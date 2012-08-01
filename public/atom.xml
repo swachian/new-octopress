@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.heroku.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-01T10:09:23+08:00</updated>
+  <updated>2012-08-01T10:47:25+08:00</updated>
   <id>http://octopresszhangyu.heroku.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/01/test/"/>
-    <updated>2012-08-01T09:50:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/08/01/test</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
@@ -1963,6 +1954,37 @@ readme driven development
 先把README叫做SPEC，完成一点，就把内容移到README中。</p>
 
 <p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WebSocket]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket/"/>
+    <updated>2012-05-28T14:00:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket</id>
+    <content type="html"><![CDATA[<p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
+
+<p>现在浏览器对real-time应用的解决办法：</p>
+
+<ul>
+<li><em>polling</em> ajax 定期轮询</li>
+<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
+<li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
+</ul>
+
+
+<p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
+
+<p>WebSocket这是下一代的web通信&#8212;full-duplex, bidirectional, a single socket。看下来是对HTTP协议的一个替换。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
+</span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
+
+
+<p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
+Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
 ]]></content>
   </entry>
   
