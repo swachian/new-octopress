@@ -1,0 +1,1969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.heroku.com/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.heroku.com/"/>
+  <updated>2012-08-01T10:09:23+08:00</updated>
+  <id>http://octopresszhangyu.heroku.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/01/test/"/>
+    <updated>2012-08-01T09:50:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/08/01/test</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
+    <updated>2012-07-31T09:04:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
+    <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
+
+<p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
+如果只是一个死记硬背各种开发模型的人，看到这本书可能会有恍然大悟的感觉。但于我而言，一直坚持独立思考，所以很早
+以前就看明白了所谓迭代、敏捷、增量和瀑布模型都是有关的，核心的一点都是把顺序模型的大瀑布打破变成小瀑布，只是
+打破的方法各有差异耳。但是，能把话说得这么明确的项目管理书籍可能也就只有这一本。这只能说作者的诚实和自信造就
+了这本书，也对不自己动脑子的pm们提供了参考。从这点上说，其意义还是很明确的。</p>
+
+<p>作者的另外一个特色就是她确实<strong>是</strong>一个项目经理。因为她其他事情基本不参与，比如开发比如测试。所以她偏重管理以及
+软技能谈的更多些，如何与老板交涉也谈的很多，其实和客户交谈反而不如用户故事里讲的多。</p>
+
+<p>项目仪表盘那张，同燃尽图累计故事图很类似，其实还是七武士里面那种画圈的方式最简单明了。书中还提到了多用贴纸，不过
+我对即时贴总有种混乱不堪的感觉。试试看吧，反正即时贴的成本确实很低。总之，本书适合给不怎么爱思考的背书派项目
+经理使用，其精华部分在于对各种开发模型的比较与剖析。是我读过的关于开发生命周期模型介绍中最诚实、最坦露本质内容
+的一本书。</p>
+
+<p>ps. heroku把默认的域名改成herokuapp,明显域名变难看了许多。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
+    <updated>2012-07-21T09:46:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
+    <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
+只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
+难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
+
+<p>试了一下，jekyll的是完全可以产生的。但是对octopress并非完全适用。
+首先，对heroku而言，默认有一个<code>.slugignore</code>文件中会把source等3个文件排除在外，而没有这3个文件无法generate。但有了这3个文件，slug的体积就变大。</p>
+
+<p>其次，有个gem需要使用python的库，无法在heroku上直接运行。</p>
+
+<p>而作为苦逼的中国用户，还会碰到编码问题。</p>
+
+<p>合在一起，其实原因可归结为一个，即如果generate牵涉的东西太多则不适合在heroku这样的平台按照 build/run的方式使用，毕竟环境不是完全能模拟本机的，
+也不是自己的服务器环境可以自己装。</p>
+
+<p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[levels]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/13/levels/"/>
+    <updated>2012-07-13T10:18:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/13/levels</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
+
+<p>来自37sigals的<a href="http://37signals.com/svn/posts/3200-levels-of-aspiration">转载</a></p>
+
+<p>个人觉得应当以‘Really works’为最低目标， 大部分组件的使用都应该达到&#8217;Well engineered&#8217;，
+至于Beautiful和Moving industry forward则要看运气了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The hardware architecture of 37 signals]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
+    <updated>2012-07-11T11:10:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
+    <content type="html"><![CDATA[<p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
+
+<p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
+就能装进12个u 48根内存条。目前37signals的rails进程跑了8个sleds。
+网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
+备份直接用的S3 storage。</p>
+
+<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[User Stories Applied: For Agile Software Development]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
+    <updated>2012-07-11T09:43:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
+    <content type="html"><![CDATA[<p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
+比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
+一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
+功能也是随着开发的进展而逐步加入。
+Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段的todo处理。
+最大的缺失是没有客户驻场，另外就是Sprint的周期不够明确。但总体来说，从团队组织到任务完成的方式上，都是很接近Scrum的。
+而且依据我的经验来说，对于3-8人的团队，中等规模，需求又易变化的项目来说，这么做是相当有效的。
+至于测试，根据新的实践总结，有些东西值得写测试有些就不值得，衡量性价比永远是王道。</p>
+
+<p>下面是一些笔记。个人认为本书最地道的地方就是将用故事与需求规格、用例、用户场景进行了比较。从实际开发中看，
+我们日常使用最多的其实确实是用户故事。以后可以明确自己到底在用啥方法，而不必总是愧疚开发方式不够正规。<br/>
+写故事的技巧可以进一步加强，比如尽量写封闭的，让人感觉完成某个任务的故事，而不是永远做不完的故事。<br/>
+估算的数字可以跨度大一些，预估不到的东西不如估的多一些。<br/>
+燃尽图和累计故事图是很好的进度跟踪与计划工具。</p>
+
+<ul>
+<li>用户故事：
+
+<ul>
+<li>用来讨论的主题汇总   card</li>
+<li>交谈重于一切        conversation</li>
+<li>确认，写在背面的测试 confirmation</li>
+</ul>
+</li>
+</ul>
+
+
+<p>拖网式的捕捞，从粗到细，从大到小；深度遍历用户故事</p>
+
+<ul>
+<li>识别用户<strong>角色</strong>，其实就是对用户进行分类。
+
+<ul>
+<li>对角色的合并归类剔除，以及实例化特殊角色的用户</li>
+</ul>
+</li>
+</ul>
+
+
+<p>把用户故事分成一个一个周期进行迭代开发；对不确定的事情在故事上拆成两个，分到两个阶段中去完成</p>
+
+<p>最好是与用户直接联系，有些是有只能通过<strong>用户代理</strong>来沟通，<strong>开发经理</strong>不是好的用户代理，因为最终不是他来使用；销售人员、市场团队、领域专家、客户都是还算不错的用户代理。</p>
+
+<p>让客户编写测试案例</p>
+
+<p>用切蛋糕的方式来切用户故事，而不要用切奶油、切面粉的分层次的方式来切，对应用编程来说，这点并不占便宜。</p>
+
+<p>编写封闭的故事。就是编写可以完成的故事，构成一个闭合故事的集合。
+使用户有成就感。随着一个有意义的目标的实现而结束的故事，能让用户感觉使用后完成了某个任务。所以，登录并不是闭合性的故事。</p>
+
+<p>故事点的估算：预定值可以拉得很开，比如<br/>
+1/2, 1, 2, 3, 5, 8, 13, 20, 40, 80<br/>
+这个类似于wbs的估算，实质是一回事情。所谓的点数是团队内部相对的度量单位</p>
+
+<p>迭代指每次选择一组用户故事，安排好每一轮实现的故事。1-4周是一个迭代周期，5-10次的迭代都是很正常的。<br/>
+迭代计划中需要对故事继续分解。如可以查看酒店的相关信息可以分解成：</p>
+
+<ul>
+<li>设计展示html</li>
+<li>酒店的图片显示和介绍</li>
+<li>酒店的地图位置编写</li>
+<li>酒店设施和服务清单编写</li>
+<li>后台数据库建表与查询</li>
+<li>研究显示地图</li>
+<li>帮助手册</li>
+</ul>
+
+
+<p>测量就是记录。<br/>
+<strong>燃尽图</strong>横轴是时间纵轴是剩余任务故事点。<br/>
+<strong>累计故事点图</strong>， 用于比较计划与实际完成的曲线图。<br/>
+ #故事 #故事点 #状态   &#8211; 在迭代中完成的故事表格
+ 迭代开始的故事点，在迭代中完成的， 改变的估算， 新加故事的故事点， 迭代结束时故事点， 然后就是迭代1，迭代2的进行记录</p>
+
+<p>用户故事与用例的区别在于前者更类似于后者的成功场景和扩展，但是前者只是一个开始，用例则是文章写完就完毕了。
+故事只是用来提示进一步和用户商谈的。很可能过一阵子就被撕掉了。用例极其容易过早陷入界面的细节中。</p>
+
+<p>卡片也可以用软件记录，也可以用wiki记录。<br/>
+用户界面以减少用户学习成本为本。<br/>
+故事可以保留也可以销毁。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数学之美]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
+    <updated>2012-07-02T23:47:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei</id>
+    <content type="html"><![CDATA[<p>在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页.</p>
+
+<p>分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅.</p>
+
+<p>正文是256页,但是排版是很松的, 有点像经管类书籍的排版, 所以这本书的篇幅并不大.主要是27个章节, 实际就是27片文章, 大部分的来源是google黑板报.
+吴军博士深入浅出的能力很强,所以大部分时候不需要大家去推算数学公式, 他会把公式的含义和影响解释的很清楚. 这是他的本事. 通篇来看, 文章大致可以
+分成下面几类:</p>
+
+<ul>
+<li>信息论的基础知识<br/>
+这部分主要包括第一章的信息, 文字和数字,  有些细节很有趣, 比如罗马数字原来里面含有加减法的含义</li>
+<li>数学原理的应用<br/>
+这个主要是以google在语言分析 语音分析 拼音输入法 是集中体现了马尔科夫链和统计学; 余弦定理与新闻分类/文章分类/自动分类</li>
+<li>google的技术<br/>
+数学知识只是用于帮助解决计算复杂度, 而不是作为解题的思路和理论基础.集中体现在PageRank, TF-IDF中</li>
+<li>密码学的知识<br/>
+当然,密码学本身也用到了数学尤其是数论的内容.包括用指纹减少信息量,提高存储和比对的效率,</li>
+<li>一些知名的算法<br/>
+主要有维特比</li>
+<li>名人传记<br/>
+这部分总有自抬身价的意思.特别是开复开复的出现很多, 也算是sns互吹了.有特色的就是这些专家大都还处于这个时代,相当有新鲜感,
+当然,维特比这个算法也被当做经典算法我只能说很多东西其实运气更加重要.第一个发现的人得到特别的奖赏也是应该的.</li>
+</ul>
+
+
+<p>整本书有些部分是让我第一次了解了语音/文章识别用到的其实都概率推测的东西, 以及google的页面排序和TF-IDF这些指标产生. 而有些内容则触发为进一步
+了解其他知识.比如昨天刚刚搞懂的频分/时分/码分复用, 这东西第一次在网络课上听到已经是十二三年前了, 即便考研的时候也未弄懂, 而这次在介绍维特比
+和cdma的时候有看见了,然后再看看谢希仁的教材,竟然就懂了. 那个向量正交真的是很精巧的设计, 这样才使得接收端收到叠加信息后还能还原出来.</p>
+
+<p>除了介绍一些新颖的做法和能引发看其他内容的兴趣, 文章也提到了一些google的文化甚至美国工程师的文化.实际上无论美国还是中国,第一流的工程师还是
+向往在大公司工作, 只是美国有那么一部分喜欢创业的工程师, 中国这个比例少一些而已.否则google也不会起先山寨遍地后来又系统化地解决问题.其实两边
+一流的工程师或者某个领域的权威专家都是愿意给大公司打工,也只有大公司才养得起这些高手吧.</p>
+
+<p>整本书让人<strong>眼界打开了不少</strong>, 也能<strong>引起自己学习其他内容的兴趣</strong>, 这当然就是一本<strong>好书</strong>了. 不过,这本书的内容毕竟讲的都比较浅显, 并不是一本很耐看的书.
+属于速食图书里面的营养品.提取一下主题,感兴趣的还是要自己继续找材料摸索练习才行.但是无论如何,这都是一本好书,而且很值得一看,投入产出比相当高
+的一本书.否则也不值得为了它写一篇书评.</p>
+
+<p>此外, 就是第一次了解了吴军博士. 他的履历确实相当漂亮, 文字写的也很棒, 这样的人才应该是<strong>中国IT业界的领军</strong>
+人物.才是中国一流大学工程师的代表.</p>
+
+<p>最后是分类做的一些<strong>笔记</strong>.</p>
+
+<ul>
+<li>科普</li>
+</ul>
+
+
+<p>文字按照意思有<strong>聚类</strong>, 类似机器学习的聚类, 副作用是有歧义性.</p>
+
+<p>罗塞塔石碑上3种文字提供了冗余和翻译的基础.</p>
+
+<p>数字从文字中被单独抽象出来表达.大部分是十进制的, 不过 也有玛雅人用的20进制,所以他们的一个世纪是400年.<br/>
+中国数字的编解码规则是乘法.</p>
+
+<p>托勒密的60个圆的点球模型,实现了365天+4年一润的模型.格里格拉教皇对日历闰年的调整,世纪末最后一年的闰年取消,每400年加一个闰年.
+哥白尼的日心说用来更少的圆8-10个,但误差极大,直到开普勒改成这几个椭圆才最终令人信服.牛顿最后又加上了万有引力.</p>
+
+<ul>
+<li>马尔科夫与动态路径</li>
+</ul>
+
+
+<p>自然语言的处理从<strong>设立规则</strong>发展到了<strong>统计</strong>算概率, 就是对最终结果进行对比, 这个过程走的很漫长.<br/>
+语音搜索和自动翻译用的技术是一样的,全部用的统计语言模型.最后落实到出现的次数比 P(wi|wi-1) = #(wi-1, wi)/#(wi-1)
+分词也是一样的,目的就是计算出每种分词后概率最大的那个.</p>
+
+<p>马尔科夫是用于概率简化,把前面n个条件简化成一个或者稍多一点的.</p>
+
+<p>动态规划其实就是一种维特比算法, 然后再加入按group分成队列的话, 就能应付大部分请求了.<br/>
+拼音输入法的原理也是概率统计推断, 从起点到终点找出最短路径.<br/>
+条件随机场与句法分析,让被分析的内容成为句子的概率最大.<br/>
+维特比和维特比优化路径微观算法.</p>
+
+<ul>
+<li>PageRank<br/>
+信息熵: log32=5, 其实就是需要几位bit才能表示状态, 这也决定了搜索所需要的次数.
+<code>H=-(p1.logp1 + p2.logp2 + ... + p32.logp32)</code></li>
+</ul>
+
+
+<p>信息的作用是<strong>消除一部分不确定性</strong>, 通过寻找<strong>相关的</strong>信息来消除.自然语言的处理就是寻找相关信息的过程.</p>
+
+<p>搜索引擎的基本原理是对关键字做索引,然后用布尔代数计算结果.</p>
+
+<p><strong>网页质量</strong>信息 &amp; <strong>网络相关性</strong>信息<br/>
+质量是根据被引用的链接数量来做排序因子的, 可以看出他们是有学术背景的. Page眼中,页面就是一个节点, 链接就像一个弧, 把互联网用矩阵来进行描述.
+排名公式:
+<code>Bi = AxBi-1</code><br/>
+其中Bi是N维列向量, A是一个N维方矩阵, 将上公式反复迭代10次,可得到收敛的结果,起初和假定B的每个数字都是1/N. A的值则是各元素(各网页)之间的链接
+数字列表.<br/>
+单文本词频(Term Frequency), 是在文章中出现的次数/总词汇数. 简称<strong>TF</strong><br/>
+实际应用时又有加权处理.权重大小根据该词在所有页面中出现的次数来确定,出现多的权重就小,出现少的权重就大. 简称<strong>IDF</strong>, 公式为log(D/Dw).<br/>
+<code>Tf-IDF = TF1xIDF1 + ... + TFNxIDFN</code><br/>
+IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根据香农的熵公式,I(w) = -P(w)logP(w)</p>
+
+<ul>
+<li>向量相关</li>
+</ul>
+
+
+<p><strong>余弦定理与新闻分类</strong>,实质就是计算两个向量的夹角, 以明确相关度.计算公式就是两个向量内积然后除以向量模的乘积.</p>
+
+<p>反SEO的一些内容,本质就是要把噪音去除, 比如把出站链接相似的网站屏蔽</p>
+
+<p>CDMA技术. 海蒂拉马尔发明的实际上是频率跳变的码流, 然后才被用来当做复用. 这里面正交向量当做code的设计思路使得多种信号在叠加后也能按各个code分别进行还原, 这个整个设计最
+重要的地方.也在此,进一步明白了频分/时分/码分的区别和特点.吴军至少写书的时候还不懂cdma背后的数学原理,否则他肯定会谈的.</p>
+
+<p>文本自收敛分类.其实就是不停迭代计算向量.使得各类内部的距离d最短,而类间距离D最长.</p>
+
+<ul>
+<li>随机数的映射</li>
+</ul>
+
+
+<p>信息指纹的核心思想是通过随机数函数把内容转换为较短的随机数,这样可以用来做判定集合相同/反盗版/判定集合基本相同.即提取对应的信息保持足够简短,
+这样的好处是存放和检索的成本大大下降.MD5的重复概率只有一千八百亿亿次,2的六十四次方.</p>
+
+<p>布隆过滤器.其实就是把原始信息投射到一个几亿字节的几位中去.然后通过判断这几位是否为1,来明确后来的信息是否在要过滤的集合中.本质上就是一种随机数的算法.弱点是有一定的假阳性.</p>
+
+<ul>
+<li>其他</li>
+</ul>
+
+
+<p>爬虫其实就是按图论进行遍历.欧拉七桥的图论定理.每一个顶点的度必须是偶数.具体有广度优先还是深度有限?页面分析和URL提取?URL如何存放的瓶颈?</p>
+
+<p>密码学基础,公钥私钥</p>
+
+<h4>人物</h4>
+
+<p>贾里尼克,捷克犹太人,吴军美国大学语言语音处理中心的创始人<br/>
+马库斯,自然语言转向统计方式处理的另一个教父级别的人物, 还建立了语料库,让大家有一个平等的环境进行算法比较测试<br/>
+辛格博士, AK47, 简单有效</p>
+
+<h3>推荐书单</h3>
+
+<p><a href="http://202.120.227.11/F/DN9IEV1ANU9DYR3D8YYF2FX84MGGMV6U9B37KVBLASBNGDQPNB-55367?func=item-global-exp&amp;doc_number=000573910&amp;item_sequence=000010&amp;sub_library=LJCXK">信息论基础</a> Cover<br/>
+<a href="http://infolab.stanford.edu/~backrub/google.html">google.html</a><br/>
+地址分析的有限状态机编写,还有基于概率的有限状态机<br/>
+相似hash的算法(Simhash)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ssh-key]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key/"/>
+    <updated>2012-06-29T16:18:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key</id>
+    <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
+
+<p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
+console快速敏捷的威力。这个比每次输入密码的体验好多了。更重要的，当机器很多很多，比如几十台上百台的时候，那省下的功夫
+和能做的事情可就不是一点点了。当然，我并不理解为什么不用保存登录密码的方式，而是兜圈子采用这么一种办法。细想下来可能
+和linux系统是多用户的系统这个特性相关。因为实质上的ssh-key登录是另外一个东西。可参见<a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">这篇</a>入门的文章。</p>
+
+<p>要想使用公钥登录方式，可以分为两步：</p>
+
+<ol>
+<li>生成公钥私钥对，会存放在<code>.ssh/id_rsa,  .ssh/id_rsa.pub</code>中，这是通过命令 <code>$ssh-keygen</code>来操作的</li>
+<li>如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
+把他们存放在<code>.ssh/authorized_keys</code>中。其实就是每个client增加一条记录。执行的命令是<code>$ ssh-copy-id user@host</code></li>
+</ol>
+
+
+<p>弄好以后，发现做起事情来确实快多了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git init[zz]]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init/"/>
+    <updated>2012-06-27T16:38:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
+</span><span class='line'>
+</span><span class='line'>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+</span><span class='line'>$ git push origin master </span></code></pre></td></tr></table></div></figure>
+
+
+<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
+
+<p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
+如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>
+
+<p>$ git push origin test:master         // 提交本地test分支作为远程的master分支
+$ git push origin test:test              // 提交本地test分支作为远程的test分支</p>
+
+<p>如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。</p>
+
+<p>$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[hubot and socket.io]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
+    <updated>2012-06-26T22:05:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
+    <content type="html"><![CDATA[<p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
+最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
+也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
+</span><span class='line'>coffee
+</span><span class='line'>&gt; 3+2<span class="o">=</span>?
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后者显然便捷许多.</p>
+
+<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
+Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
+而且<code>socket.io-client</code>也很有意思.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Programming Language Performance]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance/"/>
+    <updated>2012-06-26T10:06:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
+
+<p>JavaScript是一个很大的亮点。V8的性能确实快。
+相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
+1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
+2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
+而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <updated>2012-06-23T00:08:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
+中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
+再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
+但是缺乏练习的后果必然是无法掌握的.</p>
+
+<p>最近在看CoffeeScript 和 NodeJS, 进一步领略了JS的威力, 有些地方也不甚明白, 于是又翻出这本书看了一下.这次出奇的顺利, 从翻开
+到看完也就2天的功夫, 而且2天时间内看的比例并不高.下面是看完后对这本书的书评.</p>
+
+<p>这本书确实是一本需要反复阅读的书.作者的话语极其精炼, 招招都是要害, 所以必须要仔细看才能看的明白.而且从书中可以看出作者的造诣
+确实很深, 对js的认识以及语言的评价都是高度与深度相结合, 而且很多反应了使用者的感受, 不是大家是写不出这么有深度的文章的.</p>
+
+<p>书中最有价值的是 3.Objects, 4.Functions, 5.Inheritance 这3章. 如果是用coffeeScript的话, 3和4的价值就更加突出.通过学习,可以掌握
+js的object array的文法, 也可以明白js function的4种调用方式(obj.method, func.func, Obj.construtor(new), func.apply(this, argv)),
+Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了汉诺塔.</p>
+
+<p>Js的另一部分即prototype继承的特性目前还不甚了了, 可能还需呀补充一点其他读物. 做点练习才能领会.</p>
+
+<p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
+一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
+    <updated>2012-06-13T10:28:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
+    <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
+于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
+
+<p>个人觉得如何破解foxmail的密码都可以写一篇不错的论文。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sam Stephenson's Better JS with CoffeeScript]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/"/>
+    <updated>2012-06-06T17:02:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript</id>
+    <content type="html"><![CDATA[<p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
+
+<p>Won&#8217;t write js again.</p>
+
+<p>2004 Google Map ，build wonderful app with just html &amp; js<br/>
+improve the language , prototype</p>
+
+<p>1.function Syntax<br/>
+2.Significant Whitespace<br/>
+  not see braces<br/>
+3.Bare Objects, no braces needed<br/>
+4.Everything&#8217;s an Expression<br/>
+5.Comprehensions</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">names</span> <span class="o">=</span> <span class="k">for</span> <span class="nx">person</span> <span class="k">in</span> <span class="nx">people</span>
+</span><span class='line'>     <span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'>   <span class="err">返回</span><span class="p">[]</span><span class="err">，</span><span class="nx">borrow</span> <span class="nx">from</span> <span class="nx">python</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+6.Classes &amp;&amp; Inheritance<br/>
+  <code>extends, construct, @, $el=super</code></p>
+
+<p>7.Bound Functions<br/>
+  <code>=&gt;</code> 取代了bind(this)<br/>
+8.Conditionals<br/>
+ <code>?</code> <br/>
+9.Destructuring, Assignment<br/>
+ <code>{name, age} = person</code><br/>
+ <code>[first,seconde] = s.split(//)</code>
+  必须要是{}或者[]对象 <br/>
+10.String Syntax<br/>
+  <code>#{}</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Replace log Files with Streams]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams/"/>
+    <updated>2012-06-05T12:16:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams</id>
+    <content type="html"><![CDATA[<p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
+整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
+
+<p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
+总之，流更适合对分布式系统的集中处理。</p>
+
+<h3>站在开发的角度</h3>
+
+<p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
+莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
+实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
+
+<h3>站在部署的角度</h3>
+
+<p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
+一个input stream。</p>
+
+<p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
+
+<h3>几种技巧和工具</h3>
+
+<ol>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
+syslog是要搭配bash的命令<code>logger</code>使用的。
+<code>sh
+ mydaemon | tee /var/log/mydaemon.log | logger
+</code>
+tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
+则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
+这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
+存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
+再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
+<li><p>Upstart launchd  Systemd
+这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NodeJS]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <updated>2012-06-04T17:12:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
+特别是搭配CS的语法后, 相当的让人感觉良好.</p>
+
+<p>而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
+而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.</p>
+
+<p>http://howtonode.org/understanding-process-next-tick</p>
+
+<p>tick其实就是计算机系统的时隙.</p>
+
+<h2>util</h2>
+
+<p>util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
+两点是多了<code>%j</code>支持json格式的输出.</p>
+
+<p>util.debug() 用于调试的,输出到<code>stderr</code><br/>
+util.log() <code>stdout</code><br/>
+util.inspect(object) 展开对象信息<br/>
+util.isArray, isRegExp, isDate</p>
+
+<h2>Events</h2>
+
+<p>All objects which emit events are instances of <code>require('events').EventEmitter</code><br/>
+All EventEmitters emit the event <code>newListener</code> when new listeners are added</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">#</span> <span class="err">前一个参数是</span><span class="nx">camel</span><span class="o">-</span><span class="nx">cased</span> <span class="nx">string</span><span class="p">,</span> <span class="err">后一个是是函数</span><span class="p">,</span><span class="err">也就做</span><span class="nx">listener</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;someone connected!&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">一次性事件</span><span class="p">,</span><span class="err">发生后自动消失</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ah, we have our first user!&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">removeAllListeners</span><span class="p">([</span><span class="nx">event</span><span class="p">])</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">setMaxListeners</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">返回一系列函数</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">listeners</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">触发事件</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">],</span> <span class="p">[</span><span class="nx">arg2</span><span class="p">],</span> <span class="p">[...])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Buffer</h2>
+
+<p>这个东西和C里面的 <code>bytes c[8192];</code> 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
+自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可.</p>
+
+<ul>
+<li>encodings:
+
+<ul>
+<li>ascii</li>
+<li>utf8</li>
+<li>ucs2</li>
+<li>base64</li>
+<li>binary 通常不用,而是直接用Buffer</li>
+<li>hex 十六进制</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span>
+</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">length</span><span class="p">],</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span> <span class="err">#</span> <span class="err">把</span><span class="nx">string</span><span class="err">的内容写到</span><span class="nx">buffer</span><span class="err">里</span><span class="p">,</span><span class="err">和</span><span class="nx">c</span><span class="err">很像</span><span class="p">,</span><span class="err">但是</span><span class="nx">offset</span><span class="err">默认是</span><span class="mi">0</span><span class="p">,</span><span class="nx">length</span><span class="err">默认是</span><span class="nx">buffer</span><span class="err">的长度</span> <span class="o">-</span> <span class="nx">offset</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">([</span><span class="nx">encoding</span><span class="p">],</span> <span class="p">[</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">slice</span><span class="p">([</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="nx">Buffer</span><span class="p">.</span><span class="nx">byteLength</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">length</span> <span class="err">返回的是整个</span><span class="nx">buffer</span><span class="err">的</span><span class="nx">size</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="nx">targetBuffer</span><span class="p">,</span> <span class="p">[</span><span class="nx">targetStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceEnd</span><span class="p">])</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="err">此外还有一堆读写各种类型的函数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Stream</h2>
+
+<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br/>
+所有的stream, 都是<code>EventEmitter</code>的实现.</p>
+
+<h3>Readable Stream</h3>
+
+<ul>
+<li><p>Event</p>
+
+<ul>
+<li>data</li>
+<li>end 可能可以继续写</li>
+<li>error</li>
+<li>close 不是所有的流都有关闭,比如进来的http request</li>
+</ul>
+</li>
+<li><p>method</p>
+
+<ul>
+<li>readable</li>
+<li>setEncoding(encoding) , 设置后,data返回的就不是buffer而是string</li>
+<li>pause 停止<code>data</code>事件</li>
+<li>resume 恢复<code>data</code>事件</li>
+<li>destroy</li>
+<li>pipe</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">,</span> <span class="p">{</span> <span class="nx">end</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span> <span class="err">#截断</span><span class="nx">source</span> <span class="err">的</span> <span class="nx">end</span><span class="err">事件发给</span><span class="nx">destination</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Goodbye\n&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Writable Stream</h3>
+
+<ul>
+<li><p>Event</p>
+
+<ul>
+<li>drain 表明可以再写了</li>
+<li>error</li>
+<li>close</li>
+<li>pipe</li>
+</ul>
+</li>
+<li><p>method</p>
+
+<ul>
+<li>writable</li>
+<li>write(string, [encoding], [fd])</li>
+<li>write(buffer)</li>
+<li>end()</li>
+<li>end(string, encoding)</li>
+<li>end(buffer)</li>
+<li>destroy()</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Crypto</h2>
+
+<p>加密解密的系类</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">shasum</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">ReadStream</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">shasum</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">shasum</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>File System</h2>
+
+<p>异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block</p>
+
+<ul>
+<li>fs.watch
+
+<ul>
+<li>Linux下用 <code>inotify</code>实现</li>
+<li>返回&#8217;rename&#8217; or &#8216;change&#8217; 事件</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fs</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s1">&#39;somedir&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;event is: &#39;</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename provided: &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename not provided&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>fs.ReadStream</li>
+<li>fs.WriteStream</li>
+<li>fs.open(path, flags, [mode], [callback])
+<code>(err, fd)</code></li>
+</ul>
+
+
+<h2>Path</h2>
+
+<h2>Net</h2>
+
+<ul>
+<li>net.createServer([options], [connectionListener])</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;net&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//&#39;connection&#39; listener</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server connected&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server disconnected&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;hello\r\n&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8124</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//&#39;listening&#39; listener</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server bound&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>net.connect,net.createConnection
+
+<ul>
+<li>也是一样触发<code>connect</code>事件</li>
+<li>net.connect(port, [host], [connectListener])</li>
+<li>net.connect(path, [connectListener])</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>net.Server</h3>
+
+<ul>
+<li>server.listen(port, [host], [listeningListener])
+
+<ul>
+<li><code>listening</code> event</li>
+</ul>
+</li>
+<li>server.close()
+
+<ul>
+<li>也是异步关闭，最终 emit <code>close</code>事件</li>
+</ul>
+</li>
+<li>server.address() <code>{"port":43239,"family":2,"address":"0.0.0.0"}</code></li>
+<li>server.maxConnections</li>
+<li><p>server.connections</p></li>
+<li><p>Event</p>
+
+<ul>
+<li>listening</li>
+<li>connection</li>
+<li>close</li>
+<li>error</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>net.Socket</h3>
+
+<ul>
+<li>new net.Socket([options])
+
+<ul>
+<li>fd, type, allowHalfOpen</li>
+</ul>
+</li>
+<li>socket.connect 一般用net.connect来新建</li>
+<li>bufferSize() 当前准备发的缓存长度</li>
+<li>setEncoding() 指定接收data的编码</li>
+<li>write(data, [encoding], [callback])</li>
+<li>end([data]) half-close</li>
+<li>destroy() 仅在处理error是需要使用</li>
+<li>pause(), resume() 和<code>data</code>事件相关</li>
+<li>setTimeout(timeout, [callback])
+
+<ul>
+<li>超时，通常没有超时</li>
+<li>0则表示同步操作，而且要求即刻发掉</li>
+</ul>
+</li>
+<li>setNoDelay() 默认就是true</li>
+<li>keepAlive()</li>
+<li>address(), remoteAddress(), remotePort()</li>
+<li><p>bytesRead() 已收到的bytes数量， bytesWritten()</p></li>
+<li><p>Event</p>
+
+<ul>
+<li>connect</li>
+<li>data</li>
+<li>end</li>
+<li>timeout</li>
+<li>drain</li>
+<li>error</li>
+<li>close</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>UDP / Datagram Sockets</h2>
+
+<p>  <code>require 'dgram'</code></p>
+
+<h2>DNS</h2>
+
+<ul>
+<li>lookup()</li>
+<li>resolve()</li>
+</ul>
+
+
+<h2>HTTP</h2>
+
+<p>核心思想： The user is able to <strong>stream data</strong>.</p>
+
+<h3>http</h3>
+
+<ul>
+<li>http.createServer([requestListener])</li>
+</ul>
+
+
+<h4>Event</h4>
+
+<ul>
+<li>&#8216;request&#8217;
+
+<ul>
+<li>(request, response) -></li>
+<li>一个connection可能有多个request</li>
+</ul>
+</li>
+<li>&#8216;connection&#8217;
+
+<ul>
+<li>(socket) -></li>
+<li>一般不会直接处理，也可以通过<code>request.connection</code>获得<code>socket</code></li>
+</ul>
+</li>
+<li>&#8216;close&#8217;</li>
+<li>&#8216;checkContinue&#8217;
+
+<ul>
+<li>(request, response) -></li>
+<li><a href="http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/">关于100-continue</a>  ,用处就是试探，在发起实际的body前把条件等发给server预审</li>
+<li><code>request</code> event will <strong>not</strong> be emitted.</li>
+</ul>
+</li>
+<li>&#8216;upgrade&#8217;
+
+<ul>
+<li>不知何意</li>
+<li>(request, socket, head) -></li>
+</ul>
+</li>
+<li>&#8216;clientError&#8217;
+
+<ul>
+<li>(exception) -></li>
+</ul>
+</li>
+</ul>
+
+
+<h4>method</h4>
+
+<ul>
+<li>listen(port, [hostname], [callback])</li>
+<li>close() = net.Server.close()</li>
+</ul>
+
+
+<h3>http.ServerRequest</h3>
+
+<h4>Event</h4>
+
+<ul>
+<li>data</li>
+<li>(chunk) -></li>
+<li>end</li>
+<li>close</li>
+</ul>
+
+
+<h4>method</h4>
+
+<ul>
+<li>method &#8216;GET&#8217;, &#8216;DELETE&#8217;</li>
+<li>url
+
+<ul>
+<li><code>require('url').parse(request.url, true)</code></li>
+<li><code>require('querystring').parse</code></li>
+</ul>
+</li>
+<li>request.headers</li>
+<li>request.trailers
+
+<ul>
+<li>Only populated after the &#8216;end&#8217; event.</li>
+</ul>
+</li>
+<li>request.setEncoding([encoding])</li>
+<li>pause()</li>
+<li>resume()</li>
+<li>connection</li>
+</ul>
+
+
+<h3>http.ServerResponse</h3>
+
+<p>实现了<code>Writable Stream</code></p>
+
+<h4>Event</h4>
+
+<ul>
+<li>&#8216;close&#8217;</li>
+</ul>
+
+
+<h4>Method</h4>
+
+<ul>
+<li>writeContinue()</li>
+<li>writeHead(statusCode, [reasonPhrase], [headers])
+
+<ul>
+<li>必须在<code>response.end()</code>被调用之前</li>
+<li><code>response.writeHead(200, {Content-Type: 'text/plain'})</code></li>
+</ul>
+</li>
+<li>statusCode</li>
+<li>setHeader(name, value)
+
+<ul>
+<li><code>response.setHeader("Content-Type", "text/html")</code></li>
+</ul>
+</li>
+<li>getHeader(name)</li>
+<li>removeHeader(name)</li>
+<li>write(chunk, [encoding])
+
+<ul>
+<li>stream式的写法</li>
+<li>raw</li>
+<li>implicit header mode</li>
+</ul>
+</li>
+<li>addTrailers(headers)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
+</span><span class='line'>                          <span class="s1">&#39;Trailer&#39;</span><span class="o">:</span> <span class="s1">&#39;Content-MD5&#39;</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>end([data], [encoding])</li>
+</ul>
+
+
+<h3>http.request</h3>
+
+<p>Node保持有几个可以发起http请求的连接</p>
+
+<ul>
+<li>http.request(options, callback)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/upload&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;STATUS: &#39;</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;HEADERS: &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">));</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;problem with request: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// write data to request body</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>http.get(options, callback)</li>
+</ul>
+
+
+<h4>http.Agent</h4>
+
+<p>node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent</p>
+
+<h3>http.ClientRequest</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Event</h4>
+
+<ul>
+<li>response
+
+<ul>
+<li>(response) -></li>
+</ul>
+</li>
+<li>socket
+
+<ul>
+<li>(socket) -></li>
+<li>给该request分配socket后触发</li>
+</ul>
+</li>
+<li>upgrade
+
+<ul>
+<li>(response, socket, head) -></li>
+<li>似乎是用来升级到websocket的</li>
+</ul>
+</li>
+<li>continue</li>
+</ul>
+
+
+<h4>Method</h4>
+
+<ul>
+<li>write(chunk, [encoding])</li>
+<li>end()</li>
+<li>abort()</li>
+<li>setTimeout(timeout, [callback])</li>
+<li>setNoDelay(true/false)</li>
+<li>setSocketKeepAlive([enable], [initialDelay])</li>
+</ul>
+
+
+<h3>http.ClientResponse</h3>
+
+<p>a <code>Readable Stream</code></p>
+
+<ul>
+<li>data</li>
+<li>end</li>
+<li><p>close</p></li>
+<li><p>statusCode</p></li>
+<li>headers</li>
+<li>trailers</li>
+<li>setEncoding([encoding])</li>
+<li>pause()</li>
+<li>resume()</li>
+</ul>
+
+
+<h2>HTTPS</h2>
+
+<h2>URL</h2>
+
+<ul>
+<li>href - <code>http://user:pass@host.com:8080/p/a/t/h?query=string#hash</code></li>
+<li>protocol</li>
+<li>host</li>
+<li>auth</li>
+<li>hostname</li>
+<li>port</li>
+<li>pathname</li>
+<li>search</li>
+<li>path</li>
+<li>query</li>
+<li><p>hash</p></li>
+<li><p>url.parse(urlStr)</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">coffee</span><span class="o">&gt;</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;http://192.168.2.2/?q=1&amp;q=2#sss&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span> <span class="nx">protocol</span><span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">slashes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;http://192.168.2.2/?q=1&amp;q=2#sss&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;#sss&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=1&amp;q=2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span> <span class="p">]</span> <span class="p">},</span>
+</span><span class='line'>  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Readline</h2>
+
+<p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Note on CoffeeScript]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <updated>2012-06-01T11:06:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <content type="html"><![CDATA[<p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
+不需要太大的部头。</p>
+
+<h1>安装步骤</h1>
+
+<p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span>
+</span><span class='line'><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Some</span> <span class="nx">CoffeeScript</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
+但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>wget http://nodejs.org/dist/v0.6.18/node-v0.6.18.tar.gz
+</span><span class='line'>tar -zxvf node-v0.6.18.tar.gz
+</span><span class='line'>cd node-v0.6.18.tar.gz
+</span><span class='line'>./configure
+</span><span class='line'>make <span class="err">&amp;&amp;</span> make install
+</span><span class='line'>npm install -g coffee-script # -g 才能确保不是安装在当前目录
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
+<strong>运行</strong> <code>coffee my-script.coffee</code>
+<strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
+
+<h1>1. Syntax</h1>
+
+<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
+和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
+
+<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
+
+<p>支持多行注释</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="err">###</span>
+</span><span class='line'>    <span class="nx">A</span> <span class="nx">multiline</span> <span class="nx">comment</span><span class="p">,</span>
+</span><span class='line'>  <span class="err">###</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>变量和范围</h3>
+
+<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
+需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
+<strong>global object</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">exports</span> <span class="o">=</span> <span class="k">this</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">MyVariable</span> <span class="o">=</span> <span class="s2">&quot;foo-bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>Functions</h3>
+
+<p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
+单行函数 <code>func = -&gt; "bar"</code><br/>
+多行函数，必须注意<strong>缩进</strong>（indent）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">func</span> <span class="o">=</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span> <span class="nx">An</span> <span class="nx">extra</span> <span class="nx">line</span>
+</span><span class='line'>  <span class="s2">&quot;bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
+接受多个参数 <code>sum = (nums...) -&gt;</code></p>
+
+<p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
+没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
+
+<p>Function <strong>Context</strong> 待进一步了解<br/>
+<code>=&gt;</code></p>
+
+<h3>一些表达式</h3>
+
+<p>花括号是可选的，hash和array可以利用缩进完成。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">object2</span> <span class="o">=</span> <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">object3</span> <span class="o">=</span>
+</span><span class='line'>  <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array2</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>  <span class="mi">1</span>
+</span><span class='line'>  <span class="mi">2</span>
+</span><span class='line'>  <span class="mi">3</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Flow Control<br/>
+像python，像ruby</p>
+
+<p>String的解析，和ruby类似</p>
+
+<h3>循环和综合（类似python)</h3>
+
+<p><code>in</code> &#8212;- <code>for name in ["A", "B", "C"]</code><br/>
+需要index &#8212;- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
+把操作也写成一行 &#8212;- <code>release prisoner for prisoner in []</code><br/>
+comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] == "R"</code>
+内置的仅支持while</p>
+
+<h3>几个替换和操作符</h3>
+
+<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
+<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
+
+<p><code>?</code> similiar to Ruby&#8217;s nil?, <code>praise if brian?</code> , it&#8217;s also a <code>||</code>， <code>velocity = southern ? 40</code></p>
+
+<h1>2. CoffeeScript Classes</h1>
+
+<p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
+使用new 来新建对象 <code>animal = new Animal</code>,<br/>
+<code>contructor</code> 类似ruby的initialize，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+其中，构造函数的参数如果带@则会自动被当成实例变量进行设置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constuctor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>instance 属性</h3>
+
+<p>给实例加属性如同给object加属性</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">price</span><span class="o">:</span> <span class="mi">5</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">sell</span><span class="o">:</span> <span class="p">(</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span>
+</span><span class='line'><span class="nx">animal</span><span class="p">.</span><span class="nx">sell</span><span class="p">(</span><span class="k">new</span> <span class="nx">Customer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
+环境的变化而变化。</p>
+
+<h3>Static 属性</h3>
+
+<p>这就是class变量，需要用到this 或者 @</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">find</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="err">@</span><span class="nx">find</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>继承与Super</h3>
+
+<p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">alive</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kc">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Parrot</span> <span class="kr">extends</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kr">super</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">dead</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">not</span> <span class="err">@</span><span class="nx">alive</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="o">::</span><span class="nx">rip</span> <span class="o">=</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parrot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parrot</span><span class="p">(</span><span class="s2">&quot;Macaw&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nx">parrot</span><span class="p">.</span><span class="nx">rip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>3. 惯用法</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">###</span> <span class="nx">each</span>
+</span><span class='line'><span class="nx">fun</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="k">for</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">map</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>  <span class="nx">item</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">select</span>
+</span><span class='line'><span class="nx">passed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="nx">failed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">score</span> <span class="k">in</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="nx">score</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="nx">then</span> <span class="nx">passed</span> <span class="k">else</span> <span class="nx">failed</span><span class="p">).</span><span class="nx">push</span> <span class="nx">score</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">includes</span>
+</span><span class='line'><span class="nx">included</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span> <span class="k">in</span> <span class="nx">array</span> <span class="err">#但不能用于单个字符串的内部模式匹配</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">属性遍历</span>
+</span><span class='line'><span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">object</span>
+</span><span class='line'>  <span class="s2">&quot;#{key} = #{value}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">or</span>
+</span><span class='line'><span class="nx">hash</span> <span class="o">?=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">支持多值返回</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">外部扩展库</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Use</span> <span class="nx">local</span> <span class="nx">alias</span>
+</span><span class='line'><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span><span class="nx">COMContentLoaded</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.js-el&quot;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>4. 编译</h1>
+
+<p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
+跟rake差不多，可以watch，可以自动编译。</p>
+
+<h1>5.优良部分</h1>
+
+<p>孙子说，知己知彼百战不殆。</p>
+
+<p>CS也只是修复了部分js的缺陷。</p>
+
+<p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vi for Aptana]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana/"/>
+    <updated>2012-05-30T10:38:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana</id>
+    <content type="html"><![CDATA[<p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
+
+<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
+下载配置好后，算是跑了起来。</p>
+
+<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
+</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
+</span><span class='line'>
+</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
+</span><span class='line'>
+</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
+</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
+</span><span class='line'>
+</span><span class='line'>  4. To delete the character at the cursor type:  x
+</span><span class='line'>
+</span><span class='line'>  5. To insert or append text type:
+</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
+</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
+</span><span class='line'>
+</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span><span class='line'>                           Lesson 2 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
+</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
+</span><span class='line'>  3. To delete a whole line type:    dd
+</span><span class='line'>
+</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
+</span><span class='line'>  5. The format for a change command is:
+</span><span class='line'>           operator   [number]   motion
+</span><span class='line'> where:
+</span><span class='line'>   operator - is what to do, such as  d  for delete
+</span><span class='line'>   [number] - is an optional count to repeat the motion
+</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
+</span><span class='line'>              $ (to the end of line), etc.
+</span><span class='line'>
+</span><span class='line'>  6. To move to the start of the line use a zero:  0
+</span><span class='line'>
+</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
+</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
+</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一个屌丝的逆袭]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi/"/>
+    <updated>2012-05-30T00:13:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi</id>
+    <content type="html"><![CDATA[<p>http://www.designsor.com/
+原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
+
+<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
+需要工具：Firefox+Easy Tor+Autoproxy</p>
+
+<p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
+但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
+
+<p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
+用gmail发信到：bridges@torproject.org
+主题随便，内容写：get bridges
+发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
+打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
+成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
+速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inside Github]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github/"/>
+    <updated>2012-05-29T11:18:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github</id>
+    <content type="html"><![CDATA[<p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
+的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
+
+<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
+
+<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
+
+<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
+4四大<strong>frameworks</strong>组成。</p>
+
+<ul>
+<li>rails
+Github.com, Gist, &#8230;</li>
+<li>resque
+Background processing, G大约有50个不同的类型</li>
+<li>chimney
+All git calls happen over the write</li>
+<li>utils
+ 意外日志，统计，辅助应用等</li>
+</ul>
+
+
+<h3>rails</h3>
+
+<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
+GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
+
+<ul>
+<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
+支付的抽象库。有中国人给家里alipay的补丁</li>
+<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
+<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
+<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
+<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
+除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
+</ul>
+
+
+<p>Gems:</p>
+
+<ul>
+<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
+<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
+<li><a href="">aws-s3</a></li>
+<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
+<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
+<li><a href="https://github.com/github/markup">github/markup</a></li>
+<li>[jekyll]</li>
+<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
+<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
+<li>[unicorn] 16 workers</li>
+</ul>
+
+
+<p>Rack:</p>
+
+<ul>
+<li>Rack::Bug<br/>
+Coderack</li>
+<li>nerdEd/rack-validate</li>
+<li>webficient/rack-tidy</li>
+<li>talison/rack-mobile-detect</li>
+</ul>
+
+
+<p>Nginx当然不让 :<br/>
+* Limit Zone<br/>
+* Limit Request: Anti-DDOS
+* memcached support<br/>
+* Push Module: comet!</p>
+
+<p>Git:
+* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
+
+<h3>chimney(smoke)</h3>
+
+<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
+Smoke calls</p>
+
+<ul>
+<li>BERT-RPC
+另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
+<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
+<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
+<li>[chimney]
+proprietary 的库，怀疑是erlang写的<br/>
+让RPC clients知道如何找到server，路由内容存放在Redis中</li>
+<li>proxymachine
+有点类似nodeload替换的功能，不过这个也用于git clone<br/>
+能用来作为所有tcp链接的代理</li>
+<li>JSON-RPC</li>
+<li>node.js<br/>
+downloads<br/>
+event streams</li>
+<li>hubot</li>
+</ul>
+
+
+<h3>resque</h3>
+
+<ul>
+<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
+Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
+<li><p>优先等级</p>
+
+<ul>
+<li>严重</li>
+<li>高</li>
+<li>低</li>
+</ul>
+</li>
+<li><p>队列任务</p>
+
+<ul>
+<li>page 产生页面</li>
+<li>archive 打包tar</li>
+<li>search
+
+<ul>
+<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据库是MySql 5</p></li>
+</ul>
+
+
+<h3>utils</h3>
+
+<ul>
+<li>comet loading</li>
+<li>nagios 负责监控</li>
+<li>resque 的web</li>
+<li>collectd 用于手机负载、RAM等的信息</li>
+<li>pingdom 短信系统</li>
+<li>tender 一个客服系统</li>
+</ul>
+
+
+<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
+
+<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
+
+<p>里面提到了<strong>RDD</strong>的概念:<br/>
+readme driven development
+先把README叫做SPEC，完成一点，就把内容移到README中。</p>
+
+<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
+]]></content>
+  </entry>
+  
+</feed>
