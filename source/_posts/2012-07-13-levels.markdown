@@ -1,0 +1,18 @@
+---
+layout: post
+title: "levels"
+date: 2012-07-13 10:18
+comments: true
+categories: 
+- 项目管理
+---
+
+
+![levels of computer engineering](/images/screen_print/952-technical-hierarchy.png)
+
+来自37sigals的[转载](http://37signals.com/svn/posts/3200-levels-of-aspiration)  
+
+个人觉得应当以‘Really works’为最低目标， 大部分组件的使用都应该达到'Well engineered'，
+至于Beautiful和Moving industry forward则要看运气了。
+
+

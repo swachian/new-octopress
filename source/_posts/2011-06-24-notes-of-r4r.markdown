@@ -1,0 +1,575 @@
+---
+layout: post
+title: "R4R笔记"
+date: 2011-06-24 18:48
+comments: true
+categories: 
+- 技术
+- 读书笔记
+---
+
+HTML use syntax: true
+
+第1章
+=====
+
+    ruby -cw c2f.rb
+    #只进行语法等的检查，-w可以列出详细信息
+
+    ruby -rname 是引入指定的扩展，如ruby -rdebug -rprofile
+
+
+将一个大文件拆成多个单独的文件是有好处的，通过require可以自行另一个rb文件的代码，load则是反复执行，Rails下的development模式正式用load取代require来达到不用重启，也能执行被更新的文件
+
+erb是ruby的一个重要工具，它是一个程序，可以执行诸如 erb erbdemo.rb 这样的rb程序
+
+第2章
+=====
+第一个开发阶段，定义下面动作
+> 用一个现有作品的所有作曲者的列表欢迎访问者
+
+> 允许访问者点击任一作曲者的名字，然后显示该作曲者的所有作品
+
+> 允许访问者点击作品的名字，然后显示该作品的所有版本
+
+> 允许访问者点击任一版本，然后显示该版本的详细信息
+
+定义了4个控制器动作，那么就有4个视图需要设计
+默认路由即空URL
+
+rails分发器大致是这么工作的
+
+    分析url，带出对应的controller和method
+    填写session和params等信息
+    调用controller的method
+    把instance变量写入view的预定义变量中
+    调用erb程序产生html  
+    扩展layout
+    返回html
+
+第3章
+=====
+
+交互的、数据库驱动的Web应用是Rails的特定领域。
+在rails中编程和配置是融为一体的。yaml就是典型的案例。
+
+Yaml.load
+to_yaml
+<code>
+    def all
+      @order = params[:order] || "number"
+      sort_proc = case @order
+        when "author" then lambda {|r| [r.user.name.downcase, r.number]}
+        when "status",
+             "title" then lambda {|r| [r.send(@order).downcase, r.number]}
+        when "number" then lambda {|r| -r.name}
+    end
+</code>
+
+上面代码中的亮点（feature）是case,lambda,send(最易status和title的处理方式）,sort_by传递一个lambda表达式
+
+    def nice_name
+      title + " " + first_name + " " +
+      if middle_initial then middle_initial + "." else "" end +
+      last_name
+    end
+
+
+体会其中的if写入一行的用法。这个代码也体现了通过ruby来扩展rails。
+
+第4章 对象
+=====
+
+对象： Object.new 对象是程序员的代理
+
+定义对象行为 def obj.talk; puts 'ddd' ; end
+
+发送消息： object.message
+
+接受参数
+
+返回值
+
+ object_id
+ respond_to?
+ send
+
+ 
+    if ticket.respond_to?(request)
+      puts ticket.send(request)
+    else
+      puts "no such method available"
+    end
+
+
+必须参数，可选参数，默认值参数
+
+局部变量的范围（scope）和赋值（传引用而不是值）
+
+裸辞:
+  局部变量
+  关键字 
+  方法调用
+
+第5章 类
+=====
+
+Ruby是以对象为中心的，而Java是以类为中心的。
+在Ruby中，类是组织对象的手段而已，以便不必给每个对象都添加方法。而类本身也是对象。 Ticket.new是一种用工厂方法产生对象的手法。但类通常用常量命名。
+    class Ticket
+    end
+可以认为用class定义了一个常量。
+特点：
+1. 实例方法与单例方法
+2. 重新定义方法（后来者居上）
+3. 类可重新打开（在不同的文件中比如）
+
+实例变量：
+实例变量表明了类的状态，是和一个对象相关的信息和数据。以@开头，仅对该对象可见，实例变量在一个类中的方法中的定义和引用是同一个. 即@变量属于object这个closure。
+在对象初始化时，可在new中传入参数，以生成实例变量，方法是定义`initialize`函数
+
+对外型的关注是ruby和rails常见的做法，如方法名中的等号实现类似赋值操作，syntactic sugar，语法糖衣
+
+attr_* , attr_reader, attr_writer, attr_accessor, attr只能对一个属性进行操作，不太常用
+
+类是可以生成对象的对象
+类也是对象，所以有类方法。即消息发送给类对象本身，而不是类对象的实例。与所有实例都相关，不能由单个实例对象完成。类还有自己的状态和身份标识。类方法的本质就是一个单例方法（添加到单个对象上的方法），其实ruby并没有对class做扩充。
+
+类也来自他的类，即Class类，是Class类的实例
+
+    my_class = Class.new
+    instance = my_class.new
+
+
+常量的基本用法是，在靠近类定义的顶部定义，在内部可直接应用，在外部使用双冒号引用 `Ticket::VENUES`,常量以大写字母开头。
+常量的重新赋值会警告，而改变则不会。因为赋值修改的是符号本身，改变改的则是引用的内容。例如常量是一个数组的情况， Helpers=[]，rails里有多处Helper <<　url_helper,用于保存辅助方法名。
+
+继承，祖先（父类和模块），是关键的组织技术之一。祖先和类将它们的实例方法赋予类创建的实例。
+ruby中，继承树并不是对象行为的唯一决定者；Object类位于继承树的顶部。
+
+
+第6章 模块 module
+=====
+Class类是Module的子类，Object是继承树上顶级的类，Kernel是最顶级的模块。
+Module与class最大的区别在于没有new方法，不能实例化对象。
+Module也是常量。
+
+    module MyModule
+      def say_hello
+         puts "Hello"
+      end
+    end
+    
+    class ModuleTester
+      include MyModule
+    end
+    
+    ModuleTester.new.say_hello
+
+
+module可以被多个类混合，实现了在多个类间共享代码，同时也提供了更精细的组织代码的方式，在继承之外。include后，可以像使用父类的方法一样使用模块。
+模块也能有实例变量。
+
+在对象中寻找方法
+1.我是D类的实例，D定义了这个method吗？
+2. 没有。D混合了模块了吗？
+3. 没有。父类C定义了实例方法吗？
+4. 没有。C混合模块了吗？
+5. 是的，模块M。M定义了report方法吗？
+6. 是的！那么执行该方法。
+
+顶端的是Object, 它include了module Kernel.
+给定一个名字，类和模块中仅有一个对应的方法。找到第一个方法就返回，也是后来（定义）者居上的模式。
+
+super可以调用上一个同名匹配。
+    super 原封不动传参数
+    super() 不传参数
+    super(a,b,c) 传指定参数，其实二和三是一种形式。
+
+一般将实体定义为class，而实体的特性定义为module.如Stack  & Stacklike
+
+模块和类可以互相嵌套，一反面提供了命名空间以隔离同名的类，另一方面给规划程序的设计和结构提供了另一维度。
+    module Tools
+      class Hammer
+    
+    h = Tools::Hammer.new
+
+
+Rails中大量使用了模块化来组织代码，也大量使用了重新打开类。
+
+第7章 作用域和self
+=====
+
+作用域表明变量以及其他元素的可见性（即内存空间）。self是一个对象，self在程序中可不断改变，可以指向不同的对象。这两个东西决定了在Ruby中的方位感。
+
+4种上下文：
+1.顶层(main) 2. 类定义 3.模块定义 4.方法定义（又含顶层、类、模块和单例方法（类方法、模块方法））
+
+class module def 3个关键字出现后会切换到新的self
+
+类方法是一种单例方法，即属于类的方法. 单例方法中的self即单例本身
+<code>
+obj = Object.new
+def obj.show_me
+  p self
+end
+obj.show_me
+
+class C
+  def C.x
+    p self
+  end
+end
+C.x
+
+class C
+  def self.x
+    p self
+  end
+end
+C.x
+</code>
+
+self的主要特权是作为消息的默认接收者.
+同时，任何实例变量都属于该位置的self对象。这也意味着任何地方都可以定义实例变量。
+理解Ruby中任何地方都有这样一样当前对象，以及判断谁是self。
+
+全局变量，$开头，以及很多内建的全局变量。$$包含进程号，$0执行文件名，$:搜索文件的路径，一般不推荐自定义全局变量。
+
+局部作用域，也是顶层、类或模块（含嵌套的）、方法定义，即class, module, def
+
+常量作用域， ::
+
+私有方法指那些不能指定接收者的方法，因为不能带self，所以作者把这部分内容写在了这边。
+
+    private :pour_flour, :add_egg, :stir_batter
+
+第8章 控制流技术
+=====
+
+
+*  条件执行
+*  循环
+*  迭代 block
+   可能因为block会导致代码执行权（流）的变化，于是加入控制流中
+*  异常
+
+<code>
+if cond1
+end
+
+if cond1 then puts x end # 可以把if语句写在一行里，变种是用分号或者冒号替换then
+
+else elsif
+
+每个if后面必有一个end对应，主要用来消除歧义性（else属于哪个if）。举了C的嵌套的例子。
+条件修饰语可以不用end 也能写在一行里面
+
+unless
+
+case var
+when cond1,cond2
+  action
+else
+end
+使用对象的===三等号操作符来进行比较，可自定义这种method的含义。
+</code>
+
+loop中传入了特殊类型的参数，代码块（code block）。用 {} 或者do和end编写。
+
+loop while until for
+
+yield使得控制转移，执行结束后控制转回。
+代码块接收参数的定义方式采用管道||表示法，而非括号(), 但是yield的时候依然是括号，如yield(10).
+代码块的返回值如同方法。
+本质上因为迭代的需要，以实现*方法和代码块之间分工*。
+
+raise,
+这个是抛出RuntimeError的异常
+    raise ArgumentError, "I need a number under 10" unless x < 10
+
+resue语句有两种写法：
+1. 将想要保护的代码用begin/end包围起来；
+2. 要保护一个完整的方法，只要将rescue语句放在定义体的最后。
+
+    rescue Errno::ENOENT => e
+    #=>构造将异常对象放入变量e中
+
+创建异常类
+<code>
+class MyNewException < Exception
+end
+
+raise MyNewException, "some new kind of error has occurred!"
+</code>
+
+第9章 内建类和模块基础知识
+=====
+
+###字面构造器
+
+<code>
+String 引号
+Symbol 前导冒号， :symbol 或 :"symbol with spaces"
+Array 中括号
+Hash 大括号
+Range 两个点或三个点
+Regexp 斜杠 /([a-z]+)/
+
+</code>
+
+
+### 语法糖衣
+算数操作符，读写添加数据的方法（[]、[]=、<<)，比较操作符，三等号， +=， 可以像运算符操作那样调用这些方法，这些方法也都能够重载
+
+改变接收对象状态的方法(!)，to_*的方法，迭代器也有返回值（each，collect)
+
+true，false，nil。 nil和false是仅有的两个布尔值为假的对象。表达式为假的则有很多:100<50.
+
+###比较两个对象，牵涉到布尔值及其测试
+== eql? equal? , 通常equal?不会被重新定义，其他两个用于重载。
+
+比较与Comparable模块，只要实现<=>(太空船操作符)，就可使用include Comparable，获得==、<、>等一堆方法。
+<code>
+class Bid
+  include Comparable
+  
+  def <=>(other_bid)
+    if self.estimate < other_bid.estimate
+      -1
+    elsif self.estimate > other_bid.estimate
+      1
+    else
+      0
+    end
+  end
+end
+</code>
+由层叠的if/elsif/else构成，总是返回-1,0,1，分别表示小于、等于、大于。
+
+true.methods.sort.select {|m| m=~/to/}
+
+第10章 标量对象（无法再分的对象）
+=====
+
+###字符串
+
+单引，双引，%q(单引)，&Q（双引），单引不支持内插机制。
+
++， <<（会改变接收者）
+
+symbol, 数值， 时间
+
+第11章 向量对象（集合对象）
+=====
+
+<code>
+Array.new(3, "abc")
+与
+Array.new(3) {"abc"} 的区别。
+尤其要注意里面闭包的概念
+</code>
+
+unshift,push, <<, shift, pop
+
+concat, push, +(不会改变数组本身), replace, zip 
+[1,2,3].zip([4,5,6]) => [[1,4],[2,5],[3,6]]
+
+flatten(把数组的数组扁平化），reverse，join，uniq， 这些都是直接的、单步的、预定义的改变。
+
+each, each_with_index，
+
+数组过滤操作：find, find_all/select, reject(拒绝符合条件的对象，返回不满足条件的对象)
+
+数组查找操作：size, empty?, include?(item), any?, all?
+
+散列可以使用多个键值来获得多个值，values_at
+
+当找不到key时，可以触发hash把值写入到散列中。 
+
+    h = Hash.new {|hash, key| hash[key] = key *3}
+
+merge， merge! / update
+
+invert, clear, replace
+
+迭代: each {|key,value|}, h.keys, h.values, h.each_key {|k|}, h.each_value {|v| }
+
+过滤，返回的都是数组， select, find, map/collcect
+
+查找，has_key?  has_value?, empty?, size
+
+Enumerable和each，each是这个模块的引擎。Comparable和<=>，太空船是这个模块的引擎。
+<code>
+def each
+  yield "red"
+  yield "orange"
+end
+
+or
+
+def each 
+  XXX.each {|x| yield x}
+end
+</code>
+调用each的过程中，会把代码执行权返回给find/select，以及自己提供给find/select的代码块。
+
+集合排序
+给对象的类定义<=>方法，并把这个类放到某个容器中。
+
+或者，直接在sort {|a，b|} 后面提供代码块，sort_by {|a|}是一种更简洁的方式
+
+第12章 正则表达式
+=====
+
+String#scan, split, sub, gsub, sub后面可跟代码块，代码块中可用$1等
+
+Enumerable#grep
+
+第13章 Ruby 动态特性
+======
+
+###单例类
+
+单例类是定义单例方法的地方。每一个对象实际上有两个类：
+* 多个实例共享的类
+* 单例类
+
+单例类中的方法仅属于该对象，可以通过打开单例类来定义单例方法，如同过去常见的def obj.twice; ...; end 一样。
+使用的记法是
+<code>
+class << object 从而打开了object的单例类,object在此可以是任何对象
+
+使用class << 可定义类方法.
+
+class Ticket 
+  class << self
+    def m....
+     # etc
+
+上面的例子中，等价于
+class << Ticket
+然而其本质都是 class << object
+</code>
+
+有了单例类后，查找method的顺序
+<code> 
+  class Object ---> module Kernel
+
+  所属类 --->所属类类include的模块 
+   |
+   |
+单例类 --->单例类include的模块 --->单例类的父单例类（如果继承了其他类的话）
+</code>
+
+说明的链接("http://www.iteye.com/topic/1022621")
+
+单例类中混含模块的方式有两个，打开单例类和使用extend
+<code>
+obj = C.new
+class << obj
+  include M
+end
+
+obj.extend(M)
+</code>
+      
+一个module可以混含在不同层级的类里头，甚至module还可以include module。
+通过使用ancestor方法可以打印了解层级结构。
+
+C的单例类可以成为D的单例类的父类。
+
+eval,
+
+instance_eval, 把self改成调用的对象 a.instance_eval { p self }
+
+class_eval(module_eval)，使得代码可以进入到类定义体中。和打开类最大的区别在于可以获得外围作用域。
+<code>
+var = 'initial'
+c.class_eval do 
+  puts var
+  def some_method
+      puts var
+  end
+
+  #要想在实例方法中获得访问var的scope，可以使用define_method
+  define_method("talk") {puts var}
+end
+</code>
+
+###Proc对象
+
+    pr = Proc.new { puts "inside a proc's block" }
+    pr.call #总是通过call来调用
+
+Proc对象有闭包，会记录下它被定义时的变量，即携带它自己的上下文，而不管调用时的上下文。
+
+<code>
+a = "aaaa"
+pr = Proc.new {puts a}
+pr.call => "aaa"
+a = "bbb"
+pr.call => "bbb"
+</code>
+#总是会调用当时定义域中的引用
+
+proc对象可跟参数, Proc.new {　|x| p x }
+
+### lambda
+lambda也是一个Proc对象，调用方法和lambda一样，定义方法是 l = lambda { puts "aaa"}，也是实现闭包的。同Proc.new的区别在于，lambda中的return仅仅从代码块中返回，而Proc.new中则是从调用者中返回，即调用者余下的代码不会被执行下去。
+
+proc和lambda可以被当做代码块进行互相转换，虽然实际上ruby中并没有匿名代码块这个对象。
+引用方法是加& 
+grab_block λ {...}
+
+### 回调方法和钩子方法
+
+If this then that
+
+* 调用一个不存在的method
+<code>
+def method_missing(m, *args, &block)
+  @recipes.send(m,*args,&block)
+end
+</code>
+这样一个类马上就能拥有@recipese所具备的方法。
+
+* 一个模块被混含 Module#included
+
+最基本的用途是在include后给类或者模块增加类方法。原来叫做append_features
+<code>
+module M
+  def self.included(c1)
+    def c1.a_class_method
+    end
+  end
+
+  def an_inst_method
+  end
+end
+
+class C
+  include M
+end
+</code>
+
+* 一个类被继承 Class#inherited
+<code>
+module ActiveRecord
+  class Base
+    @@subclasses = {}
+    def self.inherited(child)
+      @@subclasses[self] ||= []
+      @@subclasses[self] << child
+      super
+    end
+  end
+end
+</code>
+
+
+### Module#const_missing
+
+覆盖和增加核心功能
+alias :old_match :match，
+可以自由的打开类并修改类

@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Svnlook与代码统计"
+date: 2012-03-01 11:48
+comments: true
+categories: 
+- script
+- svn
+- 技术
+---
+
+发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
+有了这个东西后，各种统计都会变得有可能。
+
+个人感觉，最有用的当属svn tree 命令
+
+	svn tree . --full-paths
+就能打出成排的版本库中的文件和目录。
+
+比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。
+	svnlook tree . --full-paths | grep java$ | grep -v tags
+	svnlook tree . --full-paths | grep jsp$ | grep -v tags
+	svnlook tree . --full-paths | grep xml$ | grep -v tags

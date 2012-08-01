@@ -1,0 +1,91 @@
+---
+layout: post
+title: "Heredocs 和缩进"
+date: 2012-04-19 12:41
+comments: true
+categories: 
+- ruby
+
+---
+
+### heredocs是什么
+
+**heredocs**适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的
+
+```ruby
+text = <<END
+aaa
+bbb
+ccc
+END
+```
+
+但是使用heredocs的时候常有**时灵时不灵**的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写
+
+```ruby
+class Poem
+  def initialize
+    @text = <<END
+"Faith" is a fine invention
+When Gentlemen can see
+But Microscopes are prudent
+           In an Emergency.
+(Emily Dickinson 1830-1886)
+END
+  end
+  def recite
+    puts @text
+  end
+end
+```
+
+但是这样写就是**不行**了：
+
+```ruby
+text = <<END
+  aaa
+  bbb
+  END #END加了缩进就失败
+```
+
+### 解决办法
+
+在第一个END前面加`-`，即使用`-END`，会让最后结束符`  END`前的空白都被忽略，而**内容前面的空白则会被保留**。如果也要去掉，可以使用gsub.
+此处END可以换成任意大写字符，只要成对匹配即可。
+```ruby
+class Poem
+  def initialize
+    @text = <<-END.gsub(/^ {6}/, '')
+      "Faith" is a fine invention
+      When Gentlemen can see
+      But Microscopes are prudent
+                 In an Emergency.
+      (Emily Dickinson 1830-1886)
+    END
+  end
+  def recite
+    puts @text
+  end
+end
+```
+
+### `%w`是何方神圣
+
+有几次，我直接使用`%w{}`以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
+%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。
+
+```ruby
+text2 = %w{
+aaa
+bbb
+ccc
+  dddd
+      }
+
+puts text2
+```
+
+
+
+* [引用链接1](http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/)
+* [引用链接2](https://github.com/styleguide/ruby)

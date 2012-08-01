@@ -1,0 +1,21 @@
+---
+layout: post
+title: "sass"
+date: 2011-08-29 18:48
+comments: true
+categories: 
+- 技术
+- sass
+---
+
+* [sass](http://sass-lang.com/tutorial.html)
+* [rails cast](http://railscasts.com/episodes/268-sass-basics)
+
+sass的几大特性
+
+* nest
+* variable
+* function
+* mixin,variable
+
+另外还有files的组织

@@ -1,0 +1,460 @@
+---
+layout: post
+title: "NodeJS"
+date: 2012-06-04 17:12
+comments: true
+categories: 
+- 笔记
+- nodejs
+- 神器
+---
+
+最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
+特别是搭配CS的语法后, 相当的让人感觉良好.
+
+而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
+而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.
+
+http://howtonode.org/understanding-process-next-tick
+
+tick其实就是计算机系统的时隙.
+
+## util
+
+util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
+两点是多了`%j`支持json格式的输出.
+
+util.debug() 用于调试的,输出到`stderr`  
+util.log() `stdout`  
+util.inspect(object) 展开对象信息  
+util.isArray, isRegExp, isDate  
+
+## Events
+
+All objects which emit events are instances of `require('events').EventEmitter`  
+All EventEmitters emit the event `newListener` when new listeners are added  
+
+```js
+# 前一个参数是camel-cased string, 后一个是是函数,也就做listener  
+server.on('connection', function (stream) {
+  console.log('someone connected!');
+}); 
+
+# 一次性事件,发生后自动消失
+server.once('connection', function (stream) {
+  console.log('Ah, we have our first user!');
+});
+
+server.removeListener('connection', callback);
+emitter.removeAllListeners([event])
+emitter.setMaxListeners(n)
+
+# 返回一系列函数
+emitter.listeners(event)
+
+# 触发事件
+emitter.emit(event, [arg1], [arg2], [...])
+```
+ 
+## Buffer
+
+这个东西和C里面的 `bytes c[8192];` 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
+自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可. 
+
+* encodings:
+  - ascii
+  - utf8
+  - ucs2
+  - base64
+  - binary 通常不用,而是直接用Buffer
+  - hex 十六进制 
+  
+```js
+new Buffer(size)
+new Buffer(array)
+new Buffer(str, [encoding])
+
+buf.write(string, [offset], [length], [encoding]) # 把string的内容写到buffer里,和c很像,但是offset默认是0,length默认是buffer的长度 - offset
+buf.toString([encoding], [start], [end])
+buf[index]
+buf.slice([start], [end])
+Buffer.byteLength(str, 'utf8')
+buf.length 返回的是整个buffer的size
+
+buf.copy(targetBuffer, [targetStart], [sourceStart], [sourceEnd])
+buf.fill(value, [offset], [end])
+此外还有一堆读写各种类型的函数
+```
+
+## Stream
+
+stream是一个抽象接口, HTTP stdout都是对stream的实现.  
+所有的stream, 都是`EventEmitter`的实现. 
+
+### Readable Stream
+
+* Event  
+  - data
+  - end 可能可以继续写
+  - error
+  - close 不是所有的流都有关闭,比如进来的http request
+
+* method
+  - readable
+  - setEncoding(encoding) , 设置后,data返回的就不是buffer而是string
+  - pause 停止`data`事件
+  - resume 恢复`data`事件
+  - destroy
+  - pipe 
+```js
+    process.stdin.resume();
+
+	process.stdin.pipe(process.stdout, { end: false }); #截断source 的 end事件发给destination
+	
+	process.stdin.on("end", function() {
+	  process.stdout.write("Goodbye\n");
+	});
+```
+
+### Writable Stream
+
+* Event
+  - drain 表明可以再写了
+  - error
+  - close
+  - pipe
+  
+* method  
+  - writable
+  - write(string, [encoding], [fd])
+  - write(buffer)
+  - end()
+  - end(string, encoding)
+  - end(buffer)
+  - destroy()
+
+
+## Crypto 
+加密解密的系类
+
+```js
+var filename = process.argv[2];
+var crypto = require('crypto');
+var fs = require('fs');
+
+var shasum = crypto.createHash('sha1');
+
+var s = fs.ReadStream(filename);
+s.on('data', function(d) {
+  shasum.update(d);
+});
+
+s.on('end', function() {
+  var d = shasum.digest('hex');
+  console.log(d + '  ' + filename);
+});
+```
+
+## File System
+
+异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block
+
+* fs.watch  
+  - Linux下用 `inotify`实现
+  - 返回'rename' or 'change' 事件
+```js
+	fs.watch('somedir', function (event, filename) {
+	  console.log('event is: ' + event);
+	  if (filename) {
+	    console.log('filename provided: ' + filename);
+	  } else {
+	    console.log('filename not provided');
+	  }
+	});
+```
+* fs.ReadStream  
+* fs.WriteStream 
+* fs.open(path, flags, [mode], [callback]) 
+  `(err, fd)`
+  
+## Path
+  
+## Net
+
+* net.createServer([options], [connectionListener])  
+```js
+var net = require('net');
+var server = net.createServer(function(c) { //'connection' listener
+  console.log('server connected');
+  c.on('end', function() {
+    console.log('server disconnected');
+  });
+  c.write('hello\r\n');
+  c.pipe(c);
+});
+server.listen(8124, function() { //'listening' listener
+  console.log('server bound');
+});
+```
+
+* net.connect,net.createConnection  
+  - 也是一样触发`connect`事件
+  - net.connect(port, [host], [connectListener])
+  - net.connect(path, [connectListener])  
+  
+### net.Server
+* server.listen(port, [host], [listeningListener])
+  - `listening` event
+* server.close()  
+  - 也是异步关闭，最终 emit `close`事件
+* server.address() `{"port":43239,"family":2,"address":"0.0.0.0"}`
+* server.maxConnections
+* server.connections
+
+* Event  
+  - listening
+  - connection
+  - close
+  - error
+  
+### net.Socket
+
+* new net.Socket([options])
+  - fd, type, allowHalfOpen
+* socket.connect 一般用net.connect来新建
+* bufferSize() 当前准备发的缓存长度
+* setEncoding() 指定接收data的编码
+* write(data, [encoding], [callback])
+* end([data]) half-close
+* destroy() 仅在处理error是需要使用
+* pause(), resume() 和`data`事件相关
+* setTimeout(timeout, [callback])
+  - 超时，通常没有超时
+  - 0则表示同步操作，而且要求即刻发掉
+* setNoDelay() 默认就是true
+* keepAlive()
+* address(), remoteAddress(), remotePort()
+* bytesRead() 已收到的bytes数量， bytesWritten()
+
+* Event
+  - connect
+  - data
+  - end
+  - timeout
+  - drain
+  - error
+  - close
+
+## UDP / Datagram Sockets
+  `require 'dgram'`  
+  
+## DNS
+  * lookup()  
+  * resolve()
+  
+## HTTP
+
+核心思想： The user is able to **stream data**.
+
+### http
+* http.createServer([requestListener])
+
+#### Event
+
+* 'request'
+  - (request, response) -> 
+  - 一个connection可能有多个request
+* 'connection'
+  - (socket) ->
+  - 一般不会直接处理，也可以通过`request.connection`获得`socket`
+* 'close'
+* 'checkContinue'
+  - (request, response) ->
+  - [关于100-continue](http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/)  ,用处就是试探，在发起实际的body前把条件等发给server预审
+  - `request` event will **not** be emitted.
+* 'upgrade'
+  - 不知何意
+  - (request, socket, head) -> 
+* 'clientError'
+  - (exception) ->
+  
+#### method
+
+* listen(port, [hostname], [callback])
+* close() = net.Server.close()
+
+### http.ServerRequest
+
+#### Event
+
+* data
+ - (chunk) ->
+* end
+* close
+
+#### method
+
+* method 'GET', 'DELETE'
+* url
+  - `require('url').parse(request.url, true)`
+  - `require('querystring').parse`
+* request.headers
+* request.trailers 
+  - Only populated after the 'end' event.
+* request.setEncoding([encoding])
+* pause()
+* resume()
+* connection
+
+### http.ServerResponse
+
+实现了`Writable Stream`
+
+#### Event
+
+* 'close'
+
+#### Method
+
+* writeContinue()
+* writeHead(statusCode, [reasonPhrase], [headers])
+  - 必须在`response.end()`被调用之前
+  - `response.writeHead(200, {Content-Type: 'text/plain'})`
+* statusCode  
+* setHeader(name, value)
+  - `response.setHeader("Content-Type", "text/html")`
+* getHeader(name)
+* removeHeader(name)
+* write(chunk, [encoding])
+  - stream式的写法
+  - raw
+  - implicit header mode
+* addTrailers(headers)
+```js
+response.writeHead(200, { 'Content-Type': 'text/plain',
+                          'Trailer': 'Content-MD5' });
+response.write(fileData);
+response.addTrailers({'Content-MD5': "7895bf4b8828b55ceaf47747b4bca667"});
+response.end();
+```
+* end([data], [encoding])
+  
+### http.request
+
+Node保持有几个可以发起http请求的连接
+
+* http.request(options, callback)
+```js
+var options = {
+  host: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST'
+};
+
+var req = http.request(options, function(res) {
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+
+req.on('error', function(e) {
+  console.log('problem with request: ' + e.message);
+});
+
+// write data to request body
+req.write('data\n');
+req.write('data\n');
+req.end(); 
+```
+
+* http.get(options, callback)
+
+#### http.Agent
+
+node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent
+
+### http.ClientRequest
+
+```js
+request.on('response', function (response) {
+  response.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+```
+
+#### Event
+
+* response
+  - (response) ->
+* socket
+  - (socket) -> 
+  - 给该request分配socket后触发
+* upgrade
+  - (response, socket, head) -> 
+  - 似乎是用来升级到websocket的
+* continue    
+
+#### Method
+
+* write(chunk, [encoding])
+* end()
+* abort()
+* setTimeout(timeout, [callback])
+* setNoDelay(true/false)
+* setSocketKeepAlive([enable], [initialDelay])
+
+### http.ClientResponse
+
+a `Readable Stream` 
+ 
+* data
+* end
+* close
+
+* statusCode
+* headers
+* trailers
+* setEncoding([encoding])
+* pause()
+* resume()
+
+## HTTPS
+
+## URL
+
+* href - `http://user:pass@host.com:8080/p/a/t/h?query=string#hash`
+* protocol
+* host
+* auth
+* hostname
+* port
+* pathname
+* search 
+* path
+* query
+* hash
+
+* url.parse(urlStr)
+
+```js
+coffee> url.parse("http://192.168.2.2/?q=1&q=2#sss", true)
+{ protocol: 'http:',
+  slashes: true,
+  host: '192.168.2.2',
+  hostname: '192.168.2.2',
+  href: 'http://192.168.2.2/?q=1&q=2#sss',
+  hash: '#sss',
+  search: '?q=1&q=2',
+  query: { q: [ '1', '2' ] },
+  pathname: '/',
+  path: '/?q=1&q=2' }
+```
+
+## Readline
+
+加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。
