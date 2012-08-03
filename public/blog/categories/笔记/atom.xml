@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.heroku.com/blog/categories/笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-02T09:36:26+08:00</updated>
+  <updated>2012-08-03T10:13:25+08:00</updated>
   <id>http://octopresszhangyu.heroku.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ship It]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <updated>2012-08-03T09:38:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
+
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
+
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
+
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
+
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
+
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
@@ -912,282 +945,6 @@ coffee&gt; url.parse("http://192.168.2.2/?q=1&amp;q=2#sss", true)
 <h2>Readline</h2>
 
 <p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
-    <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
-    <content type="html"><![CDATA[<p>这是阅读'The little Book on CoffeeScript'的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
-不需要太大的部头。</p>
-
-<h1>安装步骤</h1>
-
-<p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
-
-<p>```html</p>
-
-<script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"
-type="text/javascript" charset="utf-8"></script>
-
-
-<script type="text/coffeescript">
-# Some CoffeeScript
-</script>
-
-
-<p>```</p>
-
-<p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
-但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
-
-<p><code>
-wget http://nodejs.org/dist/v0.6.18/node-v0.6.18.tar.gz
-tar -zxvf node-v0.6.18.tar.gz
-cd node-v0.6.18.tar.gz
-./configure
-make &amp;&amp; make install
-npm install -g coffee-script # -g 才能确保不是安装在当前目录
-</code></p>
-
-<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
-<strong>运行</strong> <code>coffee my-script.coffee</code>
-<strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
-
-<h1>1. Syntax</h1>
-
-<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
-和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
-
-<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
-
-<p>支持多行注释<br/>
-```js
-  ###</p>
-
-<pre><code>A multiline comment,
-</code></pre>
-
-<p>  ###
-```</p>
-
-<h3>变量和范围</h3>
-
-<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
-需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
-<strong>global object</strong><br/>
-<code>js
-exports = this
-exports.MyVariable = "foo-bar"
-</code></p>
-
-<h3>Functions</h3>
-
-<p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
-单行函数 <code>func = -&gt; "bar"</code><br/>
-多行函数，必须注意<strong>缩进</strong>（indent）<br/>
-<code>js
-func = -&gt;
-  # An extra line
-  "bar"
-</code></p>
-
-<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
-接受多个参数 <code>sum = (nums...) -&gt;</code></p>
-
-<p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
-没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
-
-<p>Function <strong>Context</strong> 待进一步了解<br/>
-<code>=&gt;</code></p>
-
-<h3>一些表达式</h3>
-
-<p>花括号是可选的，hash和array可以利用缩进完成。
-```js
-object2 = one: 1, two: 2</p>
-
-<p>object3 =
-  one: 1
-  two: 2</p>
-
-<p>array1 = [1, 2, 3]</p>
-
-<p>array2 = [
-  1
-  2
-  3
-]
-```</p>
-
-<p>Flow Control<br/>
-像python，像ruby</p>
-
-<p>String的解析，和ruby类似</p>
-
-<h3>循环和综合（类似python)</h3>
-
-<p><code>in</code> ---- <code>for name in ["A", "B", "C"]</code><br/>
-需要index ---- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
-把操作也写成一行 ---- <code>release prisoner for prisoner in []</code><br/>
-comprehensions: ---- <code>release p for p in prisoners when prisoners[0] == "R"</code>
-内置的仅支持while</p>
-
-<h3>几个替换和操作符</h3>
-
-<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
-<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
-
-<p><code>?</code> similiar to Ruby's nil?, <code>praise if brian?</code> , it's also a <code>||</code>， <code>velocity = southern ? 40</code></p>
-
-<h1>2. CoffeeScript Classes</h1>
-
-<p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
-使用new 来新建对象 <code>animal = new Animal</code>,<br/>
-<code>contructor</code> 类似ruby的initialize，
-```js
-class Animal
-  constructor: (name) -></p>
-
-<pre><code>@name = name
-</code></pre>
-
-<p><code>  
-其中，构造函数的参数如果带@则会自动被当成实例变量进行设置  
-</code>js
-class Animal
-  constuctor: (@name) -></p>
-
-<p>animal = new Animal("Parrot")
-```</p>
-
-<h3>instance 属性</h3>
-
-<p>给实例加属性如同给object加属性</p>
-
-<p>```js
-class Animal
-  price: 5</p>
-
-<p>  sell: (customer) =></p>
-
-<p>animal = new Animal
-animal.sell(new Customer)
-```</p>
-
-<p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
-环境的变化而变化。</p>
-
-<h3>Static 属性</h3>
-
-<p>这就是class变量，需要用到this 或者 @<br/>
-```js
-class Animal
-  this.find = (name) -></p>
-
-<p>Animal.find("Parrot")</p>
-
-<p>Class Animal
-  @find: (name) -></p>
-
-<p>Animal.find("Parrot")
-```</p>
-
-<h3>继承与Super</h3>
-
-<p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
-
-<p>```js
-class Animal
-  constructor: (@name) -></p>
-
-<p>  alive: -></p>
-
-<pre><code>false
-</code></pre>
-
-<p>class Parrot extends Animal
-  constructor: -></p>
-
-<pre><code>super("Parrot")
-</code></pre>
-
-<p>  dead: -></p>
-
-<pre><code>not @alive()
-</code></pre>
-
-<p>Animal::rip = true</p>
-
-<p>parrot = new Parrot("Macaw")
-console.log("aaa") if parrot.rip
-```</p>
-
-<h1>3. 惯用法</h1>
-
-<p>```js</p>
-
-<h3>each</h3>
-
-<p>fun(n) for n, i in array</p>
-
-<h3>map</h3>
-
-<p>for item in array
-  item.name</p>
-
-<h3>select</h3>
-
-<p>passed = []
-failed = []
-for score in [49, 48, 90]
-  (if score > 60 then passed else failed).push score</p>
-
-<h3>includes</h3>
-
-<p>included = "test" in array #但不能用于单个字符串的内部模式匹配</p>
-
-<h3>属性遍历</h3>
-
-<p>object = {one: 1, two: 2}
-for key, value of object
-  "#{key} = #{value}"</p>
-
-<h3>or</h3>
-
-<p>hash ?= {}</p>
-
-<h3>支持多值返回</h3>
-
-<h3>外部扩展库</h3>
-
-<h1>Use local alias</h1>
-
-<p>$ = jQuery</p>
-
-<p>$ ->
-  #COMContentLoaded
-  $(".js-el").click -></p>
-
-<pre><code>alert("clicked!")
-</code></pre>
-
-<p>```</p>
-
-<h1>4. 编译</h1>
-
-<p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
-跟rake差不多，可以watch，可以自动编译。</p>
-
-<h1>5.优良部分</h1>
-
-<p>孙子说，知己知彼百战不殆。</p>
-
-<p>CS也只是修复了部分js的缺陷。</p>
-
-<p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 项目管理 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.heroku.com/blog/categories/项目管理/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-02T09:36:26+08:00</updated>
+  <updated>2012-08-03T10:13:25+08:00</updated>
   <id>http://octopresszhangyu.heroku.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ship It]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <updated>2012-08-03T09:38:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
+
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
+
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
+
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
+
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
+
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
@@ -193,37 +226,6 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
 “這很大程度了解釋了為什麼：個人、大公司要『新創』一個事業很容易失敗。而一些『大公司』要『山寨』一個服務也有機會取得成功。” <br/>
 那么反过来，对于不够明确的、大家都还没谱的、都需要摸索的项目就不合适。<br/>
 所谓<strong>执行</strong>是针对有成熟套路的东西，考察的是系统的熟练程度和配合程度。而创新、新业务是需要<strong>试错的</strong>，其中的核心能力是<strong>学习</strong>、<strong>摸索</strong>、<strong>观察</strong>和<strong>勇气</strong>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[思考出哪些不用测试更加重要]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part/"/>
-    <updated>2012-04-12T21:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part</id>
-    <content type="html"><![CDATA[<p>很多次，一直问自己测试代码到底值不值？毕竟我写过几次，但最后发现写测试代码的工作量其实很大。特别是碰到需求变更，本来只要改一处的代码，变得
-必须改  <strong>2x</strong> 处。做了一段时间以后，我承认这是对保证质量有效的，但是往往确实不值得，因为得不偿失。另一个问题是先写
-测试还是先写程序？</p>
-
-<p>按TDD的要求，无疑测试代码在先，实际代码在后。但根据我写web程序的经验，尤其是那些controller的经验，坚持测试代码在先基本没什么意义。在web上和
-数据库上直接看见结果显然更有感觉。</p>
-
-<p>二者结合起来，最后我们就不怎么写测试代码了。尽管对违反TDD有一种罪恶感，但在教条和现实之间，我们还是选择了现实。其实想来比坚持教条要好。但实际上可以处理的更加聪明，也更有效果些。</p>
-
-<p>直到今天读了DHH的 <a href="http://37signals.com/svn/posts/3159-testing-like-the-tsa">测试识别</a> ， 我对上面的问题有了更深一步的认识。</p>
-
-<ol>
-<li><strong>严格按照TDD</strong>还是<strong>不写</strong>是两个极端， 实际上中间有很多中间状态。比如，比较优良的测试覆盖率应该在20%，绝不应该超过33% . 道理很简单，就是一直讽刺thoughtworks的他们是在写测试程序而不是真正<strong>有用的软件</strong>。</li>
-<li>写测试本来就是不是<strong>免费</strong>的，需要阅读、需要维护、需要动脑筋、需要花时间，而这个时间比例也最好控制起来，20%是不错的一个开销比例。</li>
-<li>关键问题在于，也是最难的，是<strong>识别什么东西是需要测试的</strong>，真正值得动脑筋的是这些东西。</li>
-<li>识别出要写的测试后，先写测试还是后写其实和在写什么内容关系重大。针对api的可以tdd，而应用类的实际上还是可以先写代码再写测试，毕竟tdd在web中更多的是一种保障作用。</li>
-</ol>
-
-
-<p>得到的教训：</p>
-
-<p>人类最可贵的是 <strong>独立思考</strong> + <strong>灵活运用</strong>， 走极端不好。实际上很多事情都是一个度的问题， 把原则用在需要的地方。 在做其他事情方面也是一样的。
-不用追求用了TDD就100%，未满似乎就不是TDD。或者写不到50%以上就索性一点都不写。即使做其他事情的时候，也要牢记这个道理。原则是有价值的，但必须要有灵活的运用。这才是运用技术手段时该抱有的开放的心态。</p>
 ]]></content>
   </entry>
   

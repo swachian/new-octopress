@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>rubygems的本地化cache - Hegel2011的博客</title>
+  <title>Ship It - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="本地化rubygem cache的git链接 设计思想是：
-1. 将rubygems.com指向本地的地址，例如127.0.0.1;
-2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
-3. 如果本地没有，则先从远端下载到本地，然后再传输回去 &hellip;">
+  <meta name="description" content="这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。 全篇最精彩的部分在于基础设施章节。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.heroku.com/blog/2011/06/17/rubygems-cache/">
+  <link rel="canonical" href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rubygems的本地化cache</h1>
+      <h1 class="entry-title">Ship It</h1>
     
     
       <p class="meta">
@@ -86,40 +84,38 @@
   
 
 
-<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+<time datetime="2012-08-03T09:38:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://github.com/akitaonrails/rubygems_proxy.git">本地化rubygem cache的git链接</a></p>
+<div class="entry-content"><p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
 
-<p>设计思想是：
-1. 将rubygems.com指向本地的地址，例如127.0.0.1;
-2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
-3. 如果本地没有，则先从远端下载到本地，然后再传输回去</p>
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
 
-<p>这样就保证了自己曾经下载过的gem可以在本地有个案底，既节省下次安装的时间，又获得了备份。</p>
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
 
-<p>update: 2011.6.19
-直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
 
-<pre><code>unicorn -c unicorn.conf.rb 
-</code></pre>
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
 
-<p>conf.rb文件的内容</p>
-
-<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
-listen 8080
-</code></pre>
-
-<p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
-
-<p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
-
-<pre><code>gem install bundle --source='http://127.0.0.1:3000'
-</code></pre>
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
 </div>
 
 
@@ -142,12 +138,12 @@ listen 8080
   
 
 
-<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+<time datetime="2012-08-03T09:38:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/技术/'>技术</a>
+    <a class='category' href='/blog/categories/笔记/'>笔记</a>, <a class='category' href='/blog/categories/项目管理/'>项目管理</a>
   
 </span>
 
@@ -156,7 +152,7 @@ listen 8080
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.heroku.com/blog/2011/06/17/rubygems-cache/" data-via="" data-counturl="http://octopresszhangyu.heroku.com/blog/2011/06/17/rubygems-cache/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/" data-via="" data-counturl="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/" >Tweet</a>
   
   
   
@@ -165,10 +161,8 @@ listen 8080
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/06/16/ubuntu1104-install/" title="Previous Post: ubuntu1104安装手记">&laquo; ubuntu1104安装手记</a>
+        <a class="basic-alignment left" href="/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/" title="Previous Post: Mange It! Your Guide to Progmatic Project Management">&laquo; Mange It! Your Guide to Progmatic Project Management</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/06/18/two-good-presents/" title="Next Post: 今天读的两个不错的ppt">今天读的两个不错的ppt &raquo;</a>
       
     </p>
   </footer>

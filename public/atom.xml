@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.heroku.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-02T09:36:26+08:00</updated>
+  <updated>2012-08-03T10:13:25+08:00</updated>
   <id>http://octopresszhangyu.heroku.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ship It]]></title>
+    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <updated>2012-08-03T09:38:00+08:00</updated>
+    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
+
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
+
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
+
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
+
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
+
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
@@ -1954,37 +1987,6 @@ readme driven development
 先把README叫做SPEC，完成一点，就把内容移到README中。</p>
 
 <p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[WebSocket]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket/"/>
-    <updated>2012-05-28T14:00:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket</id>
-    <content type="html"><![CDATA[<p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
-
-<p>现在浏览器对real-time应用的解决办法：</p>
-
-<ul>
-<li><em>polling</em> ajax 定期轮询</li>
-<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
-<li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
-</ul>
-
-
-<p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
-
-<p>WebSocket这是下一代的web通信&#8212;full-duplex, bidirectional, a single socket。看下来是对HTTP协议的一个替换。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
-</span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
-
-
-<p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
-Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
 ]]></content>
   </entry>
   
