@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 读书笔记 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/读书笔记/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书笔记/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (3) 部署和管理]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/17/deployment-and-administration-for-mongod/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod/"/>
     <updated>2012-04-17T11:07:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/17/deployment-and-administration-for-mongod</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod</id>
     <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
@@ -200,9 +200,9 @@ mongodb hard nofile 10240
   
   <entry>
     <title type="html"><![CDATA[PM培训课程小结]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/15/lessons-from-a-training-on-pm/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/15/lessons-from-a-training-on-pm/"/>
     <updated>2012-04-15T13:42:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/15/lessons-from-a-training-on-pm</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/15/lessons-from-a-training-on-pm</id>
     <content type="html"><![CDATA[<p>趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看<a href="http://xdite-smalltalk.tumblr.com/post/18034694291">别人</a>的一些文章，谈谈
 自己的想法。</p>
 
@@ -256,9 +256,9 @@ mongodb hard nofile 10240
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (2)]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/30/learning-mongodb-2/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2/"/>
     <updated>2012-03-30T17:03:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/30/learning-mongodb-2</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2</id>
     <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
@@ -441,9 +441,9 @@ mongos> db.chunks.find()
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (1)]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/29/learning-mongodb-1/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1/"/>
     <updated>2012-03-29T15:59:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/29/learning-mongodb-1</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1</id>
     <content type="html"><![CDATA[<p>一个不错的mongodb<a href="http://tutorial.mongly.com/tutorial/index">入门游戏</a>. 一共二十课，介绍了基本的内容。通常20-60分钟可以通关。<br/>
 下面是同一个作者给mongodb写的<a href="https://github.com/karlseguin/the-little-mongodb-book">小书</a>.<br/>
 需要执行的脚本可以这样输入 <code>./mongo server:27017/dbname --quiet my_commands.js</code></p>
@@ -603,9 +603,9 @@ Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard
   
   <entry>
     <title type="html"><![CDATA[阶级分层]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/13/jiejifenchen/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/13/jiejifenchen/"/>
     <updated>2012-03-13T22:05:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/13/jiejifenchen</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/13/jiejifenchen</id>
     <content type="html"><![CDATA[<p>以中国人实际的概念而言，所谓封建社会 就是  <strong>地富</strong> 社会。<br/>
 知识分子也开始装老粗，因为农民思维农民习气受到推崇。因为彼时是战斗阶段，农民是地位最高的一个阶层。<br/>
 阶级出身论是中共革命最重要的组织原则，也是思想原则。在革命年代有过重要贡献。这和员工治理有很多相通的地方。但是公司怎么折腾明显是私人的事情。一个国家都这样，就必然要出现问题。</p>

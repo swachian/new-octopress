@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ssh-key]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/"/>
     <updated>2012-06-29T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key</id>
     <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
 
 <p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
@@ -40,9 +40,9 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
   
   <entry>
     <title type="html"><![CDATA[Arp 绑定]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/23/arp-binding/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/23/arp-binding/"/>
     <updated>2012-04-23T11:46:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/23/arp-binding</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/23/arp-binding</id>
     <content type="html"><![CDATA[<p>通过ftp备份老是报告登录失败。检查过后，网管告知我们是ip被抢。照理是需要网管执行纪律的，但是这个我就不越俎代庖，反正
 解决问题为主。而且即便执行纪律也不保证下次就不会发生。于是想起来直接绑定arp和ip，这样可以<strong>根除</strong>此类问题。</p>
 
@@ -73,9 +73,9 @@ echo '192.168.202.19 00:26:b9:4c:8d:af' &gt; /etc/ip-mac
   
   <entry>
     <title type="html"><![CDATA[What is Numa and the effect of it]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
     <updated>2012-04-08T22:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
     <content type="html"><![CDATA[<p>研究mongod的时候，知道了一个关于cpu的概念--numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
 
 <p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
@@ -94,9 +94,9 @@ echo '192.168.202.19 00:26:b9:4c:8d:af' &gt; /etc/ip-mac
   
   <entry>
     <title type="html"><![CDATA[给shell加上显示git的分支]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/28/display-git-branch-in-shell/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell/"/>
     <updated>2011-06-28T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/28/display-git-branch-in-shell</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell</id>
     <content type="html"><![CDATA[<p><code>
 function find_git_branch {</p>
 

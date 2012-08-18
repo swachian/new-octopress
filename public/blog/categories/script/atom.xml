@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: script | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/script/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/script/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[What is Numa and the effect of it]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
     <updated>2012-04-08T22:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
     <content type="html"><![CDATA[<p>研究mongod的时候，知道了一个关于cpu的概念--numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
 
 <p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
@@ -36,9 +36,9 @@
   
   <entry>
     <title type="html"><![CDATA[Svnlook与代码统计]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/01/svnlook/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/01/svnlook/"/>
     <updated>2012-03-01T11:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/01/svnlook</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/01/svnlook</id>
     <content type="html"><![CDATA[<p>发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
 有了这个东西后，各种统计都会变得有可能。</p>
 
@@ -60,9 +60,9 @@ svnlook tree . --full-paths | grep xml$ | grep -v tags
   
   <entry>
     <title type="html"><![CDATA[给shell加上显示git的分支]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/28/display-git-branch-in-shell/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell/"/>
     <updated>2011-06-28T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/28/display-git-branch-in-shell</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell</id>
     <content type="html"><![CDATA[<p><code>
 function find_git_branch {</p>
 

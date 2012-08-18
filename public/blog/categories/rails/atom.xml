@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Rails View]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/24/the-rails-view/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view/"/>
     <updated>2012-04-24T12:11:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/24/the-rails-view</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view</id>
     <content type="html"><![CDATA[<p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
 是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
 提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[[zz]Rails与Merb合并背后的故事]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/21/inside-rails-and-merb/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/21/inside-rails-and-merb/"/>
     <updated>2011-06-21T16:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/21/inside-rails-and-merb</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/21/inside-rails-and-merb</id>
     <content type="html"><![CDATA[<p>Rails的目标是减少cost并带来极大的方便，而yehuda提出的现代化框架虽然有架构之美，但对方便性却没什么意义，效益增收不明显，而且实践极难，所以rails团队一直没做。</p>
 
 <pre><code>*
@@ -69,9 +69,9 @@
   
   <entry>
     <title type="html"><![CDATA[我的开发环境]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/20/my-developing-environment/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment/"/>
     <updated>2011-06-20T15:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/20/my-developing-environment</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment</id>
     <content type="html"><![CDATA[<p>牵涉到的软件：</p>
 
 <p>vmware</p>
@@ -108,9 +108,9 @@ sudo apt-get install openssh-server</p>
   
   <entry>
     <title type="html"><![CDATA[Rails3.1使用手记]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/16/rails3.1/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1/"/>
     <updated>2011-06-16T14:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/16/rails3.1</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1</id>
     <content type="html"><![CDATA[<p>HTML use syntax: true</p>
 
 <p>bundle 执行的对象是Gemfile，而bundle install 后会在Gemfile.lock文件中产生gem及其版本的依赖，所以在Gemfile中不再需要声明版本号

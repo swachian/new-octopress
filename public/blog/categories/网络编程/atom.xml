@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 网络编程 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/网络编程/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/网络编程/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[WebSocket]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/05/28/websocket/"/>
     <updated>2012-05-28T14:00:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/28/websocket</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/05/28/websocket</id>
     <content type="html"><![CDATA[<p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
 
 <p>现在浏览器对real-time应用的解决办法：</p>

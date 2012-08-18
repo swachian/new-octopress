@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/神器/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-18T20:33:29+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
     <updated>2012-07-21T09:46:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
     <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
 只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
 难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
@@ -38,9 +38,9 @@
   
   <entry>
     <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
     <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
     <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
 中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
 再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
@@ -65,9 +65,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
     <updated>2012-06-13T10:28:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
     <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
 于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
 
@@ -77,9 +77,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 
@@ -718,9 +718,9 @@ coffee&gt; url.parse("http://192.168.2.2/?q=1&amp;q=2#sss", true)
   
   <entry>
     <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
     <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
     <content type="html"><![CDATA[<p>这是阅读'The little Book on CoffeeScript'的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 

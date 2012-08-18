@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这是读革命年代有关内容后的一点体会。
-国民党的失败源于军事，经济之垮是受军事的拖累，尤其是东北战局的拖累。国家财政70%用于军费，70%又用于东北。而政治的失败也受军事影响很大。
-国军上手之时，对共军的理解还停留在34年剿匪阶段。当是时，毛泽东领导的中国红军确实已经被国民党‘剿’的差不多了。但是， &hellip;">
+  <meta name="description" content="发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
+有了这个东西后，各种统计都会变得有可能。 个人感觉，最有用的当属svn tree 命令 svn tree . --full-paths 就能打出成排的版本库中的文件和目录。 比如为了获得java文件、jsp、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.heroku.com/blog/page/6/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/page/6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -51,7 +50,7 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:octopresszhangyu.heroku.com" />
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -66,6 +65,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/01/svnlook/">Svnlook与代码统计</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-01T11:48:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
+有了这个东西后，各种统计都会变得有可能。</p>
+
+<p>个人感觉，最有用的当属svn tree 命令</p>
+
+<pre><code>svn tree . --full-paths
+</code></pre>
+
+<p>就能打出成排的版本库中的文件和目录。</p>
+
+<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。</p>
+
+<pre><code>svnlook tree . --full-paths | grep java$ | grep -v tags
+svnlook tree . --full-paths | grep jsp$ | grep -v tags
+svnlook tree . --full-paths | grep xml$ | grep -v tags
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -593,58 +643,6 @@ CPU：美国博康BCM5357处理器   &#8221;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/15/waikanban-diandi/">外刊班点滴</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-15T18:48:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>外刊班是丁老师自己的理想。虽然效果很大，买账的学生并不多。毕竟大部分学生的认识能力有限，强求不得的。所有的视频班都是网上播放，唯外刊有光盘刻，也是老丁在坚持自己的理想，自己的快乐。</p>
-
-<p>四期是08年冬天的寒假（“视频拍摄费用很高，三个小时就一两千，希望以后有机会”），但实际上应该是拍了</p>
-
-<p>三期讲了三十篇文章 07年夏天 无视频</p>
-
-<p>07年寒假第二期 无视频</p>
-
-<p>06年暑假第一期 无视频</p>
-
-<p>09年寒假第五期（石头，于超，这个外刊视频班纯粹是不赚钱，甚至是亏本在做，比去年多了光盘包）.背景是有一排tank的房间。</p>
-
-<p>09年暑假第六期 无视频</p>
-
-<p>10年寒假第七期</p>
-
-<p>11年寒假第八期</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -662,6 +660,10 @@ CPU：美国博康BCM5357处理器   &#8221;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/18/chuyue/">处约</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/03/ship-it/">Ship It</a>
       </li>
     
@@ -677,15 +679,11 @@ CPU：美国博康BCM5357处理器   &#8221;
         <a href="/blog/2012/07/13/levels/">levels</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/11/the-hardware-architecture-of-37-signals/">The hardware architecture of 37 signals</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/生活'>生活 (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/云计算'>云计算 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/生活'>生活 (7)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/云计算'>云计算 (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
