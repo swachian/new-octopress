@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-16T10:48:31+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -14,10 +14,40 @@
 
   
   <entry>
+    <title type="html"><![CDATA[hadoop集群安装手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
+    <updated>2012-08-06T16:43:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
+    <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
+</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
+
+<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
+读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
+比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
+然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
+然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
+map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
+
+<h1>文献</h1>
+
+<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Ship It]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it/"/>
     <updated>2012-08-03T09:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it</id>
     <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
 告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
 
@@ -48,9 +78,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
     <updated>2012-07-31T09:04:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
     <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
 
 <p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
@@ -73,9 +103,9 @@
   
   <entry>
     <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
     <updated>2012-07-21T09:46:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
     <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
 只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
 难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
@@ -96,10 +126,10 @@
   
   <entry>
     <title type="html"><![CDATA[levels]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/13/levels/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels/"/>
     <updated>2012-07-13T10:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/13/levels</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
 
 <p>来自37sigals的<a href="http://37signals.com/svn/posts/3200-levels-of-aspiration">转载</a></p>
 
@@ -110,9 +140,9 @@
   
   <entry>
     <title type="html"><![CDATA[The hardware architecture of 37 signals]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
     <updated>2012-07-11T11:10:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
     <content type="html"><![CDATA[<p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
 
 <p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
@@ -120,15 +150,15 @@
 网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
 备份直接用的S3 storage。</p>
 
-<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
+<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[User Stories Applied: For Agile Software Development]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
     <updated>2012-07-11T09:43:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
     <content type="html"><![CDATA[<p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
 比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
 一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
@@ -214,9 +244,9 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
   
   <entry>
     <title type="html"><![CDATA[数学之美]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
     <updated>2012-07-02T23:47:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei</id>
     <content type="html"><![CDATA[<p>在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页.</p>
 
 <p>分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅.</p>
@@ -362,9 +392,9 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
   
   <entry>
     <title type="html"><![CDATA[ssh-key]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/"/>
     <updated>2012-06-29T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key</id>
     <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
 
 <p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
@@ -387,9 +417,9 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
   
   <entry>
     <title type="html"><![CDATA[git init[zz]]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init/"/>
     <updated>2012-06-27T16:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -416,9 +446,9 @@ $ git push origin test:test              // 提交本地test分支作为远程�
   
   <entry>
     <title type="html"><![CDATA[hubot and socket.io]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
     <updated>2012-06-26T22:05:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
     <content type="html"><![CDATA[<p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
 最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
 也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
@@ -449,10 +479,10 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[Programming Language Performance]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance/"/>
     <updated>2012-06-26T10:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
 
 <p>JavaScript是一个很大的亮点。V8的性能确实快。
 相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
@@ -464,9 +494,9 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
     <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
     <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
 中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
 再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
@@ -491,9 +521,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
     <updated>2012-06-13T10:28:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
     <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
 于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
 
@@ -503,9 +533,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[Sam Stephenson's Better JS with CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/"/>
     <updated>2012-06-06T17:02:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript</id>
     <content type="html"><![CDATA[<p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
 
 <p>Won&#8217;t write js again.</p>
@@ -548,9 +578,9 @@ improve the language , prototype</p>
   
   <entry>
     <title type="html"><![CDATA[Replace log Files with Streams]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/"/>
     <updated>2012-06-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams</id>
     <content type="html"><![CDATA[<p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
 整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
 
@@ -594,9 +624,9 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 
@@ -1352,9 +1382,9 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
   
   <entry>
     <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
     <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
     <content type="html"><![CDATA[<p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 
@@ -1716,9 +1746,9 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
   
   <entry>
     <title type="html"><![CDATA[Vi for Aptana]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/05/30/vi-for-aptana/"/>
     <updated>2012-05-30T10:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/05/30/vi-for-aptana</id>
     <content type="html"><![CDATA[<p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
 IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
 
@@ -1811,9 +1841,9 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
   
   <entry>
     <title type="html"><![CDATA[一个屌丝的逆袭]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/05/30/yigediaosidenixi/"/>
     <updated>2012-05-30T00:13:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/05/30/yigediaosidenixi</id>
     <content type="html"><![CDATA[<p>http://www.designsor.com/
 原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
 
@@ -1830,163 +1860,6 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
 打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
 成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
 速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Inside Github]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github/"/>
-    <updated>2012-05-29T11:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github</id>
-    <content type="html"><![CDATA[<p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
-的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
-
-<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
-
-<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
-
-<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
-4四大<strong>frameworks</strong>组成。</p>
-
-<ul>
-<li>rails
-Github.com, Gist, &#8230;</li>
-<li>resque
-Background processing, G大约有50个不同的类型</li>
-<li>chimney
-All git calls happen over the write</li>
-<li>utils
- 意外日志，统计，辅助应用等</li>
-</ul>
-
-
-<h3>rails</h3>
-
-<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
-GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
-
-<ul>
-<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
-支付的抽象库。有中国人给家里alipay的补丁</li>
-<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
-<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
-<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
-<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
-除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
-</ul>
-
-
-<p>Gems:</p>
-
-<ul>
-<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
-<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
-<li><a href="">aws-s3</a></li>
-<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
-<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
-<li><a href="https://github.com/github/markup">github/markup</a></li>
-<li>[jekyll]</li>
-<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
-<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
-<li>[unicorn] 16 workers</li>
-</ul>
-
-
-<p>Rack:</p>
-
-<ul>
-<li>Rack::Bug<br/>
-Coderack</li>
-<li>nerdEd/rack-validate</li>
-<li>webficient/rack-tidy</li>
-<li>talison/rack-mobile-detect</li>
-</ul>
-
-
-<p>Nginx当然不让 :<br/>
-* Limit Zone<br/>
-* Limit Request: Anti-DDOS
-* memcached support<br/>
-* Push Module: comet!</p>
-
-<p>Git:
-* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
-
-<h3>chimney(smoke)</h3>
-
-<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
-Smoke calls</p>
-
-<ul>
-<li>BERT-RPC
-另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
-<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
-<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
-<li>[chimney]
-proprietary 的库，怀疑是erlang写的<br/>
-让RPC clients知道如何找到server，路由内容存放在Redis中</li>
-<li>proxymachine
-有点类似nodeload替换的功能，不过这个也用于git clone<br/>
-能用来作为所有tcp链接的代理</li>
-<li>JSON-RPC</li>
-<li>node.js<br/>
-downloads<br/>
-event streams</li>
-<li>hubot</li>
-</ul>
-
-
-<h3>resque</h3>
-
-<ul>
-<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
-Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
-<li><p>优先等级</p>
-
-<ul>
-<li>严重</li>
-<li>高</li>
-<li>低</li>
-</ul>
-</li>
-<li><p>队列任务</p>
-
-<ul>
-<li>page 产生页面</li>
-<li>archive 打包tar</li>
-<li>search
-
-<ul>
-<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据库是MySql 5</p></li>
-</ul>
-
-
-<h3>utils</h3>
-
-<ul>
-<li>comet loading</li>
-<li>nagios 负责监控</li>
-<li>resque 的web</li>
-<li>collectd 用于手机负载、RAM等的信息</li>
-<li>pingdom 短信系统</li>
-<li>tender 一个客服系统</li>
-</ul>
-
-
-<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
-
-<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
-
-<p>里面提到了<strong>RDD</strong>的概念:<br/>
-readme driven development
-先把README叫做SPEC，完成一点，就把内容移到README中。</p>
-
-<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
 ]]></content>
   </entry>
   

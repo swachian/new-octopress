@@ -9,10 +9,16 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="发现Ruby Inside最近的
-文章又好看了起来。选了一些细细研究如下。 GitHub&#8217;s Ruby Style Guide
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。
-此外，还有tomdoc做编码文档的规范， &hellip;">
+  <meta name="description" content="heredocs是什么 heredocs适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的 1
+2
+3
+4
+5
+text = &lt;&lt;END
+aaa
+bbb
+ccc
+END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱在于最后一行的缩进。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.heroku.com/blog/page/4/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/page/4/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -52,7 +58,7 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:octopresszhangyu.heroku.com" />
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -67,6 +73,175 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/19/heredocs/">Heredocs 和缩进</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-19T12:41:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>heredocs是什么</h3>
+
+<p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
+</span><span class='line'><span class="sh">aaa</span>
+</span><span class='line'><span class="sh">bbb</span>
+</span><span class='line'><span class="sh">ccc</span>
+</span><span class='line'><span class="no">END</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Poem</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
+</span><span class='line'><span class="sh">&quot;Faith&quot; is a fine invention</span>
+</span><span class='line'><span class="sh">When Gentlemen can see</span>
+</span><span class='line'><span class="sh">But Microscopes are prudent</span>
+</span><span class='line'><span class="sh">           In an Emergency.</span>
+</span><span class='line'><span class="sh">(Emily Dickinson 1830-1886)</span>
+</span><span class='line'><span class="no">END</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">recite</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="vi">@text</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是这样写就是<strong>不行</strong>了：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
+</span><span class='line'><span class="err">  aaa</span>
+</span><span class='line'><span class="err">  bbb</span>
+</span><span class='line'><span class="err">  END #END加了缩进就失败</span>
+</span><span class='line'>  <span class="n">aaa</span>
+</span><span class='line'>  <span class="n">bbb</span>
+</span><span class='line'>  <span class="k">END</span> <span class="c1">#END加了缩进就失败</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>解决办法</h3>
+
+<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
+此处END可以换成任意大写字符，只要成对匹配即可。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Poem</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@text</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">END</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/^ {6}/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="sh">      &quot;Faith&quot; is a fine invention</span>
+</span><span class='line'><span class="sh">      When Gentlemen can see</span>
+</span><span class='line'><span class="sh">      But Microscopes are prudent</span>
+</span><span class='line'><span class="sh">                 In an Emergency.</span>
+</span><span class='line'><span class="sh">      (Emily Dickinson 1830-1886)</span>
+</span><span class='line'><span class="no">    END</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">recite</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="vi">@text</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>%w</code>是何方神圣</h3>
+
+<p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
+%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text2</span> <span class="o">=</span> <span class="sx">%w{</span>
+</span><span class='line'><span class="sx">aaa</span>
+</span><span class='line'><span class="sx">bbb</span>
+</span><span class='line'><span class="sx">ccc</span>
+</span><span class='line'><span class="sx">  dddd</span>
+</span><span class='line'><span class="sx">      }</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">text2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
+<li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -921,149 +1096,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/01/journey-plan-to-hangzhou/">杭州游的计划</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-01T16:26:00+08:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>景点：</h3>
-
-<ul>
-<li>植物园</li>
-<li>划船（自开船）</li>
-<li>灵隐寺</li>
-<li>岳庙</li>
-<li>雷峰塔</li>
-<li>胡庆余堂（胡雪岩故居，元宝街18号）</li>
-<li>心源茶楼庆春店（非诚勿扰景点）</li>
-<li>虎跑</li>
-<li>西湖天地</li>
-<li>郭庄</li>
-</ul>
-
-
-<h3>美食</h3>
-
-<ul>
-<li>武林广场美食</li>
-<li>知味观味庄（杨公堤10-12号，花港观鱼西门外）</li>
-<li>楼外楼，孤山路30号（岳王庙）</li>
-<li>山外山菜馆（植物园北门或者岳王庙）</li>
-<li>黄饭儿（靠近胡雪岩故居）</li>
-<li>奎元馆</li>
-<li>外婆家（近桔子酒店）</li>
-</ul>
-
-
-<h3>串联安排</h3>
-
-<ul>
-<li><p>4月5日</p>
-
-<p>早8点出门打的去上海火车站<br/>
-11点坐车去<strong>山外山菜馆</strong></p>
-
-<blockquote><p>杭州火车站 终点：杭州植物园北门乘<strong>K7</strong>(火车站东南方向城站火车站上，玉泉下，先网东北走到玉泉路往西北走，到玉古路往北走)。</p></blockquote>
-
- 下午，植物园
-
-<blockquote><p> 植物园北门(玉泉)售票处步行80米 玉泉
-15(经过12站|7.2公里|41分钟)还可乘:15K15
-打索桥步行40米</p></blockquote>
-
-<p>桔子酒店，旁边的外婆家用晚餐。 酒店出来往南，到文一路往东，到湖墅南路往南，总计300-400米路程。</p></li>
-<li><p>4月6日</p>
-
-<p>早9点出门去灵隐寺，知味观味庄用中餐</p>
-
-<blockquote><p>打索桥
-23(经过6站|3.9公里|26分钟)还可乘:23K23
-黄龙洞黄龙洞
-K807(经过6站|4.4公里|27分钟)
-灵隐</p>
-
-<p>打索桥
-B支1(经过2站|1.7公里|16分钟)还可乘:B支1K11
-密渡桥路口密渡桥路口
-K807(经过10站|6.9公里|38分钟)
-灵隐步行340米</p></blockquote></li>
-</ul>
-
-
-<p> 灵隐 -> 桔子水晶</p>
-
-<blockquote><p>Y1
-56分钟
-10公里,直达,步行540米,全价1.0元
-灵隐寺步行300米
-灵隐
-Y1(经过13站|9公里|47分钟)
-清波门(柳浪闻莺)步行240米</p></blockquote>
-
-<p>  白堤、岳王庙、武松墓</p>
-
-<blockquote><p>坐 Y1</p></blockquote>
-
-<p>  杨公堤、郭庄、太子湾公园<br/>
-  雷峰塔、花、钱王祠</p>
-
-<blockquote><p>坐 Y2</p></blockquote>
-
-<p>  桔子水晶，西湖天地</p>
-
-<ul>
-<li><p>4月7日</p>
-
-<p>虎跑</p>
-
-<blockquote><p>K822/822/K504/K4/假日9&#8230;
-28分钟
-5公里,直达,步行220米,全价1.0元
-杭州桔子水晶酒店步行120米
-清波门
-K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
-虎跑步行100米</p></blockquote>
-
-虎跑   六和塔
-
-<blockquote><p>K4可通</p></blockquote></li>
-</ul>
-
-
-<p> 水晶  茶楼  西湖周边<br/>
-  火车站</p>
-
-<p> 17:00火车返回</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1081,6 +1113,10 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">hadoop集群安装手记</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/08/03/ship-it/">Ship It</a>
       </li>
     
@@ -1096,15 +1132,11 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
         <a href="/blog/2012/07/13/levels/">levels</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/07/11/the-hardware-architecture-of-37-signals/">The hardware architecture of 37 signals</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/生活'>生活 (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/云计算'>云计算 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/生活'>生活 (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

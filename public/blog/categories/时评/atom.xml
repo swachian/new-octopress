@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 时评 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/时评/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/时评/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-16T10:48:31+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[不列颠网站]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/05/ukgov-notes/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/05/ukgov-notes/"/>
     <updated>2012-03-05T14:37:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/05/ukgov-notes</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/05/ukgov-notes</id>
     <content type="html"><![CDATA[<p>一个曾经让我们的国家蒙羞的日不落帝国，即便早已今非昔比，但实际上已经进展到相当现代化的阶段。这从他们最近公布的一组政府网站的制造方式和制造工具上可见一端。</p>
 
 <p>首先，整个网站倡导的是 government as a platform，高度融合了政府为人民服务，政府其实就是一种云。</p>
@@ -47,9 +47,9 @@ router用Scala编写
   
   <entry>
     <title type="html"><![CDATA[创新是什么]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/01/29/chuang-xin-shi-shi-yao/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/01/29/chuang-xin-shi-shi-yao/"/>
     <updated>2012-01-29T16:20:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/01/29/chuang-xin-shi-shi-yao</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/01/29/chuang-xin-shi-shi-yao</id>
     <content type="html"><![CDATA[<p>创新是目前提到的很热门的词汇。在我看来，创新可以理解成一种突破。<br/>
 不管这种产品是渐进地到达的，还是通过结构性调整获得的，当然也有颠覆现有模式的。<br/>
 渐进的创新犹如水滴石穿，量变到质变。其中的道路、方向等都已被开辟，人们只是随着这个道路继续前进，逐步的优化提高。日积月累，自然获益良多。汽车业是这方面的典型代表。<br/>
@@ -62,9 +62,9 @@ router用Scala编写
   
   <entry>
     <title type="html"><![CDATA[读《吴敬琏传》]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/07/30/review-of-biograph-for-wjl/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl/"/>
     <updated>2011-07-30T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/07/30/review-of-biograph-for-wjl</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl</id>
     <content type="html"><![CDATA[<p>吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识，留学耶鲁回国后开始成为中央的think tank，尤其是90年代后成为江朱进行市场化经济体制改革的重要理论及方针提供者，进而影响着我们这个国家和社会。03年之后，随着政府的换届，吴也逐步从决策层淡出。此时的他思想也随之有所改变，淡出的因素既有人际关系的问题，更有着深层次的利益冲突的问题。</p>
 
 <p>纵观全书，最有价值的是最后几章，因为问题直指当前的状况，并且也道出了很多失策以及背后运作的原理，而这些又是最紧急的要处理要辨识的。4万亿的实质是什么，会把我们带向何方？出口型的经济必然导致货币通胀以及内需不振。因为货物留出去了，留在自己的只有钱。钱多物少，又如何不通胀？唯一的替代品就是资产价格暴涨，资产主要就是股票、房地产等。而所谓的深化体制改革，基本也只能是空话。意识形态不是根深蒂固的，但是中国人、中国政府、暴君与暴民却是中国固有的，要替换这些东西谈何容易。放弃苏联人那套简单，放弃中国人心中的尾巴就难了，何况有些东西绝不仅仅是思想尾巴那么简单，实际的利益摆在那边，基本无解。</p>
@@ -81,9 +81,9 @@ router用Scala编写
   
   <entry>
     <title type="html"><![CDATA[马云的麻烦]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/20/trouble-of-mayun/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/20/trouble-of-mayun/"/>
     <updated>2011-06-20T16:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/20/trouble-of-mayun</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/trouble-of-mayun</id>
     <content type="html"><![CDATA[<p>在中国，都曾经见识过国有资产私有化或者乡镇企业一瞬间就变成私人企业了。有过这样经历的人，看见马云的举动会觉得实在是小事一桩。别说阿里巴巴国际和阿里爸爸浙江本来就都是私有企业，又都是马云一首创建的，他爱怎么弄完全是他自己的事情。顶多只有阿里爸爸国际的股东有权表示反对。而这有法律控制，不需要群情激奋，也不需要大家表明立场。</p>
 
 <p>  后来，终于明白，关键的问题其实是vie。

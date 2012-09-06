@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/生活/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-16T10:48:31+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[查国生2012讲座]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/25/zaguosen2012/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/25/zaguosen2012/"/>
     <updated>2012-04-25T15:22:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/25/zaguosen2012</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/25/zaguosen2012</id>
     <content type="html"><![CDATA[<p>又听到查老师的声音了。想当初在邯郸校区上研究生英语课的时候，就感觉这是一个好老师。爱学生，懂生活。后来知道他还是MBA
 英语辅导的专家。听了几次讲座，幽默风趣依旧，体贴入微润物无声。听下来还是有一些收获：</p>
 
@@ -35,9 +35,9 @@
   
   <entry>
     <title type="html"><![CDATA[杭州游的计划]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/01/journey-plan-to-hangzhou/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/01/journey-plan-to-hangzhou/"/>
     <updated>2012-04-01T16:26:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/01/journey-plan-to-hangzhou</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/01/journey-plan-to-hangzhou</id>
     <content type="html"><![CDATA[<h3>景点：</h3>
 
 <ul>
@@ -151,9 +151,9 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
   
   <entry>
     <title type="html"><![CDATA[上海电信IPTV的VLAN ID和通过交换机连接两路IPTV]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/"/>
     <updated>2012-02-20T14:43:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan</id>
     <content type="html"><![CDATA[<p>上海电信的IPTV通道和互联网通道是通过ethernet的tag进行区分，然后达到控制各自流量的目的。这个tag打还是不打是有连接路由器的哪一个端口决定的。比如设定端口1和2是iptv的端口，
 那么电信的一体猫或者网关就会给在这个口子进入的数据打上tag 51，当从这个口子的数据传给机顶盒时又要去掉tag。因为机顶盒本身是不会处理带tag的数据包的。</p>
 
@@ -171,9 +171,9 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
   
   <entry>
     <title type="html"><![CDATA[家用路由器的选择点滴 ]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/02/17/my-way-to-choose-a-home-router/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/02/17/my-way-to-choose-a-home-router/"/>
     <updated>2012-02-17T14:26:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/02/17/my-way-to-choose-a-home-router</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/02/17/my-way-to-choose-a-home-router</id>
     <content type="html"><![CDATA[<p>因新装光纤宽带后，对老的TP-LINK路由器不满，打算重新购买一台家用路由器，从而对目前的家庭路由器进行了一番了解和实验，于是有了这篇小结。</p>
 
 <p>不满TP的原因是它对bt、emule高并发连接的支持不好，一旦允许的连接数达到几百个以上，那么打开网页等都会受影响。我起初以为这只是硬件能力的问题，毕竟tp的只是低端货，不能指望太多。但到底什么才是家庭路由器中的比较高端的或者能满足这种需求的产品呢？</p>
@@ -215,9 +215,9 @@ CPU：美国博康BCM5357处理器   "
   
   <entry>
     <title type="html"><![CDATA[Italian Holiday]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/12/02/italian-holiday/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/12/02/italian-holiday/"/>
     <updated>2011-12-02T22:55:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/12/02/italian-holiday</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/12/02/italian-holiday</id>
     <content type="html"><![CDATA[<p>一直以来，最深刻的意大利人的形象是‘这个杀手不太冷’里面的杀手里奥。现实中的则是卡纳瓦罗、布冯这样的足球运动员。普遍特点是身手矫健脑子好使，行动灵活。身体、力量和头脑都是一流的，但似乎都是文盲。这些特点合在一起，搭配上懒散和不爱学习，似乎天生就是干小偷的料。所以，出发前并不是很想去意大利，更愿意去德国、瑞士看看。但是，那些地方普遍都要玩10天以上，老婆抱定她只剩这点假期的限制，也就只有听老婆话了。</p>
 
 <p>然后简单瞄了一下行程。要去4个地方，发现基本是早上坐车，下午参观，晚上睡觉，自由活动的时间也还算给了不少。出发前，领队寄来的须知里面，倒是让人感受到了先进国家确实是先进国家。司机一天必须保证12小时的休息，每开2小时必须休息20分钟，汽车 在停车状态时启动引擎是违法的行为，也就是在等人的时候不得长时间开着马达。换在中国，开个助动车的在楼下停车或者启动都经常会释放5分钟以上的噪音。看到这些规定，对旅途瞬间放心了许多。之后的经历来看，这些规定可以说是严格遵守，而且公路上开一会就会遇到休息站。规定绝不是用来仰望星空的一纸空文。他们的休息站是真的休息，不像我们的休息站基本是加油站。</p>

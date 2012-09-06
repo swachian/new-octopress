@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/笔记/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-08-16T10:48:31+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ship It]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it/"/>
     <updated>2012-08-03T09:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it</id>
     <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
 告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
 
@@ -48,9 +48,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
     <updated>2012-07-31T09:04:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
     <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
 
 <p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
@@ -73,9 +73,9 @@
   
   <entry>
     <title type="html"><![CDATA[User Stories Applied: For Agile Software Development]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
     <updated>2012-07-11T09:43:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
     <content type="html"><![CDATA[<p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
 比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
 一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
@@ -161,9 +161,9 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
   
   <entry>
     <title type="html"><![CDATA[数学之美]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
     <updated>2012-07-02T23:47:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei</id>
     <content type="html"><![CDATA[<p>在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页.</p>
 
 <p>分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅.</p>
@@ -309,9 +309,9 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 
