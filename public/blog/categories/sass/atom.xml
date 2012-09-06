@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: sass | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/sass/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-06T23:44:55+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[sass]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/08/29/sass/"/>
+    <updated>2011-08-29T18:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/08/29/sass</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://sass-lang.com/tutorial.html">sass</a></li>
+<li><a href="http://railscasts.com/episodes/268-sass-basics">rails cast</a></li>
+</ul>
+
+
+<p>sass的几大特性</p>
+
+<ul>
+<li>nest</li>
+<li>variable</li>
+<li>function</li>
+<li>mixin,variable</li>
+</ul>
+
+
+<p>另外还有files的组织</p>
+]]></content>
+  </entry>
+  
+</feed>

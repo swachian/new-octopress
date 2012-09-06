@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-06T23:44:55+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Heredocs 和缩进]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs/"/>
+    <updated>2012-04-19T12:41:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs</id>
+    <content type="html"><![CDATA[<h3>heredocs是什么</h3>
+
+<p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
+
+<p><code>ruby
+text = &lt;&lt;END
+aaa
+bbb
+ccc
+END
+</code></p>
+
+<p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
+
+<p>```ruby
+class Poem
+  def initialize</p>
+
+<pre><code>@text = &lt;&lt;END
+</code></pre>
+
+<p>"Faith" is a fine invention
+When Gentlemen can see
+But Microscopes are prudent</p>
+
+<pre><code>       In an Emergency.
+</code></pre>
+
+<p>(Emily Dickinson 1830-1886)
+END
+  end
+  def recite</p>
+
+<pre><code>puts @text
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>但是这样写就是<strong>不行</strong>了：</p>
+
+<p><code>ruby
+text = &lt;&lt;END
+  aaa
+  bbb
+  END #END加了缩进就失败
+</code></p>
+
+<h3>解决办法</h3>
+
+<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
+此处END可以换成任意大写字符，只要成对匹配即可。
+```ruby
+class Poem
+  def initialize</p>
+
+<pre><code>@text = &lt;&lt;-END.gsub(/^ {6}/, '')
+  "Faith" is a fine invention
+  When Gentlemen can see
+  But Microscopes are prudent
+             In an Emergency.
+  (Emily Dickinson 1830-1886)
+END
+</code></pre>
+
+<p>  end
+  def recite</p>
+
+<pre><code>puts @text
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3><code>%w</code>是何方神圣</h3>
+
+<p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
+%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
+
+<p>```ruby
+text2 = %w{
+aaa
+bbb
+ccc
+  dddd</p>
+
+<pre><code>  }
+</code></pre>
+
+<p>puts text2
+```</p>
+
+<ul>
+<li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
+<li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Inside 3月链接]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/some-useful-link/"/>
+    <updated>2012-04-19T11:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/19/some-useful-link</id>
+    <content type="html"><![CDATA[<p>发现<a href="http://www.rubyinside.com/march-2012-ruby-news-5841.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+RubyInside+%28Ruby+Inside%29">Ruby Inside</a>最近的
+文章又好看了起来。选了一些细细研究如下。</p>
+
+<ul>
+<li><p><a href="https://github.com/styleguide/ruby">GitHub's Ruby Style Guide</a><br/>
+很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
+此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
+<li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
+</ul>
+
+
+<p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
+
+<p><code>sh
+$ mkdir your_blog
+$ cd ./your_blog
+$ mkdir _layouts _plugins _includes _posts css javascripts images
+$ touch index.html _config.yml _layouts/default.html
+</code>
+目录树结构</p>
+
+<p>```sh
+├── README.md
+├── <em>config.yml
+├── </em>layouts</p>
+
+<pre><code>└── default.html
+</code></pre>
+
+<p>├── <em>plugins
+├── </em>includes
+├── _posts
+│   ├── 2012-03-27-your_first_post_in_markdown.md
+│   └── 2012-03-27-your_second_post_in_textile.textile
+├── css
+│   └── screen.css
+├── javascripts
+├── images
+└── index.html
+```</p>
+
+<p><code>sh
+$ jekyll --server --auto
+</code></p>
+
+<p>文档的要求只有一个:</p>
+
+<h2>```sh</h2>
+
+<p>layout: default</p>
+
+<h2>title: Your First Post In Markdown</h2>
+
+<p>```</p>
+
+<p>就会按markdown里面的layout产生内容。</p>
+
+<p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
+
+<ul>
+<li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
+</ul>
+
+
+<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
+
+<ul>
+<li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
+</ul>
+
+
+<p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
+<strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
+<strong>结果</strong>都是可以让程序员和不具备界面美化能力的项目经理也可以设计出说得过去的应用。</p>
+
+<ul>
+<li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
+<li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
+</ul>
+
+
+<p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gimli and markdown 2 pdf]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/17/gimli-and-markdown-2-pdf/"/>
+    <updated>2012-04-17T15:24:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/17/gimli-and-markdown-2-pdf</id>
+    <content type="html"><![CDATA[<p>想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的<a href="http://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/">博客</a>中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。</p>
+
+<p>先安装 Pandoc</p>
+
+<p><code>sudo agt-get install pandoc nbibtex texlive-latex-base texlive-latex-recommended texlive-latex-extra preview-latex-style dvipng texlive-fonts-recommended</code></p>
+
+<p>安装ruby的gem gimli</p>
+
+<p><code>sh
+sudo agt-get install wkhtmltopdf
+gem install gimli
+</code></p>
+
+<p>最后运行</p>
+
+<p><code>sh
+gimli -f ./README.md
+</code></p>
+
+<p>即可得到类似GitHub风格的pdf文档。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Braces 和  do end]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/21/braces-and-do-end/"/>
+    <updated>2012-03-21T10:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/21/braces-and-do-end</id>
+    <content type="html"><![CDATA[<p>Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this means in practice.</p>
+
+<p>``` ruby
+outer inner {|where| puts "#{where} called me"}</p>
+
+<h1>"inner called me"</h1>
+
+<p>outer inner do |where|
+  puts "#{where} called me"
+end</p>
+
+<h1>"outer called me"</h1>
+
+<p>```</p>
+
+<p>区别在于block属于谁，是前一个（outer）还是后一个（inner）。</p>
+
+<p>类似的例子还有高见龙的：
+http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
+
+<p>``` ruby
+my_array = [1, 2, 3, 4, 5]</p>
+
+<p>p my_array.map { |item|
+  item * 2  # 得到[2, 4, 6, 8, 10]
+}</p>
+
+<p>p my_array.map do |item|
+  item * 2  # 得到[1, 2, 3, 4, 5]
+end</p>
+
+<p>```</p>
+
+<p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
+但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
+总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的开发环境]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment/"/>
+    <updated>2011-06-20T15:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment</id>
+    <content type="html"><![CDATA[<p>牵涉到的软件：</p>
+
+<p>vmware</p>
+
+<p>  ubuntu1104</p>
+
+<pre><code>ssh
+
+rvm
+
+ ruby gem rails thin
+</code></pre>
+
+<p>windows</p>
+
+<p>  securecrt</p>
+
+<p>  radrails</p>
+
+<pre><code>rse 远程控制插件
+Target Management 3.0 Update Site   http://download.eclipse.org/dsdp/tm/updates/3.0 Enabled
+</code></pre>
+
+<p>其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录，同时搭配securecrt的console能力。可以说，这是在windows下最好的方案。考虑到中文等支持，可能也是比ubuntu下直接利用netbeans等开发更好的方案了。</p>
+
+<p>具体做法，前提是vmware上装好ubuntu，同时装好并启用ssh
+sudo apt-get install openssh-server</p>
+
+<p>然后，下载最新版的radrails，安装后，选择安装软件，更新增加里面的rse插件，基本做法可以是输入remote
+　　让系统去filter
+　　。</p>
+]]></content>
+  </entry>
+  
+</feed>

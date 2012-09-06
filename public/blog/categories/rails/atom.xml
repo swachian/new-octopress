@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-06T23:44:55+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Rails View]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view/"/>
+    <updated>2012-04-24T12:11:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view</id>
+    <content type="html"><![CDATA[<p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
+是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
+提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
+
+<p>(待续)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[zz]Rails与Merb合并背后的故事]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/21/inside-rails-and-merb/"/>
+    <updated>2011-06-21T16:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/21/inside-rails-and-merb</id>
+    <content type="html"><![CDATA[<p>Rails的目标是减少cost并带来极大的方便，而yehuda提出的现代化框架虽然有架构之美，但对方便性却没什么意义，效益增收不明显，而且实践极难，所以rails团队一直没做。</p>
+
+<pre><code>*
+* [閒聊] Rails 與 Merb 合併背後的故事 剛剛有感而發，在公司開發的 microblog上寫了一段 Rails 與 Merb 合併的故事，以作
+</code></pre>
+
+<p>1
+2010-03-10 　　
+发表:xdite</p>
+
+<p>剛剛有感而發，在公司開發的 microblog上寫了一段 Rails 與 Merb 合併的故事，以作為一些事情的借鏡。後來覺得寫太長了，所以就乾脆整理一下貼過來…</p>
+
+<p>====</p>
+
+<p>Merb 當初是為了要解決 Rails 沒辦法解決的問題，比如說上傳檔案會造成整個網站 hang 住才開始開發的。在 Yehuda 當初設計的哲學之中，他認為 Framework 內部要能夠 modularity 。同時要能實現 ORM Agnosticism，甚至不只 ORM ，包括 javascript library 之類的也都必須要可以這麼做。最後幹出了一套 merb。於是在 2008 年逐漸形成了 Rails 與 Merb 之爭。</p>
+
+<p>但 Merb 越來越開發到最後，core team 發現到一件事，”過於自由” 並不會帶來開發上的便利，反而形成 Merb 內部 component dependency 的 conflict。同時，對於寫出一套 Merb application，不像 Rails 一樣，大家並沒有很清楚的開發標準與 Best Practice，而光看教學文件，因為版本與寫法的關係，造成有心踏入 merb 的開發者一天到晚踩中難以解決的地雷。</p>
+
+<p>更糟糕的是，跳槽來 Merb 的人都是前 Rails 開發者，雖然他們多半是不滿 Rails 的束縛過來的，但他們過來之後，對 Merb 最大的抱怨變成：Merb 並沒有 Rails 那麼便利。這個沒有，那個沒有 ….</p>
+
+<p>剛開始，Merb 的核心團隊，對於這些抱怨，解決之道，就是你喊缺，我們就加！但寫到最後越來越不對勁。他們越來越接近在「重寫」一個 Rails 而已。但這些開發者並不會感激他們。開發者還是只會抱怨 Merb 相比起 Rails「還」缺了甚麼。</p>
+
+<p>加功能，並不會讓 Merb 從此以後取代 Rails，只是永無止盡的追趕和重造輪子，但是開發者還是只是會繼續抱怨。而且，一個 Community 再大，力量也只撐的起一個「主流」Framework。Merb 與 Rails 之爭，相當的損害了社群的開發元氣。</p>
+
+<p>Yehuda 覺得這樣發展下去並不是他的本意。於是找上了 Rails core team 談。一談之下，才達成了現在的合併共識。Rails Core Team 覺得 Yehuda 提的 modulity 與 API 是很好的提議，只是他們「不在乎」。這個不在乎並不是真的不在乎，而是 Rails 的 goal 是壓縮開發的 cost，讓 convention 達到最大化，在此目標之下，要做這件事並沒有太大的實質效益，而且他們這些人的力量與技術能力也不夠做這件事。</p>
+
+<p>而 Yehuda 的原意是他要解決 Rails 沒有辦法達成的事，同時帶進他覺得 modern framework 應該要有的設計，這樣才能讓整個 framework scable，連帶 application 也 scable。而非玩到如今的局面 :「 硬是重造一個 Rails」。既然 Rails core team 也覺得 Yehuda 提的很好很重要，只是他們沒能力去做。而如今 Yehuda 也有能力有意願去做，那就讓他加入 Rails core team 做這件事吧。</p>
+
+<p>所以才造就現在看到的偉大 framework : Rails 3。</p>
+
+<p>====</p>
+
+<p>apply 到一些場景，真是感觸良多啊 /_\</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的开发环境]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment/"/>
+    <updated>2011-06-20T15:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment</id>
+    <content type="html"><![CDATA[<p>牵涉到的软件：</p>
+
+<p>vmware</p>
+
+<p>  ubuntu1104</p>
+
+<pre><code>ssh
+
+rvm
+
+ ruby gem rails thin
+</code></pre>
+
+<p>windows</p>
+
+<p>  securecrt</p>
+
+<p>  radrails</p>
+
+<pre><code>rse 远程控制插件
+Target Management 3.0 Update Site   http://download.eclipse.org/dsdp/tm/updates/3.0 Enabled
+</code></pre>
+
+<p>其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录，同时搭配securecrt的console能力。可以说，这是在windows下最好的方案。考虑到中文等支持，可能也是比ubuntu下直接利用netbeans等开发更好的方案了。</p>
+
+<p>具体做法，前提是vmware上装好ubuntu，同时装好并启用ssh
+sudo apt-get install openssh-server</p>
+
+<p>然后，下载最新版的radrails，安装后，选择安装软件，更新增加里面的rse插件，基本做法可以是输入remote
+　　让系统去filter
+　　。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails3.1使用手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1/"/>
+    <updated>2011-06-16T14:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1</id>
+    <content type="html"><![CDATA[<p>HTML use syntax: true</p>
+
+<p>bundle 执行的对象是Gemfile，而bundle install 后会在Gemfile.lock文件中产生gem及其版本的依赖，所以在Gemfile中不再需要声明版本号
+据说这是大胡子忙了1年左右的成果。确实是改善内部关系的好东西。</p>
+
+<p>therubyracer 是内建于ruby vm的js解释器，ree并没有自带，mri已自带
+有人谈论不好，有人认为挺好，个人认为不是问题</p>
+
+<p>js和css似乎会自动编译
+不过真是部署还是需要 rake assets:precompile来在public/assets目录下产生css文件
+Sprockets来自动集成js成一个文件，css成一个文件
+uglifier 生产环境下来压缩静态文件</p>
+
+<p>console里面的 <pre>reload!</pre> 可以重新加在修改过的文件</p>
+
+<p>view层也带继承了
+这是很大的一个进步，view终于获得了应有的地位</p>
+
+<pre><code>after_find #一个回调函数
+first last #不像find那样会报NoRecord的error
+find_each #批量查询方法，避免整个表拿出来
+find_in_batches #同find_each类似，就是取出的是一个集合
+</code></pre>
+
+<p>join</p>
+
+<pre><code>Post.joins(:category, :comments)
+Category.joins(:posts =&gt; [{:comments =&gt; :guest}, :tags])
+</code></pre>
+
+<p>clients = Client.includes(:address).limit(10)
+  使得原本11句查询，变成了2句，先查出client，然后通过client_id in（x,x ...）查出address的结果</p>
+
+<pre><code>find_by_first_name, find_all_by_first_name, find_by_name!
+Client.find_or_initialize, Client.find_or_create
+
+
+Post.where(:published =&gt; true).any? 检查是否exist?
+
+
+&lt;%=form_for([@post, @post.comments.build]) do |f| %&gt;
+#新版的form_for前用&lt;%=，注意多了=号，挺无聊的追求，对new的要求可以放到view里面来写，一来这确实只是为了view的需要，另一方面今后其他action复用view的话不用再在controller里面new了
+</code></pre>
+
+<p>常用的操作</p>
+
+<pre><code>&lt;%= render :partial =&gt; "comments/comment",
+:collection =&gt; @post.comments %&gt;
+&lt;%= render "comments/form" %&gt;
+&lt;%= link_to 'Destroy Comment', [comment.post, comment],
+:confirm =&gt; 'Are you sure?',:method =&gt; :delete %&gt;
+</code></pre>
+
+<p>嵌套form</p>
+
+<pre><code>accepts_nested_attributes_for :tags, :allow_destroy =&gt; :true,
+    :reject_if =&gt; proc { |attrs| attrs.all? { |k, v| v.blank? } }
+&lt;%= form.fields_for :tags do |tag_form| %&gt;
+</code></pre>
+
+<p>rails的callback不能直接使用def after_safe,而需要用after_save :method的方式来定义一个执行链
+新版的规矩</p>
+
+<p>比较好的<a href="http://phoenixtoday.blogbus.com/logs/33458940.html">git教程</a></p>
+
+<p>ihow的template https://github.com/ihower/rails3-app-template/blob/master/Gemfile,可以发现不少实用的操作，以及一些常用的gem包</p>
+
+<p>simple_form 这个插件</p>
+
+<p>annotate 自动标注，这里面学到了新的配置Gemfile的方法和执行通过Gemfile安装的特定的gem的使用方法</p>
+
+<p>Gemfile</p>
+
+<pre><code>gem 'annotate', :git =&gt; 'https://github.com/ctran/annotate_models.git' #, :branch =&gt; 'rake_compatibility' #指定通过git来安装，也可再跟上一个branch
+</code></pre>
+
+<p>通过上述方法安装的可运行gem，需要通过    <code>bundle exec annotate</code>    来运行</p>
+]]></content>
+  </entry>
+  
+</feed>
