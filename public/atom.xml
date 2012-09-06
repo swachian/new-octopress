@@ -4,7 +4,11 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
+<<<<<<< HEAD
   <updated>2012-08-16T10:48:31+08:00</updated>
+=======
+  <updated>2012-08-18T20:33:29+08:00</updated>
+>>>>>>> 2f0269d415fd6f94f8aeeb9e6661668d6eb0507a
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[hadoop集群安装手记]]></title>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
     <updated>2012-08-06T16:43:00+08:00</updated>
@@ -40,6 +45,31 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 
 <p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
 <a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+=======
+    <title type="html"><![CDATA[处约]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/"/>
+    <updated>2012-08-18T20:05:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue</id>
+    <content type="html"><![CDATA[<p>下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
+已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的，
+有这方面志向又有人指导的话并不难做到。</p>
+
+<p>随即得瑟地去跟老婆说，如今我还在读书的话估计也能保研清华。老婆看看我，然后说现在根本不是比个人能力的时候，也不是你们当年主要靠个人表现就
+能解决基本问题的年代。现在去保了清华能搞定房子车子吗？ 顿时让我无语。毕竟清华的金字招牌尽管很牛，硕士毕业二三十万起步是做得到的，但要更进
+一步那是很难的。至于凭薪水在北京上海搞定房子那基本也是不太可能的事情。于是陷入更大的思绪混沌中。毕竟清华的研究生还是相当诱人的，而搞不定
+这些基本的东西，那么这么诱人又有什么意义呢？</p>
+
+<p>仔细想想，确实是我犯了读书人的毛病，太高看清华了。首先，从计算机系、软件学院会招二流保研生就可说明实际质量不过尔尔。三清团的说法不是没有
+道理的。其次，读书解决一切问题的想法是不对的。曾文正公当翰林期间都是牢骚满腹，彼时中进士的三年不过几百人都有那么多牢骚，那么多的生活拮据，
+何况如今已经扩招几万倍的大学研究生。</p>
+
+<p>更严重的是我又弄差了读书的意义。</p>
+
+<blockquote><p>凡人多望子孙为大官，余不愿为大官，但愿为读书明理之君子。勤俭自持，习劳习苦，可以处乐，可以处约。此君子也。
+凡富贵功名，皆有命定，半由人力，半由天事。惟学作圣贤，全由自己作主，不与天命相干涉。</p></blockquote>
+
+<p>保研之事半由天命半由人力，读书明理，勤俭自持，习劳习苦，处乐处约才是个人该下功夫的地方。</p>
+>>>>>>> 2f0269d415fd6f94f8aeeb9e6661668d6eb0507a
 ]]></content>
   </entry>
   
