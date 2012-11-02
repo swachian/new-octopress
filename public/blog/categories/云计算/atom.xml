@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2012-09-07T17:18:40+08:00</updated>
+  <updated>2012-11-02T11:57:33+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -25,7 +25,8 @@ ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
 </code></p>
 
-<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
+<p>=======
+<strong>数据源的输入才是Hadoop方便地方</strong></p>
 
 <p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
 读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
