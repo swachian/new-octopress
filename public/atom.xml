@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -14,10 +14,179 @@
 
   
   <entry>
+    <title type="html"><![CDATA[核心期刊]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/09/06/article-issues/"/>
+    <updated>2012-09-06T16:35:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/09/06/article-issues</id>
+    <content type="html"><![CDATA[<p>忙了一阵子的投稿，也积累了一些经验。随手记录一下。</p>
+
+<p>投了《计算机系统应用》和《计算机应用与软件》，两篇稿子处理的都还挺快，基本一个月的样子，也都修录了。
+比较起来，北京的这个杂志给的意见更针对文章一些，确实点到了文章的问题。上海的这篇因为已经是第二篇文章了，虽然主题是不同的，但手已比较熟悉，所以问题较少。专家提的意见也只能说要提终归提得出问题来的。</p>
+
+<p>运气还算不错，写了两篇投了两个地方都中了，到录用为止的过程都还挺顺利。当然，个人相信自己的水平比普通研究生肯定高多了。毕竟年龄长了近10岁，
+又是扩招前的上海交大的计算机本科生，2个半月边工作边复习能统考踏破复旦线。仅凭此三点，自信强过很多研究生。即像我这把岁数的研究生能有几人？
+如今研究生每年的录取人数是我们当年本科生的一倍多，质量对比又如何？2个半月过复旦线我在10年前也是做不到的，没有这些年中获得的极大的进步怎么可能？</p>
+
+<p>夸完自己，谈谈对期刊投稿的感受。</p>
+
+<h3>计算机系统应用</h3>
+
+<blockquote><p>杂志社还是不错的。录用过程规范，也不收审稿费。投稿声明、打印材料等的要求都比较正规。专家审稿也是仔细看的，指出的问题还是客观和贴切的。
+杂志的文章总体来说应用性比较强，不像有些期刊纯玩公式和理论，看着高深但仔细分析一下内容其实毫无新意。这个杂志的文章往往还是有点创新内容的。
+对作者的身份背景不太在意，但是连未毕业的本科生也能发文就有点太无章可循。目前是科技期刊的核心，不过在我们系倒也还是承认是二线核心期刊（一线是几个学报）。
+录用后发表编辑说半年左右，这样从投稿开始算的话基本上七八个月也就可以了。总体说来值得一投。</p></blockquote>
+
+<h3>计算机应用与软件</h3>
+
+<blockquote><p>尽管有些评论认为这个杂志在核心期刊里面有点烂，但实际文章看下来大部分文章还是有点用的。在二线核心期刊里应该算是好的。
+缺点就是版面费高，400元/页。出版时间长，要一年，可以加急，费用300元，大约提前2-3个月。审稿时间还是挺快的，就是1个月会出结果。还有短信通知。也不需要递交签字等保密材料。
+如今又是北大核心，也是cscd扩展的核心，所以这个杂志还是挺热门的。总而言之，和上海的it很类似，很正规很不错，但离顶级完全不搭界。
+鉴于在上海的地理位置，以后还是会投的。毕竟各种服务还是很到位的。出版时间能控制在6-8个月就更好了。
+其实兜了一圈下来发现还是上海的杂志比较好。当然就是东西贵了点。但档次、态度等都是一流的。</p></blockquote>
+
+<p>通过这次发文，对核心期刊也有所了解。实际上，核心期刊本身就是一个笼统的概念，名称应该来源于北大图书馆每隔几年发布的《中文核心期刊要目总览》(北大)，
+计算机、自动化方面收入31个刊物，排名低于这个就没戏了。蛮多地方就用这个做标准的。似乎上海交大就是这样。
+但是，实际上又不止这个标准。用的很多的另外一个标准是《中国科学引文数据库》(CSCD，中科院),很多职称评审又只看这个，CSCD又分核心和扩展，前者700多，后者三四百。
+此外，又有《中国科技期刊引证报告》（科技部）。能在这里面的某一个入选，就能够算作核心期刊。如交大图书馆的核心期刊查询，属于其中之一的均能查到内容，
+否则就是空白。EI/SSCI则是国际收入，核心期刊里除了前三个，另外的被收录的并不多。不过几种大学的学报是收录在其中的，比如上海交通大学学报，山东大学学报等。
+除非用于博士毕业，不然核心期刊投投也足够了。</p>
+
+<p>严格的权威期刊，只有计算机学报和软件学报能算，计算机研发也顶多勉强算，自动化和通信的学报基本也算。
+当然，每个地方会再扩展。从我了解下来的情况看，小微被纳入的比较多，计算机科学也有挤进去的案例。下面摘录一下复旦大学计算机的指导目录，
+确实是专家总结过的，对计算机系的学生还是很有指导意义的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>国内期刊指导目录
+</span><span class='line'>计算机科学与技术
+</span><span class='line'>K0812001  计算机学报 中国计算机学会、中科院计算研究所    A类
+</span><span class='line'>K0812002  软件学报    中国计算机学会、中科院软件研究所    A类
+</span><span class='line'>K0812003  模式识别与人工智能 中国自动化学会、国家智能计算机研究开发中心 A类
+</span><span class='line'>K0812004  计算机研究与发展    中科院计算研究所、中国计算机学会    A类
+</span><span class='line'>K0812005  自动化学报 中科院自动化研究所、中国自动化学会 A类
+</span><span class='line'>K0812006  小型、微型计算机系统  中科院沈阳计算机技术研究所 A类
+</span><span class='line'>K0812007  Journal of Computer Science and Technology  中科院计算技术研究所  A类
+</span><span class='line'>K0812008  计算机应用与软件    上海计算技术所、上海计算机软件技术开发中心 B类
+</span><span class='line'>K0812009  计算机科学 国家科技部西南信息中心   B类
+</span><span class='line'>K0812010  计算机工程 华东计算技术研究所、上海市计算机学会  B类
+</span><span class='line'>K0812011  计算机技术 华北计算所 B类
+</span><span class='line'>K0812012  计算机工程与应用    华北计算技术研究所 B类
+</span><span class='line'>K0812013  计算机工程设计   中国航天科工集团二院706所    B类
+</span><span class='line'>K0812014  电信科学    中国通信学会  B类
+</span><span class='line'>K0812015  中文信息学报  中国中文信息学会、中科院软件研究所 B类
+</span><span class='line'>K0812016  信息与控制 中国自动化学会、中科院沈阳自动化研究所   B类
+</span><span class='line'>K0812017  机器人   中国自动化学会   B类
+</span><span class='line'>K0812018  中国图形图象学报    中国图形图象学会、中国科学院遥感应用研究所、中科院自动化研究所   B类
+</span><span class='line'>K0812019  中文信息    中国中文信息学会    B类
+</span><span class='line'>K0812020  微型电脑应用  上海市微型电脑应用学会   B类
+</span><span class='line'>K0812021  计算机工程与科学    国防科学技术大学计算机学院 B类
+</span><span class='line'>K0812022  计算机系统应用   中科院软件所  B类
+</span><span class='line'>K0812023  计算机集成制造系统—CIMK  国家863计划CIMS主题、中国兵器工业集团第210研究所 B类</span></code></pre></td></tr></table></div></figure>
+
+
+<p>美中不足的是漏了一个《计算机应用》，这个期刊个人感觉还是很有特色的。从我个人感受而言，下述的几个还不错：</p>
+
+<table>
+<tr><td width="20%">        </td><td width="10%">北大</td><td width="10%">科技部</td><td width="10%"> 中科院</td><td width="25%">地方</td><td width="20%">审稿费/版面费 </td><td></td></tr>
+<tr><td>计算机应用与软件      </td><td>1</td><td>1</td><td>E</td><td>上海</td><td>100 400/页  </td><td></td></tr>
+<tr><td>计算机应用           </td><td>1</td><td>1</td><td>1</td><td>中科院成都计算机应用研究所</td><td>50 350/页   </td><td></td></tr>
+<tr><td>计算机系统应用     </td><td></td><td>1</td><td></td><td>北京中科院</td><td>0 200/页  </td><td></td></tr>
+<tr><td>小型微型计算机系统  </td><td>1</td><td>1</td><td>1</td><td>中国科学院沈阳计算机研究所</td><td>100 250/页  </td><td></td></tr>
+<tr><td>计算机科学                </td><td>1</td><td>1</td><td>1</td><td>重庆</td><td>150    400/页  </td><td>喜录增刊 </td></tr>
+<tr><td>计算机应用研究     </td><td>1</td><td>1</td><td>E</td><td>国防科技大学计算机学院</td><td>100  300/页  </td><td>喜录增刊 </td></tr>
+<tr><td>电信科学      </td><td>1</td><td>1</td><td></td><td>北京:中国通信学会</td><td>0 200/页  </td><td></td></tr>
+</table>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[处约]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/"/>
+    <updated>2012-08-18T20:05:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue</id>
+    <content type="html"><![CDATA[<p>下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
+已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的，
+有这方面志向又有人指导的话并不难做到。</p>
+
+<p>随即得瑟地去跟老婆说，如今我还在读书的话估计也能保研清华。老婆看看我，然后说现在根本不是比个人能力的时候，也不是你们当年主要靠个人表现就
+能解决基本问题的年代。现在去保了清华能搞定房子车子吗？ 顿时让我无语。毕竟清华的金字招牌尽管很牛，硕士毕业二三十万起步是做得到的，但要更进
+一步那是很难的。至于凭薪水在北京上海搞定房子那基本也是不太可能的事情。于是陷入更大的思绪混沌中。毕竟清华的研究生还是相当诱人的，而搞不定
+这些基本的东西，那么这么诱人又有什么意义呢？</p>
+
+<p>仔细想想，确实是我犯了读书人的毛病，太高看清华了。首先，从计算机系、软件学院会招二流保研生就可说明实际质量不过尔尔。三清团的说法不是没有
+道理的。其次，读书解决一切问题的想法是不对的。曾文正公当翰林期间都是牢骚满腹，彼时中进士的三年不过几百人都有那么多牢骚，那么多的生活拮据，
+何况如今已经扩招几万倍的大学研究生。</p>
+
+<p>更严重的是我又弄差了读书的意义。</p>
+
+<blockquote><p>凡人多望子孙为大官，余不愿为大官，但愿为读书明理之君子。勤俭自持，习劳习苦，可以处乐，可以处约。此君子也。
+凡富贵功名，皆有命定，半由人力，半由天事。惟学作圣贤，全由自己作主，不与天命相干涉。</p></blockquote>
+
+<p>保研之事半由天命半由人力，读书明理，勤俭自持，习劳习苦，处乐处约才是个人该下功夫的地方。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[hadoop集群安装手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
+    <updated>2012-08-06T16:43:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
+    <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
+</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
+
+<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
+读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
+比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
+然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
+然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
+map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
+
+<h1>文献</h1>
+
+<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Ship It]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it/"/>
     <updated>2012-08-03T09:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/08/03/ship-it</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/03/ship-it</id>
     <content type="html"><![CDATA[<p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
 告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
 
@@ -48,9 +217,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
     <updated>2012-07-31T09:04:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
     <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
 
 <p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
@@ -73,9 +242,9 @@
   
   <entry>
     <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
     <updated>2012-07-21T09:46:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
     <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
 只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
 难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
@@ -96,10 +265,10 @@
   
   <entry>
     <title type="html"><![CDATA[levels]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/13/levels/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels/"/>
     <updated>2012-07-13T10:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/13/levels</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
 
 <p>来自37sigals的<a href="http://37signals.com/svn/posts/3200-levels-of-aspiration">转载</a></p>
 
@@ -110,9 +279,9 @@
   
   <entry>
     <title type="html"><![CDATA[The hardware architecture of 37 signals]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
     <updated>2012-07-11T11:10:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
     <content type="html"><![CDATA[<p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
 
 <p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
@@ -120,15 +289,15 @@
 网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
 备份直接用的S3 storage。</p>
 
-<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
+<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[User Stories Applied: For Agile Software Development]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
     <updated>2012-07-11T09:43:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
     <content type="html"><![CDATA[<p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
 比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
 一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
@@ -214,9 +383,9 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
   
   <entry>
     <title type="html"><![CDATA[数学之美]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
     <updated>2012-07-02T23:47:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei</id>
     <content type="html"><![CDATA[<p>在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页.</p>
 
 <p>分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅.</p>
@@ -362,9 +531,9 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
   
   <entry>
     <title type="html"><![CDATA[ssh-key]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/"/>
     <updated>2012-06-29T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/29/ssh-key</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key</id>
     <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
 
 <p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
@@ -382,14 +551,16 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
 
 
 <p>弄好以后，发现做起事情来确实快多了。</p>
+
+<p>Update: 有些机器上需要给出额外的参数<code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@host</code></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[git init[zz]]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init/"/>
     <updated>2012-06-27T16:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/27/git-init</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -416,9 +587,9 @@ $ git push origin test:test              // 提交本地test分支作为远程�
   
   <entry>
     <title type="html"><![CDATA[hubot and socket.io]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
     <updated>2012-06-26T22:05:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
     <content type="html"><![CDATA[<p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
 最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
 也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
@@ -449,10 +620,10 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[Programming Language Performance]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance/"/>
     <updated>2012-06-26T10:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.heroku.com/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
 
 <p>JavaScript是一个很大的亮点。V8的性能确实快。
 相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
@@ -464,9 +635,9 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
     <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
     <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
 中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
 再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
@@ -491,9 +662,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
     <updated>2012-06-13T10:28:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
     <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
 于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
 
@@ -503,9 +674,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[Sam Stephenson's Better JS with CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/"/>
     <updated>2012-06-06T17:02:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript</id>
     <content type="html"><![CDATA[<p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
 
 <p>Won&#8217;t write js again.</p>
@@ -548,9 +719,9 @@ improve the language , prototype</p>
   
   <entry>
     <title type="html"><![CDATA[Replace log Files with Streams]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/"/>
     <updated>2012-06-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams</id>
     <content type="html"><![CDATA[<p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
 整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
 
@@ -594,9 +765,9 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 
@@ -1352,9 +1523,9 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
   
   <entry>
     <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
     <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
     <content type="html"><![CDATA[<p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 
@@ -1711,282 +1882,6 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 <p>CS也只是修复了部分js的缺陷。</p>
 
 <p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vi for Aptana]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana/"/>
-    <updated>2012-05-30T10:38:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/vi-for-aptana</id>
-    <content type="html"><![CDATA[<p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
-IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
-
-<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
-下载配置好后，算是跑了起来。</p>
-
-<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
-</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
-</span><span class='line'>
-</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
-</span><span class='line'>
-</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
-</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
-</span><span class='line'>
-</span><span class='line'>  4. To delete the character at the cursor type:  x
-</span><span class='line'>
-</span><span class='line'>  5. To insert or append text type:
-</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
-</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
-</span><span class='line'>
-</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span class='line'>                           Lesson 2 SUMMARY
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
-</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
-</span><span class='line'>  3. To delete a whole line type:    dd
-</span><span class='line'>
-</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
-</span><span class='line'>  5. The format for a change command is:
-</span><span class='line'>           operator   [number]   motion
-</span><span class='line'> where:
-</span><span class='line'>   operator - is what to do, such as  d  for delete
-</span><span class='line'>   [number] - is an optional count to repeat the motion
-</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
-</span><span class='line'>              $ (to the end of line), etc.
-</span><span class='line'>
-</span><span class='line'>  6. To move to the start of the line use a zero:  0
-</span><span class='line'>
-</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
-</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
-</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一个屌丝的逆袭]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi/"/>
-    <updated>2012-05-30T00:13:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/30/yigediaosidenixi</id>
-    <content type="html"><![CDATA[<p>http://www.designsor.com/
-原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
-
-<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
-需要工具：Firefox+Easy Tor+Autoproxy</p>
-
-<p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
-但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
-
-<p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
-用gmail发信到：bridges@torproject.org
-主题随便，内容写：get bridges
-发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
-打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
-成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
-速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Inside Github]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github/"/>
-    <updated>2012-05-29T11:18:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/29/inside-github</id>
-    <content type="html"><![CDATA[<p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
-的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
-
-<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
-
-<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
-
-<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
-4四大<strong>frameworks</strong>组成。</p>
-
-<ul>
-<li>rails
-Github.com, Gist, &#8230;</li>
-<li>resque
-Background processing, G大约有50个不同的类型</li>
-<li>chimney
-All git calls happen over the write</li>
-<li>utils
- 意外日志，统计，辅助应用等</li>
-</ul>
-
-
-<h3>rails</h3>
-
-<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
-GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
-
-<ul>
-<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
-支付的抽象库。有中国人给家里alipay的补丁</li>
-<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
-<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
-<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
-<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
-除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
-</ul>
-
-
-<p>Gems:</p>
-
-<ul>
-<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
-<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
-<li><a href="">aws-s3</a></li>
-<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
-<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
-<li><a href="https://github.com/github/markup">github/markup</a></li>
-<li>[jekyll]</li>
-<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
-<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
-<li>[unicorn] 16 workers</li>
-</ul>
-
-
-<p>Rack:</p>
-
-<ul>
-<li>Rack::Bug<br/>
-Coderack</li>
-<li>nerdEd/rack-validate</li>
-<li>webficient/rack-tidy</li>
-<li>talison/rack-mobile-detect</li>
-</ul>
-
-
-<p>Nginx当然不让 :<br/>
-* Limit Zone<br/>
-* Limit Request: Anti-DDOS
-* memcached support<br/>
-* Push Module: comet!</p>
-
-<p>Git:
-* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
-
-<h3>chimney(smoke)</h3>
-
-<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
-Smoke calls</p>
-
-<ul>
-<li>BERT-RPC
-另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
-<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
-<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
-<li>[chimney]
-proprietary 的库，怀疑是erlang写的<br/>
-让RPC clients知道如何找到server，路由内容存放在Redis中</li>
-<li>proxymachine
-有点类似nodeload替换的功能，不过这个也用于git clone<br/>
-能用来作为所有tcp链接的代理</li>
-<li>JSON-RPC</li>
-<li>node.js<br/>
-downloads<br/>
-event streams</li>
-<li>hubot</li>
-</ul>
-
-
-<h3>resque</h3>
-
-<ul>
-<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
-Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
-<li><p>优先等级</p>
-
-<ul>
-<li>严重</li>
-<li>高</li>
-<li>低</li>
-</ul>
-</li>
-<li><p>队列任务</p>
-
-<ul>
-<li>page 产生页面</li>
-<li>archive 打包tar</li>
-<li>search
-
-<ul>
-<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据库是MySql 5</p></li>
-</ul>
-
-
-<h3>utils</h3>
-
-<ul>
-<li>comet loading</li>
-<li>nagios 负责监控</li>
-<li>resque 的web</li>
-<li>collectd 用于手机负载、RAM等的信息</li>
-<li>pingdom 短信系统</li>
-<li>tender 一个客服系统</li>
-</ul>
-
-
-<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
-
-<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
-
-<p>里面提到了<strong>RDD</strong>的概念:<br/>
-readme driven development
-先把README叫做SPEC，完成一点，就把内容移到README中。</p>
-
-<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
 ]]></content>
   </entry>
   

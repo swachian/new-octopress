@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: svn | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/svn/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/svn/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Svnlook与代码统计]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/03/01/svnlook/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/01/svnlook/"/>
     <updated>2012-03-01T11:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/03/01/svnlook</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/01/svnlook</id>
     <content type="html"><![CDATA[<p>发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
 有了这个东西后，各种统计都会变得有可能。</p>
 

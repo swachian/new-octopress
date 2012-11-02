@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 测试 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/测试/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/测试/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[思考出哪些不用测试更加重要]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part/"/>
     <updated>2012-04-12T21:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part</id>
     <content type="html"><![CDATA[<p>很多次，一直问自己测试代码到底值不值？毕竟我写过几次，但最后发现写测试代码的工作量其实很大。特别是碰到需求变更，本来只要改一处的代码，变得
 必须改  <strong>2x</strong> 处。做了一段时间以后，我承认这是对保证质量有效的，但是往往确实不值得，因为得不偿失。另一个问题是先写
 测试还是先写程序？</p>

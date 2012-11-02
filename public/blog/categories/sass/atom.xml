@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: sass | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/sass/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/sass/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[sass]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/08/29/sass/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/08/29/sass/"/>
     <updated>2011-08-29T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/08/29/sass</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/08/29/sass</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="http://sass-lang.com/tutorial.html">sass</a></li>
 <li><a href="http://railscasts.com/episodes/268-sass-basics">rails cast</a></li>

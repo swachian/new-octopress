@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: nodejs | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/nodejs/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nodejs/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[hubot and socket.io]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
     <updated>2012-06-26T22:05:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
     <content type="html"><![CDATA[<p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
 最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
 也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
@@ -45,9 +45,9 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
     <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
     <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
 中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
 再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
@@ -72,9 +72,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/04/nodejs</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 
@@ -713,9 +713,9 @@ coffee&gt; url.parse("http://192.168.2.2/?q=1&amp;q=2#sss", true)
   
   <entry>
     <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
     <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
     <content type="html"><![CDATA[<p>这是阅读'The little Book on CoffeeScript'的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 

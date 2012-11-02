@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/技术/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -14,10 +14,38 @@
 
   
   <entry>
+    <title type="html"><![CDATA[hadoop集群安装手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
+    <updated>2012-08-06T16:43:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
+    <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
+
+<p><code>bash
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
+</code></p>
+
+<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
+
+<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
+读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
+比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
+然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
+然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
+map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
+
+<h1>文献</h1>
+
+<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[数学之美]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei/"/>
     <updated>2012-07-02T23:47:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/07/02/shu-xue-zhi-mei</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/02/shu-xue-zhi-mei</id>
     <content type="html"><![CDATA[<p>在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页.</p>
 
 <p>分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅.</p>
@@ -163,9 +191,9 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
   
   <entry>
     <title type="html"><![CDATA[Programming Language Performance]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance/"/>
     <updated>2012-06-26T10:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/26/programming-language-performance</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/programming-language-performance</id>
     <content type="html"><![CDATA[<p><img src="/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
 
 <p>JavaScript是一个很大的亮点。V8的性能确实快。
@@ -178,9 +206,9 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
   
   <entry>
     <title type="html"><![CDATA[Replace log Files with Streams]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/"/>
     <updated>2012-06-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/05/replace-log-files-with-streams</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams</id>
     <content type="html"><![CDATA[<p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
 整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
 
@@ -224,9 +252,9 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   
   <entry>
     <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
     <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/06/01/note-on-coffeescript</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
     <content type="html"><![CDATA[<p>这是阅读'The little Book on CoffeeScript'的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 
@@ -495,58 +523,6 @@ for key, value of object
 <p>CS也只是修复了部分js的缺陷。</p>
 
 <p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Where to Use NODEJS]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2012/05/22/where-to-use-nodejs/"/>
-    <updated>2012-05-22T09:27:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2012/05/22/where-to-use-nodejs</id>
-    <content type="html"><![CDATA[<p>近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。<br/>
-今天又读到一篇讲<a href="http://blog.targeterapp.com/post/22984987832/why-we-moved-from-nodejs-to-ror">为什么从NodeJS迁移到RoR</a>。
-作者列举的主要理由如下：</p>
-
-<ol>
-<li>NodeJS适合 <strong>short lived requests</strong>。 并不是很明确这里的request是指什么，似乎就是异步先返回的意思，但这样的体验应该不会好。</li>
-<li>框架很年轻，变动很大。这个经历过Rails的人都明白，估计NodeJS的变动更大，因为js本身就很bt。</li>
-<li>Testing的表现一般，比Django RoR的测试平台还是差距很大。</li>
-<li>他需要Cache所有的东西。Node的强项是每秒千万次点击承受力，对cache似乎并不擅长。1000 RPS的访问压力，对Rails+Nginx已经是小菜一碟。</li>
-</ol>
-
-
-<p>然后作者又推荐了一篇<a href="http://nodeguide.com/convincing_the_boss.html">Guide</a>
-里面提到的了node.js适合与不适合的。</p>
-
-<p>Bad Use Cases:</p>
-
-<ul>
-<li>CPU重度使用<br/>
-js适合高I/O的，而不适合重CPU的。视频编码解码、人工智能等CPU hungry的软件还是用C吧。有提到js写C的addons是挺方便的</li>
-<li>简单的CRUD / HTML apps<br/>
-js下的是不如Rails，CakePHP或者Django那样强有力的</li>
-<li>再搭配其他新技术<br/>
-比如NoSQL，这样会让技术风险做乘法，毕竟两样都不熟的东西组合在一起，会提出更多的挑战。而这些可能对你做出吸引人的业务没有magically的提高</li>
-</ul>
-
-
-<p>Good Use Cases:</p>
-
-<ul>
-<li>JSON APIs<br/>
-对包装数据资源，比如数据库和web services，然后将他们转换成JSON接口暴露给外部使用</li>
-<li>Sigle page apps<br/>
-指那些富客户端的页面应用，如Gmail。好处是可以在客户端和服务端共享很多代码，比如验证确认类的。同时，也给处理多请求的能力有了用武之地</li>
-<li>利用现有软件<br/>
-可以fork多个子进程并对这些进程的输出当做一个stream来处理，使得node成为一个很好的杠杆现存软件的选择。</li>
-<li>Streaming data<br/>
-http实质上是streams，只是多年来都被当成atomic events来处理了。但js可以利用这一点。在诸如实时分析文件上传、多数据层间的proxy搭建等一显身手</li>
-<li>Soft Realtime Applications<br/>
-但有gc的存在，所以不适合作为hard realtime的实现，对允许不要求始终如一的响应时间的系统还是合适的。Hard方面的更好的选择是Erlang。</li>
-</ul>
-
-
-<p>我打算做的东西不在bad case之类，和good case 基本沾边。目前的结论是值得一试。</p>
 ]]></content>
   </entry>
   

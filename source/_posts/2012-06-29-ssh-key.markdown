@@ -18,6 +18,8 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
 
 1. 生成公钥私钥对，会存放在`.ssh/id_rsa,  .ssh/id_rsa.pub`中，这是通过命令 `$ssh-keygen`来操作的  
 2. 如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
-把他们存放在`.ssh/authorized_keys`中。其实就是每个client增加一条记录。执行的命令是`$ ssh-copy-id user@host`
+把他们存放在`.ssh/authorized_keys`中。其实就是每个client增加一条记录。执行的命令是`$ ssh-copy-id user@host` 
 
 弄好以后，发现做起事情来确实快多了。 
+
+Update: 有些机器上需要给出额外的参数` ssh-copy-id -i ~/.ssh/id_rsa.pub git@host`

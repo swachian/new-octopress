@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 安装 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.heroku.com/blog/categories/安装/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.heroku.com/"/>
-  <updated>2012-08-03T10:13:25+08:00</updated>
-  <id>http://octopresszhangyu.heroku.com/</id>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/安装/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2012-09-07T17:18:40+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ubuntu1104安装手记]]></title>
-    <link href="http://octopresszhangyu.heroku.com/blog/2011/06/16/ubuntu1104-install/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/16/ubuntu1104-install/"/>
     <updated>2011-06-16T14:52:00+08:00</updated>
-    <id>http://octopresszhangyu.heroku.com/blog/2011/06/16/ubuntu1104-install</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/16/ubuntu1104-install</id>
     <content type="html"><![CDATA[<p>前提：拥有虚拟机并已经安装好ubuntu1104</p>
 
 <h3>1. 默认没有ssh server，所以需要安装.安装完成后，会自动打开每次启动的选项。</h3>
