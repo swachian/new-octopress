@@ -5,11 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Heroku的新服务 - Hegel2011的博客</title>
+  <title>What's new in Rails 4 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Heroku发表了一系列介绍自己内部升级的文章。最重要的变化是开始支持除ruby/rack以外的语言和框架。起先加入了node.js，然后又加入了Clojure. Clojure是跑在jvm上面的一种语言，对这块没研究。 在heroku看来， &hellip;">
+  <meta name="description" content="来自视频的笔记 Rails.queue 1
+2
+3
+4
+5
+6
+7
+8
+class ExpensiveOperation def run end
+end Rails.queue.push(ExpensiveOperation.new) config.queue = Sidekiq::Client &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +76,7 @@
   
   <header>
     
-      <h1 class="entry-title">Heroku的新服务</h1>
+      <h1 class="entry-title">What's New in Rails 4</h1>
     
     
       <p class="meta">
@@ -83,21 +92,121 @@
   
 
 
-<time datetime="2011-07-07T18:48:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2011</time>
+<time datetime="2012-11-23T22:00:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Heroku发表了一系列介绍自己内部升级的文章。最重要的变化是开始支持除ruby/rack以外的语言和框架。起先加入了node.js，然后又加入了Clojure. Clojure是跑在jvm上面的一种语言，对这块没研究。</p>
+<div class="entry-content"><p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
 
-<p>在heroku看来，ruby的高动态性和强调美感使她天生适合面向用户的web应用。Node.js的基于事件的搞并发使得它适合实时web。 Clojure使得需要correctness,performance,composability, optionally的组件成为可能，并且触及java的生态圈。</p>
+<h3>Rails.queue</h3>
 
-<p>heroku开始支持Java. <a href="http://blog.heroku.com/archives/2011/8/25/java/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">heroku for java</a>
-不支持war包比较让人痛苦。试着发布一个应用玩玩吧。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ExpensiveOperation
+</span><span class='line'>  def run
+</span><span class='line'>   
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Rails.queue.push(ExpensiveOperation.new)
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Real apps come from real developers Real developers wanted to use their own tools</p>
+
+<p>config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
+
+<h3>strong_parameters</h3>
+
+<p>Alternative to MassAssignmentSecurity</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class PostsController &lt; ApplicationController
+</span><span class='line'>  def create
+</span><span class='line'>     @post = Post.create(post_params)
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  private
+</span><span class='line'>  def post_params
+</span><span class='line'>    params.require(:post).permit(:title, :body)
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Turbolinks</h3>
+
+<h3>Cache Digests(Russian Doll Caching)</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># app/views/projects/show.html.erb
+</span><span class='line'>&lt;% cache project do %&gt;
+</span><span class='line'>  &lt;h1&gt; &lt;/h1&gt;
+</span><span class='line'>  &lt;%= render project.documents %&gt;
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ActionController::Live</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>include ActionController::Live
+</span><span class='line'>
+</span><span class='line'>response.stream.write "hello\n"
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PATCH Verb</h3>
+
+<p>just as PUT</p>
+
+<h3>Plugins are dead; long live plugins</h3>
+
+<p>use gems with bundle</p>
+
+<h3>lambda scope</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scope :published, -&gt; { where(:published =&gt; true) }
+</span><span class='line'>
+</span><span class='line'>#Pitfall 
+</span><span class='line'>scoped :recent, where("created_at &gt; ?", 1.week.ago)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>@sikachu</p>
+
+<p>Routing Concerns</p>
+
+<p>Long live activeresource</p>
+
+<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
+They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
 </div>
 
 
@@ -120,12 +229,12 @@
   
 
 
-<time datetime="2011-07-07T18:48:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2011</time>
+<time datetime="2012-11-23T22:00:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/云计算/'>云计算</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
   
 </span>
 
@@ -134,7 +243,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/" >Tweet</a>
   
   
   
@@ -143,10 +252,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/06/28/display-git-branch-in-shell/" title="Previous Post: 给shell加上显示git的分支">&laquo; 给shell加上显示git的分支</a>
+        <a class="basic-alignment left" href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/" title="Previous Post: 软考之系统架构设计师">&laquo; 软考之系统架构设计师</a>
       
       
-        <a class="basic-alignment right" href="/blog/2011/07/30/review-of-biograph-for-wjl/" title="Next Post: 读《吴敬琏传》">读《吴敬琏传》 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/11/23/diaowaipo/" title="Next Post: 悼外婆">悼外婆 &raquo;</a>
       
     </p>
   </footer>

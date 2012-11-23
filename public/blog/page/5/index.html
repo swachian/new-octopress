@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="很多次，一直问自己测试代码到底值不值？毕竟我写过几次，但最后发现写测试代码的工作量其实很大。特别是碰到需求变更，本来只要改一处的代码，变得
-必须改 2x 处。做了一段时间以后，我承认这是对保证质量有效的，但是往往确实不值得，因为得不偿失。另一个问题是先写
-测试还是先写程序？ 按TDD的要求， &hellip;">
+  <meta name="description" content="系列链接： mongodb基础
+尝试分布式及复制 （sharding and replication)
+部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
+little-endian , 不适合SPARC, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,307 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">Learning Mongodb (3) 部署和管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T11:07:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>系列链接：</p>
+
+<ol>
+<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
+<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
+</ol>
+
+
+<h3>部署环境要求</h3>
+
+<ul>
+<li><p>架构</p>
+
+<ul>
+<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
+<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
+</ul>
+</li>
+<li><p>CPU</p>
+
+<ul>
+<li>非cpu密集型应用</li>
+<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
+<li>多客户端同时读时，多核会被利用</li>
+<li>写操作还是单核</li>
+</ul>
+</li>
+<li><p>RAM</p>
+
+<ul>
+<li>越多越好</li>
+<li>working set， index size， ram总数</li>
+</ul>
+</li>
+<li><p>Disk</p>
+
+<ul>
+<li>IOPS 优先</li>
+<li><em>background flush</em> 60s sync到磁盘一次</li>
+<li>ssd可以优化速度（solid state drive）</li>
+<li>RAID 10 组成 LVM</li>
+</ul>
+</li>
+<li><p>文件系统</p>
+
+<ul>
+<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
+<li>禁用access time(atime)更新</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 禁用 atime更新</span>
+</span><span class='line'>sudo mv /etc/fstab /etc/fstab.bak
+</span><span class='line'>sudo vim /etc/fstab
+</span><span class='line'><span class="c"># file-system mount type options dump pass</span>
+</span><span class='line'><span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
+</span><span class='line'>
+</span><span class='line'>改完文件后，可以不用重启
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文件描述符(FD)
+
+<ul>
+<li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
+<li>调大 <code>ulimit -Hn</code> 可以查看</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>vi /etc/security/limits.conf
+</span><span class='line'>mongodb hard nofile 10240
+</span><span class='line'>下次登录后生效
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>时钟</p>
+
+<ul>
+<li>ntp协议，在跑shard和replication时候必须启用的东西</li>
+</ul>
+</li>
+<li><p>ec2上使用mongodb</p>
+
+<ul>
+<li>ec2易用、地理范围广、价格有竞争力</li>
+<li>68GB RAM的限制</li>
+<li>使用  EBS 存储， 吞吐性能一般化</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>服务器配置</h3>
+
+<ul>
+<li><p>选择拓扑</p>
+
+<ul>
+<li>是否需要shard， 是否需要replica</li>
+<li>建议多机</li>
+</ul>
+</li>
+<li><p>打开journal标志</p></li>
+</ul>
+
+
+<h3>安全保障</h3>
+
+<ul>
+<li><p>环境安全</p>
+
+<ul>
+<li>防火墙</li>
+<li>数据的传输是不加密的</li>
+</ul>
+</li>
+<li><p>授权</p>
+
+<ul>
+<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
+<li>启动时带上选项 <code>mongod --auth</code></li>
+<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
+<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
+<li>查找用户 <code>db.system.users.find()</code></li>
+</ul>
+</li>
+<li><p>keyFile</p>
+
+<ul>
+<li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
+</ul>
+</li>
+<li><p>日志记录</p>
+
+<ul>
+<li>运行时&#8211;logpath指定</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>监控工具</h3>
+
+<ul>
+<li><p>serverStatus<br/>
+<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
+<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
+<strong>mem</strong> 段的单位是MB</p></li>
+<li><p>mongostat</p>
+
+<ul>
+<li>类似 iostat 运行的效果</li>
+</ul>
+</li>
+<li><p>web console</p>
+
+<ul>
+<li>&#8211;rest 标志打开的话，可以从web处得到更多的运行信息</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>备份与压缩</h3>
+
+<p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/15/lessons-from-a-training-on-pm/">PM培训课程小结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-15T13:42:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看<a href="http://xdite-smalltalk.tumblr.com/post/18034694291">别人</a>的一些文章，谈谈
+自己的想法。</p>
+
+<p>整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
+把大瀑布分拆成了n个小瀑布。实际上对软件开发并不太适用。不过因为整套体系认为<strong>光有集成</strong>是没有自己的竞争力的，要求有<strong>30%</strong>的软件开发内容，
+于是又把软件开发放在里面。这也让我终于明白了工作的第一个部门成立的<strong>指导思想来源</strong>。因为我曾经相当一段时间纳闷为什么非要把系统集成
+和研发凑合成一个部门。而且整个软件组还受集成一侧领导。这样能做出什么好东西来。但现在终于了解了这样组织的来源，而且以集成为主导也是因为这里面
+要求软件比例不低于30%。</p>
+
+<p>读了这本材料，终于明白公司是抄自国家认证考试的体系。也可能是其他人这么建议的，而也受了这个认证体系理论的影响。</p>
+
+<p>软件开发有其自身的特点和重点。集成体系用其无所不包、范围够广的方式（9大范围）强行把软件包裹了进去。尽管看上去纳入了，但重点很不突出。
+毕竟即使有软件工程也和系统工程是两码事情。所以，这次培训最大的结果是了解集成到底是什么思路，然后就通过这个考试，剩下的也只有自己继续摸索。</p>
+
+<p>先说说集成这套体系。</p>
+
+<p>首先，体系强调章程和计划。章程只有一个，而计划各个领域可以有很多。实际上，<strong>计划也是章程</strong>。只不过灵活度比章程强，可以按照需要进行
+变更、更新，而章程定下了就不怎么更新了。计划或者章程规定了要做哪些事情，什么时候做，相关人员是什么，什么情况下需要变更。
+随后就是一堆输入输出的交付物。</p>
+
+<p>接下去的东西就好理解了，反正整个东西追求的结果都是文档。当然，文档确实有很多种，有些方法对保证系统也确实有帮助。
+比如需求管理中的use case，每个case其实还是要用文字说明的，case图可以让需求方和系统分析师把东西交流清楚。但本质上就是
+一个list，只是说明参与对象是什么。WBS分解，可以用于进一步细化和确认需求，分写出要做的工作。这些都是和软件开发业密切相关的，
+但是在此之外，其他的东西实质上和软件的关联就不怎么大了。</p>
+
+<p>最后，就是强调一切东西都要有确认，变更等都要走流程。这些东西如果乙方有能力实施，当然是很好的。</p>
+
+<p>此外，还有一些东西就是骗来骗去的了。比如进度估计、成本估计，实际上即使传统的工程，能准确估算出来的都是很少的。</p>
+
+<p>经典的启动、计划、执行、监控和收尾，又叫做PDCA（Plan Doing Check Action), 典型的普遍模型，自上而下。只是又可以分解成n个小瀑布。
+但是，这个真的是软件开发里面最重要的事情嘛？</p>
+
+<p>恐怕不是。</p>
+
+<p>就我看来，软件或者互联网应用更多的强调对自身功能和模块的拆分，启动时往往很难明确细化东西。即使建筑工程本身，也就是这套体系产生的原型，
+也有众多管理失败的案例，巴拿马运河等，那么软件对这套系统的适应性恐怕更难。而且这套体系显然没考虑很多项目管理工具的使用，如redmine、如版本控制系统，
+而不同的工具或进步的工具是可以颠覆整个开发行为的。条条框框和优秀的软件结合起来会完全改变制造方式。与此相比，管理体系本身就显得僵化。当然，值得吸取的部分还是有的。
+比如我们需要一个章程，需要需求的确认。</p>
+
+<p>最最重要的，就是list要做的事情，给出最终时间。WBS后，确认细节，排好顺序，随后和用户确认。</p>
+
+<p>而在这中间，系统的调整能力和团队和用户沟通的软实力才是起决定作用的东西。</p>
+
+<p>Update(2012-05-15): 读了<a href="http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+xxddite+%28Blog.XDite.net%29">New product Introduction Model的九宗罪</a>
+进一步明确了PM这套东西不适合的原因。确实，这套东西适合的是“在有確定用戶，確定市場，確定 bussiness model 的情況下才能使用。也只有在這樣的情況下才有機會成功。”
+“這很大程度了解釋了為什麼：個人、大公司要『新創』一個事業很容易失敗。而一些『大公司』要『山寨』一個服務也有機會取得成功。” <br/>
+那么反过来，对于不够明确的、大家都还没谱的、都需要摸索的项目就不合适。<br/>
+所谓<strong>执行</strong>是针对有成熟套路的东西，考察的是系统的熟练程度和配合程度。而创新、新业务是需要<strong>试错的</strong>，其中的核心能力是<strong>学习</strong>、<strong>摸索</strong>、<strong>观察</strong>和<strong>勇气</strong>。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1012,170 +1314,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/26/book-for-a-pmp/">Xd推荐的项目管理书单</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-26T09:30:00+08:00" pubdate data-updated="true">Mar 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>专案，也就是我们日常所说的项目，台湾xd推荐的书单。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7014948309/sizes/o/in/photostream/">书单</a></p>
-
-<ul>
-<li>团队之美 机工 Stellman &amp; Greene</li>
-<li>项目管理之美  Scott Berkun (文科馆二楼文科书库 F224.5 /B911 英文版) 文科馆学生阅览室    F224.5 /B911A</li>
-<li>Planning extreme Programming Kent Beck(已下载)</li>
-<li>用户故事与敏捷方法 清华大学出版社(√)</li>
-<li>ship it Richardson / Gwaltney (√)</li>
-<li>项目管理修炼之道 人民邮电出版社 Johanna Rothman(√)</li>
-<li>软体快速开发(√)</li>
-</ul>
-
-
-<p>ship it增加的书单：</p>
-
-<ul>
-<li>领导力21法则</li>
-<li>高效能人士的七个习惯 文科馆二楼文科书库    B848.4 /K372(9)</li>
-<li>人性的弱点 文科馆二楼文科书库   C912.1 /K12T</li>
-<li>Extreme Programming Applied: Playing to Win</li>
-<li>Extreme Programming Explained: Embrace Change 张江馆张江书库   TP311.52 /B452A</li>
-<li>项目自动化之道 Java, Mike Clark 理科馆应用学科借阅室 TP312JA /K422</li>
-<li>程序员修炼之道 (已预约)</li>
-<li>计算机程序设计艺术</li>
-</ul>
-
-
-<p>杂书:</p>
-
-<ul>
-<li>自慢1~4</li>
-<li>打不破的人生30个定律</li>
-<li>苹果滋味</li>
-<li>师父</li>
-<li>学徒模式(DAVE HOOVER；ADEWALE OSHINEYE)</li>
-<li>与时间做朋友</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/21/braces-and-do-end/">Braces 和 Do End</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-21T10:12:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this means in practice.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="p">{</span><span class="o">|</span><span class="n">where</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;inner called me&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="k">do</span> <span class="o">|</span><span class="n">where</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;outer called me&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>区别在于block属于谁，是前一个（outer）还是后一个（inner）。</p>
-
-<p>类似的例子还有高见龙的：
-http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[2, 4, 6, 8, 10]</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[1, 2, 3, 4, 5]</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
-但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
-总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -1193,6 +1331,14 @@ http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/23/diaowaipo/">悼外婆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/23/whats-new-in-rails-4/">What&#8217;s new in Rails 4</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>
       </li>
     
@@ -1204,19 +1350,11 @@ http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
         <a href="/blog/2012/09/06/article-issues/">核心期刊</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/18/chuyue/">处约</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">hadoop集群安装手记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/生活'>生活 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/生活'>生活 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
