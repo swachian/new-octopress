@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2012-11-27T22:59:15+08:00</updated>
+  <updated>2012-12-09T21:16:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Kindle]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle/"/>
+    <updated>2012-12-09T20:53:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle</id>
+    <content type="html"><![CDATA[<p>周五终于忍不住买了一台Kindle，把玩不久之后就喜欢上了。到手没多久已经用她看完了《我的西域，你的东土》后半部分。
+比起在手机上，即便是4寸的手机，看书的感觉棒多了。甚至比在电脑上看还要好，比抱着实体书看的感觉更棒。为什么这么说？</p>
+
+<p>最简单的道理就是分量轻、字体可以很大。从体积和重量上来讲，kindle的分量只相当于一本普通的100页不到的产品说明书，手握着相当舒服。和纸质书相比，
+要轻了许多，尤其是和那些大部头的书比较的话，计算机的书籍很多都是很厚的，显然轻便很多。手握着很轻松，单手也能操作，口袋里可以随便塞。在日光
+下的显示效果也要好于纸质书。</p>
+
+<p>而在字体方面更是可以做到很大。从这点上来说是对纸质书实现了全面的突破和超越。看大字不费眼不容易近视是普遍认同的，但囿于纸质书的体积和重量，
+篇幅必须加以控制，而篇幅的控制除了内容本身的长短就是和字体排版大小相关了。传统书籍为了还能让人携带，或者处于印刷成本的考虑，字体都是不得不损失的，
+而小字体其实阅读体验并不好，也容易伤眼。从阅读本身角度来说，字体越大眼睛越不累（当然自己感觉不到累可能眼睛会用的更多，呵呵）。Kindle就可以把
+字体放置的很大，看起来就舒服多拉。</p>
+
+<p>此外，如今的年代抱着一本书在外面看是不太好意思和别人打招呼的。Kindle就没这个问题了。带着和带pad、带手机看东西的感觉是一样的，同外部环境很协调。</p>
+
+<p>在我看来，这绝对是阅读方面划时代的产品。对纸质书的冲击以后再写文章评论吧。大体上认为是赢家通吃&amp;长尾理论挤掉了中坚力量的存活空间。</p>
+
+<p>最后，必须得承认<a href="" title="http://home.duokan.com/index.html">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
+对于我最喜欢的PDF格式支持也很好，关键一点在于支持智能重排，效果那是相当的棒。此外，多看设计的Wifi传输，其实就是ftp服务，也相当的实用。一开始
+还担心安全问题，后来确认它默认是关闭ftp的。Kindle的硬件+多看软件，这个组合相当厉害。现在就等我的疯马纹皮套和SOLIS灯了。</p>
+
+<p>I love it!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[悼外婆]]></title>
@@ -919,18 +948,6 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
 
 <p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
 一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
-    <updated>2012-06-13T10:28:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
-    <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
-于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
-
-<p>个人觉得如何破解foxmail的密码都可以写一篇不错的论文。</p>
 ]]></content>
   </entry>
   

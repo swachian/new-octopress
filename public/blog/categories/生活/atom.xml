@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2012-11-27T22:59:15+08:00</updated>
+  <updated>2012-12-09T21:16:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Kindle]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle/"/>
+    <updated>2012-12-09T20:53:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle</id>
+    <content type="html"><![CDATA[<p>周五终于忍不住买了一台Kindle，把玩不久之后就喜欢上了。到手没多久已经用她看完了《我的西域，你的东土》后半部分。
+比起在手机上，即便是4寸的手机，看书的感觉棒多了。甚至比在电脑上看还要好，比抱着实体书看的感觉更棒。为什么这么说？</p>
+
+<p>最简单的道理就是分量轻、字体可以很大。从体积和重量上来讲，kindle的分量只相当于一本普通的100页不到的产品说明书，手握着相当舒服。和纸质书相比，
+要轻了许多，尤其是和那些大部头的书比较的话，计算机的书籍很多都是很厚的，显然轻便很多。手握着很轻松，单手也能操作，口袋里可以随便塞。在日光
+下的显示效果也要好于纸质书。</p>
+
+<p>而在字体方面更是可以做到很大。从这点上来说是对纸质书实现了全面的突破和超越。看大字不费眼不容易近视是普遍认同的，但囿于纸质书的体积和重量，
+篇幅必须加以控制，而篇幅的控制除了内容本身的长短就是和字体排版大小相关了。传统书籍为了还能让人携带，或者处于印刷成本的考虑，字体都是不得不损失的，
+而小字体其实阅读体验并不好，也容易伤眼。从阅读本身角度来说，字体越大眼睛越不累（当然自己感觉不到累可能眼睛会用的更多，呵呵）。Kindle就可以把
+字体放置的很大，看起来就舒服多拉。</p>
+
+<p>此外，如今的年代抱着一本书在外面看是不太好意思和别人打招呼的。Kindle就没这个问题了。带着和带pad、带手机看东西的感觉是一样的，同外部环境很协调。</p>
+
+<p>在我看来，这绝对是阅读方面划时代的产品。对纸质书的冲击以后再写文章评论吧。大体上认为是赢家通吃&amp;长尾理论挤掉了中坚力量的存活空间。</p>
+
+<p>最后，必须得承认<a href="" title="http://home.duokan.com/index.html">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
+对于我最喜欢的PDF格式支持也很好，关键一点在于支持智能重排，效果那是相当的棒。此外，多看设计的Wifi传输，其实就是ftp服务，也相当的实用。一开始
+还担心安全问题，后来确认它默认是关闭ftp的。Kindle的硬件+多看软件，这个组合相当厉害。现在就等我的疯马纹皮套和SOLIS灯了。</p>
+
+<p>I love it!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[悼外婆]]></title>
@@ -244,26 +273,6 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
   火车站</p>
 
 <p> 17:00火车返回</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[上海电信IPTV的VLAN ID和通过交换机连接两路IPTV]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/"/>
-    <updated>2012-02-20T14:43:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan</id>
-    <content type="html"><![CDATA[<p>上海电信的IPTV通道和互联网通道是通过ethernet的tag进行区分，然后达到控制各自流量的目的。这个tag打还是不打是有连接路由器的哪一个端口决定的。比如设定端口1和2是iptv的端口，
-那么电信的一体猫或者网关就会给在这个口子进入的数据打上tag 51，当从这个口子的数据传给机顶盒时又要去掉tag。因为机顶盒本身是不会处理带tag的数据包的。</p>
-
-<p>但是，我们普通家用的路由器或交换机是不会带有打tag区分vlan的功能。这就是为什么自己家庭的路由器直接连光猫或adsl后就只有iptv能用，或者只有互联网能接通。
-要想iptv和互联网都能用，要么改造自己的猫，要么就继续用电信的路由器。</p>
-
-<p>对我来说，是用自己的路由器接电信的上网端口3实现上网，用交换机接电信的iptv端口2实现iptv连接，其实这时候交换机就起到了一种vlan的作用。
-这种架构也是一种被逼无奈。因为这边主要使用一体猫，而我的光猫又是放在门外的弱电井中 ，中间通过一根以太网网线连接。而这根网线已经在当两根网线在用，一根连路由器，一根连iptv机顶盒。
-所以再装一路高清的话，就没有线路了。这根网线是预埋的，没有第二根线可以连到弱电井。</p>
-
-<p>通过上面的办法，机顶盒可以直接连接自己的交换机，这样就实现了iptv端口2的共享。而这个共享至少到目前为止，上海电信还没有加以限制。如果电信调整了vlan等参数，可能会需要加以变化，但基本的原理
-仍然是vlan id。最极端的情况，就是自己买一个千兆路由器，更换成openwrt固件后，自己直接打开vlan进行设置。这样就达到了同采用电信网关一模一样的效果。</p>
 ]]></content>
   </entry>
   
