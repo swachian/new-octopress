@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2012-12-09T21:24:38+08:00</updated>
+  <updated>2012-12-14T10:11:51+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[硕士答辩]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/09/dabian/"/>
-    <updated>2012-12-09T21:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/dabian</id>
-    <content type="html"><![CDATA[<p>12月7日周五下午通过了硕士论文的答辩。多亏了C，让我们可以在比较早的顺位得到答辩的机会，大大节省了时间和精力。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kindle]]></title>
@@ -930,6 +921,33 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
 1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
 2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
 而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <updated>2012-06-23T00:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
+中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
+再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
+但是缺乏练习的后果必然是无法掌握的.</p>
+
+<p>最近在看CoffeeScript 和 NodeJS, 进一步领略了JS的威力, 有些地方也不甚明白, 于是又翻出这本书看了一下.这次出奇的顺利, 从翻开
+到看完也就2天的功夫, 而且2天时间内看的比例并不高.下面是看完后对这本书的书评.</p>
+
+<p>这本书确实是一本需要反复阅读的书.作者的话语极其精炼, 招招都是要害, 所以必须要仔细看才能看的明白.而且从书中可以看出作者的造诣
+确实很深, 对js的认识以及语言的评价都是高度与深度相结合, 而且很多反应了使用者的感受, 不是大家是写不出这么有深度的文章的.</p>
+
+<p>书中最有价值的是 3.Objects, 4.Functions, 5.Inheritance 这3章. 如果是用coffeeScript的话, 3和4的价值就更加突出.通过学习,可以掌握
+js的object array的文法, 也可以明白js function的4种调用方式(obj.method, func.func, Obj.construtor(new), func.apply(this, argv)),
+Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了汉诺塔.</p>
+
+<p>Js的另一部分即prototype继承的特性目前还不甚了了, 可能还需呀补充一点其他读物. 做点练习才能领会.</p>
+
+<p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
+一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
 ]]></content>
   </entry>
   

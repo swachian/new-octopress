@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在railscast上看到了一个介绍导入导出数据的工具taps. 最大的亮点在于: 是用起服务的方式来完成。先针对一个数据库启动一个server监听在5000端口，随后在它处启动一个脚本导数据；
-可以跨数据库导入导出。实际上中间是用到了sequel这个ruby的Orm框架， &hellip;">
+  <meta name="description" content="想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的博客中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。 先安装 Pandoc sudo agt-get install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,61 +66,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/19/taps-a-simple-app-to-transfer-data/">Taps： 一个导数据的工具</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-19T10:21:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在railscast上看到了一个介绍导入导出数据的工具<a href="https://github.com/ricardochimal/taps">taps</a>.</p>
-
-<p>最大的亮点在于:</p>
-
-<ol>
-<li>是用起服务的方式来完成。先针对一个数据库启动一个server监听在5000端口，随后在它处启动一个脚本导数据；</li>
-<li>可以跨数据库导入导出。实际上中间是用到了<a href="sequel.rubyforge.org/">sequel</a>这个ruby的Orm框架，所以理论上应该是只要有adapter的数据库就都能被匹配。</li>
-</ol>
-
-
-<p>使用也非常之简单与直接</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gem install taps
-</span><span class='line'><span class="nv">$ </span>taps server postgres://localdbuser:localdbpass@localhost/dbname httpuser httppassword
-</span><span class='line'><span class="nv">$ </span>taps pull postgres://dbuser:dbpassword@localhost/dbname http://httpuser:httppassword@example.com:5000
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1192,6 +1138,199 @@ mongos 的 config 数据是问 config server 获取<br/>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/29/learning-mongodb-1/">Learning Mongodb (1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-29T15:59:00+08:00" pubdate data-updated="true">Mar 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一个不错的mongodb<a href="http://tutorial.mongly.com/tutorial/index">入门游戏</a>. 一共二十课，介绍了基本的内容。通常20-60分钟可以通关。<br/>
+下面是同一个作者给mongodb写的<a href="https://github.com/karlseguin/the-little-mongodb-book">小书</a>.<br/>
+需要执行的脚本可以这样输入 <code>./mongo server:27017/dbname --quiet my_commands.js</code></p>
+
+<p>table - collection<br/>
+row - document<br/>
+column - field<br/>
+最核心最本质的突破点在于，将定义字段 从table级别  <strong>下放</strong> 到了document的级别，因而起了不同的名字以示区别。</p>
+
+<h3>selector</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">{</span><span class="nx">filed</span><span class="p">,</span> <span class="nx">value</span><span class="p">}</span>
+</span><span class='line'><span class="nx">$lt</span><span class="p">,</span> <span class="nx">$gt</span><span class="p">,</span> <span class="nx">$lte</span><span class="p">,</span> <span class="nx">$gte</span><span class="p">,</span> <span class="nx">$ne</span>
+</span><span class='line'><span class="nx">$or</span>
+</span><span class='line'>  <span class="nx">db</span><span class="p">.</span><span class="nx">unicorns</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="nx">$or</span><span class="o">:</span> <span class="p">[{</span><span class="nx">loves</span><span class="o">:</span> <span class="s1">&#39;apple&#39;</span><span class="p">},</span> <span class="p">{</span><span class="nx">weight</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lt</span><span class="o">:</span> <span class="mi">500</span><span class="p">}}]})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>replace 和$set及modifier</h3>
+
+<p>mongodb的update至少跟两个参数：</p>
+
+<ul>
+<li>selector</li>
+<li><p><strong>replace</strong>的值</p>
+
+<p>这点区别于sql，他会对document的值做全部更新</p></li>
+</ul>
+
+
+<p>如果只是部分更新，请用<code>$set</code>, <code>db.unicorns.update({name: "ooo"}, {$set: {name: 'dddd'}})</code></p>
+
+<p><code>$inc</code>: <code>db.unicorns.update({name: 'dddd'}, {$inc: {vampires: -2}})</code><br/>
+<code>$push</code>: <code>db.unicorns.update({name: 'ddd'}, {$push: {loves: 'sugar'}})</code><br/>
+$inc主要用于整型数据，push主要用于数组等类型。</p>
+
+<ul>
+<li>upserts<br/>
+第3个参数决定是否upserts，即不存在的时候就插入一笔新的数据, 默认为false不开启。</li>
+<li>multiple update
+第4个参数决定是否批量更新。 默认情况下，只会更新一笔数据，而不是所有满足条件的数据。</li>
+</ul>
+
+
+<p>upserts搭配$inc的威力还是巨大的。</p>
+
+<h3>find进一步</h3>
+
+<p><code>find()</code>返回的仅仅是<code>cursors</code>，以此实现链式反应。</p>
+
+<p><code>find()</code>还有一个参数，就是指定列名。 <code>db.unicorns.find(null, {name:1, _id: 0})</code>.<br/>
+  0表示隐藏不要，只有_id能和显示或隐藏混合使用，否则只能使用0或者1</p>
+
+<p><code>sort</code>等于sql里面的order，<code>db.unicorns.find().sort({weight: -1})</code>，1表示升序，-1表示降序。<br/>
+对于没有索引的排序，mongodb有最大尺寸的限制，这可以认为是一个瑕疵，但对避免很次的数据库设计有好处。</p>
+
+<p><strong>paging</strong>通过<code>skip()</code>和<code>limit()</code>来配合实现。limit表示返回几条，skip表示略过前面多少个。</p>
+
+<p><code>count()</code>其实也是cursor方法，只不过shell实现了简写。下面两个是等效的：<br/>
+<code>db.unicorns.find({vampires: {$gt: 50}}).count</code> &lt;=> <code>db.unicorns.count({vampires: {$gt: 500}})</code></p>
+
+<h3>Data模型设计区别</h3>
+
+<ul>
+<li><p>No Joins, 替代品是在client多做一次查询，该查询通常是针对已加索引的字段。</p></li>
+<li><p>Arrays 和 Embedded Documents</p>
+
+<ul>
+<li>arrays适合处理用于many-to-many的关联，在mongodb中，array的等级很高，使用很多</li>
+<li>embedded的doc是的可以进一步反范式化，查询可以用面向对象的方式<code>.</code>进行链式表达.<code>db.employees.find({'family.mother': 'Chani'})</code></li>
+<li>上面两个均可选择，当前的限制是一条doc最大的尺寸是4mB</li>
+</ul>
+</li>
+<li><p>DBRef<br/>
+等同于外键，是在服务器端支持，但还需客户端支持。</p></li>
+<li><p>collection数量考虑<br/>
+以schemaless的角度考虑，一个collection实际上可以支持全部的应用。但是，实际上使用时还是会按照sql数据库表格的设计方式进行区分。
+当然，many_to_many的表格基本是不存在了。而设计时，可以多考虑使用<strong>embedded</strong>的方式。</p></li>
+</ul>
+
+
+<h3>何时使用MongoDB</h3>
+
+<ul>
+<li><p>大部分数据其实也是结构化的，所以schemaless实际上并未受到重视。但是在开发流程方面则发生了很大的变化，而这一点对于从java .net过来的程序员是震撼性的。</p></li>
+<li><p>Writes，也就是logging</p>
+
+<ul>
+<li>是因为mongodb的写性能很高。因为它允许写命令即可返回而不用等待真实的写。类似non-block。</li>
+<li>1.8以后也增加了safe的模式 ，确保写是成功的； 对于违反约束的写，比如唯一索引，不safe的写也不会返回错误</li>
+<li><code>capped collection</code>使得文件尺寸可以设置最大值，或条数设置最大值，有利于反复循环利用现有的空间。 <code>db.createCollection('logs', {capped: true, size: 1048576, max: 10000})</code></li>
+<li>schemaless对日志来说，也可以较易地做修改</li>
+<li><code>journal=true</code>位于<code>mongodb.config</code>中有利于提高durability（耐久性）</li>
+</ul>
+</li>
+<li><p>事务性 <br/>
+这并非mongodb的强项。经过有atomic的操作和两段提交的例子。前者用的还是比较多的，如<code>$inc</code>, $<code>set</code></p></li>
+<li><p>数据处理</p>
+
+<ul>
+<li>内建的js的MapReduce，但是js是单线程的</li>
+<li>可以使用Hadoop，也存在MongoDB adapter for Hadoop</li>
+</ul>
+</li>
+<li><p>地图应用<br/>
+内建有$near $within 的操作符</p></li>
+</ul>
+
+
+<h3>MapReduce</h3>
+
+<p>尽管 Mongodb 内建 MapReduce 计算模型，自己只要写 hook，然后使用 <code>db.hits.mapReduce(map, reduce, {out: {inline: 1}})</code> 来调用。但是，本质上这其实一种存储过程的写法，用来弥补group计算
+功能的不够强大。毕竟js是 <strong>单线程</strong>，所以这里的MapReduce有点鸡肋，聊胜于无。如果真的大数据量处理，还是用Hadoop等吧。<br/>
+毕竟MapReduce是一种模式，而各语言实际上有各自的实现。</p>
+
+<h3>性能及其他</h3>
+
+<ul>
+<li><p>索引</p>
+
+<ul>
+<li>普通索引 <code>db.unicorns.ensureIndex({name: 1})</code>, 1表示升序</li>
+<li>unique <code>db.unicorns.ensureIndex({name: 1}, {unique: true})</code></li>
+<li>复合 <code>db.unicorns.ensureIndex({name:1, vampires: -1})</code>, -1表示降序，在复合索引中，有意义</li>
+<li>explain: 可以查看查询使用的索引状况; <code>db.unicorns.find().explain()</code>, 例如<code>BasiceCursor</code>, <code>BtreeCursor</code></li>
+</ul>
+</li>
+<li><p>Sharding<br/>
+MongoDB支持自动partition<br/>
+Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard由主从两个mongo组成，中间其实还有一个arbiter</p></li>
+<li><p>性能信息</p>
+
+<ul>
+<li><code>stats()</code>可以看状态，主要是size方面的信息</li>
+<li>web的接口除了浏览器终端，还有restful的接口</li>
+<li><code>db.system.profile.find()</code> 可以分析性能</li>
+</ul>
+</li>
+<li><p>备份及恢复
+<code>mongodump --db tutorial --out backup</code> 可把一个schema导入到backup这个目录下，里面的内容是相应的 <strong>bson</strong> 文件<br/>
+<code>mongorestore --collection pcmds backup/tutorial/pcmds.bson</code> 可以把数据复原<br/>
+<code>mongoexport</code> 和 <code>mongoimport</code> 可以导入导出json和csv文件</p></li>
+</ul>
+
+
+<h3>下一步计划</h3>
+
+<ol>
+<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
+<li>GridFS</li>
+<li>Hadoop 的 MapReduce 学习及引用</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -1209,10 +1348,6 @@ mongos 的 config 数据是问 config server 获取<br/>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/12/09/dabian/">硕士答辩</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2012/12/09/kindle/">Kindle</a>
       </li>
     
@@ -1228,11 +1363,15 @@ mongos 的 config 数据是问 config server 获取<br/>
         <a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2012/11/02/a-gov-site/">一个政府网站</a>
+      </li>
+    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/生活'>生活 (10)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/生活'>生活 (9)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
