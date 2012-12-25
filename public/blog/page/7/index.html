@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="因新装光纤宽带后，对老的TP-LINK路由器不满，打算重新购买一台家用路由器，从而对目前的家庭路由器进行了一番了解和实验，于是有了这篇小结。 不满TP的原因是它对bt、emule高并发连接的支持不好，一旦允许的连接数达到几百个以上，那么打开网页等都会受影响。我起初以为这只是硬件能力的问题， &hellip;">
+  <meta name="description" content="一个曾经让我们的国家蒙羞的日不落帝国，即便早已今非昔比，但实际上已经进展到相当现代化的阶段。这从他们最近公布的一组政府网站的制造方式和制造工具上可见一端。 首先，整个网站倡导的是 government as a platform，高度融合了政府为人民服务，政府其实就是一种云。 其次， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,217 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/05/ukgov-notes/">不列颠网站</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-05T14:37:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一个曾经让我们的国家蒙羞的日不落帝国，即便早已今非昔比，但实际上已经进展到相当现代化的阶段。这从他们最近公布的一组政府网站的制造方式和制造工具上可见一端。</p>
+
+<p>首先，整个网站倡导的是 government as a platform，高度融合了政府为人民服务，政府其实就是一种云。</p>
+
+<p>其次，整个网站不单使用大量的开源工具和软件来构造，网站本身的代码也是开源的，就托管在GitHub上。而被问及为何考虑开源自己的代码时，他们的政府负责人回答是既然是政府平台，
+那么它就是大家的，既然是大家的我们希望可以在开发中贡献和分享给每一个人。</p>
+
+<p>整个项目的预算则是1.7百万英镑。这个价格确实不高。我们的孔子学院门户就要3kw人民币，而英国政府的网站造价仅有中国一个官办学院的一半。那是相当之便宜。</p>
+
+<p>以上是整个网站的构造思想，它是开源的、开放的，价格合理的，全民参与和分享的。而在技术实现上也更进一步体现了这种平民化的政府网站哲学。</p>
+
+<p>英国政府并没有买大量的服务器，也没有以国家安全为由自己组建机房。而是选择了Amazon EC2作为存放的主机，存储也是采用的A的S3.这在我们看来是难以想象的。简直有损国家的尊严。身为
+一个历史悠久的帝国，怎能连自己的服务器和机房都不具备？实际上，大英帝国政府连email服务器也是租用的。很可能他们用的Gmail和Amazon的mail服务还是免费的。</p>
+
+<p>而在语言和框架方面，也尽显开源和先进的本色。</p>
+
+<pre><code>Javascript uses jQuery, jQuery UI, Chosen, and a variety of other plugins
+Most of the application code is written in Ruby, running on a mixture of Rails and Sinatra
+router用Scala编写
+</code></pre>
+
+<p>数据库当然也是开源的，MongDB起NoSQL的部分，MySQL作为传统的关系型数据库，MaPit做地图数据库。</p>
+
+<p>一个优雅、合理的新时代的网站架构。一句话形容，这才tmd真是先进国家的先进政府网站。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/01/svnlook/">Svnlook与代码统计</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-01T11:48:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>发现svnlook是一个很好的命令，可以帮助获得不少代码版本库中有用的信息。
+有了这个东西后，各种统计都会变得有可能。</p>
+
+<p>个人感觉，最有用的当属svn tree 命令</p>
+
+<pre><code>svn tree . --full-paths
+</code></pre>
+
+<p>就能打出成排的版本库中的文件和目录。</p>
+
+<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。</p>
+
+<pre><code>svnlook tree . --full-paths | grep java$ | grep -v tags
+svnlook tree . --full-paths | grep jsp$ | grep -v tags
+svnlook tree . --full-paths | grep xml$ | grep -v tags
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/29/geminniandai/">国民党为什么会失败</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-29T14:57:00+08:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是读革命年代有关内容后的一点体会。<br/>
+国民党的失败源于军事，经济之垮是受军事的拖累，尤其是东北战局的拖累。国家财政70%用于军费，70%又用于东北。而政治的失败也受军事影响很大。<br/>
+国军上手之时，对共军的理解还停留在34年剿匪阶段。当是时，毛泽东领导的中国红军确实已经被国民党‘剿’的差不多了。但是，经过十几年的休养生息，共产党方面的实力有了长足的进步。至开战前，
+双方士兵人数在450万对127万。</p>
+
+<p>但是国民党却依然轻敌，这是失败的首要原因。因为轻敌于是没有争取伪军、匪兵甚至日本人来补充自己的战斗力。而中共在彼时由于把自己摆在弱者的位置，因而没有教条主义。轻敌使得全中国都没有什么人考虑过国民党会失败，国民党自己在动员及神经上都不紧绷。</p>
+
+<p>从将领方面来看，林彪、彭德怀、刘伯承、粟裕这样统帅型将领蒋介石身边是很少的。唯一的白崇禧也并不是很受重用。这样的指挥之下，军队表现不如共军也就不是奇怪的。</p>
+
+<p>二者相斗，有点类似于荣誉型vs寡头财富型。后者在打仗时必须考虑经济上是否划算，因此打仗不是最主要的。前者则没有私财，当兵也不是为了吃响，而是有更大的预期。干部没有私产、不用发工资的解放军论打仗能力自然要比蒋匪强。土改之后，中共在农村得到了广泛的拥护，因而有着源源不断的补充。</p>
+
+<p>老蒋在党政工作方面完全缺失。学美军撤出了全部的党代表，但又没有加入替代性的精神组织元素。从而导致周边都是特工。情报、渗透、潜伏这方面大大落后于党。军队的凝聚力也因为没有精神元素，在被俘虏后也会轻易地向解放军投降。
+而以上种种，都表明国民党没有全国动员的精神纲领。虽然领导着大半个中国，但是组织和发挥却相当有限。完全不如共产党毫无包袱轻装上阵，有明确的纲领和战略战术。而蒋则在这种消耗中，一步一步走向崩溃。
+除了精神方面不明确，经过整风的共产党思想高度统一，是一个团结的集体。而国军，则内部派系林立的多。傅作义、马步芳、李宗仁等地方实力派老蒋并不是很好控制。</p>
+
+<p>此外就是蒋公版的不恨神一样的对手，只怨猪一样的队友。‘此次革命剿匪之失败并非失败于共匪而是失败于俄史，亦非败于俄史而是失败于美马’，‘革命纪律与党德全为李宗仁等扫地殆尽’。</p>
+
+<p>以上这些原因是国民党在大陆军事上失败最本质的原因。而落实到蒋身上，可以理解成年纪大了。抗战胜利时，蒋已经63岁。心中所想所做已不是完全是一个法西斯强人的心态。同时，受美帝影响，颇想改善民生以及拥有美军那样的国家化军队。当然，蓝图里国家是国民党的。
+但也学了个四不像，反而失去了基本的动员和组织能力。用毛主席的话讲就是:无量民主，无心独裁。加之骄傲轻敌等因素，最终使得他们失败。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/">上海电信IPTV的VLAN ID和通过交换机连接两路IPTV</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T14:43:00+08:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>上海电信的IPTV通道和互联网通道是通过ethernet的tag进行区分，然后达到控制各自流量的目的。这个tag打还是不打是有连接路由器的哪一个端口决定的。比如设定端口1和2是iptv的端口，
+那么电信的一体猫或者网关就会给在这个口子进入的数据打上tag 51，当从这个口子的数据传给机顶盒时又要去掉tag。因为机顶盒本身是不会处理带tag的数据包的。</p>
+
+<p>但是，我们普通家用的路由器或交换机是不会带有打tag区分vlan的功能。这就是为什么自己家庭的路由器直接连光猫或adsl后就只有iptv能用，或者只有互联网能接通。
+要想iptv和互联网都能用，要么改造自己的猫，要么就继续用电信的路由器。</p>
+
+<p>对我来说，是用自己的路由器接电信的上网端口3实现上网，用交换机接电信的iptv端口2实现iptv连接，其实这时候交换机就起到了一种vlan的作用。
+这种架构也是一种被逼无奈。因为这边主要使用一体猫，而我的光猫又是放在门外的弱电井中 ，中间通过一根以太网网线连接。而这根网线已经在当两根网线在用，一根连路由器，一根连iptv机顶盒。
+所以再装一路高清的话，就没有线路了。这根网线是预埋的，没有第二根线可以连到弱电井。</p>
+
+<p>通过上面的办法，机顶盒可以直接连接自己的交换机，这样就实现了iptv端口2的共享。而这个共享至少到目前为止，上海电信还没有加以限制。如果电信调整了vlan等参数，可能会需要加以变化，但基本的原理
+仍然是vlan id。最极端的情况，就是自己买一个千兆路由器，更换成openwrt固件后，自己直接打开vlan进行设置。这样就达到了同采用电信网关一模一样的效果。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -452,176 +663,6 @@ CPU：美国博康BCM5357处理器   &#8221;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/27/lunyu-notes/">肖知兴论语笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-27T17:47:00+08:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>企业属于私有领域，因而管理者可以为所欲为；而国家属于公有领域，因而管理者不得为所欲为。</p>
-
-<p>中国人的组织架构更适合于高墒的模型，即强烈的兴起与迅速的跌落，而对稳定性要求较高的领域，就表现一般了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/15/waikanban-diandi/">外刊班点滴</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-15T18:48:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>外刊班是丁老师自己的理想。虽然效果很大，买账的学生并不多。毕竟大部分学生的认识能力有限，强求不得的。所有的视频班都是网上播放，唯外刊有光盘刻，也是老丁在坚持自己的理想，自己的快乐。</p>
-
-<p>四期是08年冬天的寒假（“视频拍摄费用很高，三个小时就一两千，希望以后有机会”），但实际上应该是拍了</p>
-
-<p>三期讲了三十篇文章 07年夏天 无视频</p>
-
-<p>07年寒假第二期 无视频</p>
-
-<p>06年暑假第一期 无视频</p>
-
-<p>09年寒假第五期（石头，于超，这个外刊视频班纯粹是不赚钱，甚至是亏本在做，比去年多了光盘包）.背景是有一排tank的房间。</p>
-
-<p>09年暑假第六期 无视频</p>
-
-<p>10年寒假第七期</p>
-
-<p>11年寒假第八期</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/08/superinterior/">半天读完细节营销</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-08T18:48:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不曾想只花了半天时间就读完了这本书。一方面这本书确实很薄，只有32k、200来页。另一方面，行文很易懂，说的也很有道理，而且与我的理念基本吻合，所以接受起来相当迅速。</p>
-
-<p>但还需要消化消化。营销是又一个一个分解后的内容组成的，每个组成部分就是一个细节。不能出现太明显的短板。比如1x1x1x0.1x1x1=0.1</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/07/read-market/">外刊超精读学习进展</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-07T18:48:00+08:00" pubdate data-updated="true">Sep 7<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>从7.10开始学习外刊，用了50天时间，到8.28看完了第五期光盘。随后开始进行总结，目前总结了1/3.在学习的过程中，已经感觉到了很大的进步，尤其在输入这块。对段间的衔接，段内各意群的衔接，阅读时的耐心及预测和回推等，学了不少招数。</p>
-
-<p>今天，借着试看2006年英语的超精解，做了一遍2006年的真题。阅读四篇一小时多一点时间错了3个。学外刊之前，10年的英语二四篇错了5个，11年的英语二四篇错4个。而据说06年的真题属于偏难。由此看来，我的英语水平在这2个月期间已获得很大进步。终于入门了。</p>
-
-<p>&#8212;update on 2012.01.13
-随后学习了第八期光盘。这期看的比较琐碎，而且放弃了之前第五期的复习。所以长进不大。在做12年英语一的时候，还是错了三四个。当然英语二只错了2个，而且今年的文章比前两年的难一些，说明读外刊后的进步还是很大的。
-此外，听力依旧是老大难的问题，要想办法予以解决。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -639,30 +680,30 @@ CPU：美国博康BCM5357处理器   &#8221;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/25/ziyang/">ziyang</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/25/lang-chao-zhi-dian/">浪潮之巅</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/15/tianzang/">《天葬》读后感及Kindle的体验</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/09/dabian/">硕士答辩</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/12/09/kindle/">Kindle</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/daowaipo/">悼外婆</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/whats-new-in-rails-4/">What&#8217;s new in Rails 4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/02/a-gov-site/">一个政府网站</a>
       </li>
     
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/生活'>生活 (9)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (10)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

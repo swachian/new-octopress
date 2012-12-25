@@ -9,9 +9,12 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
-于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。 个人觉得如何破解foxmail的密码都可以写一篇不错的论文。
-">
+  <meta name="description" content="1
+2
+3
+4
+$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中 $ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+$ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,218 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/27/git-init/">Git Init[zz]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-27T16:38:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
+</span><span class='line'>
+</span><span class='line'>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+</span><span class='line'>$ git push origin master </span></code></pre></td></tr></table></div></figure>
+
+
+<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
+
+<p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
+如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>
+
+<p>$ git push origin test:master         // 提交本地test分支作为远程的master分支
+$ git push origin test:test              // 提交本地test分支作为远程的test分支</p>
+
+<p>如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。</p>
+
+<p>$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/26/hubot-and-socket-dot-io/">Hubot and socket.io</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
+最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
+也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
+</span><span class='line'>coffee
+</span><span class='line'>&gt; 3+2<span class="o">=</span>?
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后者显然便捷许多.</p>
+
+<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
+Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
+而且<code>socket.io-client</code>也很有意思.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/26/programming-language-performance/">Programming Language Performance</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-26T10:06:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
+
+<p>JavaScript是一个很大的亮点。V8的性能确实快。
+相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
+1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
+2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
+而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/23/javascript-the-good-parts/">JavaScript: The Good Parts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-23T00:08:00+08:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
+中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
+再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
+但是缺乏练习的后果必然是无法掌握的.</p>
+
+<p>最近在看CoffeeScript 和 NodeJS, 进一步领略了JS的威力, 有些地方也不甚明白, 于是又翻出这本书看了一下.这次出奇的顺利, 从翻开
+到看完也就2天的功夫, 而且2天时间内看的比例并不高.下面是看完后对这本书的书评.</p>
+
+<p>这本书确实是一本需要反复阅读的书.作者的话语极其精炼, 招招都是要害, 所以必须要仔细看才能看的明白.而且从书中可以看出作者的造诣
+确实很深, 对js的认识以及语言的评价都是高度与深度相结合, 而且很多反应了使用者的感受, 不是大家是写不出这么有深度的文章的.</p>
+
+<p>书中最有价值的是 3.Objects, 4.Functions, 5.Inheritance 这3章. 如果是用coffeeScript的话, 3和4的价值就更加突出.通过学习,可以掌握
+js的object array的文法, 也可以明白js function的4种调用方式(obj.method, func.func, Obj.construtor(new), func.apply(this, argv)),
+Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了汉诺塔.</p>
+
+<p>Js的另一部分即prototype继承的特性目前还不甚了了, 可能还需呀补充一点其他读物. 做点练习才能领会.</p>
+
+<p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
+一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1549,365 +1764,6 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/30/yigediaosidenixi/">一个屌丝的逆袭</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-30T00:13:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://www.designsor.com/
-原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
-
-<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
-需要工具：Firefox+Easy Tor+Autoproxy</p>
-
-<p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
-但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
-
-<p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
-用gmail发信到：bridges@torproject.org
-主题随便，内容写：get bridges
-发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
-打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
-成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
-速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/29/inside-github/">Inside Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-29T11:18:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
-的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
-
-<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
-
-<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
-
-<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
-4四大<strong>frameworks</strong>组成。</p>
-
-<ul>
-<li>rails
-Github.com, Gist, &#8230;</li>
-<li>resque
-Background processing, G大约有50个不同的类型</li>
-<li>chimney
-All git calls happen over the write</li>
-<li>utils
- 意外日志，统计，辅助应用等</li>
-</ul>
-
-
-<h3>rails</h3>
-
-<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
-GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
-
-<ul>
-<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
-支付的抽象库。有中国人给家里alipay的补丁</li>
-<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
-<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
-<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
-<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
-除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
-</ul>
-
-
-<p>Gems:</p>
-
-<ul>
-<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
-<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
-<li><a href="">aws-s3</a></li>
-<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
-<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
-<li><a href="https://github.com/github/markup">github/markup</a></li>
-<li>[jekyll]</li>
-<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
-<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
-<li>[unicorn] 16 workers</li>
-</ul>
-
-
-<p>Rack:</p>
-
-<ul>
-<li>Rack::Bug<br/>
-Coderack</li>
-<li>nerdEd/rack-validate</li>
-<li>webficient/rack-tidy</li>
-<li>talison/rack-mobile-detect</li>
-</ul>
-
-
-<p>Nginx当然不让 :<br/>
-* Limit Zone<br/>
-* Limit Request: Anti-DDOS
-* memcached support<br/>
-* Push Module: comet!</p>
-
-<p>Git:
-* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
-
-<h3>chimney(smoke)</h3>
-
-<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
-Smoke calls</p>
-
-<ul>
-<li>BERT-RPC
-另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
-<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
-<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
-<li>[chimney]
-proprietary 的库，怀疑是erlang写的<br/>
-让RPC clients知道如何找到server，路由内容存放在Redis中</li>
-<li>proxymachine
-有点类似nodeload替换的功能，不过这个也用于git clone<br/>
-能用来作为所有tcp链接的代理</li>
-<li>JSON-RPC</li>
-<li>node.js<br/>
-downloads<br/>
-event streams</li>
-<li>hubot</li>
-</ul>
-
-
-<h3>resque</h3>
-
-<ul>
-<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
-Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
-<li><p>优先等级</p>
-
-<ul>
-<li>严重</li>
-<li>高</li>
-<li>低</li>
-</ul>
-</li>
-<li><p>队列任务</p>
-
-<ul>
-<li>page 产生页面</li>
-<li>archive 打包tar</li>
-<li>search
-
-<ul>
-<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据库是MySql 5</p></li>
-</ul>
-
-
-<h3>utils</h3>
-
-<ul>
-<li>comet loading</li>
-<li>nagios 负责监控</li>
-<li>resque 的web</li>
-<li>collectd 用于手机负载、RAM等的信息</li>
-<li>pingdom 短信系统</li>
-<li>tender 一个客服系统</li>
-</ul>
-
-
-<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
-
-<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
-
-<p>里面提到了<strong>RDD</strong>的概念:<br/>
-readme driven development
-先把README叫做SPEC，完成一点，就把内容移到README中。</p>
-
-<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/28/websocket/">WebSocket</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-28T14:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
-
-<p>现在浏览器对real-time应用的解决办法：</p>
-
-<ul>
-<li><em>polling</em> ajax 定期轮询</li>
-<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
-<li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
-</ul>
-
-
-<p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
-
-<p>WebSocket这是下一代的web通信&#8212;full-duplex, bidirectional, a single socket。看下来是对HTTP协议的一个替换。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
-</span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
-
-
-<p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
-Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/27/take-the-exam/">软考回忆</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-27T10:13:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>软考被安排在天等路那边,对我来说是很偏远的地方.路是远了些,但是去了之后发现那边的环境
-也还不错.因为靠近华东理工,而且除了新侨学院还有不少其他的中专职校,所以那边的中小饭店
-很多,而且物价相对便宜.比起公司附近,吃饭的价格大约只有2/3.肉夹馍3-5元,臊子面9元,
-芒果冰沙也只要8元10元,10元的杯子真的很大.
-而在我们公司那边一个馍10元,一碗面12元.尽管偏远,但好处也不少.何况偏远只是从我这边来
-说,毕竟上海太大了.那地方好歹还是中环以内的.因为吃的很不错,对那边的感觉倒也不错.<br/>
-交通还算方便,石龙路下来就有一辆终点站的156可以过去,而且也基本是开到门口的.校园的大门
-比想象的好,里面的设备有点老旧,学校的整体外观还是不错的.中午休息也能去华理,校园转转的感觉
-也还不错.</p>
-
-<p>说回考试本身,据说通过率只有10%-20%.不过考试强度本身并不大,也就相当于会考的强度.内容
-也是以死记硬背为主,真的费脑子的东西不多.当然,能不能过关因为没有答案可做参照,现在还
-难以下结论.问题应该不大.今年难在上午,下午还是挺主流的.</p>
-
-<p>准备的日子也不算很少,有空研究研究这玩意的有效期.现在我脑子里对这个还是一片混乱.由此可见,
-培训做的不是很到位.</p>
-
-<p>流程是这样的:</p>
-
-<ol>
-<li>参加软考获得<strong>中华人民共和国计算机技术与软件专业技术资格（水平）证书</strong>, 有效期3年,可以继续教育.</li>
-<li>凭软考证书+资历再申报<strong>项目经理资质证书</strong>, 资质证书也有有效期,继续教育服务平台网址为http://www.informatization.gov.cn和 http://www.chinasi.org.cn</li>
-</ol>
-
-
-<p>软考从2004年开始就要求继续教育,但2003年前取得的证书不需要登记也就不需要继续教育.
-自从可持续发展深入人心后,软考组织单位倒是落实的挺起劲的.
-但是这样一来, 实在看不见还有什么要去考证的需要.等到非要用的时候再说吧.毕竟会失效的投资,还是按需努力吧.
-万一以后他们搞联合,要求两个证同时续约才能有效,那有资质的人员岂不是苦死. 真心不喜欢这种敛财的方式.</p>
-
-<p>Update: http://bbs.educity.cn/bbs/141365_1.html 情况可能有变化</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1925,30 +1781,30 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/25/ziyang/">ziyang</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/25/lang-chao-zhi-dian/">浪潮之巅</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/15/tianzang/">《天葬》读后感及Kindle的体验</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/09/dabian/">硕士答辩</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/12/09/kindle/">Kindle</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/daowaipo/">悼外婆</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/23/whats-new-in-rails-4/">What&#8217;s new in Rails 4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/02/a-gov-site/">一个政府网站</a>
       </li>
     
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (15)</a></li><li><a href='/blog/categories/生活'>生活 (9)</a></li><li><a href='/blog/categories/神器'>神器 (9)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (10)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/笔记'>笔记 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
