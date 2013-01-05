@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2012-12-25T23:21:53+08:00</updated>
+  <updated>2013-01-05T22:30:30+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[考研三周年纪念]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/05/kaoyan-3-zhounian/"/>
+    <updated>2013-01-05T21:56:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/05/kaoyan-3-zhounian</id>
+    <content type="html"><![CDATA[<p>在2010年的一月考试季节，我参加了研究生入学考试，至今已整整三年了。而在昨天，我已经拍摄了毕业集体照，即将拿到学位和学历证书。也在昨天，
+工作上终于又有了突破。
+今天，是2013年考研的日子，借机提取一下自身的感受。</p>
+
+<p>回首这三年是很丰富多彩的，可以说比以往经历的任何三年的内容都要多。这三年中，我用75天左右的时间复习了高数等考研内容，参加了研究生入学的1月份
+全国统考，踏破了复旦线。这三年中，我找到了自己的爱人，一起买了新房，忙活了很久房子的装修，举行了自己的婚礼。这三年中，我和妻子开始独立生活，
+撑起自己的小家庭。这三年中，蜜月的意大利之旅至今令人难忘，甚至增强了我对阳光的感觉。这三年中，在张江进行研究生阶段的进修，学写论文、发表论文，撰写硕士论文并通过答辩。这三年中，补充了经济管理方面的知识，至少
+有半个mba的水平吧。这三年中，实现了工作的突破。这三年中，迎来了宝宝的降生，品尝到做父亲的喜悦与辛苦，体会到老婆和女性的不易。</p>
+
+<p>这三年里确实经历了许多精彩，丰富了自己的人生。当然，也有悲哀和痛苦的。自己的体重又快接近减肥前了，身体也始终受一种毛病的困扰，我亲爱的外婆、大姆妈辞世。
+人生总不可能是圆满的，世上不如意之事十之八九，花未全开月未圆，不顺也是生活中必然存在的一个部分。总体说来，这三年还是充满了很强烈的幸福感。</p>
+
+<p>今天是新年的第一篇博客，既是对三年的一点小回顾，也不免俗地写点新年心愿。最大的愿望当然就是宝宝顺利健康地成长，家人亲友都能平平安安。有人认为人到中年
+不忙赚钱忙做事，但我作为一个居家的上海男人还是追求平安是福。其次希望工作的结果能更有意义，呵呵，做事是第二位的，平安幸福重要，但要幸福必须
+得做事才行。具体的着手打算从对存储设备及安全的研究开始。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ziyang]]></title>
@@ -912,33 +935,6 @@ IDF之所以使用Log,其实就是采用每个词的信息量作为权重,而根
 <a href="http://infolab.stanford.edu/~backrub/google.html">google.html</a><br/>
 地址分析的有限状态机编写,还有基于概率的有限状态机<br/>
 相似hash的算法(Simhash)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ssh-key]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/"/>
-    <updated>2012-06-29T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key</id>
-    <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
-
-<p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
-console快速敏捷的威力。这个比每次输入密码的体验好多了。更重要的，当机器很多很多，比如几十台上百台的时候，那省下的功夫
-和能做的事情可就不是一点点了。当然，我并不理解为什么不用保存登录密码的方式，而是兜圈子采用这么一种办法。细想下来可能
-和linux系统是多用户的系统这个特性相关。因为实质上的ssh-key登录是另外一个东西。可参见<a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">这篇</a>入门的文章。</p>
-
-<p>要想使用公钥登录方式，可以分为两步：</p>
-
-<ol>
-<li>生成公钥私钥对，会存放在<code>.ssh/id_rsa,  .ssh/id_rsa.pub</code>中，这是通过命令 <code>$ssh-keygen</code>来操作的</li>
-<li>如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
-把他们存放在<code>.ssh/authorized_keys</code>中。其实就是每个client增加一条记录。执行的命令是<code>$ ssh-copy-id user@host</code></li>
-</ol>
-
-
-<p>弄好以后，发现做起事情来确实快多了。</p>
-
-<p>Update: 有些机器上需要给出额外的参数<code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@host</code></p>
 ]]></content>
   </entry>
   
