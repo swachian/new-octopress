@@ -9,7 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="钱学森在美国生活了近20年，工作学习了15年，软禁了5年，作为秘密解密的期限。原因是当时美国麦卡锡主义盛行，反共高潮迭起，钱学森有个同事是共产党员，于是他也被怀疑是共产党员。实际上他在美国是受到驱逐的，意味着他的事业在美国已经结束。但是回国之后确实打开了新的局面。当然，这仅仅就中国和个人事业来说， &hellip;">
+  <meta name="description" content="最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+挂号网做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。 初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +67,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/02/a-gov-site/">一个政府网站</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-02T10:30:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+<a href="http://www.guahao.com/">挂号网</a>做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。</p>
+
+<p>初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量，
+所以风格上还是很有倾向性的。
+能确定的，就是从页面风格上，这个站点用了大量jquery和bootstrap的前端技术，
+后端的框架可能不是Rails，但这个框架本身借鉴了很多Rails的技巧与实践。</p>
+
+<p>从网站的风格可以看出，受豆瓣的影响挺深。从我的口味来说，这个站点比豆瓣
+做的更加清爽。</p>
+
+<p>后台的技术并不完全确定，不过这个站点也使用了varnish这个组件。</p>
+
+<p>之后，就好奇这个站点是哪家开发。毕竟一个官网做成这样是很罕见的。搜索了半天，
+终于发现原来是浙江杭州的一家公司做的。这家公司其实是一个互联网公司，并不是
+传统的做如软件集成业务的企业，也难怪会做出这样一个与众不同的产品出来。</p>
+
+<p>下面是这个企业的介绍，摘自<a href="http://search.51job.com/list/co,c,2756440,000000,50,1.html">51job</a></p>
+
+<blockquote><p><strong>浙江康健绿线网络技术有限公司 </strong><br/>
+为提高全民健康素养，切实缓解“看病难”问题，2010年3月，经卫生部批准， “全国健康咨询及就医指导平台”正式启动建设，目前为用户提供就医指导、预约挂号、 健康咨询、医疗支付服务，帮助用户合理就诊、方便就医。“全国健康咨询及就医指导平台”由卫生部新闻宣传中心/中国健康教育中心组织实施，中国医院协会提供支持。</p>
+
+<p>作为“全国健康咨询及就医指导平台”的官方网站，Guahao.com通过号源托管、HIS直连、搜索链接三种方式聚合了全国超过400家重点三级医院的预约挂号资源，建立了全国三级医院22万名医生的专长库，帮助全国用户“找对医生挂到号”。</p>
+
+<p>“全国健康咨询及就医指导平台”启动两年来，已成功为全国超过1200万用户提供了预约挂号、就医指导、健康咨询服务，成为了全国规模最大的医疗健康服务平台。</p></blockquote>
+
+<p>不过仔细分辨的话，这个站点不具备一些rails网站的典型特征，尤其缺乏近期Rails的实践特色。目前推测实现上可能是采用的Zend，一个PHP的框架。</p>
+
+<blockquote><p>Zend Framework的设计构思形成于2005年，由Ruby on Rails和Spring Framework的设计思路发展而来的。2005年10月，第一次Zend年会上，Zend公司宣布了ZF的开发计划。[2]
+2007年7月1日，Zend Framework 1.0发布。
+Zend Framework 本身的结构很大程度的模仿了 Ruby on Rails，但又做了足够的改动使其适应 PHP 的特点。所以很多 PHP 框架都或多或少的借鉴、参考了 Zend Framework。由于不满 Zend Framework 中前端控制器重复初始化带来的不必要开销，甚至有开发者用 C/C++ 写 PHP 扩展的方式，重新实现了 Zend Framework ，使前端控制器只需要全局初始化一次（Yaf Framework）。</p></blockquote>
+
+<p>估计挂号网也是用zend写的。也就难怪这东西做出来的html和url确实和rails像极了。</p>
+
+<p>同时，听说<a href="http://xiami.com">虾米网</a>改用PHP了，不过我以前记得是Rails写的。看网站的介绍，推测是08年年底他们改换成的PHP，呵呵，看来不关注这个网的时间蛮久了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -619,121 +694,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/11/user-stories-applied-for-agile-software-development/">User Stories Applied: For Agile Software Development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-11T09:43:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
-比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
-一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
-功能也是随着开发的进展而逐步加入。
-Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段的todo处理。
-最大的缺失是没有客户驻场，另外就是Sprint的周期不够明确。但总体来说，从团队组织到任务完成的方式上，都是很接近Scrum的。
-而且依据我的经验来说，对于3-8人的团队，中等规模，需求又易变化的项目来说，这么做是相当有效的。
-至于测试，根据新的实践总结，有些东西值得写测试有些就不值得，衡量性价比永远是王道。</p>
-
-<p>下面是一些笔记。个人认为本书最地道的地方就是将用故事与需求规格、用例、用户场景进行了比较。从实际开发中看，
-我们日常使用最多的其实确实是用户故事。以后可以明确自己到底在用啥方法，而不必总是愧疚开发方式不够正规。<br/>
-写故事的技巧可以进一步加强，比如尽量写封闭的，让人感觉完成某个任务的故事，而不是永远做不完的故事。<br/>
-估算的数字可以跨度大一些，预估不到的东西不如估的多一些。<br/>
-燃尽图和累计故事图是很好的进度跟踪与计划工具。</p>
-
-<ul>
-<li>用户故事：
-
-<ul>
-<li>用来讨论的主题汇总   card</li>
-<li>交谈重于一切        conversation</li>
-<li>确认，写在背面的测试 confirmation</li>
-</ul>
-</li>
-</ul>
-
-
-<p>拖网式的捕捞，从粗到细，从大到小；深度遍历用户故事</p>
-
-<ul>
-<li>识别用户<strong>角色</strong>，其实就是对用户进行分类。
-
-<ul>
-<li>对角色的合并归类剔除，以及实例化特殊角色的用户</li>
-</ul>
-</li>
-</ul>
-
-
-<p>把用户故事分成一个一个周期进行迭代开发；对不确定的事情在故事上拆成两个，分到两个阶段中去完成</p>
-
-<p>最好是与用户直接联系，有些是有只能通过<strong>用户代理</strong>来沟通，<strong>开发经理</strong>不是好的用户代理，因为最终不是他来使用；销售人员、市场团队、领域专家、客户都是还算不错的用户代理。</p>
-
-<p>让客户编写测试案例</p>
-
-<p>用切蛋糕的方式来切用户故事，而不要用切奶油、切面粉的分层次的方式来切，对应用编程来说，这点并不占便宜。</p>
-
-<p>编写封闭的故事。就是编写可以完成的故事，构成一个闭合故事的集合。
-使用户有成就感。随着一个有意义的目标的实现而结束的故事，能让用户感觉使用后完成了某个任务。所以，登录并不是闭合性的故事。</p>
-
-<p>故事点的估算：预定值可以拉得很开，比如<br/>
-1/2, 1, 2, 3, 5, 8, 13, 20, 40, 80<br/>
-这个类似于wbs的估算，实质是一回事情。所谓的点数是团队内部相对的度量单位</p>
-
-<p>迭代指每次选择一组用户故事，安排好每一轮实现的故事。1-4周是一个迭代周期，5-10次的迭代都是很正常的。<br/>
-迭代计划中需要对故事继续分解。如可以查看酒店的相关信息可以分解成：</p>
-
-<ul>
-<li>设计展示html</li>
-<li>酒店的图片显示和介绍</li>
-<li>酒店的地图位置编写</li>
-<li>酒店设施和服务清单编写</li>
-<li>后台数据库建表与查询</li>
-<li>研究显示地图</li>
-<li>帮助手册</li>
-</ul>
-
-
-<p>测量就是记录。<br/>
-<strong>燃尽图</strong>横轴是时间纵轴是剩余任务故事点。<br/>
-<strong>累计故事点图</strong>， 用于比较计划与实际完成的曲线图。<br/>
- #故事 #故事点 #状态   &#8211; 在迭代中完成的故事表格
- 迭代开始的故事点，在迭代中完成的， 改变的估算， 新加故事的故事点， 迭代结束时故事点， 然后就是迭代1，迭代2的进行记录</p>
-
-<p>用户故事与用例的区别在于前者更类似于后者的成功场景和扩展，但是前者只是一个开始，用例则是文章写完就完毕了。
-故事只是用来提示进一步和用户商谈的。很可能过一阵子就被撕掉了。用例极其容易过早陷入界面的细节中。</p>
-
-<p>卡片也可以用软件记录，也可以用wiki记录。<br/>
-用户界面以减少用户学习成本为本。<br/>
-故事可以保留也可以销毁。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -751,6 +711,10 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">房祸替黄祸挡下了子弹</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/05/kaoyan-3-zhounian/">考研三周年纪念</a>
       </li>
     
@@ -766,15 +730,11 @@ Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段�
         <a href="/blog/2012/12/15/tianzang/">《天葬》读后感及Kindle的体验</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/12/09/dabian/">硕士答辩</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (11)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/笔记'>笔记 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (29)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (11)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/笔记'>笔记 (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
