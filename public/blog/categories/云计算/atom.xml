@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-07T20:45:29+08:00</updated>
+  <updated>2013-01-08T17:07:57+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[大话存储]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/"/>
+    <updated>2013-01-08T17:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu</id>
+    <content type="html"><![CDATA[<p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
+
+<script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hadoop集群安装手记]]></title>

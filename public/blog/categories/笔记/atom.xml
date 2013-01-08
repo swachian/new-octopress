@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-07T20:45:29+08:00</updated>
+  <updated>2013-01-08T17:07:57+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[大话存储]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/"/>
+    <updated>2013-01-08T17:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu</id>
+    <content type="html"><![CDATA[<p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
+
+<script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[房祸替黄祸挡下了子弹]]></title>
@@ -135,94 +149,6 @@
 的一本书。</p>
 
 <p>ps. heroku把默认的域名改成herokuapp,明显域名变难看了许多。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[User Stories Applied: For Agile Software Development]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development/"/>
-    <updated>2012-07-11T09:43:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/user-stories-applied-for-agile-software-development</id>
-    <content type="html"><![CDATA[<p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
-比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
-一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
-功能也是随着开发的进展而逐步加入。
-Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段的todo处理。
-最大的缺失是没有客户驻场，另外就是Sprint的周期不够明确。但总体来说，从团队组织到任务完成的方式上，都是很接近Scrum的。
-而且依据我的经验来说，对于3-8人的团队，中等规模，需求又易变化的项目来说，这么做是相当有效的。
-至于测试，根据新的实践总结，有些东西值得写测试有些就不值得，衡量性价比永远是王道。</p>
-
-<p>下面是一些笔记。个人认为本书最地道的地方就是将用故事与需求规格、用例、用户场景进行了比较。从实际开发中看，
-我们日常使用最多的其实确实是用户故事。以后可以明确自己到底在用啥方法，而不必总是愧疚开发方式不够正规。<br/>
-写故事的技巧可以进一步加强，比如尽量写封闭的，让人感觉完成某个任务的故事，而不是永远做不完的故事。<br/>
-估算的数字可以跨度大一些，预估不到的东西不如估的多一些。<br/>
-燃尽图和累计故事图是很好的进度跟踪与计划工具。</p>
-
-<ul>
-<li>用户故事：
-
-<ul>
-<li>用来讨论的主题汇总   card</li>
-<li>交谈重于一切        conversation</li>
-<li>确认，写在背面的测试 confirmation</li>
-</ul>
-</li>
-</ul>
-
-
-<p>拖网式的捕捞，从粗到细，从大到小；深度遍历用户故事</p>
-
-<ul>
-<li>识别用户<strong>角色</strong>，其实就是对用户进行分类。
-
-<ul>
-<li>对角色的合并归类剔除，以及实例化特殊角色的用户</li>
-</ul>
-</li>
-</ul>
-
-
-<p>把用户故事分成一个一个周期进行迭代开发；对不确定的事情在故事上拆成两个，分到两个阶段中去完成</p>
-
-<p>最好是与用户直接联系，有些是有只能通过<strong>用户代理</strong>来沟通，<strong>开发经理</strong>不是好的用户代理，因为最终不是他来使用；销售人员、市场团队、领域专家、客户都是还算不错的用户代理。</p>
-
-<p>让客户编写测试案例</p>
-
-<p>用切蛋糕的方式来切用户故事，而不要用切奶油、切面粉的分层次的方式来切，对应用编程来说，这点并不占便宜。</p>
-
-<p>编写封闭的故事。就是编写可以完成的故事，构成一个闭合故事的集合。
-使用户有成就感。随着一个有意义的目标的实现而结束的故事，能让用户感觉使用后完成了某个任务。所以，登录并不是闭合性的故事。</p>
-
-<p>故事点的估算：预定值可以拉得很开，比如<br/>
-1/2, 1, 2, 3, 5, 8, 13, 20, 40, 80<br/>
-这个类似于wbs的估算，实质是一回事情。所谓的点数是团队内部相对的度量单位</p>
-
-<p>迭代指每次选择一组用户故事，安排好每一轮实现的故事。1-4周是一个迭代周期，5-10次的迭代都是很正常的。<br/>
-迭代计划中需要对故事继续分解。如可以查看酒店的相关信息可以分解成：</p>
-
-<ul>
-<li>设计展示html</li>
-<li>酒店的图片显示和介绍</li>
-<li>酒店的地图位置编写</li>
-<li>酒店设施和服务清单编写</li>
-<li>后台数据库建表与查询</li>
-<li>研究显示地图</li>
-<li>帮助手册</li>
-</ul>
-
-
-<p>测量就是记录。<br/>
-<strong>燃尽图</strong>横轴是时间纵轴是剩余任务故事点。<br/>
-<strong>累计故事点图</strong>， 用于比较计划与实际完成的曲线图。<br/>
- #故事 #故事点 #状态   -- 在迭代中完成的故事表格
- 迭代开始的故事点，在迭代中完成的， 改变的估算， 新加故事的故事点， 迭代结束时故事点， 然后就是迭代1，迭代2的进行记录</p>
-
-<p>用户故事与用例的区别在于前者更类似于后者的成功场景和扩展，但是前者只是一个开始，用例则是文章写完就完毕了。
-故事只是用来提示进一步和用户商谈的。很可能过一阵子就被撕掉了。用例极其容易过早陷入界面的细节中。</p>
-
-<p>卡片也可以用软件记录，也可以用wiki记录。<br/>
-用户界面以减少用户学习成本为本。<br/>
-故事可以保留也可以销毁。</p>
 ]]></content>
   </entry>
   

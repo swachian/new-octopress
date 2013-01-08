@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-07T20:45:29+08:00</updated>
+  <updated>2013-01-08T17:07:57+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[大话存储]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/"/>
+    <updated>2013-01-08T17:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu</id>
+    <content type="html"><![CDATA[<p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
+
+<script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[房祸替黄祸挡下了子弹]]></title>
@@ -750,22 +764,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 
 <p>个人觉得应当以‘Really works’为最低目标， 大部分组件的使用都应该达到&#8217;Well engineered&#8217;，
 至于Beautiful和Moving industry forward则要看运气了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The hardware architecture of 37 signals]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals/"/>
-    <updated>2012-07-11T11:10:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/11/the-hardware-architecture-of-37-signals</id>
-    <content type="html"><![CDATA[<p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
-
-<p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
-就能装进12个u 48根内存条。目前37signals的rails进程跑了8个sleds。
-网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
-备份直接用的S3 storage。</p>
-
-<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
 ]]></content>
   </entry>
   
