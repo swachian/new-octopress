@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-08T17:07:57+08:00</updated>
+  <updated>2013-01-11T13:29:33+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2012]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/"/>
+    <updated>2013-01-11T12:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list</id>
+    <content type="html"><![CDATA[<p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
+
+<h2>技术类</h2>
+
+<ol>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a></li>
+<li>吴翰清，白帽子讲Web安全，电工</li>
+<li>阿朱，走出软件作坊，电工</li>
+<li>高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工</li>
+<li>Gourley D, Totty B. HTTP权威指南 O&#8217;Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
+Paul Graham。 Hackers &amp; Painters.</li>
+<li>谭云杰,大象&#8211;Thinking in UML，水利水电</li>
+<li>谢希仁.计算机网络，电工</li>
+</ol>
+
+
+<h2>经管</h2>
+
+<ol>
+<li>何飞鹏,自慢</li>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a></li>
+</ol>
+
+
+<h2>文化</h2>
+
+<ol>
+<li><a href="">王力雄,我的西域 你的东土</a></li>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/15/tianzang/">王力雄，天葬</a></li>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">王力雄，黄祸</a></li>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/25/ziyang/">ziyang</a></li>
+</ol>
+
+
+<h2>期刊文章</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[大话存储]]></title>
@@ -750,20 +795,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 也不是自己的服务器环境可以自己装。</p>
 
 <p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[levels]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels/"/>
-    <updated>2012-07-13T10:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/13/levels</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/952-technical-hierarchy.png" alt="levels of computer engineering" /></p>
-
-<p>来自37sigals的<a href="http://37signals.com/svn/posts/3200-levels-of-aspiration">转载</a></p>
-
-<p>个人觉得应当以‘Really works’为最低目标， 大部分组件的使用都应该达到&#8217;Well engineered&#8217;，
-至于Beautiful和Moving industry forward则要看运气了。</p>
 ]]></content>
   </entry>
   

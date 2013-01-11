@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-08T17:07:57+08:00</updated>
+  <updated>2013-01-11T13:29:33+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2012]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/"/>
+    <updated>2013-01-11T12:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list</id>
+    <content type="html"><![CDATA[<p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
+
+<h2>技术类</h2>
+
+<ol>
+<li><a href="/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a></li>
+<li>吴翰清，白帽子讲Web安全，电工</li>
+<li>阿朱，走出软件作坊，电工</li>
+<li>高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工</li>
+<li>Gourley D, Totty B. HTTP权威指南 O'Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
+Paul Graham。 Hackers &amp; Painters.</li>
+<li>谭云杰,大象--Thinking in UML，水利水电</li>
+<li>谢希仁.计算机网络，电工</li>
+</ol>
+
+
+<h2>经管</h2>
+
+<ol>
+<li>何飞鹏,自慢</li>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li><a href="/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a></li>
+</ol>
+
+
+<h2>文化</h2>
+
+<ol>
+<li><a href="">王力雄,我的西域 你的东土</a></li>
+<li><a href="/blog/2012/12/15/tianzang/">王力雄，天葬</a></li>
+<li><a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">王力雄，黄祸</a></li>
+<li><a href="/blog/2012/12/25/ziyang/">ziyang</a></li>
+</ol>
+
+
+<h2>期刊文章</h2>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[考研三周年纪念]]></title>
@@ -142,33 +187,6 @@
 
 <p>二零一二年十一月二十三日晚<br/>
 于娘娘逝世半个月后补祭</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[处约]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/"/>
-    <updated>2012-08-18T20:05:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue</id>
-    <content type="html"><![CDATA[<p>下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
-已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的，
-有这方面志向又有人指导的话并不难做到。</p>
-
-<p>随即得瑟地去跟老婆说，如今我还在读书的话估计也能保研清华。老婆看看我，然后说现在根本不是比个人能力的时候，也不是你们当年主要靠个人表现就
-能解决基本问题的年代。现在去保了清华能搞定房子车子吗？ 顿时让我无语。毕竟清华的金字招牌尽管很牛，硕士毕业二三十万起步是做得到的，但要更进
-一步那是很难的。至于凭薪水在北京上海搞定房子那基本也是不太可能的事情。于是陷入更大的思绪混沌中。毕竟清华的研究生还是相当诱人的，而搞不定
-这些基本的东西，那么这么诱人又有什么意义呢？</p>
-
-<p>仔细想想，确实是我犯了读书人的毛病，太高看清华了。首先，从计算机系、软件学院会招二流保研生就可说明实际质量不过尔尔。三清团的说法不是没有
-道理的。其次，读书解决一切问题的想法是不对的。曾文正公当翰林期间都是牢骚满腹，彼时中进士的三年不过几百人都有那么多牢骚，那么多的生活拮据，
-何况如今已经扩招几万倍的大学研究生。</p>
-
-<p>更严重的是我又弄差了读书的意义。</p>
-
-<blockquote><p>凡人多望子孙为大官，余不愿为大官，但愿为读书明理之君子。勤俭自持，习劳习苦，可以处乐，可以处约。此君子也。
-凡富贵功名，皆有命定，半由人力，半由天事。惟学作圣贤，全由自己作主，不与天命相干涉。</p></blockquote>
-
-<p>保研之事半由天命半由人力，读书明理，勤俭自持，习劳习苦，处乐处约才是个人该下功夫的地方。</p>
 ]]></content>
   </entry>
   

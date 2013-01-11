@@ -9,7 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。 ">
+  <meta name="description" content="过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。 技术类 张冬，大话存储，清华
+吴翰清，白帽子讲Web安全，电工
+阿朱，走出软件作坊，电工
+高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +67,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/11/to-read-list/">读书列表2012</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-11T12:33:00+08:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
+
+<h2>技术类</h2>
+
+<ol>
+<li><a href="/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a></li>
+<li>吴翰清，白帽子讲Web安全，电工</li>
+<li>阿朱，走出软件作坊，电工</li>
+<li>高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工</li>
+<li>Gourley D, Totty B. HTTP权威指南 O&#8217;Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
+Paul Graham。 Hackers &amp; Painters.</li>
+<li>谭云杰,大象&#8211;Thinking in UML，水利水电</li>
+<li>谢希仁.计算机网络，电工</li>
+</ol>
+
+
+<h2>经管</h2>
+
+<ol>
+<li>何飞鹏,自慢</li>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li><a href="/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a></li>
+</ol>
+
+
+<h2>文化</h2>
+
+<ol>
+<li><a href="">王力雄,我的西域 你的东土</a></li>
+<li><a href="/blog/2012/12/15/tianzang/">王力雄，天葬</a></li>
+<li><a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">王力雄，黄祸</a></li>
+<li><a href="/blog/2012/12/25/ziyang/">ziyang</a></li>
+</ol>
+
+
+<h2>期刊文章</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -577,149 +652,6 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/whats-new-in-rails-4/">What&#8217;s New in Rails 4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T22:00:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
-
-<h3>Rails.queue</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ExpensiveOperation
-</span><span class='line'>  def run
-</span><span class='line'>   
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Rails.queue.push(ExpensiveOperation.new)
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
-
-<h3>strong_parameters</h3>
-
-<p>Alternative to MassAssignmentSecurity</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class PostsController &lt; ApplicationController
-</span><span class='line'>  def create
-</span><span class='line'>     @post = Post.create(post_params)
-</span><span class='line'>  end
-</span><span class='line'>
-</span><span class='line'>  private
-</span><span class='line'>  def post_params
-</span><span class='line'>    params.require(:post).permit(:title, :body)
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Turbolinks</h3>
-
-<h3>Cache Digests(Russian Doll Caching)</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># app/views/projects/show.html.erb
-</span><span class='line'>&lt;% cache project do %&gt;
-</span><span class='line'>  &lt;h1&gt; &lt;/h1&gt;
-</span><span class='line'>  &lt;%= render project.documents %&gt;
-</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ActionController::Live</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>include ActionController::Live
-</span><span class='line'>
-</span><span class='line'>response.stream.write "hello\n"
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>PATCH Verb</h3>
-
-<p>just as PUT</p>
-
-<h3>Plugins are dead; long live plugins</h3>
-
-<p>use gems with bundle</p>
-
-<h3>lambda scope</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>scope :published, -&gt; { where(:published =&gt; true) }
-</span><span class='line'>
-</span><span class='line'>#Pitfall 
-</span><span class='line'>scoped :recent, where("created_at &gt; ?", 1.week.ago)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>@sikachu</p>
-
-<p>Routing Concerns</p>
-
-<p>Long live activeresource</p>
-
-<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
-They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -733,6 +665,10 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/11/to-read-list/">读书列表2012</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/01/08/da-hua-cun-chu/">大话存储</a>
@@ -750,15 +686,11 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
         <a href="/blog/2012/12/25/ziyang/">ziyang</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/12/25/lang-chao-zhi-dian/">浪潮之巅</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (11)</a></li><li><a href='/blog/categories/生活'>生活 (11)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/笔记'>笔记 (11)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
