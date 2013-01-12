@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-11T13:29:33+08:00</updated>
+  <updated>2013-01-12T21:04:20+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[通过系统架构师后想说的话]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/12/pass-the-ruan-kao-exam/"/>
+    <updated>2013-01-12T20:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/12/pass-the-ruan-kao-exam</id>
+    <content type="html"><![CDATA[<p>最早听说软考是在大学里了，90年代，当时只是了解这是系统分析员考试。因为不太看得起国家组织的这种考试，于是从来没有留意过。
+班上有人参加过，而且是计算机专业方面的牛人。但我依然对此无动于衷。回过头来看，可能我们这批大学生彼时还未扩招，还是所谓的天之骄子，大学期间
+干些什么对以后的就业并无本质影响，我们的注意力也更多地放在其他地方。</p>
+
+<p>通过去年上半年开始接触软考后，我发现其实很多题目就是大学考试的题目，至于谁抄的谁实在不好评论。但是，如果彼时能拿来做练习、做参考一定是大有裨益的。
+毕竟那些年不像现在资源丰富，教材的教辅是没有的，各种参考资料的获取也极难。而软考当时的教材和参考书却不能获得。如果那时候也参加这方面的内容，
+我的专业基础知识应该可以走的更远。</p>
+
+<p>软考历年的题目还是相当有价值的。客观题考的是基础知识，大题目很能体现热点，而且也能给人启发，是不折不扣的的好题和训练素材。</p>
+
+<h3>关于这次考试</h3>
+
+<p>如在<a href="http://octopresszhangyu.herokuapp.com/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>所言：</p>
+
+<blockquote><p>起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年 论文等事宜，准备一门新的考试的时间并非很充足，所以最后换成了软件架构设计师。实际上下半年只有项目管理、网络规划、系统架构3门高级，项目管理 上半年考了中级，没有继续主要是因为第一书已经借出去了，第二考出来后还要等3年才能去换高级项目的证书。看了看架构师的题目，基本不需要太多额外 的准备工作。于是还是选了架构师。</p></blockquote>
+
+<p>架构师的题目从最早看见就觉得很合适我的方向和日常接触的东西。做真题，客观题无需复习基本就可以在48分以上。因为我有不错的计算机基础知识，经过研究生统考检验的，我的项目管理知识至少也通过
+了中级项目经理的考试，应付软考其他科目的项管内容就很轻松了。所以做架构师是真题，我分数丢的多的反而是<strong>“架构风格”</strong>这个核心内容。 但实际上这个
+内容也不陌生，只是我不一定习惯它的一些叫法，有些细节需要再雕琢一下。所以，最后看了一点相关的内容也就考到55分以上了。</p>
+
+<p>下午的案例分析题是有一定难度的。经过仔细分析这几年的真题，发现架构风格总有一题，另外Web或当前热点内容（如Rest风格、缓存）也往往会有一题，
+偏系统分析的也必有一题。尽管5题中总有一题嵌入式是我搞不定的，但剩下4道里面至少有2道是有把握的。而今年运气不错，热点题是出的关于NoSQL较
+SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研究的还是相当到位的。架构风格也不出意料总是有那么一题。另外还有一题是看图理解，基本
+确保第一小题10分到手。于是最后选了这3道题。没做的一道也是设计模式方面，其实也不是不能做了，只是得分上不像看图题那么简单明了，所以没选。
+最后原先最担心的案例题反而是得分最高的。取得了6x的成绩。<br/>
+应该说，论文的编写对我的帮助还是很大的。一方面开拓了视野，掌握了阅读文献这条路，写了硕士论文，发表了小论文，用老总的话属于名利双收。而在软考
+考试中也帮了一把。</p>
+
+<p>下午的案例题是4选1，后面2个我都不熟。后来挑了第二个，写的是关于持久层设计的。考后想来应该选以架构为中心的软件设计更合适些。好在运气不错，
+老师还是给够我过线的分数了。但答题时确实犯了硬伤。因为我并不了解几种数据访问模式。其实指的是在先访问、DAO、DTO、离线数据模式、ORM这五种，
+不过我打的时候专注于ORM，分的却是ORM里面的进一步细分的模式。这是不折不扣的一个硬伤。但是，好在后面的与应用结合还算写的不错，也确实自己的
+经验之谈，占了这部分的光，老师也就让我通过了考试。文章这种东西讲到底主观性还是很强的，运气成分确实不少。</p>
+
+<h3>关于是否参加高项考试</h3>
+
+<p>高项考试我相信还是会参加的。尤其是在继续教育因为不得人心至少在上海很难继续开展下去。高项的投资应该不会失效。考虑到目前孩子年幼加今年另有
+2个高工评审要参加，高项的报名至少也是下半年的事情了。也可能要再过一年再予以考虑。通过高项后，我应该不会再参加软考了。当然，很多东西都在变，
+所谓不再考其他科目也只是现在的判断。毕竟这种东西的弹性大的很。</p>
+
+<h3>关于高级职称</h3>
+
+<p>其实写小论文就是为了评高级职称，而且是去市里评高级职称。已经折腾了，今年就继续折腾吧。要弄什么创新教育，也是一堆麻烦事情。<br/>
+系统内部的评审应该也会报名。不过现在已经有高级证了，也算有个底。</p>
+
+<h3>关于软考的未来</h3>
+
+<p>评论一项考试的未来，可能我过于骄傲了。我对软考的认识依然没有改变，这个证书是比较鸡肋的目前，但毕竟是政府权威的考试，而且它的证书
+被上海居转户认可，那么权威的性质就是存在的。但是IT系统毕竟不是其他系统，政府掌握的资源并不具有决定性，大部分高科技企业并不在
+政府手里，IT业的主要构成是外企、私企，包括很多的互联网公司。整个的浪潮并非政府带动的。所以这个证书不能像经济师、会计这样铺的开，
+最热门的集成项目经理也是因为政府在信息化项目实施上有指导权才吸引了那么多企业来参与。软考真的权威性太强，对IT业未必是好事情。</p>
+
+<p>软考没接触之前会觉得这个东西很没有意义，接触后会发觉对推进人才队伍建设以及提高能力方面确实有不小的促进作用。对整个产业的发展毫无疑问
+是有益的。它的未来会同政府和市场、政府和社会的关系紧密相关。也同公平和正义相关。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[读书列表2012]]></title>
@@ -25,8 +86,8 @@
 <ol>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a></li>
 <li>吴翰清，白帽子讲Web安全，电工</li>
-<li>阿朱，走出软件作坊，电工</li>
 <li>高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工</li>
+<li>Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional</li>
 <li>Gourley D, Totty B. HTTP权威指南 O&#8217;Reilly</li>
 <li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
 Paul Graham。 Hackers &amp; Painters.</li>
@@ -39,8 +100,13 @@ Paul Graham。 Hackers &amp; Painters.</li>
 
 <ol>
 <li>何飞鹏,自慢</li>
+<li>阿朱，走出软件作坊，电工</li>
 <li>余江，韦尔奇，Winning（赢），中信</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a></li>
+<li>曾志尧, 35岁前要上的33堂理财课,中信</li>
+<li>李笑来，把时间当做朋友</li>
+<li>蔡康永，说话之道</li>
+<li>高盛如何算赢世界</li>
 </ol>
 
 
@@ -51,6 +117,15 @@ Paul Graham。 Hackers &amp; Painters.</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/15/tianzang/">王力雄，天葬</a></li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">王力雄，黄祸</a></li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2012/12/25/ziyang/">ziyang</a></li>
+<li>张鸣，北洋裂变&#8211;军阀与五四</li>
+</ol>
+
+
+<h2>幼儿</h2>
+
+<ol>
+<li>阿狸-梦之城堡</li>
+<li>阿狸-永远站</li>
 </ol>
 
 
@@ -469,6 +544,10 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
 但随后几天，娘娘的病情恶化，于周三11月7日去世。本来打算弃考软考，毕竟也不是什么很严重的考试。
 不过最后还是去考了软考的系统架构设计师，只是状态确实不好，冲刺复习也基本为0.之所以还去主要还是
 妈妈的支持以及做此类事情娘娘向来是全力支持的，我放弃去考反而不是家里希望看到的。过关与否，已经是次要的了。</p>
+
+<p>Updated on 11/01/2013: 成绩结果终于能够查了。rkb的网站依然不是很给力，响应和可靠性都比较差，基本到晚上六点以后才算恢复查询功能。还好论坛
+里有人给了信管网的链接才不至于等太久。最后的分数还不错，都过线了，上午表现正常偏好，下午一发挥尤其出色，下午二涉险过关。总体而言，确实是一门很经济实惠的考试，对我而言。
+领证当然还有一个过程，估计要4月份才能拿到证书，2月份的时候应该会先填合格人员登记表并把照片送到报名点。</p>
 ]]></content>
   </entry>
   
@@ -772,29 +851,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 的一本书。</p>
 
 <p>ps. heroku把默认的域名改成herokuapp,明显域名变难看了许多。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
-    <updated>2012-07-21T09:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
-    <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
-只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
-难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
-
-<p>试了一下，jekyll的是完全可以产生的。但是对octopress并非完全适用。
-首先，对heroku而言，默认有一个<code>.slugignore</code>文件中会把source等3个文件排除在外，而没有这3个文件无法generate。但有了这3个文件，slug的体积就变大。</p>
-
-<p>其次，有个gem需要使用python的库，无法在heroku上直接运行。</p>
-
-<p>而作为苦逼的中国用户，还会碰到编码问题。</p>
-
-<p>合在一起，其实原因可归结为一个，即如果generate牵涉的东西太多则不适合在heroku这样的平台按照 build/run的方式使用，毕竟环境不是完全能模拟本机的，
-也不是自己的服务器环境可以自己装。</p>
-
-<p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
 ]]></content>
   </entry>
   

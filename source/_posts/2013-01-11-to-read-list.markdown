@@ -13,8 +13,8 @@ categories:
 
 1. [张冬，大话存储，清华](/blog/2013/01/08/da-hua-cun-chu/)
 2. 吴翰清，白帽子讲Web安全，电工
-3. 阿朱，走出软件作坊，电工
 3. 高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工
+1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O'Reilly
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
 Paul Graham。 Hackers & Painters.
@@ -24,8 +24,14 @@ Paul Graham。 Hackers & Painters.
 ## 经管  
 
 1. 何飞鹏,自慢  
+3. 阿朱，走出软件作坊，电工
 1. 余江，韦尔奇，Winning（赢），中信
 1. [吴军,浪潮之巅](/blog/2012/12/25/lang-chao-zhi-dian/)
+1. 曾志尧, 35岁前要上的33堂理财课,中信
+1. 李笑来，把时间当做朋友
+2. 蔡康永，说话之道
+1. 高盛如何算赢世界
+
 
 ## 文化 
 
@@ -33,6 +39,13 @@ Paul Graham。 Hackers & Painters.
 1. [王力雄，天葬](/blog/2012/12/15/tianzang/)
 1. [王力雄，黄祸](/blog/2013/01/07/huanghuo-give-way-to-fanghuo/)
 1. [ziyang](/blog/2012/12/25/ziyang/)
+1. 张鸣，北洋裂变--军阀与五四
+
+## 幼儿
+
+1. 阿狸-梦之城堡
+2. 阿狸-永远站
+
 
 ## 期刊文章  
 
