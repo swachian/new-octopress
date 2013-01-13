@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="蔡学镛的如何做简报 &amp; linux必备知识与文化 Rails Screencasts CoffeeScript 的电子书
-">
+  <meta name="description" content="牵涉到的软件： vmware ubuntu1104 ssh rvm ruby gem rails thin windows securecrt radrails rse 远程控制插件
+Target Management 3.0 Update Site http://download.eclipse &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/20/my-developing-environment/">我的开发环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-20T15:48:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>牵涉到的软件：</p>
+
+<p>vmware</p>
+
+<p>  ubuntu1104</p>
+
+<pre><code>ssh
+
+rvm
+
+ ruby gem rails thin
+</code></pre>
+
+<p>windows</p>
+
+<p>  securecrt</p>
+
+<p>  radrails</p>
+
+<pre><code>rse 远程控制插件
+Target Management 3.0 Update Site   http://download.eclipse.org/dsdp/tm/updates/3.0 Enabled
+</code></pre>
+
+<p>其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录，同时搭配securecrt的console能力。可以说，这是在windows下最好的方案。考虑到中文等支持，可能也是比ubuntu下直接利用netbeans等开发更好的方案了。</p>
+
+<p>具体做法，前提是vmware上装好ubuntu，同时装好并启用ssh
+sudo apt-get install openssh-server</p>
+
+<p>然后，下载最新版的radrails，安装后，选择安装软件，更新增加里面的rse插件，基本做法可以是输入remote
+　　让系统去filter
+　　。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -461,6 +527,10 @@ Post.where(:published =&gt; true).any? 检查是否exist?
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/13/abbyy-finereader/">ABBYY FineReader</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/12/pass-the-ruan-kao-exam/">通过系统架构师后想说的话</a>
       </li>
     
@@ -476,15 +546,11 @@ Post.where(:published =&gt; true).any? 检查是否exist?
         <a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">房祸替黄祸挡下了子弹</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/05/kaoyan-3-zhounian/">考研三周年纪念</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/笔记'>笔记 (11)</a></li><li><a href='/blog/categories/神器'>神器 (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/软考'>软考 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/笔记'>笔记 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/软考'>软考 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

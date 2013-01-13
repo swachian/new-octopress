@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-12T21:04:20+08:00</updated>
+  <updated>2013-01-13T22:23:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ABBYY FineReader]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/13/abbyy-finereader/"/>
+    <updated>2013-01-13T22:11:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/13/abbyy-finereader</id>
+    <content type="html"><![CDATA[<p>最近看电子书，发现中文的电子书还是处于原始阶段。网上广泛地流传着书籍的阉割版和扫描版，健全的可读性强的电子版很稀罕，比起英文图书不能同日而语。
+只能说一句盗版强国必然也是防盗强国，越是贼窝防盗工作做得越好。</p>
+
+<p>不过热门书籍并不缺少扫描版。于是想起来OCR工具。下载到了ABBYY FineReader，试用之下感觉这也算一方神器了。有了这个工具，以后读浪潮之巅、软件作坊
+之类的书籍就再也不用愁了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[通过系统架构师后想说的话]]></title>
@@ -826,31 +839,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
 所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
 当然是软件开发尤其是应用软件开发应该的样子。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
-    <updated>2012-07-31T09:04:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
-    <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
-
-<p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
-如果只是一个死记硬背各种开发模型的人，看到这本书可能会有恍然大悟的感觉。但于我而言，一直坚持独立思考，所以很早
-以前就看明白了所谓迭代、敏捷、增量和瀑布模型都是有关的，核心的一点都是把顺序模型的大瀑布打破变成小瀑布，只是
-打破的方法各有差异耳。但是，能把话说得这么明确的项目管理书籍可能也就只有这一本。这只能说作者的诚实和自信造就
-了这本书，也对不自己动脑子的pm们提供了参考。从这点上说，其意义还是很明确的。</p>
-
-<p>作者的另外一个特色就是她确实<strong>是</strong>一个项目经理。因为她其他事情基本不参与，比如开发比如测试。所以她偏重管理以及
-软技能谈的更多些，如何与老板交涉也谈的很多，其实和客户交谈反而不如用户故事里讲的多。</p>
-
-<p>项目仪表盘那张，同燃尽图累计故事图很类似，其实还是七武士里面那种画圈的方式最简单明了。书中还提到了多用贴纸，不过
-我对即时贴总有种混乱不堪的感觉。试试看吧，反正即时贴的成本确实很低。总之，本书适合给不怎么爱思考的背书派项目
-经理使用，其精华部分在于对各种开发模型的比较与剖析。是我读过的关于开发生命周期模型介绍中最诚实、最坦露本质内容
-的一本书。</p>
-
-<p>ps. heroku把默认的域名改成herokuapp,明显域名变难看了许多。</p>
 ]]></content>
   </entry>
   
