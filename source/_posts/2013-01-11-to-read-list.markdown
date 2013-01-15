@@ -14,6 +14,7 @@ categories:
 1. [张冬，大话存储，清华](/blog/2013/01/08/da-hua-cun-chu/)
 2. 吴翰清，白帽子讲Web安全，电工
 3. 高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工
+1. Thomas Kyte, Expert Oracle Database Architecture.pdf
 1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O'Reilly
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
