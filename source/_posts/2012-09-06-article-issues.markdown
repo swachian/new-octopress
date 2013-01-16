@@ -84,6 +84,7 @@ K0812023	计算机集成制造系统—CIMK	国家863计划CIMS主题、中国�
 <tr><td>计算机科学                </td><td>1</td><td>1</td><td>1</td><td>重庆</td><td>150	400/页  </td><td>喜录增刊 </td></tr>
 <tr><td>计算机应用研究	  </td><td>1</td><td>1</td><td>E</td><td>国防科技大学计算机学院</td><td>100	300/页  </td><td>喜录增刊 </td></tr>
 <tr><td>电信科学	  </td><td>1</td><td>1</td><td></td><td>北京:中国通信学会</td><td>0	200/页  </td><td></td></tr>
+<tr><td>互联网学报/天地	  </td><td>1</td><td>1</td><td></td><td>北京:中国通信学会，和电信科学的主办单位一样</td><td>0	</td><td></td></tr>
 </table>
 
 

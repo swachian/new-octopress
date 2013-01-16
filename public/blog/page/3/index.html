@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。 数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
-如果只是一个死记硬背各种开发模型的人，看到这本书可能会有恍然大悟的感觉。但于我而言，一直坚持独立思考， &hellip;">
+  <meta name="description" content="下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
+已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,178 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/18/chuyue/">处约</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-18T20:05:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
+已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的，
+有这方面志向又有人指导的话并不难做到。</p>
+
+<p>随即得瑟地去跟老婆说，如今我还在读书的话估计也能保研清华。老婆看看我，然后说现在根本不是比个人能力的时候，也不是你们当年主要靠个人表现就
+能解决基本问题的年代。现在去保了清华能搞定房子车子吗？ 顿时让我无语。毕竟清华的金字招牌尽管很牛，硕士毕业二三十万起步是做得到的，但要更进
+一步那是很难的。至于凭薪水在北京上海搞定房子那基本也是不太可能的事情。于是陷入更大的思绪混沌中。毕竟清华的研究生还是相当诱人的，而搞不定
+这些基本的东西，那么这么诱人又有什么意义呢？</p>
+
+<p>仔细想想，确实是我犯了读书人的毛病，太高看清华了。首先，从计算机系、软件学院会招二流保研生就可说明实际质量不过尔尔。三清团的说法不是没有
+道理的。其次，读书解决一切问题的想法是不对的。曾文正公当翰林期间都是牢骚满腹，彼时中进士的三年不过几百人都有那么多牢骚，那么多的生活拮据，
+何况如今已经扩招几万倍的大学研究生。</p>
+
+<p>更严重的是我又弄差了读书的意义。</p>
+
+<blockquote><p>凡人多望子孙为大官，余不愿为大官，但愿为读书明理之君子。勤俭自持，习劳习苦，可以处乐，可以处约。此君子也。
+凡富贵功名，皆有命定，半由人力，半由天事。惟学作圣贤，全由自己作主，不与天命相干涉。</p></blockquote>
+
+<p>保研之事半由天命半由人力，读书明理，勤俭自持，习劳习苦，处乐处约才是个人该下功夫的地方。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">Hadoop集群安装手记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ssh的使用公钥登录配置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
+</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>=======
+<strong>数据源的输入才是Hadoop方便地方</strong></p>
+
+<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
+读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
+比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
+然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
+然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
+map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
+
+<h1>文献</h1>
+
+<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/03/ship-it/">Ship It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-03T09:38:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
+
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
+
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
+
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
+
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
+
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -596,164 +768,6 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/27/git-init/">Git Init[zz]</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-27T16:38:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
-</span><span class='line'>
-</span><span class='line'>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
-</span><span class='line'>$ git push origin master </span></code></pre></td></tr></table></div></figure>
-
-
-<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
-
-<p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
-如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>
-
-<p>$ git push origin test:master         // 提交本地test分支作为远程的master分支
-$ git push origin test:test              // 提交本地test分支作为远程的test分支</p>
-
-<p>如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。</p>
-
-<p>$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/26/hubot-and-socket-dot-io/">Hubot and socket.io</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
-</span><span class='line'>coffee
-</span><span class='line'>&gt; 3+2<span class="o">=</span>?
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>vs</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>后者显然便捷许多.</p>
-
-<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
-Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
-而且<code>socket.io-client</code>也很有意思.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/26/programming-language-performance/">Programming Language Performance</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-26T10:06:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
-
-<p>JavaScript是一个很大的亮点。V8的性能确实快。
-相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
-1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
-2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
-而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -771,6 +785,14 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/16/whats-luokao-for-ruankao/">裸考在软考中意味着什么</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/out-the-firm/">《走出软件作坊》读后感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/13/abbyy-finereader/">ABBYY FineReader</a>
       </li>
     
@@ -782,19 +804,11 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
         <a href="/blog/2013/01/11/to-read-list/">读书列表2012</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/08/da-hua-cun-chu/">大话存储</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">房祸替黄祸挡下了子弹</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/笔记'>笔记 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (7)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/软考'>软考 (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/时评'>时评 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (12)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>
