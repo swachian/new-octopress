@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。 ">
+  <meta name="description" content="张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。 存储的发展 封面很山寨，图片有很多。比较有利于增强感性认识，也符合我想认识设备的需求。 纸带 磁存储 硬盘 磁阵 网络磁阵（几百个磁盘） 网络存储（硬盘从主机箱移到外面） 总线 总线就是一条或多条物理导线，导线可以有多条， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,7 +95,101 @@
 <script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
 
 
+<h2>存储的发展</h2>
 
+<p>封面很山寨，图片有很多。比较有利于增强感性认识，也符合我想认识设备的需求。</p>
+
+<p>纸带 磁存储 硬盘 磁阵 网络磁阵（几百个磁盘） 网络存储（硬盘从主机箱移到外面）</p>
+
+<h2>总线</h2>
+
+<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br/>
+导线中，有些是<strong>交互数据</strong>用的数据总线，有些是<strong>传递控制信号</strong>的控制总线，包括处理<strong>中断与仲裁</strong>的,另有一些是用来确认目标设备的<strong>地址总线。</strong></p>
+
+<h3>连找发模型、CPU与硬盘的交互</h3>
+
+<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br/>
+CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
+<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br/>
+<strong>发</strong>即发送操作指令，对于磁盘CPU有如下三条指令：
+  1. 读还是写，外加其他选项如是否缓存、是否用中断来通知CPU处理
+  2. 知名应该读取的硬盘逻辑号[LBA]<br/>
+  3. 给出读取出来的内容放在内存中的哪个地址。<br/>
+上面这三个指令其实是发给南桥上的控制器，南桥再将指令翻译成磁盘认识的一系列指令，南桥和磁盘之间的协议接口形成了ATA和SCSI两个指令集。</p>
+
+<h2>磁盘结构</h2>
+
+<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br/>
+磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br/>
+盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br/>
+不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br/>
+能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细</p>
+
+<p>扇区传统上采用CHS编码（Cylinder柱面、Header磁头、Sector扇区)，每个扇区包含扇区头信息和数据区两部分，头信息就有CHS信息以及是否为坏扇区这些内容；不过随着发展，目前已经抽象成了LBA寻址方式，但这只是在磁盘外部表现的逻辑</p>
+
+<p><strong>扇区交叉因子</strong>是为了满足磁头旋转时因速度原因跑过了头，从而把不连续的扇区编号成为第2扇区，其实是一种模的运算，核心还是为了迎合磁头的物理运转需求
+<strong>磁头扭斜</strong>则是为了满足切换磁道时也会产生的位移，因而磁道之间开始编号的起始扇区也有一个差</p>
+
+<p><strong>低级格式化</strong>就是利用磁头重新划分扇区</p>
+
+<p>总有个最小单位（芝诺悖论，龟兔赛跑悖论）</p>
+
+<h3>硬盘接口技术</h3>
+
+<ul>
+<li><p>ATA</p>
+
+<ul>
+<li>IDE（PIO,DMA两种主要模式，前者的数据通过CPU写入内存，后者磁盘直接写入内存，最高的是ATA133）</li>
+<li>SATA（较PATA的信号干扰小）</li>
+</ul>
+</li>
+<li><p>SCSI（带宽大，热插拔，较ATA多了SCSI控制卡，其实就是多了一个处理器）</p>
+
+<ul>
+<li>并行</li>
+<li>串行</li>
+<li>IBM SSA</li>
+<li>FC接口（FCP）</li>
+</ul>
+</li>
+</ul>
+
+
+<p>CPU &#8212;&#8211;> 磁盘控制器（南桥） &#8212;&#8211;> 磁盘驱动器控制电路（硬盘内）</p>
+
+<pre><code>`接口1：磁盘控制器驱动程序`   `接口2：ATA/SCSI接口`  
+</code></pre>
+
+<p>磁盘数据 &#8212;&#8211;> 驱动控制电路的缓存 &#8212;&#8211;> 磁盘控制器</p>
+
+<pre><code>  `内部传输速率`               `外部传输速率`  
+</code></pre>
+
+<h3>并行的劣势</h3>
+
+<p>并行是要求同步达到，这给并发信息之间的配合带来问题；它的传输频率不能太高，因为并行会增加干扰增加配合难度，而串行则无此问题，可以通过增加频率来提高速度。这里面的核心问题是<strong>传输距离</strong>，距离低的比如内存到cpu就不用担心干扰和配合带来的难题。而距离远的，如usb ata这是串行优势明显。</p>
+
+<h2>七种Raid</h2>
+
+<ul>
+<li>Raid 0 &#8212; 几块硬盘全部并发；</li>
+<li>Raid 1 &#8212; 1比1镜像；</li>
+<li>Raid 2 &#8212; 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃</li>
+<li>Raid 3 &#8212; 较Raid 2 对校验进行了突破，采用了布尔运算中的抑或算法，可以用更少的<strong>校验盘</strong>，可以校验和找回，但不像R2那样可以纠错，条带也被弄成了4KB；
+每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO</li>
+<li>Raid 4 &#8212; 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；</li>
+<li><p>Raid 5 &#8212; 继续使用校验，突破点在于不再单独地使用一个硬盘做校验盘，而是在所有的磁盘中都产生了校验区；</p>
+
+<ul>
+<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.</li>
+</ul>
+</li>
+<li><p>Raid 6 &#8212; 另外6种Raid基本只容忍可以损坏一种磁盘，Raid 6允许损坏2块磁盘。在XOR运算之外，又增加了一种校验运算，从而提高了磁阵的可靠性。</p></li>
+</ul>
+
+
+<h2>Raid 虚拟磁盘 卷 和文件系统实现</h2>
 </div>
 
 
@@ -159,6 +253,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/20/hackers-and-painters/">hackers &amp; painters</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/16/whats-luokao-for-ruankao/">裸考在软考中意味着什么</a>
       </li>
     
@@ -174,15 +272,11 @@
         <a href="/blog/2013/01/12/pass-the-ruan-kao-exam/">通过系统架构师后想说的话</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/11/to-read-list/">读书列表2012</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (12)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

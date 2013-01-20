@@ -12,7 +12,6 @@ categories:
 ## 技术类
 
 1. [张冬，大话存储，清华](/blog/2013/01/08/da-hua-cun-chu/)
-1. Paul Graham。 Hackers & Painters.
 2. 吴翰清，白帽子讲Web安全，电工
 3. 高俊峰,高性能Linux服务器构建实战:运维监控、性能调优与集群应用(深入介绍如何构建高性能Linux服务器),机工
 1. Thomas Kyte, Expert Oracle Database Architecture.pdf
@@ -31,7 +30,8 @@ categories:
 2. 蔡康永，说话之道
 1. 高盛如何算赢世界
 1. [吴军,浪潮之巅](/blog/2012/12/25/lang-chao-zhi-dian/), it经管入门必读
-3. [阿朱，走出软件作坊，电工](/blog/2013/01/14/out-the-firm/)， it职场经验谈，有一定局限，但作者的勇气确实可嘉
+3. [阿朱，走出软件作坊，电工](/blog/2013/01/14/out-the-firm/)， it职场经验谈，有一定局限，但作者的勇气确实可嘉  
+1. [Paul Graham。 Hackers & Painters.](/blog/2013/01/20/hackers-and-painters/)
 
 
 ## 文化 

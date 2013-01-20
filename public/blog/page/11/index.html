@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hubot and socket.io - Hegel2011的博客</title>
+  <title>Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中. &hellip;">
+  <meta name="description" content="向heroku学习，做PaaS平台。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/page/11/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,12 +63,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Hubot and socket.io</h1>
+      <h1 class="entry-title"><a href="/blog/2011/06/15/first-blog/">First-blog</a></h1>
     
     
       <p class="meta">
@@ -85,94 +87,29 @@
   
 
 
-<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+<time datetime="2011-06-15T14:48:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
-</span><span class='line'>coffee
-</span><span class='line'>&gt; 3+2<span class="o">=</span>?
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>vs</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>后者显然便捷许多.</p>
-
-<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
-Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
-而且<code>socket.io-client</code>也很有意思.</p>
+  <div class="entry-content"><p>向heroku学习，做PaaS平台。</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/nodejs/'>nodejs</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/06/26/programming-language-performance/" title="Previous Post: Programming Language Performance">&laquo; Programming Language Performance</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/06/27/git-init/" title="Next Post: git init[zz]">git init[zz] &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/blog/page/10/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -207,7 +144,6 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
 </section>
   
 </aside>
-
 
     </div>
   </div>
