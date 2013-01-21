@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-20T20:13:24+08:00</updated>
+  <updated>2013-01-21T22:42:01+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -238,7 +238,35 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 </ul>
 
 
+<p>Raid 0速度快所以可以和其他Raid杂交，组成Raid 50 、 Raid 10等等。</p>
+
 <h2>Raid 虚拟磁盘 卷 和文件系统实现</h2>
+
+<h3>软硬Raid</h3>
+
+<p>Raid程序位于OS底层。</p>
+
+<p>Raid 卡北连PCI南部包含了SCSI控制器。</p>
+
+<p>虚拟磁盘是Raid卡把多个磁盘组合出来的，在OS看来就是一个物理磁盘。windows中的动态磁盘。</p>
+
+<h3>卷管理层</h3>
+
+<p><strong>LV</strong> -- 最后构成了LV<br/>
+LP -- 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br/>
+PP -- 分成N个可以用于磁盘分配的块<br/>
+<strong>VG</strong> -- 卷组，多个磁盘都可以放到一个卷组里面<br/>
+<strong>PV</strong> -- 物理磁盘</p>
+
+<p>实际的I/O参与者（1个manager，3个drivers）</p>
+
+<ul>
+<li>I/O manager ---> 寻求FS翻译</li>
+<li>File System driver ---> 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
+<li>LV manager driver ---> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager</li>
+<li>Disk driver ---> 翻译成磁盘相关的磁盘上的物理便宜位置</li>
+</ul>
+
 ]]></content>
   </entry>
   

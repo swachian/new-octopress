@@ -115,3 +115,12 @@ PP -- 分成N个可以用于磁盘分配的块
 - LV manager driver ---> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager  
 - Disk driver ---> 翻译成磁盘相关的磁盘上的物理便宜位置
 
+这个东西从架构风格上而言就是一个manager带着3个driver，采用过滤器式的链式传递。driver的顺序由manager管理，执行顺序由manager负责。
+具体的活则由driver完成。
+
+## 阵列
+
+起步，JBOD，Just a Bound Of Disks, 里面就做到电路板上的SCSI线缆，连接15块硬盘，机箱外露出一个SCSI接口，与主机通过SCSI线相连。
+
+之后，把RAID功能做进箱子里。因为JBOD时OS看见的和能操作的只有磁盘，反之，则能看见磁盘还能用OS工具把磁盘做成Raid。
+因此，约定俗成，JBOD叫做**磁盘柜**，后一个叫做**磁盘阵列**。
