@@ -87,7 +87,31 @@ CPU -----> 磁盘控制器（南桥） -----> 磁盘驱动器控制电路（硬�
 - Raid 6 --- 另外6种Raid基本只容忍可以损坏一种磁盘，Raid 6允许损坏2块磁盘。在XOR运算之外，又增加了一种校验运算，从而提高了磁阵的可靠性。
 
 
+Raid 0速度快所以可以和其他Raid杂交，组成Raid 50 、 Raid 10等等。
+
 ## Raid 虚拟磁盘 卷 和文件系统实现
 
+### 软硬Raid 
 
+Raid程序位于OS底层。
+
+Raid 卡北连PCI南部包含了SCSI控制器。
+
+
+虚拟磁盘是Raid卡把多个磁盘组合出来的，在OS看来就是一个物理磁盘。windows中的动态磁盘。
+
+### 卷管理层
+
+**LV** -- 最后构成了LV  
+LP -- 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成  
+PP -- 分成N个可以用于磁盘分配的块  
+**VG** -- 卷组，多个磁盘都可以放到一个卷组里面  
+**PV** -- 物理磁盘  
+
+实际的I/O参与者（1个manager，3个drivers）
+
+- I/O manager ---> 寻求FS翻译 
+- File System driver ---> 把偏移转换成LV相关的便宜, 通过I/O Manager
+- LV manager driver ---> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager  
+- Disk driver ---> 翻译成磁盘相关的磁盘上的物理便宜位置
 
