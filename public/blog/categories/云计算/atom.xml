@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-21T22:42:01+08:00</updated>
+  <updated>2013-01-23T12:21:42+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -146,6 +146,103 @@ PP -- 分成N个可以用于磁盘分配的块<br/>
 <li>Disk driver ---> 翻译成磁盘相关的磁盘上的物理便宜位置</li>
 </ul>
 
+
+<p>这个东西从架构风格上而言就是一个manager带着3个driver，采用过滤器式的链式传递。driver的顺序由manager管理，执行顺序由manager负责。
+具体的活则由driver完成。</p>
+
+<h2>阵列</h2>
+
+<p>起步，JBOD，Just a Bound Of Disks, 里面就做到电路板上的SCSI线缆，连接15块硬盘，机箱外露出一个SCSI接口，与主机通过SCSI线相连。</p>
+
+<p>之后，把RAID功能做进箱子里。因为JBOD时OS看见的和能操作的只有磁盘，反之，则能看见磁盘还能用OS工具把磁盘做成Raid。
+因此，约定俗成，JBOD叫做<strong>磁盘柜</strong>，后一个叫做<strong>磁盘阵列</strong>。</p>
+
+<p>独立后的磁阵可分为<strong>前端</strong>和<strong>后端</strong>，前端就是对外部提供的接口（<strong>外部接口</strong>)，
+后端就是面向内部管理的接口（<strong>内部接口</strong>），前端和后端的协议可以不一样。一个前端
+也可以有<strong>多外部接口</strong>，这样就可以连到多个主机。</p>
+
+<p>高级磁阵内部的芯片控制器都是<strong>双路</strong>的，这样避免了磁阵的单点故障。工作方式有
+Active-Standby和Dual-Active。</p>
+
+<p><strong>机头</strong>就是带有控制器的磁盘阵列，后面可以接多个磁盘柜。这样一个机头就可以拖n个磁盘柜，从而扩大容量。</p>
+
+<p>盘阵类型有 SCSI-FC、FC-FC、SATA-FC、SCSI-SCSI等等，前后表示后端，后者表示前端。
+例如，SCSI-FC表示后端为SCSI接口，前端连接主机的是FC接口。</p>
+
+<h2>FC协议的引入</h2>
+
+<h3>FC协议和以太网</h3>
+
+<p>FC协议其实是Fibre Channel（网状通道）的意思。其传输介质可以是光纤也可以是铜线。就像以太网的传输介质也可以是光纤是一样的。
+只不过用光纤连接的多，于是FC在中国就变成光纤通信了。FC协议的传输效率比以太网高，但实现更复杂。但都是可以适应各种传输介质的，
+比如无线信号、铜线、光纤。</p>
+
+<p>FC的适配器也有光纤和RJ45等。</p>
+
+<h3>前端从SCSI迁移到FC</h3>
+
+<p>SCSI指令集在SCSI-3中做了分割，从此应用层的指令语义部分独立出来，下层改造成了一个适配器。而FC只要实现了这个适配器的功能就能
+使用上层的指令语义部分。就这样，FC和SCSI的组合构成了新的SCSI前端。</p>
+
+<p>意义（好处）：</p>
+
+<ol>
+<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。</li>
+<li>增加了传输距离，铜线和光纤的区别。</li>
+<li>有了安全策略：
+
+<ul>
+<li>磁阵控制器上配置<strong>LUN映射表</strong>，规定只有某些主机能访问某些LUN，解决磁阵共享的问题</li>
+<li>在FC交换机上配置<strong>ZONE</strong>,类似VPN的做法</li>
+<li>磁阵共享的另一个解决办法是集群文件系统。是否磁阵独占由SCSI指令集协议定义</li>
+</ul>
+</li>
+<li>可实现冗余和均衡负载</li>
+</ol>
+
+
+<p>FC是<strong>面向无连接</strong>的基于包分发的连接形式，是<strong>串行</strong>的所以适合远距离。</p>
+
+<p>攻陷前端之后，FC又扩展到了SAN的后端。只是后端用的不是FC交换，而是FC中相对简单的另一个模式。协议的上层依然是SCSI。而且后端主要
+还是铜材料连接。</p>
+
+<p>配置LUN（划分磁盘），各个LUN参数（条带深度、数据宽度），配置LUN映射。类似PC上给磁盘分区后格式化。</p>
+
+<h2>DAS ， SAN 和NAS</h2>
+
+<p>NAS(Network Attached Storage)就是把文件系统的功能放置在存储设备中，暴露在外面的不再是一个裸设备。
+Windows使用CIFS协议，Linux使用NFS协议。</p>
+
+<p>NAS暴露出去的是一个文件系统，而SAN在惯例中只是暴露出去的一个形式上类似物理磁盘的设备。</p>
+
+<p>实际使用中，NAS后面可以接SAN作为存储。即混合使用。NAS也能作为SAN的一种特例。在我国，通常SAN就是指FC SAN。</p>
+
+<h2>以太网和TCP/IP概述</h2>
+
+<ul>
+<li>HUB --- 无对应表</li>
+<li>网桥 --- 总线-MAC</li>
+<li>交换机 --- MAC-端口</li>
+</ul>
+
+
+<p>TCP/IP 和 以太网的关系是PoP，即Protocol over Protocol。它们的关系是一对组合。
+协议融合的方式有Tunnel和Map两个大类，PPPoE就是PPP协议 over Ethernet协议。</p>
+
+<h2>IP SAN</h2>
+
+<p>ISCSI, Internet Small Computer System Interface，SCSI协议走在以太网（通过ISCSI）上，以太网替换了FC，如同FC替换了SCSI链路，
+编号RFC3720,2004年通过。开销比例约6%。</p>
+
+<p>主机称作<strong>ISCSI Initiator</strong>，磁阵称作<strong>ISCSI Target</strong>设备。</p>
+
+<p>以太网的发展速度以10倍速为单位，10Mb/s，100Mb/s,1Gb/s,10Gb/s. 而FC是以2倍速为单位，1Gb/s,2Gb/s,4Gb/s,8Gb/s。</p>
+
+<p>IP SAN的成本低，卡和交换机都便宜的多，速度也还过得去，成本只有1/10以下。</p>
+
+<h3>IP 与 FC的融合</h3>
+
+<p>局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。</p>
 ]]></content>
   </entry>
   

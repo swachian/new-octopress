@@ -177,3 +177,33 @@ NAS(Network Attached Storage)就是把文件系统的功能放置在存储设备
 Windows使用CIFS协议，Linux使用NFS协议。
 
 NAS暴露出去的是一个文件系统，而SAN在惯例中只是暴露出去的一个形式上类似物理磁盘的设备。
+
+实际使用中，NAS后面可以接SAN作为存储。即混合使用。NAS也能作为SAN的一种特例。在我国，通常SAN就是指FC SAN。
+
+## 以太网和TCP/IP概述
+
+- HUB --- 无对应表
+- 网桥 --- 总线-MAC
+- 交换机 --- MAC-端口
+
+TCP/IP 和 以太网的关系是PoP，即Protocol over Protocol。它们的关系是一对组合。
+协议融合的方式有Tunnel和Map两个大类，PPPoE就是PPP协议 over Ethernet协议。
+
+## IP SAN
+
+ISCSI, Internet Small Computer System Interface，SCSI协议走在以太网（通过ISCSI）上，以太网替换了FC，如同FC替换了SCSI链路，
+编号RFC3720,2004年通过。开销比例约6%。
+
+主机称作**ISCSI Initiator**，磁阵称作**ISCSI Target**设备。
+
+以太网的发展速度以10倍速为单位，10Mb/s，100Mb/s,1Gb/s,10Gb/s. 而FC是以2倍速为单位，1Gb/s,2Gb/s,4Gb/s,8Gb/s。
+
+IP SAN的成本低，卡和交换机都便宜的多，速度也还过得去，成本只有1/10以下。
+
+### IP 与 FC的融合
+
+局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。
+
+
+
+
