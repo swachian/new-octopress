@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-23T12:21:42+08:00</updated>
+  <updated>2013-01-25T14:02:50+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -150,6 +150,10 @@ Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、My
     <updated>2013-01-08T17:01:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu</id>
     <content type="html"><![CDATA[<p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
+
+<p>书到IP SAN之前都是很棒的。讲的很仔细，简直可以替换计算机组成的有关内容了。作者的实战经验很丰富，专业的知识面很广，如PCB盘片为什么要分层，对磁盘的解析，磁盘与CPU、OS的交互都很细致和形象，串行并行的优劣势，对几种Raid之间的区别于联系、发展脉络讲解的十分到位，柜和阵的区别，FC究竟意味着什么。可以看出作者是一个勤于思考勤于提炼的人。</p>
+
+<p>不足之处就是书籍有点虎头蛇尾，在IP SAN讲解完之后的几章内容相对没有重点。当然，作为又出了第二版，我看了下主要补充的就是后半部分的内容。两本我都有，但是简单看了下第二版的后半部分，也还是不如前半部写的出色。</p>
 
 <script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
 
