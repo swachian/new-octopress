@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="看见一篇抱怨ruby在国内社区越来越小的帖子。仔细想想，ruby或者说rails在国内的状况始终是不愠不火，她的社区可能在中国的环境下就是不会大。但是如果说到rails社区，似乎捧红了不少软件开发业的亮点。 第一个，自然就是ruby。原本只有日本人知道的脚本语言一年内就完成了全球化， &hellip;">
+  <meta name="description" content="60年代死人过多，导致一线领导（刘周邓陈）调整大跃进（用阶级斗争的方式搞生产）的政策 刘毛矛盾，9个指头 vs 1个指头 窃听器事件、刘少奇选集 7000人大会上，毛泽东（谁让我是中央主席呢，所以中央犯的错误第一位就是我）。但是62年又开始抓阶级斗争。 你们（刘少奇）不说我来说，毛主席自己写文章。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/04/gaohua-lecture-notes/">高华讲座笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-04T15:33:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>60年代死人过多，导致一线领导（刘周邓陈）调整大跃进（用阶级斗争的方式搞生产）的政策</p>
+
+<p>刘毛矛盾，9个指头 vs 1个指头</p>
+
+<p>窃听器事件、刘少奇选集</p>
+
+<p>7000人大会上，毛泽东（谁让我是中央主席呢，所以中央犯的错误第一位就是我）。但是62年又开始抓阶级斗争。</p>
+
+<p>你们（刘少奇）不说我来说，毛主席自己写文章。此时毛主席和林彪实现了良性互动。</p>
+
+<p>文化大革命是打倒刘少奇的运动的名称</p>
+
+<p>刘少奇爱搞地下工作，毛泽东爱搞师出有名</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -513,74 +561,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/28/display-git-branch-in-shell/">给shell加上显示git的分支</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-28T18:48:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><code>
-function find_git_branch {</p>
-
-<pre><code>local dir=. head
-until [ "$dir" -ef / ]; do
-    if [ -f "$dir/.git/HEAD" ]; then
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-            git_branch=" (${head#*/*/})"
-        elif [[ $head != '' ]]; then
-            git_branch=' (detached)'
-        else
-            git_branch=' (unknown)'
-        fi
-        return
-    fi
-    dir="../$dir"
-done
-git_branch=''
-</code></pre>
-
-<p>}
-PROMPT_COMMAND=&#8221;find_git_branch; $PROMPT_COMMAND&#8221;
-green=$&#8217;\e[1;32m&#8217;
-magenta=$&#8217;\e[1;35m&#8217;
-normal_colours=$&#8217;\e[m&#8217;</p>
-
-<p>PS1=&#8221;[$green]\u@\h:\w[$magenta]\$git_branch[$green]\$[$normal_colours] &#8221;
-</code>
-秘密在于PROMPT_COMMAND，以保证每次都会执行以下find_git_branch函数</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -598,6 +578,10 @@ normal_colours=$&#8217;\e[m&#8217;</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/26/bai-mao-zi-web/">《白帽子讲Web安全》</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/20/hackers-and-painters/">hackers &amp; painters</a>
       </li>
     
@@ -613,15 +597,11 @@ normal_colours=$&#8217;\e[m&#8217;</p>
         <a href="/blog/2013/01/13/abbyy-finereader/">ABBYY FineReader</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/12/pass-the-ruan-kao-exam/">通过系统架构师后想说的话</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (14)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/神器'>神器 (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/linux'>Linux (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/期刊'>期刊 (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Sam Stephenson's Better JS with CoffeeScript - Hegel2011的博客</title>
+  <title>《白帽子讲Web安全》 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="http://www.tudou.com/programs/view/pg-PTg9Hcfc/ Won&#8217;t write js again. 2004 Google Map ，build wonderful app with just html &amp; js
-improve the &hellip;">
+  <meta name="description" content="一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
+都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
+篇幅很大， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ improve the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +69,7 @@ improve the &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Sam Stephenson's Better JS With CoffeeScript</h1>
+      <h1 class="entry-title">《白帽子讲Web安全》</h1>
     
     
       <p class="meta">
@@ -84,50 +85,25 @@ improve the &hellip;">
   
 
 
-<time datetime="2012-06-06T17:02:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+<time datetime="2013-01-26T22:59:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
+<div class="entry-content"><p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
+都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
+篇幅很大，但真正值得读的代码却很少。</p>
 
-<p>Won&#8217;t write js again.</p>
+<p>本书好的地方就是给出了大量的实例，这些例子就在我们身边，百度的、搜狐的、MySpace的。跟着这些案例仔细自己再做分析应该还是会有很多收获的。
+至少让人明白，第一网络确实不安全，第二值得研究的工作还有许多。</p>
 
-<p>2004 Google Map ，build wonderful app with just html &amp; js<br/>
-improve the language , prototype</p>
+<p>但是，被很多人推荐就有点不可理解了。从技术书籍的角度考量，这本书真的很一般。就清晰度、深度、整洁度来讲，都很平平。卖的好，可能主要还是营销
+的好。</p>
 
-<p>1.function Syntax<br/>
-2.Significant Whitespace<br/>
-  not see braces<br/>
-3.Bare Objects, no braces needed<br/>
-4.Everything&#8217;s an Expression<br/>
-5.Comprehensions</p>
+<script src="https://gist.github.com/f801d7015715f6f10098.js"></script>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">names</span> <span class="o">=</span> <span class="k">for</span> <span class="nx">person</span> <span class="k">in</span> <span class="nx">people</span>
-</span><span class='line'>     <span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'>   <span class="err">返回</span><span class="p">[]</span><span class="err">，</span><span class="nx">borrow</span> <span class="nx">from</span> <span class="nx">python</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-6.Classes &amp;&amp; Inheritance<br/>
-  <code>extends, construct, @, $el=super</code></p>
-
-<p>7.Bound Functions<br/>
-  <code>=&gt;</code> 取代了bind(this)<br/>
-8.Conditionals<br/>
- <code>?</code> <br/>
-9.Destructuring, Assignment<br/>
- <code>{name, age} = person</code><br/>
- <code>[first,seconde] = s.split(//)</code>
-  必须要是{}或者[]对象 <br/>
-10.String Syntax<br/>
-  <code>#{}</code></p>
 </div>
 
 
@@ -150,15 +126,21 @@ improve the language , prototype</p>
   
 
 
-<time datetime="2012-06-06T17:02:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+<time datetime="2013-01-26T22:59:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/技术/'>技术</a>, <a class='category' href='/blog/categories/笔记/'>笔记</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/" >Tweet</a>
   
   
   
@@ -167,10 +149,8 @@ improve the language , prototype</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/05/replace-log-files-with-streams/" title="Previous Post: Replace log Files with Streams">&laquo; Replace log Files with Streams</a>
+        <a class="basic-alignment left" href="/blog/2013/01/20/hackers-and-painters/" title="Previous Post: hackers &amp; painters">&laquo; hackers &amp; painters</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/13/yueyin-foxmail-cracker/" title="Next Post: 月影 Foxmail cracker">月影 Foxmail cracker &raquo;</a>
       
     </p>
   </footer>

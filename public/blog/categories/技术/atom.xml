@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-01-25T20:52:45+08:00</updated>
+  <updated>2013-01-26T23:46:06+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[《白帽子讲Web安全》]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/"/>
+    <updated>2013-01-26T22:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web</id>
+    <content type="html"><![CDATA[<p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
+都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
+篇幅很大，但真正值得读的代码却很少。</p>
+
+<p>本书好的地方就是给出了大量的实例，这些例子就在我们身边，百度的、搜狐的、MySpace的。跟着这些案例仔细自己再做分析应该还是会有很多收获的。
+至少让人明白，第一网络确实不安全，第二值得研究的工作还有许多。</p>
+
+<p>但是，被很多人推荐就有点不可理解了。从技术书籍的角度考量，这本书真的很一般。就清晰度、深度、整洁度来讲，都很平平。卖的好，可能主要还是营销
+的好。</p>
+
+<script src="https://gist.github.com/f801d7015715f6f10098.js"></script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hackers &amp; painters]]></title>
@@ -478,35 +498,6 @@ scope :published, -> { where(:published => true) }</p>
 
 <p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
 They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[hadoop集群安装手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
-    <updated>2012-08-06T16:43:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
-    <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
-
-<p><code>bash
-ssh-keygen
-ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
-</code></p>
-
-<p>=======
-<strong>数据源的输入才是Hadoop方便地方</strong></p>
-
-<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
-读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
-比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
-然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
-然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
-map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
-
-<h1>文献</h1>
-
-<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
-<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
 ]]></content>
   </entry>
   

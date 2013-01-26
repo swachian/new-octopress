@@ -12,7 +12,7 @@ categories:
 ## 技术类
 
 1. [张冬，大话存储，清华](/blog/2013/01/08/da-hua-cun-chu/) 这本书前后总共读了18天，中间有八九天没有读
-2. 吴翰清，白帽子讲Web安全，电工
+2. [吴翰清，白帽子讲Web安全，电工](/blog/2013/01/26/bai-mao-zi-web/) 比较一般 没有fenng评价的那么好
 3. 余红春,构建高可用Linux服务器,机工
 1. Thomas Kyte, Expert Oracle Database Architecture.pdf
 1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
