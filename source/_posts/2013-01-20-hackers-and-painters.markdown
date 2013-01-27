@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "hackers &amp; painters"
+title: "Hackers &amp; Painters"
 date: 2013-01-20 15:38
 comments: true
 categories: 
