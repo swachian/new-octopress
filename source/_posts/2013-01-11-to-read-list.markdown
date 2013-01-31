@@ -31,7 +31,7 @@ categories:
 1. 高盛如何算赢世界
 1. [吴军,浪潮之巅](/blog/2012/12/25/lang-chao-zhi-dian/), it经管入门必读
 3. [阿朱，走出软件作坊，电工](/blog/2013/01/14/out-the-firm/)， it职场经验谈，有一定局限，但作者的勇气确实可嘉  
-1. [Paul Graham。 Hackers & Painters.](/blog/2013/01/20/hackers-and-painters/)
+1. [Paul Graham。 Hackers & Painters.](/blog/2013/01/20/hackers-and-painters/)，前后看了十来天，一开始中英双语，后来还是直接看中文了。创业教父之名名不虚传。
 
 
 ## 文化 
