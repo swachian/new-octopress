@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-01T13:58:05+08:00</updated>
+  <updated>2013-02-03T18:59:23+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
+    <updated>2013-02-03T12:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself</id>
+    <content type="html"><![CDATA[<p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
+
+<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
+而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
+
+<ul>
+<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
+<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
+</ul>
+
+
+<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
+正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
+
+<p>所以，表达力越差（可以理解成
+啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
+因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
+
+<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Heredocs 和缩进]]></title>
@@ -281,45 +308,6 @@ end</p>
 <p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
 但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
 总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的开发环境]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment/"/>
-    <updated>2011-06-20T15:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/my-developing-environment</id>
-    <content type="html"><![CDATA[<p>牵涉到的软件：</p>
-
-<p>vmware</p>
-
-<p>  ubuntu1104</p>
-
-<pre><code>ssh
-
-rvm
-
- ruby gem rails thin
-</code></pre>
-
-<p>windows</p>
-
-<p>  securecrt</p>
-
-<p>  radrails</p>
-
-<pre><code>rse 远程控制插件
-Target Management 3.0 Update Site   http://download.eclipse.org/dsdp/tm/updates/3.0 Enabled
-</code></pre>
-
-<p>其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录，同时搭配securecrt的console能力。可以说，这是在windows下最好的方案。考虑到中文等支持，可能也是比ubuntu下直接利用netbeans等开发更好的方案了。</p>
-
-<p>具体做法，前提是vmware上装好ubuntu，同时装好并启用ssh
-sudo apt-get install openssh-server</p>
-
-<p>然后，下载最新版的radrails，安装后，选择安装软件，更新增加里面的rse插件，基本做法可以是输入remote
-　　让系统去filter
-　　。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-01T13:58:05+08:00</updated>
+  <updated>2013-02-03T18:59:23+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
+    <updated>2013-02-03T12:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself</id>
+    <content type="html"><![CDATA[<p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
+
+<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
+而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
+
+<ul>
+<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
+<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
+</ul>
+
+
+<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
+正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
+
+<p>所以，表达力越差（可以理解成
+啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
+因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
+
+<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《白帽子讲Web安全》]]></title>
@@ -568,103 +595,6 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 <h3>IP 与 FC的融合</h3>
 
 <p>局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What's new in Rails 4]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/"/>
-    <updated>2012-11-23T22:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4</id>
-    <content type="html"><![CDATA[<p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
-
-<h3>Rails.queue</h3>
-
-<p>```
-class ExpensiveOperation
-  def run</p>
-
-<p>  end
-end</p>
-
-<p>Rails.queue.push(ExpensiveOperation.new)</p>
-
-<p>```
-config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
-
-<h3>strong_parameters</h3>
-
-<p>Alternative to MassAssignmentSecurity</p>
-
-<p>```
-class PostsController &lt; ApplicationController
-  def create</p>
-
-<pre><code> @post = Post.create(post_params)
-</code></pre>
-
-<p>  end</p>
-
-<p>  private
-  def post_params</p>
-
-<pre><code>params.require(:post).permit(:title, :body)
-</code></pre>
-
-<p>  end
-end</p>
-
-<p>```</p>
-
-<h3>Turbolinks</h3>
-
-<h3>Cache Digests(Russian Doll Caching)</h3>
-
-<p>```</p>
-
-<h1>app/views/projects/show.html.erb</h1>
-
-<p>&lt;% cache project do %>
-  <h1> </h1>
-  &lt;%= render project.documents %>
-&lt;% end %>
-```</p>
-
-<h3>ActionController::Live</h3>
-
-<p>```
-include ActionController::Live</p>
-
-<p>response.stream.write "hello\n"</p>
-
-<p>```</p>
-
-<h3>PATCH Verb</h3>
-
-<p>just as PUT</p>
-
-<h3>Plugins are dead; long live plugins</h3>
-
-<p>use gems with bundle</p>
-
-<h3>lambda scope</h3>
-
-<p>```
-scope :published, -> { where(:published => true) }</p>
-
-<h1>Pitfall</h1>
-
-<p>scoped :recent, where("created_at > ?", 1.week.ago)
-```</p>
-
-<p>@sikachu</p>
-
-<p>Routing Concerns</p>
-
-<p>Long live activeresource</p>
-
-<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
-They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
 ]]></content>
   </entry>
   
