@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-03T18:59:23+08:00</updated>
+  <updated>2013-02-05T12:58:30+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[patch and diff]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff/"/>
+    <updated>2013-02-05T10:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff</id>
+    <content type="html"><![CDATA[<p>patch和diff确实是个神奇的东西，用来对现有版本的升级是最好不过了。
+好处在于一来不用停业务，二来可以明确到底改了多少东西。</p>
+
+<h3>diff</h3>
+
+<p>首先来说说diff，毕竟patch是从此处产生。</p>
+
+<p>```
+diff -ruNa src dest  > a.patch</p>
+
+<p>-r 针对整个目录<br/>
+-u 以合并的方式来显示文件内容的不同
+-N 新文件做空白文件
+-a 包含二进制内容，如jar包，class等
+```</p>
+
+<p>据说这个东西是perl的发明者创建的工具，主要用于比较源码，通常不带<code>-a</code>。</p>
+
+<h3>patch</h3>
+
+<p>patch就比较强大了。如果是更改一个目录下面，最常见的做法是进入该目录，然后执行</p>
+
+<p><code>
+patch -p1 &lt; ../a.patch
+</code></p>
+
+<p>随后，两个目录就会变得一模一样了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ABBYY FineReader]]></title>
@@ -102,18 +137,6 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
 
 <p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
 一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[月影 Foxmail cracker]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker/"/>
-    <updated>2012-06-13T10:28:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/13/yueyin-foxmail-cracker</id>
-    <content type="html"><![CDATA[<p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
-于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
-
-<p>个人觉得如何破解foxmail的密码都可以写一篇不错的论文。</p>
 ]]></content>
   </entry>
   

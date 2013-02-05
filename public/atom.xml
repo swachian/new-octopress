@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-03T18:59:23+08:00</updated>
+  <updated>2013-02-05T12:58:30+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[patch and diff]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff/"/>
+    <updated>2013-02-05T10:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff</id>
+    <content type="html"><![CDATA[<p>patch和diff确实是个神奇的东西，用来对现有版本的升级是最好不过了。
+好处在于一来不用停业务，二来可以明确到底改了多少东西。</p>
+
+<h3>diff</h3>
+
+<p>首先来说说diff，毕竟patch是从此处产生。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diff -ruNa src dest  &gt; a.patch
+</span><span class='line'>
+</span><span class='line'>-r 针对整个目录  
+</span><span class='line'>-u 以合并的方式来显示文件内容的不同
+</span><span class='line'>-N 新文件做空白文件
+</span><span class='line'>-a 包含二进制内容，如jar包，class等</span></code></pre></td></tr></table></div></figure>
+
+
+<p>据说这个东西是perl的发明者创建的工具，主要用于比较源码，通常不带<code>-a</code>。</p>
+
+<h3>patch</h3>
+
+<p>patch就比较强大了。如果是更改一个目录下面，最常见的做法是进入该目录，然后执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>patch -p1 &lt; ../a.patch </span></code></pre></td></tr></table></div></figure>
+
+
+<p>随后，两个目录就会变得一模一样了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Should we try to pursue a master degree]]></title>
@@ -1167,39 +1207,6 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 
 <p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
 They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[软考之系统架构设计师]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/"/>
-    <updated>2012-11-04T15:04:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi</id>
-    <content type="html"><![CDATA[<p>距上次考<a href="http://octopresszhangyu.herokuapp.com/blog/2012/05/27/take-the-exam/">软考的中级项目经理</a>已经有将近半年的时间。看了软考证书的性质一直想再去考一个高级的证书出来。
-毕竟这个证书既然上海居转户认可，那么就有其权威的性质。起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年
-论文等事宜，准备一门新的考试的时间并非很充足，所以最后换成了软件架构设计师。实际上下半年只有项目管理、网络规划、系统架构3门高级，项目管理
-上半年考了中级，没有继续主要是因为第一书已经借出去了，第二考出来后还要等3年才能去换高级项目的证书。看了看架构师的题目，基本不需要太多额外
-的准备工作。于是还是选了架构师。</p>
-
-<p>复习一直进行的有条不紊，自己也想试试能否通过低强度的复习就通过。因为这一门总体而言对我并不难。麻烦主要是下午的问答题，但这里面运气的成分还
-是蛮大的。下周就要考了，但愿过关吧。</p>
-
-<p>上周还去考了末代上海职称英语考试。卷子比较简单。同全国卷相比，词汇部门难一些，阅读部分没有很强的干扰项。大致上二者都不难，而且又都可以带
-字典。考试的地方在锦绣路浦建路那边的东辉职业学院，附近有香梅花园、上海绿地等大楼盘。整个区域的环境还是不错的，房子也大都造于04-06年间。
-有闲钱的话，可以考虑到那边置业，基本上4万/平。最大的特色是运动场地多，包括露天的带跑道的操场，健身会所等。这样的社区环境可能还是比较难找
-的。劣势么就是毕竟在浦东，学校、交通总是僧多粥少。</p>
-
-<p>Updated on 27/11/2012: 职称英语的成绩今天查到了。按理是昨天<a href="http://www.spta.gov.cn">spta</a>这个网站就公布查询界面了，但是网站后来瘫掉了，所以今天才查。分数还不错，
-92分高分通过。这几年的英语还是有所长进的。毕竟06年去考B级的也只有85。从这次分数的情况来看，应该是完形填空错的太多了。</p>
-
-<p>Updated on 27/11/2012: 写文章的时候，娘娘还在医院的看护病房里观察，病情尚算稳定。老婆午睡完毕后提醒我提过的要去看娘娘的事情，时间也正好赶上。
-但随后几天，娘娘的病情恶化，于周三11月7日去世。本来打算弃考软考，毕竟也不是什么很严重的考试。
-不过最后还是去考了软考的系统架构设计师，只是状态确实不好，冲刺复习也基本为0.之所以还去主要还是
-妈妈的支持以及做此类事情娘娘向来是全力支持的，我放弃去考反而不是家里希望看到的。过关与否，已经是次要的了。</p>
-
-<p>Updated on 11/01/2013: 成绩结果终于能够查了。rkb的网站依然不是很给力，响应和可靠性都比较差，基本到晚上六点以后才算恢复查询功能。还好论坛
-里有人给了信管网的链接才不至于等太久。最后的分数还不错，都过线了，上午表现正常偏好，下午一发挥尤其出色，下午二涉险过关。总体而言，确实是一门很经济实惠的考试，对我而言。
-领证当然还有一个过程，估计要4月份才能拿到证书，2月份的时候应该会先填合格人员登记表并把照片送到报名点。</p>
 ]]></content>
   </entry>
   

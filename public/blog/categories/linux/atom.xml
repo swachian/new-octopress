@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-03T18:59:23+08:00</updated>
+  <updated>2013-02-05T12:58:30+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[patch and diff]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff/"/>
+    <updated>2013-02-05T10:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/05/patch-and-diff</id>
+    <content type="html"><![CDATA[<p>patch和diff确实是个神奇的东西，用来对现有版本的升级是最好不过了。
+好处在于一来不用停业务，二来可以明确到底改了多少东西。</p>
+
+<h3>diff</h3>
+
+<p>首先来说说diff，毕竟patch是从此处产生。</p>
+
+<p>```
+diff -ruNa src dest  > a.patch</p>
+
+<p>-r 针对整个目录<br/>
+-u 以合并的方式来显示文件内容的不同
+-N 新文件做空白文件
+-a 包含二进制内容，如jar包，class等
+```</p>
+
+<p>据说这个东西是perl的发明者创建的工具，主要用于比较源码，通常不带<code>-a</code>。</p>
+
+<h3>patch</h3>
+
+<p>patch就比较强大了。如果是更改一个目录下面，最常见的做法是进入该目录，然后执行</p>
+
+<p><code>
+patch -p1 &lt; ../a.patch
+</code></p>
+
+<p>随后，两个目录就会变得一模一样了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ssh-key]]></title>
