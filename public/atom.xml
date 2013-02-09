@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-05T12:58:30+08:00</updated>
+  <updated>2013-02-09T17:53:45+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[期刊读后感]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application/"/>
+    <updated>2013-02-09T16:45:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application</id>
+    <content type="html"><![CDATA[<p>读了去年年底订阅的《计算机应用》，发现还是有一些文章是值得一读的。
+订阅这个杂志是因为觉得发文速度还算快，期刊和文章的档次也还不错。看了2013年第2期，里面还是有六七篇很有收获的文章的。
+必须承认的是，期刊文章的质量普遍比网上的资料要高。</p>
+
+<p>按钱学森的理论，做研究的一大秘诀是阅读文献，因为大部分问题肯定都有人面对过，从中获取启发再进行突破才能取得更好的效果。
+这个理论对计算机也是适用的，实际上信息技术里面阅读文献的效果要超过其他工程专业。毕竟信息行业里思路和实现之间的差距
+比其他的要短的多。</p>
+
+<p>虽然已经是互联网时代，但要探索自己未知的还是离不开杂志的。首先搜索的素材的一大来源就是期刊，搜索本身并不制造内容，内容的一大制造者
+就是期刊。尽管现在网上的博客、科技文章等素材已经很广阔，但其质量普遍还是不如期刊的。原因在于发表期刊真的是挺难的，你给拿出自己的
+拿手好戏才行，没有的点真东西期刊的编辑是不会买账的。质量普遍较高是期刊的第二大优势，毕竟既要自己花钱又有审稿者和编辑把关，质量高于
+网上的其他资料是很正常的。最重要的，只有期刊才能让你可能接触自己不熟悉的东西。搜索是目的性很明显的阅读方式。但当你没有明确的方向时
+搜索是帮不上忙的。而高质量的期刊可以弥补搜索的这个弱点。虽然你要忍受一堆可能没有用或者自己读不进去的内容，但总的来说，产出投入比
+还是很大的，还是很值得这么做的。我阅读了一期，就有了以下几点收获：</p>
+
+<ol>
+<li>对基站提供的定位信息的应用有了新的认识。原来还可以用来跟踪用户的行动路径，为换乘乃至规划和其他促销活动提供依据。</li>
+<li>均衡服务可以使用HiCuts算法，其实就是一种决策树，在分类时可以使用，丰富自己的分类依据，以前主要也就是有个hash的概念。</li>
+<li>小波算法其实和取log差不多，最大的意义在于提高监测值可感知效果。</li>
+<li>聚类后对数据特征值的取顶叫做概化，可以是平均值，也可以是区间。</li>
+<li>网页防篡改分远程和本地两种，远程的把内容按动态和静态区分应该也算一个思路。话说我的第一个防篡改方案也是看期刊获得灵感。</li>
+<li>排班优化原来也是人工智能的一部分。</li>
+<li>网管软件的组件可以按主站、代理、代理数据信息、网管协议4个组件来进行组织，对写此类文章有了更好的心得，毕竟描述一个系统要写成期刊是很难的。</li>
+</ol>
+
+
+<p>短短时间，收获已经很多。</p>
+
+<p>不过期刊也有不足之处。最大的问题可能在于计算机期刊的文章刊出时间都太长了。投稿半年内能读到的已经是凤毛麟角，一年以上是常态，
+最nb的期刊基本要3年。套用一句俗话，这好像是和一个25岁的2个孩子的妈谈恋爱，不新鲜的东西往往有时候就没使用价值了。从这点上来讲，计算机应用和
+计算机系统应用都做的很不错。</p>
+
+<p>还有一点，就是计算机应用里面也包含了大量计算机科学的内容。因为科学两个字，搞得天下计算机从业者往往都喜欢套数学，这个也是阻碍业界接受期刊的一大障碍吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[patch and diff]]></title>
@@ -1091,122 +1132,6 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 
 <p>二零一二年十一月二十三日晚<br/>
 于娘娘逝世半个月后补祭</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What's new in Rails 4]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/"/>
-    <updated>2012-11-23T22:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4</id>
-    <content type="html"><![CDATA[<p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
-
-<h3>Rails.queue</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ExpensiveOperation
-</span><span class='line'>  def run
-</span><span class='line'>   
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Rails.queue.push(ExpensiveOperation.new)
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
-
-<h3>strong_parameters</h3>
-
-<p>Alternative to MassAssignmentSecurity</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class PostsController &lt; ApplicationController
-</span><span class='line'>  def create
-</span><span class='line'>     @post = Post.create(post_params)
-</span><span class='line'>  end
-</span><span class='line'>
-</span><span class='line'>  private
-</span><span class='line'>  def post_params
-</span><span class='line'>    params.require(:post).permit(:title, :body)
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Turbolinks</h3>
-
-<h3>Cache Digests(Russian Doll Caching)</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># app/views/projects/show.html.erb
-</span><span class='line'>&lt;% cache project do %&gt;
-</span><span class='line'>  &lt;h1&gt; &lt;/h1&gt;
-</span><span class='line'>  &lt;%= render project.documents %&gt;
-</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ActionController::Live</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>include ActionController::Live
-</span><span class='line'>
-</span><span class='line'>response.stream.write "hello\n"
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>PATCH Verb</h3>
-
-<p>just as PUT</p>
-
-<h3>Plugins are dead; long live plugins</h3>
-
-<p>use gems with bundle</p>
-
-<h3>lambda scope</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>scope :published, -&gt; { where(:published =&gt; true) }
-</span><span class='line'>
-</span><span class='line'>#Pitfall 
-</span><span class='line'>scoped :recent, where("created_at &gt; ?", 1.week.ago)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>@sikachu</p>
-
-<p>Routing Concerns</p>
-
-<p>Long live activeresource</p>
-
-<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
-They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
 ]]></content>
   </entry>
   
