@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-15T14:08:23+08:00</updated>
+  <updated>2013-02-19T15:17:07+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -25,8 +25,9 @@
 <ol>
 <li><a href="/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
 <li><a href="/blog/2013/01/26/bai-mao-zi-web/">吴翰清，白帽子讲Web安全，电工</a> 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少</li>
-<li>余红春,构建高可用Linux服务器,机工</li>
+<li><a href="/blog/2013/02/19/about-awk/">AWK,The Awk programming language.</a> 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。</li>
 <li>Thomas Kyte, Expert Oracle Database Architecture.pdf</li>
+<li>余红春,构建高可用Linux服务器,机工</li>
 <li>Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional</li>
 <li>Gourley D, Totty B. HTTP权威指南 O'Reilly</li>
 <li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists</li>

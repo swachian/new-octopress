@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-15T14:08:23+08:00</updated>
+  <updated>2013-02-19T15:17:07+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[About AWK]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/"/>
+    <updated>2013-02-19T14:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk</id>
+    <content type="html"><![CDATA[<p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
+
+<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
+但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
+已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
+script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
+显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
+
+<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[patch and diff]]></title>
@@ -126,47 +144,6 @@ echo '192.168.202.19 00:26:b9:4c:8d:af' &gt; /etc/ip-mac
 
 <p>简而言之，numa的方法是让内存按cpu所属的node进行隔离，好处是提高了内存分配的公平性。但是对于mongod mysqld这样会
 吃尽内存的应用，这种确保公平的分配方案并不好。因为根本没有其他核心需要用内存，但需要用内存的核心却会吃不饱。所以需要加上参数，使得这种公平性被取消，从而提高整体效能，其实就是发挥出mongod和mysqld的能力。因为这些应用都是单进程多线程的应用。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[给shell加上显示git的分支]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell/"/>
-    <updated>2011-06-28T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell</id>
-    <content type="html"><![CDATA[<p><code>
-function find_git_branch {</p>
-
-<pre><code>local dir=. head
-until [ "$dir" -ef / ]; do
-    if [ -f "$dir/.git/HEAD" ]; then
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-            git_branch=" (${head#*/*/})"
-        elif [[ $head != '' ]]; then
-            git_branch=' (detached)'
-        else
-            git_branch=' (unknown)'
-        fi
-        return
-    fi
-    dir="../$dir"
-done
-git_branch=''
-</code></pre>
-
-<p>}
-PROMPT_COMMAND="find_git_branch; $PROMPT_COMMAND"
-green=$'\e[1;32m'
-magenta=$'\e[1;35m'
-normal_colours=$'\e[m'</p>
-
-<p>PS1="[$green]\u@\h:\w[$magenta]\$git_branch[$green]\$[$normal_colours] "
-</code>
-秘密在于PROMPT_COMMAND，以保证每次都会执行以下find_git_branch函数</p>
 ]]></content>
   </entry>
   

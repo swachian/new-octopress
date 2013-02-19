@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="读了去年年底订阅的《计算机应用》，发现还是有一些文章是值得一读的。
-订阅这个杂志是因为觉得发文速度还算快，期刊和文章的档次也还不错。看了2013年第2期，里面还是有六七篇很有收获的文章的。
-必须承认的是，期刊文章的质量普遍比网上的资料要高。 按钱学森的理论，做研究的一大秘诀是阅读文献， &hellip;">
+  <meta name="description" content="受 AWK简明教程 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。 学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/19/about-awk/">About AWK</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-19T14:52:00+08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
+
+<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
+但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
+已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
+script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
+显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
+
+<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -819,94 +863,6 @@ Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、My
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/12/pass-the-ruan-kao-exam/">通过系统架构师后想说的话</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-12T20:08:00+08:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最早听说软考是在大学里了，90年代，当时只是了解这是系统分析员考试。因为不太看得起国家组织的这种考试，于是从来没有留意过。
-班上有人参加过，而且是计算机专业方面的牛人。但我依然对此无动于衷。回过头来看，可能我们这批大学生彼时还未扩招，还是所谓的天之骄子，大学期间
-干些什么对以后的就业并无本质影响，我们的注意力也更多地放在其他地方。</p>
-
-<p>通过去年上半年开始接触软考后，我发现其实很多题目就是大学考试的题目，至于谁抄的谁实在不好评论。但是，如果彼时能拿来做练习、做参考一定是大有裨益的。
-毕竟那些年不像现在资源丰富，教材的教辅是没有的，各种参考资料的获取也极难。而软考当时的教材和参考书却不能获得。如果那时候也参加这方面的内容，
-我的专业基础知识应该可以走的更远。</p>
-
-<p>软考历年的题目还是相当有价值的。客观题考的是基础知识，大题目很能体现热点，而且也能给人启发，是不折不扣的的好题和训练素材。</p>
-
-<h3>关于这次考试</h3>
-
-<p>如在<a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a>所言：</p>
-
-<blockquote><p>起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年 论文等事宜，准备一门新的考试的时间并非很充足，所以最后换成了软件架构设计师。实际上下半年只有项目管理、网络规划、系统架构3门高级，项目管理 上半年考了中级，没有继续主要是因为第一书已经借出去了，第二考出来后还要等3年才能去换高级项目的证书。看了看架构师的题目，基本不需要太多额外 的准备工作。于是还是选了架构师。</p></blockquote>
-
-<p>架构师的题目从最早看见就觉得很合适我的方向和日常接触的东西。做真题，客观题无需复习基本就可以在48分以上。因为我有不错的计算机基础知识，经过研究生统考检验的，我的项目管理知识至少也通过
-了中级项目经理的考试，应付软考其他科目的项管内容就很轻松了。所以做架构师是真题，我分数丢的多的反而是<strong>“架构风格”</strong>这个核心内容。 但实际上这个
-内容也不陌生，只是我不一定习惯它的一些叫法，有些细节需要再雕琢一下。所以，最后看了一点相关的内容也就考到55分以上了。</p>
-
-<p>下午的案例分析题是有一定难度的。经过仔细分析这几年的真题，发现架构风格总有一题，另外Web或当前热点内容（如Rest风格、缓存）也往往会有一题，
-偏系统分析的也必有一题。尽管5题中总有一题嵌入式是我搞不定的，但剩下4道里面至少有2道是有把握的。而今年运气不错，热点题是出的关于NoSQL较
-SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研究的还是相当到位的。架构风格也不出意料总是有那么一题。另外还有一题是看图理解，基本
-确保第一小题10分到手。于是最后选了这3道题。没做的一道也是设计模式方面，其实也不是不能做了，只是得分上不像看图题那么简单明了，所以没选。
-最后原先最担心的案例题反而是得分最高的。取得了6x的成绩。<br/>
-应该说，论文的编写对我的帮助还是很大的。一方面开拓了视野，掌握了阅读文献这条路，写了硕士论文，发表了小论文，用老总的话属于名利双收。而在软考
-考试中也帮了一把。</p>
-
-<p>下午的案例题是4选1，后面2个我都不熟。后来挑了第二个，写的是关于持久层设计的。考后想来应该选以架构为中心的软件设计更合适些。好在运气不错，
-老师还是给够我过线的分数了。但答题时确实犯了硬伤。因为我并不了解几种数据访问模式。其实指的是在先访问、DAO、DTO、离线数据模式、ORM这五种，
-不过我打的时候专注于ORM，分的却是ORM里面的进一步细分的模式。这是不折不扣的一个硬伤。但是，好在后面的与应用结合还算写的不错，也确实自己的
-经验之谈，占了这部分的光，老师也就让我通过了考试。文章这种东西讲到底主观性还是很强的，运气成分确实不少。</p>
-
-<h3>关于是否参加高项考试</h3>
-
-<p>高项考试我相信还是会参加的。尤其是在继续教育因为不得人心至少在上海很难继续开展下去。高项的投资应该不会失效。考虑到目前孩子年幼加今年另有
-2个高工评审要参加，高项的报名至少也是下半年的事情了。也可能要再过一年再予以考虑。通过高项后，我应该不会再参加软考了。当然，很多东西都在变，
-所谓不再考其他科目也只是现在的判断。毕竟这种东西的弹性大的很。</p>
-
-<h3>关于高级职称</h3>
-
-<p>其实写小论文就是为了评高级职称，而且是去市里评高级职称。已经折腾了，今年就继续折腾吧。要弄什么创新教育，也是一堆麻烦事情。<br/>
-系统内部的评审应该也会报名。不过现在已经有高级证了，也算有个底。</p>
-
-<h3>关于软考的未来</h3>
-
-<p>评论一项考试的未来，可能我过于骄傲了。我对软考的认识依然没有改变，这个证书是比较鸡肋的目前，但毕竟是政府权威的考试，而且它的证书
-被上海居转户认可，那么权威的性质就是存在的。但是IT系统毕竟不是其他系统，政府掌握的资源并不具有决定性，大部分高科技企业并不在
-政府手里，IT业的主要构成是外企、私企，包括很多的互联网公司。整个的浪潮并非政府带动的。所以这个证书不能像经济师、会计这样铺的开，
-最热门的集成项目经理也是因为政府在信息化项目实施上有指导权才吸引了那么多企业来参与。软考真的权威性太强，对IT业未必是好事情。</p>
-
-<p>软考没接触之前会觉得这个东西很没有意义，接触后会发觉对推进人才队伍建设以及提高能力方面确实有不小的促进作用。对整个产业的发展毫无疑问
-是有益的。它的未来会同政府和市场、政府和社会的关系紧密相关。也同公平和正义相关。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -920,6 +876,10 @@ SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/19/about-awk/">About AWK</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/02/09/journal-of-computer-application/">期刊读后感</a>
@@ -937,15 +897,11 @@ SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研�
         <a href="/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/">Every language will implement a lisp interpreter in itself</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/26/bai-mao-zi-web/">《白帽子讲Web安全》</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (12)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (6)</a></li><li><a href='/blog/categories/时评'>时评 (6)</a></li><li><a href='/blog/categories/linux'>Linux (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (6)</a></li><li><a href='/blog/categories/时评'>时评 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

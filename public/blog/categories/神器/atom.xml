@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-15T14:08:23+08:00</updated>
+  <updated>2013-02-19T15:17:07+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[About AWK]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/"/>
+    <updated>2013-02-19T14:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk</id>
+    <content type="html"><![CDATA[<p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
+
+<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
+但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
+已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
+script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
+显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
+
+<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[patch and diff]]></title>
@@ -110,33 +128,6 @@ patch -p1 &lt; ../a.patch
 也不是自己的服务器环境可以自己装。</p>
 
 <p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
-    <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
-    <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
-中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
-再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
-但是缺乏练习的后果必然是无法掌握的.</p>
-
-<p>最近在看CoffeeScript 和 NodeJS, 进一步领略了JS的威力, 有些地方也不甚明白, 于是又翻出这本书看了一下.这次出奇的顺利, 从翻开
-到看完也就2天的功夫, 而且2天时间内看的比例并不高.下面是看完后对这本书的书评.</p>
-
-<p>这本书确实是一本需要反复阅读的书.作者的话语极其精炼, 招招都是要害, 所以必须要仔细看才能看的明白.而且从书中可以看出作者的造诣
-确实很深, 对js的认识以及语言的评价都是高度与深度相结合, 而且很多反应了使用者的感受, 不是大家是写不出这么有深度的文章的.</p>
-
-<p>书中最有价值的是 3.Objects, 4.Functions, 5.Inheritance 这3章. 如果是用coffeeScript的话, 3和4的价值就更加突出.通过学习,可以掌握
-js的object array的文法, 也可以明白js function的4种调用方式(obj.method, func.func, Obj.construtor(new), func.apply(this, argv)),
-Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了汉诺塔.</p>
-
-<p>Js的另一部分即prototype继承的特性目前还不甚了了, 可能还需呀补充一点其他读物. 做点练习才能领会.</p>
-
-<p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
-一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
 ]]></content>
   </entry>
   

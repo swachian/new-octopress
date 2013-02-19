@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ssh-key - Hegel2011的博客</title>
+  <title>About AWK - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。ssh-key登录就是这样一类东西。 一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
-console快速敏捷的威力。这个比每次输入密码的体验好多了 &hellip;">
+  <meta name="description" content="受 AWK简明教程 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。 学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了 &he
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +68,7 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了 &he
   
   <header>
     
-      <h1 class="entry-title">Ssh-key</h1>
+      <h1 class="entry-title">About AWK</h1>
     
     
       <p class="meta">
@@ -84,32 +84,23 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了 &he
   
 
 
-<time datetime="2012-06-29T16:18:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2012</time>
+<time datetime="2013-02-19T14:52:00+08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
+<div class="entry-content"><p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
+甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
 
-<p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
-console快速敏捷的威力。这个比每次输入密码的体验好多了。更重要的，当机器很多很多，比如几十台上百台的时候，那省下的功夫
-和能做的事情可就不是一点点了。当然，我并不理解为什么不用保存登录密码的方式，而是兜圈子采用这么一种办法。细想下来可能
-和linux系统是多用户的系统这个特性相关。因为实质上的ssh-key登录是另外一个东西。可参见<a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">这篇</a>入门的文章。</p>
+<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
+但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
+已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
+script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
+显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
 
-<p>要想使用公钥登录方式，可以分为两步：</p>
-
-<ol>
-<li>生成公钥私钥对，会存放在<code>.ssh/id_rsa,  .ssh/id_rsa.pub</code>中，这是通过命令 <code>$ssh-keygen</code>来操作的</li>
-<li>如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
-把他们存放在<code>.ssh/authorized_keys</code>中。其实就是每个client增加一条记录。执行的命令是<code>$ ssh-copy-id user@host</code></li>
-</ol>
-
-
-<p>弄好以后，发现做起事情来确实快多了。</p>
-
-<p>Update: 有些机器上需要给出额外的参数<code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@host</code></p>
+<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
 </div>
 
 
@@ -132,12 +123,12 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
   
 
 
-<time datetime="2012-06-29T16:18:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2012</time>
+<time datetime="2013-02-19T14:52:00+08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/神器/'>神器</a>
   
 </span>
 
@@ -146,7 +137,7 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/" >Tweet</a>
   
   
   
@@ -155,10 +146,8 @@ console快速敏捷的威力。这个比每次输入密码的体验好多了。�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/27/git-init/" title="Previous Post: git init[zz]">&laquo; git init[zz]</a>
+        <a class="basic-alignment left" href="/blog/2013/02/09/journal-of-computer-application/" title="Previous Post: 期刊读后感">&laquo; 期刊读后感</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/02/shu-xue-zhi-mei/" title="Next Post: 数学之美">数学之美 &raquo;</a>
       
     </p>
   </footer>
