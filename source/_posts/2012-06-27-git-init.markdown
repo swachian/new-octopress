@@ -13,6 +13,21 @@ $ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到
 $ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
 $ git push origin master 
 ```
+远程的可以这样创建
+
+```
+$ mkdir northboundhelper.git
+$ cd northboundhelper.git/
+$ git init --bare 
+ 
+```
+
+在config里面指明常用的branch
+```
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
 
 这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。
 

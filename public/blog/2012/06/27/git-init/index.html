@@ -105,6 +105,28 @@ $ &hellip;">
 </span><span class='line'>$ git push origin master </span></code></pre></td></tr></table></div></figure>
 
 
+<p>远程的可以这样创建</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir northboundhelper.git
+</span><span class='line'>$ cd northboundhelper.git/
+</span><span class='line'>$ git init --bare 
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>在config里面指明常用的branch</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[branch "master"]
+</span><span class='line'>        remote = origin
+</span><span class='line'>        merge = refs/heads/master</span></code></pre></td></tr></table></div></figure>
+
+
 <p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
 
 <p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
