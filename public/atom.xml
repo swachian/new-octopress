@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-26T11:23:20+08:00</updated>
+  <updated>2013-02-26T11:44:44+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[change to ruby 2.0.0]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/"/>
+    <updated>2013-02-26T11:30:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0</id>
+    <content type="html"><![CDATA[<p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
+
+<p>步骤如下：</p>
+
+<ol>
+<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
+<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
+<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
+<li><code>git commit -a</code></li>
+<li><code>git push heroku</code></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 119, done.
+</span><span class='line'>Compressing objects: 100% (59/59), done.
+</span><span class='line'>Writing objects: 100% (60/60), 5.46 KiB, done.
+</span><span class='line'>Total 60 (delta 32), reused 0 (delta 0)
+</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
+</span><span class='line'>-----&gt; Ruby/Rack app detected
+</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
+</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
+</span><span class='line'>       Ruby version change detected. Clearing bundler cache.
+</span><span class='line'>       Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
+</span><span class='line'>       New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
+</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+</span><span class='line'>       Fetching gem metadata from http://ruby.taobao.org/.
+</span><span class='line'>       Fetching full source index from http://ruby.taobao.org/
+</span><span class='line'>       Installing daemons (1.1.8)
+</span><span class='line'>       Installing eventmachine (0.12.10)
+</span><span class='line'>       Installing rack (1.4.1)
+</span><span class='line'>       Installing rack-protection (1.3.2)
+</span><span class='line'>       Installing tilt (1.3.3)
+</span><span class='line'>       Installing sinatra (1.3.5)
+</span><span class='line'>       Installing thin (1.4.1)
+</span><span class='line'>       Using bundler (1.3.0.pre.5)
+</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
+</span><span class='line'>       Cleaning up the bundler cache.
+</span><span class='line'>-----&gt; Discovering process types
+</span><span class='line'>       Procfile declares types     -&gt; (none)
+</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
+</span><span class='line'>
+</span><span class='line'>-----&gt; Compiled slug size: 30.5MB
+</span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但我不太理解slug size为啥变大了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[About AWK]]></title>
@@ -1053,35 +1137,6 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
     <updated>2012-12-09T21:22:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/dabian</id>
     <content type="html"><![CDATA[<p>12月7日周五下午通过了硕士论文的答辩。多亏了C，让我们可以在比较早的顺位得到答辩的机会，大大节省了时间和精力。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kindle]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle/"/>
-    <updated>2012-12-09T20:53:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle</id>
-    <content type="html"><![CDATA[<p>周五终于忍不住买了一台Kindle，把玩不久之后就喜欢上了。到手没多久已经用她看完了《我的西域，你的东土》后半部分。
-比起在手机上，即便是4寸的手机，看书的感觉棒多了。甚至比在电脑上看还要好，比抱着实体书看的感觉更棒。为什么这么说？</p>
-
-<p>最简单的道理就是分量轻、字体可以很大。从体积和重量上来讲，kindle的分量只相当于一本普通的100页不到的产品说明书，手握着相当舒服。和纸质书相比，
-要轻了许多，尤其是和那些大部头的书比较的话，计算机的书籍很多都是很厚的，显然轻便很多。手握着很轻松，单手也能操作，口袋里可以随便塞。在日光
-下的显示效果也要好于纸质书。</p>
-
-<p>而在字体方面更是可以做到很大。从这点上来说是对纸质书实现了全面的突破和超越。看大字不费眼不容易近视是普遍认同的，但囿于纸质书的体积和重量，
-篇幅必须加以控制，而篇幅的控制除了内容本身的长短就是和字体排版大小相关了。传统书籍为了还能让人携带，或者处于印刷成本的考虑，字体都是不得不损失的，
-而小字体其实阅读体验并不好，也容易伤眼。从阅读本身角度来说，字体越大眼睛越不累（当然自己感觉不到累可能眼睛会用的更多，呵呵）。Kindle就可以把
-字体放置的很大，看起来就舒服多啦。</p>
-
-<p>此外，如今的年代抱着一本书在外面看是不太好意思和别人打招呼的。Kindle就没这个问题了。带着和带pad、带手机看东西的感觉是一样的，同外部环境很协调。</p>
-
-<p>在我看来，这绝对是阅读方面划时代的产品。对纸质书的冲击以后再写文章评论吧。大体上认为是赢家通吃&amp;长尾理论挤掉了中坚力量的存活空间。</p>
-
-<p>最后，必须得承认<a href="" title="http://home.duokan.com/index.html">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
-对于我最喜欢的PDF格式支持也很好，关键一点在于支持智能重排，效果那是相当的棒。此外，多看设计的Wifi传输，其实就是ftp服务，也相当的实用。一开始
-还担心安全问题，后来确认它默认是关闭ftp的。Kindle的硬件+多看软件，这个组合相当厉害。现在就等我的疯马纹皮套和SOLIS灯了。</p>
-
-<p>I love it!</p>
 ]]></content>
   </entry>
   

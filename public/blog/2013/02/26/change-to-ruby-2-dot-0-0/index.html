@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>读《吴敬琏传》 - Hegel2011的博客</title>
+  <title>change to ruby 2.0.0 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识， &hellip;">
+  <meta name="description" content="借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0. 步骤如下： 在Gemfile中加入 ruby "2.0.0"
+更新Gemfile中其他的一些gem， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">读《吴敬琏传》</h1>
+      <h1 class="entry-title">Change to Ruby 2.0.0</h1>
     
     
       <p class="meta">
@@ -83,24 +84,89 @@
   
 
 
-<time datetime="2011-07-30T18:48:00+08:00" pubdate data-updated="true">Jul 30<span>th</span>, 2011</time>
+<time datetime="2013-02-26T11:30:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识，留学耶鲁回国后开始成为中央的think tank，尤其是90年代后成为江朱进行市场化经济体制改革的重要理论及方针提供者，进而影响着我们这个国家和社会。03年之后，随着政府的换届，吴也逐步从决策层淡出。此时的他思想也随之有所改变，淡出的因素既有人际关系的问题，更有着深层次的利益冲突的问题。</p>
+<div class="entry-content"><p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
 
-<p>纵观全书，最有价值的是最后几章，因为问题直指当前的状况，并且也道出了很多失策以及背后运作的原理，而这些又是最紧急的要处理要辨识的。4万亿的实质是什么，会把我们带向何方？出口型的经济必然导致货币通胀以及内需不振。因为货物留出去了，留在自己的只有钱。钱多物少，又如何不通胀？唯一的替代品就是资产价格暴涨，资产主要就是股票、房地产等。而所谓的深化体制改革，基本也只能是空话。意识形态不是根深蒂固的，但是中国人、中国政府、暴君与暴民却是中国固有的，要替换这些东西谈何容易。放弃苏联人那套简单，放弃中国人心中的尾巴就难了，何况有些东西绝不仅仅是思想尾巴那么简单，实际的利益摆在那边，基本无解。</p>
+<p>步骤如下：</p>
 
-<p>次一级有意思的地方是书的前半段，尤其是吴的出生背景及他的母亲。出生于知识分子家庭，母亲是一个成功的报业企业家，其家族也是有名民营企业家，甚至还参与过铁路的建设，作为资方。包括吴和其太太周南认识的场景、几十年的相濡以沫，都令人十分感动。吴生活的家族是一个伟大的家族。</p>
+<ol>
+<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
+<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
+<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
+<li><code>git commit -a</code></li>
+<li><code>git push heroku</code></li>
+</ol>
 
-<p>接下来的描述是本书的主体。但对于读过中国经济改革教程的人来说，这部分就变成了一个很好的背景知识的补充。一些在阅读教程时想了解的东西，比如耶鲁的生活，顾准、sunyefang的介绍更加丰满，毕竟有些东西也不太好在教程里自己直接描述。甚至包括了他如何同中央进行交流等。这些东西合在一起，使得对一个公共知识分子如何发挥作用、影响中国的变革，有了鲜活的了解。</p>
 
-<p>要评价吴敬琏，必须说他所倡导的东西好坏并存，成功与失败并举。这个就不再展开。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 119, done.
+</span><span class='line'>Compressing objects: 100% (59/59), done.
+</span><span class='line'>Writing objects: 100% (60/60), 5.46 KiB, done.
+</span><span class='line'>Total 60 (delta 32), reused 0 (delta 0)
+</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
+</span><span class='line'>-----&gt; Ruby/Rack app detected
+</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
+</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
+</span><span class='line'>       Ruby version change detected. Clearing bundler cache.
+</span><span class='line'>       Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
+</span><span class='line'>       New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
+</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+</span><span class='line'>       Fetching gem metadata from http://ruby.taobao.org/.
+</span><span class='line'>       Fetching full source index from http://ruby.taobao.org/
+</span><span class='line'>       Installing daemons (1.1.8)
+</span><span class='line'>       Installing eventmachine (0.12.10)
+</span><span class='line'>       Installing rack (1.4.1)
+</span><span class='line'>       Installing rack-protection (1.3.2)
+</span><span class='line'>       Installing tilt (1.3.3)
+</span><span class='line'>       Installing sinatra (1.3.5)
+</span><span class='line'>       Installing thin (1.4.1)
+</span><span class='line'>       Using bundler (1.3.0.pre.5)
+</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
+</span><span class='line'>       Cleaning up the bundler cache.
+</span><span class='line'>-----&gt; Discovering process types
+</span><span class='line'>       Procfile declares types     -&gt; (none)
+</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
+</span><span class='line'>
+</span><span class='line'>-----&gt; Compiled slug size: 30.5MB
+</span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
 
-<p>得到的另一个结论是，中国的通胀不可避免，冬天早就该到，只是人为的延后了。</p>
+
+<p>但我不太理解slug size为啥变大了。</p>
 </div>
 
 
@@ -123,12 +189,12 @@
   
 
 
-<time datetime="2011-07-30T18:48:00+08:00" pubdate data-updated="true">Jul 30<span>th</span>, 2011</time>
+<time datetime="2013-02-26T11:30:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/时评/'>时评</a>
+    <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -137,7 +203,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/" >Tweet</a>
   
   
   
@@ -146,10 +212,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/07/07/new-service-offered-by-heroku-nodejs/" title="Previous Post: Heroku的新服务">&laquo; Heroku的新服务</a>
+        <a class="basic-alignment left" href="/blog/2013/02/19/about-awk/" title="Previous Post: About AWK">&laquo; About AWK</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/08/29/sass/" title="Next Post: sass">sass &raquo;</a>
       
     </p>
   </footer>
