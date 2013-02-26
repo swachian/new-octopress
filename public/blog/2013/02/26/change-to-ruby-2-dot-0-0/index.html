@@ -237,7 +237,60 @@
 </span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
 
 
-<p><a href="http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log">heroku run bash</a></p>
+<p>最后重新弄了一下，发现还是很大。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Writing objects: 100% (3/3), 281 bytes, done.
+</span><span class='line'>Total 3 (delta 2), reused 0 (delta 0)
+</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
+</span><span class='line'>-----&gt; Ruby/Rack app detected
+</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
+</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
+</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+</span><span class='line'>       Using kgio (2.8.0)
+</span><span class='line'>       Using rack (1.4.5)
+</span><span class='line'>       Using rack-protection (1.3.2)
+</span><span class='line'>       Using raindrops (0.10.0)
+</span><span class='line'>       Using tilt (1.3.3)
+</span><span class='line'>       Using sinatra (1.3.5)
+</span><span class='line'>       Using unicorn (4.6.2)
+</span><span class='line'>       Using bundler (1.3.0.pre.5)
+</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
+</span><span class='line'>       Cleaning up the bundler cache.
+</span><span class='line'>-----&gt; Discovering process types
+</span><span class='line'>       Procfile declares types     -&gt; web
+</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
+</span><span class='line'>
+</span><span class='line'>-----&gt; Compiled slug size: 27.3MB
+</span><span class='line'>-----&gt; Launching... done, v5
+</span><span class='line'>       http://octopresszhangyu.herokuapp.com deployed to Heroku</span></code></pre></td></tr></table></div></figure>
+
+
+<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
+明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
 </div>
 
 
@@ -265,7 +318,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -322,7 +375,7 @@
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/ruby'>Ruby (7)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/ruby'>Ruby (7)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/时评'>时评 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/sass'>Sass (1)</a></li></ul>
 </section>
   
 </aside>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-26T12:43:06+08:00</updated>
+  <updated>2013-02-26T16:34:12+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -115,7 +115,45 @@ Total 3 (delta 1), reused 0 (delta 0)
 -----> Launching... done, v53
 ```</p>
 
-<p><a href="http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log">heroku run bash</a></p>
+<p>最后重新弄了一下，发现还是很大。</p>
+
+<p>```
+Writing objects: 100% (3/3), 281 bytes, done.
+Total 3 (delta 2), reused 0 (delta 0)
+-----> Deleting 5 files matching .slugignore patterns.
+-----> Ruby/Rack app detected
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.0.pre.5</p>
+
+<pre><code>   Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+   Using kgio (2.8.0)
+   Using rack (1.4.5)
+   Using rack-protection (1.3.2)
+   Using raindrops (0.10.0)
+   Using tilt (1.3.3)
+   Using sinatra (1.3.5)
+   Using unicorn (4.6.2)
+   Using bundler (1.3.0.pre.5)
+   Your bundle is complete! It was installed into ./vendor/bundle
+   Cleaning up the bundler cache.
+</code></pre>
+
+<p>-----> Discovering process types</p>
+
+<pre><code>   Procfile declares types     -&gt; web
+   Default types for Ruby/Rack -&gt; console, rake
+</code></pre>
+
+<p>-----> Compiled slug size: 27.3MB
+-----> Launching... done, v5</p>
+
+<pre><code>   http://octopresszhangyu.herokuapp.com deployed to Heroku
+</code></pre>
+
+<p>```</p>
+
+<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
+明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
 ]]></content>
   </entry>
   
