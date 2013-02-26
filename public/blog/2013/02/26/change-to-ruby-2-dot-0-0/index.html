@@ -167,6 +167,77 @@
 
 
 <p>但我不太理解slug size为啥变大了。</p>
+
+<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
+于是改用了unicorn，又折腾了Procfile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec unicorn -p $PORT</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
+</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
+</span><span class='line'>-----&gt; Ruby/Rack app detected
+</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
+</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
+</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+</span><span class='line'>       Using kgio (2.8.0)
+</span><span class='line'>       Using rack (1.4.5)
+</span><span class='line'>       Using rack-protection (1.3.2)
+</span><span class='line'>       Using raindrops (0.10.0)
+</span><span class='line'>       Using tilt (1.3.3)
+</span><span class='line'>       Using sinatra (1.3.5)
+</span><span class='line'>       Using unicorn (4.6.2)
+</span><span class='line'>       Using bundler (1.3.0.pre.5)
+</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
+</span><span class='line'>       Cleaning up the bundler cache.
+</span><span class='line'>       Would have removed thin (1.4.1)
+</span><span class='line'>       Would have removed daemons (1.1.9)
+</span><span class='line'>       Would have removed daemons (1.1.8)
+</span><span class='line'>       Would have removed thin (1.5.0)
+</span><span class='line'>       Would have removed rack (1.4.1)
+</span><span class='line'>       Would have removed eventmachine (1.0.0)
+</span><span class='line'>       Would have removed eventmachine (0.12.10)
+</span><span class='line'>-----&gt; Discovering process types
+</span><span class='line'>       Procfile declares types     -&gt; web
+</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
+</span><span class='line'>
+</span><span class='line'>-----&gt; Compiled slug size: 35.9MB
+</span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log">heroku run bash</a></p>
 </div>
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-02-26T11:44:44+08:00</updated>
+  <updated>2013-02-26T12:43:06+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -70,6 +70,52 @@ Total 60 (delta 32), reused 0 (delta 0)
 ```</p>
 
 <p>但我不太理解slug size为啥变大了。</p>
+
+<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
+于是改用了unicorn，又折腾了Procfile</p>
+
+<p><code>
+web: bundle exec unicorn -p $PORT
+</code></p>
+
+<p>```
+Total 3 (delta 1), reused 0 (delta 0)
+-----> Deleting 5 files matching .slugignore patterns.
+-----> Ruby/Rack app detected
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.0.pre.5</p>
+
+<pre><code>   Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+   Using kgio (2.8.0)
+   Using rack (1.4.5)
+   Using rack-protection (1.3.2)
+   Using raindrops (0.10.0)
+   Using tilt (1.3.3)
+   Using sinatra (1.3.5)
+   Using unicorn (4.6.2)
+   Using bundler (1.3.0.pre.5)
+   Your bundle is complete! It was installed into ./vendor/bundle
+   Cleaning up the bundler cache.
+   Would have removed thin (1.4.1)
+   Would have removed daemons (1.1.9)
+   Would have removed daemons (1.1.8)
+   Would have removed thin (1.5.0)
+   Would have removed rack (1.4.1)
+   Would have removed eventmachine (1.0.0)
+   Would have removed eventmachine (0.12.10)
+</code></pre>
+
+<p>-----> Discovering process types</p>
+
+<pre><code>   Procfile declares types     -&gt; web
+   Default types for Ruby/Rack -&gt; console, rake
+</code></pre>
+
+<p>-----> Compiled slug size: 35.9MB
+-----> Launching... done, v53
+```</p>
+
+<p><a href="http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log">heroku run bash</a></p>
 ]]></content>
   </entry>
   
