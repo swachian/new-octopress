@@ -1,1 +1,1 @@
-web: ./bin/rake preview
+web: unicorn
