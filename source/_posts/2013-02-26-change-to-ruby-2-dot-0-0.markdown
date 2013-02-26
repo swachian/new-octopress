@@ -5,6 +5,7 @@ date: 2013-02-26 11:30
 comments: true
 categories: 
 - ruby
+- heroku
 
 ---
 
@@ -92,4 +93,34 @@ Total 3 (delta 1), reused 0 (delta 0)
 -----> Launching... done, v53
 ```
 
-[heroku run bash](http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log)
+最后重新弄了一下，发现还是很大。
+
+```
+Writing objects: 100% (3/3), 281 bytes, done.
+Total 3 (delta 2), reused 0 (delta 0)
+-----> Deleting 5 files matching .slugignore patterns.
+-----> Ruby/Rack app detected
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.0.pre.5
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+       Using kgio (2.8.0)
+       Using rack (1.4.5)
+       Using rack-protection (1.3.2)
+       Using raindrops (0.10.0)
+       Using tilt (1.3.3)
+       Using sinatra (1.3.5)
+       Using unicorn (4.6.2)
+       Using bundler (1.3.0.pre.5)
+       Your bundle is complete! It was installed into ./vendor/bundle
+       Cleaning up the bundler cache.
+-----> Discovering process types
+       Procfile declares types     -> web
+       Default types for Ruby/Rack -> console, rake
+
+-----> Compiled slug size: 27.3MB
+-----> Launching... done, v5
+       http://octopresszhangyu.herokuapp.com deployed to Heroku
+```
+
+感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
+明显处理能力会强于只有一个实例的thin。以上灵感来自[unicorn的部署高人](http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html)。
