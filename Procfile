@@ -1,1 +1,1 @@
-web: unicorn
+web: bundle exec unicorn -p $PORT
