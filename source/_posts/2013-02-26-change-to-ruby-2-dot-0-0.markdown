@@ -52,3 +52,44 @@ Total 60 (delta 32), reused 0 (delta 0)
 ```
 
 但我不太理解slug size为啥变大了。
+
+而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
+于是改用了unicorn，又折腾了Procfile
+
+```
+web: bundle exec unicorn -p $PORT
+```
+
+```
+Total 3 (delta 1), reused 0 (delta 0)
+-----> Deleting 5 files matching .slugignore patterns.
+-----> Ruby/Rack app detected
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.0.pre.5
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+       Using kgio (2.8.0)
+       Using rack (1.4.5)
+       Using rack-protection (1.3.2)
+       Using raindrops (0.10.0)
+       Using tilt (1.3.3)
+       Using sinatra (1.3.5)
+       Using unicorn (4.6.2)
+       Using bundler (1.3.0.pre.5)
+       Your bundle is complete! It was installed into ./vendor/bundle
+       Cleaning up the bundler cache.
+       Would have removed thin (1.4.1)
+       Would have removed daemons (1.1.9)
+       Would have removed daemons (1.1.8)
+       Would have removed thin (1.5.0)
+       Would have removed rack (1.4.1)
+       Would have removed eventmachine (1.0.0)
+       Would have removed eventmachine (0.12.10)
+-----> Discovering process types
+       Procfile declares types     -> web
+       Default types for Ruby/Rack -> console, rake
+
+-----> Compiled slug size: 35.9MB
+-----> Launching... done, v53
+```
+
+[heroku run bash](http://stackoverflow.com/questions/14539894/would-have-removed-in-heroku-deploy-log)
