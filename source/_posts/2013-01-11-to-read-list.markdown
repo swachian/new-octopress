@@ -53,3 +53,4 @@ categories:
 
 ## 期刊文章  
 
+[ruby 2.0 by example](http://benhoskin.gs/2013/02/24/ruby-2-0-by-example?utm_source=rubyweekly&utm_medium=email) , 值得反复看的ruby 2.0特性文章
