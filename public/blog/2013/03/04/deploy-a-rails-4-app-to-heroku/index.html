@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>今天读的两个不错的ppt - Hegel2011的博客</title>
+  <title>Deploy a Rails 4 app to Heroku - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="蔡学镛的如何做简报 &amp; linux必备知识与文化 Rails Screencasts CoffeeScript 的电子书
-">
+  <meta name="description" content="近期从rvm切换到了rbenv, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析User-Agent的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2011/06/18/two-good-presents/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">今天读的两个不错的ppt</h1>
+      <h1 class="entry-title">Deploy a Rails 4 App to Heroku</h1>
     
     
       <p class="meta">
@@ -84,18 +85,76 @@
   
 
 
-<time datetime="2011-06-18T14:48:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2011</time>
+<time datetime="2013-03-04T20:03:00+08:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://www.slideshare.net/Fenng/caffeinenicotine">蔡学镛的如何做简报</a> &amp; <a href="http://www.slideshare.net/Fenng/linuxunix">linux必备知识与文化</a></p>
+<div class="entry-content"><p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
 
-<p><a href="http://rubyonrails.org/screencasts/rails3/">Rails Screencasts</a></p>
+<h3>0 事先准备</h3>
 
-<p><a href="http://arcturo.github.com/library/coffeescript/index.html">CoffeeScript 的电子书</a></p>
+<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
+但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
+
+<h3>1 创建应用</h3>
+
+<p>首先执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku apps:create user-agent-show2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会在heroku处创建一个stack，目前版本是<code>cedar</code>. 同时，在.git/config里面会增加一个heroku分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[remote "heroku"]
+</span><span class='line'>        url = git@heroku.com:user-agent-show.git
+</span><span class='line'>        fetch = +refs/heads/*:refs/remotes/heroku/*</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2 Git push</h3>
+
+<p>随后就可以执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push heroku</span></code></pre></td></tr></table></div></figure>
+
+
+<p>部署应用了。
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
+
+<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
+因为rails 4默认生成environments/production.rb中是这样配置的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
+对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样才能保证静态文件被正常访问。</p>
+
+<h3>3 数据库更新</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku run rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
 </div>
 
 
@@ -118,15 +177,21 @@
   
 
 
-<time datetime="2011-06-18T14:48:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2011</time>
+<time datetime="2013-03-04T20:03:00+08:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2011/06/18/two-good-presents/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2011/06/18/two-good-presents/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/" >Tweet</a>
   
   
   
@@ -135,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/06/17/rubygems-cache/" title="Previous Post: rubygems的本地化cache">&laquo; rubygems的本地化cache</a>
+        <a class="basic-alignment left" href="/blog/2013/02/26/change-to-ruby-2-dot-0-0/" title="Previous Post: Change to Ruby 2.0.0">&laquo; Change to Ruby 2.0.0</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/06/20/my-developing-environment/" title="Next Post: 我的开发环境">我的开发环境 &raquo;</a>
       
     </p>
   </footer>

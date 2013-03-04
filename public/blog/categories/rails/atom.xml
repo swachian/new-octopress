@@ -4,7 +4,7 @@
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-01T12:00:59+08:00</updated>
+  <updated>2013-03-04T21:53:14+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Deploy a Rails 4 app to Heroku]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
+    <updated>2013-03-04T20:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
+    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
+
+<h3>0 事先准备</h3>
+
+<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
+但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
+
+<h3>1 创建应用</h3>
+
+<p>首先执行
+```
+heroku apps:create user-agent-show2</p>
+
+<p><code>
+这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
+</code>
+[remote "heroku"]</p>
+
+<pre><code>    url = git@heroku.com:user-agent-show.git
+    fetch = +refs/heads/*:refs/remotes/heroku/*
+</code></pre>
+
+<p>```</p>
+
+<h3>2 Git push</h3>
+
+<p>随后就可以执行
+<code>
+git push heroku
+</code>
+部署应用了。
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
+
+<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
+因为rails 4默认生成environments/production.rb中是这样配置的
+<code>
+config.serve_static_assets = false
+</code>
+这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
+对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成
+<code>
+config.serve_static_assets = true
+</code>
+这样才能保证静态文件被正常访问。</p>
+
+<h3>3 数据库更新</h3>
+
+<p><code>
+heroku run rake db:migrate
+</code></p>
+
+<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Rails View]]></title>
@@ -124,91 +187,6 @@ sudo apt-get install openssh-server</p>
 <p>然后，下载最新版的radrails，安装后，选择安装软件，更新增加里面的rse插件，基本做法可以是输入remote
 　　让系统去filter
 　　。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails3.1使用手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1/"/>
-    <updated>2011-06-16T14:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/16/rails3.1</id>
-    <content type="html"><![CDATA[<p>HTML use syntax: true</p>
-
-<p>bundle 执行的对象是Gemfile，而bundle install 后会在Gemfile.lock文件中产生gem及其版本的依赖，所以在Gemfile中不再需要声明版本号
-据说这是大胡子忙了1年左右的成果。确实是改善内部关系的好东西。</p>
-
-<p>therubyracer 是内建于ruby vm的js解释器，ree并没有自带，mri已自带
-有人谈论不好，有人认为挺好，个人认为不是问题</p>
-
-<p>js和css似乎会自动编译
-不过真是部署还是需要 rake assets:precompile来在public/assets目录下产生css文件
-Sprockets来自动集成js成一个文件，css成一个文件
-uglifier 生产环境下来压缩静态文件</p>
-
-<p>console里面的 <pre>reload!</pre> 可以重新加在修改过的文件</p>
-
-<p>view层也带继承了
-这是很大的一个进步，view终于获得了应有的地位</p>
-
-<pre><code>after_find #一个回调函数
-first last #不像find那样会报NoRecord的error
-find_each #批量查询方法，避免整个表拿出来
-find_in_batches #同find_each类似，就是取出的是一个集合
-</code></pre>
-
-<p>join</p>
-
-<pre><code>Post.joins(:category, :comments)
-Category.joins(:posts =&gt; [{:comments =&gt; :guest}, :tags])
-</code></pre>
-
-<p>clients = Client.includes(:address).limit(10)
-  使得原本11句查询，变成了2句，先查出client，然后通过client_id in（x,x ...）查出address的结果</p>
-
-<pre><code>find_by_first_name, find_all_by_first_name, find_by_name!
-Client.find_or_initialize, Client.find_or_create
-
-
-Post.where(:published =&gt; true).any? 检查是否exist?
-
-
-&lt;%=form_for([@post, @post.comments.build]) do |f| %&gt;
-#新版的form_for前用&lt;%=，注意多了=号，挺无聊的追求，对new的要求可以放到view里面来写，一来这确实只是为了view的需要，另一方面今后其他action复用view的话不用再在controller里面new了
-</code></pre>
-
-<p>常用的操作</p>
-
-<pre><code>&lt;%= render :partial =&gt; "comments/comment",
-:collection =&gt; @post.comments %&gt;
-&lt;%= render "comments/form" %&gt;
-&lt;%= link_to 'Destroy Comment', [comment.post, comment],
-:confirm =&gt; 'Are you sure?',:method =&gt; :delete %&gt;
-</code></pre>
-
-<p>嵌套form</p>
-
-<pre><code>accepts_nested_attributes_for :tags, :allow_destroy =&gt; :true,
-    :reject_if =&gt; proc { |attrs| attrs.all? { |k, v| v.blank? } }
-&lt;%= form.fields_for :tags do |tag_form| %&gt;
-</code></pre>
-
-<p>rails的callback不能直接使用def after_safe,而需要用after_save :method的方式来定义一个执行链
-新版的规矩</p>
-
-<p>比较好的<a href="http://phoenixtoday.blogbus.com/logs/33458940.html">git教程</a></p>
-
-<p>ihow的template https://github.com/ihower/rails3-app-template/blob/master/Gemfile,可以发现不少实用的操作，以及一些常用的gem包</p>
-
-<p>simple_form 这个插件</p>
-
-<p>annotate 自动标注，这里面学到了新的配置Gemfile的方法和执行通过Gemfile安装的特定的gem的使用方法</p>
-
-<p>Gemfile</p>
-
-<pre><code>gem 'annotate', :git =&gt; 'https://github.com/ctran/annotate_models.git' #, :branch =&gt; 'rake_compatibility' #指定通过git来安装，也可再跟上一个branch
-</code></pre>
-
-<p>通过上述方法安装的可运行gem，需要通过    <code>bundle exec annotate</code>    来运行</p>
 ]]></content>
   </entry>
   

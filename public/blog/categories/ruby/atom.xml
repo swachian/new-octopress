@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-01T12:00:59+08:00</updated>
+  <updated>2013-03-04T21:53:14+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -14,7 +14,70 @@
 
   
   <entry>
-    <title type="html"><![CDATA[change to ruby 2.0.0]]></title>
+    <title type="html"><![CDATA[Deploy a Rails 4 app to Heroku]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
+    <updated>2013-03-04T20:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
+    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
+
+<h3>0 事先准备</h3>
+
+<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
+但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
+
+<h3>1 创建应用</h3>
+
+<p>首先执行
+```
+heroku apps:create user-agent-show2</p>
+
+<p><code>
+这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
+</code>
+[remote "heroku"]</p>
+
+<pre><code>    url = git@heroku.com:user-agent-show.git
+    fetch = +refs/heads/*:refs/remotes/heroku/*
+</code></pre>
+
+<p>```</p>
+
+<h3>2 Git push</h3>
+
+<p>随后就可以执行
+<code>
+git push heroku
+</code>
+部署应用了。
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
+
+<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
+因为rails 4默认生成environments/production.rb中是这样配置的
+<code>
+config.serve_static_assets = false
+</code>
+这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
+对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成
+<code>
+config.serve_static_assets = true
+</code>
+这样才能保证静态文件被正常访问。</p>
+
+<h3>3 数据库更新</h3>
+
+<p><code>
+heroku run rake db:migrate
+</code></p>
+
+<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Change to Ruby 2.0.0]]></title>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/"/>
     <updated>2013-02-26T11:30:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0</id>
@@ -378,36 +441,6 @@ $ jekyll --server --auto
 
 
 <p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gimli and markdown 2 pdf]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/17/gimli-and-markdown-2-pdf/"/>
-    <updated>2012-04-17T15:24:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/17/gimli-and-markdown-2-pdf</id>
-    <content type="html"><![CDATA[<p>想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
-最终在这个法国人的<a href="http://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/">博客</a>中找到了很好的解决办法。
-最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。</p>
-
-<p>先安装 Pandoc</p>
-
-<p><code>sudo agt-get install pandoc nbibtex texlive-latex-base texlive-latex-recommended texlive-latex-extra preview-latex-style dvipng texlive-fonts-recommended</code></p>
-
-<p>安装ruby的gem gimli</p>
-
-<p><code>sh
-sudo agt-get install wkhtmltopdf
-gem install gimli
-</code></p>
-
-<p>最后运行</p>
-
-<p><code>sh
-gimli -f ./README.md
-</code></p>
-
-<p>即可得到类似GitHub风格的pdf文档。</p>
 ]]></content>
   </entry>
   

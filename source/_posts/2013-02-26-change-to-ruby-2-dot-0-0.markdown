@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "change to ruby 2.0.0"
+title: "Change to Ruby 2.0.0"
 date: 2013-02-26 11:30
 comments: true
 categories: 
