@@ -5,14 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby Inside 3月链接 - Hegel2011的博客</title>
+  <title>notes of matz on Ruby 2.0 at herokus waza - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="发现Ruby Inside最近的
-文章又好看了起来。选了一些细细研究如下。 GitHub&#8217;s Ruby Style Guide
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。
-此外，还有tomdoc做编码文档的规范， &hellip;">
+  <meta name="description" content="Mats Ruby 2.0
+的笔记。 首先讲了Ruby的历史 Dec 1995 0.95
+Dec 1996 1.0
+Aug 1997 1.1
+Dec 1998 1.2
+Aug 1999 1.4
+Sep 2000 1.6 以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。 voccation- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/some-useful-link/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ruby Inside 3月链接</h1>
+      <h1 class="entry-title">Notes of Matz on Ruby 2.0 at Herokus Waza</h1>
     
     
       <p class="meta">
@@ -86,40 +89,87 @@
   
 
 
-<time datetime="2012-04-19T11:23:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
+<time datetime="2013-03-08T11:15:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>发现<a href="http://www.rubyinside.com/march-2012-ruby-news-5841.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+RubyInside+%28Ruby+Inside%29">Ruby Inside</a>最近的
-文章又好看了起来。选了一些细细研究如下。</p>
+<div class="entry-content"><p><a href="https://speakerdeck.com/yukihiro_matz/ruby-2-dot-0-en">Mats Ruby 2.0</a>
+的笔记。</p>
+
+<p>首先讲了Ruby的历史</p>
 
 <ul>
-<li><p><a href="https://github.com/styleguide/ruby">GitHub&#8217;s Ruby Style Guide</a><br/>
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
-此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
-<li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
+<li>Dec 1995 0.95</li>
+<li>Dec 1996 1.0</li>
+<li>Aug 1997 1.1</li>
+<li>Dec 1998 1.2</li>
+<li>Aug 1999 1.4</li>
+<li>Sep 2000 1.6</li>
 </ul>
 
 
-<p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
+<p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>voccation-driven development<br/>
+Anniversary-driven development</p>
+
+<ul>
+<li>Aug 2003 1.8</li>
+<li>Dec 2007 1.9.0</li>
+<li>Aug 2010 1.9.2</li>
+<li>Oct 2011 1.9.3</li>
+<li>Feb 2013 2.0.0</li>
+</ul>
+
+
+<p>2.0版最早是在Ruby Conf 2001提出，包括</p>
+
+<ul>
+<li>new GC</li>
+<li>native Thread with GIL</li>
+<li>有些特性后来放弃了</li>
+</ul>
+
+
+<p>2.0的发布带来了：</p>
+
+<ul>
+<li>New Hash literals</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>keyword arguments</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir your_blog
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ./your_blog
-</span><span class='line'><span class="nv">$ </span>mkdir _layouts _plugins _includes _posts css javascripts images
-</span><span class='line'><span class="nv">$ </span>touch index.html _config.yml _layouts/default.html
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  def log(msg, level: "ERROR", time: Time.now)
+</span><span class='line'>    puts "..."
+</span><span class='line'>  end
+</span><span class='line'>  
+</span><span class='line'>  # existing hash passing
+</span><span class='line'>  log("Hello!", **hash)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>目录树结构</p>
+<ul>
+<li>Module#prepend, alias method chain, from CommonLisp</li>
+</ul>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -133,70 +183,105 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>├── README.md
-</span><span class='line'>├── _config.yml
-</span><span class='line'>├── _layouts
-</span><span class='line'>  └── default.html
-</span><span class='line'>├── _plugins
-</span><span class='line'>├── _includes
-</span><span class='line'>├── _posts
-</span><span class='line'>│   ├── 2012-03-27-your_first_post_in_markdown.md
-</span><span class='line'>│   └── 2012-03-27-your_second_post_in_textile.textile
-</span><span class='line'>├── css
-</span><span class='line'>│   └── screen.css
-</span><span class='line'>├── javascripts
-</span><span class='line'>├── images
-</span><span class='line'>└── index.html
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#prepend put them before to wrap methods
+</span><span class='line'>class Foo
+</span><span class='line'>  def foo; p :foo; end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>module Prepend
+</span><span class='line'>  def foo
+</span><span class='line'>    p :before
+</span><span class='line'>    super
+</span><span class='line'>    p :after
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Foo
+</span><span class='line'>  prepend Prepend # just as include Prepend
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Foo.new.foo
 </span></code></pre></td></tr></table></div></figure>
 
 
+<ul>
+<li>refine，to constrain open class, scoped monkey patching</li>
+</ul>
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>jekyll --server --auto
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>文档的要求只有一个:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>---
-</span><span class='line'>layout: default
-</span><span class='line'>title: Your First Post In Markdown
-</span><span class='line'>---
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module R
+</span><span class='line'>  refine String do
+</span><span class='line'>    def foo
+</span><span class='line'>      puts "aaa"
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>"".foo # =&gt; error!
+</span><span class='line'>
+</span><span class='line'>using R
+</span><span class='line'>"".foo</span></code></pre></td></tr></table></div></figure>
 
 
-<p>就会按markdown里面的layout产生内容。</p>
-
-<p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
+<p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
 
 <ul>
-<li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
+<li>Enumerable#lazy， 受函数式编程影响</li>
 </ul>
 
 
-<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(1..Float::INFINITY).lazy.map {|i|
+</span><span class='line'>  i.to_s
+</span><span class='line'>}.select {|s|
+</span><span class='line'>  /3/ === s
+</span><span class='line'>}.first(500000)</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
+<li>Symbol array literals</li>
 </ul>
 
 
-<p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
-<strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
-<strong>结果</strong>都是可以让程序员和不具备界面美化能力的项目经理也可以设计出说得过去的应用。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%i(foo bar baz) =&gt; [:foo, :bar, :baz]</span></code></pre></td></tr></table></div></figure>
+
 
 <ul>
-<li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
-<li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
+<li><p>to_h, to_hash</p></li>
+<li><p>UTF-8 by default</p></li>
+<li><p>Performance Faster:</p>
+
+<ul>
+<li>VM(YARV)</li>
+<li>GC</li>
+<li>require</li>
+</ul>
+</li>
 </ul>
 
 
-<p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
+<p>Ruby 2.1 maybe 25.12.2013</p>
 </div>
 
 
@@ -219,7 +304,7 @@
   
 
 
-<time datetime="2012-04-19T11:23:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
+<time datetime="2013-03-08T11:15:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -233,7 +318,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/some-useful-link/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/some-useful-link/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/" >Tweet</a>
   
   
   
@@ -242,10 +327,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/19/taps-a-simple-app-to-transfer-data/" title="Previous Post: Taps： 一个导数据的工具 ">&laquo; Taps： 一个导数据的工具 </a>
+        <a class="basic-alignment left" href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/" title="Previous Post: Deploy a Rails 4 app to Heroku">&laquo; Deploy a Rails 4 app to Heroku</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/19/heredocs/" title="Next Post: Heredocs 和缩进">Heredocs 和缩进 &raquo;</a>
       
     </p>
   </footer>
