@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-08T12:09:53+08:00</updated>
+  <updated>2013-03-17T22:07:24+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sass and Compass]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/16/sass-and-compass/"/>
+    <updated>2013-03-16T21:29:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/16/sass-and-compass</id>
+    <content type="html"><![CDATA[<p>Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。
+看了下《Pragmatic Guide to Sass》, 理清了一下脉络。<br/>
+顺便提一句，这本书是在kindle上看的，出版社和作者提供了epub的版本。  这可以算是第一本在kindle上看完的计算机技术类书籍。虽然效果还可以，
+但是看了下原书的pdf版本，发现其版本也深受“小书”，小版面，的影响。这可能是未来计算机书籍的一个趋势吧。不过kindle还是最适合纯文字，
+用来阅读计算机技术书籍的体验还是很一般。</p>
+
+<p>Sass是最基础的，类似coffeeScript对Css的改写，当然引入的内容要多的多。毕竟js本身也是一种语言，但css很难算的上是一门编程语言。
+Sass有自己的运行命令，由ruby实现，可以把scss文件编译成css文件，也能convert回去。</p>
+
+<p>Compass则是sass的库和扩展，在sass的基础上提供了更丰富的样式、函数和变量以及模式。其本身也有了一套命令，也更适合于建项目。Sass如果是java，
+那么compass就是J2EE+Eclipse。</p>
+
+<p>如果不想安装那么多东西，那么可以直接使用scout这个GUI工具，工具本身集成了sass和compass的能力，只是又提供了图形化的集成界面。该界面可能是基于
+Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以从scout入手。</p>
+
+<p>compass是很神奇的，而它的spriting堪称神奇中的神奇。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[notes of matz on Ruby 2.0 at herokus waza]]></title>
@@ -1087,6 +1111,7 @@ SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研�
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/">吴翰清，白帽子讲Web安全，电工</a> 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/">AWK,The Awk programming language.</a> 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。</li>
+<li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/03/16/sass-and-compass/">Pragmatic Guide to Sass</a> 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的</li>
 <li>Thomas Kyte, Expert Oracle Database Architecture.pdf</li>
 <li>余红春,构建高可用Linux服务器,机工</li>
 <li>Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional</li>
@@ -1444,20 +1469,6 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
     <content type="html"><![CDATA[<p>全书比较浪费时间，最有价值的是最后的一篇历史专家的序，基本把主要内容概括出来了。</p>
 
 <p>作为实际操作改革开放的设计师，Z肯定有过人之处，但同时也可以看出2B的地方也不少，可见人总有弱点，也不必追求尽善尽美。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[浪潮之巅]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/25/lang-chao-zhi-dian/"/>
-    <updated>2012-12-25T22:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/25/lang-chao-zhi-dian</id>
-    <content type="html"><![CDATA[<p>读完浪潮之巅，确实算本好书。作者能记录那么多小故事小掌故可见平时的积累很深。财经股市融资讲的也很生动。
-当然，不见得所有分析都对。比如solaris他就没意识到是被ibm支撑的linux打败的，windows至今在桌面上和linux井水不犯河水。当然，盖茨的担忧不是没道理。
-pc上linux毫无机会，但是移动终端就变天了。</p>
-
-<p>另外，给我的启示是别说老师不知道我们今后能干什么，实在是没人能料到发展状况的，以前指望老师指条明路的想法太不切实际。
-这个产业的高速发展和不确定性完全不是能被预知的。</p>
 ]]></content>
   </entry>
   
