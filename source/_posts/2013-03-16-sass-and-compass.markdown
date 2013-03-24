@@ -3,13 +3,13 @@ layout: post
 title: "Sass and Compass"
 date: 2013-03-16 21:29
 comments: true
-categories: 
+categories:
 - 技术
 - sass
 ---
 
 Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。
-看了下《Pragmatic Guide to Sass》, 理清了一下脉络。  
+看了下《Pragmatic Guide to Sass》, 理清了一下脉络。
 顺便提一句，这本书是在kindle上看的，出版社和作者提供了epub的版本。  这可以算是第一本在kindle上看完的计算机技术类书籍。虽然效果还可以，
 但是看了下原书的pdf版本，发现其版本也深受“小书”，小版面，的影响。这可能是未来计算机书籍的一个趋势吧。不过kindle还是最适合纯文字，
 用来阅读计算机技术书籍的体验还是很一般。
@@ -26,6 +26,6 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
 
 compass是很神奇的，而它的spriting堪称神奇中的神奇。
 
-
+但我发觉设计也是有天赋和术业专攻的。我们的美工完全不用这些东西，也很快就能搞出一个各种android上面看过去还不错的版本，我用这些东西去写出来的还是感觉很累。但至少比没有要好多了。
 
 

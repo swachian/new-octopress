@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-18T21:35:34+08:00</updated>
+  <updated>2013-03-24T16:51:34+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[为什么ruby不火仍然值得学]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/"/>
+    <updated>2013-03-24T16:14:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue</id>
+    <content type="html"><![CDATA[<p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
+
+<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
+
+<h3>1. 简单</h3>
+
+<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
+
+<h3>2. 方便</h3>
+
+<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
+方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
+
+<h3>3.程序员（IT人员）的朋友</h3>
+
+<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
+
+<h3>4. Rails</h3>
+
+<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
+的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
+不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
+
+<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
+现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
+
+<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
+
+<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[notes of matz on Ruby 2.0 at herokus waza]]></title>
@@ -412,113 +449,6 @@ Total 3 (delta 2), reused 0 (delta 0)
 因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
 
 <p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Heredocs 和缩进]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs/"/>
-    <updated>2012-04-19T12:41:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs</id>
-    <content type="html"><![CDATA[<h3>heredocs是什么</h3>
-
-<p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
-
-<p><code>ruby
-text = &lt;&lt;END
-aaa
-bbb
-ccc
-END
-</code></p>
-
-<p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
-
-<p>```ruby
-class Poem
-  def initialize</p>
-
-<pre><code>@text = &lt;&lt;END
-</code></pre>
-
-<p>"Faith" is a fine invention
-When Gentlemen can see
-But Microscopes are prudent</p>
-
-<pre><code>       In an Emergency.
-</code></pre>
-
-<p>(Emily Dickinson 1830-1886)
-END
-  end
-  def recite</p>
-
-<pre><code>puts @text
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<p>但是这样写就是<strong>不行</strong>了：</p>
-
-<p><code>ruby
-text = &lt;&lt;END
-  aaa
-  bbb
-  END #END加了缩进就失败
-</code></p>
-
-<h3>解决办法</h3>
-
-<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
-此处END可以换成任意大写字符，只要成对匹配即可。
-```ruby
-class Poem
-  def initialize</p>
-
-<pre><code>@text = &lt;&lt;-END.gsub(/^ {6}/, '')
-  "Faith" is a fine invention
-  When Gentlemen can see
-  But Microscopes are prudent
-             In an Emergency.
-  (Emily Dickinson 1830-1886)
-END
-</code></pre>
-
-<p>  end
-  def recite</p>
-
-<pre><code>puts @text
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h3><code>%w</code>是何方神圣</h3>
-
-<p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
-%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
-
-<p>```ruby
-text2 = %w{
-aaa
-bbb
-ccc
-  dddd</p>
-
-<pre><code>  }
-</code></pre>
-
-<p>puts text2
-```</p>
-
-<ul>
-<li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
-<li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
