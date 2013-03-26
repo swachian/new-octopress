@@ -1,9 +1,9 @@
----
+
 layout: post
 title: "Change to Ruby 2.0.0"
 date: 2013-02-26 11:30
 comments: true
-categories: 
+categories:
 - ruby
 - heroku
 
@@ -124,3 +124,7 @@ Total 3 (delta 2), reused 0 (delta 0)
 
 感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
 明显处理能力会强于只有一个实例的thin。以上灵感来自[unicorn的部署高人](http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html)。
+
+今日装某个系统，发现有掉到了libyaml这个沟里。试了几次，最后发现是 `LD_LIBRARY_PATH=`的缘故。
+编译好libyaml，在加入到上面这个环境变量中，ruby才能读的出来。
+

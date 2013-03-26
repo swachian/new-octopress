@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 安装 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/安装/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-26T09:16:28+08:00</updated>
+  <updated>2013-03-26T16:14:05+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -66,9 +66,6 @@ $ sudo useradd -g mysql mysql
 $ ./configure --prefix=/opt/mysql --with-charset=utf8 --with-extra-charsets="gbk,gb2312,big5" --with-plugins=innobase
 $ make &amp;&amp; make install
 
-cp support-files/my-huge.cnf /etc/my.cnf
-cp support-files/mysql.server /etc/init.d/mysqld
-chmod 755 /etc/init.d/mysqld
 cp support-files/my-huge.cnf /etc/my.cnf
 cp support-files/mysql.server /etc/init.d/mysqld
 chmod 755 /etc/init.d/mysqld

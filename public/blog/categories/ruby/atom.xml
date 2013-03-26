@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-26T09:16:28+08:00</updated>
+  <updated>2013-03-26T16:14:05+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -282,150 +282,6 @@ heroku run rake db:migrate
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Change to Ruby 2.0.0]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/"/>
-    <updated>2013-02-26T11:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0</id>
-    <content type="html"><![CDATA[<p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
-
-<p>步骤如下：</p>
-
-<ol>
-<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
-<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
-<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
-<li><code>git commit -a</code></li>
-<li><code>git push heroku</code></li>
-</ol>
-
-
-<p>```
-Counting objects: 119, done.
-Compressing objects: 100% (59/59), done.
-Writing objects: 100% (60/60), 5.46 KiB, done.
-Total 60 (delta 32), reused 0 (delta 0)
------> Deleting 5 files matching .slugignore patterns.
------> Ruby/Rack app detected
------> Using Ruby version: ruby-2.0.0
------> Installing dependencies using Bundler version 1.3.0.pre.5</p>
-
-<pre><code>   Ruby version change detected. Clearing bundler cache.
-   Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
-   New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
-   Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-   Fetching gem metadata from http://ruby.taobao.org/.
-   Fetching full source index from http://ruby.taobao.org/
-   Installing daemons (1.1.8)
-   Installing eventmachine (0.12.10)
-   Installing rack (1.4.1)
-   Installing rack-protection (1.3.2)
-   Installing tilt (1.3.3)
-   Installing sinatra (1.3.5)
-   Installing thin (1.4.1)
-   Using bundler (1.3.0.pre.5)
-   Your bundle is complete! It was installed into ./vendor/bundle
-   Cleaning up the bundler cache.
-</code></pre>
-
-<p>-----> Discovering process types</p>
-
-<pre><code>   Procfile declares types     -&gt; (none)
-   Default types for Ruby/Rack -&gt; console, rake, web
-</code></pre>
-
-<p>-----> Compiled slug size: 30.5MB
------> Launching... done, v48
-```</p>
-
-<p>但我不太理解slug size为啥变大了。</p>
-
-<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
-于是改用了unicorn，又折腾了Procfile</p>
-
-<p><code>
-web: bundle exec unicorn -p $PORT
-</code></p>
-
-<p>```
-Total 3 (delta 1), reused 0 (delta 0)
------> Deleting 5 files matching .slugignore patterns.
------> Ruby/Rack app detected
------> Using Ruby version: ruby-2.0.0
------> Installing dependencies using Bundler version 1.3.0.pre.5</p>
-
-<pre><code>   Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-   Using kgio (2.8.0)
-   Using rack (1.4.5)
-   Using rack-protection (1.3.2)
-   Using raindrops (0.10.0)
-   Using tilt (1.3.3)
-   Using sinatra (1.3.5)
-   Using unicorn (4.6.2)
-   Using bundler (1.3.0.pre.5)
-   Your bundle is complete! It was installed into ./vendor/bundle
-   Cleaning up the bundler cache.
-   Would have removed thin (1.4.1)
-   Would have removed daemons (1.1.9)
-   Would have removed daemons (1.1.8)
-   Would have removed thin (1.5.0)
-   Would have removed rack (1.4.1)
-   Would have removed eventmachine (1.0.0)
-   Would have removed eventmachine (0.12.10)
-</code></pre>
-
-<p>-----> Discovering process types</p>
-
-<pre><code>   Procfile declares types     -&gt; web
-   Default types for Ruby/Rack -&gt; console, rake
-</code></pre>
-
-<p>-----> Compiled slug size: 35.9MB
------> Launching... done, v53
-```</p>
-
-<p>最后重新弄了一下，发现还是很大。</p>
-
-<p>```
-Writing objects: 100% (3/3), 281 bytes, done.
-Total 3 (delta 2), reused 0 (delta 0)
------> Deleting 5 files matching .slugignore patterns.
------> Ruby/Rack app detected
------> Using Ruby version: ruby-2.0.0
------> Installing dependencies using Bundler version 1.3.0.pre.5</p>
-
-<pre><code>   Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-   Using kgio (2.8.0)
-   Using rack (1.4.5)
-   Using rack-protection (1.3.2)
-   Using raindrops (0.10.0)
-   Using tilt (1.3.3)
-   Using sinatra (1.3.5)
-   Using unicorn (4.6.2)
-   Using bundler (1.3.0.pre.5)
-   Your bundle is complete! It was installed into ./vendor/bundle
-   Cleaning up the bundler cache.
-</code></pre>
-
-<p>-----> Discovering process types</p>
-
-<pre><code>   Procfile declares types     -&gt; web
-   Default types for Ruby/Rack -&gt; console, rake
-</code></pre>
-
-<p>-----> Compiled slug size: 27.3MB
------> Launching... done, v5</p>
-
-<pre><code>   http://octopresszhangyu.herokuapp.com deployed to Heroku
-</code></pre>
-
-<p>```</p>
-
-<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
-明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
     <updated>2013-02-03T12:48:00+08:00</updated>
@@ -449,6 +305,113 @@ Total 3 (delta 2), reused 0 (delta 0)
 因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
 
 <p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Heredocs 和缩进]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs/"/>
+    <updated>2012-04-19T12:41:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/19/heredocs</id>
+    <content type="html"><![CDATA[<h3>heredocs是什么</h3>
+
+<p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
+
+<p><code>ruby
+text = &lt;&lt;END
+aaa
+bbb
+ccc
+END
+</code></p>
+
+<p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
+
+<p>```ruby
+class Poem
+  def initialize</p>
+
+<pre><code>@text = &lt;&lt;END
+</code></pre>
+
+<p>"Faith" is a fine invention
+When Gentlemen can see
+But Microscopes are prudent</p>
+
+<pre><code>       In an Emergency.
+</code></pre>
+
+<p>(Emily Dickinson 1830-1886)
+END
+  end
+  def recite</p>
+
+<pre><code>puts @text
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>但是这样写就是<strong>不行</strong>了：</p>
+
+<p><code>ruby
+text = &lt;&lt;END
+  aaa
+  bbb
+  END #END加了缩进就失败
+</code></p>
+
+<h3>解决办法</h3>
+
+<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
+此处END可以换成任意大写字符，只要成对匹配即可。
+```ruby
+class Poem
+  def initialize</p>
+
+<pre><code>@text = &lt;&lt;-END.gsub(/^ {6}/, '')
+  "Faith" is a fine invention
+  When Gentlemen can see
+  But Microscopes are prudent
+             In an Emergency.
+  (Emily Dickinson 1830-1886)
+END
+</code></pre>
+
+<p>  end
+  def recite</p>
+
+<pre><code>puts @text
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h3><code>%w</code>是何方神圣</h3>
+
+<p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
+%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
+
+<p>```ruby
+text2 = %w{
+aaa
+bbb
+ccc
+  dddd</p>
+
+<pre><code>  }
+</code></pre>
+
+<p>puts text2
+```</p>
+
+<ul>
+<li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
+<li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
+</ul>
+
 ]]></content>
   </entry>
   

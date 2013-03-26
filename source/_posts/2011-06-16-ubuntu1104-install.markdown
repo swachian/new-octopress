@@ -59,9 +59,6 @@ rvm基本指令
     cp support-files/my-huge.cnf /etc/my.cnf
     cp support-files/mysql.server /etc/init.d/mysqld
     chmod 755 /etc/init.d/mysqld
-    cp support-files/my-huge.cnf /etc/my.cnf
-    cp support-files/mysql.server /etc/init.d/mysqld
-    chmod 755 /etc/init.d/mysqld
     cd /etc/init.d/
     who -r
     cd /ect/rc5.d/
