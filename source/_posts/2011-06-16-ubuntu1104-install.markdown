@@ -3,7 +3,7 @@ layout: post
 title: "ubuntu1104安装手记"
 date: 2011-06-16 14:52
 comments: true
-categories: 
+categories:
 - 技术
 - 安装
 ---
@@ -18,7 +18,7 @@ categories:
 
 ###2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等
 
-    sudo apt-get install curl libcurl3 libcurl3-dev 
+    sudo apt-get install curl libcurl3 libcurl3-dev
     apt-get install zlib1g-dev #安装git需要
     apt-get install bison
     /usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
@@ -40,7 +40,7 @@ rvm基本指令
 
     rvm list known
     rvm install 1.9.2
-    rvm use 1.9.2  
+    rvm use 1.9.2
     rvm gemset list
     rvm gemset create r310
     rvm gemset use r310
@@ -54,40 +54,40 @@ rvm基本指令
     $ sudo groupadd mysql
     $ sudo useradd -g mysql mysql
     $ ./configure --prefix=/opt/mysql --with-charset=utf8 --with-extra-charsets="gbk,gb2312,big5" --with-plugins=innobase
-    $ make && make install 
+    $ make && make install
 
-    cp support-files/my-huge.cnf /etc/my.cnf 
+    cp support-files/my-huge.cnf /etc/my.cnf
     cp support-files/mysql.server /etc/init.d/mysqld
-    chmod 755 /etc/init.d/mysqld 
-    cp support-files/my-huge.cnf /etc/my.cnf 
+    chmod 755 /etc/init.d/mysqld
+    cp support-files/my-huge.cnf /etc/my.cnf
     cp support-files/mysql.server /etc/init.d/mysqld
-    chmod 755 /etc/init.d/mysqld 
+    chmod 755 /etc/init.d/mysqld
     cd /etc/init.d/
     who -r
     cd /ect/rc5.d/
     ln -s ../init.d/mysqld S85mysqld
     ln -s ../init.d/mysqld K85mysqld
-    vi /etc/my.cnf 
+    vi /etc/my.cnf
 		 在/etc/my.cnf中设置innodb成为默认的数据库引擎
 		default-storage-engine=INNODB
 		transaction-isolation=READ-COMMITTED #将innodb的事务隔离级别调整,以保证提交的数据必定被读取
-        grant all on *.* to 'haobai_community'@'%' identified by 'sanss123';
+        grant all on *.* to 'user'@'%' identified by 'password';
     cd /opt/mysql/
-    ./bin/mysql_install_db 
+    ./bin/mysql_install_db
     chown -R root .
     chown -R mysql var
     /etc/init.d/mysqld start
 
 
 ###6. 更新rubygem
-    
+
     gem install update-system
     update_rubygems
     update_rubygems
 
 
 ###7. 安装rails
-    gem install rails 
+    gem install rails
     gem install mysql2
 
 
