@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-26T16:14:05+08:00</updated>
+  <updated>2013-03-27T21:09:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -1160,8 +1160,8 @@ SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研�
 <h2>技术类</h2>
 
 <ol>
-<li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
-<li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/">吴翰清，白帽子讲Web安全，电工</a> 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少</li>
+<li>[X] <a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
+<li>[x] <a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/">吴翰清，白帽子讲Web安全，电工</a> 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/">AWK,The Awk programming language.</a> 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。</li>
 <li><a href="http://octopresszhangyu.herokuapp.com/blog/2013/03/16/sass-and-compass/">Pragmatic Guide to Sass</a> 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的</li>
 <li>Thomas Kyte, Expert Oracle Database Architecture.pdf</li>
