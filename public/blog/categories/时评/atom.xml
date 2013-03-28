@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 时评 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/时评/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-27T21:09:54+08:00</updated>
+  <updated>2013-03-28T16:08:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle的价格]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/28/the-price-of-oracle/"/>
+    <updated>2013-03-28T14:57:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/28/the-price-of-oracle</id>
+    <content type="html"><![CDATA[<p>不少人应该对Oracle的报价是好奇的，研究了一番之后，发现Oracle的报价无论在商务上还是使用策略上都可以称之为出奇的<strong>成功</strong>.</p>
+
+<h3>Oracle的数据库种类</h3>
+
+<p>Oracle的数据库讲穿了只有一套，但又分成ee、se等几个版本。而这些都可以提供免费试用。
+通过免费可以培养用户群，降低工程师的雇佣成本。通过划分版本，又可以执行价格策略，抢占不同的市场。</p>
+
+<h3>Oracle的单价种类</h3>
+
+<p>Oracle的单价基本可以分为按User和按CPU卖。User的话是一个自然人或者设备。CPU就是按装机卖了。</p>
+
+<p>下面是一些价格举例，单位都是美刀
+按用户： {企业版： 950，se: 350, seo: 180}
+按cpu: {企业版：47500， se：17500，seo：5800}</p>
+
+<h3>Oracle的起步license概念</h3>
+
+<p>显然，按user大部分情况下应该比较便宜。所以，邪恶的oracle又有了最小license数量的概念。比如，企业版最低的user数就是25，se则是5，以此来保证oracle的收入。</p>
+
+<h3>折扣</h3>
+
+<p>以上只是目录价，一般通过代理买，获得一半的折扣是没有多少问题的。如果是大客户的话，还可以更加优惠。</p>
+
+<p>最后，说一下关于DataGuard的事情。有说是免费的，也有说是付费的。在10g的ee版本中，这个确实已经包含了。</p>
+
+<blockquote><p>Data Guard supports both physical standby and logical standby sites. Oracle Corporation makes Data Guard available only as a bundled feature included within its "Enterprise Edition" of the Oracle RDBMS.</p></blockquote>
+
+<p>所以，10g ee里面的ODG肯定是免费的，因为已经买过单了。</p>
+
+<blockquote><p>The "Oracle Active Data Guard" option, an extra-cost facility,[4] extends Oracle Data Guard physical standby functionality in Oracle 11g configurations. It allows read-only access on the standby node at the same time as applying archived transactions from the primary node.[5]</p></blockquote>
+
+<p>然后，在11g里面，又推出了Active Data Guard，二者在技术上有什么区别还没研究过，但在付费上这是一个可选包。目录价200/user.</p>
+
+<p>参考资料：</p>
+
+<ol>
+<li><p><a href="http://www.oracle.com/us/corporate/pricing/technology-price-list-070617.pdf">oracle price list</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Oracle_Data_Guard">oracle data guard wiki</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Should we try to pursue a master degree]]></title>
@@ -126,25 +174,6 @@ router用Scala编写
 <p>下一个会是什么？coffee.js或者其他什么东西。这个还真的难以预料。因为以上这些全是rails发展过程中的副产品，捧谁不捧谁只有天知道，捧得起捧不起只有看被捧的东西。Rails自己关心的始终是web开发的创新。</p>
 
 <p>从中我们也可以发现，国外的软件生态圈更多的是n样独立的东西共赢发展，每样独立的东西本身规模都比较小。这和我们这个民族所向往的求最大、求一体化完全是两码事情。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[读《吴敬琏传》]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl/"/>
-    <updated>2011-07-30T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/07/30/review-of-biograph-for-wjl</id>
-    <content type="html"><![CDATA[<p>吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识，留学耶鲁回国后开始成为中央的think tank，尤其是90年代后成为江朱进行市场化经济体制改革的重要理论及方针提供者，进而影响着我们这个国家和社会。03年之后，随着政府的换届，吴也逐步从决策层淡出。此时的他思想也随之有所改变，淡出的因素既有人际关系的问题，更有着深层次的利益冲突的问题。</p>
-
-<p>纵观全书，最有价值的是最后几章，因为问题直指当前的状况，并且也道出了很多失策以及背后运作的原理，而这些又是最紧急的要处理要辨识的。4万亿的实质是什么，会把我们带向何方？出口型的经济必然导致货币通胀以及内需不振。因为货物留出去了，留在自己的只有钱。钱多物少，又如何不通胀？唯一的替代品就是资产价格暴涨，资产主要就是股票、房地产等。而所谓的深化体制改革，基本也只能是空话。意识形态不是根深蒂固的，但是中国人、中国政府、暴君与暴民却是中国固有的，要替换这些东西谈何容易。放弃苏联人那套简单，放弃中国人心中的尾巴就难了，何况有些东西绝不仅仅是思想尾巴那么简单，实际的利益摆在那边，基本无解。</p>
-
-<p>次一级有意思的地方是书的前半段，尤其是吴的出生背景及他的母亲。出生于知识分子家庭，母亲是一个成功的报业企业家，其家族也是有名民营企业家，甚至还参与过铁路的建设，作为资方。包括吴和其太太周南认识的场景、几十年的相濡以沫，都令人十分感动。吴生活的家族是一个伟大的家族。</p>
-
-<p>接下来的描述是本书的主体。但对于读过中国经济改革教程的人来说，这部分就变成了一个很好的背景知识的补充。一些在阅读教程时想了解的东西，比如耶鲁的生活，顾准、sunyefang的介绍更加丰满，毕竟有些东西也不太好在教程里自己直接描述。甚至包括了他如何同中央进行交流等。这些东西合在一起，使得对一个公共知识分子如何发挥作用、影响中国的变革，有了鲜活的了解。</p>
-
-<p>要评价吴敬琏，必须说他所倡导的东西好坏并存，成功与失败并举。这个就不再展开。</p>
-
-<p>得到的另一个结论是，中国的通胀不可避免，冬天早就该到，只是人为的延后了。</p>
 ]]></content>
   </entry>
   

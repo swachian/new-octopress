@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-03-27T21:09:54+08:00</updated>
+  <updated>2013-03-28T16:08:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle的价格]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/28/the-price-of-oracle/"/>
+    <updated>2013-03-28T14:57:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/28/the-price-of-oracle</id>
+    <content type="html"><![CDATA[<p>不少人应该对Oracle的报价是好奇的，研究了一番之后，发现Oracle的报价无论在商务上还是使用策略上都可以称之为出奇的<strong>成功</strong>.</p>
+
+<h3>Oracle的数据库种类</h3>
+
+<p>Oracle的数据库讲穿了只有一套，但又分成ee、se等几个版本。而这些都可以提供免费试用。
+通过免费可以培养用户群，降低工程师的雇佣成本。通过划分版本，又可以执行价格策略，抢占不同的市场。</p>
+
+<h3>Oracle的单价种类</h3>
+
+<p>Oracle的单价基本可以分为按User和按CPU卖。User的话是一个自然人或者设备。CPU就是按装机卖了。</p>
+
+<p>下面是一些价格举例，单位都是美刀
+按用户： {企业版： 950，se: 350, seo: 180}
+按cpu: {企业版：47500， se：17500，seo：5800}</p>
+
+<h3>Oracle的起步license概念</h3>
+
+<p>显然，按user大部分情况下应该比较便宜。所以，邪恶的oracle又有了最小license数量的概念。比如，企业版最低的user数就是25，se则是5，以此来保证oracle的收入。</p>
+
+<h3>折扣</h3>
+
+<p>以上只是目录价，一般通过代理买，获得一半的折扣是没有多少问题的。如果是大客户的话，还可以更加优惠。</p>
+
+<p>最后，说一下关于DataGuard的事情。有说是免费的，也有说是付费的。在10g的ee版本中，这个确实已经包含了。</p>
+
+<blockquote><p>Data Guard supports both physical standby and logical standby sites. Oracle Corporation makes Data Guard available only as a bundled feature included within its &#8220;Enterprise Edition&#8221; of the Oracle RDBMS.</p></blockquote>
+
+<p>所以，10g ee里面的ODG肯定是免费的，因为已经买过单了。</p>
+
+<blockquote><p>The &#8220;Oracle Active Data Guard&#8221; option, an extra-cost facility,[4] extends Oracle Data Guard physical standby functionality in Oracle 11g configurations. It allows read-only access on the standby node at the same time as applying archived transactions from the primary node.[5]</p></blockquote>
+
+<p>然后，在11g里面，又推出了Active Data Guard，二者在技术上有什么区别还没研究过，但在付费上这是一个可选包。目录价200/user.</p>
+
+<p>参考资料：</p>
+
+<ol>
+<li><p><a href="http://www.oracle.com/us/corporate/pricing/technology-price-list-070617.pdf">oracle price list</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Oracle_Data_Guard">oracle data guard wiki</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为什么ruby不火仍然值得学]]></title>
@@ -1487,29 +1535,6 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 
 <p>王力雄的文风是很偏理科化的作家，充满着阳刚和逻辑之美。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[考研三周年纪念]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/05/kaoyan-3-zhounian/"/>
-    <updated>2013-01-05T21:56:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/05/kaoyan-3-zhounian</id>
-    <content type="html"><![CDATA[<p>在2010年的一月考试季节，我参加了研究生入学考试，至今已整整三年了。而在昨天，我已经拍摄了毕业集体照，即将拿到学位和学历证书。也在昨天，
-工作上终于又有了突破。
-今天，是2013年考研的日子，借机提取一下自身的感受。</p>
-
-<p>回首这三年是很丰富多彩的，可以说比以往经历的任何三年的内容都要多。这三年中，我用75天左右的时间复习了高数等考研内容，参加了研究生入学的1月份
-全国统考，踏破了复旦线。这三年中，我找到了自己的爱人，一起买了新房，忙活了很久房子的装修，举行了自己的婚礼。这三年中，我和妻子开始独立生活，
-撑起自己的小家庭。这三年中，蜜月的意大利之旅至今令人难忘，甚至增强了我对阳光的感觉。这三年中，在张江进行研究生阶段的进修，学写论文、发表论文，撰写硕士论文并通过答辩。这三年中，补充了经济管理方面的知识，至少
-有半个mba的水平吧。这三年中，实现了工作的突破。这三年中，迎来了宝宝的降生，品尝到做父亲的喜悦与辛苦，体会到老婆和女性的不易。</p>
-
-<p>这三年里确实经历了许多精彩，丰富了自己的人生。当然，也有悲哀和痛苦的。自己的体重又快接近减肥前了，身体也始终受一种毛病的困扰，我亲爱的外婆、大姆妈辞世。
-人生总不可能是圆满的，世上不如意之事十之八九，花未全开月未圆，不顺也是生活中必然存在的一个部分。总体说来，这三年还是充满了很强烈的幸福感。</p>
-
-<p>今天是新年的第一篇博客，既是对三年的一点小回顾，也不免俗地写点新年心愿。最大的愿望当然就是宝宝顺利健康地成长，家人亲友都能平平安安。有人认为人到中年
-不忙赚钱忙做事，但我作为一个居家的上海男人还是追求平安是福。其次希望工作的结果能更有意义，呵呵，做事是第二位的，平安幸福重要，但要幸福必须
-得做事才行。具体的着手打算从对存储设备及安全的研究开始。</p>
 ]]></content>
   </entry>
   

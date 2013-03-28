@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
-都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
-篇幅很大， &hellip;">
+  <meta name="description" content="H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。 从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
+而css依然一团乱； &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/">Every Language Will Implement a Lisp Interpreter in Itself</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T12:48:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
+
+<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
+而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
+
+<ul>
+<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
+<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
+</ul>
+
+
+<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
+正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
+
+<p>所以，表达力越差（可以理解成
+啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
+因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
+
+<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1066,56 +1119,6 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/05/kaoyan-3-zhounian/">考研三周年纪念</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-05T21:56:00+08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在2010年的一月考试季节，我参加了研究生入学考试，至今已整整三年了。而在昨天，我已经拍摄了毕业集体照，即将拿到学位和学历证书。也在昨天，
-工作上终于又有了突破。
-今天，是2013年考研的日子，借机提取一下自身的感受。</p>
-
-<p>回首这三年是很丰富多彩的，可以说比以往经历的任何三年的内容都要多。这三年中，我用75天左右的时间复习了高数等考研内容，参加了研究生入学的1月份
-全国统考，踏破了复旦线。这三年中，我找到了自己的爱人，一起买了新房，忙活了很久房子的装修，举行了自己的婚礼。这三年中，我和妻子开始独立生活，
-撑起自己的小家庭。这三年中，蜜月的意大利之旅至今令人难忘，甚至增强了我对阳光的感觉。这三年中，在张江进行研究生阶段的进修，学写论文、发表论文，撰写硕士论文并通过答辩。这三年中，补充了经济管理方面的知识，至少
-有半个mba的水平吧。这三年中，实现了工作的突破。这三年中，迎来了宝宝的降生，品尝到做父亲的喜悦与辛苦，体会到老婆和女性的不易。</p>
-
-<p>这三年里确实经历了许多精彩，丰富了自己的人生。当然，也有悲哀和痛苦的。自己的体重又快接近减肥前了，身体也始终受一种毛病的困扰，我亲爱的外婆、大姆妈辞世。
-人生总不可能是圆满的，世上不如意之事十之八九，花未全开月未圆，不顺也是生活中必然存在的一个部分。总体说来，这三年还是充满了很强烈的幸福感。</p>
-
-<p>今天是新年的第一篇博客，既是对三年的一点小回顾，也不免俗地写点新年心愿。最大的愿望当然就是宝宝顺利健康地成长，家人亲友都能平平安安。有人认为人到中年
-不忙赚钱忙做事，但我作为一个居家的上海男人还是追求平安是福。其次希望工作的结果能更有意义，呵呵，做事是第二位的，平安幸福重要，但要幸福必须
-得做事才行。具体的着手打算从对存储设备及安全的研究开始。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1133,6 +1136,10 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/03/28/the-price-of-oracle/">Oracle的价格</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/">为什么ruby不火仍然值得学</a>
       </li>
     
@@ -1148,15 +1155,11 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
         <a href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">Deploy a Rails 4 app to Heroku</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/02/26/change-to-ruby-2-dot-0-0/">Change To Ruby 2 Dot 0 0</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/时评'>时评 (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
