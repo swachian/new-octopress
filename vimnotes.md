@@ -1,6 +1,8 @@
 ## 命令备忘
 
 
+
+
 ### 插入命令
     a 当前光标后面
     i 当前光标前面
@@ -8,7 +10,6 @@
     O 插入当前行，当前行下移
 
 ### 保存命令
-
 
     wq
     x
@@ -51,9 +52,22 @@
     w other 另存为
 
 ### 末行模式操作技巧
+
+
     1,8s/^/#/g 第一道第八行前面加#号
     1,8 >> 右移两个tab
     1,8 << 左移
+
+
+### 几种编码
+    :set fileencoding=utf-8  文件编码
+    fileencodings  支持文件编码
+    encoding  vim内部编码
+    let &termencoding=&encoding 设置终端编码与vim编码一样
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim   解决菜单乱码
+
+
 
 
 
