@@ -2,6 +2,7 @@
 
 
 
+
 ## 用户shell选择
 
 Linux as系统所有增加用户一律采用/bin/bash的shell，用户环境变量编辑.bash_profile文件。
@@ -128,7 +129,6 @@ r - remote，sync是把内存同步到硬盘
 
 ## NFS 网络文件服务
 
-
 缺点: 安全性不好, 优点: 应用性好
 
     rpm -q portmap
@@ -139,6 +139,7 @@ r - remote，sync是把内存同步到硬盘
 
     rpcinfo -p # 检查服务启动的信息
 配置文件位于 `/etc/exports`
+
     /public #允许所有主机访问/public目录
     /website 192.168.16.0(ro) #允许网段
 配置完成后,重启nfs服务,或者`exportfs -rv`, `showmount -e 192.168.16.155`可查看nfs服务器共享的目录有哪些.
@@ -148,5 +149,33 @@ r - remote，sync是把内存同步到硬盘
 ### 自动挂载NFS共享
 
 配置 `/etc/fstab`
+
     192.168.16.155:/website /mnt/website nfs ro 0 0
+
+
+## 文件共享 Samba(桑巴)
+
+
+SMB - Server Message Block, 服务器消息块
+`rpm -q samba` #查询是否已安装samba
+`/etc/samba/smb.conf`是samba的配置文件
+
+* [global] 全局环境选项
+* [home]   设置用户宿主目录共享
+* [printers]
+* [sharefiles]
+
+`security: {share: 无权限， user: 缺省推荐 由Linux Samba服务器做验证}`
+
+`smbpasswd -a user`, user必须是linux的系统用户， `smbstatus`可以查看访问的客户端信
+
+用法1： 各自访问home目录，
+用法2： 共享目录， 编辑`/etc/samba/smb.conf`，后重启服务, `testparm`会检察参数是否语法正确
+
+    [共享名]
+    path = 共享目录
+    valid users = jack mary
+    writable = = yes
+用法3: 建立公共目录，只要不设置`valid users`即可
+用法4：建立部门共享目录/hr，部门每个人都能读写，但不能删除别人的文件。秘诀是`chmod` `hr`下面的各目录权限。
 
