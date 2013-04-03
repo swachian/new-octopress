@@ -1,0 +1,152 @@
+# LINUX AS5操作系统设置手册
+
+
+
+## 用户shell选择
+
+Linux as系统所有增加用户一律采用/bin/bash的shell，用户环境变量编辑.bash_profile文件。
+
+## 如何修改Linux主机名
+1.修改 /etc/sysconfig/network，使得下次启动时使用新的主机名
+hostname=newhostname
+2.修改 /etc/hosts。不修改的话，apache等需要解析主机名的服务将不能启动
+IP newhostname
+
+## 启动远程x-window 服务
+
+编辑文件/usr/share/gdm/defaults.conf ，[xdmcp]一节将Enable=false改成Enable=true；要想使用户root用户登录需要对[security] 一节将AllowRemoteRoot=false改成AllowRemoteRoot=true。修改文件后需要重启主机。
+作用：方便pluswell双机软件图形界面操作
+
+## 取消系统对core限制（ms模块必须）
+以root登录，vi /etc/profile 修改
+    ulimit -S -c 0 > /dev/null 2>&1
+        为
+        ulimit -S -c unlimited > /dev/null 2>&1
+        添加 ulimit -n 8192，保存退出
+        vi /etc/security/limits.conf
+        添加如下两行，保存退出
+        *               soft nofile 8192
+        *               hard nofile 8192
+        作用：这个是把core文件的限制去掉，程序一旦崩溃，可以得到core文件。
+        开启系统服务
+        chkconfig --level 5 telnet on
+        chkconfig --level 5 rlogin on
+        chkconfig --level 5 rsh on
+        chkconfig --level 5 rexec on
+        chkconfig --level 5 ip6tables off
+        chkconfig --level 5 iptables off
+        chkconfig --level 5 nfs on
+        chkconfig --level 5 sendmail off
+        chkconfig --level 5 vsftpd on
+        内存管理
+        在root用户的/bin下增加命令vi dropcache.sh，编辑内容：
+        #!/bin/bash
+        sync
+        echo 3 > /proc/sys/vm/drop_caches
+        修改可执行权限chmod 755 dropcache.sh，然后在root用户使用crontab –e编译定时器使其定时执行：
+        0 4 * * * dropcache.sh
+        代表每天凌晨4点执行dropcache.sh。
+        作用：定时释放被cached占用的内存。
+        时钟同步
+        在非时钟源主机上使用crontab –e增加定时到时钟源同步时间的命令：
+        0 * * * * /usr/sbin/ntpdate 210.72.145.44
+        表示每天0点到210.72.145.44公网时钟源同步时间，要是有内网时钟源，只需修改地址即可。
+        关于使用Mount文件系统必须注意的参数
+        在其他项目中因进行频繁双机切换测试后，出现mount的磁盘柜上文件系统不能写操作，touch文件时提示“只读文件系统”，共享磁盘不能正常使用。
+        因不明原因，所以重做了此文件系统的逻辑卷，重做完成后，提示“This filesystem will be automatically checked every 21 mounts or 180 days, whichever comes first.  Use tune2fs -c or -i to override.”
+        这样问题明确了，因为此文件系统默认21次mount后进入只读状态，等待fsck。命令说明：tune2fs是linux下面重要的文件系统调整工具，其中的几个选项解释如下：
+        -c：表示文件系统在mount次数达到设定后，需要运行fsck检查文件系统。
+        -i：文件系统的检查间隔时间。系统在达到时间间隔时，自动检查文件系统。
+        -l：显示文件系统的很多参数。
+        -j：转换为ext3文件系统。
+
+        可以使用-c 0关掉mount次数达到后的文件系统检查。使用-i 0关掉时间限制。
+        将命令加到/etc/rc.local里，保证重启后也是关掉mount限制及时间限制。
+        双网卡配置
+        双网卡冗余设置，需要根据网络设备配置情况来决定，比如单台SWITCH，那么就可以不需要进行双网卡冗余设置。
+        [root@linux220 network-scripts]# pwd
+        /etc/sysconfig/network-scripts
+        [root@linux220 network-scripts]# more ifcfg-bond0
+        DEVICE=bond0
+        BROADCAST=192.168.2.255
+        IPADDR=192.168.2.220
+        NETMASK=255.255.255.0
+        NETWORK=192.168.2.0
+        GATEWAY=192.168.2.226
+        ONBOOT=yes
+        BOOTPROTO=none
+        USERCTL=no
+        [root@linux220 network-scripts]# more ifcfg-eth0
+        DEVICE=eth0
+        ONBOOT=yes
+        BOOTPROTO=none
+        USERCTL=no
+        MASTER=bond0
+        SLAVE=yes
+        [root@linux220 network-scripts]# more ifcfg-eth1
+        DEVICE=eth1
+        ONBOOT=yes
+        BOOTPROTO=none
+        USERCTL=no
+        MASTER=bond0
+        SLAVE=yes
+
+
+          添加以下行到/etc/rc.local 文件
+          modprobe bonding miimon=100 mode=1
+          ifenslave bond0 eth0 eth1
+
+## ssh免密码登录
+
+采用私钥/公钥的方式可以建立**信任**主机，避免每次输入密码。其原理就是把自己的公钥交给对方，公钥只能解密私钥加密的信息，从而建立信任关系。
+
+    # 主机1
+    ssh-keygen -t rsa # 生成公钥id_rsa.pub
+
+    # 主机2
+    上传pub key到远程主机的用户下
+    cat id_rsa.pub >> .ssh/authorized_keys
+    chmod 600 .ssh/authorized_keys
+    chmod 700 .ssh
+
+## 增量备份(rsync)
+
+
+r - remote，sync是把内存同步到硬盘
+增量备份也会删除，不单只有增加
+
+编辑配置文件`/etc/xinetd.d/rsync`, 设置`disable=no`,然后执行`service xinetd restart`
+
+    /usr/bin/rsync -arHz --progress --delete penny@ip:/website /backup
+    -a 保持所有属性 ls -l
+    -r 递归
+    -H 硬链接
+    -z 优化备份速度
+    --progress 显示执行进程，自动化时不需要
+    -- delete 备份目录同步减少文件
+    -e ssh 通过ssh通道加密
+
+## NFS 网络文件服务
+
+
+缺点: 安全性不好, 优点: 应用性好
+
+    rpm -q portmap
+    rpm -qa | grep nfs
+    service portmap start
+    service nfs start
+    注: portmap一定要优先于nfs启动,从而给nfs提供端口
+
+    rpcinfo -p # 检查服务启动的信息
+配置文件位于 `/etc/exports`
+    /public #允许所有主机访问/public目录
+    /website 192.168.16.0(ro) #允许网段
+配置完成后,重启nfs服务,或者`exportfs -rv`, `showmount -e 192.168.16.155`可查看nfs服务器共享的目录有哪些.
+
+挂载时,先建目录`mkdir /mnt/website`, 再mount `mount 192.168.16.155:/website /mnt/website`, 运行`unmount /mnt/website`
+
+### 自动挂载NFS共享
+
+配置 `/etc/fstab`
+    192.168.16.155:/website /mnt/website nfs ro 0 0
+
