@@ -21,19 +21,19 @@ snippet都极其简单, 如果还要写代码的话, 确实值得掌握. 主要�
 然后顺便看了一下RHCE和RHCA. 发现lampbrother的课程基本是按RHCE的脉络来的, 这门课其实可以直接改为通过RHCE.
 RHCE的范围基本如下:
 
-*Hardware installation and configuration
-*The boot process
-*Linux filesystem administration
-*Package management and Kickstart
-*User and group administration
-*System administration tools
-*Kernel services and configuration
-*Apache and Squid
-*Network file sharing services (NFS, FTP, and Samba)
-*Domain Name System (DNS)
-*E-mail (servers and clients)
-*Extended Internet Services Daemon (xinetd), the Secure package, and DHCP
-*The X Window System
-*Firewalls, SELinux, and troubleshooting
+* Hardware installation and configuration
+* The boot process
+* Linux filesystem administration
+* Package management and Kickstart
+* User and group administration
+* System administration tools
+* Kernel services and configuration
+* Apache and Squid
+* Network file sharing services (NFS, FTP, and Samba)
+* Domain Name System (DNS)
+* E-mail (servers and clients)
+* Extended Internet Services Daemon (xinetd), the Secure package, and DHCP
+* The X Window System
+* Firewalls, SELinux, and troubleshooting
 
 只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.
