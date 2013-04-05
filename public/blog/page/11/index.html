@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Heroku发表了一系列介绍自己内部升级的文章。最重要的变化是开始支持除ruby/rack以外的语言和框架。起先加入了node.js，然后又加入了Clojure. Clojure是跑在jvm上面的一种语言，对这块没研究。 在heroku看来， &hellip;">
+  <meta name="description" content="吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/30/review-of-biograph-for-wjl/">读《吴敬琏传》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-30T18:48:00+08:00" pubdate data-updated="true">Jul 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>吴敬琏是一个中国公共知识分子，以他的市场化经济闻名于当代，最近则日益呼唤法治的市场经济。我所读的这本书正是以他为主人公，由另一名知名的经济作家吴晓波编写。该传从吴的家庭背景和青年时代说起，接着是研究所、文革下放的经历，以及在这段日子中他说接触的前辈、学友，到形成自己对经济制度的认识，留学耶鲁回国后开始成为中央的think tank，尤其是90年代后成为江朱进行市场化经济体制改革的重要理论及方针提供者，进而影响着我们这个国家和社会。03年之后，随着政府的换届，吴也逐步从决策层淡出。此时的他思想也随之有所改变，淡出的因素既有人际关系的问题，更有着深层次的利益冲突的问题。</p>
+
+<p>纵观全书，最有价值的是最后几章，因为问题直指当前的状况，并且也道出了很多失策以及背后运作的原理，而这些又是最紧急的要处理要辨识的。4万亿的实质是什么，会把我们带向何方？出口型的经济必然导致货币通胀以及内需不振。因为货物留出去了，留在自己的只有钱。钱多物少，又如何不通胀？唯一的替代品就是资产价格暴涨，资产主要就是股票、房地产等。而所谓的深化体制改革，基本也只能是空话。意识形态不是根深蒂固的，但是中国人、中国政府、暴君与暴民却是中国固有的，要替换这些东西谈何容易。放弃苏联人那套简单，放弃中国人心中的尾巴就难了，何况有些东西绝不仅仅是思想尾巴那么简单，实际的利益摆在那边，基本无解。</p>
+
+<p>次一级有意思的地方是书的前半段，尤其是吴的出生背景及他的母亲。出生于知识分子家庭，母亲是一个成功的报业企业家，其家族也是有名民营企业家，甚至还参与过铁路的建设，作为资方。包括吴和其太太周南认识的场景、几十年的相濡以沫，都令人十分感动。吴生活的家族是一个伟大的家族。</p>
+
+<p>接下来的描述是本书的主体。但对于读过中国经济改革教程的人来说，这部分就变成了一个很好的背景知识的补充。一些在阅读教程时想了解的东西，比如耶鲁的生活，顾准、sunyefang的介绍更加丰满，毕竟有些东西也不太好在教程里自己直接描述。甚至包括了他如何同中央进行交流等。这些东西合在一起，使得对一个公共知识分子如何发挥作用、影响中国的变革，有了鲜活的了解。</p>
+
+<p>要评价吴敬琏，必须说他所倡导的东西好坏并存，成功与失败并举。这个就不再展开。</p>
+
+<p>得到的另一个结论是，中国的通胀不可避免，冬天早就该到，只是人为的延后了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1352,68 +1398,6 @@ sudo apt-get install openssh-server</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/17/rubygems-cache/">Rubygems的本地化cache</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/akitaonrails/rubygems_proxy.git">本地化rubygem cache的git链接</a></p>
-
-<p>设计思想是：
-1. 将rubygems.com指向本地的地址，例如127.0.0.1;
-2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
-3. 如果本地没有，则先从远端下载到本地，然后再传输回去</p>
-
-<p>这样就保证了自己曾经下载过的gem可以在本地有个案底，既节省下次安装的时间，又获得了备份。</p>
-
-<p>update: 2011.6.19
-直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
-
-<pre><code>unicorn -c unicorn.conf.rb 
-</code></pre>
-
-<p>conf.rb文件的内容</p>
-
-<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
-listen 8080
-</code></pre>
-
-<p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
-
-<p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
-
-<pre><code>gem install bundle --source='http://127.0.0.1:3000'
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -1431,6 +1415,10 @@ listen 8080
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/05/vim-and-lampbroter/">Vim and lampbrother</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/28/the-price-of-oracle/">Oracle的价格</a>
       </li>
     
@@ -1446,15 +1434,11 @@ listen 8080
         <a href="/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/">notes of matz on Ruby 2.0 at herokus waza</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">Deploy a Rails 4 app to Heroku</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (13)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/linux'>Linux (6)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (15)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/软考'>软考 (6)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

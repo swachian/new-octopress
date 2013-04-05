@@ -3,6 +3,7 @@
 
 
 
+
 ## 用户shell选择
 
 Linux as系统所有增加用户一律采用/bin/bash的shell，用户环境变量编辑.bash_profile文件。
@@ -155,7 +156,6 @@ r - remote，sync是把内存同步到硬盘
 
 ## 文件共享 Samba(桑巴)
 
-
 SMB - Server Message Block, 服务器消息块
 `rpm -q samba` #查询是否已安装samba
 `/etc/samba/smb.conf`是samba的配置文件
@@ -178,4 +178,41 @@ SMB - Server Message Block, 服务器消息块
     writable = = yes
 用法3: 建立公共目录，只要不设置`valid users`即可
 用法4：建立部门共享目录/hr，部门每个人都能读写，但不能删除别人的文件。秘诀是`chmod` `hr`下面的各目录权限。
+
+## linux存档、压缩
+
+`tar cf myfile.tar files/` 归档, `tar czf myfile.tar.gz files/`压缩归档.
+`tar -tf m.tar` 查看tar文件, `j`替换`z`就把gz格式换成`bz2`.
+`tree`可以看目录结构.
+`tar -xvf m.tar.gz -C dest`  , 解压到指定目录.
+
+## 磁盘阵列
+
+1.创建raid
+
+    mdadm -C /dev/md0 -ayes -l0 -n2 /dev/sd[a,b]1
+    mdadm -C /dev/md0 -ayes -l1 -n2 /dev/sd[a,b]1
+    mdadm -C /dev/md0 -ayes -l5 -n3 -x1 /dev/sd[a,b,c,c]1
+
+`-C`: 创建, 以`md`开头的都是raid, `-ayes`激活, `-l0`: 等级, `-n2`: 数量, `/dev/sd[a,b]1`: 纳入的设备
+`-x1`是热备盘的意思
+
+2. 格式化及加载
+
+`cat /proc/mdstat` 命令查看创建进度 , `mkfs.ext3 /dev/md0` 格式化raid为ex3格式, `mount /dev/md0 /mnt`挂载磁盘.
+`/etc/fstab`文件添加一行, `/dev/md0   /raid5disk    ext3   defaults  0 0`
+
+3. 删除、添加一个阵列
+
+`fdisk -l` 查看磁盘状况.
+`fdisk /dev/sdb` 对新硬盘进行操作, `m` for help, 根据提示再增加新的分区, 可以直接加为扩展分区(避免主分区的冲突),会直接以5开头. 产生 `/dev/sdb5` 和 `/dev/sdb6`
+
+`partprobe`同步磁盘配置生效, `blkid`可现实磁盘状况.
+
+`mdadm -D /dev/md0` 查看做好的磁阵的信息. `chunk size`表示多少个字节写到一个磁盘.
+
+20'
+
+
+
 
