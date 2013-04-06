@@ -211,8 +211,43 @@ SMB - Server Message Block, 服务器消息块
 
 `mdadm -D /dev/md0` 查看做好的磁阵的信息. `chunk size`表示多少个字节写到一个磁盘.
 
-20'
+`umount /md0` , `mount -a` 测试自动挂载是否成功
+
+4. 彻底删除
+
+`mdadm -S /dev/md0` 停止raid, 停之前先`unmount`,最后擦掉超级快 `mdadm --zero-superblock /dev/sdb[5,6]`
+
+`mdadm -Ds`可查看raid建立情况, 在6.0(新版linux内核)中需要执行`echo `mdadm -Ds`>>/etc/mdadm.conf` 把配置写入,否则会从md127开始编号
 
 
+## lvm(逻辑卷管理)
+
+屏蔽磁盘和分区的细节.
+
+PV - 物理卷 ->(加) VG(卷组, 池)  ->(分) 逻辑卷
+
+### 新建
+
+和raid一样,先`fdisk` 分区 , 随后创建物理pv: `pvcreate /dev/sdb{12..14}`, 然后创建vg: `vgcreate vg0 /dev/sdb{12..14}`, 查看: `pvs`, `vgs`, `lvs`, 再创建lv: `lvcreate -L +100M -n1v0 /dev/vg0`, 最后再格式化和加载.
+
+### 扩充
+
+扩充lv: `lvextend -L +100M /dev/vg0/lv0`, 在线生效: `e2fsck -f /dev/vg0/lv0` && `resize2fs /dev/vg0/lv0`
+
+扩充vg: `vgextend vg0 /dev/sdbx`
+
+### 删除
+
+先`umount`, 再`lvremove`
+
+## Redhat 的策略和CentOS
+
+[Redhat的版权回答](http://www.myexception.cn/linux-unix/272971.html)
+
+> RHEL 仍然要遵守 GPL 协议！
+但是 RHEL 以另外一种方式来操作：
+收费用户提供binary版本并提供售后服务，binary是RPM格式的，刻录成光碟可以直接安装；
+免费用户可以得到RPMS版本，即原代码，不能直接安装，必须用户自己编译，当然，也没有售后服务。
+http://www.centos.org/ 编译有CentOS 与RHEL 一致的binary
 
 
