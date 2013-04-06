@@ -244,10 +244,12 @@ PV - 物理卷 ->(加) VG(卷组, 池)  ->(分) 逻辑卷
 
 [Redhat的版权回答](http://www.myexception.cn/linux-unix/272971.html)
 
-> RHEL 仍然要遵守 GPL 协议！
-但是 RHEL 以另外一种方式来操作：
-收费用户提供binary版本并提供售后服务，binary是RPM格式的，刻录成光碟可以直接安装；
-免费用户可以得到RPMS版本，即原代码，不能直接安装，必须用户自己编译，当然，也没有售后服务。
-http://www.centos.org/ 编译有CentOS 与RHEL 一致的binary
+> RHEL 仍然要遵守 GPL 协议！  
+但是 RHEL 以另外一种方式来操作：  
+收费用户提供binary版本并提供售后服务，binary是RPM格式的，刻录成光碟可以直接安装；  
+免费用户可以得到RPMS版本，即原代码，不能直接安装，必须用户自己编译，当然，也没有售后服务。  
+http://www.centos.org/ 编译有CentOS 与RHEL 一致的binary  
+
+Linux/Unix 发展的组件因素: C 语言、TCP/IP、自由软件运动. 移植和分享.
 
 
