@@ -244,12 +244,65 @@ PV - 物理卷 ->(加) VG(卷组, 池)  ->(分) 逻辑卷
 
 [Redhat的版权回答](http://www.myexception.cn/linux-unix/272971.html)
 
-> RHEL 仍然要遵守 GPL 协议！  
-但是 RHEL 以另外一种方式来操作：  
-收费用户提供binary版本并提供售后服务，binary是RPM格式的，刻录成光碟可以直接安装；  
-免费用户可以得到RPMS版本，即原代码，不能直接安装，必须用户自己编译，当然，也没有售后服务。  
-http://www.centos.org/ 编译有CentOS 与RHEL 一致的binary  
+> RHEL 仍然要遵守 GPL 协议！
+但是 RHEL 以另外一种方式来操作：
+收费用户提供binary版本并提供售后服务，binary是RPM格式的，刻录成光碟可以直接安装；
+免费用户可以得到RPMS版本，即原代码，不能直接安装，必须用户自己编译，当然，也没有售后服务。
+http://www.centos.org/ 编译有CentOS 与RHEL 一致的binary
 
 Linux/Unix 发展的组件因素: C 语言、TCP/IP、自由软件运动. 移植和分享.
+
+## 硬链接、软链接
+
+`ls` 命令中, 第2列是表明有多少个硬链接(指向inode的引用)
+
+    drwxr-xr-x  4 root    root        4096 2012-06-27 13:34 ../
+
+`ln -s from to`软链接, `ln from to` 创建硬链接,实际上就是指向inode,因此硬链接不能跨设备/跨分区
+
+`umask 0022`
+
+## 查找文件
+
+`which`, `whereis`
+
+`find`
+
+    # 选项 -name
+    find . -name init # 精确查找
+    find . -name init\* #通配符,匹配任意字符,包括0个字符
+    find . -name init?  # 匹配单个字符
+
+    # 选项 -size, 文件大小 block数据块, 512字节=0.5KB
+    find / -size +204800 # 大于100MB的文件
+    find / -size -204800 # 小于100MB的文件
+
+    # 选项 -user, 文件所有者
+    find / -user helen
+
+    # 选项 -type, f 普通文件, l: 软链接文件, d: 目录
+    find /etc -name init* -a -type l
+
+    # 选项 时间(天) ctime, atime, mtime
+    # 分钟 cmin, amin, mmin
+    # c-change 改变, 表示文件的属性被修改过,所有者/权限等
+    # a-access 访问
+    # m-modify 修改, 表示正文内容被修改
+    # -之内, +超过
+    find /etc/ --mmin -120
+
+    # 连接符
+    # 1. -a and 与操作,  -o or  或操作
+    find /etc -size +163840 -a -size -204800 #查找大于80MB小于100MB的文件
+    # 2. find ... -exec 命令 {} \; # {}find 查找的结果, \执行命令的本意, \;必须联合写
+    find /home -user helen -exec rm -rf {} \; #-ok 会操作前询问
+    find . -inum 16 -exec rm {} \; # 根据i节点号查找
+
+`grep`
+
+
+
+
+
 
 
