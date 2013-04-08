@@ -300,9 +300,15 @@ Linux/Unix 发展的组件因素: C 语言、TCP/IP、自由软件运动. 移植
 
 `grep`
 
+## 帮助命令
+
+`man`, `whatis`
 
 
+## 软件包管理
 
+### rpm
 
+`rpm -e` 卸载软件包 `--nodeps` 强行卸载
 
 
