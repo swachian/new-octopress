@@ -328,3 +328,42 @@ Linux/Unix 发展的组件因素: C 语言、TCP/IP、自由软件运动. 移植
 
 还有一类就是脚本安装, 这是参照windows的.
 
+## Linux 引导流程
+
+    firmware(CMOS/BIOS)      ->  POST加电自检
+    自举程序BootLoader(GRUB) -> 载入内核
+    载入Kernel               -> 驱动硬件
+    启动init进程             -> 读取执行配置文件/etc/inittab
+
+### 加电自检
+
+与os无关, 只与硬件架构有关.
+`hwclock` 硬件时钟, 与sysclock操作系统时间对应.
+
+### 读取MBR(主引导记录), 载入自举程序
+
+在0磁头0扇区, 存放着BootLoader 和 分区表.
+
+GRUB Lilo 都是BootLoader. windows的则是ntldr(new technology)修改windows的`boot.ini`可更改启动对象.
+
+`/etc/grub.conf`, linux的BootLoader配置文件. 作用在于载入内核.
+
+### 内核(驱动硬件)
+
+1. 识别硬件.内核中大部分都是驱动.
+2. 启动进程init(pid=1)
+
+PID为0的进程是内容调度器(kernel scheduler), 父进程消亡子进程必须消亡, 所以孤儿进程的父进程会变成init.
+
+### /etc/inittab
+
+runlevels: `id:5:initdefault`, `runlevel`: 查看运行级别, `init [0-6,Ss]`: 切换运行级别
+
+`id:run-levels:action:process`
+
+* action(状态)
+  - initdefault
+  - sysinit 系统启动就执行
+
+
+
