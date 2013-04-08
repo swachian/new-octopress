@@ -310,5 +310,21 @@ Linux/Unix 发展的组件因素: C 语言、TCP/IP、自由软件运动. 移植
 ### rpm
 
 `rpm -e` 卸载软件包 `--nodeps` 强行卸载
+`rpm -i` 安装
+`rpm -q` 或 `rpm -qa` 查询某软件包
+选项: `--excludedocs`: 不安装文档, `--prefix=`: 安装目录,不过大部分rpm包不允许指定目录, `--test`: 只对安装软件进行测试,并不实际安装, `--replacefiles`: 覆盖安装.
 
+### yum
+
+自动解决依赖关系, 方便的软件包升级
+
+`yum install`, `yum check-update`, `yum update`, `yum info`: 提示软件安装包的介绍, `yum remove`: 删除
+
+### 源码安装
+
+源码安装需要指定固定目录,因为不像rpm包有固定的位置可通过命令删除.
+
+`configure` 主要是针对不同平台搜集信息的,所以有些只适用于linux的软件,也就没必要configure了.
+
+还有一类就是脚本安装, 这是参照windows的.
 
