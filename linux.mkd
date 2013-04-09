@@ -393,4 +393,14 @@ runlevels: `id:5:initdefault`, `runlevel`: 查看运行级别, `init [0-6,Ss]`: 
 
 grub也可以设置密码. `/etc/grub.conf` 增加`passwrod --md5 密文`
 
+## 用户管理
 
+### 用户类型
+
+超级用户(UID=0), 普通用户: UID 500-60000, 伪用户: UID 1-499
+
+### 用户的元文件
+
+用户信息文件: `/etc/passwd`, 密码文件: `/etc/shadow`, 用户组文件: `/etc/group`, 用户组密码文件: `/etc/gshadow`,
+用户配置文件: `/etc/login.defs` `/etc/default/useradd`, 新用户信息文件: `/etc/skel`,
+登录信息: `/etc/motd` `/etc/issue`
