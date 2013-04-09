@@ -3,7 +3,6 @@
 
 
 
-
 ## 用户shell选择
 
 Linux as系统所有增加用户一律采用/bin/bash的shell，用户环境变量编辑.bash_profile文件。
@@ -364,6 +363,34 @@ runlevels: `id:5:initdefault`, `runlevel`: 查看运行级别, `init [0-6,Ss]`: 
 * action(状态)
   - initdefault
   - sysinit 系统启动就执行
+  - respawn 总会再开这个服务
 
+## 设置服务自启动
+
+`etc/init.d` 下面, 在 `/etc/rc.d/rcx.d/`下面建立S开头的软链接.
+
+`chkconfig` 检查运行状态, `chkconfig --levels 2345 sshd off`
+
+### 检查硬件
+
+`dmesg | grep` 能够找当前识别的硬件信息.
+
+`/var/log/messages` 中存放有日志信息.
+
+## GRUB配置
+
+    title CentOS(www)
+    root (hd0,0)
+    kernel /boot/vmlinuz-2.6.18-274.18.1.el5 ro root=LABEL=/1 rhgb quiet #定义内核所在的位置
+    initrd #载入镜像文件
+
+### ROOT密码忘记(单用户模式应用)
+
+`e`: 编辑当前的启动菜单项, `b`: 启动当前菜单项
+
+按e编辑kernel, 在后面加一个数字就表示运行级别, 空格1表示单用户模式, 回车以后按b就可以运行.
+**单用户模式进入系统不需要密码.**
+
+grub也可以设置密码. `/etc/grub.conf` 增加`passwrod --md5 密文`
 
 
