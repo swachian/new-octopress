@@ -452,4 +452,30 @@ SetUID=4, 或者u+s, `chmod u+s`, `chmod 4755`
 * xinetd     - 监听由某进程负责, 收到请求后转发
 * atd crond 计划任务
 
+## Linux 文件系统管理
 
+### 文件系统构成
+
+所有设备都放在 `/dev` 下, `lost+found` 存放一些出错信息
+
+`df -h`: 查看分区空间, `du -sh /`: 查看目录的大小
+`fsck -y /dev/sda2`: file system check, `e2fsck -p`: 检测文件系统及修复文件系统
+`file`: 判断文件类型.
+
+### 设备挂载
+
+`mount /dev/cdrom /mnt/cdrom`: 挂载光驱, `umount`: 卸载目录设备
+
+### 分区与格式化原理
+
+`fdisk`
+
+`mkfs`
+
+`mount`
+
+写入`/etc/fstab`
+
+### 磁盘配额
+
+看到第42分钟.
