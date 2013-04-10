@@ -404,3 +404,20 @@ grub也可以设置密码. `/etc/grub.conf` 增加`passwrod --md5 密文`
 用户信息文件: `/etc/passwd`, 密码文件: `/etc/shadow`, 用户组文件: `/etc/group`, 用户组密码文件: `/etc/gshadow`,
 用户配置文件: `/etc/login.defs` `/etc/default/useradd`, 新用户信息文件: `/etc/skel`,
 登录信息: `/etc/motd` `/etc/issue`
+
+## 特殊是权限`s`
+
+`SetUID=4` 置位后会以所有者权限运行.
+
+范例: 1: 将touch命令授予S位, 2: 将vi授予S位, 3: 查找SetUID程序 `find / -perm -4000 -o -perm -2000`
+
+SetUID=4, 或者u+s, `chmod u+s`, `chmod 4755`
+
+`SetGID=2`
+
+`粘着位=1`, 针对其他人、针对目录且目录的权限是777, 置位后每个用户只能删除该目录下自己是所有者的文件
+
+## John ripper
+
+`run/unshadow /etc/passwd /etc/shadow > /tmp/test.shadow`
+`run/john /tmp/test.shadow`
