@@ -421,3 +421,35 @@ SetUID=4, 或者u+s, `chmod u+s`, `chmod 4755`
 
 `run/unshadow /etc/passwd /etc/shadow > /tmp/test.shadow`
 `run/john /tmp/test.shadow`
+
+## 进程管理
+
+`ps -aux`, `ps -ef`, `ps -uU user`, `pstree`
+`kill`, `killall httpd`,
+
+`/proc/partitions`, `/proc/cpuinfo`, `/proc/memory`
+`pgrep httpd`, `pkill httpd`
+
+`nohup`
+
+### 进程的挂起和中止
+
+`ctrl z`: 挂起, `ctrl c`: 中止,  `jobs`: 找出正在后台运行的进程
+`fg 1`: 恢复到前台运行, `bg 1`: 放到后台运行
+
+`top`, `-u`: 查某用户, `k`: 在里面直接杀死
+
+
+## 计划任务
+
+`at -f at.script hh:mm MM/DD/YY`, 位于`/var/spool/at`
+
+`crontab {-l|-r|-e}`
+
+## 进程处理方式
+
+* standalone - 自己监听端口
+* xinetd     - 监听由某进程负责, 收到请求后转发
+* atd crond 计划任务
+
+
