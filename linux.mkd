@@ -468,14 +468,40 @@ SetUID=4, 或者u+s, `chmod u+s`, `chmod 4755`
 
 ### 分区与格式化原理
 
-`fdisk`
+`fdisk`: 分区, `m`: 帮助, `p`: 显示分区表, `n`: 添加新分区, `t`: 改变分区文件, `w`: 保存分区操作.
 
-`mkfs`
+`mkfs`: 格式化, `mkfs -t ext3` 或者 `mkfs.ext3 /dev/sdb1 `
 
-`mount`
+`mount`, 先建立目录, 然后`mount /dev/sdba /web`
 
 写入`/etc/fstab`
+`物理分区名/卷标    挂载点  文件系统类型 缺省设置  是否检测(1/0) 检测顺序(0,1,2)`
+
+### 扩容swap实例
+
+`dd if=/dev/sda1 of=/dev/sda2`:  拷贝sda1到sda2
+`dd if=/dev/zero of=/var/swap/file.swp bs=1024k count=64`: `bs`是blocksize, count是写n次block
+`mkswap /var/swap/file.swp`, `swapon /var/swap/file.swp`
 
 ### 磁盘配额
 
-看到第42分钟.
+1. 修改`/etc/fstab`: `/dev/sd3 /home ext3 defaults,usrquota 1 2`, && `mount -o remount /home`
+2. `quotacheck -cvug /test`, 会产生`aquota.user` 配置文件
+3. `quotaon /test`: 启动配额功能, `quotanoff`: 关闭.
+4. `edquota helen`: 编辑用户信息
+
+软限制: 只是警告, 硬限制: 超出则报错.
+
+## 备份
+
+备份的分区可以需要时再mount
+
+`cp -Rpu`: 增量备份, `-p`:不修改时间, `-u`: 增量备份
+
+`tar` 可同时打包多个目录
+
+### 备份日志表格范例
+
+- 机器名称 IP地址 存放位置
+- 截止及编号
+- 备份命令
