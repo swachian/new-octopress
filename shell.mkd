@@ -28,3 +28,32 @@
 `$*`: 列出所有的位置变量
 `$#`: 产出的个数
 `$$`: 进程的pid
+`$0`: 命令本身
+
+## Shell命令
+
+
+`read first second third`: 读取输入, `sh -x` 会显示执行过程
+
+`expr $var1 - 5`: 整数型算数运算, 符号中间要有空格, `*`需要转义
+
+### 测试条件
+
+`test`: 测试条件
+
+    test str1=str2 测试字符串
+    test str1!=str2 不相等
+    test str1  测试是否不为空
+    test -n str1 测试是否不为空
+    test -z str1 测试是否为空
+
+    test int1 -eq int2 相等
+    test int1 -ge ints >=
+    -gt -le -lt -ne(不相等)
+
+    test -d file 是否为目录
+    test -f file 是否为常规文件
+    test -x file 是否可执行, -r -w
+    test -a file 是否存在(可访问)
+    test -s file 文件的大小是否非0
+
