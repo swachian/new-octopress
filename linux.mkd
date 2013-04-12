@@ -505,3 +505,50 @@ SetUID=4, 或者u+s, `chmod u+s`, `chmod 4755`
 - 机器名称 IP地址 存放位置
 - 截止及编号
 - 备份命令
+
+## Linux 网络设置
+
+`arp -a`, `arp -d ip`, `arp -s ip mac`
+`rarp`: 反向查询ip地址
+
+### 域名解析
+
+`/etc/hosts`: `ip 主机名或域名  别名`
+
+DNS
+
+### 网卡
+
+`ifconfig eth0:1 ip2`: 设置两个ip地址, bond技术
+
+### 网卡配置文件
+
+    /etc/sysconfig/network-scripts/ifcfg-eth0下
+    IPADDR=新IP地址
+    GATEWAY=网关
+    NETMASK
+
+### 主机名
+
+    /etc/sysconfig/network
+    HOSTNAME=主机名
+
+`/etc/rc.d/init.d/network star/stop/restart`
+
+`/etc/services`: 网络服务信息的文件
+
+### DNS服务器地址指定
+
+    /etc/resolv.conf # 指定DNS服务器
+    nameserver ip # 一般最多设置3个
+
+### 几个网络命令
+
+`ifconfig `
+`ethtool eth0`: 检测网卡链接
+`arp`
+`ping`, `-s`可指定ping包的大小
+`route`: 操作路由表, 一般可以写到sysconfig的配置文件里面
+**zerba**路由器软件, 类似cisco的操作命令.
+
+
