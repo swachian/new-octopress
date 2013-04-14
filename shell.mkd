@@ -57,3 +57,54 @@
     test -a file 是否存在(可访问)
     test -s file 文件的大小是否非0
 
+`if [ str1=str2] ` 等价于 `if test str1=str2`
+
+## 流控制语句
+
+`if []; then elif else fi`
+
+`-a` `-o` 做逻辑与或
+
+    for 变量 in 名字表
+    do
+        命令列表
+    done
+
+例子: kill一个用户的全部进程
+
+### select
+
+    select var in list list2
+    do
+       break
+    done
+    # 会列出内容共大家选择
+
+### case
+
+    case  变量 in
+        字符串1) 命令列表
+            ;;
+        字符串n) 命令列表n
+            ;;
+         *)
+    esac
+
+### while
+
+    while
+    do
+        ...
+    done
+
+循环里面有 `break` 和`continue`
+
+### 屏蔽交互式的命令
+
+`echo 123456 | passwd --stdin shedon`
+
+## awk
+
+awk -F分隔符 `命令`
+
+35'
