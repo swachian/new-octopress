@@ -103,8 +103,15 @@
 
 `echo 123456 | passwd --stdin shedon`
 
+## 函数应用
+
+    start() {
+
+    }
+
+    start # 不带()
+
 ## awk
 
 awk -F分隔符 `命令`
 
-35'
