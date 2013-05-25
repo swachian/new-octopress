@@ -4,7 +4,7 @@
   <title><![CDATA[分类: heroku | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-05-25T13:16:12+08:00</updated>
+  <updated>2013-05-25T14:40:41+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[折腾记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji/"/>
+    <updated>2013-05-25T14:35:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji</id>
+    <content type="html"><![CDATA[<p>人总是免不了折腾。用什么虚拟机工具可以折腾，用什么linux发行版本也可以折腾。这些都搞定了，发行墙又来和我们折腾。
+Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方案，但发现还真是折腾。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Deploy a Rails 4 app to Heroku]]></title>
