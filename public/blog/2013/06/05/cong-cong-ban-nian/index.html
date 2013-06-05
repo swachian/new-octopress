@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Heroku's Buildpacks and Redeploy for jekyll and octopress - Hegel2011的博客</title>
+  <title>匆匆半年 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Heroku是永远能给人带来惊喜的厂商，Builpacks
-只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成buildpack。
-难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。 试了一下， &hellip;">
+  <meta name="description" content="不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。 有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。 说句实话，这半年过的还不错。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/06/05/cong-cong-ban-nian/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Heroku's Buildpacks and Redeploy for Jekyll and Octopress</h1>
+      <h1 class="entry-title">匆匆半年</h1>
     
     
       <p class="meta">
@@ -87,28 +85,18 @@
   
 
 
-<time datetime="2012-07-21T09:46:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
+<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
-只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
-难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
+<div class="entry-content"><p>不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。</p>
 
-<p>试了一下，jekyll的是完全可以产生的。但是对octopress并非完全适用。
-首先，对heroku而言，默认有一个<code>.slugignore</code>文件中会把source等3个文件排除在外，而没有这3个文件无法generate。但有了这3个文件，slug的体积就变大。</p>
+<p>有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。</p>
 
-<p>其次，有个gem需要使用python的库，无法在heroku上直接运行。</p>
-
-<p>而作为苦逼的中国用户，还会碰到编码问题。</p>
-
-<p>合在一起，其实原因可归结为一个，即如果generate牵涉的东西太多则不适合在heroku这样的平台按照 build/run的方式使用，毕竟环境不是完全能模拟本机的，
-也不是自己的服务器环境可以自己装。</p>
-
-<p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
+<p>说句实话，这半年过的还不错。只是飙升的体重真的要想办法调整才行了。</p>
 </div>
 
 
@@ -131,12 +119,12 @@
   
 
 
-<time datetime="2012-07-21T09:46:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
+<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/heroku/'>heroku</a>, <a class='category' href='/blog/categories/神器/'>神器</a>
+    <a class='category' href='/blog/categories/生活/'>生活</a>
   
 </span>
 
@@ -145,7 +133,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/06/05/cong-cong-ban-nian/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/06/05/cong-cong-ban-nian/" >Tweet</a>
   
   
   
@@ -154,10 +142,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/07/13/levels/" title="Previous Post: levels">&laquo; levels</a>
+        <a class="basic-alignment left" href="/blog/2013/05/25/zhe-teng-ji/" title="Previous Post: 折腾记">&laquo; 折腾记</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/" title="Next Post: Mange It! Your Guide to Progmatic Project Management">Mange It! Your Guide to Progmatic Project Management &raquo;</a>
       
     </p>
   </footer>
