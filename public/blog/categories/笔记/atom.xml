@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-06-06T06:57:37+08:00</updated>
+  <updated>2013-06-05T21:08:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -24,12 +24,12 @@
 
 <p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
 
-<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。
+<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
 关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
 
-<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。
-所以常常被大公司用了作为日志和搜索系统。
-colum里面存放的是map。
+<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
+所以常常被大公司用了作为日志和搜索系统。<br/>
+column里面存放的是map。<br/>
 journaling = write-ahead logging.</p>
 
 <p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。

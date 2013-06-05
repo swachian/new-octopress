@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-06-06T06:57:37+08:00</updated>
+  <updated>2013-06-05T21:08:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -41,7 +41,8 @@
 <li>[x] <a href="/blog/2013/02/19/about-awk/">AWK,The Awk programming language.</a> 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。</li>
 <li>[x] <a href="/blog/2013/03/16/sass-and-compass/">Pragmatic Guide to Sass</a> 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的</li>
 <li><a href="">Spring in Action</a> in action系列确实不错, java web依然让人痛苦不堪. 概念还是讲的不错的。</li>
-<li><a href="">seven databases in seven weeks</a>， 不是seven days，慢慢来吧</li>
+<li><a href="/blog/2013/06/06/7dbs-in-7wks/">seven databases in seven weeks</a>， 不是seven days，慢慢来吧，收货颇丰。尤其是对HBase Redis的了解，也第一次接触到了Neo4j。</li>
+<li><a href="">seven languages in seven weeks</a>， 看了第一个Ruby，复习了下yield，把metaprogramming局限在了open class、method_missing和module include。</li>
 <li>Thomas Kyte, Expert Oracle Database Architecture.pdf</li>
 <li>余红春,构建高可用Linux服务器,机工</li>
 <li>Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional</li>
@@ -65,7 +66,7 @@
 <li><a href="/blog/2013/01/14/out-the-firm/">阿朱，走出软件作坊，电工</a>， it职场经验谈，有一定局限，但作者的勇气确实可嘉</li>
 <li><a href="/blog/2013/01/20/hackers-and-painters/">Paul Graham。 Hackers &amp; Painters.</a>，前后看了十来天，一开始中英双语，后来还是直接看中文了。创业教父之名名不虚传。</li>
 <li><a href="">何飞鹏,自慢</a> 一般般，跟传统那套差不多，决定不继续看下去了，还不如张超的书实在</li>
-<li>A&amp;R, Why nations fail, 来自DHH的推荐，看下来感觉很不错</li>
+<li><a href="">A&amp;R</a>, Why nations fail, 来自DHH的推荐，看下来感觉很不错</li>
 </ol>
 
 

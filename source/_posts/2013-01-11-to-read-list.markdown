@@ -16,15 +16,15 @@ categories:
 2. [x] [AWK,The Awk programming language.](/blog/2013/02/19/about-awk/) 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。
 1. [x] [Pragmatic Guide to Sass](/blog/2013/03/16/sass-and-compass/) 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的
 1. [Spring in Action]() in action系列确实不错, java web依然让人痛苦不堪. 概念还是讲的不错的。
-1. [seven databases in seven weeks]()， 不是seven days，慢慢来吧
-1. Thomas Kyte, Expert Oracle Database Architecture.pdf
+1. [seven databases in seven weeks](/blog/2013/06/06/7dbs-in-7wks/)， 不是seven days，慢慢来吧，收货颇丰。尤其是对HBase Redis的了解，也第一次接触到了Neo4j。
+1. [seven languages in seven weeks]()， 看了第一个Ruby，复习了下yield，把metaprogramming局限在了open class、method_missing和module include。
+0. Thomas Kyte, Expert Oracle Database Architecture.pdf
 3. 余红春,构建高可用Linux服务器,机工
 1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O'Reilly
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
 1. 谭云杰,大象--Thinking in UML，水利水电
 1. 谢希仁.计算机网络，电工
-
 
 ## 经管
 
@@ -39,7 +39,8 @@ categories:
 3. [阿朱，走出软件作坊，电工](/blog/2013/01/14/out-the-firm/)， it职场经验谈，有一定局限，但作者的勇气确实可嘉
 1. [Paul Graham。 Hackers & Painters.](/blog/2013/01/20/hackers-and-painters/)，前后看了十来天，一开始中英双语，后来还是直接看中文了。创业教父之名名不虚传。
 1. [何飞鹏,自慢]() 一般般，跟传统那套差不多，决定不继续看下去了，还不如张超的书实在
-1. A&R, Why nations fail, 来自DHH的推荐，看下来感觉很不错
+1. [A&R](), Why nations fail, 来自DHH的推荐，看下来感觉很不错
+
 
 ## 文化
 
