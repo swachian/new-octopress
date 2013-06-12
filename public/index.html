@@ -171,6 +171,50 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T21:32:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近发现淘宝的前端大牛似乎想往后端发展，摆脱只做前端的印象；<br/>
+另一方面, teahour上的人却认为越来越多的工作从服务器往前端在靠，投入在javascript上面的工作量和时间越来越多。单用围城效应这个不是太能解释的通。</p>
+
+<p>以我个人这段时间的开发经验来看，前端很多事情和很细小，消耗的时间确实很多。比较起来，在这方面花费太多的时间如果能移到后端的话，确实可以完成更多的事情。从Get Things Done的角度而言，前端的意义是不如后端的。毕竟无论界面多么花哨，真正值得关注的还是内容。就像我们去淘宝，不是因为界面有多炫，而是里面的商品价格等吸引着我们。</p>
+
+<p>然而，事情又不那么简单。首先，世上的事情一定要Get Done的讲穿了也不多，如果只盯着最有意义的事情，那么只有长生不老，而这个完成不了的话其实做任何事情最后都是徒劳的。因此，忽视前端的效果是不对的。   其次，前端可以吸引眼球，也和少挨骂有重要相关的作用。虽然吸引我上淘宝的不是其界面，但如果他的界面很傻，那么作为用户还是会骂的。当然，比起完事界面确实是次要的。就像我能忍受12306的界面，只要他能让我订完票能兑现就一切ok。<br/>
+还有一点，没有好的前端，服务根本吸引不了人。毕竟大部分人也不会有什么杀手级的内容，这个时候比拼界面反而是能反应团队的水平及做事用心的程度。</p>
+
+<p>所以，我的结论是，如果后端和内容有足够重要的事情，那么还是围绕后端。反之，有余力后可关注前端。毕竟门面功夫也不可小觑。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/05/25/zhe-teng-ji/">折腾记</a></h1>
     
     
@@ -727,104 +771,6 @@ Anniversary-driven development</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">Deploy a Rails 4 App to Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-04T20:03:00+08:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
-为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
-在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
-
-<h3>0 事先准备</h3>
-
-<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
-但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
-
-<h3>1 创建应用</h3>
-
-<p>首先执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heroku apps:create user-agent-show2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样会在heroku处创建一个stack，目前版本是<code>cedar</code>. 同时，在.git/config里面会增加一个heroku分支</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[remote "heroku"]
-</span><span class='line'>        url = git@heroku.com:user-agent-show.git
-</span><span class='line'>        fetch = +refs/heads/*:refs/remotes/heroku/*</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2 Git push</h3>
-
-<p>随后就可以执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git push heroku</span></code></pre></td></tr></table></div></figure>
-
-
-<p>部署应用了。
-但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
-基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
-
-<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
-因为rails 4默认生成environments/production.rb中是这样配置的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = false</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
-对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = true</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样才能保证静态文件被正常访问。</p>
-
-<h3>3 数据库更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heroku run rake db:migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -848,15 +794,15 @@ Anniversary-driven development</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/25/zhe-teng-ji/">折腾记</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/04/08/ruankao-qian-jiming/">软考的名次</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/05/vim-and-lampbroter/">Vim and lampbrother</a>
       </li>
     
   </ul>
