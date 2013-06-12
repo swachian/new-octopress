@@ -9,16 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="heredocs是什么 heredocs适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的 1
-2
-3
-4
-5
-text = &lt;&lt;END
-aaa
-bbb
-ccc
-END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱在于最后一行的缩进。 &hellip;">
+  <meta name="description" content="The Rails View有pdf版。
+是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
+提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +68,112 @@ END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/24/the-rails-view/">The Rails View</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-24T12:11:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
+是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
+提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
+
+<p>(待续)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/23/arp-binding/">Arp 绑定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-23T11:46:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>通过ftp备份老是报告登录失败。检查过后，网管告知我们是ip被抢。照理是需要网管执行纪律的，但是这个我就不越俎代庖，反正
+解决问题为主。而且即便执行纪律也不保证下次就不会发生。于是想起来直接绑定arp和ip，这样可以<strong>根除</strong>此类问题。</p>
+
+<p>主要参考了<a href="http://www.xxlinux.com/linux/article/network/security/20070809/9234.html">Linux下绑定IP和MAC地址，防止ARP欺骗</a>.</p>
+
+<p>1.检查当前arp</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -a</span>
+</span><span class='line'>? <span class="o">(</span>192.168.203.22<span class="o">)</span> at 00:A0:D1:E5:D1:A9 <span class="o">[</span>ether<span class="o">]</span> on eth0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.建立一个mac->ip的对应文件： ip-mac, 将IP和MAC写入才文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;192.168.202.19 00:26:b9:4c:8d:af&#39;</span> &gt; /etc/ip-mac
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.手动执行绑定</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -f /etc/ip-mac</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>上面的内容也可以存入<code>/etc/rc.d/rc.local</code> ,这样可以实现开机自动绑定。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -906,198 +1005,6 @@ END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/08/about-salesforce/">About Salesforce</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-08T13:41:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Salesforce.com在1999年由前甲骨文高管 Marc Benioff 创立，他创办Salesforce的核心理念就是&#8221;No Software（消灭软件）&#8221;. 指消灭安装在企业内部的软件，
-转而使用互联网上的服务。</p>
-
-<p>Salesforce的主要产品包括Sales Cloud（CRM）、Service Cloud、Chatter和Force.com等。下面是它的主要发展史：</p>
-
-<ul>
-<li>1999年，Salesforce在美国旧金山成立。</li>
-<li>2001年，推出了第一款SaaS应用CRM，同时也受到众多厂商和客户的热议。</li>
-<li>2004年，Sunguard成为Salesforce第1000位用户。</li>
-<li>2005年，推出了名为&#8221;AppExchange&#8221;的程序商店，以丰富用户选择。</li>
-<li>2006年，推出了首个运行在云计算平台的语言Apex，并在语法上类似Java。</li>
-<li>2007年，推出了它的PaaS平台Force.com，来让用户更方便地在Saleforce平台上开发在线应用，同时Salesforce凭借Force.com得到了华尔街日报的科技创新奖（Technology Innovation Award）。</li>
-<li>2009年，Salesforce成为首家年收入达到10亿美元的云计算公司，并在年初推出了名为&#8221;Service Cloud&#8221;在线客户服务应用。</li>
-<li>2010年，Salesforce将推出名为&#8221;Chatter&#8221;的企业级在线SNS服务，类似于企业内部的&#8221;LinkedIn&#8221;，同时其CRM应用已更名为&#8221;Sales Cloud&#8221;。</li>
-</ul>
-
-
-<p>实现了多租户的模型，即每个用户享有一个虚拟出的应用实例，背后的数据库设计是关键。</p>
-
-<p>Salesforce 团队不仅做了优化，
-而且凭借着其很多核心成员来自于 Oracle 的背景，在数据库端做了很多高水平的优化，比如添加了很多貌似累赘的 Pivot 表来加快部分常用数据的读取。</p>
-
-<p>salesforce的核心竞争力在于他们的数据库优化。<br/>
-他的s云就跑在他们的p云上面，他们的p云叫做force。有一套类似java的语言，允许他人作二次开发后进行部署。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/02/all-aoubt-dba-notes/">[冯大辉博客](http://www.dbanotes.net/)有感</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-02T12:35:00+08:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>应该也是78-79年出生，2000到2001之间开始工作。2005年3月冯去了杭州支付宝。</p>
-
-<p>从他的言语中，三农问题彻底解决。</p>
-
-<p>混ITPUB出来的。2000年还没毕业去翻译了python入门教程。</p>
-
-<p>关于blog。集中式的blog方式确实不讨喜。msn的space的揭秘确实是不错的。本质上还是有自己的站点好。</p>
-
-<p>明年计划:
-锻炼身体 不能把革命本钱丢了.
-提高个人效能 / 高质量 Blog 写作.
-&#8220;围城&#8221; 老大不小了
-迎接任何可能的变化尽量压制自己的野心
-开拓智域，拥抱开源文化</p>
-
-<p>看完2005年的</p>
-
-<p>06年一月，冯关注过几大站点的web server选型。我做这件事情差不多是09年时候。总体来看，我比这个同龄人落后了3-4年步伐。<a href="http://uptime.netcraft.com/up/graph?site=www.taobao.com">netcraft</a>是何方神圣？</p>
-
-<p>对于发展中国家而言，类似手机的设备要比笔记本电脑来得有用，因为这些地方的无线通讯服务需求相当大，而且持续增强中
-&#8211;微软副总裁及首席技术官Craig J. Mundie针对100美元PC的评论．微软没有加入到这一计划中．</p>
-
-<p>颜色感觉、W3C标准、JS代码，UI已经变成了一项超难工种。
-&#8211;刘韧 2006最想结识的人</p>
-
-<p>2006年7月看完</p>
-
-<p>2006年时，也就是基本5届学生以前：在的学生底线可真的不高。本科生一般 2000-3000，研究生 5000-7000。研究生一抓一大把</p>
-
-<p>06年底时还要租房，月租1800-2000</p>
-
-<p>至今为止，华为没有一项原创性的产品发明，主要做的、所取得的是在西方公司的成果上进行了一些功能、特性上的改进和集成能力的提升，更多的是表现在工程设计、工程实现方面的技术进步
-&#8211;任正非</p>
-
-<p>2007年5月看完</p>
-
-<p>2007年11月看完</p>
-
-<p>分享也是一种宣传手段。本质上开源软件就是这么一个模式。</p>
-
-<p>2007对博主也是关键的一年。有幸成为国内第一拨 Oracle ACE，8 月份 在上海参加了 Oracle Open World 会议。在 ITpub 的年度奖项
-评选中得了个“数据库大版最佳版主”奖，也值得欣慰一下。相比去年，还算是有了不少走出去的场合，“交流”也会是我 08 年的一个重点关键词。
-07-08年之间应该也是口袋相对装满了一些。 <strong>主要原因是07年阿里巴巴B2b在香港上市了。</strong></p>
-
-<p>2008年1月看完</p>
-
-<p>08年以后开始和csdn的关系开始好转</p>
-
-<p>手机之家、高春辉、varnish</p>
-
-<p>2008年看完</p>
-
-<p>大量小文件同步问题：Merkle tree</p>
-
-<p>雅虎技术人何伟平的一篇《PostgreSQL 昨天,今天和明天》</p>
-
-<p>08-09年冯的关注点不再是数据库，在09年5月他自己也坦承了这一点。</p>
-
-<p>2009年7月看完</p>
-
-<p>(中文版《Oracle性能诊断艺术》），三个人，六个月时间出头，稿酬大约 15000 RMB 多一点。</p>
-
-<p>HP Cluster Platform 3000BL ， 阿凡达的集群</p>
-
-<p>我有好几次说国内的一些快速成长的&#8221;轻模式&#8221;的网站可能会给一些&#8221;次传统&#8221;模式的网站带来致命的冲击。
-行业  轻模式   次传统模式
-社区  豆瓣 (Douban.com) 天涯 (Tianya.cn)
-旅游  途牛(Tuniu.com)   携程 (Ctrip.com)
-房产  安居客 (anjuke.com)  搜房 (Soufun.com)
-游戏平台    4399 (4399.com) 盛大游戏 (Shandagames.com)</p>
-
-<p>2010年4月看完</p>
-
-<p>verycd确实比较渣。之前拿个开源的emule改改，然后就算他们自己的了。一直蒙蔽让人以为emule是他家发明的。始终不赚钱，然后就去做游戏代理。嘿，这下子还真的发了。</p>
-
-<p>2010年6月底，大辉从支付宝离职去了丁香园。</p>
-
-<p>2010看完。</p>
-
-<p><a href="http://www.gnu.org/software/coreutils/manual/coreutils.html">Linux 核心秘笈</a> Fileutils + Shellutils + Textutils</p>
-
-<p>象 Flickr 技术大牛 Cal Henderson 这样的人几乎是可遇不可求。操作系统、网络、数据库、开发语言每样都能那起来并且能够涉及足够灵活的技术方案</p>
-
-<p>shard和partition的区别在于前者的数据不在一个库上的多台机器，后者则在一个库上的多个机器</p>
-
-<p><a href="http://www.dbanotes.net/startup/Tech_Startup_Ver_002.html">建站指南</a></p>
-
-<p><a href="http://www.dbanotes.net/review/show_stopper.html">微软创建NT之路</a></p>
-
-<p><a href="http://www.fdi.gov.cn/pub/FDI/zgjj/tzhj/zrzy/nygy/dli/t20090618_107346.htm">电力消费指南</a></p>
-
-<p><a href="http://www.dbanotes.net/arch/twitter_ops.html">twitter的请求频率访问限制</a></p>
-
-<p>百姓网，<strong>王建硕</strong>，不错</p>
-
-<p>创业这事儿已经进入了&#8221;圈养时代&#8221;</p>
-
-<p><a href="http://www.dbanotes.net/startup/Startup_what_hell_are_you_doing.html">副产品的很多例子</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1115,6 +1022,14 @@ END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/12/my-first-gem/">my first gem</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/12/di-%5B%3F%5D-ge-gem/">第一个gem</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/06/7dbs-in-7wks/">7dbs in 7wks</a>
       </li>
     
@@ -1126,19 +1041,11 @@ END 但是使用heredocs的时候常有时灵时不灵的情形，这个陷阱�
         <a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/25/zhe-teng-ji/">折腾记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/08/ruankao-qian-jiming/">软考的名次</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li></ul>
 </section>
   
 </aside>

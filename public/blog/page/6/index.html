@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中. &hellip;">
+  <meta name="description" content="有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。ssh-key登录就是这样一类东西。 一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
+console快速敏捷的威力。这个比每次输入密码的体验好多了 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,138 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/29/ssh-key/">Ssh-key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-29T16:18:00+08:00" pubdate data-updated="true">Jun 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
+
+<p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
+console快速敏捷的威力。这个比每次输入密码的体验好多了。更重要的，当机器很多很多，比如几十台上百台的时候，那省下的功夫
+和能做的事情可就不是一点点了。当然，我并不理解为什么不用保存登录密码的方式，而是兜圈子采用这么一种办法。细想下来可能
+和linux系统是多用户的系统这个特性相关。因为实质上的ssh-key登录是另外一个东西。可参见<a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">这篇</a>入门的文章。</p>
+
+<p>要想使用公钥登录方式，可以分为两步：</p>
+
+<ol>
+<li>生成公钥私钥对，会存放在<code>.ssh/id_rsa,  .ssh/id_rsa.pub</code>中，这是通过命令 <code>$ssh-keygen</code>来操作的</li>
+<li>如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
+把他们存放在<code>.ssh/authorized_keys</code>中。其实就是每个client增加一条记录。执行的命令是<code>$ ssh-copy-id user@host</code></li>
+</ol>
+
+
+<p>弄好以后，发现做起事情来确实快多了。</p>
+
+<p>Update: 有些机器上需要给出额外的参数<code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@host</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/27/git-init/">Git Init[zz]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-27T16:38:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
+</span><span class='line'>
+</span><span class='line'>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+</span><span class='line'>$ git push origin master </span></code></pre></td></tr></table></div></figure>
+
+
+<p>远程的可以这样创建</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir northboundhelper.git
+</span><span class='line'>$ cd northboundhelper.git/
+</span><span class='line'>$ git init --bare 
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>在config里面指明常用的branch</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[branch "master"]
+</span><span class='line'>        remote = origin
+</span><span class='line'>        merge = refs/heads/master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
+
+<p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
+如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>
+
+<p>$ git push origin test:master         // 提交本地test分支作为远程的master分支
+$ git push origin test:test              // 提交本地test分支作为远程的test分支</p>
+
+<p>如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。</p>
+
+<p>$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1585,179 +1716,6 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/30/vi-for-aptana/">Vi for Aptana</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-30T10:38:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
-IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
-
-<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
-下载配置好后，算是跑了起来。</p>
-
-<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
-</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
-</span><span class='line'>
-</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
-</span><span class='line'>
-</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
-</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
-</span><span class='line'>
-</span><span class='line'>  4. To delete the character at the cursor type:  x
-</span><span class='line'>
-</span><span class='line'>  5. To insert or append text type:
-</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
-</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
-</span><span class='line'>
-</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span><span class='line'>                           Lesson 2 SUMMARY
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
-</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
-</span><span class='line'>  3. To delete a whole line type:    dd
-</span><span class='line'>
-</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
-</span><span class='line'>  5. The format for a change command is:
-</span><span class='line'>           operator   [number]   motion
-</span><span class='line'> where:
-</span><span class='line'>   operator - is what to do, such as  d  for delete
-</span><span class='line'>   [number] - is an optional count to repeat the motion
-</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
-</span><span class='line'>              $ (to the end of line), etc.
-</span><span class='line'>
-</span><span class='line'>  6. To move to the start of the line use a zero:  0
-</span><span class='line'>
-</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
-</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
-</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/30/yigediaosidenixi/">一个屌丝的逆袭</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-30T00:13:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://www.designsor.com/
-原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
-
-<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
-需要工具：Firefox+Easy Tor+Autoproxy</p>
-
-<p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
-但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
-
-<p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
-用gmail发信到：bridges@torproject.org
-主题随便，内容写：get bridges
-发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
-打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
-成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
-速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1775,6 +1733,14 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/12/my-first-gem/">my first gem</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/12/di-%5B%3F%5D-ge-gem/">第一个gem</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/06/7dbs-in-7wks/">7dbs in 7wks</a>
       </li>
     
@@ -1786,19 +1752,11 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
         <a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/25/zhe-teng-ji/">折腾记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/08/ruankao-qian-jiming/">软考的名次</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/时评'>时评 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li></ul>
 </section>
   
 </aside>
