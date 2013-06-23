@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>肖知兴论语笔记 - Hegel2011的博客</title>
+  <title>Prolog - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="企业属于私有领域，因而管理者可以为所欲为；而国家属于公有领域，因而管理者不得为所欲为。 中国人的组织架构更适合于高墒的模型，即强烈的兴起与迅速的跌落，而对稳定性要求较高的领域，就表现一般了。
-">
+  <meta name="description" content="七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实w3school的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2011/10/27/lunyu-notes/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">肖知兴论语笔记</h1>
+      <h1 class="entry-title">Prolog</h1>
     
     
       <p class="meta">
@@ -86,16 +87,44 @@
   
 
 
-<time datetime="2011-10-27T17:47:00+08:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>企业属于私有领域，因而管理者可以为所欲为；而国家属于公有领域，因而管理者不得为所欲为。</p>
+<div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
+基本功就无从发挥了。</p>
 
-<p>中国人的组织架构更适合于高墒的模型，即强烈的兴起与迅速的跌落，而对稳定性要求较高的领域，就表现一般了。</p>
+<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
+这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
+
+<ul>
+<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
+<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
+
+<ul>
+<li>第一个是X！=Y</li>
+<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
+</ul>
+</li>
+<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
+</ul>
+
+
+<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
+
+<h3>最大的启发</h3>
+
+<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
+
+<h3>试用体验</h3>
+
+<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
+不过确实是只要树立规则，就能输出结果。</p>
 </div>
 
 
@@ -118,12 +147,12 @@
   
 
 
-<time datetime="2011-10-27T17:47:00+08:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/读书笔记/'>读书笔记</a>
+    <a class='category' href='/blog/categories/技术/'>技术</a>
   
 </span>
 
@@ -132,7 +161,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2011/10/27/lunyu-notes/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2011/10/27/lunyu-notes/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog/" >Tweet</a>
   
   
   
@@ -141,10 +170,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/09/15/waikanban-diandi/" title="Previous Post: 外刊班点滴">&laquo; 外刊班点滴</a>
+        <a class="basic-alignment left" href="/blog/2013/06/14/the-orgnization-of-an-app-site/" title="Previous Post: 一个App站点的人员组织">&laquo; 一个App站点的人员组织</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/12/02/italian-holiday/" title="Next Post: Italian Holiday">Italian Holiday &raquo;</a>
       
     </p>
   </footer>

@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
-IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。 参照[1]，并在[2]
-下载配置好后，算是跑了起来 &hellip;">
+  <meta name="description" content="这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
+不需要太大的部头。 安装步骤 coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。 1
+2
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,397 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/01/note-on-coffeescript/">Note on CoffeeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T11:06:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
+不需要太大的部头。</p>
+
+<h1>安装步骤</h1>
+
+<p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span>
+</span><span class='line'><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Some</span> <span class="nx">CoffeeScript</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
+但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>wget http://nodejs.org/dist/v0.6.18/node-v0.6.18.tar.gz
+</span><span class='line'>tar -zxvf node-v0.6.18.tar.gz
+</span><span class='line'>cd node-v0.6.18.tar.gz
+</span><span class='line'>./configure
+</span><span class='line'>make <span class="err">&amp;&amp;</span> make install
+</span><span class='line'>npm install -g coffee-script # -g 才能确保不是安装在当前目录
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
+<strong>运行</strong> <code>coffee my-script.coffee</code>
+<strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
+
+<h1>1. Syntax</h1>
+
+<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
+和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
+
+<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
+
+<p>支持多行注释</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="err">###</span>
+</span><span class='line'>    <span class="nx">A</span> <span class="nx">multiline</span> <span class="nx">comment</span><span class="p">,</span>
+</span><span class='line'>  <span class="err">###</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>变量和范围</h3>
+
+<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
+需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
+<strong>global object</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">exports</span> <span class="o">=</span> <span class="k">this</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">MyVariable</span> <span class="o">=</span> <span class="s2">&quot;foo-bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>Functions</h3>
+
+<p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
+单行函数 <code>func = -&gt; "bar"</code><br/>
+多行函数，必须注意<strong>缩进</strong>（indent）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">func</span> <span class="o">=</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span> <span class="nx">An</span> <span class="nx">extra</span> <span class="nx">line</span>
+</span><span class='line'>  <span class="s2">&quot;bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
+接受多个参数 <code>sum = (nums...) -&gt;</code></p>
+
+<p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
+没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
+
+<p>Function <strong>Context</strong> 待进一步了解<br/>
+<code>=&gt;</code></p>
+
+<h3>一些表达式</h3>
+
+<p>花括号是可选的，hash和array可以利用缩进完成。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">object2</span> <span class="o">=</span> <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">object3</span> <span class="o">=</span>
+</span><span class='line'>  <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array2</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>  <span class="mi">1</span>
+</span><span class='line'>  <span class="mi">2</span>
+</span><span class='line'>  <span class="mi">3</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Flow Control<br/>
+像python，像ruby</p>
+
+<p>String的解析，和ruby类似</p>
+
+<h3>循环和综合（类似python)</h3>
+
+<p><code>in</code> &#8212;- <code>for name in ["A", "B", "C"]</code><br/>
+需要index &#8212;- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
+把操作也写成一行 &#8212;- <code>release prisoner for prisoner in []</code><br/>
+comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] == "R"</code>
+内置的仅支持while</p>
+
+<h3>几个替换和操作符</h3>
+
+<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
+<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
+
+<p><code>?</code> similiar to Ruby&#8217;s nil?, <code>praise if brian?</code> , it&#8217;s also a <code>||</code>， <code>velocity = southern ? 40</code></p>
+
+<h1>2. CoffeeScript Classes</h1>
+
+<p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
+使用new 来新建对象 <code>animal = new Animal</code>,<br/>
+<code>contructor</code> 类似ruby的initialize，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+其中，构造函数的参数如果带@则会自动被当成实例变量进行设置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constuctor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>instance 属性</h3>
+
+<p>给实例加属性如同给object加属性</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">price</span><span class="o">:</span> <span class="mi">5</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">sell</span><span class="o">:</span> <span class="p">(</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span>
+</span><span class='line'><span class="nx">animal</span><span class="p">.</span><span class="nx">sell</span><span class="p">(</span><span class="k">new</span> <span class="nx">Customer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
+环境的变化而变化。</p>
+
+<h3>Static 属性</h3>
+
+<p>这就是class变量，需要用到this 或者 @</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">find</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="err">@</span><span class="nx">find</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>继承与Super</h3>
+
+<p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">alive</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kc">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Parrot</span> <span class="kr">extends</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kr">super</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">dead</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">not</span> <span class="err">@</span><span class="nx">alive</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="o">::</span><span class="nx">rip</span> <span class="o">=</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parrot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parrot</span><span class="p">(</span><span class="s2">&quot;Macaw&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nx">parrot</span><span class="p">.</span><span class="nx">rip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>3. 惯用法</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">###</span> <span class="nx">each</span>
+</span><span class='line'><span class="nx">fun</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="k">for</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">map</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>  <span class="nx">item</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">select</span>
+</span><span class='line'><span class="nx">passed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="nx">failed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">score</span> <span class="k">in</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="nx">score</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="nx">then</span> <span class="nx">passed</span> <span class="k">else</span> <span class="nx">failed</span><span class="p">).</span><span class="nx">push</span> <span class="nx">score</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">includes</span>
+</span><span class='line'><span class="nx">included</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span> <span class="k">in</span> <span class="nx">array</span> <span class="err">#但不能用于单个字符串的内部模式匹配</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">属性遍历</span>
+</span><span class='line'><span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">object</span>
+</span><span class='line'>  <span class="s2">&quot;#{key} = #{value}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">or</span>
+</span><span class='line'><span class="nx">hash</span> <span class="o">?=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">支持多值返回</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">外部扩展库</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Use</span> <span class="nx">local</span> <span class="nx">alias</span>
+</span><span class='line'><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span><span class="nx">COMContentLoaded</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.js-el&quot;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>4. 编译</h1>
+
+<p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
+跟rake差不多，可以watch，可以自动编译。</p>
+
+<h1>5.优良部分</h1>
+
+<p>孙子说，知己知彼百战不殆。</p>
+
+<p>CS也只是修复了部分js的缺陷。</p>
+
+<p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -824,53 +1216,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/25/zaguosen2012/">查国生2012讲座</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-25T15:22:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>又听到查老师的声音了。想当初在邯郸校区上研究生英语课的时候，就感觉这是一个好老师。爱学生，懂生活。后来知道他还是MBA
-英语辅导的专家。听了几次讲座，幽默风趣依旧，体贴入微润物无声。听下来还是有一些收获：</p>
-
-<ol>
-<li>英语二机器阅卷，全部在上海进行阅卷，包含了一切专硕，20多万份</li>
-<li>硕士普及不可能，本科都没普及好，所以几十年内不可能了，博士没意义，除非是教师、医生</li>
-<li>MBA一线首选，二线（同济、财大）也可以考虑，再差的就没意义了</li>
-<li>How to <strong>make more money</strong>. Better Money, Better Life.</li>
-</ol>
-
-
-<p>说的话让人信服的老师就是好老师。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -888,6 +1233,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/16/prolog/">Prolog</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/14/the-orgnization-of-an-app-site/">一个App站点的人员组织</a>
       </li>
     
@@ -903,15 +1252,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2013/06/05/cong-cong-ban-nian/">匆匆半年</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/时评'>时评 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (37)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/生活'>生活 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/时评'>时评 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/linux'>Linux (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>
