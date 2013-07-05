@@ -17,6 +17,7 @@ categories:
 1. [x] [Pragmatic Guide to Sass](/blog/2013/03/16/sass-and-compass/) 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的
 1. [Spring in Action]() in action系列确实不错, java web依然让人痛苦不堪. 概念还是讲的不错的。
 1. [seven databases in seven weeks](/blog/2013/06/06/7dbs-in-7wks/)， 不是seven days，慢慢来吧，收货颇丰。尤其是对HBase Redis的了解，也第一次接触到了Neo4j。
+1. [孙卫琴，精通Hibernate](),补了一下hibernate的知识，确实比较繁琐，但考虑的还是比较周全的。另外孙学姐的书写的条理很清晰，作风严谨，前后一致连贯，像是交大计算机的文风。不过就是孙姐姐似乎已经有3年没发书了，javathinker站点也已经易主。不知近况如何。
 1. [seven languages in seven weeks]()， 看了第一个Ruby，复习了下yield，把metaprogramming局限在了open class、method_missing和module include。
 0. Thomas Kyte, Expert Oracle Database Architecture.pdf
 3. 余红春,构建高可用Linux服务器,机工
