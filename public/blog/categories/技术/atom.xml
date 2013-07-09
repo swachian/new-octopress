@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-05T17:12:06+08:00</updated>
+  <updated>2013-07-09T22:36:03+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure is really pesky]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/"/>
+    <updated>2013-07-09T22:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky</id>
+    <content type="html"><![CDATA[<p>试用了一下clojure，感觉这个东西不太灵。最早知道clojure，是在Heroku宣布<a href="http://devcenter.heroku.com/articles/clojure">支持它</a>，知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
+
+<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。这个设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。如果，在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
+
+<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
+其次，融入jvm中，意味着需要ide的配合了。无论哪种ide，都是很重的，因此很是麻烦。
+叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
+
+<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，java的开发效率毕竟也比C高，所以基于java开发新的语言首先开发是脚容易一些，另外就是需要连接数据库等组件都是现成的。</p>
+
+<p>但是，真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等方便。伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这家年已经无人深入了。</p>
+
+<p>除了依赖JVM这个不好不坏的一点，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。</p>
+
+<p>所以看了一圈clojure的内容后，觉得这个语言现在还是别搀和了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Prolog]]></title>
@@ -137,140 +160,6 @@ patch -p1 &lt; ../a.patch
 因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
 
 <p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[《白帽子讲Web安全》]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/"/>
-    <updated>2013-01-26T22:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web</id>
-    <content type="html"><![CDATA[<p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
-都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
-篇幅很大，但真正值得读的代码却很少。</p>
-
-<p>本书好的地方就是给出了大量的实例，这些例子就在我们身边，百度的、搜狐的、MySpace的。跟着这些案例仔细自己再做分析应该还是会有很多收获的。
-至少让人明白，第一网络确实不安全，第二值得研究的工作还有许多。</p>
-
-<p>但是，被很多人推荐就有点不可理解了。从技术书籍的角度考量，这本书真的很一般。就清晰度、深度、整洁度来讲，都很平平。卖的好，可能主要还是营销
-的好。</p>
-
-<p>花了2天半，这本书也就翻完了。还是过得去的一本书，但有些评价显然过高。Yahoo的算法很有用。几个案例至少也提供了继续跟踪研究的线索。</p>
-
-<p>这本书的总体风格就是这个样子，提供了足够多的案例作为进一步研究的入门线索，但书本身拼凑痕迹严重，存在大量的不负责代码黏贴，也缺乏作为一本技术书籍
-尤其是畅销书籍应该具备的细致入微的分析。不过这个主题的其他书籍也确实不多，作者也算这个领域的牛人了。还是值得推荐给做Web开发的人员读读的，至少可以
-增加点广度的认识。</p>
-
-<p><a href="https://gist.github.com/f801d7015715f6f10098">gist</a></p>
-
-<p>作者：</p>
-
-<p>吴翰清，西安交通大学少年班，84年生人。<br/>
-2007年，成为P7（初级技术专家）；<br/>
-2010年，成为P8（高级技术专家）。<br/>
-2012年下半年，跳槽去了安全宝，创新工场下面的一个企业。我对开复不感冒，甚至是负分的哦。</p>
-
-<p><strong>白帽子</strong> 主守， <strong>黑帽子</strong> 主攻。</p>
-
-<p>防火墙及ACL的控制，是的任意攻击系统端口的情况不再可能。而Web端口不能封。加之Web技术的普及和流行，黑客攻击转向Web。</p>
-
-<h3>安全三要素(CIA)</h3>
-
-<ul>
-<li>机密性(Confidentiality)</li>
-<li>完整性(Integrity)</li>
-<li>可用性(Availability)</li>
-</ul>
-
-
-<p>其他还有可审计性、不可抵赖性等</p>
-
-<p>第一章很一般，全部都是空谈，讲一些人人都懂的道理。而且归纳的也很不好，基本就是一个列表，列表之间没有逻辑关系。</p>
-
-<p>作者的文字功底和解释能力相当一般。</p>
-
-<h2>XSS(跨站脚本）</h2>
-
-<p>这章前半部分很无聊，作者罗列了一堆xss的案例，其中贴的js代码就差不多有十页。但没解释，没重点。XSS防御部分介绍的还行。
-xss可以分为参数安全和劫持Cookie两种。可以试试<a href="http://www.fiddler2.com/fiddler2/">fiddler</a>工具。</p>
-
-<h3>XSS防御</h3>
-
-<ul>
-<li>HttpOnly</li>
-</ul>
-
-
-<p>是设置cookie的属性，即只能Http请求时上传，而不能让JS操作。这样就可以避免cookie被劫持。</p>
-
-<ul>
-<li>输入检查</li>
-</ul>
-
-
-<p>黑白名单过滤器</p>
-
-<ul>
-<li>输出检查</li>
-</ul>
-
-
-<p>在html文本中用HtmlEncode，在javascript中用JavascriptEncode。</p>
-
-<p>在css和url的输出则较为复杂。 Anti-Samy是一个很好的XSS Filter。</p>
-
-<h2>CSRF(Cross Site Request Forgery) 跨站点请求伪造</h2>
-
-<p>有些浏览器本地cookie不会被提交，session型cookie则肯定会被提交。</p>
-
-<p>解决办法是 <strong>验证码</strong> 和 <strong>Anti CSRF Token</strong></p>
-
-<p>就是在表单和session中，都放一个token来确保这个form是本地服务产生的。<br/>
-Token可以是一个，也可以是多个。</p>
-
-<p>点击劫持和HTML5都讲的比较烂。总是缺乏画龙点睛的那一笔。</p>
-
-<h2>SQL 注入</h2>
-
-<p>此章依然很一般。介绍的内容相当不到位。比如只说出了是利用sql拼接的漏洞，但没说具体是怎么应用的。
-不过在 <a href="http://vdisk.weibo.com/s/oHDMV/1359208976">SQL注入攻击技术初探</a> 中，终于搞懂了以前困惑过我的问题：内容到底是怎么显示出去的。道理在于让第一句（自己写的语句）出错无记录，而后面跟随union则返回攻击程序写出来的sql，这样自然内容就回显了。而参数数量等都是通过order by 16等试错来取得的。</p>
-
-<p>使用预编译语句的效果主要是确保SQL语句的结构不会因为输入的参数发生变化。即实现了数据和代码（字段及从句的分离。</p>
-
-<h2>访问控制</h2>
-
-<p>依然讲的不清楚，懂的人不需要读，不懂的人读了也白读。</p>
-
-<ul>
-<li>垂直权限管理 -- 针对URL的访问控制，RBAC</li>
-<li>水平权限管理 -- 面对数据资源的</li>
-<li>OAuth -- 和我们的重定向类似，只是更加标准，返回的不是用户数据，而是token</li>
-</ul>
-
-
-<h2>加密算法和随机数</h2>
-
-<p>这章还算有点料，从使用者的角度讲解了加密解密算法的用法。</p>
-
-<p>建议：</p>
-
-<ul>
-<li>使用CBC模式的AES256用于加密；</li>
-<li>使用HMAC-SHA512用于完整性检查；</li>
-<li>使用带salt的SHA-256或SHA-512用于Hashing.</li>
-</ul>
-
-
-<h2>DDOS</h2>
-
-<p>亮点在于给了Yahoo的专利，确实是绝佳的主意。
-<a href="http://patft.uspto.gov">Detecting system abuse</a></p>
-
-<p>本书不是一本讲解性质的。其特点是列出各个大门，然后读者自己进去领取东西。对比师傅领进门的模式，它的模式是门户告诉你，然后靠自己。</p>
-
-<p>OWASP的ESAPI安全模块</p>
-
-<p>安全监控、入侵检测、Web应用防火墙(Apache的一个模块）</p>
 ]]></content>
   </entry>
   

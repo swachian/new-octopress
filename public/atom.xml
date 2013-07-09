@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-05T17:12:06+08:00</updated>
+  <updated>2013-07-09T22:36:03+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure is really pesky]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/"/>
+    <updated>2013-07-09T22:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky</id>
+    <content type="html"><![CDATA[<p>试用了一下clojure，感觉这个东西不太灵。最早知道clojure，是在Heroku宣布<a href="http://devcenter.heroku.com/articles/clojure">支持它</a>，知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
+
+<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。这个设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。如果，在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
+
+<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
+其次，融入jvm中，意味着需要ide的配合了。无论哪种ide，都是很重的，因此很是麻烦。
+叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
+
+<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，java的开发效率毕竟也比C高，所以基于java开发新的语言首先开发是脚容易一些，另外就是需要连接数据库等组件都是现成的。</p>
+
+<p>但是，真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等方便。伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这家年已经无人深入了。</p>
+
+<p>除了依赖JVM这个不好不坏的一点，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。</p>
+
+<p>所以看了一圈clojure的内容后，觉得这个语言现在还是别搀和了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Prolog]]></title>
@@ -966,33 +989,6 @@ script流行的年代，而这些脚本语言可以很大程度上替代AWK。AW
 是有用的，但干活和工作也是很正经的事情，而且是来自现实世界的正经事情。硕士文凭在去体制内和大公司的时候特别有用，而且越大就越有用。如果想去大公司
 那么可以读的还是去读一个吧。如果想靠自己闯的，那么建议大二大三稍稍有空闲时间即可实际接触现实世界的项目和技术。真的做到的话，竞争力会强于大部分
 研究生，当然，现实是大部分本科生是做不到的，所以他们大部分也比不上硕士研究生。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
-    <updated>2013-02-03T12:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself</id>
-    <content type="html"><![CDATA[<p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
-
-<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
-而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
-
-<ul>
-<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
-<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
-</ul>
-
-
-<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
-正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
-
-<p>所以，表达力越差（可以理解成
-啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
-因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
-
-<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
 ]]></content>
   </entry>
   

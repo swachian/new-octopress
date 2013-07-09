@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>风陵渡口 - Hegel2011的博客</title>
+  <title>Clojure is really pesky - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="民族主义还是国际主义？ 民族主义同共产国际主义的矛盾。共产国际主义当时的实质就是忠于苏联和斯大林。
-而毛是马克思主义中国化的代表人物，延安整风刷清苏联崇拜情结相当不易，也把‘国际主义’代表人物赶下了台。但48年因利益关系，必须争取斯大林的支持，于是刘对铁托匆忙表态，反苏分子也被调离原岗位。 &hellip;">
+  <meta name="description" content="试用了一下clojure，感觉这个东西不太灵。最早知道clojure，是在Heroku宣布支持它，知道彼时这个东西挺火。应该和闭包什么的有关联。 这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。这个设计思路听上去不错， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/03/05/fldk/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">风陵渡口</h1>
+      <h1 class="entry-title">Clojure Is Really Pesky</h1>
     
     
       <p class="meta">
@@ -86,25 +85,28 @@
   
 
 
-<time datetime="2012-03-05T17:09:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
+<time datetime="2013-07-09T22:07:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>民族主义还是国际主义？</p>
+<div class="entry-content"><p>试用了一下clojure，感觉这个东西不太灵。最早知道clojure，是在Heroku宣布<a href="http://devcenter.heroku.com/articles/clojure">支持它</a>，知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
 
-<p>民族主义同共产国际主义的矛盾。共产国际主义当时的实质就是忠于苏联和斯大林。
-而毛是马克思主义中国化的代表人物，延安整风刷清苏联崇拜情结相当不易，也把‘国际主义’代表人物赶下了台。但48年因利益关系，必须争取斯大林的支持，于是刘对铁托匆忙表态，反苏分子也被调离原岗位。</p>
+<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。这个设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。如果，在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
 
-<p>共字上必须有个‘中’，才是名副其实的中共。
-马克思共产主义学校&#8211;>中央党校
-马列学院->中央研究院</p>
+<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
+其次，融入jvm中，意味着需要ide的配合了。无论哪种ide，都是很重的，因此很是麻烦。
+叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
 
-<p>林彪南下后，高成为了‘国际主义者’。忘记了他是毛委任的中共东北局第一书记，而不是斯大林派任的‘新关东总督’。</p>
+<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，java的开发效率毕竟也比C高，所以基于java开发新的语言首先开发是脚容易一些，另外就是需要连接数据库等组件都是现成的。</p>
 
-<p>其实，政治是最现实的。一切从需要出发。</p>
+<p>但是，真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等方便。伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这家年已经无人深入了。</p>
+
+<p>除了依赖JVM这个不好不坏的一点，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。</p>
+
+<p>所以看了一圈clojure的内容后，觉得这个语言现在还是别搀和了。</p>
 </div>
 
 
@@ -127,12 +129,12 @@
   
 
 
-<time datetime="2012-03-05T17:09:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
+<time datetime="2013-07-09T22:07:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/读书笔记/'>读书笔记</a>
+    <a class='category' href='/blog/categories/技术/'>技术</a>
   
 </span>
 
@@ -141,7 +143,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/03/05/fldk/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/03/05/fldk/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/" >Tweet</a>
   
   
   
@@ -150,10 +152,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/03/05/ukgov-notes/" title="Previous Post: 不列颠网站">&laquo; 不列颠网站</a>
+        <a class="basic-alignment left" href="/blog/2013/06/16/prolog/" title="Previous Post: Prolog">&laquo; Prolog</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/03/13/jiejifenchen/" title="Next Post: 阶级分层">阶级分层 &raquo;</a>
       
     </p>
   </footer>
