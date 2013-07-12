@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-10T11:08:14+08:00</updated>
+  <updated>2013-07-12T14:30:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS5 Ruby2.0 and Rails4.0]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/"/>
+    <updated>2013-07-12T12:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0</id>
+    <content type="html"><![CDATA[<p>升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用<code>git diff</code>对一个一个目录或者文件进行比对与合并。整个过程下来，发现rails默认生成的文件，3.1和4.0的区别并非很大。</p>
+
+<p>这个过程也就是只有几个小时，半天不到的时间就让应用可以跑起来了。本地测试了一下，写入数据库、查询、写入文件等都没什么问题。随后自然就是部署。</p>
+
+<p>但此时，问题来了. 本地开发的环境是这样的：</p>
+
+<ul>
+<li>Ubuntu 12.04</li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
+<li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
+<li>rails 4</li>
+</ul>
+
+
+<p>而部署环境是这样的：</p>
+
+<ul>
+<li>CentOS release 5.4</li>
+<li>gcc 版本 4.1.2 20080704</li>
+<li>ruby 2.0.0p247 (2013-06-27) [i686-linux]</li>
+<li>rails 4</li>
+</ul>
+
+
+<p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
+
+<p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整
+<code>
+SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)
+</code>
+2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
+
+<p>为此，则折腾掉了很多的业余时间。</p>
+
+<p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
+
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
+又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
+之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
+
+<p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
+
+<h3>教训</h3>
+
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
+CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
+
+<h3>题外话</h3>
+
+<p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[my first gem]]></title>
@@ -300,33 +361,6 @@ heroku run rake db:migrate
 </code></p>
 
 <p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
-    <updated>2013-02-03T12:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself</id>
-    <content type="html"><![CDATA[<p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
-
-<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
-而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
-
-<ul>
-<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
-<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
-</ul>
-
-
-<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
-正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
-
-<p>所以，表达力越差（可以理解成
-啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
-因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
-
-<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
 ]]></content>
   </entry>
   

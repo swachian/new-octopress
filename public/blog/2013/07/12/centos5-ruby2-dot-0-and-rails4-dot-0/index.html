@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hubot and socket.io - Hegel2011的博客</title>
+  <title>CentOS5 Ruby2.0 and Rails4.0 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中. &hellip;">
+  <meta name="description" content="升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用git diff对一个一个目录或者文件进行比对与合并。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Hubot and socket.io</h1>
+      <h1 class="entry-title">CentOS5 Ruby2.0 and Rails4.0</h1>
     
     
       <p class="meta">
@@ -87,38 +85,68 @@
   
 
 
-<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+<time datetime="2013-07-12T12:55:00+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
-最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
-也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
+<div class="entry-content"><p>升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用<code>git diff</code>对一个一个目录或者文件进行比对与合并。整个过程下来，发现rails默认生成的文件，3.1和4.0的区别并非很大。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
-</span><span class='line'>coffee
-</span><span class='line'>&gt; 3+2<span class="o">=</span>?
-</span></code></pre></td></tr></table></div></figure>
+<p>这个过程也就是只有几个小时，半天不到的时间就让应用可以跑起来了。本地测试了一下，写入数据库、查询、写入文件等都没什么问题。随后自然就是部署。</p>
 
+<p>但此时，问题来了. 本地开发的环境是这样的：</p>
 
-<p>vs</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>Ubuntu 12.04</li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
+<li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
+<li>rails 4</li>
+</ul>
 
 
-<p>后者显然便捷许多.</p>
+<p>而部署环境是这样的：</p>
 
-<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
-Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
-而且<code>socket.io-client</code>也很有意思.</p>
+<ul>
+<li>CentOS release 5.4</li>
+<li>gcc 版本 4.1.2 20080704</li>
+<li>ruby 2.0.0p247 (2013-06-27) [i686-linux]</li>
+<li>rails 4</li>
+</ul>
+
+
+<p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
+
+<p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
+
+<p>为此，则折腾掉了很多的业余时间。</p>
+
+<p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
+
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
+又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
+之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
+
+<p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
+
+<h3>教训</h3>
+
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
+CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
+
+<h3>题外话</h3>
+
+<p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
 </div>
 
 
@@ -141,12 +169,12 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
 
 
-<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+<time datetime="2013-07-12T12:55:00+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/nodejs/'>nodejs</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -155,7 +183,7 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/" >Tweet</a>
   
   
   
@@ -164,10 +192,8 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/26/programming-language-performance/" title="Previous Post: Programming Language Performance">&laquo; Programming Language Performance</a>
+        <a class="basic-alignment left" href="/blog/2013/07/09/clojure-is-really-pesky/" title="Previous Post: Clojure is really pesky">&laquo; Clojure is really pesky</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/06/27/git-init/" title="Next Post: git init[zz]">git init[zz] &raquo;</a>
       
     </p>
   </footer>
