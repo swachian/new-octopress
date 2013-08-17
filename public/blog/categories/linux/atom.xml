@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-26T09:45:50+08:00</updated>
+  <updated>2013-08-17T22:16:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <updated>2013-08-17T20:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
+
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
+
+<p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
+
+<ul>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+</ul>
+
+
+<p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CentOS5 Ruby2.0 and Rails4.0]]></title>
@@ -164,33 +188,6 @@ patch -p1 &lt; ../a.patch
 </code></p>
 
 <p>随后，两个目录就会变得一模一样了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ssh-key]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key/"/>
-    <updated>2012-06-29T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/29/ssh-key</id>
-    <content type="html"><![CDATA[<p>有些东西没用只是因为你的不习惯。一旦你开始用了，可能就会觉得之前的不采用是多么的傻。<strong>ssh-key</strong>登录就是这样一类东西。</p>
-
-<p>一直以来没搞懂每次输入一个密码有那么麻烦的吗？去哪个站点不要登录啊。但用了几次之后，发现加了key后才能彻底发挥出
-console快速敏捷的威力。这个比每次输入密码的体验好多了。更重要的，当机器很多很多，比如几十台上百台的时候，那省下的功夫
-和能做的事情可就不是一点点了。当然，我并不理解为什么不用保存登录密码的方式，而是兜圈子采用这么一种办法。细想下来可能
-和linux系统是多用户的系统这个特性相关。因为实质上的ssh-key登录是另外一个东西。可参见<a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">这篇</a>入门的文章。</p>
-
-<p>要想使用公钥登录方式，可以分为两步：</p>
-
-<ol>
-<li>生成公钥私钥对，会存放在<code>.ssh/id_rsa,  .ssh/id_rsa.pub</code>中，这是通过命令 <code>$ssh-keygen</code>来操作的</li>
-<li>如果已经生成过了，那以后增加其他机器就可以直接执行这步，无需每次都生成公钥私钥。将公钥上传到远程服务器，远程主机会
-把他们存放在<code>.ssh/authorized_keys</code>中。其实就是每个client增加一条记录。执行的命令是<code>$ ssh-copy-id user@host</code></li>
-</ol>
-
-
-<p>弄好以后，发现做起事情来确实快多了。</p>
-
-<p>Update: 有些机器上需要给出额外的参数<code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@host</code></p>
 ]]></content>
   </entry>
   

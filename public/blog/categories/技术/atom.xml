@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-26T09:45:50+08:00</updated>
+  <updated>2013-08-17T22:16:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <updated>2013-08-17T20:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
+
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
+
+<p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
+
+<ul>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+</ul>
+
+
+<p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure is really pesky]]></title>
@@ -142,33 +166,6 @@ patch -p1 &lt; ../a.patch
 </code></p>
 
 <p>随后，两个目录就会变得一模一样了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Every language will implement a lisp interpreter in itself]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/"/>
-    <updated>2013-02-03T12:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself</id>
-    <content type="html"><![CDATA[<p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
-
-<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
-而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
-
-<ul>
-<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
-<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
-</ul>
-
-
-<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
-正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
-
-<p>所以，表达力越差（可以理解成
-啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
-因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
-
-<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
 ]]></content>
   </entry>
   

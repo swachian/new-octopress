@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-26T09:45:50+08:00</updated>
+  <updated>2013-08-17T22:16:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <updated>2013-08-17T20:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
+
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
+
+<p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
+
+<ul>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+</ul>
+
+
+<p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[大话存储]]></title>
@@ -337,22 +361,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
 <p>MapReduce实际上是切分+管道技术。可以表述称 Map | Reduce。
 通过Map，将要处理的数据转换成[key, value], 再管道给Reduce继续进行处理。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Heroku的新服务]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs/"/>
-    <updated>2011-07-07T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs</id>
-    <content type="html"><![CDATA[<p>Heroku发表了一系列介绍自己内部升级的文章。最重要的变化是开始支持除ruby/rack以外的语言和框架。起先加入了node.js，然后又加入了Clojure. Clojure是跑在jvm上面的一种语言，对这块没研究。</p>
-
-<p>在heroku看来，ruby的高动态性和强调美感使她天生适合面向用户的web应用。Node.js的基于事件的搞并发使得它适合实时web。 Clojure使得需要correctness,performance,composability, optionally的组件成为可能，并且触及java的生态圈。</p>
-
-<p>heroku开始支持Java. <a href="http://blog.heroku.com/archives/2011/8/25/java/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">heroku for java</a>
-不支持war包比较让人痛苦。试着发布一个应用玩玩吧。</p>
-
-<p>Real apps come from real developers Real developers wanted to use their own tools</p>
 ]]></content>
   </entry>
   

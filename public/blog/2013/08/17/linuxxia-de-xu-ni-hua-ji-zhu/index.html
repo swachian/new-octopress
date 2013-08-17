@@ -5,15 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hadoop集群安装手记 - Hegel2011的博客</title>
+  <title>Linux下的虚拟化技术 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="ssh的使用公钥登录配置 1
-2
-ssh-keygen
-ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
-数据源的输入才是Hadoop方便地方 定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹 &hellip;">
+  <meta name="description" content="因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。 然而， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +19,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -73,7 +70,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   
   <header>
     
-      <h1 class="entry-title">Hadoop集群安装手记</h1>
+      <h1 class="entry-title">Linux下的虚拟化技术</h1>
     
     
       <p class="meta">
@@ -89,36 +86,29 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   
 
 
-<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+<time datetime="2013-08-17T20:59:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ssh的使用公钥登录配置</p>
+<div class="entry-content"><p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
-</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
-</span></code></pre></td></tr></table></div></figure>
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
+
+<p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
+
+<ul>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+</ul>
 
 
-<p>=======
-<strong>数据源的输入才是Hadoop方便地方</strong></p>
-
-<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
-读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
-比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
-然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
-然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
-map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
-
-<h1>文献</h1>
-
-<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
-<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+<p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
 </div>
 
 
@@ -141,12 +131,12 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   
 
 
-<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+<time datetime="2013-08-17T20:59:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/云计算/'>云计算</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/云计算/'>云计算</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
   
 </span>
 
@@ -155,7 +145,7 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/" >Tweet</a>
   
   
   
@@ -164,10 +154,8 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/03/ship-it/" title="Previous Post: Ship It">&laquo; Ship It</a>
+        <a class="basic-alignment left" href="/blog/2013/07/26/web-and-html-document/" title="Previous Post: Web and HTML Document">&laquo; Web and HTML Document</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/18/chuyue/" title="Next Post: 处约">处约 &raquo;</a>
       
     </p>
   </footer>

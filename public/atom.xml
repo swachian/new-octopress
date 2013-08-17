@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-07-26T09:45:50+08:00</updated>
+  <updated>2013-08-17T22:16:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <updated>2013-08-17T20:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
+
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
+
+<p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
+
+<ul>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+</ul>
+
+
+<p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Web and HTML Document]]></title>
@@ -970,47 +994,6 @@ script流行的年代，而这些脚本语言可以很大程度上替代AWK。AW
 显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
 
 <p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[期刊读后感]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application/"/>
-    <updated>2013-02-09T16:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application</id>
-    <content type="html"><![CDATA[<p>读了去年年底订阅的《计算机应用》，发现还是有一些文章是值得一读的。
-订阅这个杂志是因为觉得发文速度还算快，期刊和文章的档次也还不错。看了2013年第2期，里面还是有六七篇很有收获的文章的。
-必须承认的是，期刊文章的质量普遍比网上的资料要高。</p>
-
-<p>按钱学森的理论，做研究的一大秘诀是阅读文献，因为大部分问题肯定都有人面对过，从中获取启发再进行突破才能取得更好的效果。
-这个理论对计算机也是适用的，实际上信息技术里面阅读文献的效果要超过其他工程专业。毕竟信息行业里思路和实现之间的差距
-比其他的要短的多。</p>
-
-<p>虽然已经是互联网时代，但要探索自己未知的还是离不开杂志的。首先搜索的素材的一大来源就是期刊，搜索本身并不制造内容，内容的一大制造者
-就是期刊。尽管现在网上的博客、科技文章等素材已经很广阔，但其质量普遍还是不如期刊的。原因在于发表期刊真的是挺难的，你给拿出自己的
-拿手好戏才行，没有的点真东西期刊的编辑是不会买账的。质量普遍较高是期刊的第二大优势，毕竟既要自己花钱又有审稿者和编辑把关，质量高于
-网上的其他资料是很正常的。最重要的，只有期刊才能让你可能接触自己不熟悉的东西。搜索是目的性很明显的阅读方式。但当你没有明确的方向时
-搜索是帮不上忙的。而高质量的期刊可以弥补搜索的这个弱点。虽然你要忍受一堆可能没有用或者自己读不进去的内容，但总的来说，产出投入比
-还是很大的，还是很值得这么做的。我阅读了一期，就有了以下几点收获：</p>
-
-<ol>
-<li>对基站提供的定位信息的应用有了新的认识。原来还可以用来跟踪用户的行动路径，为换乘乃至规划和其他促销活动提供依据。</li>
-<li>均衡服务可以使用HiCuts算法，其实就是一种决策树，在分类时可以使用，丰富自己的分类依据，以前主要也就是有个hash的概念。</li>
-<li>小波算法其实和取log差不多，最大的意义在于提高监测值可感知效果。</li>
-<li>聚类后对数据特征值的取顶叫做概化，可以是平均值，也可以是区间。</li>
-<li>网页防篡改分远程和本地两种，远程的把内容按动态和静态区分应该也算一个思路。话说我的第一个防篡改方案也是看期刊获得灵感。</li>
-<li>排班优化原来也是人工智能的一部分。</li>
-<li>网管软件的组件可以按主站、代理、代理数据信息、网管协议4个组件来进行组织，对写此类文章有了更好的心得，毕竟描述一个系统要写成期刊是很难的。</li>
-</ol>
-
-
-<p>短短时间，收获已经很多。</p>
-
-<p>不过期刊也有不足之处。最大的问题可能在于计算机期刊的文章刊出时间都太长了。投稿半年内能读到的已经是凤毛麟角，一年以上是常态，
-最nb的期刊基本要3年。套用一句俗话，这好像是和一个25岁的2个孩子的妈谈恋爱，不新鲜的东西往往有时候就没使用价值了。从这点上来讲，计算机应用和
-计算机系统应用都做的很不错。</p>
-
-<p>还有一点，就是计算机应用里面也包含了大量计算机科学的内容。因为科学两个字，搞得天下计算机从业者往往都喜欢套数学，这个也是阻碍业界接受期刊的一大障碍吧。</p>
 ]]></content>
   </entry>
   
