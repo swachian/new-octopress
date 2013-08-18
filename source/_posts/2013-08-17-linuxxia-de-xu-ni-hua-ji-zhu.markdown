@@ -23,5 +23,5 @@ categories:
 
 性能方面，根据[kvm vs Virtualbox](http://www.liangsuilong.info/?p=675) 和 [Ubuntu11.10 Xen Kvm Virtualbox比拼](http://server.zol.com.cn/257/2575328.html)，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。
 
-
+顺手又了解了一些vnc的内容。vnc其实只是一个传送图形界面的协议，经典的client和server端模型，但具体的GUI还需要由其他东西实现。可选的有`xfce4`和`ubuntu-desktop`，前者小巧不少大约200MB，后者如果是server上安装则要1GB以上了。总体而言不如ssh方便，占用资源也多不少，不过在必须使用图形化界面的时候，都还是不错的选择。
 
