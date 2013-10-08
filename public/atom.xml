@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-08-18T10:13:19+08:00</updated>
+  <updated>2013-10-08T16:34:53+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对无线网卡的折腾]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/10/08/back-and-forth-with-wlan-card/"/>
+    <updated>2013-10-08T15:39:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/10/08/back-and-forth-with-wlan-card</id>
+    <content type="html"><![CDATA[<p>换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。</p>
+
+<h3>原理</h3>
+
+<p>Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。</p>
+
+<p>频带则有20和40MHz两种，一般前者全部开启，而后者就不一定了。</p>
+
+<p>只有20MHz和2.4GHz的情况下，最大只有72Mbps； 同时有5GHz，则可以达到150Mbps。 无论是2.4还是5，同时使用40MHz的话，性能都可以翻倍。再加上一些其他的优化技术，最大可以达到300Mbps。</p>
+
+<p>现实中，20<em>（2.4+5）的情况是很少的，一般150Mbps的是（20+40）</em>2.4。 然而，被割的太厉害的话，就只有20*2.4，那就只有72Mbps了。比如dell国内6430搭配的bcm制造的无线网卡。</p>
+
+<h3>Dell 1504无线网卡</h3>
+
+<p>这款网卡是dell让bcm代工的，而非常见的intel芯片网卡。博通公司的网络设备也久负盛名，国内的路由器大部分也是博通的芯片，然而这款
+wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一基带，最终结果就是明明是n的卡，实际性能只比802.11g的54Mbps好了没有多少，至多72Mbps。</p>
+
+<p>并且，E6430本身也还是一台不错的机器，wifi配了3根天线，但是这块网卡却是只有2根天线。老的E6400倒是intel的5300网卡，3根天线且支持双频，于是最后决定利旧一下。虽然5300已经过气，但性能明显比1504还是要强的。</p>
+
+<h3>更换结果</h3>
+
+<p>三根天线:</p>
+
+<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/IMG_20131008_100132.jpg" alt="image" /></p>
+
+<p>两根天线：</p>
+
+<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/IMG_20131001_161051.jpg" alt="image" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一些片子]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/09/01/yi-xie-pian-zi/"/>
+    <updated>2013-09-01T18:41:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/09/01/yi-xie-pian-zi</id>
+    <content type="html"><![CDATA[<p>过去一阵子看了不少片子，两部片子印象尤其深刻：</p>
+
+<ol>
+<li>虎胆龙威1</li>
+<li>光荣战役</li>
+</ol>
+
+
+<p>先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。</p>
+
+<p>从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片，具备了基本的场面火爆。恐怖分子组织有术，高帅富级别的，布鲁斯倒是显得有点屌丝。而一个接一个消灭恐怖分子，有点七武士的意思，交代的十分清楚。</p>
+
+<p>片子也有典型的80年代末的特征，公司的老板是日本人，大概彼时美国人深感要被日本企业统治。而在这些之外，对官僚主义、白痴媒体也有十分辛辣的讽刺。所以，整部片子就相当有深度，也十分值得让人回味。简单的剧情，却能带来意味深长的东西。绝对是含复杂于简洁中的作品。</p>
+
+<p>第二部作品，看完后才知道是丹泽尔华盛顿的成名作，而摩根弗里曼彼时还根本没出名，居中的白人上校最后到没怎么出名。影片的故事是描述南北战争中北军的第一支黑人军队。上校统带1k个黑人士兵，各级尉官军士长初期都是白人担当，随后也开始提拔黑人担当。</p>
+
+<p>不得不说，美帝的历史其实就是一部外包史。从引入黑奴与白奴并举，到黑奴为主白人帮凶，再到解放黑奴，并且调动黑奴解放黑奴，一步一步扩展了国家的可用之才。而片子也很清晰地表明了让黑人成为有效的反戈力量有多难，需要客服多少障碍。而扩充劳动力的结果，自然就是使得国家的经济得到大幅度进步。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
@@ -757,245 +818,6 @@ Anniversary-driven development</p>
 
 
 <p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Change To Ruby 2 Dot 0 0]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0/"/>
-    <updated>2013-02-26T00:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/26/change-to-ruby-2-dot-0-0</id>
-    <content type="html"><![CDATA[<p>layout: post
-title: &#8220;Change to Ruby 2.0.0&#8221;
-date: 2013-02-26 11:30
-comments: true
-categories:
-- ruby
-- heroku</p>
-
-<hr />
-
-<p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
-
-<p>步骤如下：</p>
-
-<ol>
-<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
-<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
-<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
-<li><code>git commit -a</code></li>
-<li><code>git push heroku</code></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 119, done.
-</span><span class='line'>Compressing objects: 100% (59/59), done.
-</span><span class='line'>Writing objects: 100% (60/60), 5.46 KiB, done.
-</span><span class='line'>Total 60 (delta 32), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Ruby version change detected. Clearing bundler cache.
-</span><span class='line'>       Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
-</span><span class='line'>       New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Fetching gem metadata from http://ruby.taobao.org/.
-</span><span class='line'>       Fetching full source index from http://ruby.taobao.org/
-</span><span class='line'>       Installing daemons (1.1.8)
-</span><span class='line'>       Installing eventmachine (0.12.10)
-</span><span class='line'>       Installing rack (1.4.1)
-</span><span class='line'>       Installing rack-protection (1.3.2)
-</span><span class='line'>       Installing tilt (1.3.3)
-</span><span class='line'>       Installing sinatra (1.3.5)
-</span><span class='line'>       Installing thin (1.4.1)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; (none)
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 30.5MB
-</span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但我不太理解slug size为啥变大了。</p>
-
-<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
-于是改用了unicorn，又折腾了Procfile</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec unicorn -p $PORT</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>       Would have removed thin (1.4.1)
-</span><span class='line'>       Would have removed daemons (1.1.9)
-</span><span class='line'>       Would have removed daemons (1.1.8)
-</span><span class='line'>       Would have removed thin (1.5.0)
-</span><span class='line'>       Would have removed rack (1.4.1)
-</span><span class='line'>       Would have removed eventmachine (1.0.0)
-</span><span class='line'>       Would have removed eventmachine (0.12.10)
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 35.9MB
-</span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后重新弄了一下，发现还是很大。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Writing objects: 100% (3/3), 281 bytes, done.
-</span><span class='line'>Total 3 (delta 2), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 27.3MB
-</span><span class='line'>-----&gt; Launching... done, v5
-</span><span class='line'>       http://octopresszhangyu.herokuapp.com deployed to Heroku</span></code></pre></td></tr></table></div></figure>
-
-
-<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
-明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
-
-<p>今日装某个系统，发现有掉到了libyaml这个沟里。试了几次，最后发现是 <code>LD_LIBRARY_PATH=</code>的缘故。
-编译好libyaml，在加入到上面这个环境变量中，ruby才能读的出来。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[About AWK]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/"/>
-    <updated>2013-02-19T14:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk</id>
-    <content type="html"><![CDATA[<p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
-甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
-
-<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
-但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
-已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
-script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
-显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
-
-<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
 ]]></content>
   </entry>
   
