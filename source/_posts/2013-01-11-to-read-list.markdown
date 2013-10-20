@@ -21,8 +21,9 @@ categories:
 1. [孙卫琴，精通Hibernate](),补了一下hibernate的知识，确实比较繁琐，但考虑的还是比较周全的。另外孙学姐的书写的条理很清晰，作风严谨，前后一致连贯，像是交大计算机的文风。不过就是孙姐姐似乎已经有3年没发书了，javathinker站点也已经易主。不知近况如何。
 1. [seven languages in seven weeks]()， 看了第一个Ruby，复习了下yield，把metaprogramming局限在了open class、method_missing和module include。
 1. [spring in action 3]() 重新修了一下spring mvc，struts2可以基本不用了
+1. [spring in practice](https://gist.github.com/swachian/6070011) 主要讲spring的web开发的，比in action 这本更易应用以及贴近实际。
+3. [余红春,构建高可用Linux服务器,机工](https://gist.github.com/swachian/6590735). 精选出了一套脚本，值了
 0. Thomas Kyte, Expert Oracle Database Architecture.pdf
-3. 余红春,构建高可用Linux服务器,机工
 1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O'Reilly
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists
