@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-10-20T12:33:12+08:00</updated>
+  <updated>2013-10-29T22:19:48+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[车牌拍卖]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/10/28/chepai-paimai/"/>
+    <updated>2013-10-28T22:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/10/28/chepai-paimai</id>
+    <content type="html"><![CDATA[<p>这几日研究了一下拍牌，几个小tips如下：</p>
+
+<ol>
+<li>弹验证码的窗口需要3s，系统和GUI之间的时差是系统慢5s，所以投标需要预留8s  。</li>
+<li>输入验证码一般在5s左右，所以整个过程预留15s为妙</li>
+<li>实际操作时，往往引入伏击。其实就是一种先猜后提交的办法。伏击目前主要有两种模式。其一，在最低价上加价600，随后再加300.其二，在最低价上加价900，随后再加300.</li>
+<li>在目前的投标比下2-3.5，如果两个人同时各按上诉的办法进行操作，则至少有一个会中。</li>
+<li>秒杀确实很激烈。但是投标比例更关键。</li>
+<li>无警示价时，第二阶段的价格会翻的更快一些。有警示价时，由于待拍的基数大，上涨会慢许多。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[匆匆半年]]></title>
@@ -128,35 +147,6 @@
     <updated>2012-12-09T21:22:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/dabian</id>
     <content type="html"><![CDATA[<p>12月7日周五下午通过了硕士论文的答辩。多亏了C，让我们可以在比较早的顺位得到答辩的机会，大大节省了时间和精力。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kindle]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle/"/>
-    <updated>2012-12-09T20:53:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/12/09/kindle</id>
-    <content type="html"><![CDATA[<p>周五终于忍不住买了一台Kindle，把玩不久之后就喜欢上了。到手没多久已经用她看完了《我的西域，你的东土》后半部分。
-比起在手机上，即便是4寸的手机，看书的感觉棒多了。甚至比在电脑上看还要好，比抱着实体书看的感觉更棒。为什么这么说？</p>
-
-<p>最简单的道理就是分量轻、字体可以很大。从体积和重量上来讲，kindle的分量只相当于一本普通的100页不到的产品说明书，手握着相当舒服。和纸质书相比，
-要轻了许多，尤其是和那些大部头的书比较的话，计算机的书籍很多都是很厚的，显然轻便很多。手握着很轻松，单手也能操作，口袋里可以随便塞。在日光
-下的显示效果也要好于纸质书。</p>
-
-<p>而在字体方面更是可以做到很大。从这点上来说是对纸质书实现了全面的突破和超越。看大字不费眼不容易近视是普遍认同的，但囿于纸质书的体积和重量，
-篇幅必须加以控制，而篇幅的控制除了内容本身的长短就是和字体排版大小相关了。传统书籍为了还能让人携带，或者处于印刷成本的考虑，字体都是不得不损失的，
-而小字体其实阅读体验并不好，也容易伤眼。从阅读本身角度来说，字体越大眼睛越不累（当然自己感觉不到累可能眼睛会用的更多，呵呵）。Kindle就可以把
-字体放置的很大，看起来就舒服多啦。</p>
-
-<p>此外，如今的年代抱着一本书在外面看是不太好意思和别人打招呼的。Kindle就没这个问题了。带着和带pad、带手机看东西的感觉是一样的，同外部环境很协调。</p>
-
-<p>在我看来，这绝对是阅读方面划时代的产品。对纸质书的冲击以后再写文章评论吧。大体上认为是赢家通吃&amp;长尾理论挤掉了中坚力量的存活空间。</p>
-
-<p>最后，必须得承认<a href="" title="http://home.duokan.com/index.html">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
-对于我最喜欢的PDF格式支持也很好，关键一点在于支持智能重排，效果那是相当的棒。此外，多看设计的Wifi传输，其实就是ftp服务，也相当的实用。一开始
-还担心安全问题，后来确认它默认是关闭ftp的。Kindle的硬件+多看软件，这个组合相当厉害。现在就等我的疯马纹皮套和SOLIS灯了。</p>
-
-<p>I love it!</p>
 ]]></content>
   </entry>
   
