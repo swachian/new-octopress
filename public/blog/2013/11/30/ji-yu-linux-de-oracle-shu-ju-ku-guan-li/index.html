@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>处约 - Hegel2011的博客</title>
+  <title>基于Linux 的Oracle 数据库管理 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
-已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的， &hellip;">
+  <meta name="description" content="云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。 先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">处约</h1>
+      <h1 class="entry-title">基于Linux 的Oracle 数据库管理</h1>
     
     
       <p class="meta">
@@ -86,32 +85,22 @@
   
 
 
-<time datetime="2012-08-18T20:05:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+<time datetime="2013-11-30T22:01:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>下午偶然发现清华保研竟然会招二流学校的本科生。这倒大大出乎我的意料。毕竟在我读书的年代校外保研也是本校推荐，而教育发展到现在竟然校间互保
-已经变成一个学校的行为了。当然，难度还是有的。首先要成绩排名前5%，如果参加过大赛或者发表过论文则会极大简化初试和复试的难度。但说句实在的，
-有这方面志向又有人指导的话并不难做到。</p>
+<div class="entry-content"><p>云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。</p>
 
-<p>随即得瑟地去跟老婆说，如今我还在读书的话估计也能保研清华。老婆看看我，然后说现在根本不是比个人能力的时候，也不是你们当年主要靠个人表现就
-能解决基本问题的年代。现在去保了清华能搞定房子车子吗？ 顿时让我无语。毕竟清华的金字招牌尽管很牛，硕士毕业二三十万起步是做得到的，但要更进
-一步那是很难的。至于凭薪水在北京上海搞定房子那基本也是不太可能的事情。于是陷入更大的思绪混沌中。毕竟清华的研究生还是相当诱人的，而搞不定
-这些基本的东西，那么这么诱人又有什么意义呢？</p>
+<p>先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。比如Linux各发行版和Oracle的兼容性，ext2（有点老了）的文件系统磁盘数据结构，bios-grub-linux的启动顺序等。</p>
 
-<p>仔细想想，确实是我犯了读书人的毛病，太高看清华了。首先，从计算机系、软件学院会招二流保研生就可说明实际质量不过尔尔。三清团的说法不是没有
-道理的。其次，读书解决一切问题的想法是不对的。曾文正公当翰林期间都是牢骚满腹，彼时中进士的三年不过几百人都有那么多牢骚，那么多的生活拮据，
-何况如今已经扩招几万倍的大学研究生。</p>
+<p>整本书是一个很简洁的linux常用功能的介绍，并以oracle安装维护为中心，展现了使用的方式。虽然有些地方相对简陋，但确属作者的经验之谈。有工程和实际经验才能提炼出来的东西。比如补充的配置环境命令别名<code>udump, bdump</code>等，安装用于sqlplus操作方便的<code>rlwrap</code>。当然还有一系列的shell脚本。</p>
 
-<p>更严重的是我又弄差了读书的意义。</p>
+<p>但限于篇幅，有些东西确实没谈。而且整本书的重点在于linux如何使用oracle，对oracle的介绍着墨很少。又比如讲了rman，只讲了怎么打开，怎么用许多东西备份，但没提及怎么用这些东西来恢复。但总的来说还是很值得一读的一本书。至少可以了解职业实施人员的部署情况。</p>
 
-<blockquote><p>凡人多望子孙为大官，余不愿为大官，但愿为读书明理之君子。勤俭自持，习劳习苦，可以处乐，可以处约。此君子也。
-凡富贵功名，皆有命定，半由人力，半由天事。惟学作圣贤，全由自己作主，不与天命相干涉。</p></blockquote>
-
-<p>保研之事半由天命半由人力，读书明理，勤俭自持，习劳习苦，处乐处约才是个人该下功夫的地方。</p>
+<p>整本书只花了一个下午就读完了，至少说明书的可读性不错。</p>
 </div>
 
 
@@ -134,12 +123,12 @@
   
 
 
-<time datetime="2012-08-18T20:05:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+<time datetime="2013-11-30T22:01:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/生活/'>生活</a>
+    <a class='category' href='/blog/categories/读书笔记/'>读书笔记</a>
   
 </span>
 
@@ -148,7 +137,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/08/18/chuyue/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/" >Tweet</a>
   
   
   
@@ -157,10 +146,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/" title="Previous Post: hadoop集群安装手记">&laquo; hadoop集群安装手记</a>
+        <a class="basic-alignment left" href="/blog/2013/11/06/hu-pai-huan-shi-wai-pai/" title="Previous Post: 虎牌还是外牌">&laquo; 虎牌还是外牌</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/09/06/article-issues/" title="Next Post: 核心期刊">核心期刊 &raquo;</a>
       
     </p>
   </footer>

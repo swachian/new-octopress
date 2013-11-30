@@ -9,12 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="参考了一下残游记的组织与分工，小结如下： 产品经理，1，老板
-后端开发，1, 技术负责人
-前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师
-视觉设计师，2
-ios开发，1，
-运营，2，应该就是管理员和推销员 ">
+  <meta name="description" content="七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实w3school的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +68,72 @@ ios开发，1，
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/16/prolog/">Prolog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
+基本功就无从发挥了。</p>
+
+<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
+这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
+
+<ul>
+<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
+<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
+
+<ul>
+<li>第一个是X！=Y</li>
+<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
+</ul>
+</li>
+<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
+</ul>
+
+
+<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
+
+<h3>最大的启发</h3>
+
+<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
+
+<h3>试用体验</h3>
+
+<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
+不过确实是只要树立规则，就能输出结果。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -536,70 +599,6 @@ RHCE的范围基本如下:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/">为什么ruby不火仍然值得学</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-24T16:14:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
-
-<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
-
-<h3>1. 简单</h3>
-
-<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
-
-<h3>2. 方便</h3>
-
-<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
-方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
-
-<h3>3.程序员（IT人员）的朋友</h3>
-
-<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
-
-<h3>4. Rails</h3>
-
-<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
-的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
-不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
-
-<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
-现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
-
-<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
-
-<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -617,6 +616,10 @@ RHCE的范围基本如下:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/">基于Linux 的Oracle 数据库管理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/06/hu-pai-huan-shi-wai-pai/">虎牌还是外牌</a>
       </li>
     
@@ -632,15 +635,11 @@ RHCE的范围基本如下:</p>
         <a href="/blog/2013/10/08/back-and-forth-with-wlan-card/">对无线网卡的折腾</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/09/01/yi-xie-pian-zi/">一些片子</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/生活'>生活 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/时评'>时评 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/生活'>生活 (16)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/时评'>时评 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

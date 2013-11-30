@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 读书笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-11-06T12:45:10+08:00</updated>
+  <updated>2013-11-30T22:29:27+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[基于Linux 的Oracle 数据库管理]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/"/>
+    <updated>2013-11-30T22:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li</id>
+    <content type="html"><![CDATA[<p>云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。</p>
+
+<p>先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。比如Linux各发行版和Oracle的兼容性，ext2（有点老了）的文件系统磁盘数据结构，bios-grub-linux的启动顺序等。</p>
+
+<p>整本书是一个很简洁的linux常用功能的介绍，并以oracle安装维护为中心，展现了使用的方式。虽然有些地方相对简陋，但确属作者的经验之谈。有工程和实际经验才能提炼出来的东西。比如补充的配置环境命令别名<code>udump, bdump</code>等，安装用于sqlplus操作方便的<code>rlwrap</code>。当然还有一系列的shell脚本。</p>
+
+<p>但限于篇幅，有些东西确实没谈。而且整本书的重点在于linux如何使用oracle，对oracle的介绍着墨很少。又比如讲了rman，只讲了怎么打开，怎么用许多东西备份，但没提及怎么用这些东西来恢复。但总的来说还是很值得一读的一本书。至少可以了解职业实施人员的部署情况。</p>
+
+<p>整本书只花了一个下午就读完了，至少说明书的可读性不错。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ziyang]]></title>
@@ -281,62 +298,6 @@ mongodb hard nofile 10240
 <h3>备份与压缩</h3>
 
 <p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PM培训课程小结]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/15/lessons-from-a-training-on-pm/"/>
-    <updated>2012-04-15T13:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/15/lessons-from-a-training-on-pm</id>
-    <content type="html"><![CDATA[<p>趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看<a href="http://xdite-smalltalk.tumblr.com/post/18034694291">别人</a>的一些文章，谈谈
-自己的想法。</p>
-
-<p>整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
-把大瀑布分拆成了n个小瀑布。实际上对软件开发并不太适用。不过因为整套体系认为<strong>光有集成</strong>是没有自己的竞争力的，要求有<strong>30%</strong>的软件开发内容，
-于是又把软件开发放在里面。这也让我终于明白了工作的第一个部门成立的<strong>指导思想来源</strong>。因为我曾经相当一段时间纳闷为什么非要把系统集成
-和研发凑合成一个部门。而且整个软件组还受集成一侧领导。这样能做出什么好东西来。但现在终于了解了这样组织的来源，而且以集成为主导也是因为这里面
-要求软件比例不低于30%。</p>
-
-<p>读了这本材料，终于明白公司是抄自国家认证考试的体系。也可能是其他人这么建议的，而也受了这个认证体系理论的影响。</p>
-
-<p>软件开发有其自身的特点和重点。集成体系用其无所不包、范围够广的方式（9大范围）强行把软件包裹了进去。尽管看上去纳入了，但重点很不突出。
-毕竟即使有软件工程也和系统工程是两码事情。所以，这次培训最大的结果是了解集成到底是什么思路，然后就通过这个考试，剩下的也只有自己继续摸索。</p>
-
-<p>先说说集成这套体系。</p>
-
-<p>首先，体系强调章程和计划。章程只有一个，而计划各个领域可以有很多。实际上，<strong>计划也是章程</strong>。只不过灵活度比章程强，可以按照需要进行
-变更、更新，而章程定下了就不怎么更新了。计划或者章程规定了要做哪些事情，什么时候做，相关人员是什么，什么情况下需要变更。
-随后就是一堆输入输出的交付物。</p>
-
-<p>接下去的东西就好理解了，反正整个东西追求的结果都是文档。当然，文档确实有很多种，有些方法对保证系统也确实有帮助。
-比如需求管理中的use case，每个case其实还是要用文字说明的，case图可以让需求方和系统分析师把东西交流清楚。但本质上就是
-一个list，只是说明参与对象是什么。WBS分解，可以用于进一步细化和确认需求，分写出要做的工作。这些都是和软件开发业密切相关的，
-但是在此之外，其他的东西实质上和软件的关联就不怎么大了。</p>
-
-<p>最后，就是强调一切东西都要有确认，变更等都要走流程。这些东西如果乙方有能力实施，当然是很好的。</p>
-
-<p>此外，还有一些东西就是骗来骗去的了。比如进度估计、成本估计，实际上即使传统的工程，能准确估算出来的都是很少的。</p>
-
-<p>经典的启动、计划、执行、监控和收尾，又叫做PDCA（Plan Doing Check Action), 典型的普遍模型，自上而下。只是又可以分解成n个小瀑布。
-但是，这个真的是软件开发里面最重要的事情嘛？</p>
-
-<p>恐怕不是。</p>
-
-<p>就我看来，软件或者互联网应用更多的强调对自身功能和模块的拆分，启动时往往很难明确细化东西。即使建筑工程本身，也就是这套体系产生的原型，
-也有众多管理失败的案例，巴拿马运河等，那么软件对这套系统的适应性恐怕更难。而且这套体系显然没考虑很多项目管理工具的使用，如redmine、如版本控制系统，
-而不同的工具或进步的工具是可以颠覆整个开发行为的。条条框框和优秀的软件结合起来会完全改变制造方式。与此相比，管理体系本身就显得僵化。当然，值得吸取的部分还是有的。
-比如我们需要一个章程，需要需求的确认。</p>
-
-<p>最最重要的，就是list要做的事情，给出最终时间。WBS后，确认细节，排好顺序，随后和用户确认。</p>
-
-<p>而在这中间，系统的调整能力和团队和用户沟通的软实力才是起决定作用的东西。</p>
-
-<p>Update(2012-05-15): 读了<a href="http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+xxddite+%28Blog.XDite.net%29">New product Introduction Model的九宗罪</a>
-进一步明确了PM这套东西不适合的原因。确实，这套东西适合的是“在有確定用戶，確定市場，確定 bussiness model 的情況下才能使用。也只有在這樣的情況下才有機會成功。”
-“這很大程度了解釋了為什麼：個人、大公司要『新創』一個事業很容易失敗。而一些『大公司』要『山寨』一個服務也有機會取得成功。” <br/>
-那么反过来，对于不够明确的、大家都还没谱的、都需要摸索的项目就不合适。<br/>
-所谓<strong>执行</strong>是针对有成熟套路的东西，考察的是系统的熟练程度和配合程度。而创新、新业务是需要<strong>试错的</strong>，其中的核心能力是<strong>学习</strong>、<strong>摸索</strong>、<strong>观察</strong>和<strong>勇气</strong>。</p>
 ]]></content>
   </entry>
   

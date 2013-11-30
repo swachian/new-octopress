@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2013-11-06T12:45:10+08:00</updated>
+  <updated>2013-11-30T22:29:27+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -144,6 +144,8 @@
 <li><a href="">spring in action 3</a> 重新修了一下spring mvc，struts2可以基本不用了</li>
 <li><a href="https://gist.github.com/swachian/6070011">spring in practice</a> 主要讲spring的web开发的，比in action 这本更易应用以及贴近实际。</li>
 <li><a href="https://gist.github.com/swachian/6590735">余红春,构建高可用Linux服务器,机工</a>. 精选出了一套脚本，值了</li>
+<li><a href="">李爱武，基于Linux的Oracle数据库管理</a></li>
+<li><a href="">Whalen，陈曙晖译，基于Linux平台的Oracle Database 10g 管理</a></li>
 <li>Thomas Kyte, Expert Oracle Database Architecture.pdf</li>
 <li>Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional</li>
 <li>Gourley D, Totty B. HTTP权威指南 O'Reilly</li>

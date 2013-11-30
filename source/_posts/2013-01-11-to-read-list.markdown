@@ -11,7 +11,6 @@ categories:
 
 ## 技术类
 
-
 1. [X] [张冬，大话存储，清华](/blog/2013/01/08/da-hua-cun-chu/) 这本书前后总共读了18天，中间有八九天没有读
 2. [x] [吴翰清，白帽子讲Web安全，电工](/blog/2013/01/26/bai-mao-zi-web/) 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少
 2. [x] [AWK,The Awk programming language.](/blog/2013/02/19/about-awk/) 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。
@@ -23,6 +22,8 @@ categories:
 1. [spring in action 3]() 重新修了一下spring mvc，struts2可以基本不用了
 1. [spring in practice](https://gist.github.com/swachian/6070011) 主要讲spring的web开发的，比in action 这本更易应用以及贴近实际。
 3. [余红春,构建高可用Linux服务器,机工](https://gist.github.com/swachian/6590735). 精选出了一套脚本，值了
+4. [李爱武，基于Linux的Oracle数据库管理]('')
+5. [Whalen，陈曙晖译，基于Linux平台的Oracle Database 10g 管理]()
 0. Thomas Kyte, Expert Oracle Database Architecture.pdf
 1. Flower M. Patterns of Enterprise Application Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O'Reilly
