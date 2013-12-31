@@ -9,9 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个： 大数据量写入，一小时10G
-数据量极大的查询
-并发数不大，即写入和读取都不是高并发的 发现此类数据库普遍从3年前开始流行，主要实现这些数据库的编程语言是下面这些， &hellip;">
+  <meta name="description" content="Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/21/braces-and-do-end/">Braces 和 Do End</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-21T10:12:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this means in practice.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="p">{</span><span class="o">|</span><span class="n">where</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># &quot;inner called me&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="k">do</span> <span class="o">|</span><span class="n">where</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># &quot;outer called me&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>区别在于block属于谁，是前一个（outer）还是后一个（inner）。</p>
+
+<p>类似的例子还有高见龙的：
+http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[2, 4, 6, 8, 10]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[1, 2, 3, 4, 5]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
+但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
+总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -767,48 +854,6 @@ CPU：美国博康BCM5357处理器   &#8221;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/29/chuang-xin-shi-shi-yao/">创新是什么</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-29T16:20:00+08:00" pubdate data-updated="true">Jan 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>创新是目前提到的很热门的词汇。在我看来，创新可以理解成一种突破。<br/>
-不管这种产品是渐进地到达的，还是通过结构性调整获得的，当然也有颠覆现有模式的。<br/>
-渐进的创新犹如水滴石穿，量变到质变。其中的道路、方向等都已被开辟，人们只是随着这个道路继续前进，逐步的优化提高。日积月累，自然获益良多。汽车业是这方面的典型代表。<br/>
-结构性调整的代表可以提一下Rails。横空出世的Rails，实际上是在一系列东西基础上，最后经DHH独创产生。但是，DHH的独创离不开Ruby的MRI，而database的接口也是其他人已写好多年，erb的引擎也是在DHH动手之前就有。而DHH把这些东西重新组织起来用于开发Web应用，就有了突破性的开发框架Rails。<br/>
-颠覆现有模式的典型，非数码照相机莫属。实际上互联网的产生，使得很多领域都出现了颠覆性创新的可能。试问，一旦没有互联网，dc还能那么流行吗？</p>
-
-<p>所以，创新者，配合发展的环境同时发展的事物耳。如果环境不发展，则自然也没有创新的机遇。中国人创新能力差，盖因环境变化少。与时俱进乃创新之真正配套内涵。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -826,6 +871,10 @@ CPU：美国博康BCM5357处理器   &#8221;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/31/zz-qi-che-xiao-fei-guan/">【zz】 汽车消费观</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/16/shuang-biao-shu-xia-pai-pai-zhong-yu-gao-ding/">双标书下拍牌终于搞定</a>
       </li>
     
@@ -841,15 +890,11 @@ CPU：美国博康BCM5357处理器   &#8221;
         <a href="/blog/2013/11/03/kan-che-da-nuo-yi-ji/">看车大挪移记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/10/28/chepai-paimai/">车牌拍卖</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/生活'>生活 (17)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/生活'>生活 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
