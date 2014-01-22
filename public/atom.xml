@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-01-17T17:23:08+08:00</updated>
+  <updated>2014-01-22T14:53:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于车架号的备忘]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/01/22/about-vehicle-identification-number/"/>
+    <updated>2014-01-22T13:56:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/01/22/about-vehicle-identification-number</id>
+    <content type="html"><![CDATA[<p>车架号，又叫做VIN（Vehicle Identification Number），是每一辆车的识别号。
+由17位数字组成，ISO组织进行了全世界范围的标准化。我国在90年代就已经采用并加入了这个标准。</p>
+
+<p>以东风日产为例，其车架号类似LGBM4DE43DS000117，</p>
+
+<p>其中，LGB是东风日产的代号（WMI，世界制造厂识别码），L表示中国，GB是在中国工信部分配的。其后各字母和数字的含义是：</p>
+
+<p>第4位：表示车辆品牌，M：奇骏，L：逍客，F：天籁<br/>
+第5位：表示车身类型，例如几开门、几厢等<br/>
+第6位：发动机型号，D基本上是2.5排量的意思<br/>
+第7位：约束系统，即安全带和气囊<br/>
+第8位：变速箱说明，0：普通AT<br/>
+第9位：前8位的校验位</p>
+
+<p>第10位：制造年份，从1开始到Y，扣除了0、I、O、Q、U后共有30个字符可以用于表示年份，从71年开始计算，即30年更换一轮。01年就又从1开始，而D的话就表示13年，其余以此类推。  <br/>
+第11位：制造地，Y：花都工厂，R：襄樊工厂，S：郑州工厂<br/>
+第12位：生产顺序号</p>
+
+<p>具体对一辆车子而言，最有用的可能就是制造年份和装配地点，然后可以通过顺序号大致推出是在第几个月生产的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[天籁 Teana]]></title>
@@ -652,16 +679,6 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
 还有一点，没有好的前端，服务根本吸引不了人。毕竟大部分人也不会有什么杀手级的内容，这个时候比拼界面反而是能反应团队的水平及做事用心的程度。</p>
 
 <p>所以，我的结论是，如果后端和内容有足够重要的事情，那么还是围绕后端。反之，有余力后可关注前端。毕竟门面功夫也不可小觑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[折腾记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji/"/>
-    <updated>2013-05-25T14:35:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji</id>
-    <content type="html"><![CDATA[<p>人总是免不了折腾。用什么虚拟机工具可以折腾，用什么linux发行版本也可以折腾。这些都搞定了，发行墙又来和我们折腾。
-Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方案，但发现还真是折腾。</p>
 ]]></content>
   </entry>
   

@@ -9,10 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="系列链接： mongodb基础
-尝试分布式及复制 （sharding and replication)
-部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
-little-endian , 不适合SPARC, &hellip;">
+  <meta name="description" content="想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的博客中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。 先安装 Pandoc sudo agt-get install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,66 @@ little-endian , 不适合SPARC, &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/gimli-and-markdown-2-pdf/">Gimli and Markdown 2 Pdf</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T15:24:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的<a href="http://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/">博客</a>中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。</p>
+
+<p>先安装 Pandoc</p>
+
+<p><code>sudo agt-get install pandoc nbibtex texlive-latex-base texlive-latex-recommended texlive-latex-extra preview-latex-style dvipng texlive-fonts-recommended</code></p>
+
+<p>安装ruby的gem gimli</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo agt-get install wkhtmltopdf
+</span><span class='line'>gem install gimli
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后运行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>gimli -f ./README.md
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可得到类似GitHub风格的pdf文档。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1274,48 +1333,6 @@ Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/27/the-difference-between-mapreduce-and-hadoop/">The Difference Between MapReduce and Hadoop</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-27T12:42:00+08:00" pubdate data-updated="true">Mar 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>简单地说，MapReduce是一种计算模型，也就是一种设计；而Hadoop则是这种模式的Java实现，由Apache发行。
-2004年的时候，google发布了MapReduce的论文，并给出了一个C++的实现。此后，很多种语言都实现了MapReduce模式，比较有名的有，
-Hadoop(java), Skynet(ruby)等。<br/>
-而Hadoop除了这个计算模型外，还包括分布式数据库和分布式内存存储两大部分内容。</p>
-
-<p>MapReduce实际上是切分+管道技术。可以表述称 Map | Reduce。
-通过Map，将要处理的数据转换成[key, value], 再管道给Reduce继续进行处理。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -1333,6 +1350,10 @@ Hadoop(java), Skynet(ruby)等。<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/22/about-vehicle-identification-number/">关于车架号的备忘</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/17/teana/">天籁 Teana</a>
       </li>
     
@@ -1348,15 +1369,11 @@ Hadoop(java), Skynet(ruby)等。<br/>
         <a href="/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/">基于Linux 的Oracle 数据库管理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/11/06/hu-pai-huan-shi-wai-pai/">虎牌还是外牌</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/生活'>生活 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (39)</a></li><li><a href='/blog/categories/生活'>生活 (20)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/车车'>车车 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
