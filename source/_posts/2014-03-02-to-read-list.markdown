@@ -9,15 +9,19 @@ categories:
 
 ### 技术类
 
+1. Flower M. Patterns of Enterprise Application   Architecture, Addison-Wesley Professional. Rails诞生的书，[DHH最爱的五本编程书籍](http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me)，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。
+1. [PoEAA的访谈和DHH](http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/)
+1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999. 
+1. Eric Evans. Domain-Driven Design.  
+1. Beck. Smalltalk best practice patterns, 1996.
+1. Donald C. Gause, Are you lights on? 1990.
 1. 张昊，Linux Shell编程从入门到精通。  
 1. Core Java。有必要更新一下。  
-1. Thomas Kyte, Expert Oracle Database Architecture.pdf  
-1. Flower M. Patterns of Enterprise Application   Architecture, Addison-Wesley Professional
 1. Gourley D, Totty B. HTTP权威指南 O’Reilly  
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists  
 1. 谭云杰,大象–Thinking in UML，水利水电  
 1. 谢希仁.计算机网络，电工 
-
+ii
 ### 经管
 
 1. [x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。  
