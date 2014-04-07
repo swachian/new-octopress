@@ -9,13 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Mats Ruby 2.0
-的笔记。 首先讲了Ruby的历史 Dec 1995 0.95
-Dec 1996 1.0
-Aug 1997 1.1
-Dec 1998 1.2
-Aug 1999 1.4
-Sep 2000 1.6 以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。 voccation- &hellip;">
+  <meta name="description" content="不少人应该对Oracle的报价是好奇的，研究了一番之后，发现Oracle的报价无论在商务上还是使用策略上都可以称之为出奇的成功. Oracle的数据库种类 Oracle的数据库讲穿了只有一套，但又分成ee、se等几个版本。而这些都可以提供免费试用。
+通过免费可以培养用户群，降低工程师的雇佣成本。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +67,198 @@ Sep 2000 1.6 以上是节假日驱动开发，后来改成了周年纪念开发�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/28/the-price-of-oracle/">Oracle的价格</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-28T14:57:00+08:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>不少人应该对Oracle的报价是好奇的，研究了一番之后，发现Oracle的报价无论在商务上还是使用策略上都可以称之为出奇的<strong>成功</strong>.</p>
+
+<h3>Oracle的数据库种类</h3>
+
+<p>Oracle的数据库讲穿了只有一套，但又分成ee、se等几个版本。而这些都可以提供免费试用。
+通过免费可以培养用户群，降低工程师的雇佣成本。通过划分版本，又可以执行价格策略，抢占不同的市场。</p>
+
+<h3>Oracle的单价种类</h3>
+
+<p>Oracle的单价基本可以分为按User和按CPU卖。User的话是一个自然人或者设备。CPU就是按装机卖了。</p>
+
+<p>下面是一些价格举例，单位都是美刀
+按用户： {企业版： 950，se: 350, seo: 180}
+按cpu: {企业版：47500， se：17500，seo：5800}</p>
+
+<h3>Oracle的起步license概念</h3>
+
+<p>显然，按user大部分情况下应该比较便宜。所以，邪恶的oracle又有了最小license数量的概念。比如，企业版最低的user数就是25，se则是5，以此来保证oracle的收入。</p>
+
+<h3>折扣</h3>
+
+<p>以上只是目录价，一般通过代理买，获得一半的折扣是没有多少问题的。如果是大客户的话，还可以更加优惠。</p>
+
+<p>最后，说一下关于DataGuard的事情。有说是免费的，也有说是付费的。在10g的ee版本中，这个确实已经包含了。</p>
+
+<blockquote><p>Data Guard supports both physical standby and logical standby sites. Oracle Corporation makes Data Guard available only as a bundled feature included within its &#8220;Enterprise Edition&#8221; of the Oracle RDBMS.</p></blockquote>
+
+<p>所以，10g ee里面的ODG肯定是免费的，因为已经买过单了。</p>
+
+<blockquote><p>The &#8220;Oracle Active Data Guard&#8221; option, an extra-cost facility,[4] extends Oracle Data Guard physical standby functionality in Oracle 11g configurations. It allows read-only access on the standby node at the same time as applying archived transactions from the primary node.[5]</p></blockquote>
+
+<p>然后，在11g里面，又推出了Active Data Guard，二者在技术上有什么区别还没研究过，但在付费上这是一个可选包。目录价200/user.</p>
+
+<p>参考资料：</p>
+
+<ol>
+<li><p><a href="http://www.oracle.com/us/corporate/pricing/technology-price-list-070617.pdf">oracle price list</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Oracle_Data_Guard">oracle data guard wiki</a></p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/">为什么ruby不火仍然值得学</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-24T16:14:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
+
+<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
+
+<h3>1. 简单</h3>
+
+<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
+
+<h3>2. 方便</h3>
+
+<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
+方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
+
+<h3>3.程序员（IT人员）的朋友</h3>
+
+<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
+
+<h3>4. Rails</h3>
+
+<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
+的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
+不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
+
+<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
+现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
+
+<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
+
+<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/16/sass-and-compass/">Sass and Compass</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-16T21:29:00+08:00" pubdate data-updated="true">Mar 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。
+看了下《Pragmatic Guide to Sass》, 理清了一下脉络。
+顺便提一句，这本书是在kindle上看的，出版社和作者提供了epub的版本。  这可以算是第一本在kindle上看完的计算机技术类书籍。虽然效果还可以，
+但是看了下原书的pdf版本，发现其版本也深受“小书”，小版面，的影响。这可能是未来计算机书籍的一个趋势吧。不过kindle还是最适合纯文字，
+用来阅读计算机技术书籍的体验还是很一般。</p>
+
+<p>Sass是最基础的，类似coffeeScript对Css的改写，当然引入的内容要多的多。毕竟js本身也是一种语言，但css很难算的上是一门编程语言。
+Sass有自己的运行命令，由ruby实现，可以把scss文件编译成css文件，也能convert回去。</p>
+
+<p>Compass则是sass的库和扩展，在sass的基础上提供了更丰富的样式、函数和变量以及模式。其本身也有了一套命令，也更适合于建项目。Sass如果是java，
+那么compass就是J2EE+Eclipse。</p>
+
+<p>如果不想安装那么多东西，那么可以直接使用scout这个GUI工具，工具本身集成了sass和compass的能力，只是又提供了图形化的集成界面。该界面可能是基于
+Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以从scout入手。</p>
+
+<p>compass是很神奇的，而它的spriting堪称神奇中的神奇。</p>
+
+<p>但我发觉设计也是有天赋和术业专攻的。我们的美工完全不用这些东西，也很快就能搞出一个各种android上面看过去还不错的版本，我用这些东西去写出来的还是感觉很累。但至少比没有要好多了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -895,355 +1082,6 @@ script流行的年代，而这些脚本语言可以很大程度上替代AWK。AW
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/03/every-language-will-implement-a-lisp-interpreter-in-itself/">Every Language Will Implement a Lisp Interpreter in Itself</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-03T12:48:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>H&amp;P里面这句话起初还有点琢磨不过来，后来看了下jstl等东西，这不就是表达式在java中的一个实现么。</p>
-
-<p>从头开始讲的话，需要从web开发讲起。Web中最耗开发时间的是页面的开发，因为在这个环节一切编程的好东西都是没有引入的。比如C的头文件有include检察，
-而css依然一团乱；其他语言有的各类引用机制，到了页面全部木有。而在页面上的代码，主要有下面两种模式：</p>
-
-<ul>
-<li><code>&lt;% %&gt;</code> <code>&lt;%= %&gt;</code>这样的代码嵌入</li>
-<li>代码标签及各类膜拜，如jstl标签，struts2标签，velocity模板等</li>
-</ul>
-
-
-<p>仔细观察，可以发现第二种代码标签和模板其实就是实现了一套语言解析器。往往Java的就用Java实现，有些语言就用自己的实现。
-正好印证了Paul的话。为了应付实际的表达困难，表达力弱一些的语言不得不自建一套<strong>类Lisp的语言表达解释器</strong>。</p>
-
-<p>所以，表达力越差（可以理解成
-啰嗦、信息量低）的语言，其搭配的解释器可能越五花八门，因为<code>&lt;% %&gt;</code>是很难适应这类语言嵌入在Html中的需求的。而能力强的语言，则模板就要少许多，
-因为语言本身的表达力强大，使得再造一套标签显得很没有必要，自然也就无人发明此类模板。</p>
-
-<p>从表达力而言，Java确实较次些。按Paul的理论那就Ruby更接近Lisp。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/26/bai-mao-zi-web/">《白帽子讲Web安全》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-26T22:59:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
-都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
-篇幅很大，但真正值得读的代码却很少。</p>
-
-<p>本书好的地方就是给出了大量的实例，这些例子就在我们身边，百度的、搜狐的、MySpace的。跟着这些案例仔细自己再做分析应该还是会有很多收获的。
-至少让人明白，第一网络确实不安全，第二值得研究的工作还有许多。</p>
-
-<p>但是，被很多人推荐就有点不可理解了。从技术书籍的角度考量，这本书真的很一般。就清晰度、深度、整洁度来讲，都很平平。卖的好，可能主要还是营销
-的好。</p>
-
-<p>花了2天半，这本书也就翻完了。还是过得去的一本书，但有些评价显然过高。Yahoo的算法很有用。几个案例至少也提供了继续跟踪研究的线索。</p>
-
-<p>这本书的总体风格就是这个样子，提供了足够多的案例作为进一步研究的入门线索，但书本身拼凑痕迹严重，存在大量的不负责代码黏贴，也缺乏作为一本技术书籍
-尤其是畅销书籍应该具备的细致入微的分析。不过这个主题的其他书籍也确实不多，作者也算这个领域的牛人了。还是值得推荐给做Web开发的人员读读的，至少可以
-增加点广度的认识。</p>
-
-<p><a href="https://gist.github.com/f801d7015715f6f10098">gist</a></p>
-
-<p>作者：</p>
-
-<p>吴翰清，西安交通大学少年班，84年生人。<br/>
-2007年，成为P7（初级技术专家）；<br/>
-2010年，成为P8（高级技术专家）。<br/>
-2012年下半年，跳槽去了安全宝，创新工场下面的一个企业。我对开复不感冒，甚至是负分的哦。</p>
-
-<p><strong>白帽子</strong> 主守， <strong>黑帽子</strong> 主攻。</p>
-
-<p>防火墙及ACL的控制，是的任意攻击系统端口的情况不再可能。而Web端口不能封。加之Web技术的普及和流行，黑客攻击转向Web。</p>
-
-<h3>安全三要素(CIA)</h3>
-
-<ul>
-<li>机密性(Confidentiality)</li>
-<li>完整性(Integrity)</li>
-<li>可用性(Availability)</li>
-</ul>
-
-
-<p>其他还有可审计性、不可抵赖性等</p>
-
-<p>第一章很一般，全部都是空谈，讲一些人人都懂的道理。而且归纳的也很不好，基本就是一个列表，列表之间没有逻辑关系。</p>
-
-<p>作者的文字功底和解释能力相当一般。</p>
-
-<h2>XSS(跨站脚本）</h2>
-
-<p>这章前半部分很无聊，作者罗列了一堆xss的案例，其中贴的js代码就差不多有十页。但没解释，没重点。XSS防御部分介绍的还行。
-xss可以分为参数安全和劫持Cookie两种。可以试试<a href="http://www.fiddler2.com/fiddler2/">fiddler</a>工具。</p>
-
-<h3>XSS防御</h3>
-
-<ul>
-<li>HttpOnly</li>
-</ul>
-
-
-<p>是设置cookie的属性，即只能Http请求时上传，而不能让JS操作。这样就可以避免cookie被劫持。</p>
-
-<ul>
-<li>输入检查</li>
-</ul>
-
-
-<p>黑白名单过滤器</p>
-
-<ul>
-<li>输出检查</li>
-</ul>
-
-
-<p>在html文本中用HtmlEncode，在javascript中用JavascriptEncode。</p>
-
-<p>在css和url的输出则较为复杂。 Anti-Samy是一个很好的XSS Filter。</p>
-
-<h2>CSRF(Cross Site Request Forgery) 跨站点请求伪造</h2>
-
-<p>有些浏览器本地cookie不会被提交，session型cookie则肯定会被提交。</p>
-
-<p>解决办法是 <strong>验证码</strong> 和 <strong>Anti CSRF Token</strong></p>
-
-<p>就是在表单和session中，都放一个token来确保这个form是本地服务产生的。<br/>
-Token可以是一个，也可以是多个。</p>
-
-<p>点击劫持和HTML5都讲的比较烂。总是缺乏画龙点睛的那一笔。</p>
-
-<h2>SQL 注入</h2>
-
-<p>此章依然很一般。介绍的内容相当不到位。比如只说出了是利用sql拼接的漏洞，但没说具体是怎么应用的。
-不过在 <a href="http://vdisk.weibo.com/s/oHDMV/1359208976">SQL注入攻击技术初探</a> 中，终于搞懂了以前困惑过我的问题：内容到底是怎么显示出去的。道理在于让第一句（自己写的语句）出错无记录，而后面跟随union则返回攻击程序写出来的sql，这样自然内容就回显了。而参数数量等都是通过order by 16等试错来取得的。</p>
-
-<p>使用预编译语句的效果主要是确保SQL语句的结构不会因为输入的参数发生变化。即实现了数据和代码（字段及从句的分离。</p>
-
-<h2>访问控制</h2>
-
-<p>依然讲的不清楚，懂的人不需要读，不懂的人读了也白读。</p>
-
-<ul>
-<li>垂直权限管理 &#8211; 针对URL的访问控制，RBAC</li>
-<li>水平权限管理 &#8211; 面对数据资源的</li>
-<li>OAuth &#8211; 和我们的重定向类似，只是更加标准，返回的不是用户数据，而是token</li>
-</ul>
-
-
-<h2>加密算法和随机数</h2>
-
-<p>这章还算有点料，从使用者的角度讲解了加密解密算法的用法。</p>
-
-<p>建议：</p>
-
-<ul>
-<li>使用CBC模式的AES256用于加密；</li>
-<li>使用HMAC-SHA512用于完整性检查；</li>
-<li>使用带salt的SHA-256或SHA-512用于Hashing.</li>
-</ul>
-
-
-<h2>DDOS</h2>
-
-<p>亮点在于给了Yahoo的专利，确实是绝佳的主意。
-<a href="http://patft.uspto.gov">Detecting system abuse</a></p>
-
-<p>本书不是一本讲解性质的。其特点是列出各个大门，然后读者自己进去领取东西。对比师傅领进门的模式，它的模式是门户告诉你，然后靠自己。</p>
-
-<p>OWASP的ESAPI安全模块</p>
-
-<p>安全监控、入侵检测、Web应用防火墙(Apache的一个模块）</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/20/hackers-and-painters/">Hackers &amp; Painters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-20T15:38:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Paul Graham 的这本书有15个章节。我有英文版和中文版两个版本，但读了英文版没几页之后，我就决定把这本书当做双语练习来对待。
-是的，作者的文章很美，也很有深度和启发，值得对照、精读和背诵。15章我已经阅读了几章，第一章的Why Nerds Are Unpopular感觉最好。<br/>
-<strong>第六章</strong>How to make wealth有人说看了大受启发，基本说明了财富和金钱的关系，但这个内容在我看来就比较平淡，因为中欧商学院推荐的
-图书基本已经把这个道理说得很清楚了。所谓大公司测量难小公司测素质方便也是很早就是我自己产生的想法。不过高科技公司拥有的杠杆（放大）
-效应此前并没有强烈的意识。其他的诸如形成产权概念、保护私人财产是西方发达的主要因素，这个xiaozixin早就讲过。只不过这下子更明确了
-西方也不是一开始就这样的。产权或者说私权的明晰是一个逐步发展的过程，也是文艺复兴的一大成果。在西方的过去，统治者及其手下也是会想办法
-把财富从创造者那里夺走。只是后来才逐步找到了平衡。</p>
-
-<p><strong>第10章</strong>和<strong>第11章</strong>都是关于程序语言的。对我而言，这两章比较业余。当然，作者的视野很高，从机器语言到高层语言，从动态执行到静态编译，从强类型
-到弱类型都介绍了一下，感觉这章是给外行看的科普文章。后面的100年语言如何就比较扯了，随便看看就行。</p>
-
-<p>下面重点说说<strong>第一章</strong>。这篇文章很独特。作者从书呆子(nerds)为什么不受欢迎说起，指出是因为nerds对受欢迎不是真的最感兴趣；随后分析美国普通
-初高中学校的分层情况，指出nerds所受的是“迫害”，因为一个梨型的架构下必须要有一些牺牲品成为受打击对象，这样最底层的“白人”才能好受些，才能享受被欢迎。
-随后才引出文章的真正主题，学校为什么会存在？学校和监狱为什么又类似的地方，为什么二者的内部社会等级也很类似？其实文章是对现今流行的
-学校教育制度的一种抨击。因为学校和监狱一样，他们的存在本身并不是为了创造什么财富，一大功能是把人给围起来避免影响工业化时代<strong>其他普通人</strong>的
-工作。学校的存在使得一个人在22岁之前和现实世界是分离的。而且缺乏实践，相对于农业文明（藏人小孩8岁就可以放牧了）时能创造真正的财富
-需要很长的时间和代价。<br/>
-最后又回到主题，指出nerds之所以在学校不受欢迎本质上是他们看到了更现实世界的需求，他们是能促进世界进步的人。</p>
-
-<p>一旦nerds进入现实世界，现实世界的需求需要他们去解决，此后他们就会被得到尊重。因为此时受不受欢迎在小团体中不再成为主要因素。而且世界范围的
-扩大也使得nerds可以自己组群从而不再孤单。</p>
-
-<p>结合自己的感受说说这一章。从nerd对现实世界有用来讲，这个世界上的人本来就是可以分为欢迎且有用、不欢迎但有用、欢迎但没用、不欢迎且没用。
-一个无所事事的世界或环境里，欢迎是第一位的，有用是次要的，但一旦环境发生变化必须要有用时，那么欢迎反而是可以退居之后的。作者的文章
-只是把nerd局限在学校，然后一下子推广到了大千世界。<br/>
-现在看来，中国媒体日常所讲的“情商”其实是社交受欢迎的意思。严格地说，情商不单包括受欢迎，还包括承受压力、自信心、意志力等个人品质，我国
-媒体强调的情商只是片面的受欢迎关联的几项。</p>
-
-<p>孩子的世界确实存在着欺负。因为其秩序是团体内部临时组合而成，没有经历过历史的演变，层级和帮派往往会占据主流，看来无论是美国还是中国的中学
-都存在秩序混乱的特色。只不过中国是以考试为荣的国度，书呆子只要成绩好，一般也没人会看不起，反而还是挺受尊重的。但任何群体里，都不太会欢迎
-逆袭这样的举动，此时美帝和中国中学生的表现都差不多，即群起而攻之。这也是为了站队的需要，使得自己可以被其他团体接受。只要是梨型结构，可能就是这种特色。</p>
-
-<p>关于教育，美帝的一套看来并不值得一学，他们的问题也不少。</p>
-
-<p><strong>第二章</strong>是关于画家和hacker的。这个现在读来就没什么新东西了，因为这也是我这几年主要接触的素材，个人也是这么想的。
-本质上，计算机是一种文科和理科结合的专业，而其中又可以派生出一类maker。计算机之所以能如此流行，渗透到生活的方方面面，主要就在于它具备这种
-文学和理科、自由和严谨、艺术和工程的结合的性质。计算机系和软件学院的区别也可以从中窥到一斑。我去过意大利，去过佛罗伦萨，倒是那些画家的事迹
-更有感触。原来那些画上的内容也是可以不同的人完成的，实际上一个画家不会全部都自己画完。每幅画其实也反复修改过多次（颜料的反复修补涂改等）。
-这个和做软件真的挺类似。<br/>
-而且，他也给抵制数学找出了理由。如果是计算机科学，那么必然要加入数学，而实际上这并不是必须的。计算机不是数学，是我一直以来有的观念，否则大家
-还搞什么计算机，都去数学系不是更好。就是因为计算机有自己的关注点和特色，才从数学里面分离出来的么。<br/>
-总之，很有意思的一章，但对我而言可能觉得都是顺理成章的。从大学时代的学习、到后面DHH的实例，都验证了我的想法。呵呵，可以正大光明地偷懒
-不学算法导论了。</p>
-
-<p><strong>第三章</strong>是关于独立思考和要不要讲出来的。这篇文章较难，英文的很多地方就不理解，转而看中文也如坠五里雾中。小结一下作者的意思是要自己独立思考、
-怀疑要大但说出来的要小。步子迈大了叫离经叛道，走一点点就叫创新。思想要奇特，讲话要把握分寸。</p>
-
-<p><strong>第四章</strong>从解释hacker和hack的含义开始，然后以hack的历史作为衔接引到了<strong>政府和有反抗精神人的关系</strong>上面。第一个hacker不是计算机
-专家，而是一个在曼哈顿计划中破解保险箱密码的hacker。然后展开了为什么美国有强大的黑客文化，因为美国人的反抗精神本来就强大一些。
-二战期间，德日英法都没这种现象。<br/>
-原因当然很简单，能反抗政府的人自然也能解决其他棘手问题，在政府门前不声不响的自然在其他问题面前也无能为力。此外产权保护、防止
-研究都是等于政府给hacker放了一把锁，对于hacker而言第一反应自然是要突破它。如果失去了这种精神，或者是失去了这种精神的人，那么国家
-将变得衰弱。<br/>
-另外，能够自由发言的国家最后容易变成很多东西采取最优方案的那一个。一个集权和权威的国家，则主要是听资助者（老大）的声音，
-那方案是否最优就不一定了。再者，权威（集权）国家容易产生腐败，腐败容易导致贫穷，贫穷自然虚弱。这是大清的现实情况。</p>
-
-<p>换个角度，中国的hacker比美国更有反抗政府或者说钻政府控制的精神。所以国家给了一定的生存空间后，财富就积累了起来。我国的
-世界第二富不是吹的。</p>
-
-<p><strong>第五章</strong>是关于如何在互联网上开发软件的。作者的文章写于2001年，相当的具有前瞻性，37signals可以说是实践了这套理论的典型。而且也进一步说明了
-为什么互联网公司方面小公司可以打败大公司。</p>
-
-<p>在人才和回报两方面，只有小型的互联网公司才能给予优秀人才第一流的回报，做特殊需要费力的事情。大公司只能雇佣优秀人才做普通的事情，或者雇佣普通人才
-做很费力的事情，但很难让优秀人才做需要很大努力的事情。</p>
-
-<p>作者对ipod、互联网软件的认识都极有深度，预言的也很准。对世界怎么运行的了解也很深。比如说“很大一部分是商家为了让大公司买下这个商品而付出的费用”，呵呵，
-在美国这叫营销，在中国有时候叫做寻租。是的，商品不单有本身的价值，不单由供求关系、环境等决定它的价格，还必然有<strong>为了卖</strong>而付出的成本。</p>
-
-<p><strong>第七章</strong>是关于财富分配的。作者的观点是财富分配差距拉大但社会总体更加富裕，富人和穷人的生活差距反而在缩小。除了收入差距、住房差距，其他差距是在缩小。</p>
-
-<p><strong>平均</strong>和<strong>公平</strong>是两个不同的概念。当官在历史上各个国家都受欢迎，就是因为他们可以窃取财富。但作者这里没说多印钞票的问题。</p>
-
-<p>技术无法使得<strong>品牌</strong>变得更便宜。</p>
-
-<p><strong>第八章</strong> 讲了通过统计学的方法（贝叶斯公式）来解决垃圾邮件。其核心特征就是利用邮件的统计特征值，来实现一套可以自己成长并适应
-变化的反垃圾邮件系统。在读过数学之美，了解google之后，这章的核心思想一看就明白了。</p>
-
-<p><strong>第九章</strong> 讲了设计者的品味。实际上是指更好、更美、更简洁的解决方案或者设计。品味的提高源于对现实的不满，起初是模仿，
-随后是提高和突破。</p>
-
-<p>这方面中国人普遍不强大，本人和大部分人一样，都是得过且过的。所以，中国好的设计品味并不多。这可能也是没有办法的
-事情。</p>
-
-<p><strong>第十二</strong> 、 <strong>十三章</strong> 都是讲使用优秀语言的优势，以lisp为主。前一章以击败平庸公司为切入。各种语言的能力
-其实是不一样的，经理的选择更出于平稳考虑，而优秀语言真正的用武之地是小型的竞争激烈的领域。
-越通用的技术也意味着越平庸，但对大公司这样是合适的。优秀语言适合需要高收入低人数的企业。</p>
-
-<p>后面的则进一步解释lisp的强大所在。ruby比perl python更接近lisp。lisp的风格用括号和缩进
-是我喜欢的，考虑学习学习。</p>
-
-<p>编程语言是技术和宗教的混合物。评估竞争对手可关注他们的招聘职位。书生气的开发者与层级官僚
-经理之间总是发生冲突。lisp由数学演算诞生，约翰麦卡西，诞生之处就包含9种新思想，但没写闭包。</p>
-
-<p><strong>第十四章</strong> 则是讲了作者心中的梦幻语言是什么样子的。当然，还是Lisp。</p>
-
-<p><strong>第十五章</strong> 讲了设计和研究的区别于联系。简而言之，设计都是为了好，研究都是为了新。他们的方法不同，但目标都是又新又好。因为好的设计
-必然需要带有突破性质的新东西。</p>
-
-<p>为了自己使用的而设计的通常要比给别人使用的设计来的好。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1261,6 +1099,18 @@ Token可以是一个，也可以是多个。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/ibmde-linuxhe-googlede-android/">IBM的Linux和Google的Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/xiao-mi-de-hong-mi/">小米的红米</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/16/dang-dai-zhong-guo-he-wei-lian-de-guo-de-ge-xiang-si-dian/">当代中国和威廉德国的一个相似点</a>
       </li>
     
@@ -1268,23 +1118,11 @@ Token可以是一个，也可以是多个。</p>
         <a href="/blog/2014/03/10/nubia-z5s/">Nubia Z5S</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/02/to-read-list/">读书列表2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/15/zhui-lun-ye-ya-chuan-dong-he-cvt/">锥轮、液压传动和CVT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/23/gou-che-liu-cheng-xiao-ji/">购车流程小记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

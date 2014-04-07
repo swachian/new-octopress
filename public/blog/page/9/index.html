@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="http://www.designsor.com/
-原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记. 可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测） &hellip;">
+  <meta name="description" content="最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
+特别是搭配CS的语法后, 相当的让人感觉良好. 而越看NodeJS越有UNIX系统编程和网络编程的味道, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,1304 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/04/nodejs/">NodeJS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-04T17:12:00+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
+特别是搭配CS的语法后, 相当的让人感觉良好.</p>
+
+<p>而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
+而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.</p>
+
+<p>http://howtonode.org/understanding-process-next-tick</p>
+
+<p>tick其实就是计算机系统的时隙.</p>
+
+<h2>util</h2>
+
+<p>util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
+两点是多了<code>%j</code>支持json格式的输出.</p>
+
+<p>util.debug() 用于调试的,输出到<code>stderr</code><br/>
+util.log() <code>stdout</code><br/>
+util.inspect(object) 展开对象信息<br/>
+util.isArray, isRegExp, isDate</p>
+
+<h2>Events</h2>
+
+<p>All objects which emit events are instances of <code>require('events').EventEmitter</code><br/>
+All EventEmitters emit the event <code>newListener</code> when new listeners are added</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">#</span> <span class="err">前一个参数是</span><span class="nx">camel</span><span class="o">-</span><span class="nx">cased</span> <span class="nx">string</span><span class="p">,</span> <span class="err">后一个是是函数</span><span class="p">,</span><span class="err">也就做</span><span class="nx">listener</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;someone connected!&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">一次性事件</span><span class="p">,</span><span class="err">发生后自动消失</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ah, we have our first user!&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">removeAllListeners</span><span class="p">([</span><span class="nx">event</span><span class="p">])</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">setMaxListeners</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">返回一系列函数</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">listeners</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="err">触发事件</span>
+</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">],</span> <span class="p">[</span><span class="nx">arg2</span><span class="p">],</span> <span class="p">[...])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Buffer</h2>
+
+<p>这个东西和C里面的 <code>bytes c[8192];</code> 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
+自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可.</p>
+
+<ul>
+<li>encodings:
+
+<ul>
+<li>ascii</li>
+<li>utf8</li>
+<li>ucs2</li>
+<li>base64</li>
+<li>binary 通常不用,而是直接用Buffer</li>
+<li>hex 十六进制</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span>
+</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">length</span><span class="p">],</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span> <span class="err">#</span> <span class="err">把</span><span class="nx">string</span><span class="err">的内容写到</span><span class="nx">buffer</span><span class="err">里</span><span class="p">,</span><span class="err">和</span><span class="nx">c</span><span class="err">很像</span><span class="p">,</span><span class="err">但是</span><span class="nx">offset</span><span class="err">默认是</span><span class="mi">0</span><span class="p">,</span><span class="nx">length</span><span class="err">默认是</span><span class="nx">buffer</span><span class="err">的长度</span> <span class="o">-</span> <span class="nx">offset</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">([</span><span class="nx">encoding</span><span class="p">],</span> <span class="p">[</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">slice</span><span class="p">([</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="nx">Buffer</span><span class="p">.</span><span class="nx">byteLength</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">length</span> <span class="err">返回的是整个</span><span class="nx">buffer</span><span class="err">的</span><span class="nx">size</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="nx">targetBuffer</span><span class="p">,</span> <span class="p">[</span><span class="nx">targetStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceEnd</span><span class="p">])</span>
+</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
+</span><span class='line'><span class="err">此外还有一堆读写各种类型的函数</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Stream</h2>
+
+<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br/>
+所有的stream, 都是<code>EventEmitter</code>的实现.</p>
+
+<h3>Readable Stream</h3>
+
+<ul>
+<li><p>Event</p>
+
+<ul>
+<li>data</li>
+<li>end 可能可以继续写</li>
+<li>error</li>
+<li>close 不是所有的流都有关闭,比如进来的http request</li>
+</ul>
+</li>
+<li><p>method</p>
+
+<ul>
+<li>readable</li>
+<li>setEncoding(encoding) , 设置后,data返回的就不是buffer而是string</li>
+<li>pause 停止<code>data</code>事件</li>
+<li>resume 恢复<code>data</code>事件</li>
+<li>destroy</li>
+<li>pipe</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">,</span> <span class="p">{</span> <span class="nx">end</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span> <span class="err">#截断</span><span class="nx">source</span> <span class="err">的</span> <span class="nx">end</span><span class="err">事件发给</span><span class="nx">destination</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Goodbye\n&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Writable Stream</h3>
+
+<ul>
+<li><p>Event</p>
+
+<ul>
+<li>drain 表明可以再写了</li>
+<li>error</li>
+<li>close</li>
+<li>pipe</li>
+</ul>
+</li>
+<li><p>method</p>
+
+<ul>
+<li>writable</li>
+<li>write(string, [encoding], [fd])</li>
+<li>write(buffer)</li>
+<li>end()</li>
+<li>end(string, encoding)</li>
+<li>end(buffer)</li>
+<li>destroy()</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Crypto</h2>
+
+<p>加密解密的系类</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">shasum</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">ReadStream</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">shasum</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">shasum</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>File System</h2>
+
+<p>异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block</p>
+
+<ul>
+<li>fs.watch
+
+<ul>
+<li>Linux下用 <code>inotify</code>实现</li>
+<li>返回&#8217;rename&#8217; or &#8216;change&#8217; 事件</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fs</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s1">&#39;somedir&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;event is: &#39;</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename provided: &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename not provided&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>fs.ReadStream</li>
+<li>fs.WriteStream</li>
+<li>fs.open(path, flags, [mode], [callback])
+<code>(err, fd)</code></li>
+</ul>
+
+
+<h2>Path</h2>
+
+<h2>Net</h2>
+
+<ul>
+<li>net.createServer([options], [connectionListener])</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;net&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//&#39;connection&#39; listener</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server connected&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server disconnected&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;hello\r\n&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8124</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//&#39;listening&#39; listener</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server bound&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>net.connect,net.createConnection
+
+<ul>
+<li>也是一样触发<code>connect</code>事件</li>
+<li>net.connect(port, [host], [connectListener])</li>
+<li>net.connect(path, [connectListener])</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>net.Server</h3>
+
+<ul>
+<li>server.listen(port, [host], [listeningListener])
+
+<ul>
+<li><code>listening</code> event</li>
+</ul>
+</li>
+<li>server.close()
+
+<ul>
+<li>也是异步关闭，最终 emit <code>close</code>事件</li>
+</ul>
+</li>
+<li>server.address() <code>{"port":43239,"family":2,"address":"0.0.0.0"}</code></li>
+<li>server.maxConnections</li>
+<li><p>server.connections</p></li>
+<li><p>Event</p>
+
+<ul>
+<li>listening</li>
+<li>connection</li>
+<li>close</li>
+<li>error</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>net.Socket</h3>
+
+<ul>
+<li>new net.Socket([options])
+
+<ul>
+<li>fd, type, allowHalfOpen</li>
+</ul>
+</li>
+<li>socket.connect 一般用net.connect来新建</li>
+<li>bufferSize() 当前准备发的缓存长度</li>
+<li>setEncoding() 指定接收data的编码</li>
+<li>write(data, [encoding], [callback])</li>
+<li>end([data]) half-close</li>
+<li>destroy() 仅在处理error是需要使用</li>
+<li>pause(), resume() 和<code>data</code>事件相关</li>
+<li>setTimeout(timeout, [callback])
+
+<ul>
+<li>超时，通常没有超时</li>
+<li>0则表示同步操作，而且要求即刻发掉</li>
+</ul>
+</li>
+<li>setNoDelay() 默认就是true</li>
+<li>keepAlive()</li>
+<li>address(), remoteAddress(), remotePort()</li>
+<li><p>bytesRead() 已收到的bytes数量， bytesWritten()</p></li>
+<li><p>Event</p>
+
+<ul>
+<li>connect</li>
+<li>data</li>
+<li>end</li>
+<li>timeout</li>
+<li>drain</li>
+<li>error</li>
+<li>close</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>UDP / Datagram Sockets</h2>
+
+<p>  <code>require 'dgram'</code></p>
+
+<h2>DNS</h2>
+
+<ul>
+<li>lookup()</li>
+<li>resolve()</li>
+</ul>
+
+
+<h2>HTTP</h2>
+
+<p>核心思想： The user is able to <strong>stream data</strong>.</p>
+
+<h3>http</h3>
+
+<ul>
+<li>http.createServer([requestListener])</li>
+</ul>
+
+
+<h4>Event</h4>
+
+<ul>
+<li>&#8216;request&#8217;
+
+<ul>
+<li>(request, response) -></li>
+<li>一个connection可能有多个request</li>
+</ul>
+</li>
+<li>&#8216;connection&#8217;
+
+<ul>
+<li>(socket) -></li>
+<li>一般不会直接处理，也可以通过<code>request.connection</code>获得<code>socket</code></li>
+</ul>
+</li>
+<li>&#8216;close&#8217;</li>
+<li>&#8216;checkContinue&#8217;
+
+<ul>
+<li>(request, response) -></li>
+<li><a href="http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/">关于100-continue</a>  ,用处就是试探，在发起实际的body前把条件等发给server预审</li>
+<li><code>request</code> event will <strong>not</strong> be emitted.</li>
+</ul>
+</li>
+<li>&#8216;upgrade&#8217;
+
+<ul>
+<li>不知何意</li>
+<li>(request, socket, head) -></li>
+</ul>
+</li>
+<li>&#8216;clientError&#8217;
+
+<ul>
+<li>(exception) -></li>
+</ul>
+</li>
+</ul>
+
+
+<h4>method</h4>
+
+<ul>
+<li>listen(port, [hostname], [callback])</li>
+<li>close() = net.Server.close()</li>
+</ul>
+
+
+<h3>http.ServerRequest</h3>
+
+<h4>Event</h4>
+
+<ul>
+<li>data</li>
+<li>(chunk) -></li>
+<li>end</li>
+<li>close</li>
+</ul>
+
+
+<h4>method</h4>
+
+<ul>
+<li>method &#8216;GET&#8217;, &#8216;DELETE&#8217;</li>
+<li>url
+
+<ul>
+<li><code>require('url').parse(request.url, true)</code></li>
+<li><code>require('querystring').parse</code></li>
+</ul>
+</li>
+<li>request.headers</li>
+<li>request.trailers
+
+<ul>
+<li>Only populated after the &#8216;end&#8217; event.</li>
+</ul>
+</li>
+<li>request.setEncoding([encoding])</li>
+<li>pause()</li>
+<li>resume()</li>
+<li>connection</li>
+</ul>
+
+
+<h3>http.ServerResponse</h3>
+
+<p>实现了<code>Writable Stream</code></p>
+
+<h4>Event</h4>
+
+<ul>
+<li>&#8216;close&#8217;</li>
+</ul>
+
+
+<h4>Method</h4>
+
+<ul>
+<li>writeContinue()</li>
+<li>writeHead(statusCode, [reasonPhrase], [headers])
+
+<ul>
+<li>必须在<code>response.end()</code>被调用之前</li>
+<li><code>response.writeHead(200, {Content-Type: 'text/plain'})</code></li>
+</ul>
+</li>
+<li>statusCode</li>
+<li>setHeader(name, value)
+
+<ul>
+<li><code>response.setHeader("Content-Type", "text/html")</code></li>
+</ul>
+</li>
+<li>getHeader(name)</li>
+<li>removeHeader(name)</li>
+<li>write(chunk, [encoding])
+
+<ul>
+<li>stream式的写法</li>
+<li>raw</li>
+<li>implicit header mode</li>
+</ul>
+</li>
+<li>addTrailers(headers)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
+</span><span class='line'>                          <span class="s1">&#39;Trailer&#39;</span><span class="o">:</span> <span class="s1">&#39;Content-MD5&#39;</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>end([data], [encoding])</li>
+</ul>
+
+
+<h3>http.request</h3>
+
+<p>Node保持有几个可以发起http请求的连接</p>
+
+<ul>
+<li>http.request(options, callback)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/upload&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;STATUS: &#39;</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;HEADERS: &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">));</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;problem with request: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// write data to request body</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>http.get(options, callback)</li>
+</ul>
+
+
+<h4>http.Agent</h4>
+
+<p>node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent</p>
+
+<h3>http.ClientRequest</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Event</h4>
+
+<ul>
+<li>response
+
+<ul>
+<li>(response) -></li>
+</ul>
+</li>
+<li>socket
+
+<ul>
+<li>(socket) -></li>
+<li>给该request分配socket后触发</li>
+</ul>
+</li>
+<li>upgrade
+
+<ul>
+<li>(response, socket, head) -></li>
+<li>似乎是用来升级到websocket的</li>
+</ul>
+</li>
+<li>continue</li>
+</ul>
+
+
+<h4>Method</h4>
+
+<ul>
+<li>write(chunk, [encoding])</li>
+<li>end()</li>
+<li>abort()</li>
+<li>setTimeout(timeout, [callback])</li>
+<li>setNoDelay(true/false)</li>
+<li>setSocketKeepAlive([enable], [initialDelay])</li>
+</ul>
+
+
+<h3>http.ClientResponse</h3>
+
+<p>a <code>Readable Stream</code></p>
+
+<ul>
+<li>data</li>
+<li>end</li>
+<li><p>close</p></li>
+<li><p>statusCode</p></li>
+<li>headers</li>
+<li>trailers</li>
+<li>setEncoding([encoding])</li>
+<li>pause()</li>
+<li>resume()</li>
+</ul>
+
+
+<h2>HTTPS</h2>
+
+<h2>URL</h2>
+
+<ul>
+<li>href - <code>http://user:pass@host.com:8080/p/a/t/h?query=string#hash</code></li>
+<li>protocol</li>
+<li>host</li>
+<li>auth</li>
+<li>hostname</li>
+<li>port</li>
+<li>pathname</li>
+<li>search</li>
+<li>path</li>
+<li>query</li>
+<li><p>hash</p></li>
+<li><p>url.parse(urlStr)</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">coffee</span><span class="o">&gt;</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;http://192.168.2.2/?q=1&amp;q=2#sss&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span> <span class="nx">protocol</span><span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">slashes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;http://192.168.2.2/?q=1&amp;q=2#sss&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;#sss&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=1&amp;q=2&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span> <span class="p">]</span> <span class="p">},</span>
+</span><span class='line'>  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Readline</h2>
+
+<p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/01/note-on-coffeescript/">Note on CoffeeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T11:06:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
+不需要太大的部头。</p>
+
+<h1>安装步骤</h1>
+
+<p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://jashkenas.github.com/coffee-script/extras/coffee-script.js&quot;</span>
+</span><span class='line'><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/coffeescript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Some</span> <span class="nx">CoffeeScript</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
+但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>wget http://nodejs.org/dist/v0.6.18/node-v0.6.18.tar.gz
+</span><span class='line'>tar -zxvf node-v0.6.18.tar.gz
+</span><span class='line'>cd node-v0.6.18.tar.gz
+</span><span class='line'>./configure
+</span><span class='line'>make <span class="err">&amp;&amp;</span> make install
+</span><span class='line'>npm install -g coffee-script # -g 才能确保不是安装在当前目录
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
+<strong>运行</strong> <code>coffee my-script.coffee</code>
+<strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
+
+<h1>1. Syntax</h1>
+
+<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
+和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
+
+<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
+
+<p>支持多行注释</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="err">###</span>
+</span><span class='line'>    <span class="nx">A</span> <span class="nx">multiline</span> <span class="nx">comment</span><span class="p">,</span>
+</span><span class='line'>  <span class="err">###</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>变量和范围</h3>
+
+<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
+需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
+<strong>global object</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">exports</span> <span class="o">=</span> <span class="k">this</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">MyVariable</span> <span class="o">=</span> <span class="s2">&quot;foo-bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>Functions</h3>
+
+<p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
+单行函数 <code>func = -&gt; "bar"</code><br/>
+多行函数，必须注意<strong>缩进</strong>（indent）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">func</span> <span class="o">=</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span> <span class="nx">An</span> <span class="nx">extra</span> <span class="nx">line</span>
+</span><span class='line'>  <span class="s2">&quot;bar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
+接受多个参数 <code>sum = (nums...) -&gt;</code></p>
+
+<p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
+没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
+
+<p>Function <strong>Context</strong> 待进一步了解<br/>
+<code>=&gt;</code></p>
+
+<h3>一些表达式</h3>
+
+<p>花括号是可选的，hash和array可以利用缩进完成。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">object2</span> <span class="o">=</span> <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">object3</span> <span class="o">=</span>
+</span><span class='line'>  <span class="nx">one</span><span class="o">:</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array2</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>  <span class="mi">1</span>
+</span><span class='line'>  <span class="mi">2</span>
+</span><span class='line'>  <span class="mi">3</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Flow Control<br/>
+像python，像ruby</p>
+
+<p>String的解析，和ruby类似</p>
+
+<h3>循环和综合（类似python)</h3>
+
+<p><code>in</code> &#8212;- <code>for name in ["A", "B", "C"]</code><br/>
+需要index &#8212;- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
+把操作也写成一行 &#8212;- <code>release prisoner for prisoner in []</code><br/>
+comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] == "R"</code>
+内置的仅支持while</p>
+
+<h3>几个替换和操作符</h3>
+
+<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
+<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
+
+<p><code>?</code> similiar to Ruby&#8217;s nil?, <code>praise if brian?</code> , it&#8217;s also a <code>||</code>， <code>velocity = southern ? 40</code></p>
+
+<h1>2. CoffeeScript Classes</h1>
+
+<p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
+使用new 来新建对象 <code>animal = new Animal</code>,<br/>
+<code>contructor</code> 类似ruby的initialize，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+其中，构造函数的参数如果带@则会自动被当成实例变量进行设置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constuctor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>instance 属性</h3>
+
+<p>给实例加属性如同给object加属性</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">price</span><span class="o">:</span> <span class="mi">5</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">sell</span><span class="o">:</span> <span class="p">(</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span>
+</span><span class='line'><span class="nx">animal</span><span class="p">.</span><span class="nx">sell</span><span class="p">(</span><span class="k">new</span> <span class="nx">Customer</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
+环境的变化而变化。</p>
+
+<h3>Static 属性</h3>
+
+<p>这就是class变量，需要用到this 或者 @</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">find</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="err">@</span><span class="nx">find</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>继承与Super</h3>
+
+<p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">alive</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kc">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Parrot</span> <span class="kr">extends</span> <span class="nx">Animal</span>
+</span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="kr">super</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">dead</span><span class="o">:</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">not</span> <span class="err">@</span><span class="nx">alive</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="o">::</span><span class="nx">rip</span> <span class="o">=</span> <span class="kc">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">parrot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parrot</span><span class="p">(</span><span class="s2">&quot;Macaw&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nx">parrot</span><span class="p">.</span><span class="nx">rip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>3. 惯用法</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">###</span> <span class="nx">each</span>
+</span><span class='line'><span class="nx">fun</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="k">for</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">map</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">array</span>
+</span><span class='line'>  <span class="nx">item</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">select</span>
+</span><span class='line'><span class="nx">passed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="nx">failed</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">score</span> <span class="k">in</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if</span> <span class="nx">score</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="nx">then</span> <span class="nx">passed</span> <span class="k">else</span> <span class="nx">failed</span><span class="p">).</span><span class="nx">push</span> <span class="nx">score</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">includes</span>
+</span><span class='line'><span class="nx">included</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span> <span class="k">in</span> <span class="nx">array</span> <span class="err">#但不能用于单个字符串的内部模式匹配</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">属性遍历</span>
+</span><span class='line'><span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">object</span>
+</span><span class='line'>  <span class="s2">&quot;#{key} = #{value}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="nx">or</span>
+</span><span class='line'><span class="nx">hash</span> <span class="o">?=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">支持多值返回</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">###</span> <span class="err">外部扩展库</span>
+</span><span class='line'><span class="err">#</span> <span class="nx">Use</span> <span class="nx">local</span> <span class="nx">alias</span>
+</span><span class='line'><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="err">#</span><span class="nx">COMContentLoaded</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.js-el&quot;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>4. 编译</h1>
+
+<p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
+跟rake差不多，可以watch，可以自动编译。</p>
+
+<h1>5.优良部分</h1>
+
+<p>孙子说，知己知彼百战不殆。</p>
+
+<p>CS也只是修复了部分js的缺陷。</p>
+
+<p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/vi-for-aptana/">Vi for Aptana</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T10:38:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
+
+<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
+下载配置好后，算是跑了起来。</p>
+
+<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
+</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
+</span><span class='line'>
+</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
+</span><span class='line'>
+</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
+</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
+</span><span class='line'>
+</span><span class='line'>  4. To delete the character at the cursor type:  x
+</span><span class='line'>
+</span><span class='line'>  5. To insert or append text type:
+</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
+</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
+</span><span class='line'>
+</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span><span class='line'>                           Lesson 2 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
+</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
+</span><span class='line'>  3. To delete a whole line type:    dd
+</span><span class='line'>
+</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
+</span><span class='line'>  5. The format for a change command is:
+</span><span class='line'>           operator   [number]   motion
+</span><span class='line'> where:
+</span><span class='line'>   operator - is what to do, such as  d  for delete
+</span><span class='line'>   [number] - is an optional count to repeat the motion
+</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
+</span><span class='line'>              $ (to the end of line), etc.
+</span><span class='line'>
+</span><span class='line'>  6. To move to the start of the line use a zero:  0
+</span><span class='line'>
+</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
+</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
+</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -599,195 +1897,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/26/finance-notes/">非财务经理的财务课程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-26T21:18:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>参加公司组织的培训,记录一些心得.</p>
-
-<p>雷士光电是一个三位创业者对财务目标产生偏差的典型案例.本来是3个同寝室的大学生共同创业,吴长江 / 胡永红 / 杜刚. 起初是胡和杜逼吴交出股权,
-后来吴和供应商关系很好,最后逼迫胡和杜交出来股权, 合计一亿六千万.</p>
-
-<p>财务会计是给股东/董事会/经营者 三个对象提供支持的.财务数据也可以公布给公共即第三方机构.</p>
-
-<p>财务会计主要工作是对外, 管理会计主要是对内.</p>
-
-<p>利益或风险全部的转移 &#8212;-> 入账时间.</p>
-
-<p><strong>确认收入</strong>和<strong>收款</strong>是两个概念.目前主要实行权责发生制.可以后GD(elivery)N 和 GR(eceipt)N两种确认收入的方式.</p>
-
-<p>四个基本概念:</p>
-
-<ul>
-<li>会计主体 Accounting entity, Business entity, AE必然是BE,但BE不一定是AE</li>
-<li>持续经营 Going concern, 资产对经营活动有价值,主要指可以不断扩大的增长预期</li>
-<li>会计分期 Perioicity, 每个地方不一样, 有的是1-12月,有的是4-3月</li>
-<li>货币计量 Monetary measurement , 以同一种货币单位来计量</li>
-</ul>
-
-
-<p>分公司(<strong>Branch</strong>)是不能披露报表的,也就是非会计主体,无论是独立核算的还是非独立核算的分公司.<br/>
-子公司(<strong>subsidery</strong>), 独立的法人主体, 是会计主体, 报表披露可能需要合并.</p>
-
-<p>记账规则: <strong>有借必有贷, 有贷必有借</strong><br/>
-公司记账的账户包括: 资产 / 负债 / 股本及权益<br/>
-借贷其实就是 <strong>+-</strong></p>
-
-<p>3张表:</p>
-
-<ul>
-<li>资产负债表</li>
-<li>利润表</li>
-<li>现金流表</li>
-</ul>
-
-
-<p>毛利 = 销售收入 - 销售成本<br/>
-营业利润 = 毛利 - 期间费用 + 其他业务收入/支出(by-product)<br/>
-税前利润 = 营业利润 + 投资收益 + 营业外收入/支出(如罚款/变卖资产)<br/>
-净利润 = 税前利润 - 所得说</p>
-
-<p>利润分配过程:</p>
-
-<ul>
-<li>利息 &#8212;> 债权人</li>
-<li>税款 &#8212;> 税务局</li>
-<li>股息 &#8212;> 股东</li>
-<li>未分配利润 &#8212;> 扩大再生产</li>
-</ul>
-
-
-<p>收入确定 / 到款 / 坏账 / 计提的概念.<br/>
-现代财务制度其实是以计提(accrual, accrue)为核心的, 可以通过计提实现坏账风险控制, 盈余管理, 加速资产折旧等.<br/>
-计提是可以回退的,这样实际发生时就不难看了.而且可以有很多人为的判断在里面. 我们的年终奖其实就是以每月计提的方式,到年末发出来的.</p>
-
-<p>关心销售收入就是关心总资产周转率.</p>
-
-<p>杜邦分析法. 以净资产收益率为核心, 分解出来的一堆指数分析法.主要是关于利润/营业收入/权益系数的几组相关的指标.</p>
-
-<p>标准成本法, 即按人头或其他标准统一规格地对成本进行计算.好处是方便做预算,方便大家沟通.<br/>
-与之相应, 是作业成本法, 就需要按实际效用来进行计算.<br/>
-二者其实可以相混.</p>
-
-<p>呆滞货品报告, slow moving report.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/25/zaguosen2012/">查国生2012讲座</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-25T15:22:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>又听到查老师的声音了。想当初在邯郸校区上研究生英语课的时候，就感觉这是一个好老师。爱学生，懂生活。后来知道他还是MBA
-英语辅导的专家。听了几次讲座，幽默风趣依旧，体贴入微润物无声。听下来还是有一些收获：</p>
-
-<ol>
-<li>英语二机器阅卷，全部在上海进行阅卷，包含了一切专硕，20多万份</li>
-<li>硕士普及不可能，本科都没普及好，所以几十年内不可能了，博士没意义，除非是教师、医生</li>
-<li>MBA一线首选，二线（同济、财大）也可以考虑，再差的就没意义了</li>
-<li>How to <strong>make more money</strong>. Better Money, Better Life.</li>
-</ol>
-
-
-<p>说的话让人信服的老师就是好老师。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/the-rails-view/">The Rails View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T12:11:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
-是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
-提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
-
-<p>(待续)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -805,6 +1914,18 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/ibmde-linuxhe-googlede-android/">IBM的Linux和Google的Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/xiao-mi-de-hong-mi/">小米的红米</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/16/dang-dai-zhong-guo-he-wei-lian-de-guo-de-ge-xiang-si-dian/">当代中国和威廉德国的一个相似点</a>
       </li>
     
@@ -812,23 +1933,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2014/03/10/nubia-z5s/">Nubia Z5S</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/02/to-read-list/">读书列表2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/15/zhui-lun-ye-ya-chuan-dong-he-cvt/">锥轮、液压传动和CVT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/23/gou-che-liu-cheng-xiao-ji/">购车流程小记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

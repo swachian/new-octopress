@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-04-05T14:20:26+08:00</updated>
+  <updated>2014-04-07T17:53:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[小米的红米]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi/"/>
+    <updated>2014-04-07T16:17:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi</id>
+    <content type="html"><![CDATA[<p>尽管红米电信版在小米网站是一直没抢到，但在电商的站点倒有不少已经上市的，只是贵200左右，为了赶上老妈的生日，还是直接去电商渠道购买了。</p>
+
+<p>中间还有个插曲。原本是想在京东定的，然后要定了京东告知上海缺货。而在苏宁，反而发现还比京东便宜100，只要899. 当然，比小米官方的原价却又贵了100.但这个不用抢，就不是期货更不是神话了。</p>
+
+<p>机器确实很新，3月底才新鲜出炉的。但拿到手后不得不有下面一些吐槽：</p>
+
+<ol>
+<li>cdma卡槽标记不明显。打开机盖后，只在很不显眼的地方能看见很小的cdma和gsm字样，除非凑到10公分以内，不然很难看清楚哪个是gsm哪个是cdma的卡槽。而且，在说明书上是完全没有标识的。</li>
+<li>部分卡识别不出来，虽然是标准卡但可能还是要换卡。手头两张大卡uim，只能识别一张，于是不得不去营业厅花20换卡。要知道，我之前用努比亚z5s，虽然只能插小卡，但自己剪了一下就能用。而这个虽然也是大卡，但却不能用。想想也挺讽刺的。网上查了一下，这个也不是个案。可能只能说uim卡的标准比较古怪吧。好在换了2014版的uim卡也能认。</li>
+<li>后盖很难开。这个可能习惯了就好。不过对于一个可以更换电池板的手机而言，确实不太方便。</li>
+</ol>
+
+
+<p>其他其实还有一些细节方面还是可以改进的。往好处想，小米其实还有提升的余地，毕竟这些是我这个不太挑剔的人都能直接发现的毛病。</p>
+
+<p>整个手机的质感比较一般，很类似于多年前买的台电的mp3，从塑料到面板都很像，中国制造还需努力。当然，这也是一分价钱一分货，努比亚Z5S的接触材料的质感就比红米好多了。</p>
+
+<p>此外，也用了下小米的rom软件，因为用的时间也不算长，主要只是教会老妈使用，感觉并不比中兴的强，可选的主题倒是比较多，但这个对我来讲确实不重要。</p>
+
+<p>说了那么多不足，其实我还是很喜欢这个红米手机的。毕竟好处更多。只是说小米的好已经铺天盖地了，对于安卓的好处我也很认可，所以也就不再多说了。虽然是借助安卓和高通，但小米好歹是开创了属于中国的智能手机制造时代。还是很令人钦佩的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nubia Z5S]]></title>
@@ -138,19 +166,6 @@ patch -p1 &lt; ../a.patch
 </code></p>
 
 <p>随后，两个目录就会变得一模一样了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ABBYY FineReader]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/13/abbyy-finereader/"/>
-    <updated>2013-01-13T22:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/13/abbyy-finereader</id>
-    <content type="html"><![CDATA[<p>最近看电子书，发现中文的电子书还是处于原始阶段。网上广泛地流传着书籍的阉割版和扫描版，健全的可读性强的电子版很稀罕，比起英文图书不能同日而语。
-只能说一句盗版强国必然也是防盗强国，越是贼窝防盗工作做得越好。</p>
-
-<p>不过热门书籍并不缺少扫描版。于是想起来OCR工具。下载到了ABBYY FineReader，试用之下感觉这也算一方神器了。有了这个工具，以后读浪潮之巅、软件作坊
-之类的书籍就再也不用愁了。</p>
 ]]></content>
   </entry>
   

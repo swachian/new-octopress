@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-04-05T14:20:26+08:00</updated>
+  <updated>2014-04-07T17:53:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IT系统架构的模式]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi/"/>
+    <updated>2014-04-07T16:18:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IBM的Linux和Google的Android]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/ibmde-linuxhe-googlede-android/"/>
+    <updated>2014-04-07T16:18:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/ibmde-linuxhe-googlede-android</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[小米的红米]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi/"/>
+    <updated>2014-04-07T16:17:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi</id>
+    <content type="html"><![CDATA[<p>尽管红米电信版在小米网站是一直没抢到，但在电商的站点倒有不少已经上市的，只是贵200左右，为了赶上老妈的生日，还是直接去电商渠道购买了。</p>
+
+<p>中间还有个插曲。原本是想在京东定的，然后要定了京东告知上海缺货。而在苏宁，反而发现还比京东便宜100，只要899. 当然，比小米官方的原价却又贵了100.但这个不用抢，就不是期货更不是神话了。</p>
+
+<p>机器确实很新，3月底才新鲜出炉的。但拿到手后不得不有下面一些吐槽：</p>
+
+<ol>
+<li>cdma卡槽标记不明显。打开机盖后，只在很不显眼的地方能看见很小的cdma和gsm字样，除非凑到10公分以内，不然很难看清楚哪个是gsm哪个是cdma的卡槽。而且，在说明书上是完全没有标识的。</li>
+<li>部分卡识别不出来，虽然是标准卡但可能还是要换卡。手头两张大卡uim，只能识别一张，于是不得不去营业厅花20换卡。要知道，我之前用努比亚z5s，虽然只能插小卡，但自己剪了一下就能用。而这个虽然也是大卡，但却不能用。想想也挺讽刺的。网上查了一下，这个也不是个案。可能只能说uim卡的标准比较古怪吧。好在换了2014版的uim卡也能认。</li>
+<li>后盖很难开。这个可能习惯了就好。不过对于一个可以更换电池板的手机而言，确实不太方便。</li>
+</ol>
+
+
+<p>其他其实还有一些细节方面还是可以改进的。往好处想，小米其实还有提升的余地，毕竟这些是我这个不太挑剔的人都能直接发现的毛病。</p>
+
+<p>整个手机的质感比较一般，很类似于多年前买的台电的mp3，从塑料到面板都很像，中国制造还需努力。当然，这也是一分价钱一分货，努比亚Z5S的接触材料的质感就比红米好多了。</p>
+
+<p>此外，也用了下小米的rom软件，因为用的时间也不算长，主要只是教会老妈使用，感觉并不比中兴的强，可选的主题倒是比较多，但这个对我来讲确实不重要。</p>
+
+<p>说了那么多不足，其实我还是很喜欢这个红米手机的。毕竟好处更多。只是说小米的好已经铺天盖地了，对于安卓的好处我也很认可，所以也就不再多说了。虽然是借助安卓和高通，但小米好歹是开创了属于中国的智能手机制造时代。还是很令人钦佩的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[当代中国和威廉德国的一个相似点]]></title>
@@ -671,96 +717,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure is really pesky]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/"/>
-    <updated>2013-07-09T22:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky</id>
-    <content type="html"><![CDATA[<p>最早知道clojure，是在Heroku宣布<a href="https://blog.heroku.com/archives/2011/7/5/clojure_on_heroku">支持</a><a href="http://devcenter.heroku.com/articles/clojure">它</a>，这是Heroku支持的第三种语言。知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
-
-<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。
-不过今天试用了一下clojure，感觉这个东西不太灵。
-基于JVM的设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
-
-<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
-其次，融入jvm中，意味着需要ide的配合。无论哪种ide，都是很重的，因此很是麻烦。
-叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
-
-<p>而Lisp程序员似乎都喜欢用emacs，emacs和ide兼容，呵呵，这是在开什么玩笑。注定这东西的推广在开发层面会存在很大的障碍。</p>
-
-<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，安装clojure也比较方便，但clojure又引入了leinxxx。不过Java的开发效率毕竟比C高，基于java开发新的语言大概也容易一些。另外就是需要连接数据库等组件都是现成的。这就使得在java上涌现出了很多二次开发的语言。可能，这才是那么多Java实现的根本原因。</p>
-
-<p>但是，个人不太看好就因为用java实现，这些新语言就会被java开发的主流程接纳。道理很简单，混在jvm里面只是有利于复用已有jvm的机器（这点其实也不太重要），好歹部署还算方便，然而对开发而言完全是另学一套，而同时加上的枷锁和限制却更多了。</p>
-
-<p>真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等，而且是要方便地调用。   伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这些年已经无人深入了。</p>
-
-<p>除了和JVM跳舞令人哭笑不得外，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。特别好这口的人除外。这个不是通过教育就能改变的。</p>
-
-<p>所以看了一圈clojure的内容后，觉得这个语言目前还是浅尝辄止为好。</p>
-
-<p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。 <br/>
-<img src="http://octopresszhangyu.herokuapp.com/images/screen_print/programming_performance.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Prolog]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog/"/>
-    <updated>2013-06-16T22:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog</id>
-    <content type="html"><![CDATA[<p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
-好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
-相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
-基本功就无从发挥了。</p>
-
-<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
-这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
-
-<ul>
-<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
-<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
-
-<ul>
-<li>第一个是X！=Y</li>
-<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
-</ul>
-</li>
-<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
-</ul>
-
-
-<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
-
-<h3>最大的启发</h3>
-
-<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
-
-<h3>试用体验</h3>
-
-<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
-不过确实是只要树立规则，就能输出结果。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一个App站点的人员组织]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site/"/>
-    <updated>2013-06-14T15:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site</id>
-    <content type="html"><![CDATA[<p>参考了一下残游记的组织与分工，小结如下：</p>
-
-<ul>
-<li><p>产品经理，1，老板</p></li>
-<li><p>后端开发，1, 技术负责人</p></li>
-<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
-<li><p>视觉设计师，2</p></li>
-<li><p>ios开发，1，</p></li>
-<li><p>运营，2，应该就是管理员和推销员</p></li>
-</ul>
-
 ]]></content>
   </entry>
   

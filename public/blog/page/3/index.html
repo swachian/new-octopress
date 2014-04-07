@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="今天终于尝试做了第一个gem，其实挺简单的，至少在有了bundler之后。 先 bundle gem act_as_xxx，随后就可以编辑里面的内容，比如在*.gemspec里面加入描述。编辑好自己的gem后，运行gem build act_as_xxx.gemspec， &hellip;">
+  <meta name="description" content="最早知道clojure，是在Heroku宣布支持它，这是Heroku支持的第三种语言。知道彼时这个东西挺火。应该和闭包什么的有关联。 这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。
+不过今天试用了一下clojure，感觉这个东西不太灵。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,177 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/09/clojure-is-really-pesky/">Clojure Is Really Pesky</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T22:07:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最早知道clojure，是在Heroku宣布<a href="https://blog.heroku.com/archives/2011/7/5/clojure_on_heroku">支持</a><a href="http://devcenter.heroku.com/articles/clojure">它</a>，这是Heroku支持的第三种语言。知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
+
+<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。
+不过今天试用了一下clojure，感觉这个东西不太灵。
+基于JVM的设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
+
+<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
+其次，融入jvm中，意味着需要ide的配合。无论哪种ide，都是很重的，因此很是麻烦。
+叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
+
+<p>而Lisp程序员似乎都喜欢用emacs，emacs和ide兼容，呵呵，这是在开什么玩笑。注定这东西的推广在开发层面会存在很大的障碍。</p>
+
+<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，安装clojure也比较方便，但clojure又引入了leinxxx。不过Java的开发效率毕竟比C高，基于java开发新的语言大概也容易一些。另外就是需要连接数据库等组件都是现成的。这就使得在java上涌现出了很多二次开发的语言。可能，这才是那么多Java实现的根本原因。</p>
+
+<p>但是，个人不太看好就因为用java实现，这些新语言就会被java开发的主流程接纳。道理很简单，混在jvm里面只是有利于复用已有jvm的机器（这点其实也不太重要），好歹部署还算方便，然而对开发而言完全是另学一套，而同时加上的枷锁和限制却更多了。</p>
+
+<p>真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等，而且是要方便地调用。   伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这些年已经无人深入了。</p>
+
+<p>除了和JVM跳舞令人哭笑不得外，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。特别好这口的人除外。这个不是通过教育就能改变的。</p>
+
+<p>所以看了一圈clojure的内容后，觉得这个语言目前还是浅尝辄止为好。</p>
+
+<p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。 <br/>
+<img src="/images/screen_print/programming_performance.jpg" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/16/prolog/">Prolog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
+基本功就无从发挥了。</p>
+
+<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
+这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
+
+<ul>
+<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
+<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
+
+<ul>
+<li>第一个是X！=Y</li>
+<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
+</ul>
+</li>
+<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
+</ul>
+
+
+<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
+
+<h3>最大的启发</h3>
+
+<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
+
+<h3>试用体验</h3>
+
+<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
+不过确实是只要树立规则，就能输出结果。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/the-orgnization-of-an-app-site/">一个App站点的人员组织</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T15:08:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>参考了一下残游记的组织与分工，小结如下：</p>
+
+<ul>
+<li><p>产品经理，1，老板</p></li>
+<li><p>后端开发，1, 技术负责人</p></li>
+<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
+<li><p>视觉设计师，2</p></li>
+<li><p>ios开发，1，</p></li>
+<li><p>运营，2，应该就是管理员和推销员</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -410,198 +582,6 @@ RHCE的范围基本如下:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/the-price-of-oracle/">Oracle的价格</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T14:57:00+08:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不少人应该对Oracle的报价是好奇的，研究了一番之后，发现Oracle的报价无论在商务上还是使用策略上都可以称之为出奇的<strong>成功</strong>.</p>
-
-<h3>Oracle的数据库种类</h3>
-
-<p>Oracle的数据库讲穿了只有一套，但又分成ee、se等几个版本。而这些都可以提供免费试用。
-通过免费可以培养用户群，降低工程师的雇佣成本。通过划分版本，又可以执行价格策略，抢占不同的市场。</p>
-
-<h3>Oracle的单价种类</h3>
-
-<p>Oracle的单价基本可以分为按User和按CPU卖。User的话是一个自然人或者设备。CPU就是按装机卖了。</p>
-
-<p>下面是一些价格举例，单位都是美刀
-按用户： {企业版： 950，se: 350, seo: 180}
-按cpu: {企业版：47500， se：17500，seo：5800}</p>
-
-<h3>Oracle的起步license概念</h3>
-
-<p>显然，按user大部分情况下应该比较便宜。所以，邪恶的oracle又有了最小license数量的概念。比如，企业版最低的user数就是25，se则是5，以此来保证oracle的收入。</p>
-
-<h3>折扣</h3>
-
-<p>以上只是目录价，一般通过代理买，获得一半的折扣是没有多少问题的。如果是大客户的话，还可以更加优惠。</p>
-
-<p>最后，说一下关于DataGuard的事情。有说是免费的，也有说是付费的。在10g的ee版本中，这个确实已经包含了。</p>
-
-<blockquote><p>Data Guard supports both physical standby and logical standby sites. Oracle Corporation makes Data Guard available only as a bundled feature included within its &#8220;Enterprise Edition&#8221; of the Oracle RDBMS.</p></blockquote>
-
-<p>所以，10g ee里面的ODG肯定是免费的，因为已经买过单了。</p>
-
-<blockquote><p>The &#8220;Oracle Active Data Guard&#8221; option, an extra-cost facility,[4] extends Oracle Data Guard physical standby functionality in Oracle 11g configurations. It allows read-only access on the standby node at the same time as applying archived transactions from the primary node.[5]</p></blockquote>
-
-<p>然后，在11g里面，又推出了Active Data Guard，二者在技术上有什么区别还没研究过，但在付费上这是一个可选包。目录价200/user.</p>
-
-<p>参考资料：</p>
-
-<ol>
-<li><p><a href="http://www.oracle.com/us/corporate/pricing/technology-price-list-070617.pdf">oracle price list</a></p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/Oracle_Data_Guard">oracle data guard wiki</a></p></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/">为什么ruby不火仍然值得学</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-24T16:14:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
-
-<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
-
-<h3>1. 简单</h3>
-
-<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
-
-<h3>2. 方便</h3>
-
-<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
-方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
-
-<h3>3.程序员（IT人员）的朋友</h3>
-
-<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
-
-<h3>4. Rails</h3>
-
-<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
-的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
-不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
-
-<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
-现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
-
-<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
-
-<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/16/sass-and-compass/">Sass and Compass</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-16T21:29:00+08:00" pubdate data-updated="true">Mar 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。
-看了下《Pragmatic Guide to Sass》, 理清了一下脉络。
-顺便提一句，这本书是在kindle上看的，出版社和作者提供了epub的版本。  这可以算是第一本在kindle上看完的计算机技术类书籍。虽然效果还可以，
-但是看了下原书的pdf版本，发现其版本也深受“小书”，小版面，的影响。这可能是未来计算机书籍的一个趋势吧。不过kindle还是最适合纯文字，
-用来阅读计算机技术书籍的体验还是很一般。</p>
-
-<p>Sass是最基础的，类似coffeeScript对Css的改写，当然引入的内容要多的多。毕竟js本身也是一种语言，但css很难算的上是一门编程语言。
-Sass有自己的运行命令，由ruby实现，可以把scss文件编译成css文件，也能convert回去。</p>
-
-<p>Compass则是sass的库和扩展，在sass的基础上提供了更丰富的样式、函数和变量以及模式。其本身也有了一套命令，也更适合于建项目。Sass如果是java，
-那么compass就是J2EE+Eclipse。</p>
-
-<p>如果不想安装那么多东西，那么可以直接使用scout这个GUI工具，工具本身集成了sass和compass的能力，只是又提供了图形化的集成界面。该界面可能是基于
-Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以从scout入手。</p>
-
-<p>compass是很神奇的，而它的spriting堪称神奇中的神奇。</p>
-
-<p>但我发觉设计也是有天赋和术业专攻的。我们的美工完全不用这些东西，也很快就能搞出一个各种android上面看过去还不错的版本，我用这些东西去写出来的还是感觉很累。但至少比没有要好多了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -619,6 +599,18 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/ibmde-linuxhe-googlede-android/">IBM的Linux和Google的Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/07/xiao-mi-de-hong-mi/">小米的红米</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/16/dang-dai-zhong-guo-he-wei-lian-de-guo-de-ge-xiang-si-dian/">当代中国和威廉德国的一个相似点</a>
       </li>
     
@@ -626,23 +618,11 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
         <a href="/blog/2014/03/10/nubia-z5s/">Nubia Z5S</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/02/to-read-list/">读书列表2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/15/zhui-lun-ye-ya-chuan-dong-he-cvt/">锥轮、液压传动和CVT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/23/gou-che-liu-cheng-xiao-ji/">购车流程小记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (40)</a></li><li><a href='/blog/categories/生活'>生活 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/时评'>时评 (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (7)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
