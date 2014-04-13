@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-04-12T22:10:00+08:00</updated>
+  <updated>2014-04-13T17:39:38+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -14,11 +14,101 @@
 
   
   <entry>
+    <title type="html"><![CDATA[IT系统架构的模式]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/"/>
+    <updated>2014-04-12T16:18:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi</id>
+    <content type="html"><![CDATA[<p>近日终于得以拜读了Martin Fowler的大作《The Patterns of Enterprise Application Architecture》。</p>
+
+<p>最早了解这本书是从robbin那里，在距今很多年前的一个Java书单里。彼时他对这本书的评价大意是适合要自己动手开发框架的人看，对应用开发没什么直接的帮助。同时，他认为读下来并没有太多感觉。而回过头来看，读过这本书的中国程序员应该是不少的，但真的从中汲取营养做出东西来的人几乎没有。从这也可以看出中国工程师在动手和创新方面确实有些先天不足。</p>
+
+<p>然而，这本书对于DHH、对于Rails则可以说是一切的开端。对这本书贯彻的最到位、突破的最有力的，非DHH用Ruby开创Rails莫属。本书成书于2002年，彼时企业应用这个称呼比较时髦，按作者的说法，他的本意是IT系统的架构，而这也符合后来软件架构所适用的范围。如病人记录、订单跟踪、信用系统、保险、汇率兑换，这些都是IT系统，也就是企业应用。而文字处理、电梯控制、交换机、编译器、操作系统、游戏则基本不能算作企业应用。只是，2002年之后，企业应用这个名字被用的烂了，反而成了大慢笨的代表，导致07/08年的时候，甚至有不少人认为Rails不适合做企业应用。但彼时我感觉Rails对这些简单的所谓企业应用才是大杀器，毕竟大部分企业应用其实就是重度的CRUD应用，而这方面Rails堪比马克沁机枪对单兵的作战效果。至于互联网类的Web应用，交互、设计是占大头的，Rails投入使用的实际效果反而不如企业应用那么明显。</p>
+
+<p>这本书确实是rails的设计指南，或者说是rails的设计文档。但DHH的突破和创新之处还是很明显的：</p>
+
+<ol>
+<li>本书是基于.Net 和 Java的，但提及了Python和Ruby，而作者更多的应该只是一种不抱希望的假设罢了，然而DHH真的用Ruby把这本书实作了出来。</li>
+<li>虽然ActiveRecord取自于本书，然而作者本身并不是把这种模式看成一种自动化的ORM方案。广义的ORM，可以包含Dao(Table Gateway)、Data Transfer Object（json，xml）以及datamapper这些把记录化作内存对象所有模式，但狭义来看ORM是仅包含datamapper的。ActiveRecord在Fowler处其实只是一种Dao的变种。而DHH直接将ActiveRecord升格成了更高度自动化的ORM模式。</li>
+<li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
+</ol>
+
+
+<p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
+创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
+不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
+例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
+
+<p>还有一点值得一提，就是这本书是真的基于Web总结的。很多模式的书籍，其实来源于客户端界面程序，比如从做菜单中提取出来的那些模式，而本书
+是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
+至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
+
+<h2>笔记整理</h2>
+
+<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
+
+<h3>分层的坏处</h3>
+
+<ol>
+<li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
+<li>性能损害</li>
+</ol>
+
+
+<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
+但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
+
+<h3>常见的业务代码组织形式</h3>
+
+<ul>
+<li>Transaction Script</li>
+<li>Domain Module , OO对TS的改变</li>
+<li>Service层</li>
+</ul>
+
+
+<h3>会话状态</h3>
+
+<ul>
+<li>客户端 Cookie</li>
+<li>服务端（内存）</li>
+<li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
+</ul>
+
+
+<h3>分布式</h3>
+
+<p>i
+* 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
+* 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
+* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
+* Data Transfer Object ，传输对象，上面的那种是调用方法
+* 同步的接口为主
+* 异步的基于消息的处理方式
+* 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
+
+<h3>锁的种类</h3>
+
+<ol>
+<li>乐观锁，比如自己建立版本号；</li>
+<li>悲观锁，就是常见的for lock；</li>
+<li>粗颗粒（coarse-grainned)锁，就是一堆对象映射成一个入口，在入口处实施加锁；</li>
+<li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
+</ol>
+
+
+<h3>Stub和Mock</h3>
+
+<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
+Mock：用一个服务的重写来模拟某服务</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[IBM的Linux和Google的Android]]></title>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android/"/>
     <updated>2014-04-12T16:18:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android</id>
-    <content type="html"><![CDATA[<p>突然开始琢磨Google当初为什么要推安卓。起初感觉Google正在成为一个类似SUN的角色，而安卓就是Java。<br/>
+    <content type="html"><![CDATA[<p>琢磨了一下Google当初为什么要推安卓，随手记之。起初感觉Google正在成为一个类似SUN的角色，而安卓就是Java。<br/>
 二者的相似之处在于，java和安卓都给世界带来了很大的改变，借助这两样神器都出现了新的行业分支，如Java的企业应用、电商、网银等，安卓的出现才使得中国国产手机大幅度地进步，并在全球化的体系里占据更有优势的地位。但与此同时，不可否认的是，Google和SUN并未从中获得多少直接的收益。还有一点类似的地方，就是这两样神器也并不占用这两个巨头多少成本。相对于整个规模而言，无论是java还是安卓，对SUN或Google的成本比例都是有限的。</p>
 
 <p>然而，转念一想，Google和SUN其实又是完全不一样的。SUN推广Java是希望卖更多的自己的硬件服务器，而且这个思路在90年代中期基本是可行的。而Google的服务现在如日中天，推广安卓确保了他在移动互联网时代（我更愿意称之为终端和使用人群进一步扩大的互联网时代）依然是搜索业务的王者。所以，仅就结果而言，Google是成功的，而SUN确实是被釜底抽薪了。</p>
@@ -27,15 +117,6 @@
 IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务器上一统江湖。而Google的安卓，则让智能手机避免了被Apple一家独占。而在此成功狙击的基础上，IBM和Google都继续卖着自己已经处于优势地位的服务。而再看SUN的话，当时的Java并无直接的竞争对手，后来的J2EE也是如此。SUN的目标比较单纯，推广Java只是为了可以让更多的公司做互联网的网络服务，而这必然需要更多的服务器。在PC Server+ Linux未流行的年代，Solaris是较低成本的一种选择。这个算盘其实打的还是不错的。但是，IBM大神对Linux的扶持，彻底让Sun的硬件找到了更廉价也更类似的替代品。当大部分用Java的企业，不去问Sun买Solaris服务器而是选择问IBM HP Dell买硬件、软件则直接使用Linux时，SUN的Java就真的只是当活雷锋了。可能IBM的本意未必是干掉SUN，只是希望M$不要也在服务器市场形成垄断，如同Google只是希望不要苹果在智能小型终端一统天下，但不可避免地误伤了SUN。当然，SUN的倒掉肯定还有其他更重要的因素，毕竟竞争和替代品是市场经济下每个个体和公司都面临的现实。</p>
 
 <p>而IBM和Google的举动，毫无疑问都是成功了。IBM的PC服务器业务虽然卖给了联想，但至少也风光了十几年，而服务则继续在大卖。如果当初M$用windows统一了PC Server，那恐怕IBM现在也没服务好卖了。Google则在移动互联网时代，继续当着搜索的领袖，苹果在无法一统江山的情况下，也只能让Google继续保持是最重要的终端搜索引擎。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[IT系统架构的模式]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi/"/>
-    <updated>2014-04-07T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/itxi-tong-jia-gou-de-mo-shi</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
