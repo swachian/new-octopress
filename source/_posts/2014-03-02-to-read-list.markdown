@@ -3,7 +3,7 @@ layout: post
 title: "读书列表2014"
 date: 2014-03-02 09:39
 comments: true
-categories: 
+categories:
 - 生活
 ---
 
@@ -11,7 +11,7 @@ categories:
 
 1. Flower M. Patterns of Enterprise Application   Architecture, Addison-Wesley Professional. Rails诞生的书，[DHH最爱的五本编程书籍](http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me)，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。
 1. [PoEAA的访谈和DHH](http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/)
-1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999. 
+1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.
 1. Eric Evans. Domain-Driven Design.  
 1. Beck. Smalltalk best practice patterns, 1996.
 1. Donald C. Gause, Are you lights on? 1990.
@@ -20,7 +20,7 @@ categories:
 1. Gourley D, Totty B. HTTP权威指南 O’Reilly  
 1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists  
 1. 谭云杰,大象–Thinking in UML，水利水电  
-1. 谢希仁.计算机网络，电工 
+1. 谢希仁.计算机网络，电工
 ii
 ### 经管
 
@@ -40,7 +40,7 @@ ii
 
 1. [x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。  
 1. [x] 唐德刚，xxx专政始末。 相对比较一般。  
-1. [x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。 
-1. 哈夫纳，不含传说的普鲁士。
+1. [x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。
+1. 哈夫纳，不含传说的普鲁士。台版书的竖版读起来有点累，不过效果还行。
 ## 既往
  [2013读书列表](/blog/2013/01/11/to-read-list/)

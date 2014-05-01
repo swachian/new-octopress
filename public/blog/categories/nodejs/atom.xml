@@ -4,7 +4,7 @@
   <title><![CDATA[分类: nodejs | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-04-13T17:39:38+08:00</updated>
+  <updated>2014-05-01T16:51:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -263,22 +263,16 @@ s.on('data', function(d) {
 <ul>
 <li>Linux下用 <code>inotify</code>实现</li>
 <li>返回'rename' or 'change' 事件
-```js
+<code>js
 fs.watch('somedir', function (event, filename) {
   console.log('event is: ' + event);
   if (filename) {
-
-<pre><code>console.log('filename provided: ' + filename);
-</code></pre>
-
+    console.log('filename provided: ' + filename);
   } else {
-
-<pre><code>console.log('filename not provided');
-</code></pre>
-
-<p>  }
+    console.log('filename not provided');
+  }
 });
-```</p></li>
+</code></li>
 </ul>
 </li>
 <li>fs.ReadStream</li>
@@ -541,16 +535,13 @@ console.log('server bound');
 </ul>
 </li>
 <li>addTrailers(headers)
-```js
+<code>js
 response.writeHead(200, { 'Content-Type': 'text/plain',
-
-<pre><code>                    'Trailer': 'Content-MD5' });
-</code></pre>
-
-<p>response.write(fileData);
+                        'Trailer': 'Content-MD5' });
+response.write(fileData);
 response.addTrailers({'Content-MD5': "7895bf4b8828b55ceaf47747b4bca667"});
 response.end();
-```</p></li>
+</code></li>
 <li>end([data], [encoding])</li>
 </ul>
 

@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="参加公司组织的培训,记录一些心得. 雷士光电是一个三位创业者对财务目标产生偏差的典型案例.本来是3个同寝室的大学生共同创业,吴长江 / 胡永红 / 杜刚. 起初是胡和杜逼吴交出股权,
-后来吴和供应商关系很好,最后逼迫胡和杜交出来股权, 合计一亿六千万. 财务会计是给股东/董事会/经营者 &hellip;">
+  <meta name="description" content="Split 一个分区有最多10次的限制。这跟实现的机制有关。当split发生时，是这么操作的： 将现有的PART# + 1， 名字保留为被拆分的partition
+PART# - 1， 作为另一个partition的名字
+再继续拆分的话，依照上面的分法持续划分。 所以10次以后， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/10/oracle-partition-split-issues/">Oracle Partition Split Issues</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-10T13:41:00+08:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Split 一个分区有最多10次的限制。这跟实现的机制有关。当split发生时，是这么操作的：</p>
+
+<ol>
+<li>将现有的PART# + 1， 名字保留为被拆分的partition</li>
+<li>PART# - 1， 作为另一个partition的名字</li>
+<li>再继续拆分的话，依照上面的分法持续划分。</li>
+</ol>
+
+
+<p>所以10次以后，就会出现这种错误<code>ORA-00001: unique constraint (SYS.I_TABPART_BOPART$) violated</code></p>
+
+<p>自己值选的好一些，可以最多分成20个区。不过从实际情况来看，RAC似乎已经会自己relocate PART#。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -964,89 +1012,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/15/lessons-from-a-training-on-pm/">PM培训课程小结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-15T13:42:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看<a href="http://xdite-smalltalk.tumblr.com/post/18034694291">别人</a>的一些文章，谈谈
-自己的想法。</p>
-
-<p>整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
-把大瀑布分拆成了n个小瀑布。实际上对软件开发并不太适用。不过因为整套体系认为<strong>光有集成</strong>是没有自己的竞争力的，要求有<strong>30%</strong>的软件开发内容，
-于是又把软件开发放在里面。这也让我终于明白了工作的第一个部门成立的<strong>指导思想来源</strong>。因为我曾经相当一段时间纳闷为什么非要把系统集成
-和研发凑合成一个部门。而且整个软件组还受集成一侧领导。这样能做出什么好东西来。但现在终于了解了这样组织的来源，而且以集成为主导也是因为这里面
-要求软件比例不低于30%。</p>
-
-<p>读了这本材料，终于明白公司是抄自国家认证考试的体系。也可能是其他人这么建议的，而也受了这个认证体系理论的影响。</p>
-
-<p>软件开发有其自身的特点和重点。集成体系用其无所不包、范围够广的方式（9大范围）强行把软件包裹了进去。尽管看上去纳入了，但重点很不突出。
-毕竟即使有软件工程也和系统工程是两码事情。所以，这次培训最大的结果是了解集成到底是什么思路，然后就通过这个考试，剩下的也只有自己继续摸索。</p>
-
-<p>先说说集成这套体系。</p>
-
-<p>首先，体系强调章程和计划。章程只有一个，而计划各个领域可以有很多。实际上，<strong>计划也是章程</strong>。只不过灵活度比章程强，可以按照需要进行
-变更、更新，而章程定下了就不怎么更新了。计划或者章程规定了要做哪些事情，什么时候做，相关人员是什么，什么情况下需要变更。
-随后就是一堆输入输出的交付物。</p>
-
-<p>接下去的东西就好理解了，反正整个东西追求的结果都是文档。当然，文档确实有很多种，有些方法对保证系统也确实有帮助。
-比如需求管理中的use case，每个case其实还是要用文字说明的，case图可以让需求方和系统分析师把东西交流清楚。但本质上就是
-一个list，只是说明参与对象是什么。WBS分解，可以用于进一步细化和确认需求，分写出要做的工作。这些都是和软件开发业密切相关的，
-但是在此之外，其他的东西实质上和软件的关联就不怎么大了。</p>
-
-<p>最后，就是强调一切东西都要有确认，变更等都要走流程。这些东西如果乙方有能力实施，当然是很好的。</p>
-
-<p>此外，还有一些东西就是骗来骗去的了。比如进度估计、成本估计，实际上即使传统的工程，能准确估算出来的都是很少的。</p>
-
-<p>经典的启动、计划、执行、监控和收尾，又叫做PDCA（Plan Doing Check Action), 典型的普遍模型，自上而下。只是又可以分解成n个小瀑布。
-但是，这个真的是软件开发里面最重要的事情嘛？</p>
-
-<p>恐怕不是。</p>
-
-<p>就我看来，软件或者互联网应用更多的强调对自身功能和模块的拆分，启动时往往很难明确细化东西。即使建筑工程本身，也就是这套体系产生的原型，
-也有众多管理失败的案例，巴拿马运河等，那么软件对这套系统的适应性恐怕更难。而且这套体系显然没考虑很多项目管理工具的使用，如redmine、如版本控制系统，
-而不同的工具或进步的工具是可以颠覆整个开发行为的。条条框框和优秀的软件结合起来会完全改变制造方式。与此相比，管理体系本身就显得僵化。当然，值得吸取的部分还是有的。
-比如我们需要一个章程，需要需求的确认。</p>
-
-<p>最最重要的，就是list要做的事情，给出最终时间。WBS后，确认细节，排好顺序，随后和用户确认。</p>
-
-<p>而在这中间，系统的调整能力和团队和用户沟通的软实力才是起决定作用的东西。</p>
-
-<p>Update(2012-05-15): 读了<a href="http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+xxddite+%28Blog.XDite.net%29">New product Introduction Model的九宗罪</a>
-进一步明确了PM这套东西不适合的原因。确实，这套东西适合的是“在有確定用戶，確定市場，確定 bussiness model 的情況下才能使用。也只有在這樣的情況下才有機會成功。”
-“這很大程度了解釋了為什麼：個人、大公司要『新創』一個事業很容易失敗。而一些『大公司』要『山寨』一個服務也有機會取得成功。” <br/>
-那么反过来，对于不够明确的、大家都还没谱的、都需要摸索的项目就不合适。<br/>
-所谓<strong>执行</strong>是针对有成熟套路的东西，考察的是系统的熟练程度和配合程度。而创新、新业务是需要<strong>试错的</strong>，其中的核心能力是<strong>学习</strong>、<strong>摸索</strong>、<strong>观察</strong>和<strong>勇气</strong>。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -1064,6 +1029,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/01/ri-ben-zhi-lu/">日本之旅</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
       </li>
     
@@ -1079,15 +1048,11 @@
         <a href="/blog/2014/03/16/dang-dai-zhong-guo-he-wei-lian-de-guo-de-ge-xiang-si-dian/">当代中国和威廉德国的一个相似点</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/03/10/nubia-z5s/">Nubia Z5S</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (41)</a></li><li><a href='/blog/categories/生活'>生活 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (20)</a></li><li><a href='/blog/categories/神器'>神器 (17)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/旅游'>旅游 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (41)</a></li><li><a href='/blog/categories/生活'>生活 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (20)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/神器'>神器 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li></ul>
 </section>
   
 </aside>
