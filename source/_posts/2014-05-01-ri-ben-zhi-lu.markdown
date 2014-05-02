@@ -88,3 +88,5 @@ categories:
 第9天  
 东京  
 羽田机场、利木津机场巴士
+
+[旅游的详细链接](http://bbs.qyer.com/viewthread.php?tid=931893&page=1&extra=#pid9177702)
