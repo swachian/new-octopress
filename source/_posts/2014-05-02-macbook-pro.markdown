@@ -59,4 +59,5 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 随后，安装rbenv，ruby从1.8.7 1.9.3 2.1.1全部都装上，再装一个github的atom或者textmate
 做编辑器，一个开发环境就绪了。输入法换成百度for mac。
 
+ 
 （未完待续）
