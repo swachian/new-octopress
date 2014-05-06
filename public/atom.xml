@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-03T17:19:25+08:00</updated>
+  <updated>2014-05-06T14:48:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Openssl and fIPC]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc/"/>
+    <updated>2014-05-06T14:27:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc</id>
+    <content type="html"><![CDATA[<p>Openssl还是一个关联很多的基础组件。自从爆出心血漏洞后，给自己的虚机也重新编译了一个新的openssl，
+但是在编译ruby 2.1.1时却发现了新的问题。</p>
+
+<p>第一个问题，是编译时老是认不出已经安装的openssl。可能因为openssl是从源码手工安装，而没有使用
+apt-get intall，原因在于apt-get是失败的。</p>
+
+<p>为解决这个问题，就在<code>/usr/loca/openssl-1.0.1g</code> 下独立编译生成了一个openssl。然后ruby再编译时可以识别openssl组件了。
+但是，编译到一半，会报错</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol</span></code></pre></td></tr></table></div></figure>
+
+
+<p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
+
+<p>这里就是遇到的第二个问题，连接共享库失败。</p>
+
+<p>于是检查这个选项是什么意思。查下来后，我大致的理解是：</p>
+
+<ol>
+<li><code>fIPC</code>使得编译出来的库文件(.a, .so等)地址都是相对地址；</li>
+<li>相对地址的好处是适合共享使用，但在装载时不同的进程可能会装载多次这个共享库；</li>
+<li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
+</ol>
+
+
+<p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
+
+<p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
+
+<p>再在ruby安装包里执行</p>
+
+<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
+
+<p>这样就装好了。</p>
+
+<p>其实，我还有一点疑问，就是如何让openssl静态且又能找到。
+估计又是一个属于和ubuntu紧密相关的问题。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[普鲁士不含传说]]></title>
@@ -892,31 +938,6 @@ wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一
 <p>两根天线：</p>
 
 <p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/IMG_20131001_161051.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一些片子]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/09/01/yi-xie-pian-zi/"/>
-    <updated>2013-09-01T18:41:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/09/01/yi-xie-pian-zi</id>
-    <content type="html"><![CDATA[<p>过去一阵子看了不少片子，两部片子印象尤其深刻：</p>
-
-<ol>
-<li>虎胆龙威1</li>
-<li>光荣战役</li>
-</ol>
-
-
-<p>先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。</p>
-
-<p>从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片，具备了基本的场面火爆。恐怖分子组织有术，高帅富级别的，布鲁斯倒是显得有点屌丝。而一个接一个消灭恐怖分子，有点七武士的意思，交代的十分清楚。</p>
-
-<p>片子也有典型的80年代末的特征，公司的老板是日本人，大概彼时美国人深感要被日本企业统治。而在这些之外，对官僚主义、白痴媒体也有十分辛辣的讽刺。所以，整部片子就相当有深度，也十分值得让人回味。简单的剧情，却能带来意味深长的东西。绝对是含复杂于简洁中的作品。</p>
-
-<p>第二部作品，看完后才知道是丹泽尔华盛顿的成名作，而摩根弗里曼彼时还根本没出名，居中的白人上校最后到没怎么出名。影片的故事是描述南北战争中北军的第一支黑人军队。上校统带1k个黑人士兵，各级尉官军士长初期都是白人担当，随后也开始提拔黑人担当。</p>
-
-<p>不得不说，美帝的历史其实就是一部外包史。从引入黑奴与白奴并举，到黑奴为主白人帮凶，再到解放黑奴，并且调动黑奴解放黑奴，一步一步扩展了国家的可用之才。而片子也很清晰地表明了让黑人成为有效的反戈力量有多难，需要客服多少障碍。而扩充劳动力的结果，自然就是使得国家的经济得到大幅度进步。</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="因新装光纤宽带后，对老的TP-LINK路由器不满，打算重新购买一台家用路由器，从而对目前的家庭路由器进行了一番了解和实验，于是有了这篇小结。 不满TP的原因是它对bt、emule高并发连接的支持不好，一旦允许的连接数达到几百个以上，那么打开网页等都会受影响。我起初以为这只是硬件能力的问题， &hellip;">
+  <meta name="description" content="上海电信的IPTV通道和互联网通道是通过ethernet的tag进行区分，然后达到控制各自流量的目的。这个tag打还是不打是有连接路由器的哪一个端口决定的。比如设定端口1和2是iptv的端口，
+那么电信的一体猫或者网关就会给在这个口子进入的数据打上tag 51， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/">上海电信IPTV的VLAN ID和通过交换机连接两路IPTV</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T14:43:00+08:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>上海电信的IPTV通道和互联网通道是通过ethernet的tag进行区分，然后达到控制各自流量的目的。这个tag打还是不打是有连接路由器的哪一个端口决定的。比如设定端口1和2是iptv的端口，
+那么电信的一体猫或者网关就会给在这个口子进入的数据打上tag 51，当从这个口子的数据传给机顶盒时又要去掉tag。因为机顶盒本身是不会处理带tag的数据包的。</p>
+
+<p>但是，我们普通家用的路由器或交换机是不会带有打tag区分vlan的功能。这就是为什么自己家庭的路由器直接连光猫或adsl后就只有iptv能用，或者只有互联网能接通。
+要想iptv和互联网都能用，要么改造自己的猫，要么就继续用电信的路由器。</p>
+
+<p>对我来说，是用自己的路由器接电信的上网端口3实现上网，用交换机接电信的iptv端口2实现iptv连接，其实这时候交换机就起到了一种vlan的作用。
+这种架构也是一种被逼无奈。因为这边主要使用一体猫，而我的光猫又是放在门外的弱电井中 ，中间通过一根以太网网线连接。而这根网线已经在当两根网线在用，一根连路由器，一根连iptv机顶盒。
+所以再装一路高清的话，就没有线路了。这根网线是预埋的，没有第二根线可以连到弱电井。</p>
+
+<p>通过上面的办法，机顶盒可以直接连接自己的交换机，这样就实现了iptv端口2的共享。而这个共享至少到目前为止，上海电信还没有加以限制。如果电信调整了vlan等参数，可能会需要加以变化，但基本的原理
+仍然是vlan id。最极端的情况，就是自己买一个千兆路由器，更换成openwrt固件后，自己直接打开vlan进行设置。这样就达到了同采用电信网关一模一样的效果。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -592,44 +640,6 @@ CPU：美国博康BCM5357处理器   &#8221;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/08/superinterior/">半天读完细节营销</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-08T18:48:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不曾想只花了半天时间就读完了这本书。一方面这本书确实很薄，只有32k、200来页。另一方面，行文很易懂，说的也很有道理，而且与我的理念基本吻合，所以接受起来相当迅速。</p>
-
-<p>但还需要消化消化。营销是又一个一个分解后的内容组成的，每个组成部分就是一个细节。不能出现太明显的短板。比如1x1x1x0.1x1x1=0.1</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -647,6 +657,10 @@ CPU：美国博康BCM5357处理器   &#8221;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/06/openssl-and-fipc/">Openssl and fIPC</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">普鲁士不含传说</a>
       </li>
     
@@ -662,15 +676,11 @@ CPU：美国博康BCM5357处理器   &#8221;
         <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/12/ibmde-linuxhe-googlede-android/">IBM的Linux和Google的Android</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (41)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (42)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

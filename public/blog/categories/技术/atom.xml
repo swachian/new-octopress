@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-03T17:20:17+08:00</updated>
+  <updated>2014-05-06T14:48:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Openssl and fIPC]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc/"/>
+    <updated>2014-05-06T14:27:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc</id>
+    <content type="html"><![CDATA[<p>Openssl还是一个关联很多的基础组件。自从爆出心血漏洞后，给自己的虚机也重新编译了一个新的openssl，
+但是在编译ruby 2.1.1时却发现了新的问题。</p>
+
+<p>第一个问题，是编译时老是认不出已经安装的openssl。可能因为openssl是从源码手工安装，而没有使用
+apt-get intall，原因在于apt-get是失败的。</p>
+
+<p>为解决这个问题，就在<code>/usr/loca/openssl-1.0.1g</code> 下独立编译生成了一个openssl。然后ruby再编译时可以识别openssl组件了。
+但是，编译到一半，会报错</p>
+
+<p><code>
+linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol
+</code></p>
+
+<p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
+
+<p>这里就是遇到的第二个问题，连接共享库失败。</p>
+
+<p>于是检查这个选项是什么意思。查下来后，我大致的理解是：</p>
+
+<ol>
+<li><code>fIPC</code>使得编译出来的库文件(.a, .so等)地址都是相对地址；</li>
+<li>相对地址的好处是适合共享使用，但在装载时不同的进程可能会装载多次这个共享库；</li>
+<li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
+</ol>
+
+
+<p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
+
+<p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
+
+<p>再在ruby安装包里执行</p>
+
+<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
+
+<p>这样就装好了。</p>
+
+<p>其实，我还有一点疑问，就是如何让openssl静态且又能找到。
+估计又是一个属于和ubuntu紧密相关的问题。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IT系统架构的模式]]></title>
@@ -195,45 +241,6 @@ Mock：用一个服务的重写来模拟某服务</p>
 
 <p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。 <br/>
 <img src="/images/screen_print/programming_performance.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Prolog]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog/"/>
-    <updated>2013-06-16T22:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/16/prolog</id>
-    <content type="html"><![CDATA[<p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
-好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
-相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
-基本功就无从发挥了。</p>
-
-<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
-这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
-
-<ul>
-<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
-<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
-
-<ul>
-<li>第一个是X！=Y</li>
-<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
-</ul>
-</li>
-<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
-</ul>
-
-
-<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
-
-<h3>最大的启发</h3>
-
-<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
-
-<h3>试用体验</h3>
-
-<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
-不过确实是只要树立规则，就能输出结果。</p>
 ]]></content>
   </entry>
   
