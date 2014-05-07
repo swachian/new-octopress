@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-06T14:48:11+08:00</updated>
+  <updated>2014-05-07T16:55:59+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Atom和Node-Webkit]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/"/>
+    <updated>2014-05-07T16:21:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit</id>
+    <content type="html"><![CDATA[<p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
+
+<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
+vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
+
+<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
+
+<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
+Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
+
+<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
+，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
+
+<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
+
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
+
+<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Openssl and fIPC]]></title>
@@ -902,42 +930,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 <li>无警示价时，第二阶段的价格会翻的更快一些。有警示价时，由于待拍的基数大，上涨会慢许多。</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[对无线网卡的折腾]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/10/08/back-and-forth-with-wlan-card/"/>
-    <updated>2013-10-08T15:39:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/10/08/back-and-forth-with-wlan-card</id>
-    <content type="html"><![CDATA[<p>换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。</p>
-
-<h3>原理</h3>
-
-<p>Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。</p>
-
-<p>频带则有20和40MHz两种，一般前者全部开启，而后者就不一定了。</p>
-
-<p>只有20MHz和2.4GHz的情况下，最大只有72Mbps； 同时有5GHz，则可以达到150Mbps。 无论是2.4还是5，同时使用40MHz的话，性能都可以翻倍。再加上一些其他的优化技术，最大可以达到300Mbps。</p>
-
-<p>现实中，20<em>（2.4+5）的情况是很少的，一般150Mbps的是（20+40）</em>2.4。 然而，被割的太厉害的话，就只有20*2.4，那就只有72Mbps了。比如dell国内6430搭配的bcm制造的无线网卡。</p>
-
-<h3>Dell 1504无线网卡</h3>
-
-<p>这款网卡是dell让bcm代工的，而非常见的intel芯片网卡。博通公司的网络设备也久负盛名，国内的路由器大部分也是博通的芯片，然而这款
-wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一基带，最终结果就是明明是n的卡，实际性能只比802.11g的54Mbps好了没有多少，至多72Mbps。</p>
-
-<p>并且，E6430本身也还是一台不错的机器，wifi配了3根天线，但是这块网卡却是只有2根天线。老的E6400倒是intel的5300网卡，3根天线且支持双频，于是最后决定利旧一下。虽然5300已经过气，但性能明显比1504还是要强的。</p>
-
-<h3>更换结果</h3>
-
-<p>三根天线:</p>
-
-<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/IMG_20131008_100132.jpg" alt="image" /></p>
-
-<p>两根天线：</p>
-
-<p><img src="http://octopresszhangyu.herokuapp.com/images/screen_print/IMG_20131001_161051.jpg" alt="image" /></p>
 ]]></content>
   </entry>
   

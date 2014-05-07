@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-06T14:48:11+08:00</updated>
+  <updated>2014-05-07T16:57:56+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Atom和Node-Webkit]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/"/>
+    <updated>2014-05-07T16:21:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit</id>
+    <content type="html"><![CDATA[<p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
+
+<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
+vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
+
+<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
+
+<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
+Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
+
+<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
+，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
+
+<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
+
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
+
+<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Macbook Pro]]></title>
@@ -155,46 +183,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 <p>尽管整体相当满意，但电池确实有点不太经用。这个2000ma出头的电池，如果整个下午都用qq聊天的话，基本上半天电就要用光了。所以，买这个机器移动电源最好是要配一个的。z5s的电池是不能随便更换的。自从用上智能手机后，我以前的手机上两块电板轮流用的机会也不太多了。目前比较方便的还是配个移动电源。</p>
 
 <p>自从改用了C网，或者说自从智能手机开始普及，更换手机的频率一下子提高了。C网之前，老式的手机通常可以稳稳地用2年以上。而用上智能手机尤其是C网的智能手机后，更换频率基本在一年以内了。上一个华为8812还算是使用时间比较长的。不知道Nubia Z5S可以保鲜几年？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vim and lampbrother]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/04/05/vim-and-lampbroter/"/>
-    <updated>2013-04-05T11:34:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/04/05/vim-and-lampbroter</id>
-    <content type="html"><![CDATA[<p>中了vim的毒之后, 开始学起了vim. 这东西在windows下也能用,而且扩展性极佳, 确实值得学学. 添加syntax和
-snippet都极其简单, 如果还要写代码的话, 确实值得掌握. 主要是发现这个工具就是给我这类人用的.</p>
-
-<p>台湾人的视频太简单, 很多基础的东西没有讲好, 好处就是他是按照git加载众多挂件之后演示并授课的, 所以
-比较吸引人. 但光那些显然也不够, 而且他本身也不算很熟练. 于是开始找其他视频. 找了一圈以后, 发现了
-<a href="http://www.lampbrother.net/">lamp兄弟连</a>的视频. 我个人比较喜欢里面李强强的linux课程. 另一位稍早录制
-的李阳的linux视频也很不错. 这家培训机构感觉还是很不错的, 培养的确实是业界最急需的一线工人.不过他的培训主要
-针对全脱产的、尤其是那些正要找工作的20岁出头的年轻人, 我是挺难报他们的班. 毕竟不太可能有什么时间和精力能够
-连续坐在实验机房里一整天. 而且这样的效率其实也不高.</p>
-
-<p>然后顺便看了一下RHCE和RHCA. 发现lampbrother的课程基本是按RHCE的脉络来的, 这门课其实可以直接改为通过RHCE.
-RHCE的范围基本如下:</p>
-
-<ul>
-<li>Hardware installation and configuration</li>
-<li>The boot process</li>
-<li>Linux filesystem administration</li>
-<li>Package management and Kickstart</li>
-<li>User and group administration</li>
-<li>System administration tools</li>
-<li>Kernel services and configuration</li>
-<li>Apache and Squid</li>
-<li>Network file sharing services (NFS, FTP, and Samba)</li>
-<li>Domain Name System (DNS)</li>
-<li>E-mail (servers and clients)</li>
-<li>Extended Internet Services Daemon (xinetd), the Secure package, and DHCP</li>
-<li>The X Window System</li>
-<li>Firewalls, SELinux, and troubleshooting</li>
-</ul>
-
-
-<p>只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.</p>
 ]]></content>
   </entry>
   

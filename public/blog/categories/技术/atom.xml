@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-06T14:48:11+08:00</updated>
+  <updated>2014-05-07T16:57:56+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Atom和Node-Webkit]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/"/>
+    <updated>2014-05-07T16:21:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit</id>
+    <content type="html"><![CDATA[<p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
+
+<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
+vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
+
+<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
+
+<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
+Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
+
+<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
+，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
+
+<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
+
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
+
+<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Openssl and fIPC]]></title>
@@ -209,38 +237,6 @@ Mock：用一个服务的重写来模拟某服务</p>
 <p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
 
 <p>顺手又了解了一些vnc的内容。vnc其实只是一个传送图形界面的协议，经典的client和server端模型，但具体的GUI还需要由其他东西实现。可选的有<code>xfce4</code>和<code>ubuntu-desktop</code>，前者小巧不少大约200MB，后者如果是server上安装则要1GB以上了。总体而言不如ssh方便，占用资源也多不少，不过在必须使用图形化界面的时候，都还是不错的选择。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure is really pesky]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky/"/>
-    <updated>2013-07-09T22:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/09/clojure-is-really-pesky</id>
-    <content type="html"><![CDATA[<p>最早知道clojure，是在Heroku宣布<a href="https://blog.heroku.com/archives/2011/7/5/clojure_on_heroku">支持</a><a href="http://devcenter.heroku.com/articles/clojure">它</a>，这是Heroku支持的第三种语言。知道彼时这个东西挺火。应该和闭包什么的有关联。</p>
-
-<p>这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。
-不过今天试用了一下clojure，感觉这个东西不太灵。
-基于JVM的设计思路听上去不错，但仔细想想JVM的lib真有那么大的意义吗？答案是否定的。我不太相信用惯了其他语言的人会喜欢在新语言中继续调用java的内容。在ruby中，我不会有兴趣去调用java。一旦用惯了clojure也不太可能再接受调用java的api。对比起来，scala倒是和java结合的挺紧密。</p>
-
-<p>变成jvm的一部分，一大恶果就是启动变慢，从而作为脚本功能来跑很不美。毕竟一个jvm启动的时间很长，内存消耗也很大，对于处理任务极其简单的情况下，jvm启动的时间和内存开销显然过大了。
-其次，融入jvm中，意味着需要ide的配合。无论哪种ide，都是很重的，因此很是麻烦。
-叠加起来，就是导致这种基于jvm模式的开发是不令人愉快的。</p>
-
-<p>而Lisp程序员似乎都喜欢用emacs，emacs和ide兼容，呵呵，这是在开什么玩笑。注定这东西的推广在开发层面会存在很大的障碍。</p>
-
-<p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，安装clojure也比较方便，但clojure又引入了leinxxx。不过Java的开发效率毕竟比C高，基于java开发新的语言大概也容易一些。另外就是需要连接数据库等组件都是现成的。这就使得在java上涌现出了很多二次开发的语言。可能，这才是那么多Java实现的根本原因。</p>
-
-<p>但是，个人不太看好就因为用java实现，这些新语言就会被java开发的主流程接纳。道理很简单，混在jvm里面只是有利于复用已有jvm的机器（这点其实也不太重要），好歹部署还算方便，然而对开发而言完全是另学一套，而同时加上的枷锁和限制却更多了。</p>
-
-<p>真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等，而且是要方便地调用。   伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这些年已经无人深入了。</p>
-
-<p>除了和JVM跳舞令人哭笑不得外，Clojure自身的语法也很难让人爱。基本就是Lisp那套，写啥都已左右括号为主，这样的感觉其实是不太棒的。特别好这口的人除外。这个不是通过教育就能改变的。</p>
-
-<p>所以看了一圈clojure的内容后，觉得这个语言目前还是浅尝辄止为好。</p>
-
-<p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。 <br/>
-<img src="/images/screen_print/programming_performance.jpg" alt="image" /></p>
 ]]></content>
   </entry>
   

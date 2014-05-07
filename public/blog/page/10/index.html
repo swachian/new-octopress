@@ -9,10 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="软考被安排在天等路那边,对我来说是很偏远的地方.路是远了些,但是去了之后发现那边的环境
-也还不错.因为靠近华东理工,而且除了新侨学院还有不少其他的中专职校,所以那边的中小饭店
-很多,而且物价相对便宜.比起公司附近,吃饭的价格大约只有2/3.肉夹馍3-5元,臊子面9元,
-芒果冰沙也只要8元10元, &hellip;">
+  <meta name="description" content="WebSocket defines a full-duplex communication channel that operates through a single socket over the Web 现在浏览器对real-time应用的解决办法： polling ajax 定期轮询 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +66,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/28/websocket/">WebSocket</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T14:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
+
+<p>现在浏览器对real-time应用的解决办法：</p>
+
+<ul>
+<li><em>polling</em> ajax 定期轮询</li>
+<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
+<li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
+</ul>
+
+
+<p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
+
+<p>WebSocket这是下一代的web通信&#8212;full-duplex, bidirectional, a single socket。看下来是对HTTP协议的一个替换。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
+</span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
+
+
+<p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
+Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -732,145 +787,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/19/some-useful-link/">Ruby Inside 3月链接</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-19T11:23:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>发现<a href="http://www.rubyinside.com/march-2012-ruby-news-5841.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+RubyInside+%28Ruby+Inside%29">Ruby Inside</a>最近的
-文章又好看了起来。选了一些细细研究如下。</p>
-
-<ul>
-<li><p><a href="https://github.com/styleguide/ruby">GitHub&#8217;s Ruby Style Guide</a><br/>
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
-此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
-<li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
-</ul>
-
-
-<p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir your_blog
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ./your_blog
-</span><span class='line'><span class="nv">$ </span>mkdir _layouts _plugins _includes _posts css javascripts images
-</span><span class='line'><span class="nv">$ </span>touch index.html _config.yml _layouts/default.html
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>目录树结构</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>├── README.md
-</span><span class='line'>├── _config.yml
-</span><span class='line'>├── _layouts
-</span><span class='line'>  └── default.html
-</span><span class='line'>├── _plugins
-</span><span class='line'>├── _includes
-</span><span class='line'>├── _posts
-</span><span class='line'>│   ├── 2012-03-27-your_first_post_in_markdown.md
-</span><span class='line'>│   └── 2012-03-27-your_second_post_in_textile.textile
-</span><span class='line'>├── css
-</span><span class='line'>│   └── screen.css
-</span><span class='line'>├── javascripts
-</span><span class='line'>├── images
-</span><span class='line'>└── index.html
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>jekyll --server --auto
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>文档的要求只有一个:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>---
-</span><span class='line'>layout: default
-</span><span class='line'>title: Your First Post In Markdown
-</span><span class='line'>---
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>就会按markdown里面的layout产生内容。</p>
-
-<p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
-
-<ul>
-<li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
-</ul>
-
-
-<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
-
-<ul>
-<li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
-</ul>
-
-
-<p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
-<strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
-<strong>结果</strong>都是可以让程序员和不具备界面美化能力的项目经理也可以设计出说得过去的应用。</p>
-
-<ul>
-<li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
-<li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
-</ul>
-
-
-<p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -888,6 +804,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/06/openssl-and-fipc/">Openssl and fIPC</a>
       </li>
     
@@ -903,15 +823,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2014/05/01/ri-ben-zhi-lu/">日本之旅</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (42)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (18)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (43)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
