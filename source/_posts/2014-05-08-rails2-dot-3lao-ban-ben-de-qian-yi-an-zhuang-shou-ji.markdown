@@ -15,7 +15,7 @@ categories:
 
 减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。
 
-```shell
+```sh
 wget http://ruby.taobao.org/mirrors/ruby/ruby-1.8.7-p358.tar.gz
 tar -zxvf ruby-1.8.7-p358.tar.gz 
 cd ruby-1.8.7-p358
@@ -30,9 +30,10 @@ make install
 
 ### 安装rubygems
 
+
 这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.
 
-```shell
+```sh
 wget http://rubyforge.org/frs/download.php/73763/rubygems-1.4.0.tgz
 tar -zxvf rubygems-1.4.0.tgz 
 cd rubygems-1.4.0
@@ -41,9 +42,10 @@ ruby setup.rb
 
 ### 安装Oracle即时客户端和ruby-oci8
 
+
 这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置`LD_LIBRARY_PATH`的值。关键一点是注意不要配错这个环境变量指向的路径。
 
-```shell
+```sh
 export LD_LIBRARY_PATH=/opt/instantclient_10_2:/usr/local/lib:/usr/lib
 wget http://dl.bintray.com/kubo/generic/ruby-oci8-2.0.6.tar.gz
 tar -zxvf ruby-oci8-2.0.6.tar.gz 

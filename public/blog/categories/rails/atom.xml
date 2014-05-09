@@ -4,7 +4,7 @@
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-08T22:50:25+08:00</updated>
+  <updated>2014-05-09T15:38:32+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails2.3老版本的迁移安装手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/"/>
+    <updated>2014-05-08T22:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji</id>
+    <content type="html"><![CDATA[<p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
+下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
+
+<h3>下载ruby 1.8.7</h3>
+
+<p>减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。</p>
+
+<p><code>sh
+wget http://ruby.taobao.org/mirrors/ruby/ruby-1.8.7-p358.tar.gz
+tar -zxvf ruby-1.8.7-p358.tar.gz
+cd ruby-1.8.7-p358
+./configure --prefix=/usr/local/ruby187
+make
+make install
+/usr/local/ruby187/bin/ruby -ropenssl -rzlib -rreadline -e "puts :success"
+</code></p>
+
+<p>看到输出<code>success</code>后，证明ruby各安装库已全部编译进去。主机是一台CentOS 6.4，所以安装1.8.7相当之顺利。
+安装完毕后，把ruby的运行路径加到环境变量PATH的最前面。</p>
+
+<h3>安装rubygems</h3>
+
+<p>这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.</p>
+
+<p><code>sh
+wget http://rubyforge.org/frs/download.php/73763/rubygems-1.4.0.tgz
+tar -zxvf rubygems-1.4.0.tgz
+cd rubygems-1.4.0
+ruby setup.rb
+</code></p>
+
+<h3>安装Oracle即时客户端和ruby-oci8</h3>
+
+<p>这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置<code>LD_LIBRARY_PATH</code>的值。关键一点是注意不要配错这个环境变量指向的路径。</p>
+
+<p><code>sh
+export LD_LIBRARY_PATH=/opt/instantclient_10_2:/usr/local/lib:/usr/lib
+wget http://dl.bintray.com/kubo/generic/ruby-oci8-2.0.6.tar.gz
+tar -zxvf ruby-oci8-2.0.6.tar.gz
+cd ruby-oci8-2.0.6
+make
+make install
+</code></p>
+
+<h3>Gemfile和bundle</h3>
+
+<p>```ruby
+source "http://ruby.taobao.org"</p>
+
+<p>gem 'rails', '2.3.5'</p>
+
+<p>gem 'activeresource', '2.3.5'
+gem 'activesupport', '2.3.5'
+gem 'capistrano', '2.5.17'
+gem 'fastthread', '1.0.7'
+gem 'highline', '1.5.2'
+gem 'json_pure', '1.4.3'
+gem 'nokogiri', '1.4.1'
+gem 'rack', '1.0.1'
+gem 'rake', '0.8.7'
+gem 'RedCloth', '4.2.0'
+gem 'rubyforge', '2.0.4'</p>
+
+<p>gem "haml",  '3.0.12'
+gem 'will_paginate', '2.2.2'
+gem 'paperclip', '2.3.1'
+gem 'formtastic', '0.9.8'
+gem 'jintastic', '1.1.0'
+gem 'ruby-mp3info', '0.6.13'
+gem 'mime-types', '1.16'
+gem "authlogic", '2.1.5'
+gem "acl9", '0.12.0'
+gem "paginator", '1.1.1'
+gem "spreadsheet", '0.6.4.1'</p>
+
+<p>gem "thin", "0.5.2"
+gem 'activerecord-oracle_enhanced-adapter', '1.2.4'</p>
+
+<p>gem 'sqlite3-ruby'
+gem  'rest-client',  '1.6.7'<br/>
+```</p>
+
+<p>然后执行<code>bundle install</code> , 相关的Gem就可以安装到位了。 <code>thin start -e production</code> ， 通过这个命令应用就能在生产环境下启动了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IT系统架构的模式]]></title>
@@ -237,27 +328,6 @@ heroku run rake db:migrate
 提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
 
 <p>(待续)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RoR捧红的东西]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/12/08/ror-penghong/"/>
-    <updated>2011-12-08T17:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/12/08/ror-penghong</id>
-    <content type="html"><![CDATA[<p>看见一篇抱怨ruby在国内社区越来越小的帖子。仔细想想，ruby或者说rails在国内的状况始终是不愠不火，她的社区可能在中国的环境下就是不会大。但是如果说到rails社区，似乎捧红了不少软件开发业的亮点。</p>
-
-<p>第一个，自然就是ruby。原本只有日本人知道的脚本语言一年内就完成了全球化，即使六七年过去了，说起ruby的杀手级应用依然是rails.很多人学python是因为google支持python，这方面ruby的支撑巨头显然少的多。</p>
-
-<p>第二个，应该算nginx。原本只有懂俄语的人才会去架设的web服务器，因为反向代理在rails的部署方面的表现，变得为人熟知。尽管这是nginx的实力是她本身的性能优势实在出众。但不可否认，rails也是nginx引导向全球的主要突破者。</p>
-
-<p>第三个，git和github。git是系出名门。为人所知则是从Rails自svn迁移到git起始。随后就出现一轮狂飙，众多主流开源软件纷纷开始往git，实际上是github进行迁移。git和github今日的成就已有目共睹，说是傍上rails才火的那么有爆发性并不为过。当然关键还是看自身的底子，比较起来，当时同时一起迁移的票据系统lighthouse则黯淡的多。</p>
-
-<p>第四个，heroku。如果说其他几个是不论rails在与不在，他们全都存在。但是heroku则是没有rails就不会有她的。时至今日，heroku已经是一个多语言环境的PaaS，但头两三年确实一直只支持ruby系的web框架，完全以此起家。</p>
-
-<p>下一个会是什么？coffee.js或者其他什么东西。这个还真的难以预料。因为以上这些全是rails发展过程中的副产品，捧谁不捧谁只有天知道，捧得起捧不起只有看被捧的东西。Rails自己关心的始终是web开发的创新。</p>
-
-<p>从中我们也可以发现，国外的软件生态圈更多的是n样独立的东西共赢发展，每样独立的东西本身规模都比较小。这和我们这个民族所向往的求最大、求一体化完全是两码事情。</p>
 ]]></content>
   </entry>
   
