@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 时评 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/时评/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-12T22:25:49+08:00</updated>
+  <updated>2014-05-17T14:30:08+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[老板和技术骨干]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/"/>
+    <updated>2014-05-17T09:00:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan</id>
+    <content type="html"><![CDATA[<p>蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
+也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
+主要已经是看老板的rp以及骨干成员和老板的关系了。</p>
+
+<p>只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
+比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
+当然，城市的老板一般不给钱只是不给钱了，而乡村企业家拖欠
+工资可能还是想留住员工。</p>
+
+<p>如果真要总结，只有一条最重要：<strong>跟对老板</strong>。其他确实都是其次的。
+至于说保持自己的竞争力，保持自己的核心地位，这些是做任何事情的
+本分。毕竟公司不是家庭，个人的存在是必须有价值才行的。</p>
+
+<p>说回caoz本身，他的博客也是我比较喜欢的一类，尽管更新频率确实很低。
+当然，他所判断的也不全对，比如在房价、在历史方面就挺离谱的。
+但他的文章确实有干货，更重要的打鸡血的效果确实很棒。
+<strong>保持乐观可能比<del>跟对老板</del>更加重要</strong>。</p>
+
+<p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
+了的可能还是自己直接创业。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IBM的Linux和Google的Android]]></title>
@@ -124,25 +152,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 实际上很可能永远(几十年)也降不到那么低的数字。</p>
 
 <p>不过虎牌真的在升值，上个外牌也就这样子，虎牌保值多了。因此，有米的话，还是拍虎牌吧。车这种东西开个几年反正要换的，买差点问题不大。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[一个App站点的人员组织]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site/"/>
-    <updated>2013-06-14T15:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site</id>
-    <content type="html"><![CDATA[<p>参考了一下残游记的组织与分工，小结如下：</p>
-
-<ul>
-<li><p>产品经理，1，老板</p></li>
-<li><p>后端开发，1, 技术负责人</p></li>
-<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
-<li><p>视觉设计师，2</p></li>
-<li><p>ios开发，1，</p></li>
-<li><p>运营，2，应该就是管理员和推销员</p></li>
-</ul>
-
 ]]></content>
   </entry>
   

@@ -5,12 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Arp 绑定 - Hegel2011的博客</title>
+  <title>老板和技术骨干 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="通过ftp备份老是报告登录失败。检查过后，网管告知我们是ip被抢。照理是需要网管执行纪律的，但是这个我就不越俎代庖，反正
-解决问题为主。而且即便执行纪律也不保证下次就不会发生。于是想起来直接绑定arp和ip，这样可以根除此类问题。 主要参考了Linux下绑定IP和MAC地址，防止ARP欺骗. 1. &hellip;">
+  <meta name="description" content="蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
+也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
+主要已经是看老板的rp以及骨干成员和老板的关系了。 只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
+比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
+当然 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/04/23/arp-binding/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">Arp 绑定</h1>
+      <h1 class="entry-title">老板和技术骨干</h1>
     
     
       <p class="meta">
@@ -86,44 +89,33 @@
   
 
 
-<time datetime="2012-04-23T11:46:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
+<time datetime="2014-05-17T09:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>通过ftp备份老是报告登录失败。检查过后，网管告知我们是ip被抢。照理是需要网管执行纪律的，但是这个我就不越俎代庖，反正
-解决问题为主。而且即便执行纪律也不保证下次就不会发生。于是想起来直接绑定arp和ip，这样可以<strong>根除</strong>此类问题。</p>
+<div class="entry-content"><p>蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
+也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
+主要已经是看老板的rp以及骨干成员和老板的关系了。</p>
 
-<p>主要参考了<a href="http://www.xxlinux.com/linux/article/network/security/20070809/9234.html">Linux下绑定IP和MAC地址，防止ARP欺骗</a>.</p>
+<p>只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
+比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
+当然，城市的老板一般不给钱只是不给钱了，而乡村企业家拖欠
+工资可能还是想留住员工。</p>
 
-<p>1.检查当前arp</p>
+<p>如果真要总结，只有一条最重要：<strong>跟对老板</strong>。其他确实都是其次的。
+至于说保持自己的竞争力，保持自己的核心地位，这些是做任何事情的
+本分。毕竟公司不是家庭，个人的存在是必须有价值才行的。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -a</span>
-</span><span class='line'>? <span class="o">(</span>192.168.203.22<span class="o">)</span> at 00:A0:D1:E5:D1:A9 <span class="o">[</span>ether<span class="o">]</span> on eth0
-</span></code></pre></td></tr></table></div></figure>
+<p>说回caoz本身，他的博客也是我比较喜欢的一类，尽管更新频率确实很低。
+当然，他所判断的也不全对，比如在房价、在历史方面就挺离谱的。
+但他的文章确实有干货，更重要的打鸡血的效果确实很棒。
+<strong>保持乐观可能比<del>跟对老板</del>更加重要</strong>。</p>
 
-
-<p>2.建立一个mac->ip的对应文件： ip-mac, 将IP和MAC写入才文件</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;192.168.202.19 00:26:b9:4c:8d:af&#39;</span> &gt; /etc/ip-mac
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.手动执行绑定</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -f /etc/ip-mac</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>上面的内容也可以存入<code>/etc/rc.d/rc.local</code> ,这样可以实现开机自动绑定。</p>
+<p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
+了的可能还是自己直接创业。</p>
 </div>
 
 
@@ -146,12 +138,12 @@
   
 
 
-<time datetime="2012-04-23T11:46:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
+<time datetime="2014-05-17T09:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/时评/'>时评</a>
   
 </span>
 
@@ -160,7 +152,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/04/23/arp-binding/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/04/23/arp-binding/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/" >Tweet</a>
   
   
   
@@ -169,10 +161,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/19/heredocs/" title="Previous Post: Heredocs 和缩进">&laquo; Heredocs 和缩进</a>
+        <a class="basic-alignment left" href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/" title="Previous Post: Rails2.3老版本的迁移安装手记">&laquo; Rails2.3老版本的迁移安装手记</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/24/the-rails-view/" title="Next Post: The Rails View">The Rails View &raquo;</a>
       
     </p>
   </footer>
