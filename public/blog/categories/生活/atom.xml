@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-17T14:30:08+08:00</updated>
+  <updated>2014-05-18T10:28:48+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[车位]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/18/che-wei/"/>
+    <updated>2014-05-18T10:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/18/che-wei</id>
+    <content type="html"><![CDATA[<p>自从要开始开车，车位始终是一个问题。目前小区地面是无固定车位，先来先得，抢到了可以用到开走的时候。好处是价格便宜，150/月。很早就申请并开始付钱了，
+但现在发现申请的有点早了，因为小区根本没有控制车辆总数的意思。现在申请也是同样可以的。当然，每月本来开销也不大，这个就只能当小赌赌输了。真的让人头疼的还是每天要停车的现实，特别是以后每天开起来。</p>
+
+<p>小区里面另一种车位就是地下车库了。大概2011年上半年的时候，当时的物业撤离前，把开发商保留的最后一批地下车库卖了出来。
+彼时是20w元一个，且已经租用者可优先购买。我当时还没买车，自然也不是租用者，肯花钱也不一定轮得到。
+如今，再一打听，地下车位已经有人在卖40w了。这个价位有点偏高，很长时间无人问津。</p>
+
+<p>既然卖了这个价，那就更不乐意买了。毕竟现在的理财产品，妥妥的一年有5-6%的收益，40w就意味着每年可以多出来2w。
+这笔增值都可以出国旅游一趟了。何苦变成车位的死投资。地下固定车位尽管长期看涨，但除了停停车也确实没其他用处。
+而其替代品还是有一些的。如现在的小区地面，甚至可能会被贴罚单的小马路上。虽然不方便虽然有风险，但是后二者都很难迅速涨价。
+一般情况下，凑合着停停也就算了。</p>
+
+<p>让人欣慰的是，上海政府至少规定了新造的楼盘车位要达到将近1:1的比例。
+虽说不解决老小区的问题，但好歹也算以后换房多了一些选择。总体而言还是增加了地下车库的供给，而一套房子毕竟也不一定待一辈子。</p>
+
+<p>长远来看，有个固定的地下车位还是很有必要的。只是碍于目前的身价，不舍得花那么一大笔钱。
+真能解决这个问题的唯一办法，还真的只有自己努力赚钱吧。现在固定车位的意义对我而言大于40w，当然只是比如说，那肯定毫不犹豫就会出手了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Macbook Pro]]></title>
@@ -230,63 +255,6 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <p>尽管整体相当满意，但电池确实有点不太经用。这个2000ma出头的电池，如果整个下午都用qq聊天的话，基本上半天电就要用光了。所以，买这个机器移动电源最好是要配一个的。z5s的电池是不能随便更换的。自从用上智能手机后，我以前的手机上两块电板轮流用的机会也不太多了。目前比较方便的还是配个移动电源。</p>
 
 <p>自从改用了C网，或者说自从智能手机开始普及，更换手机的频率一下子提高了。C网之前，老式的手机通常可以稳稳地用2年以上。而用上智能手机尤其是C网的智能手机后，更换频率基本在一年以内了。上一个华为8812还算是使用时间比较长的。不知道Nubia Z5S可以保鲜几年？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[读书列表2014]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list/"/>
-    <updated>2014-03-02T09:39:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list</id>
-    <content type="html"><![CDATA[<h3>技术类</h3>
-
-<ol>
-<li>[x] <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">Flower M. Patterns of Enterprise Application Architecture</a>, Addison-Wesley Professional. Rails诞生的书，<a href="http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me">DHH最爱的五本编程书籍</a>，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。</li>
-<li><a href="http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/">PoEAA的访谈和DHH</a></li>
-<li>曾宪杰. 大型网站系统与Java中间件实践. 2014.</li>
-<li>FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.</li>
-<li>Eric Evans. Domain-Driven Design.</li>
-<li>Beck. Smalltalk best practice patterns, 1996.</li>
-<li>Donald C. Gause, Are you lights on? 1990.</li>
-<li>张昊，Linux Shell编程从入门到精通。</li>
-<li>Core Java。有必要更新一下。</li>
-<li>Gourley D, Totty B. HTTP权威指南 O’Reilly</li>
-<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists</li>
-<li>谭云杰,大象–Thinking in UML，水利水电</li>
-<li>谢希仁.计算机网络，电工</li>
-</ol>
-
-
-<h3>经管</h3>
-
-<ol>
-<li>[x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。</li>
-<li>[x] 汽车文化。</li>
-<li>[x] 汽车工程学基础。 上面两边都是汽车构造及文化的基本入门读物，可以填补较大的知识空白。明白汽车的基本构造原理和发展脉络。而对汽车人物的描述则很有特色和启发。让人感叹的是，很多德国的发明家，如奔驰、戴姆勒，他们既是优秀的工程师，但同时也是成功的设计师和成功的企业家。这方面德国人确实一枝独秀。另外，其他国家的汽车杰出人物不是发明家就是工程师，至少也是一个企业家。但中国的汽车代表人物却是官员。</li>
-<li>[x] 海斯勒，寻路中国，上海译文. 十分接地气的一本书，同时也相当的深刻。尤其是当一个中国人读来时，颇印证了横看成岭侧成峰，局外人更容易揭露事实的真相。
-可惜出版的还是晚了些。另外，只是country，没有城市，这一点相当遗憾。更确切的名称应该是中国乡村寻路。</li>
-<li>余江，韦尔奇，Winning（赢），中信</li>
-<li>曾志尧, 35岁前要上的33堂理财课,中信</li>
-<li>李笑来，把时间当做朋友</li>
-<li>蔡康永，说话之道</li>
-<li>高盛如何算赢世界</li>
-<li>The Intelligent Investor</li>
-</ol>
-
-
-<h3>历史文化</h3>
-
-<ol>
-<li>[x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。</li>
-<li>[x] 唐德刚，xxx专政始末。 相对比较一般。</li>
-<li>[x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。</li>
-<li>[x] 哈夫纳，<a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">不含传说的普鲁士</a>。台版书的竖版读起来有点累，不过效果还行。值得反复阅读的图书。</li>
-</ol>
-
-
-<h2>既往</h2>
-
-<p> <a href="/blog/2013/01/11/to-read-list/">2013读书列表</a></p>
 ]]></content>
   </entry>
   
