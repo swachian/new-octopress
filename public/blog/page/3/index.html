@@ -9,9 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这几日研究了一下拍牌，几个小tips如下： 弹验证码的窗口需要3s，系统和GUI之间的时差是系统慢5s，所以投标需要预留8s 。
-输入验证码一般在5s左右，所以整个过程预留15s为妙
-实际操作时，往往引入伏击。其实就是一种先猜后提交的办法。伏击目前主要有两种模式。其一，在最低价上加价600， &hellip;">
+  <meta name="description" content="云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。 先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,186 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/">基于Linux 的Oracle 数据库管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-30T22:01:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。</p>
+
+<p>先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。比如Linux各发行版和Oracle的兼容性，ext2（有点老了）的文件系统磁盘数据结构，bios-grub-linux的启动顺序等。</p>
+
+<p>整本书是一个很简洁的linux常用功能的介绍，并以oracle安装维护为中心，展现了使用的方式。虽然有些地方相对简陋，但确属作者的经验之谈。有工程和实际经验才能提炼出来的东西。比如补充的配置环境命令别名<code>udump, bdump</code>等，安装用于sqlplus操作方便的<code>rlwrap</code>。当然还有一系列的shell脚本。</p>
+
+<p>但限于篇幅，有些东西确实没谈。而且整本书的重点在于linux如何使用oracle，对oracle的介绍着墨很少。又比如讲了rman，只讲了怎么打开，怎么用许多东西备份，但没提及怎么用这些东西来恢复。但总的来说还是很值得一读的一本书。至少可以了解职业实施人员的部署情况。</p>
+
+<p>整本书只花了一个下午就读完了，至少说明书的可读性不错。</p>
+
+<p>第二本是一个老外写的翻译的书。不少评价不太好，但我读下来还是挺有收获。因为这部书是一本偏原理的书，作者喜欢把Oracle运行是怎么一回事情交代清楚。适合于对oracle的安装已经比较了解，但并不明白其中原理的层次阅读。读完之后，基本就可以自己判断该怎么玩了。很多人评价不高，是因为这本书对部署的细节交代的并不清楚，如果只是想拿来按部就班完成任务，这本书是会令人气馁的。</p>
+
+<p>同时，作者又偏向于介绍一些计算机的基础知识。虽然很精悍这些介绍，但是不明白的人还是看不明白，看的懂的人才会觉得作者点到位了。所以这本书落得评价不高也十分正常。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/06/hu-pai-huan-shi-wai-pai/">虎牌还是外牌</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-06T12:32:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>关于上沪牌和外牌似乎尚有争论，但目前看来其实是没必要的。
+因为很简单，只要经济条件足够，情愿先上沪牌，如果确实米缺缺，那外牌也只能凑合一下了。
+之所以这么选择，不是因为担心外牌会受限制。限制外牌是忽悠人的，买虎牌当前的主要意义在于保值和升值。</p>
+
+<p>北京广州和上海是不一样的。拿北京来讲，拍牌前从不限制外地车牌进京，但一旦开始摇号了，外地牌照立马禁止进去。所以北京的情况是在市区开的车、尤其是居住在北京的车主基本都是上的京牌。因此，执行限制可以雷厉风行。</p>
+
+<p>上海就不一样了。拍牌制度将近20年，上海人和居住在上海的外地人上外牌的比比皆是，这些车平时就开在这里，如果政府一声令下就可以禁止，那世界上的事情也太简单了。所以，要限的话，上海政府将面临很大的压力，牌照也会迅速往20w+跑去，这些都是政府不太愿意看见的。</p>
+
+<p>毕竟上海拍牌制度执行了那么多年，对外地牌照从来没有严格的限制。
+上海有200w辆车子的话，外牌车辆少说有100w。如果立刻强制限行，那么无非是逼着这些车主去换沪牌或者去提抗议。因为这100w人别无选择，除非坐视自己的车子成为一个年耗几万且不断贬值的摆设。</p>
+
+<p>限制的政策要等这100w减少很多后才可能实施。按现在每年也就发10w+牌照的节奏，没个10年是降不到可以实施限制的条件的。
+实际上很可能永远(几十年)也降不到那么低的数字。</p>
+
+<p>不过虎牌真的在升值，上个外牌也就这样子，虎牌保值多了。因此，有米的话，还是拍虎牌吧。车这种东西开个几年反正要换的，买差点问题不大。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/03/kan-che-da-nuo-yi-ji/">看车大挪移记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T21:57:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>终于抽空去看了下中意的车子，确实相当中意，但是整个的结果却发生了很大的漂移。</p>
+
+<p>老婆和我想添一辆车，老丈人也想换一辆车，于是就开始筹划买车的事情。起初，岳父想换一辆SUV，大众的途观。他比较中意大众的车子。我们则对大众的车子不感冒，不过起初我最想买的是斯柯达的明锐，也是大众的。只是后来嫌新标黑色实在有点难看，于是开始转型。预算也一路提高。由于老婆不喜欢途观，所以suv基本没怎么考察，关注的重点始终都在三厢轿车上。</p>
+
+<p>先在网上做功课，从斯柯达到福克斯，再到朗逸 速腾 思域 卡罗拉等，最后终于看上了东风日产的国产天籁。预算自然也节节攀升。考虑到家里如果有了一辆SUV的途观之后，买辆中大型的B级三厢还是有很大的互补性的。天籁吸引我的因素主要是下面这些：</p>
+
+<ol>
+<li>较大的空间，座椅等舒适性好</li>
+<li>价格十分合我的胃口，属于恰到好处的位置</li>
+<li>据说小毛病少，后期打理保养等相对省事</li>
+<li>日产只嫁了东风一个中国公司，技术方面还是很扎实的</li>
+<li>本人开车的偏好偏稳，以一慢二看三通过为准，天籁的动力风格与此相符</li>
+</ol>
+
+
+<p>所以，天籁的特性很符合我的需要。</p>
+
+<p>当然，也有如下的一些不足：</p>
+
+<ol>
+<li>车身太长。4.8米的车比A级车要长30公分，对于停车来说难度增加不少，毕竟我不是老司机。</li>
+<li>据说这车不适合女司机开。</li>
+<li>虽然是中国产的车，但毕竟是日本牌子，尽管也是有部分欧洲血统，但日系车在近10年的中国是有一定额外风险的。</li>
+</ol>
+
+
+<p>但综合起来看，这确实是一款很不错的车，至少我是相当喜欢了。所以决定开始看车。</p>
+
+<p>两个白天，逛了不少4s店，首当其冲去了东风日产。车子确实很大，空间、座椅、样子都没的说，岳父试驾一圈之后，也对此车相当满意。然而，老婆同时坐了下旁边的逍客，日产的SUV，觉得那车她更喜欢。</p>
+
+<p>随后，熟人介绍去不远处的丰田看了锐志。这车的动力和操控性更好，还是后驱的、6釭发动机。用一个‘骚’字形容再合适不过。车确实是好车，不过我们倒不太东西。熟人是个爱车的人，喜欢操作运动型的车。</p>
+
+<p>后来，自然又去了大众。在此过程中，明确了SUV的后背空间其实普遍不大。出于操作方便的需要，SUV的车身普遍是设计的骗紧凑的。高高的后备箱其实放不了什么东西。而且，途观的小毛小病还是挺多的，保养起来也相对费一些。
+于是，岳父打消了买途观的念头，开始在帕萨特和天籁之间想做一个选择。于是又试驾了帕萨特。德国车的操纵风格比较硬和稳，帕萨特当然也是好车。地处上海，修理保养购买，甚至看车都是最方便不过的。但这个车毕竟偏公务了
+一些，后排座椅也比较硬，没有天籁舒适。</p>
+
+<p>彼此商量了一下，决定还是老丈人买辆大一些的轿车，我和老婆还是先开一下当前的车练手一阵子，明年再换逍客。但是对帕萨特还是天籁则犹豫不决。这时，熟人建议可以去雷克萨斯看看，那种轿车同时具备了天籁和帕萨特的优点。价格方面也还是可以接受的。</p>
+
+<p>到雷克萨斯的专卖店一块，不得不承认，店的感觉是完全不同的。豪车的销售点的档次确实不一样。从装修的风格、派头到服务态度，都是很明显的变化。堪比经济型酒店一下子变成了五星级。当然，雷克萨斯和天籁的差距没那么大。
+试了一款雷克萨斯ES，舒适性、操控性方面具备了天籁的优点，扎实稳定等方面也确实堪比帕萨特。终于，大家发现找到岳父最适合的车子了。</p>
+
+<p>虽然我依然对天籁有着很深的感觉，但考虑到家里的车型搭配和起手阶段并不适合开大车以及老婆对逍客的喜爱，决定还是忍痛割爱。整个挪移的过程可以这么小结：</p>
+
+<p>车辆1： 途观 -> 天籁、帕萨特 -> 雷克萨斯<br/>
+车辆2： 明锐 -> 天籁 -> 逍客</p>
+
+<p>虽然变化有点大，虽然最终无缘天籁，但变化后的组合还是很不错的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -497,170 +675,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/16/prolog/">Prolog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
-好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
-相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
-基本功就无从发挥了。</p>
-
-<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
-这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
-
-<ul>
-<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
-<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
-
-<ul>
-<li>第一个是X！=Y</li>
-<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
-</ul>
-</li>
-<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
-</ul>
-
-
-<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
-
-<h3>最大的启发</h3>
-
-<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
-
-<h3>试用体验</h3>
-
-<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
-不过确实是只要树立规则，就能输出结果。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/14/the-orgnization-of-an-app-site/">一个App站点的人员组织</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-14T15:08:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>参考了一下残游记的组织与分工，小结如下：</p>
-
-<ul>
-<li><p>产品经理，1，老板</p></li>
-<li><p>后端开发，1, 技术负责人</p></li>
-<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
-<li><p>视觉设计师，2</p></li>
-<li><p>ios开发，1，</p></li>
-<li><p>运营，2，应该就是管理员和推销员</p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/12/my-first-gem/">My First Gem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-12T17:02:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天终于尝试做了第一个<code>gem</code>，其实挺简单的，至少在有了bundler之后。</p>
-
-<p>先 <code>bundle gem act_as_xxx</code>，随后就可以编辑里面的内容，比如在<code>*.gemspec</code>里面加入描述。编辑好自己的gem后，运行<code>gem build act_as_xxx.gemspec</code>，这样一个新的gem就会编译出来。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  Successfully built RubyGem
-</span><span class='line'>  Name: act_as_xxx
-</span><span class='line'>  Version: 0.1.1
-</span><span class='line'>  File: act_as_xxx-0.1.1.gem</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
-
-<p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -678,6 +692,18 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/18/che-wei/">车位</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">老板和技术骨干</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/">Rails2.3老版本的迁移安装手记</a>
       </li>
     
@@ -685,23 +711,11 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
         <a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/06/openssl-and-fipc/">Openssl and fIPC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">普鲁士不含传说</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/02/macbook-pro/">Macbook Pro</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (43)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (43)</a></li><li><a href='/blog/categories/生活'>生活 (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

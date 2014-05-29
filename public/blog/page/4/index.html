@@ -9,7 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。 书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。 &hellip;">
+  <meta name="description" content="七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实w3school的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +68,170 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/16/prolog/">Prolog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
+好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
+相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
+基本功就无从发挥了。</p>
+
+<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
+这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
+
+<ul>
+<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
+<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
+
+<ul>
+<li>第一个是X！=Y</li>
+<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
+</ul>
+</li>
+<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
+</ul>
+
+
+<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
+
+<h3>最大的启发</h3>
+
+<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
+
+<h3>试用体验</h3>
+
+<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
+不过确实是只要树立规则，就能输出结果。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/the-orgnization-of-an-app-site/">一个App站点的人员组织</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T15:08:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>参考了一下残游记的组织与分工，小结如下：</p>
+
+<ul>
+<li><p>产品经理，1，老板</p></li>
+<li><p>后端开发，1, 技术负责人</p></li>
+<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
+<li><p>视觉设计师，2</p></li>
+<li><p>ios开发，1，</p></li>
+<li><p>运营，2，应该就是管理员和推销员</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/12/my-first-gem/">My First Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-12T17:02:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天终于尝试做了第一个<code>gem</code>，其实挺简单的，至少在有了bundler之后。</p>
+
+<p>先 <code>bundle gem act_as_xxx</code>，随后就可以编辑里面的内容，比如在<code>*.gemspec</code>里面加入描述。编辑好自己的gem后，运行<code>gem build act_as_xxx.gemspec</code>，这样一个新的gem就会编译出来。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Successfully built RubyGem
+</span><span class='line'>  Name: act_as_xxx
+</span><span class='line'>  Version: 0.1.1
+</span><span class='line'>  File: act_as_xxx-0.1.1.gem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
+
+<p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -433,344 +599,6 @@ RHCE的范围基本如下:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/">为什么ruby不火仍然值得学</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-24T16:14:00+08:00" pubdate data-updated="true">Mar 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
-
-<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
-
-<h3>1. 简单</h3>
-
-<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
-
-<h3>2. 方便</h3>
-
-<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
-方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
-
-<h3>3.程序员（IT人员）的朋友</h3>
-
-<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
-
-<h3>4. Rails</h3>
-
-<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
-的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
-不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
-
-<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
-现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
-
-<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
-
-<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/16/sass-and-compass/">Sass and Compass</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-16T21:29:00+08:00" pubdate data-updated="true">Mar 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。
-看了下《Pragmatic Guide to Sass》, 理清了一下脉络。
-顺便提一句，这本书是在kindle上看的，出版社和作者提供了epub的版本。  这可以算是第一本在kindle上看完的计算机技术类书籍。虽然效果还可以，
-但是看了下原书的pdf版本，发现其版本也深受“小书”，小版面，的影响。这可能是未来计算机书籍的一个趋势吧。不过kindle还是最适合纯文字，
-用来阅读计算机技术书籍的体验还是很一般。</p>
-
-<p>Sass是最基础的，类似coffeeScript对Css的改写，当然引入的内容要多的多。毕竟js本身也是一种语言，但css很难算的上是一门编程语言。
-Sass有自己的运行命令，由ruby实现，可以把scss文件编译成css文件，也能convert回去。</p>
-
-<p>Compass则是sass的库和扩展，在sass的基础上提供了更丰富的样式、函数和变量以及模式。其本身也有了一套命令，也更适合于建项目。Sass如果是java，
-那么compass就是J2EE+Eclipse。</p>
-
-<p>如果不想安装那么多东西，那么可以直接使用scout这个GUI工具，工具本身集成了sass和compass的能力，只是又提供了图形化的集成界面。该界面可能是基于
-Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以从scout入手。</p>
-
-<p>compass是很神奇的，而它的spriting堪称神奇中的神奇。</p>
-
-<p>但我发觉设计也是有天赋和术业专攻的。我们的美工完全不用这些东西，也很快就能搞出一个各种android上面看过去还不错的版本，我用这些东西去写出来的还是感觉很累。但至少比没有要好多了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/">Notes of Matz on Ruby 2.0 at Herokus Waza</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-08T11:15:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://speakerdeck.com/yukihiro_matz/ruby-2-dot-0-en">Mats Ruby 2.0</a>
-的笔记。</p>
-
-<p>首先讲了Ruby的历史</p>
-
-<ul>
-<li>Dec 1995 0.95</li>
-<li>Dec 1996 1.0</li>
-<li>Aug 1997 1.1</li>
-<li>Dec 1998 1.2</li>
-<li>Aug 1999 1.4</li>
-<li>Sep 2000 1.6</li>
-</ul>
-
-
-<p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
-
-<p>voccation-driven development<br/>
-Anniversary-driven development</p>
-
-<ul>
-<li>Aug 2003 1.8</li>
-<li>Dec 2007 1.9.0</li>
-<li>Aug 2010 1.9.2</li>
-<li>Oct 2011 1.9.3</li>
-<li>Feb 2013 2.0.0</li>
-</ul>
-
-
-<p>2.0版最早是在Ruby Conf 2001提出，包括</p>
-
-<ul>
-<li>new GC</li>
-<li>native Thread with GIL</li>
-<li>有些特性后来放弃了</li>
-</ul>
-
-
-<p>2.0的发布带来了：</p>
-
-<ul>
-<li>New Hash literals</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>keyword arguments</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  def log(msg, level: "ERROR", time: Time.now)
-</span><span class='line'>    puts "..."
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  # existing hash passing
-</span><span class='line'>  log("Hello!", **hash)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Module#prepend, alias method chain, from CommonLisp</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#prepend put them before to wrap methods
-</span><span class='line'>class Foo
-</span><span class='line'>  def foo; p :foo; end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>module Prepend
-</span><span class='line'>  def foo
-</span><span class='line'>    p :before
-</span><span class='line'>    super
-</span><span class='line'>    p :after
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>class Foo
-</span><span class='line'>  prepend Prepend # just as include Prepend
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Foo.new.foo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>refine，to constrain open class, scoped monkey patching</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module R
-</span><span class='line'>  refine String do
-</span><span class='line'>    def foo
-</span><span class='line'>      puts "aaa"
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>"".foo # =&gt; error!
-</span><span class='line'>
-</span><span class='line'>using R
-</span><span class='line'>"".foo</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
-
-<ul>
-<li>Enumerable#lazy， 受函数式编程影响</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(1..Float::INFINITY).lazy.map {|i|
-</span><span class='line'>  i.to_s
-</span><span class='line'>}.select {|s|
-</span><span class='line'>  /3/ === s
-</span><span class='line'>}.first(500000)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Symbol array literals</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>%i(foo bar baz) =&gt; [:foo, :bar, :baz]</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>to_h, to_hash</p></li>
-<li><p>UTF-8 by default</p></li>
-<li><p>Performance Faster:</p>
-
-<ul>
-<li>VM(YARV)</li>
-<li>GC</li>
-<li>require</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Ruby 2.1 maybe 25.12.2013</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -788,6 +616,18 @@ Anniversary-driven development</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/18/che-wei/">车位</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">老板和技术骨干</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/">Rails2.3老版本的迁移安装手记</a>
       </li>
     
@@ -795,23 +635,11 @@ Anniversary-driven development</p>
         <a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/06/openssl-and-fipc/">Openssl and fIPC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">普鲁士不含传说</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/02/macbook-pro/">Macbook Pro</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (43)</a></li><li><a href='/blog/categories/生活'>生活 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/车车'>车车 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (43)</a></li><li><a href='/blog/categories/生活'>生活 (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/rails'>Rails (9)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
