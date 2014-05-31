@@ -4,7 +4,7 @@ title: "What's new in Rails 4"
 date: 2012-11-23 22:00
 comments: true
 categories: 
-- Rails
+- rails
 - 技术
 ---
 

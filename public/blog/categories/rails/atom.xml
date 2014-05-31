@@ -4,7 +4,7 @@
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-05-31T12:06:38+08:00</updated>
+  <updated>2014-05-31T12:57:08+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -319,15 +319,99 @@ heroku run rake db:migrate
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[The Rails View]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view/"/>
-    <updated>2012-04-24T12:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/24/the-rails-view</id>
-    <content type="html"><![CDATA[<p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
-是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
-提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
+    <title type="html"><![CDATA[What's new in Rails 4]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4/"/>
+    <updated>2012-11-23T22:00:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4</id>
+    <content type="html"><![CDATA[<p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
 
-<p>(待续)</p>
+<h3>Rails.queue</h3>
+
+<p>```
+class ExpensiveOperation
+  def run</p>
+
+<p>  end
+end</p>
+
+<p>Rails.queue.push(ExpensiveOperation.new)</p>
+
+<p>```
+config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
+
+<h3>strong_parameters</h3>
+
+<p>Alternative to MassAssignmentSecurity</p>
+
+<p>```
+class PostsController &lt; ApplicationController
+  def create</p>
+
+<pre><code> @post = Post.create(post_params)
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def post_params</p>
+
+<pre><code>params.require(:post).permit(:title, :body)
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>```</p>
+
+<h3>Turbolinks</h3>
+
+<h3>Cache Digests(Russian Doll Caching)</h3>
+
+<p>```</p>
+
+<h1>app/views/projects/show.html.erb</h1>
+
+<p>&lt;% cache project do %>
+  <h1> </h1>
+  &lt;%= render project.documents %>
+&lt;% end %>
+```</p>
+
+<h3>ActionController::Live</h3>
+
+<p>```
+include ActionController::Live</p>
+
+<p>response.stream.write "hello\n"</p>
+
+<p>```</p>
+
+<h3>PATCH Verb</h3>
+
+<p>just as PUT</p>
+
+<h3>Plugins are dead; long live plugins</h3>
+
+<p>use gems with bundle</p>
+
+<h3>lambda scope</h3>
+
+<p>```
+scope :published, -> { where(:published => true) }</p>
+
+<h1>Pitfall</h1>
+
+<p>scoped :recent, where("created_at > ?", 1.week.ago)
+```</p>
+
+<p>@sikachu</p>
+
+<p>Routing Concerns</p>
+
+<p>Long live activeresource</p>
+
+<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
+They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
 ]]></content>
   </entry>
   
