@@ -6,6 +6,7 @@ comments: true
 categories:
 - 技术
 - spring
+- java
 ---
 
 六七年来，小组的Java Web开发是用SSH（Struts2+Spring+Hibernate）的框架。

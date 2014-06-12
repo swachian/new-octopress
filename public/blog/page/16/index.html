@@ -9,7 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="前提：拥有虚拟机并已经安装好ubuntu1104 1. 默认没有ssh server，所以需要安装.安装完成后，会自动打开每次启动的选项。 $ sudo apt-get install openssh-server 2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等 sudo &hellip;">
+  <meta name="description" content="本地化rubygem cache的git链接 设计思想是：
+1. 将rubygems.com指向本地的地址，例如127.0.0.1;
+2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
+3. 如果本地没有，则先从远端下载到本地，然后再传输回去 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/17/rubygems-cache/">Rubygems的本地化cache</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/akitaonrails/rubygems_proxy.git">本地化rubygem cache的git链接</a></p>
+
+<p>设计思想是：
+1. 将rubygems.com指向本地的地址，例如127.0.0.1;
+2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
+3. 如果本地没有，则先从远端下载到本地，然后再传输回去</p>
+
+<p>这样就保证了自己曾经下载过的gem可以在本地有个案底，既节省下次安装的时间，又获得了备份。</p>
+
+<p>update: 2011.6.19
+直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
+
+<pre><code>unicorn -c unicorn.conf.rb 
+</code></pre>
+
+<p>conf.rb文件的内容</p>
+
+<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
+listen 8080
+</code></pre>
+
+<p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
+
+<p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
+
+<pre><code>gem install bundle --source='http://127.0.0.1:3000'
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -357,6 +422,10 @@ Post.where(:published =&gt; true).any? 检查是否exist?
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/">JSP中的EL表达式和Helper</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
@@ -372,15 +441,11 @@ Post.where(:published =&gt; true).any? 检查是否exist?
         <a href="/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">老板和技术骨干</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/">Rails2.3老版本的迁移安装手记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (44)</a></li><li><a href='/blog/categories/生活'>生活 (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/spring'>Spring (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>

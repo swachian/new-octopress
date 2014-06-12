@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-01T15:01:19+08:00</updated>
+  <updated>2014-06-12T19:26:12+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JSP中的EL表达式和Helper]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/"/>
+    <updated>2014-06-12T19:05:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper</id>
+    <content type="html"><![CDATA[<h2>JSP中的代码</h2>
+
+<h3>传统的老三样</h3>
+
+<p>长久以来的Java Web开发，在jsp层面进行读取或逻辑控制等行为时主要有<strong>Scriptlet</strong>、<strong>Helper</strong>和<strong>标签</strong>三种方式。</p>
+
+<p>其中，Scriptlet是最不受推荐的方式，最为推荐的是用 <strong>标签</strong> 的方式，而Helper因为免不了会使用Scriptlet，所以流传的也不广。而标签方式中，不单有相对通用的JSTL（JSP Standard Tag Library，JSP标准标签库)，每个框架往往还有自己的标签库。</p>
+
+<p>如struts1的：</p>
+
+<p><code>&lt;bean:write name="spRinglib" property="down_cnt"/&gt;</code></p>
+
+<p>struts2的：</p>
+
+<p><code>&lt;s:property value="r.department" /&gt;</code></p>
+
+<p>jstl的：</p>
+
+<p><code>&lt;c:out value="${user.company}" escapeXml=="false"/&gt;</code></p>
+
+<p>这种方式的一大特点就是冗长和啰嗦。信息的表达力很差。上述还只是用于输出的，一旦碰到条件判断等，标签的表现更是只能用拙劣二字来加以形容。同时，每个框架各搞一套，给程序员也会带来很大的负担，对项目维护也带来更多的成本。</p>
+
+<p>然而，对于程序员而言，输出内容、流程控制等原本有着更直接和通用的描述方式： 编写代码。比如Java程序员自然用Java编写代码，Ruby的则自然用Ruby。
+如果这些重新发明的标签，具有比语言更好的表达和组织能力，那么显然大家应该放弃语言本身，比如不使用java，而在MVC的各个部分都
+使用标签。但既然这个没有发生，说明标签在大部分时候并不合适。</p>
+
+<h3>新的变化-EL表达式的出现</h3>
+
+<p>好在随着EL表达式的推出，情况逐步有所改观。比如同样是上面的输出，EL的写法可以是 <code>${r.department}</code>，调用数组也可以是<code>${list[0].name}</code> 。不过EL目前还没有支持逻辑控制，所以逻辑控制还是要用jstl的标签。</p>
+
+<p>但至少在老三样之外提供了新的一种方式，并且使得使用<strong>Helper</strong>模式可以不需要必须用Scriptlet。</p>
+
+<h2>EL中使用Helper</h2>
+
+<p>说的简单点，其实就是在jsp页面中，通过EL表达式可以调用Java实现的方法。获得类似<code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 。 其中，getflow是一个用Java写的静态方法。</p>
+
+<p>而使用Scriptlet配合helper，则会出现下面的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;%</span>
+</span><span class='line'><span class="n">UserInfo</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserInfo</span><span class="o">)</span> <span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="kt">long</span> <span class="n">flow</span> <span class="o">=</span> <span class="o">(</span><span class="kt">long</span><span class="o">[]</span> <span class="o">)(</span><span class="n">userInfo</span><span class="o">.</span><span class="na">getBendiAndNationFlux</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">))[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'><span class="n">SheetAttendAction</span> <span class="n">helper</span> <span class="o">=</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">sanss</span><span class="o">.</span><span class="na">richtone</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">SheetAttendAction</span> <span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;helper&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;%=</span>  <span class="n">helper</span><span class="o">.</span><span class="na">cpSelectHelper</span><span class="o">(</span><span class="n">requestSheetForm</span><span class="o">.</span><span class="na">getManager</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpCode</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpName</span><span class="o">())</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>光写出来的代码方面，不使用EL时已经要长很多了，明明只是一个调用取值显示的操作，却要先声明一系列的东西。同时，这些类型还要在jsp
+的头上import进来。而IDE对jsp的import Class支持的并不好。所以确实相当麻烦。</p>
+
+<p>对比一下可以发现，EL能够调用方法的话，可以带来多大的方便。使用Helper方法时，无论是Scriptlet还是EL表达式，在Controller层面，做
+的事情都是类似的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//在controller里定义方法</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getflow</span><span class="o">(</span><span class="kt">long</span> <span class="n">flow</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">DecimalFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span><span class="s">&quot;###0.0&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">tmpFlow</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">;</span>
+</span><span class='line'>    <span class="kt">double</span> <span class="n">df</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">tmpFlow</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">flow</span> <span class="o">+</span> <span class="s">&quot;K&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">tmpFlow</span> <span class="o">&lt;</span> <span class="mf">1024.0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">df</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mf">1024.0</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">df</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;M&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">df</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mf">1024.0</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">df</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;G&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//在action中，注入属性</span>
+</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;myflow&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">myflow</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;mdn&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">mdn</span><span class="o">,</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">)</span> <span class="n">UserInfo</span> <span class="n">userInfo</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;helper&quot;</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;nubia/myflow&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样一来，定义自己的方法和使用这个方法就极为简便了。需要指出的是，EL表达式里面可以调用方法，即支持el里面带()调用，是<strong>直到
+servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是<del>tomcat6也不支持</del>这种调用方式。从中，可以看出EL越来越强大趋势。
+但也反过来可以证明过去方法之错误。</p>
+
+<h2>EL难道就不是Scriptlet？</h2>
+
+<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code>
+除了把${}换成了&lt;%=%>实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
+
+<p>实际上，目前的EL，除了没有逻辑判断的能力之外，已经具备了很多Scriptlet的特性。那么区别在哪里呢？</p>
+
+<p>我觉得最关键的区别在于语言本身。所谓Scriptlet其实是Java Scriptlet，需要一系列的声明才能使用。强类型编译语言有很多的好处，但在页面
+显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。</p>
+
+<p>EL的Scriptlet和Java的Scriptlet完全是两码事情，倒是和ruby的Scriptlet几乎没有区别。
+EL的支持来的有点慢，但好歹还是来了！</p>
+
+<h3>对EL未来的期盼</h3>
+
+<p>作为一个开发者，十分期望未来的EL能够再走一步，增加对 <code>if</code> <code>for</code>的原生支持，而不再需要使用麻烦的标签。能否发生这样的变化，就只有
+再看发展了。</p>
+
+<h3>标签适用的情况</h3>
+
+<p>标签其实也有其存在的价值，至少包括：</p>
+
+<ol>
+<li>分页等相对组件化的元素；</li>
+<li>风格一致的表单。</li>
+</ol>
+
+
+<p>对于那些有组件化特征的东西，标签还是很适用的。</p>
+
+<p>而在EL有了调用method的能力后，helper模式可以做的更多，很多页面逻辑可以放到helper中去完成，即把<code>if</code> <code>for</code>封装在helper里面。
+这应该是目前最值得推崇的一种页面代码模式了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[士别三日 Jave Web非复昔日阿蒙]]></title>
@@ -1205,64 +1363,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 第12位：生产顺序号</p>
 
 <p>具体对一辆车子而言，最有用的可能就是制造年份和装配地点，然后可以通过顺序号大致推出是在第几个月生产的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[天籁 Teana]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/01/17/teana/"/>
-    <updated>2014-01-17T16:25:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/01/17/teana</id>
-    <content type="html"><![CDATA[<p>上周日终于买了人生第一辆车，国产东风日产天籁Teana 2.5 XL领先版。
-选中的原因还是如下几个：</p>
-
-<ol>
-<li>较大的空间，座椅等舒适性好</li>
-<li>配置较丰富，虽然显示屏稍微小了些</li>
-<li>价格十分合我的胃口，属于恰到好处的位置</li>
-<li>小毛病相对较少，后期打理保养等相对省事</li>
-<li>日产只嫁了东风一个中国公司，技术方面还是很扎实的，这点从2013年全年的销量也得到了验证。各自取了两个的本田和丰田，各自底下两个公司加起来的销量还不如东风一家。</li>
-<li>2.5自然吸气发动机的动力也不错，底盘、油门的调教更偏向欧系风格，但发动机还是CVT的，所以平稳性好</li>
-<li>日产是最早使用CVT变速箱的大厂，所以他们的CVT变速箱技术确实好。</li>
-<li>新款天籁其实是十分运动的。北美的Altima. 如果是08年的天籁，我确实不会选择的。但看了12款和13款的，其实已经改的很年轻化了。甚至有人认为这个只是天籁的名号，实际上就是Altima。</li>
-</ol>
-
-
-<p>陆陆续续看了不少车，也增加了不少汽车的知识，了解了一些汽车的文化和背景。在看过的那么些车子里，九代雅阁也是给我留下深刻印象的。或者说是另外唯一一个打动了我的车型，一度我都想转买雅阁。因为雅阁价钱降价后和天籁的这款也就相差1w了，而其配置、轮胎、显示屏等等则要好了一块，其实还是值这点钱的。但家里已经对天籁比较达成一致，而且我也很喜欢天籁，所以最后还是选了天籁。</p>
-
-<p>车子最后选了白色。这个原因可以说没什么，也可以说比较复杂。因为日产的配色似乎很一般，整个天籁就没有什么好的颜色，无非是黑、白、深蓝。缺乏象香槟色、酒红色、浅蓝等中国人比较喜欢的颜色，所以可选的范围很小，这也是一度想买雅阁的原因之一。而在深和浅之间，最后还是选择了浅的白色。<br/>
-不过，珍珠白以后的补色确实是个麻烦，当然新车确实好看。实际上白色的车价也要加2000.</p>
-
-<p>说起价格，4s店的售价其实跟自己买组装机很类似。都是包含多个条项，有些是可选的，最终打个总价。所以单独地把某一项谈低并没有实际意义。<br/>
-通常而言，主要是下面这么几块：</p>
-
-<ul>
-<li>裸车价： 通常厂商有个目录价，比如这款天籁就是20.58w人民币，以此为基础可以有一定的降幅。这方面汽车之家上的全国最低价信息基本挺准，至少在发达地区完全可以适用。当然，也有部分品牌存在加价的可能。而新车上市的前几个月，降价的幅度通常是很小的或者没有。</li>
-<li>保险：保险是在4s店里交易时第二大的一笔费用，算上车船税之后，天籁的保费在7k左右。通常自己找保险应该是可以获得15%左右的折扣，在4s店当然就没了。但4s总要赚钱的，所以首保一般还是要给他们做的。收个代理费也算合理。</li>
-<li>各类检测费和上牌服务费： 现在检测费和出库费的费用越来越高了。基本已经上千了。一般可以砍一砍。上牌费什么的如果不想自己跑，也可以委托4s，通常也要1000-2000。讲到底，这笔钱就是给店家的服务费。比起国外还是便宜的。天籁在美国裸车可能只要2w美金，检测费可能要1200+美金。当然，国情确实不同。不过服务费方面的费用越来越高恐怕是不能避免的。</li>
-<li>加装费： 这个就比较复杂了，可以有多个项目，而且每个项目可以差别很大。现在比较流行有贴膜、底盘装甲、发动机护板、3d脚垫、镀膜、挡泥板等等。拿贴膜来讲，膜的种类和价格就有很多，作为普通消费者是很难彻底摸清的。</li>
-</ul>
-
-
-<p>最合算的当然是只买裸车+保险，付很低的出库检测费，然后整体优惠幅度到位，自己去上牌后再去汽配城修车铺之类的地方贴膜。当然，贴膜被斩也是在哪里都是可能的。而实际上做任何交易，要想做到基本合理，最基本的原则只有两条：</p>
-
-<ol>
-<li>货比三家</li>
-<li>留够合理的利润，别太贪小</li>
-</ol>
-
-
-<p>所谓无商不奸，所以要想赚卖家的便宜是不可能的。但一般的商人也是想长久做生意的，只要利润过得去通常不至于黑你。而价格的高低，本来就是比较出来的。网上也是货比三家的一个渠道。话说回来，如果跑了n家，价格都谈的差不多，那只能是也没啥好再多谈的了，完全说明这个价格就是合理的。</p>
-
-<p>以上只是把钱付给了4s，真的 <strong>落地</strong> 那还得再花一笔不小的数目。其中最主要的就是
-缴购置税。理论上，应该是发票价/1.17*0.1，但实际上从税务局到保险公司给每个车型都有一个底价。以天籁为例，2.5排量的购置税就16700, 2.0排量的就是15100。交完购置税，就可以上牌了。在上海的话，需要有上牌额度，而这个额度最高卖出过9万多。至于其难度可参看<a href="http://octopresszhangyu.herokuapp.com/blog/2013/12/16/shuang-biao-shu-xia-pai-pai-zhong-yu-gao-ding/">拍牌</a></p>
-
-<p>所以，不算牌照，最终提一辆车的费用要在裸车的实价上再加12%左右的样子。</p>
-
-<p>汽车是大宗消费品，其税收及售价注定了其支柱性产业的地位不容动摇。已天籁为例，如果实际售价20w，销售时，这已经包含了17%的增值税，外加10%的购置税，这基本的税款就达到了4-5万。所以真的相当之利害。<br/>
-去年一年，全国销售了2000w以上的车子，当然均价肯定是不到20w的。但总的对税收的贡献也是相当大的了。</p>
-
-<p>无论如何，汽车消费水平还是很能反应一个地区的幸福度的。当然，在上海，用车确实痛苦了些。但，这里面确实有爱。</p>
 ]]></content>
   </entry>
   
