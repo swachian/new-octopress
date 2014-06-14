@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-12T19:26:12+08:00</updated>
+  <updated>2014-06-14T14:58:10+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[08年至今我眼中的西班牙]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/"/>
+    <updated>2014-06-14T14:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya</id>
+    <content type="html"><![CDATA[<p>看见板鸭输给荷兰1：5，说说我眼中这几年的西班牙队。</p>
+
+<p>在我看来，08年的板鸭是完美的。那支球队可以用要啥有啥，随要随到来形容。
+从锋线到门将都相当完美，基本没什么瑕疵。</p>
+
+<p>但10年的时候，板鸭的锋线已经挺烂了，比今年的德国锋线都差的远。所以碰上蟋蟀那样的战术大师，被偷一个后就输掉了比赛。但靠着优秀的反抢和催眠控球流，确实是当届最优秀的队伍，只是比起德国的优势已经不大了。德国队08年输的没有话讲，10年输的是有点太尊重板鸭了，当然和穆勒缺席也有关系，那一届比赛穆勒是全队的触点。</p>
+
+<p>而12年的板鸭和10年挺类似的，锋线继续无力，中场和后防开始了老化，只是还不明显。我一直觉得12年的德国，实力已经超过了当时的板鸭。要不是勒夫自毁长城、拜仁欧冠功败垂成影响备战、外加被有伤的小猪坑了一把，赢下板鸭的希望是很大的。</p>
+
+<p>至于今年的板鸭，没想到会输给荷兰那么多，毕竟荷兰我印象中也是处于新老交替的一只队伍。罗本范佩西自然是顶级的，但其他的基本就拿不出什么像样的来了。而对板鸭本身，我依然认为他们在继续老化中，哈维小白阿隆索都是老爷车级别的了，后防又没了普约尔，锋线托妞可以继续入选，整个队伍除了拉莫斯，其他人的状态都不可能再达到08年的水准。</p>
+
+<p>板鸭的下滑主要还是运动员年龄的客观原因。就像穆帅带的皇马，和巴萨左比右比都觉得主教练已经没什么事情好做了，只有等这些球员继续成长。而巴萨的球员则在老去。
+他们都是顶尖的球员，彼此之间的胜负关键在状态，而状态的关键又是年纪和备战。</p>
+
+<p>板鸭确实还是一支优秀的队伍，但他们也必须承认，在足球场上，他们已经老了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JSP中的EL表达式和Helper]]></title>
@@ -1336,33 +1359,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 
 
 <p>当然，上海的用车环境确实很不好。那主要就是看几时会限制外地牌照了。难度很大，但早晚肯定会走的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于车架号的备忘]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/01/22/about-vehicle-identification-number/"/>
-    <updated>2014-01-22T13:56:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/01/22/about-vehicle-identification-number</id>
-    <content type="html"><![CDATA[<p>车架号，又叫做VIN（Vehicle Identification Number），是每一辆车的识别号。
-由17位数字组成，ISO组织进行了全世界范围的标准化。我国在90年代就已经采用并加入了这个标准。</p>
-
-<p>以东风日产为例，其车架号类似LGBM4DE43DS000117，</p>
-
-<p>其中，LGB是东风日产的代号（WMI，世界制造厂识别码），L表示中国，GB是在中国工信部分配的。其后各字母和数字的含义是：</p>
-
-<p>第4位：表示车辆品牌，M：奇骏，L：逍客，F：天籁<br/>
-第5位：表示车身类型，例如几开门、几厢等<br/>
-第6位：发动机型号，D基本上是2.5排量的意思<br/>
-第7位：约束系统，即安全带和气囊<br/>
-第8位：变速箱说明，0：普通AT<br/>
-第9位：前8位的校验位</p>
-
-<p>第10位：制造年份，从1开始到Y，扣除了0、I、O、Q、U后共有30个字符可以用于表示年份，从71年开始计算，即30年更换一轮。01年就又从1开始，而D的话就表示13年，其余以此类推。  <br/>
-第11位：制造地，Y：花都工厂，R：襄樊工厂，S：郑州工厂<br/>
-第12位：生产顺序号</p>
-
-<p>具体对一辆车子而言，最有用的可能就是制造年份和装配地点，然后可以通过顺序号大致推出是在第几个月生产的。</p>
 ]]></content>
   </entry>
   

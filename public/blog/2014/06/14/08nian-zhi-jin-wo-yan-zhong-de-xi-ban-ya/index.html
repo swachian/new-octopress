@@ -5,15 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hadoop集群安装手记 - Hegel2011的博客</title>
+  <title>08年至今我眼中的西班牙 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="ssh的使用公钥登录配置 1
-2
-ssh-keygen
-ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
-数据源的输入才是Hadoop方便地方 定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹 &hellip;">
+  <meta name="description" content="看见板鸭输给荷兰1：5，说说我眼中这几年的西班牙队。 在我看来，08年的板鸭是完美的。那支球队可以用要啥有啥，随要随到来形容。
+从锋线到门将都相当完美，基本没什么瑕疵。 但10年的时候，板鸭的锋线已经挺烂了，比今年的德国锋线都差的远。所以碰上蟋蟀那样的战术大师，被偷一个后就输掉了比赛。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +19,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -73,7 +70,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   
   <header>
     
-      <h1 class="entry-title">Hadoop集群安装手记</h1>
+      <h1 class="entry-title">08年至今我眼中的西班牙</h1>
     
     
       <p class="meta">
@@ -89,36 +86,28 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198 =======
   
 
 
-<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+<time datetime="2014-06-14T14:48:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ssh的使用公钥登录配置</p>
+<div class="entry-content"><p>看见板鸭输给荷兰1：5，说说我眼中这几年的西班牙队。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
-</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
-</span></code></pre></td></tr></table></div></figure>
+<p>在我看来，08年的板鸭是完美的。那支球队可以用要啥有啥，随要随到来形容。
+从锋线到门将都相当完美，基本没什么瑕疵。</p>
 
+<p>但10年的时候，板鸭的锋线已经挺烂了，比今年的德国锋线都差的远。所以碰上蟋蟀那样的战术大师，被偷一个后就输掉了比赛。但靠着优秀的反抢和催眠控球流，确实是当届最优秀的队伍，只是比起德国的优势已经不大了。德国队08年输的没有话讲，10年输的是有点太尊重板鸭了，当然和穆勒缺席也有关系，那一届比赛穆勒是全队的触点。</p>
 
-<p>=======
-<strong>数据源的输入才是Hadoop方便地方</strong></p>
+<p>而12年的板鸭和10年挺类似的，锋线继续无力，中场和后防开始了老化，只是还不明显。我一直觉得12年的德国，实力已经超过了当时的板鸭。要不是勒夫自毁长城、拜仁欧冠功败垂成影响备战、外加被有伤的小猪坑了一把，赢下板鸭的希望是很大的。</p>
 
-<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
-读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
-比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
-然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
-然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
-map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
+<p>至于今年的板鸭，没想到会输给荷兰那么多，毕竟荷兰我印象中也是处于新老交替的一只队伍。罗本范佩西自然是顶级的，但其他的基本就拿不出什么像样的来了。而对板鸭本身，我依然认为他们在继续老化中，哈维小白阿隆索都是老爷车级别的了，后防又没了普约尔，锋线托妞可以继续入选，整个队伍除了拉莫斯，其他人的状态都不可能再达到08年的水准。</p>
 
-<h1>文献</h1>
+<p>板鸭的下滑主要还是运动员年龄的客观原因。就像穆帅带的皇马，和巴萨左比右比都觉得主教练已经没什么事情好做了，只有等这些球员继续成长。而巴萨的球员则在老去。
+他们都是顶尖的球员，彼此之间的胜负关键在状态，而状态的关键又是年纪和备战。</p>
 
-<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
-<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
+<p>板鸭确实还是一支优秀的队伍，但他们也必须承认，在足球场上，他们已经老了。</p>
 </div>
 
 
@@ -141,12 +130,12 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   
 
 
-<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
+<time datetime="2014-06-14T14:48:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/云计算/'>云计算</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
+    <a class='category' href='/blog/categories/生活/'>生活</a>
   
 </span>
 
@@ -155,7 +144,7 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/" >Tweet</a>
   
   
   
@@ -164,10 +153,8 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/03/ship-it/" title="Previous Post: Ship It">&laquo; Ship It</a>
+        <a class="basic-alignment left" href="/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/" title="Previous Post: JSP中的EL表达式和Helper">&laquo; JSP中的EL表达式和Helper</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/18/chuyue/" title="Next Post: 处约">处约 &raquo;</a>
       
     </p>
   </footer>

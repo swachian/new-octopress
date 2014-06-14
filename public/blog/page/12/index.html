@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看别人的一些文章，谈谈
-自己的想法。 整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
-把大瀑布分拆成了n个小瀑布。 &hellip;">
+  <meta name="description" content="系列链接： mongodb基础
+尝试分布式及复制 （sharding and replication)
+部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
+little-endian , 不适合SPARC, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,224 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">Learning Mongodb (3) 部署和管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T11:07:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>系列链接：</p>
+
+<ol>
+<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
+<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
+</ol>
+
+
+<h3>部署环境要求</h3>
+
+<ul>
+<li><p>架构</p>
+
+<ul>
+<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
+<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
+</ul>
+</li>
+<li><p>CPU</p>
+
+<ul>
+<li>非cpu密集型应用</li>
+<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
+<li>多客户端同时读时，多核会被利用</li>
+<li>写操作还是单核</li>
+</ul>
+</li>
+<li><p>RAM</p>
+
+<ul>
+<li>越多越好</li>
+<li>working set， index size， ram总数</li>
+</ul>
+</li>
+<li><p>Disk</p>
+
+<ul>
+<li>IOPS 优先</li>
+<li><em>background flush</em> 60s sync到磁盘一次</li>
+<li>ssd可以优化速度（solid state drive）</li>
+<li>RAID 10 组成 LVM</li>
+</ul>
+</li>
+<li><p>文件系统</p>
+
+<ul>
+<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
+<li>禁用access time(atime)更新</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 禁用 atime更新</span>
+</span><span class='line'>sudo mv /etc/fstab /etc/fstab.bak
+</span><span class='line'>sudo vim /etc/fstab
+</span><span class='line'><span class="c"># file-system mount type options dump pass</span>
+</span><span class='line'><span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
+</span><span class='line'>
+</span><span class='line'>改完文件后，可以不用重启
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文件描述符(FD)
+
+<ul>
+<li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
+<li>调大 <code>ulimit -Hn</code> 可以查看</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>vi /etc/security/limits.conf
+</span><span class='line'>mongodb hard nofile 10240
+</span><span class='line'>下次登录后生效
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>时钟</p>
+
+<ul>
+<li>ntp协议，在跑shard和replication时候必须启用的东西</li>
+</ul>
+</li>
+<li><p>ec2上使用mongodb</p>
+
+<ul>
+<li>ec2易用、地理范围广、价格有竞争力</li>
+<li>68GB RAM的限制</li>
+<li>使用  EBS 存储， 吞吐性能一般化</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>服务器配置</h3>
+
+<ul>
+<li><p>选择拓扑</p>
+
+<ul>
+<li>是否需要shard， 是否需要replica</li>
+<li>建议多机</li>
+</ul>
+</li>
+<li><p>打开journal标志</p></li>
+</ul>
+
+
+<h3>安全保障</h3>
+
+<ul>
+<li><p>环境安全</p>
+
+<ul>
+<li>防火墙</li>
+<li>数据的传输是不加密的</li>
+</ul>
+</li>
+<li><p>授权</p>
+
+<ul>
+<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
+<li>启动时带上选项 <code>mongod --auth</code></li>
+<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
+<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
+<li>查找用户 <code>db.system.users.find()</code></li>
+</ul>
+</li>
+<li><p>keyFile</p>
+
+<ul>
+<li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
+</ul>
+</li>
+<li><p>日志记录</p>
+
+<ul>
+<li>运行时&#8211;logpath指定</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>监控工具</h3>
+
+<ul>
+<li><p>serverStatus<br/>
+<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
+<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
+<strong>mem</strong> 段的单位是MB</p></li>
+<li><p>mongostat</p>
+
+<ul>
+<li>类似 iostat 运行的效果</li>
+</ul>
+</li>
+<li><p>web console</p>
+
+<ul>
+<li>&#8211;rest 标志打开的话，可以从web处得到更多的运行信息</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>备份与压缩</h3>
+
+<p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -707,7 +926,7 @@ driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以�
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="no">Mongo</span><span class="o">::</span><span class="no">RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="ss">Mongo</span><span class="p">:</span><span class="ss">:RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
 </span><span class='line'>   <span class="c1"># **secondary** 实现了对读的scale </span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -1097,81 +1316,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/26/book-for-a-pmp/">Xd推荐的项目管理书单</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-26T09:30:00+08:00" pubdate data-updated="true">Mar 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>专案，也就是我们日常所说的项目，台湾xd推荐的书单。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7014948309/sizes/o/in/photostream/">书单</a></p>
-
-<ul>
-<li>团队之美 机工 Stellman &amp; Greene</li>
-<li>项目管理之美  Scott Berkun (文科馆二楼文科书库 F224.5 /B911 英文版) 文科馆学生阅览室    F224.5 /B911A</li>
-<li>Planning extreme Programming Kent Beck(已下载)</li>
-<li>用户故事与敏捷方法 清华大学出版社(√)</li>
-<li>ship it Richardson / Gwaltney (√)</li>
-<li>项目管理修炼之道 人民邮电出版社 Johanna Rothman(√)</li>
-<li>软体快速开发(√)</li>
-</ul>
-
-
-<p>ship it增加的书单：</p>
-
-<ul>
-<li>领导力21法则</li>
-<li>高效能人士的七个习惯 文科馆二楼文科书库    B848.4 /K372(9)</li>
-<li>人性的弱点 文科馆二楼文科书库   C912.1 /K12T</li>
-<li>Extreme Programming Applied: Playing to Win</li>
-<li>Extreme Programming Explained: Embrace Change 张江馆张江书库   TP311.52 /B452A</li>
-<li>项目自动化之道 Java, Mike Clark 理科馆应用学科借阅室 TP312JA /K422</li>
-<li>程序员修炼之道 (已预约)</li>
-<li>计算机程序设计艺术</li>
-</ul>
-
-
-<p>杂书:</p>
-
-<ul>
-<li>自慢1~4</li>
-<li>打不破的人生30个定律</li>
-<li>苹果滋味</li>
-<li>师父</li>
-<li>学徒模式(DAVE HOOVER；ADEWALE OSHINEYE)</li>
-<li>与时间做朋友</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -1189,6 +1333,10 @@ Hadoop(java), Skynet(ruby)等。<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/">08年至今我眼中的西班牙</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/">JSP中的EL表达式和Helper</a>
       </li>
     
@@ -1204,15 +1352,11 @@ Hadoop(java), Skynet(ruby)等。<br/>
         <a href="/blog/2014/05/18/che-wei/">车位</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">老板和技术骨干</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li></ul>
 </section>
   
 </aside>
