@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="nx">coffee</span><span class="o">&gt;</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;http://192.168.2.2/?q=1&amp;q=2#sss&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="p">{</span> <span class="nx">protocol</span><span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">,</span>
+  <span class="nx">slashes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+  <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
+  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;http://192.168.2.2/?q=1&amp;q=2#sss&#39;</span><span class="p">,</span>
+  <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;#sss&#39;</span><span class="p">,</span>
+  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=1&amp;q=2&#39;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span> <span class="p">]</span> <span class="p">},</span>
+  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
+</pre></div>

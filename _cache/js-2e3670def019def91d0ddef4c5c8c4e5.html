@@ -1,0 +1,5 @@
+<div class="highlight"><pre><span class="p">{</span><span class="nx">filed</span><span class="p">,</span> <span class="nx">value</span><span class="p">}</span>
+<span class="nx">$lt</span><span class="p">,</span> <span class="nx">$gt</span><span class="p">,</span> <span class="nx">$lte</span><span class="p">,</span> <span class="nx">$gte</span><span class="p">,</span> <span class="nx">$ne</span>
+<span class="nx">$or</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">unicorns</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="nx">$or</span><span class="o">:</span> <span class="p">[{</span><span class="nx">loves</span><span class="o">:</span> <span class="s1">&#39;apple&#39;</span><span class="p">},</span> <span class="p">{</span><span class="nx">weight</span><span class="o">:</span> <span class="p">{</span><span class="nx">$lt</span><span class="o">:</span> <span class="mi">500</span><span class="p">}}]})</span>
+</pre></div>

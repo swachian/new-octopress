@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-22T23:28:52+08:00</updated>
+  <updated>2014-06-23T09:27:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -18,20 +18,19 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
     <updated>2013-08-17T20:59:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
-    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br>
 公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
-<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br>
 所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
 
 <p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
 
 <ul>
-<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
-<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
-<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持<br></li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持<br></li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件<br></li>
 </ul>
-
 
 <p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
 
@@ -52,11 +51,10 @@
 
 <ul>
 <li>Ubuntu 12.04</li>
-<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) </li>
 <li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
 <li>rails 4</li>
 </ul>
-
 
 <p>而部署环境是这样的：</p>
 
@@ -67,12 +65,11 @@
 <li>rails 4</li>
 </ul>
 
-
 <p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
 
 <p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整
 <code>
-SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)
+SQLite3::SQLException: SQL logic error or missing database: INSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES (?)
 </code>
 2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
 
@@ -80,21 +77,21 @@ SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_
 
 <p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
 
-<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
-为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
-随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。<br>
 又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
 之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
 
 <p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
 
-<h3>教训</h3>
+<h3 id="toc_56">教训</h3>
 
-<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
-之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br>
 CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
 
-<h3>题外话</h3>
+<h3 id="toc_57">题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
 ]]></content>
@@ -135,7 +132,6 @@ RHCE的范围基本如下:</p>
 <li>Firewalls, SELinux, and troubleshooting</li>
 </ul>
 
-
 <p>只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.</p>
 ]]></content>
   </entry>
@@ -166,28 +162,15 @@ script流行的年代，而这些脚本语言可以很大程度上替代AWK。AW
     <content type="html"><![CDATA[<p>patch和diff确实是个神奇的东西，用来对现有版本的升级是最好不过了。
 好处在于一来不用停业务，二来可以明确到底改了多少东西。</p>
 
-<h3>diff</h3>
+<h3 id="toc_58">diff</h3>
 
 <p>首先来说说diff，毕竟patch是从此处产生。</p>
 
-<p>```
-diff -ruNa src dest  > a.patch</p>
-
-<p>-r 针对整个目录<br/>
--u 以合并的方式来显示文件内容的不同
--N 新文件做空白文件
--a 包含二进制内容，如jar包，class等
-```</p>
-
 <p>据说这个东西是perl的发明者创建的工具，主要用于比较源码，通常不带<code>-a</code>。</p>
 
-<h3>patch</h3>
+<h3 id="toc_59">patch</h3>
 
 <p>patch就比较强大了。如果是更改一个目录下面，最常见的做法是进入该目录，然后执行</p>
-
-<p><code>
-patch -p1 &lt; ../a.patch
-</code></p>
 
 <p>随后，两个目录就会变得一模一样了。</p>
 ]]></content>

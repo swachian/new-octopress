@@ -99,7 +99,7 @@
 
   <div class="entry-content"><p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
 
-<h2>技术类</h2>
+<h2 id="toc_390">技术类</h2>
 
 <ol>
 <li>[X] <a href="/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
@@ -112,12 +112,11 @@
 <li>[x] <a href="">spring in action 3</a> 重新修了一下spring mvc，struts2可以基本不用了</li>
 <li>[x] <a href="https://gist.github.com/swachian/6070011">spring in practice</a> 主要讲spring的web开发的，比in action 这本更易应用以及贴近实际。</li>
 <li>[x] <a href="https://gist.github.com/swachian/6590735">余红春,构建高可用Linux服务器,机工</a>. 精选出了一套脚本，值了</li>
-<li>[x] <a href="">李爱武，基于Linux的Oracle数据库管理</a></li>
+<li>[x] <a href="&#x27;&#x27;">李爱武，基于Linux的Oracle数据库管理</a></li>
 <li>[x] <a href="">Whalen，陈曙晖译，基于Linux平台的Oracle Database 10g 管理</a></li>
 </ol>
 
-
-<h2>经管</h2>
+<h2 id="toc_391">经管</h2>
 
 <ol>
 <li><a href="/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a>, it经管入门必读</li>
@@ -127,8 +126,7 @@
 <li><a href="">A&amp;R</a>, Why nations fail, 来自DHH的推荐，看下来感觉很不错</li>
 </ol>
 
-
-<h2>文化</h2>
+<h2 id="toc_392">文化</h2>
 
 <ol>
 <li><a href="">王力雄,我的西域 你的东土</a></li>
@@ -138,7 +136,6 @@
 <li><a href="">西游记</a>, 原著很丰富,改编的电视剧也足够出彩</li>
 <li>张鸣，北洋裂变&#8211;军阀与五四</li>
 </ol>
-
 
 <p><a href="http://benhoskin.gs/2013/02/24/ruby-2-0-by-example?utm_source=rubyweekly&amp;utm_medium=email">ruby 2.0 by example</a> , 值得反复看的ruby 2.0特性文章</p>
 </div>
@@ -184,36 +181,35 @@
 
 <script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
 
-
-<h2>存储的发展</h2>
+<h2 id="toc_372">存储的发展</h2>
 
 <p>封面很山寨，图片有很多。比较有利于增强感性认识，也符合我想认识设备的需求。</p>
 
 <p>纸带 磁存储 硬盘 磁阵 网络磁阵（几百个磁盘） 网络存储（硬盘从主机箱移到外面）</p>
 
-<h2>总线</h2>
+<h2 id="toc_373">总线</h2>
 
-<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br/>
+<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br>
 导线中，有些是<strong>交互数据</strong>用的数据总线，有些是<strong>传递控制信号</strong>的控制总线，包括处理<strong>中断与仲裁</strong>的,另有一些是用来确认目标设备的<strong>地址总线。</strong></p>
 
-<h3>连找发模型、CPU与硬盘的交互</h3>
+<h3 id="toc_374">连找发模型、CPU与硬盘的交互</h3>
 
-<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br/>
-CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
-<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br/>
+<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br>
+CPU和硬盘通过总线相 <strong>连</strong> ；<br>
+<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br>
 <strong>发</strong>即发送操作指令，对于磁盘CPU有如下三条指令：
   1. 读还是写，外加其他选项如是否缓存、是否用中断来通知CPU处理
-  2. 知名应该读取的硬盘逻辑号[LBA]<br/>
-  3. 给出读取出来的内容放在内存中的哪个地址。<br/>
+  2. 知名应该读取的硬盘逻辑号[LBA]<br>
+  3. 给出读取出来的内容放在内存中的哪个地址。<br>
 上面这三个指令其实是发给南桥上的控制器，南桥再将指令翻译成磁盘认识的一系列指令，南桥和磁盘之间的协议接口形成了ATA和SCSI两个指令集。</p>
 
-<h2>磁盘结构</h2>
+<h2 id="toc_375">磁盘结构</h2>
 
-<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br/>
-磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br/>
-盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br/>
-不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br/>
-能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细</p>
+<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br>
+磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br>
+盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br>
+不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br>
+能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细  </p>
 
 <p>扇区传统上采用CHS编码（Cylinder柱面、Header磁头、Sector扇区)，每个扇区包含扇区头信息和数据区两部分，头信息就有CHS信息以及是否为坏扇区这些内容；不过随着发展，目前已经抽象成了LBA寻址方式，但这只是在磁盘外部表现的逻辑</p>
 
@@ -224,7 +220,7 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 
 <p>总有个最小单位（芝诺悖论，龟兔赛跑悖论）</p>
 
-<h3>硬盘接口技术</h3>
+<h3 id="toc_376">硬盘接口技术</h3>
 
 <ul>
 <li><p>ATA</p>
@@ -232,8 +228,7 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 <ul>
 <li>IDE（PIO,DMA两种主要模式，前者的数据通过CPU写入内存，后者磁盘直接写入内存，最高的是ATA133）</li>
 <li>SATA（较PATA的信号干扰小）</li>
-</ul>
-</li>
+</ul></li>
 <li><p>SCSI（带宽大，热插拔，较ATA多了SCSI控制卡，其实就是多了一个处理器）</p>
 
 <ul>
@@ -241,49 +236,41 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 <li>串行</li>
 <li>IBM SSA</li>
 <li>FC接口（FCP）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
 
+<p>CPU &#8212;&#8211;&gt; 磁盘控制器（南桥） &#8212;&#8211;&gt; 磁盘驱动器控制电路（硬盘内）<br>
+    <code>接口1：磁盘控制器驱动程序</code>   <code>接口2：ATA/SCSI接口</code>  </p>
 
-<p>CPU &#8212;&#8211;> 磁盘控制器（南桥） &#8212;&#8211;> 磁盘驱动器控制电路（硬盘内）</p>
+<p>磁盘数据 &#8212;&#8211;&gt; 驱动控制电路的缓存 &#8212;&#8211;&gt; 磁盘控制器<br>
+      <code>内部传输速率</code>               <code>外部传输速率</code>  </p>
 
-<pre><code>`接口1：磁盘控制器驱动程序`   `接口2：ATA/SCSI接口`  
-</code></pre>
-
-<p>磁盘数据 &#8212;&#8211;> 驱动控制电路的缓存 &#8212;&#8211;> 磁盘控制器</p>
-
-<pre><code>  `内部传输速率`               `外部传输速率`  
-</code></pre>
-
-<h3>并行的劣势</h3>
+<h3 id="toc_377">并行的劣势</h3>
 
 <p>并行是要求同步达到，这给并发信息之间的配合带来问题；它的传输频率不能太高，因为并行会增加干扰增加配合难度，而串行则无此问题，可以通过增加频率来提高速度。这里面的核心问题是<strong>传输距离</strong>，距离低的比如内存到cpu就不用担心干扰和配合带来的难题。而距离远的，如usb ata这是串行优势明显。</p>
 
-<h2>七种Raid</h2>
+<h2 id="toc_378">七种Raid</h2>
 
 <ul>
 <li>Raid 0 &#8212; 几块硬盘全部并发；</li>
-<li>Raid 1 &#8212; 1比1镜像；</li>
-<li>Raid 2 &#8212; 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃</li>
+<li>Raid 1 &#8212; 1比1镜像；<br></li>
+<li>Raid 2 &#8212; 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃<br></li>
 <li>Raid 3 &#8212; 较Raid 2 对校验进行了突破，采用了布尔运算中的抑或算法，可以用更少的<strong>校验盘</strong>，可以校验和找回，但不像R2那样可以纠错，条带也被弄成了4KB；
-每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO</li>
-<li>Raid 4 &#8212; 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；</li>
+每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO<br></li>
+<li>Raid 4 &#8212; 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；<br></li>
 <li><p>Raid 5 &#8212; 继续使用校验，突破点在于不再单独地使用一个硬盘做校验盘，而是在所有的磁盘中都产生了校验区；</p>
 
 <ul>
-<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.</li>
-</ul>
-</li>
+<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.<br></li>
+</ul></li>
 <li><p>Raid 6 &#8212; 另外6种Raid基本只容忍可以损坏一种磁盘，Raid 6允许损坏2块磁盘。在XOR运算之外，又增加了一种校验运算，从而提高了磁阵的可靠性。</p></li>
 </ul>
 
-
 <p>Raid 0速度快所以可以和其他Raid杂交，组成Raid 50 、 Raid 10等等。</p>
 
-<h2>Raid 虚拟磁盘 卷 和文件系统实现</h2>
+<h2 id="toc_379">Raid 虚拟磁盘 卷 和文件系统实现</h2>
 
-<h3>软硬Raid</h3>
+<h3 id="toc_380">软硬Raid</h3>
 
 <p>Raid程序位于OS底层。</p>
 
@@ -291,28 +278,27 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 
 <p>虚拟磁盘是Raid卡把多个磁盘组合出来的，在OS看来就是一个物理磁盘。windows中的动态磁盘。</p>
 
-<h3>卷管理层</h3>
+<h3 id="toc_381">卷管理层</h3>
 
-<p><strong>LV</strong> &#8211; 最后构成了LV<br/>
-LP &#8211; 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br/>
-PP &#8211; 分成N个可以用于磁盘分配的块<br/>
-<strong>VG</strong> &#8211; 卷组，多个磁盘都可以放到一个卷组里面<br/>
-<strong>PV</strong> &#8211; 物理磁盘</p>
+<p><strong>LV</strong> &#8211; 最后构成了LV<br>
+LP &#8211; 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br>
+PP &#8211; 分成N个可以用于磁盘分配的块<br>
+<strong>VG</strong> &#8211; 卷组，多个磁盘都可以放到一个卷组里面<br>
+<strong>PV</strong> &#8211; 物理磁盘  </p>
 
 <p>实际的I/O参与者（1个manager，3个drivers）</p>
 
 <ul>
-<li>I/O manager &#8212;> 寻求FS翻译</li>
-<li>File System driver &#8212;> 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
-<li>LV manager driver &#8212;> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager</li>
-<li>Disk driver &#8212;> 翻译成磁盘相关的磁盘上的物理便宜位置</li>
+<li>I/O manager &#8212;&gt; 寻求FS翻译 </li>
+<li>File System driver &#8212;&gt; 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
+<li>LV manager driver &#8212;&gt; 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager<br></li>
+<li>Disk driver &#8212;&gt; 翻译成磁盘相关的磁盘上的物理便宜位置</li>
 </ul>
-
 
 <p>这个东西从架构风格上而言就是一个manager带着3个driver，采用过滤器式的链式传递。driver的顺序由manager管理，执行顺序由manager负责。
 具体的活则由driver完成。</p>
 
-<h2>阵列</h2>
+<h2 id="toc_382">阵列</h2>
 
 <p>起步，JBOD，Just a Bound Of Disks, 里面就做到电路板上的SCSI线缆，连接15块硬盘，机箱外露出一个SCSI接口，与主机通过SCSI线相连。</p>
 
@@ -331,9 +317,9 @@ Active-Standby和Dual-Active。</p>
 <p>盘阵类型有 SCSI-FC、FC-FC、SATA-FC、SCSI-SCSI等等，前后表示后端，后者表示前端。
 例如，SCSI-FC表示后端为SCSI接口，前端连接主机的是FC接口。</p>
 
-<h2>FC协议的引入</h2>
+<h2 id="toc_383">FC协议的引入</h2>
 
-<h3>FC协议和以太网</h3>
+<h3 id="toc_384">FC协议和以太网</h3>
 
 <p>FC协议其实是Fibre Channel（网状通道）的意思。其传输介质可以是光纤也可以是铜线。就像以太网的传输介质也可以是光纤是一样的。
 只不过用光纤连接的多，于是FC在中国就变成光纤通信了。FC协议的传输效率比以太网高，但实现更复杂。但都是可以适应各种传输介质的，
@@ -341,7 +327,7 @@ Active-Standby和Dual-Active。</p>
 
 <p>FC的适配器也有光纤和RJ45等。</p>
 
-<h3>前端从SCSI迁移到FC</h3>
+<h3 id="toc_385">前端从SCSI迁移到FC</h3>
 
 <p>SCSI指令集在SCSI-3中做了分割，从此应用层的指令语义部分独立出来，下层改造成了一个适配器。而FC只要实现了这个适配器的功能就能
 使用上层的指令语义部分。就这样，FC和SCSI的组合构成了新的SCSI前端。</p>
@@ -349,7 +335,7 @@ Active-Standby和Dual-Active。</p>
 <p>意义（好处）：</p>
 
 <ol>
-<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。</li>
+<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。<br></li>
 <li>增加了传输距离，铜线和光纤的区别。</li>
 <li>有了安全策略：
 
@@ -357,11 +343,9 @@ Active-Standby和Dual-Active。</p>
 <li>磁阵控制器上配置<strong>LUN映射表</strong>，规定只有某些主机能访问某些LUN，解决磁阵共享的问题</li>
 <li>在FC交换机上配置<strong>ZONE</strong>,类似VPN的做法</li>
 <li>磁阵共享的另一个解决办法是集群文件系统。是否磁阵独占由SCSI指令集协议定义</li>
-</ul>
-</li>
+</ul></li>
 <li>可实现冗余和均衡负载</li>
 </ol>
-
 
 <p>FC是<strong>面向无连接</strong>的基于包分发的连接形式，是<strong>串行</strong>的所以适合远距离。</p>
 
@@ -370,7 +354,7 @@ Active-Standby和Dual-Active。</p>
 
 <p>配置LUN（划分磁盘），各个LUN参数（条带深度、数据宽度），配置LUN映射。类似PC上给磁盘分区后格式化。</p>
 
-<h2>DAS ， SAN 和NAS</h2>
+<h2 id="toc_386">DAS ， SAN 和NAS</h2>
 
 <p>NAS(Network Attached Storage)就是把文件系统的功能放置在存储设备中，暴露在外面的不再是一个裸设备。
 Windows使用CIFS协议，Linux使用NFS协议。</p>
@@ -379,7 +363,7 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 <p>实际使用中，NAS后面可以接SAN作为存储。即混合使用。NAS也能作为SAN的一种特例。在我国，通常SAN就是指FC SAN。</p>
 
-<h2>以太网和TCP/IP概述</h2>
+<h2 id="toc_387">以太网和TCP/IP概述</h2>
 
 <ul>
 <li>HUB &#8212; 无对应表</li>
@@ -387,11 +371,10 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 <li>交换机 &#8212; MAC-端口</li>
 </ul>
 
-
 <p>TCP/IP 和 以太网的关系是PoP，即Protocol over Protocol。它们的关系是一对组合。
 协议融合的方式有Tunnel和Map两个大类，PPPoE就是PPP协议 over Ethernet协议。</p>
 
-<h2>IP SAN</h2>
+<h2 id="toc_388">IP SAN</h2>
 
 <p>ISCSI, Internet Small Computer System Interface，SCSI协议走在以太网（通过ISCSI）上，以太网替换了FC，如同FC替换了SCSI链路，
 编号RFC3720,2004年通过。开销比例约6%。</p>
@@ -402,7 +385,7 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 <p>IP SAN的成本低，卡和交换机都便宜的多，速度也还过得去，成本只有1/10以下。</p>
 
-<h3>IP 与 FC的融合</h3>
+<h3 id="toc_389">IP 与 FC的融合</h3>
 
 <p>局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。</p>
 </div>
@@ -446,27 +429,25 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 <p>整篇小说其实写的很跳跃，基本是一段一段的。场景也在中国的北方南方、世界各国跳来跳去的。书中塑造的让人记得住的人物有</p>
 
 <ol>
-<li>李克明，一个身手很好的警察，蒙冤并遭毁容，而后引出一系列武装斗争，最后死在中俄边境。</li>
-<li>石戈，不大不小的京官，后来代理了总理，递进民族制度的代言人，应该最接近作者本人。</li>
-<li>王锋，所谓的法西斯军人，但左看右看不太像。</li>
-<li>周驰，气动大师，这个最典型，但是作者的小说里把气功列为实际会起作用的。</li>
-<li>陆浩然，前任总理，替代了总书记，比较软，也缺乏掌握大局的能力，最后被美国人暗杀。</li>
-<li>黄士可，福建的一个市长，带领福建搞一国两制，排斥北方人，强调北京是国，福建是制，口号是“自己过，过的更好”，“北佬的穷包袱属于他们自己”。</li>
-<li>丁大海，王锋的潜艇舰长，最后发了20枚核弹导致美俄发生误会。</li>
+<li>李克明，一个身手很好的警察，蒙冤并遭毁容，而后引出一系列武装斗争，最后死在中俄边境。<br></li>
+<li>石戈，不大不小的京官，后来代理了总理，递进民族制度的代言人，应该最接近作者本人。<br></li>
+<li>王锋，所谓的法西斯军人，但左看右看不太像。<br></li>
+<li>周驰，气动大师，这个最典型，但是作者的小说里把气功列为实际会起作用的。<br></li>
+<li>陆浩然，前任总理，替代了总书记，比较软，也缺乏掌握大局的能力，最后被美国人暗杀。<br></li>
+<li>黄士可，福建的一个市长，带领福建搞一国两制，排斥北方人，强调北京是国，福建是制，口号是“自己过，过的更好”，“北佬的穷包袱属于他们自己”。<br></li>
+<li>丁大海，王锋的潜艇舰长，最后发了20枚核弹导致美俄发生误会。<br></li>
 </ol>
 
-
-<p>女性相对较少。印象深刻点的无非一个是台湾女间谍，另外一个就是陈盼，石戈的姘头。</p>
+<p>女性相对较少。印象深刻点的无非一个是台湾女间谍，另外一个就是陈盼，石戈的姘头。  </p>
 
 <p>小说的情节其实很荒诞，作者在当时也完全无法意识到互联网和信息化会对中国造成更大的改变。
 书本身还是很精彩的，作者也把自己的一些观点纳入其中。例如：</p>
 
 <ul>
-<li>马克思主义把全部注意力放在消灭生产资料私有制上，忽略了<strong>社会权利私有制</strong></li>
-<li>中国是人口最多，人均资源最少，欲望最高，道德水平最低。这是房祸的根源，而且无法解决</li>
-<li>投票有用，但是如果投票是去投<strong>脱离地球</strong>之类的，那全部赞成票也是没用的</li>
+<li>马克思主义把全部注意力放在消灭生产资料私有制上，忽略了<strong>社会权利私有制</strong><br></li>
+<li>中国是人口最多，人均资源最少，欲望最高，道德水平最低。这是房祸的根源，而且无法解决<br></li>
+<li>投票有用，但是如果投票是去投<strong>脱离地球</strong>之类的，那全部赞成票也是没用的<br></li>
 </ul>
-
 
 <p>王力雄的文风是很偏理科化的作家，充满着阳刚和逻辑之美。</p>
 </div>
@@ -518,7 +499,7 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 <p>今天是新年的第一篇博客，既是对三年的一点小回顾，也不免俗地写点新年心愿。最大的愿望当然就是宝宝顺利健康地成长，家人亲友都能平平安安。有人认为人到中年
 不忙赚钱忙做事，但我作为一个居家的上海男人还是追求平安是福。其次希望工作的结果能更有意义，呵呵，做事是第二位的，平安幸福重要，但要幸福必须
-得做事才行。具体的着手打算从对存储设备及安全的研究开始。</p>
+得做事才行。具体的着手打算从对存储设备及安全的研究开始。 </p>
 </div>
   
   
@@ -638,7 +619,7 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 <p>TianZang(T)这本书是写的逻辑很清晰的。从介绍西藏历史上和中国之间的关系入手，高低起伏、左转右转的关系相当引人入胜，条理极其清晰，也就很容易
 记忆住了。</p>
 
-<h3>关系简史</h3>
+<h3 id="toc_370">关系简史</h3>
 
 <p>西藏原来叫做吐蕃，唐朝时候和大唐争斗不息，互有胜负。大唐吃了不少苦头，也嫁了几个公主给他们。彼时的吐蕃人有400万之众，也未皈依佛教，
 战斗力极强。藏人本是游牧民族，骑马骑牦牛，从坡上下来打唐军可以占尽便宜。到宋代，自然无力针对他们，于是让出很远一片，基本就和藏人不接壤了。吐蕃人
@@ -681,9 +662,9 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 <p>纵观简史，西藏的问题确实很复杂，地域、空间、民族、气候的特点，使得它其实是不太适用于源于欧洲的那套国家体系。而目前国际通行的标准和规则
 又就是那一套，因此引经据典注定到头来总是看以谁的角度来看待问题。因为这个约等于完全处于主观判断中。</p>
 
-<h3>未来的遐想</h3>
+<h3 id="toc_371">未来的遐想</h3>
 
-<p>杨度有一句名言，若我中华国国亡，除非湖南人尽死。对于西藏问题，可以借用改造一下得出：若我中华失去西藏，除非中国人尽死。<br/>
+<p>杨度有一句名言，若我中华国国亡，除非湖南人尽死。对于西藏问题，可以借用改造一下得出：若我中华失去西藏，除非中国人尽死。<br>
 这并非危言耸听，以如今之形式及生存空间的要求而言，中国人是很难放弃西藏这块地区的。别说青、藏、川，哪怕只是一个自治区要想完全脱离汉人的怀抱
 也是不可能的。即便是民主及各地拥有高度自主权的中国，也是会让西藏纳入在版图之内。在这方面，中国政府的后退空间确实不多。从当前的情况看来，只有这样继续僵持了。</p>
 </div>
@@ -773,7 +754,7 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 
 <p>在我看来，这绝对是阅读方面划时代的产品。对纸质书的冲击以后再写文章评论吧。大体上认为是赢家通吃&amp;长尾理论挤掉了中坚力量的存活空间。</p>
 
-<p>最后，必须得承认<a href="" title="http://home.duokan.com/index.html">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
+<p>最后，必须得承认<a href="%22http://home.duokan.com/index.html%22">多看</a>的功能比原厂的软件做的好很多，至少在适应中国人的习惯以及中文阅读方面要强出许多。
 对于我最喜欢的PDF格式支持也很好，关键一点在于支持智能重排，效果那是相当的棒。此外，多看设计的Wifi传输，其实就是ftp服务，也相当的实用。一开始
 还担心安全问题，后来确认它默认是关闭ftp的。Kindle的硬件+多看软件，这个组合相当厉害。现在就等我的疯马纹皮套和SOLIS灯了。</p>
 
@@ -874,7 +855,7 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 
 <p>作为晚辈，按娘娘的教诲做事做人就是对长辈最好的纪念。娘娘，您安息吧，您一贯的“简朴、勤劳、节约”以及“诚实做人、勤俭持家”是我们永远要学习好品质和遵守的家庭准则。</p>
 
-<p>二零一二年十一月二十三日晚<br/>
+<p>二零一二年十一月二十三日晚<br>
 于娘娘逝世半个月后补祭</p>
 </div>
   
@@ -923,7 +904,7 @@ pc上linux毫无机会，但是移动终端就变天了。</p>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

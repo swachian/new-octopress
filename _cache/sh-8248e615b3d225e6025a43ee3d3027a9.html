@@ -1,0 +1,8 @@
+<div class="highlight"><pre><span class="c"># 禁用 atime更新</span>
+sudo mv /etc/fstab /etc/fstab.bak
+sudo vim /etc/fstab
+<span class="c"># file-system mount type options dump pass</span>
+<span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
+
+改完文件后，可以不用重启
+</pre></div>

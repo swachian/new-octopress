@@ -4,7 +4,7 @@
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-22T23:28:52+08:00</updated>
+  <updated>2014-06-23T09:27:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -21,84 +21,22 @@
     <content type="html"><![CDATA[<p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
 下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
 
-<h3>下载ruby 1.8.7</h3>
+<h3 id="toc_26">下载ruby 1.8.7</h3>
 
 <p>减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。</p>
-
-<p><code>sh
-wget http://ruby.taobao.org/mirrors/ruby/ruby-1.8.7-p358.tar.gz
-tar -zxvf ruby-1.8.7-p358.tar.gz
-cd ruby-1.8.7-p358
-./configure --prefix=/usr/local/ruby187
-make
-make install
-/usr/local/ruby187/bin/ruby -ropenssl -rzlib -rreadline -e "puts :success"
-</code></p>
 
 <p>看到输出<code>success</code>后，证明ruby各安装库已全部编译进去。主机是一台CentOS 6.4，所以安装1.8.7相当之顺利。
 安装完毕后，把ruby的运行路径加到环境变量PATH的最前面。</p>
 
-<h3>安装rubygems</h3>
+<h3 id="toc_27">安装rubygems</h3>
 
 <p>这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.</p>
 
-<p><code>sh
-wget http://rubyforge.org/frs/download.php/73763/rubygems-1.4.0.tgz
-tar -zxvf rubygems-1.4.0.tgz
-cd rubygems-1.4.0
-ruby setup.rb
-</code></p>
-
-<h3>安装Oracle即时客户端和ruby-oci8</h3>
+<h3 id="toc_28">安装Oracle即时客户端和ruby-oci8</h3>
 
 <p>这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置<code>LD_LIBRARY_PATH</code>的值。关键一点是注意不要配错这个环境变量指向的路径。</p>
 
-<p><code>sh
-export LD_LIBRARY_PATH=/opt/instantclient_10_2:/usr/local/lib:/usr/lib
-wget http://dl.bintray.com/kubo/generic/ruby-oci8-2.0.6.tar.gz
-tar -zxvf ruby-oci8-2.0.6.tar.gz
-cd ruby-oci8-2.0.6
-make
-make install
-</code></p>
-
-<h3>Gemfile和bundle</h3>
-
-<p>```ruby
-source "http://ruby.taobao.org"</p>
-
-<p>gem 'rails', '2.3.5'</p>
-
-<p>gem 'activeresource', '2.3.5'
-gem 'activesupport', '2.3.5'
-gem 'capistrano', '2.5.17'
-gem 'fastthread', '1.0.7'
-gem 'highline', '1.5.2'
-gem 'json_pure', '1.4.3'
-gem 'nokogiri', '1.4.1'
-gem 'rack', '1.0.1'
-gem 'rake', '0.8.7'
-gem 'RedCloth', '4.2.0'
-gem 'rubyforge', '2.0.4'</p>
-
-<p>gem "haml",  '3.0.12'
-gem 'will_paginate', '2.2.2'
-gem 'paperclip', '2.3.1'
-gem 'formtastic', '0.9.8'
-gem 'jintastic', '1.1.0'
-gem 'ruby-mp3info', '0.6.13'
-gem 'mime-types', '1.16'
-gem "authlogic", '2.1.5'
-gem "acl9", '0.12.0'
-gem "paginator", '1.1.1'
-gem "spreadsheet", '0.6.4.1'</p>
-
-<p>gem "thin", "0.5.2"
-gem 'activerecord-oracle_enhanced-adapter', '1.2.4'</p>
-
-<p>gem 'sqlite3-ruby'
-gem  'rest-client',  '1.6.7'<br/>
-```</p>
+<h3 id="toc_29">Gemfile和bundle</h3>
 
 <p>然后执行<code>bundle install</code> , 相关的Gem就可以安装到位了。 <code>thin start -e production</code> ， 通过这个命令应用就能在生产环境下启动了。</p>
 ]]></content>
@@ -123,9 +61,8 @@ gem  'rest-client',  '1.6.7'<br/>
 <li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
 </ol>
 
-
 <p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
-创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
+创造点什么东西，当然，最后一点纯属自娱自乐。<br>
 不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
 例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
 
@@ -133,31 +70,29 @@ gem  'rest-client',  '1.6.7'<br/>
 是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
 至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
 
-<h2>笔记整理</h2>
+<h2 id="toc_30">笔记整理</h2>
 
-<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
+<p>业务逻辑其实是业务反逻辑： complex business illogic </p>
 
-<h3>分层的坏处</h3>
+<h3 id="toc_31">分层的坏处</h3>
 
 <ol>
 <li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
 <li>性能损害</li>
 </ol>
 
-
-<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
+<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br>
 但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
 
-<h3>常见的业务代码组织形式</h3>
+<h3 id="toc_32">常见的业务代码组织形式</h3>
 
 <ul>
-<li>Transaction Script</li>
-<li>Domain Module , OO对TS的改变</li>
+<li>Transaction Script<br></li>
+<li>Domain Module , OO对TS的改变<br></li>
 <li>Service层</li>
 </ul>
 
-
-<h3>会话状态</h3>
+<h3 id="toc_33">会话状态</h3>
 
 <ul>
 <li>客户端 Cookie</li>
@@ -165,19 +100,18 @@ gem  'rest-client',  '1.6.7'<br/>
 <li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
 </ul>
 
-
-<h3>分布式</h3>
+<h3 id="toc_34">分布式</h3>
 
 <p>i
 * 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
 * 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
-* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
+* 同一台服务器内部使用细粒度调用，远程外观模式<br>
 * Data Transfer Object ，传输对象，上面的那种是调用方法
 * 同步的接口为主
 * 异步的基于消息的处理方式
 * 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
 
-<h3>锁的种类</h3>
+<h3 id="toc_35">锁的种类</h3>
 
 <ol>
 <li>乐观锁，比如自己建立版本号；</li>
@@ -186,11 +120,10 @@ gem  'rest-client',  '1.6.7'<br/>
 <li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
 </ol>
 
+<h3 id="toc_36">Stub和Mock</h3>
 
-<h3>Stub和Mock</h3>
-
-<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
-Mock：用一个服务的重写来模拟某服务</p>
+<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br>
+Mock：用一个服务的重写来模拟某服务  </p>
 ]]></content>
   </entry>
   
@@ -207,11 +140,10 @@ Mock：用一个服务的重写来模拟某服务</p>
 
 <ul>
 <li>Ubuntu 12.04</li>
-<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) </li>
 <li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
 <li>rails 4</li>
 </ul>
-
 
 <p>而部署环境是这样的：</p>
 
@@ -222,12 +154,11 @@ Mock：用一个服务的重写来模拟某服务</p>
 <li>rails 4</li>
 </ul>
 
-
 <p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
 
 <p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整
 <code>
-SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)
+SQLite3::SQLException: SQL logic error or missing database: INSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES (?)
 </code>
 2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
 
@@ -235,21 +166,21 @@ SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_
 
 <p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
 
-<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
-为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
-随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。<br>
 又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
 之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
 
 <p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
 
-<h3>教训</h3>
+<h3 id="toc_37">教训</h3>
 
-<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
-之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br>
 CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
 
-<h3>题外话</h3>
+<h3 id="toc_38">题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
 ]]></content>
@@ -260,40 +191,34 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
     <updated>2013-03-04T20:03:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
-    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
+    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br>
 为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
 在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
 
-<h3>0 事先准备</h3>
+<h3 id="toc_39">0 事先准备</h3>
 
 <p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
 但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
 
-<h3>1 创建应用</h3>
+<h3 id="toc_40">1 创建应用</h3>
 
-<p>首先执行
+<p>首先执行 
 ```
 heroku apps:create user-agent-show2</p>
 
-<p><code>
-这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
-</code>
-[remote "heroku"]</p>
+<p>[remote &quot;heroku&quot;]
+        url = <a href="mailto:git@heroku.com">git@heroku.com</a>:user-agent-show.git
+        fetch = +refs/heads/<em>:refs/remotes/heroku/</em>
+```</p>
 
-<pre><code>    url = git@heroku.com:user-agent-show.git
-    fetch = +refs/heads/*:refs/remotes/heroku/*
-</code></pre>
-
-<p>```</p>
-
-<h3>2 Git push</h3>
+<h3 id="toc_41">2 Git push</h3>
 
 <p>随后就可以执行
 <code>
 git push heroku
 </code>
 部署应用了。
-但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem &#39;pg&#39;</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
 基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
 
 <p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
@@ -308,11 +233,7 @@ config.serve_static_assets = true
 </code>
 这样才能保证静态文件被正常访问。</p>
 
-<h3>3 数据库更新</h3>
-
-<p><code>
-heroku run rake db:migrate
-</code></p>
+<h3 id="toc_42">3 数据库更新</h3>
 
 <p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
 ]]></content>
@@ -325,92 +246,37 @@ heroku run rake db:migrate
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/23/whats-new-in-rails-4</id>
     <content type="html"><![CDATA[<p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
 
-<h3>Rails.queue</h3>
+<h3 id="toc_43">Rails.queue</h3>
 
-<p>```
-class ExpensiveOperation
-  def run</p>
+<p>config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
 
-<p>  end
-end</p>
+<h3 id="toc_44">strong_parameters</h3>
 
-<p>Rails.queue.push(ExpensiveOperation.new)</p>
+<p>Alternative to MassAssignmentSecurity </p>
 
-<p>```
-config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
+<h3 id="toc_45">Turbolinks</h3>
 
-<h3>strong_parameters</h3>
+<h3 id="toc_46">Cache Digests(Russian Doll Caching)</h3>
 
-<p>Alternative to MassAssignmentSecurity</p>
+<h3 id="toc_47">ActionController::Live</h3>
 
-<p>```
-class PostsController &lt; ApplicationController
-  def create</p>
-
-<pre><code> @post = Post.create(post_params)
-</code></pre>
-
-<p>  end</p>
-
-<p>  private
-  def post_params</p>
-
-<pre><code>params.require(:post).permit(:title, :body)
-</code></pre>
-
-<p>  end
-end</p>
-
-<p>```</p>
-
-<h3>Turbolinks</h3>
-
-<h3>Cache Digests(Russian Doll Caching)</h3>
-
-<p>```</p>
-
-<h1>app/views/projects/show.html.erb</h1>
-
-<p>&lt;% cache project do %>
-  <h1> </h1>
-  &lt;%= render project.documents %>
-&lt;% end %>
-```</p>
-
-<h3>ActionController::Live</h3>
-
-<p>```
-include ActionController::Live</p>
-
-<p>response.stream.write "hello\n"</p>
-
-<p>```</p>
-
-<h3>PATCH Verb</h3>
+<h3 id="toc_48">PATCH Verb</h3>
 
 <p>just as PUT</p>
 
-<h3>Plugins are dead; long live plugins</h3>
+<h3 id="toc_49">Plugins are dead; long live plugins</h3>
 
 <p>use gems with bundle</p>
 
-<h3>lambda scope</h3>
-
-<p>```
-scope :published, -> { where(:published => true) }</p>
-
-<h1>Pitfall</h1>
-
-<p>scoped :recent, where("created_at > ?", 1.week.ago)
-```</p>
+<h3 id="toc_50">lambda scope</h3>
 
 <p>@sikachu</p>
 
-<p>Routing Concerns</p>
+<p>Routing Concerns </p>
 
-<p>Long live activeresource</p>
+<p>Long live activeresource </p>
 
-<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
+<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1. 
 They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
 ]]></content>
   </entry>

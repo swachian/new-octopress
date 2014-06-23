@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="kr">class</span> <span class="nx">Animal</span>
+  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
+  
+  <span class="nx">alive</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="kc">false</span>
+
+<span class="kr">class</span> <span class="nx">Parrot</span> <span class="kr">extends</span> <span class="nx">Animal</span>
+  <span class="nx">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="kr">super</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
+
+  <span class="nx">dead</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">not</span> <span class="err">@</span><span class="nx">alive</span><span class="p">()</span>
+
+<span class="nx">Animal</span><span class="o">::</span><span class="nx">rip</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="nx">parrot</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parrot</span><span class="p">(</span><span class="s2">&quot;Macaw&quot;</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nx">parrot</span><span class="p">.</span><span class="nx">rip</span>
+</pre></div>

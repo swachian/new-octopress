@@ -1,0 +1,29 @@
+<div class="highlight"><pre><span class="c">#起shard</span>
+mkdir -p /data/rs-a-1
+mkdir -p /data/rs-a-2
+mkdir -p /data/rs-a-3
+
+mkdir -p /data/rs-b-1
+mkdir -p /data/rs-b-2
+mkdir -p /data/rs-b-3
+
+numactl --interleave<span class="o">=</span>all mongod --shardsvr  --dbpath /data/rs-a-1 --port 30000 --logpath /data/rs-a-1.log --fork --nojournal
+<span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-2 --port 30001 --logpath /data/rs-a-2.log --fork --nojournal</span>
+<span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-3 --port 30002 --logpath /data/rs-a-3.log --fork --nojournal</span>
+
+numactl --interleave<span class="o">=</span>all mongod --shardsvr  --dbpath /data/rs-b-1 --port 30100 --logpath /data/rs-b-1.log --fork --nojournal
+<span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-2 --port 30101 --logpath /data/rs-b-2.log --fork --nojournal</span>
+<span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-3 --port 30102 --logpath /data/rs-b-3.log --fork --nojournal</span>
+
+<span class="c">#起config server，至少3个，可以和数据库节点的mongod运行在一台服务器上</span>
+mkdir -p /data/config-1
+mkdir -p /data/config-2
+mkdir -p /data/config-3
+numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-1 --port 27019 --logpath /data/config-1.log --fork --nojournal
+numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-2 --port 27020 --logpath /data/config-2.log --fork --nojournal
+numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-3 --port 27021 --logpath /data/config-3.log --fork --nojournal
+
+sleep 2
+<span class="c">#起mongos，os可以在应用服务器上一台装一个</span>
+mongos --configdb localhost:27019,localhost:27020,localhost:27021 --logpath /data/mongos.log --fork --port 40000
+</pre></div>

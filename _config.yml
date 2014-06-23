@@ -36,7 +36,10 @@ plugins: plugins
 code_dir: downloads/code
 category_dir: blog/categories
 category_title_prefix: "分类: "
-markdown: rdiscount
+#markdown: rdiscount
+markdown: redcarpet2
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data", "strikethrough", "superscript"]
 # category_list: true
 # category_counter: true
 # category_sidebar: true

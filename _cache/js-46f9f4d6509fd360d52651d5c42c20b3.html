@@ -1,0 +1,6 @@
+<div class="highlight"><pre><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;Trailer&#39;</span><span class="o">:</span> <span class="s1">&#39;Content-MD5&#39;</span> <span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</pre></div>

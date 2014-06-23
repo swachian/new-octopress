@@ -1,0 +1,7 @@
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserDao</span> <span class="kd">extends</span> <span class="n">PagingAndSortingRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;,</span> <span class="n">JpaSpecificationExecutor</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="o">{</span>
+
+	<span class="c1">//Page&lt;User&gt; findByUserId(Long id, Pageable pageRequest);</span>
+
+	<span class="n">User</span> <span class="nf">findByNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>

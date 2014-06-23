@@ -1,4 +1,4 @@
-source "http://ruby.taobao.org"
+source "https://ruby.taobao.org/"
 
 ruby "2.1.2"
 
@@ -17,6 +17,8 @@ group :development do
   gem 'liquid', '~> 2.3.0'
   gem 'directory_watcher', '1.4.1'
   gem 'thin'
+  gem 'redcarpet', '~> 2.1.1'
+  gem 'albino'
 end
 
 gem 'sinatra', '~> 1.4.2'

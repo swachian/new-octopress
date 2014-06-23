@@ -144,7 +144,7 @@
   </header>
 
 
-  <div class="entry-content"><p>近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。<br/>
+  <div class="entry-content"><p>近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。<br>
 今天又读到一篇讲<a href="http://blog.targeterapp.com/post/22984987832/why-we-moved-from-nodejs-to-ror">为什么从NodeJS迁移到RoR</a>。
 作者列举的主要理由如下：</p>
 
@@ -155,37 +155,34 @@
 <li>他需要Cache所有的东西。Node的强项是每秒千万次点击承受力，对cache似乎并不擅长。1000 RPS的访问压力，对Rails+Nginx已经是小菜一碟。</li>
 </ol>
 
-
 <p>然后作者又推荐了一篇<a href="http://nodeguide.com/convincing_the_boss.html">Guide</a>
 里面提到的了node.js适合与不适合的。</p>
 
 <p>Bad Use Cases:</p>
 
 <ul>
-<li>CPU重度使用<br/>
-js适合高I/O的，而不适合重CPU的。视频编码解码、人工智能等CPU hungry的软件还是用C吧。有提到js写C的addons是挺方便的</li>
-<li>简单的CRUD / HTML apps<br/>
-js下的是不如Rails，CakePHP或者Django那样强有力的</li>
-<li>再搭配其他新技术<br/>
-比如NoSQL，这样会让技术风险做乘法，毕竟两样都不熟的东西组合在一起，会提出更多的挑战。而这些可能对你做出吸引人的业务没有magically的提高</li>
+<li>CPU重度使用<br>
+js适合高I/O的，而不适合重CPU的。视频编码解码、人工智能等CPU hungry的软件还是用C吧。有提到js写C的addons是挺方便的<br></li>
+<li>简单的CRUD / HTML apps<br>
+js下的是不如Rails，CakePHP或者Django那样强有力的<br></li>
+<li>再搭配其他新技术<br>
+比如NoSQL，这样会让技术风险做乘法，毕竟两样都不熟的东西组合在一起，会提出更多的挑战。而这些可能对你做出吸引人的业务没有magically的提高<br></li>
 </ul>
-
 
 <p>Good Use Cases:</p>
 
 <ul>
-<li>JSON APIs<br/>
-对包装数据资源，比如数据库和web services，然后将他们转换成JSON接口暴露给外部使用</li>
-<li>Sigle page apps<br/>
-指那些富客户端的页面应用，如Gmail。好处是可以在客户端和服务端共享很多代码，比如验证确认类的。同时，也给处理多请求的能力有了用武之地</li>
-<li>利用现有软件<br/>
-可以fork多个子进程并对这些进程的输出当做一个stream来处理，使得node成为一个很好的杠杆现存软件的选择。</li>
-<li>Streaming data<br/>
+<li>JSON APIs<br>
+对包装数据资源，比如数据库和web services，然后将他们转换成JSON接口暴露给外部使用<br></li>
+<li>Sigle page apps<br>
+指那些富客户端的页面应用，如Gmail。好处是可以在客户端和服务端共享很多代码，比如验证确认类的。同时，也给处理多请求的能力有了用武之地<br></li>
+<li>利用现有软件<br>
+可以fork多个子进程并对这些进程的输出当做一个stream来处理，使得node成为一个很好的杠杆现存软件的选择。<br></li>
+<li>Streaming data<br>
 http实质上是streams，只是多年来都被当成atomic events来处理了。但js可以利用这一点。在诸如实时分析文件上传、多数据层间的proxy搭建等一显身手</li>
-<li>Soft Realtime Applications<br/>
+<li>Soft Realtime Applications<br>
 但有gc的存在，所以不适合作为hard realtime的实现，对允许不要求始终如一的响应时间的系统还是合适的。Hard方面的更好的选择是Erlang。</li>
 </ul>
-
 
 <p>我打算做的东西不在bad case之类，和good case 基本沾边。目前的结论是值得一试。</p>
 </div>
@@ -231,7 +228,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li>再继续拆分的话，依照上面的分法持续划分。</li>
 </ol>
 
-
 <p>所以10次以后，就会出现这种错误<code>ORA-00001: unique constraint (SYS.I_TABPART_BOPART$) violated</code></p>
 
 <p>自己值选的好一些，可以最多分成20个区。不过从实际情况来看，RAC似乎已经会自己relocate PART#。</p>
@@ -272,14 +268,14 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
   <div class="entry-content"><p>参加公司组织的培训,记录一些心得.</p>
 
-<p>雷士光电是一个三位创业者对财务目标产生偏差的典型案例.本来是3个同寝室的大学生共同创业,吴长江 / 胡永红 / 杜刚. 起初是胡和杜逼吴交出股权,
+<p>雷士光电是一个三位创业者对财务目标产生偏差的典型案例.本来是3个同寝室的大学生共同创业,吴长江 / 胡永红 / 杜刚. 起初是胡和杜逼吴交出股权, 
 后来吴和供应商关系很好,最后逼迫胡和杜交出来股权, 合计一亿六千万.</p>
 
 <p>财务会计是给股东/董事会/经营者 三个对象提供支持的.财务数据也可以公布给公共即第三方机构.</p>
 
 <p>财务会计主要工作是对外, 管理会计主要是对内.</p>
 
-<p>利益或风险全部的转移 &#8212;-> 入账时间.</p>
+<p>利益或风险全部的转移 &#8212;-&gt; 入账时间.</p>
 
 <p><strong>确认收入</strong>和<strong>收款</strong>是两个概念.目前主要实行权责发生制.可以后GD(elivery)N 和 GR(eceipt)N两种确认收入的方式.</p>
 
@@ -292,12 +288,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li>货币计量 Monetary measurement , 以同一种货币单位来计量</li>
 </ul>
 
-
-<p>分公司(<strong>Branch</strong>)是不能披露报表的,也就是非会计主体,无论是独立核算的还是非独立核算的分公司.<br/>
+<p>分公司(<strong>Branch</strong>)是不能披露报表的,也就是非会计主体,无论是独立核算的还是非独立核算的分公司.<br>
 子公司(<strong>subsidery</strong>), 独立的法人主体, 是会计主体, 报表披露可能需要合并.</p>
 
-<p>记账规则: <strong>有借必有贷, 有贷必有借</strong><br/>
-公司记账的账户包括: 资产 / 负债 / 股本及权益<br/>
+<p>记账规则: <strong>有借必有贷, 有贷必有借</strong><br>
+公司记账的账户包括: 资产 / 负债 / 股本及权益<br>
 借贷其实就是 <strong>+-</strong></p>
 
 <p>3张表:</p>
@@ -308,35 +303,33 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li>现金流表</li>
 </ul>
 
-
-<p>毛利 = 销售收入 - 销售成本<br/>
-营业利润 = 毛利 - 期间费用 + 其他业务收入/支出(by-product)<br/>
-税前利润 = 营业利润 + 投资收益 + 营业外收入/支出(如罚款/变卖资产)<br/>
+<p>毛利 = 销售收入 - 销售成本<br>
+营业利润 = 毛利 - 期间费用 + 其他业务收入/支出(by-product)<br>
+税前利润 = 营业利润 + 投资收益 + 营业外收入/支出(如罚款/变卖资产)<br>
 净利润 = 税前利润 - 所得说</p>
 
 <p>利润分配过程:</p>
 
 <ul>
-<li>利息 &#8212;> 债权人</li>
-<li>税款 &#8212;> 税务局</li>
-<li>股息 &#8212;> 股东</li>
-<li>未分配利润 &#8212;> 扩大再生产</li>
+<li>利息 &#8212;&gt; 债权人</li>
+<li>税款 &#8212;&gt; 税务局</li>
+<li>股息 &#8212;&gt; 股东</li>
+<li>未分配利润 &#8212;&gt; 扩大再生产</li>
 </ul>
 
-
-<p>收入确定 / 到款 / 坏账 / 计提的概念.<br/>
-现代财务制度其实是以计提(accrual, accrue)为核心的, 可以通过计提实现坏账风险控制, 盈余管理, 加速资产折旧等.<br/>
+<p>收入确定 / 到款 / 坏账 / 计提的概念.<br>
+现代财务制度其实是以计提(accrual, accrue)为核心的, 可以通过计提实现坏账风险控制, 盈余管理, 加速资产折旧等.<br>
 计提是可以回退的,这样实际发生时就不难看了.而且可以有很多人为的判断在里面. 我们的年终奖其实就是以每月计提的方式,到年末发出来的.</p>
 
-<p>关心销售收入就是关心总资产周转率.</p>
+<p>关心销售收入就是关心总资产周转率.  </p>
 
 <p>杜邦分析法. 以净资产收益率为核心, 分解出来的一堆指数分析法.主要是关于利润/营业收入/权益系数的几组相关的指标.</p>
 
-<p>标准成本法, 即按人头或其他标准统一规格地对成本进行计算.好处是方便做预算,方便大家沟通.<br/>
-与之相应, 是作业成本法, 就需要按实际效用来进行计算.<br/>
-二者其实可以相混.</p>
+<p>标准成本法, 即按人头或其他标准统一规格地对成本进行计算.好处是方便做预算,方便大家沟通.<br>
+与之相应, 是作业成本法, 就需要按实际效用来进行计算.<br>
+二者其实可以相混.  </p>
 
-<p>呆滞货品报告, slow moving report.</p>
+<p>呆滞货品报告, slow moving report. </p>
 </div>
   
   
@@ -381,7 +374,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li>MBA一线首选，二线（同济、财大）也可以考虑，再差的就没意义了</li>
 <li>How to <strong>make more money</strong>. Better Money, Better Life.</li>
 </ol>
-
 
 <p>说的话让人信服的老师就是好老师。</p>
 </div>
@@ -472,22 +464,17 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'>? <span class="o">(</span>192.168.203.22<span class="o">)</span> at 00:A0:D1:E5:D1:A9 <span class="o">[</span>ether<span class="o">]</span> on eth0
 </span></code></pre></td></tr></table></div></figure>
 
-
-<p>2.建立一个mac->ip的对应文件： ip-mac, 将IP和MAC写入才文件</p>
+<p>2.建立一个mac-&gt;ip的对应文件： ip-mac, 将IP和MAC写入才文件</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;192.168.202.19 00:26:b9:4c:8d:af&#39;</span> &gt; /etc/ip-mac
 </span></code></pre></td></tr></table></div></figure>
 
-
 <p>3.手动执行绑定</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -f /etc/ip-mac</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
+</span></code></pre></td></tr></table></div></figure> 
 
 <p>上面的内容也可以存入<code>/etc/rc.d/rc.local</code> ,这样可以实现开机自动绑定。</p>
 </div>
@@ -525,7 +512,7 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   </header>
 
 
-  <div class="entry-content"><h3>heredocs是什么</h3>
+  <div class="entry-content"><h3 id="toc_300">heredocs是什么</h3>
 
 <p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
 
@@ -540,7 +527,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'><span class="sh">ccc</span>
 </span><span class='line'><span class="no">END</span>
 </span></code></pre></td></tr></table></div></figure>
-
 
 <p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
 
@@ -574,7 +560,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
 <p>但是这样写就是<strong>不行</strong>了：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -593,12 +578,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'>  <span class="k">END</span> <span class="c1">#END加了缩进就失败</span>
 </span></code></pre></td></tr></table></div></figure>
 
+<h3 id="toc_301">解决办法</h3>
 
-<h3>解决办法</h3>
-
-<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
-此处END可以换成任意大写字符，只要成对匹配即可。</p>
-
+<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code>END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
+此处END可以换成任意大写字符，只要成对匹配即可。
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -627,10 +610,9 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'>    <span class="nb">puts</span> <span class="vi">@text</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></p>
 
-
-<h3><code>%w</code>是何方神圣</h3>
+<h3 id="toc_302"><code>%w</code>是何方神圣</h3>
 
 <p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
 %w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
@@ -653,12 +635,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'><span class="nb">puts</span> <span class="n">text2</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
 <ul>
 <li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
 <li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
 </ul>
-
 </div>
   
   
@@ -698,12 +678,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 文章又好看了起来。选了一些细细研究如下。</p>
 
 <ul>
-<li><p><a href="https://github.com/styleguide/ruby">GitHub&#8217;s Ruby Style Guide</a><br/>
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
-此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
+<li><p><a href="https://github.com/styleguide/ruby">GitHub&#39;s Ruby Style Guide</a><br>
+很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br>
+此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。  </p></li>
 <li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
 </ul>
-
 
 <p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
 
@@ -716,9 +695,7 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'><span class="nv">$ </span>mkdir _layouts _plugins _includes _posts css javascripts images
 </span><span class='line'><span class="nv">$ </span>touch index.html _config.yml _layouts/default.html
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>目录树结构</p>
+目录树结构
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -750,13 +727,9 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'>└── index.html
 </span></code></pre></td></tr></table></div></figure>
 
-
-
-
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>jekyll --server --auto
 </span></code></pre></td></tr></table></div></figure>
-
 
 <p>文档的要求只有一个:</p>
 
@@ -770,7 +743,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'>---
 </span></code></pre></td></tr></table></div></figure>
 
-
 <p>就会按markdown里面的layout产生内容。</p>
 
 <p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
@@ -779,13 +751,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
 </ul>
 
-
-<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
+<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。 </p>
 
 <ul>
 <li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
 </ul>
-
 
 <p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
 <strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
@@ -795,7 +765,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
 <li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
 </ul>
-
 
 <p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
 </div>
@@ -842,7 +811,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 <li>可以跨数据库导入导出。实际上中间是用到了<a href="sequel.rubyforge.org/">sequel</a>这个ruby的Orm框架，所以理论上应该是只要有adapter的数据库就都能被匹配。</li>
 </ol>
 
-
 <p>使用也非常之简单与直接</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -852,7 +820,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </span><span class='line'><span class="nv">$ </span>taps server postgres://localdbuser:localdbpass@localhost/dbname httpuser httppassword
 </span><span class='line'><span class="nv">$ </span>taps pull postgres://dbuser:dbpassword@localhost/dbname http://httpuser:httppassword@example.com:5000
 </span></code></pre></td></tr></table></div></figure>
-
 </div>
   
   
@@ -900,7 +867,7 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

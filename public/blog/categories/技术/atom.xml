@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-22T23:28:52+08:00</updated>
+  <updated>2014-06-23T09:27:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -18,9 +18,9 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/"/>
     <updated>2014-06-12T19:05:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper</id>
-    <content type="html"><![CDATA[<h2>JSP中的代码</h2>
+    <content type="html"><![CDATA[<h2 id="toc_12">JSP中的代码</h2>
 
-<h3>传统的老三样</h3>
+<h3 id="toc_13">传统的老三样</h3>
 
 <p>长久以来的Java Web开发，在jsp层面进行读取或逻辑控制等行为时主要有<strong>Scriptlet</strong>、<strong>Helper</strong>和<strong>标签</strong>三种方式。</p>
 
@@ -28,15 +28,15 @@
 
 <p>如struts1的：</p>
 
-<p><code>&lt;bean:write name="spRinglib" property="down_cnt"/&gt;</code></p>
+<p><code>&lt;bean:write name=&quot;spRinglib&quot; property=&quot;down_cnt&quot;/&gt;</code></p>
 
 <p>struts2的：</p>
 
-<p><code>&lt;s:property value="r.department" /&gt;</code></p>
+<p><code>&lt;s:property value=&quot;r.department&quot; /&gt;</code></p>
 
 <p>jstl的：</p>
 
-<p><code>&lt;c:out value="${user.company}" escapeXml=="false"/&gt;</code></p>
+<p><code>&lt;c:out value=&quot;${user.company}&quot; escapeXml==&quot;false&quot;/&gt;</code></p>
 
 <p>这种方式的一大特点就是冗长和啰嗦。信息的表达力很差。上述还只是用于输出的，一旦碰到条件判断等，标签的表现更是只能用拙劣二字来加以形容。同时，每个框架各搞一套，给程序员也会带来很大的负担，对项目维护也带来更多的成本。</p>
 
@@ -44,27 +44,17 @@
 如果这些重新发明的标签，具有比语言更好的表达和组织能力，那么显然大家应该放弃语言本身，比如不使用java，而在MVC的各个部分都
 使用标签。但既然这个没有发生，说明标签在大部分时候并不合适。</p>
 
-<h3>新的变化-EL表达式的出现</h3>
+<h3 id="toc_14">新的变化-EL表达式的出现</h3>
 
 <p>好在随着EL表达式的推出，情况逐步有所改观。比如同样是上面的输出，EL的写法可以是 <code>${r.department}</code>，调用数组也可以是<code>${list[0].name}</code> 。不过EL目前还没有支持逻辑控制，所以逻辑控制还是要用jstl的标签。</p>
 
 <p>但至少在老三样之外提供了新的一种方式，并且使得使用<strong>Helper</strong>模式可以不需要必须用Scriptlet。</p>
 
-<h2>EL中使用Helper</h2>
+<h2 id="toc_15">EL中使用Helper</h2>
 
 <p>说的简单点，其实就是在jsp页面中，通过EL表达式可以调用Java实现的方法。获得类似<code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 。 其中，getflow是一个用Java写的静态方法。</p>
 
 <p>而使用Scriptlet配合helper，则会出现下面的代码：</p>
-
-<p>```java
-&lt;%
-UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
-long flow = (long[] )(userInfo.getBendiAndNationFlux().get(2))[0];
-SheetAttendAction helper = (com.sanss.richtone.web.action.request.SheetAttendAction )request.getAttribute("helper");
-%></p>
-
-<p>&lt;%=  helper.cpSelectHelper(requestSheetForm.getManager(), spInfo.getCpCode(), spInfo.getCpName()) %>
-```</p>
 
 <p>光写出来的代码方面，不使用EL时已经要长很多了，明明只是一个调用取值显示的操作，却要先声明一系列的东西。同时，这些类型还要在jsp
 的头上import进来。而IDE对jsp的import Class支持的并不好。所以确实相当麻烦。</p>
@@ -72,61 +62,29 @@ SheetAttendAction helper = (com.sanss.richtone.web.action.request.SheetAttendAct
 <p>对比一下可以发现，EL能够调用方法的话，可以带来多大的方便。使用Helper方法时，无论是Scriptlet还是EL表达式，在Controller层面，做
 的事情都是类似的。</p>
 
-<p>```java
-//在controller里定义方法
-  public static String getflow(long flow) {</p>
-
-<pre><code>DecimalFormat format = new DecimalFormat("###0.0");
-long tmpFlow = flow / 1024;
-double df = 0;
-if (tmpFlow &lt; 1) {
-  return flow + "K";
-} else if (tmpFlow &lt; 1024.0) {
-  df = flow / 1024.0;
-
-  return format.format(df) + "M";
-} else {
-  df = flow / 1024.0 / 1024;
-  return format.format(df) + "G";
-}
-</code></pre>
-
-<p>  }</p>
-
-<p>  //在action中，注入属性
-  @RequestMapping(value = "myflow", method = RequestMethod.GET)
-  public String myflow(Model model, @ModelAttribute("mdn") String mdn, @ModelAttribute("userInfo") UserInfo userInfo) {</p>
-
-<pre><code>model.addAttribute("helper", this);
-return "nubia/myflow";
-</code></pre>
-
-<p>  }
-```</p>
-
 <p>这样一来，定义自己的方法和使用这个方法就极为简便了。需要指出的是，EL表达式里面可以调用方法，即支持el里面带()调用，是<strong>直到
 servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是<del>tomcat6也不支持</del>这种调用方式。从中，可以看出EL越来越强大趋势。
 但也反过来可以证明过去方法之错误。</p>
 
-<h2>EL难道就不是Scriptlet？</h2>
+<h2 id="toc_16">EL难道就不是Scriptlet？</h2>
 
-<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code>
-除了把${}换成了&lt;%=%>实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
+<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code> 
+除了把${}换成了&lt;%=%&gt;实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
 
 <p>实际上，目前的EL，除了没有逻辑判断的能力之外，已经具备了很多Scriptlet的特性。那么区别在哪里呢？</p>
 
 <p>我觉得最关键的区别在于语言本身。所谓Scriptlet其实是Java Scriptlet，需要一系列的声明才能使用。强类型编译语言有很多的好处，但在页面
-显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。</p>
+显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。 </p>
 
 <p>EL的Scriptlet和Java的Scriptlet完全是两码事情，倒是和ruby的Scriptlet几乎没有区别。
 EL的支持来的有点慢，但好歹还是来了！</p>
 
-<h3>对EL未来的期盼</h3>
+<h3 id="toc_17">对EL未来的期盼</h3>
 
 <p>作为一个开发者，十分期望未来的EL能够再走一步，增加对 <code>if</code> <code>for</code>的原生支持，而不再需要使用麻烦的标签。能否发生这样的变化，就只有
 再看发展了。</p>
 
-<h3>标签适用的情况</h3>
+<h3 id="toc_18">标签适用的情况</h3>
 
 <p>标签其实也有其存在的价值，至少包括：</p>
 
@@ -134,7 +92,6 @@ EL的支持来的有点慢，但好歹还是来了！</p>
 <li>分页等相对组件化的元素；</li>
 <li>风格一致的表单。</li>
 </ol>
-
 
 <p>对于那些有组件化特征的东西，标签还是很适用的。</p>
 
@@ -177,30 +134,11 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 
 <p>看一下Controller：</p>
 
-<p>```java</p>
-
-<pre><code>@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-public String updateForm(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("user", userService.getUser(id));
-    model.addAttribute("action", "update");
-    return "user/userForm";
-}
-
-@RequestMapping(value = "update/{id}", method = RequestMethod.POST)
-public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
-    userService.updateUser(user, user.getNumber2(), user.getCurrentshownumber());
-    redirectAttributes.addFlashAttribute("message", "更新任务成功");
-    return "redirect:/simuser/";
-}
-</code></pre>
-
-<p>```</p>
-
 <p>Restful风格的Url，通过声明<code>@ModelAttribute</code>可以注入参数到模型中，
 <code>@PathVariable</code>可以实现从url路径中获取参数，
 <code>userService</code>是注入的服务组件，<code>model.addAttribute</code>则将controller的内容注入给页面模板。
 整个风格已经十分简洁。如果需要其他组件，如<code>session</code>或者<code>request</code>，
-只要在类或者方法的参数中声明即可。<code>return "user/userForm"</code>则通知渲染user目录下的userForm.jsp模板</p>
+只要在类或者方法的参数中声明即可。<code>return &quot;user/userForm&quot;</code>则通知渲染user目录下的userForm.jsp模板</p>
 
 <p>Spring JPA则是最方便的Java ORM描述工具。寻找多年的Java版ActiveRecord终于有了着落。
 需要定义两个文件：1：model本身，2：一个dao文件（reposity）</p>
@@ -209,125 +147,22 @@ public String update(@Valid @ModelAttribute("user") User user, RedirectAttribute
 <li>model：</li>
 </ul>
 
-
-<p>```java</p>
-
-<p>//JPA标识
-@Entity
-@Table(name = "users")
-public class User extends IdEntity {</p>
-
-<pre><code>private String login;
-</code></pre>
-
-<p>  ...</p>
-
-<pre><code>private Set&lt;Phonenumber&gt; phonenumbers;
-private List&lt;Useroperlog&gt; useroperlogs;
-
-@NotBlank
-public String getNumber1() {
-    return number1;
-}
-
-public void setNumber1(String number1) {
-    this.number1 = number1;
-}
-
-@Transient
-public String getNumber2() {
-    return number2;
-}
-
-public void setNumber2(String number2) {
-    this.number2 = number2;
-}
-
-@Transient
-public String getCurrentshownumber() {
-    return currentshownumber;
-}
-
-public void setCurrentshownumber(String currentshownumber) {
-    this.currentshownumber = currentshownumber;
-}
-// join column is in table for Phonenumber
-@OneToMany(fetch=FetchType.LAZY,orphanRemoval=true,cascade=CascadeType.ALL)
-@JoinColumn(name = "userid")
-public Set&lt;Phonenumber&gt; getPhonenumbers() {
-    return phonenumbers;
-}
-
-public void setPhonenumbers(Set&lt;Phonenumber&gt; phonenumbers) {
-    this.phonenumbers = phonenumbers;
-}
-
-@OneToMany(fetch=FetchType.LAZY)
-@JoinColumn(name = "userid")
-public List&lt;Useroperlog&gt; getUseroperlogs() {
-    return useroperlogs;
-}
-
-public void setUseroperlogs(List&lt;Useroperlog&gt; useroperlogs) {
-    this.useroperlogs = useroperlogs;
-}
-@Override
-public String toString() {
-    return ToStringBuilder.reflectionToString(this);
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
 <p>啰嗦是还是有点啰嗦，这个毕竟是java。DAO相对代码少一些。</p>
 
 <ul>
 <li>DAO文件：</li>
 </ul>
 
-
-<p>```java
-public interface UserDao extends PagingAndSortingRepository&lt;User, Long>, JpaSpecificationExecutor<User> {</p>
-
-<pre><code>//Page&lt;User&gt; findByUserId(Long id, Pageable pageRequest);
-
-User findByNumber1(String number1);
-</code></pre>
-
-<p>}
-<code>``
-这个dao提供了很多默认的方法，包括</code>findAll<code>,</code>findOne<code>,</code>save`，底层的
+<p>这个dao提供了很多默认的方法，包括<code>findAll</code>, <code>findOne</code>, <code>save</code>，底层的
 实现还有很多内容，但使用的话确实只需要声明这些就行了。</p>
 
 <ul>
 <li>在Service文件中可这样使用:</li>
 </ul>
 
-
-<p>```java</p>
-
-<pre><code>public void updateUser(User entity, String number2, String showNumber) {
-    loadNumber2(entity);
-    resetCurrentshownumber(entity, showNumber);
-    resetNumber2(entity, number2);
-    userDao.save(entity);
-}
-
-public void deleteUser(Long id) {
-    userDao.delete(id);
-}
-</code></pre>
-
-<p>```</p>
-
 <p>而在页面处理上，几年前的Servlet 2.5开始，EL表达式取得了首要被支持的地位。</p>
 
-<p><code>java
-${user.name}
-</code>
-对比ruby在erb里常用的</p>
+<p>对比ruby在erb里常用的</p>
 
 <p><code>&lt;%=user.name%&gt;</code></p>
 
@@ -373,7 +208,7 @@ Node.js，一个可以在服务器端编写javascript的平台，提供了很多
 
 <p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
 
-<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br>
 从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
 
 <p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
@@ -394,10 +229,6 @@ apt-get intall，原因在于apt-get是失败的。</p>
 <p>为解决这个问题，就在<code>/usr/loca/openssl-1.0.1g</code> 下独立编译生成了一个openssl。然后ruby再编译时可以识别openssl组件了。
 但是，编译到一半，会报错</p>
 
-<p><code>
-linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol
-</code></p>
-
 <p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
 
 <p>这里就是遇到的第二个问题，连接共享库失败。</p>
@@ -410,14 +241,13 @@ linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_
 <li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
 </ol>
 
-
 <p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
 
 <p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
 
 <p>再在ruby安装包里执行</p>
 
-<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
+<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code> </p>
 
 <p>这样就装好了。</p>
 
@@ -445,9 +275,8 @@ linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_
 <li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
 </ol>
 
-
 <p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
-创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
+创造点什么东西，当然，最后一点纯属自娱自乐。<br>
 不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
 例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
 
@@ -455,31 +284,29 @@ linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_
 是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
 至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
 
-<h2>笔记整理</h2>
+<h2 id="toc_19">笔记整理</h2>
 
-<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
+<p>业务逻辑其实是业务反逻辑： complex business illogic </p>
 
-<h3>分层的坏处</h3>
+<h3 id="toc_20">分层的坏处</h3>
 
 <ol>
 <li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
 <li>性能损害</li>
 </ol>
 
-
-<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
+<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br>
 但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
 
-<h3>常见的业务代码组织形式</h3>
+<h3 id="toc_21">常见的业务代码组织形式</h3>
 
 <ul>
-<li>Transaction Script</li>
-<li>Domain Module , OO对TS的改变</li>
+<li>Transaction Script<br></li>
+<li>Domain Module , OO对TS的改变<br></li>
 <li>Service层</li>
 </ul>
 
-
-<h3>会话状态</h3>
+<h3 id="toc_22">会话状态</h3>
 
 <ul>
 <li>客户端 Cookie</li>
@@ -487,19 +314,18 @@ linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_
 <li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
 </ul>
 
-
-<h3>分布式</h3>
+<h3 id="toc_23">分布式</h3>
 
 <p>i
 * 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
 * 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
-* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
+* 同一台服务器内部使用细粒度调用，远程外观模式<br>
 * Data Transfer Object ，传输对象，上面的那种是调用方法
 * 同步的接口为主
 * 异步的基于消息的处理方式
 * 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
 
-<h3>锁的种类</h3>
+<h3 id="toc_24">锁的种类</h3>
 
 <ol>
 <li>乐观锁，比如自己建立版本号；</li>
@@ -508,11 +334,10 @@ linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_
 <li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
 </ol>
 
+<h3 id="toc_25">Stub和Mock</h3>
 
-<h3>Stub和Mock</h3>
-
-<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
-Mock：用一个服务的重写来模拟某服务</p>
+<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br>
+Mock：用一个服务的重写来模拟某服务  </p>
 ]]></content>
   </entry>
   

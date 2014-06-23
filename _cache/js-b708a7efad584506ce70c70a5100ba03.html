@@ -1,0 +1,14 @@
+<div class="highlight"><pre><span class="nx">mongo</span> <span class="nx">localhost</span><span class="o">:</span><span class="mi">40000</span> 
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">addShard</span><span class="p">(</span><span class="s2">&quot;localhost:30000&quot;</span><span class="p">)</span>
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">addShard</span><span class="p">(</span><span class="s2">&quot;localhost:30100&quot;</span><span class="p">)</span>
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">).</span><span class="nx">shards</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+<span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0000&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span> <span class="o">:</span> <span class="s2">&quot;localhost:30000&quot;</span> <span class="p">}</span>
+<span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0001&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span> <span class="o">:</span> <span class="s2">&quot;localhost:30100&quot;</span> <span class="p">}</span>
+
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">enableSharding</span><span class="p">(</span><span class="s2">&quot;myapp&quot;</span><span class="p">)</span>
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">status</span><span class="p">()</span>
+
+<span class="err">#</span> <span class="err">选择好的</span><span class="nx">sharding</span> <span class="nx">key</span><span class="err">，是设计时的重要考虑对象</span>
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">shardCollection</span><span class="p">(</span><span class="s2">&quot;myapp.pcmds&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">c4</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">).</span><span class="nx">collections</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+</pre></div>

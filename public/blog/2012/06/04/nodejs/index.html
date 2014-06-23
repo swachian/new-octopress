@@ -100,24 +100,24 @@
 <p>而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
 而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.</p>
 
-<p>http://howtonode.org/understanding-process-next-tick</p>
+<p><a href="http://howtonode.org/understanding-process-next-tick">http://howtonode.org/understanding-process-next-tick</a></p>
 
 <p>tick其实就是计算机系统的时隙.</p>
 
-<h2>util</h2>
+<h2 id="toc_321">util</h2>
 
 <p>util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
 两点是多了<code>%j</code>支持json格式的输出.</p>
 
-<p>util.debug() 用于调试的,输出到<code>stderr</code><br/>
-util.log() <code>stdout</code><br/>
-util.inspect(object) 展开对象信息<br/>
-util.isArray, isRegExp, isDate</p>
+<p>util.debug() 用于调试的,输出到<code>stderr</code><br>
+util.log() <code>stdout</code><br>
+util.inspect(object) 展开对象信息<br>
+util.isArray, isRegExp, isDate  </p>
 
-<h2>Events</h2>
+<h2 id="toc_322">Events</h2>
 
-<p>All objects which emit events are instances of <code>require('events').EventEmitter</code><br/>
-All EventEmitters emit the event <code>newListener</code> when new listeners are added</p>
+<p>All objects which emit events are instances of <code>require(&#39;events&#39;).EventEmitter</code><br>
+All EventEmitters emit the event <code>newListener</code> when new listeners are added  </p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -158,12 +158,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="err">#</span> <span class="err">触发事件</span>
 </span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">],</span> <span class="p">[</span><span class="nx">arg2</span><span class="p">],</span> <span class="p">[...])</span>
 </span></code></pre></td></tr></table></div></figure>
+ 
 
-
-<h2>Buffer</h2>
+<h2 id="toc_323">Buffer</h2>
 
 <p>这个东西和C里面的 <code>bytes c[8192];</code> 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
-自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可.</p>
+自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可. </p>
 
 <ul>
 <li>encodings:
@@ -174,11 +174,9 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>ucs2</li>
 <li>base64</li>
 <li>binary 通常不用,而是直接用Buffer</li>
-<li>hex 十六进制</li>
+<li>hex 十六进制 </li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -210,24 +208,22 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="err">此外还有一堆读写各种类型的函数</span>
 </span></code></pre></td></tr></table></div></figure>
 
+<h2 id="toc_324">Stream</h2>
 
-<h2>Stream</h2>
+<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br>
+所有的stream, 都是<code>EventEmitter</code>的实现. </p>
 
-<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br/>
-所有的stream, 都是<code>EventEmitter</code>的实现.</p>
-
-<h3>Readable Stream</h3>
+<h3 id="toc_325">Readable Stream</h3>
 
 <ul>
-<li><p>Event</p>
+<li><p>Event  </p>
 
 <ul>
 <li>data</li>
 <li>end 可能可以继续写</li>
 <li>error</li>
 <li>close 不是所有的流都有关闭,比如进来的http request</li>
-</ul>
-</li>
+</ul></li>
 <li><p>method</p>
 
 <ul>
@@ -236,12 +232,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>pause 停止<code>data</code>事件</li>
 <li>resume 恢复<code>data</code>事件</li>
 <li>destroy</li>
-<li>pipe</li>
-</ul>
-</li>
-</ul>
-
-
+<li>pipe 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -256,10 +247,11 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>  <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Goodbye\n&quot;</span><span class="p">);</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></li>
+</ul></li>
+</ul>
 
-
-<h3>Writable Stream</h3>
+<h3 id="toc_326">Writable Stream</h3>
 
 <ul>
 <li><p>Event</p>
@@ -269,9 +261,8 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>error</li>
 <li>close</li>
 <li>pipe</li>
-</ul>
-</li>
-<li><p>method</p>
+</ul></li>
+<li><p>method  </p>
 
 <ul>
 <li>writable</li>
@@ -281,12 +272,10 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>end(string, encoding)</li>
 <li>end(buffer)</li>
 <li>destroy()</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<h2>Crypto</h2>
+<h2 id="toc_327">Crypto</h2>
 
 <p>加密解密的系类</p>
 
@@ -322,22 +311,16 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<h2>File System</h2>
+<h2 id="toc_328">File System</h2>
 
 <p>异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block</p>
 
 <ul>
-<li>fs.watch
+<li>fs.watch<br>
 
 <ul>
 <li>Linux下用 <code>inotify</code>实现</li>
-<li>返回&#8217;rename&#8217; or &#8216;change&#8217; 事件</li>
-</ul>
-</li>
-</ul>
-
-
+<li>返回&#39;rename&#39; or &#39;change&#39; 事件
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -354,26 +337,20 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename not provided&#39;</span><span class="p">);</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>fs.ReadStream</li>
-<li>fs.WriteStream</li>
-<li>fs.open(path, flags, [mode], [callback])
+</span></code></pre></td></tr></table></div></figure></li>
+</ul></li>
+<li>fs.ReadStream<br></li>
+<li>fs.WriteStream </li>
+<li>fs.open(path, flags, [mode], [callback]) 
 <code>(err, fd)</code></li>
 </ul>
 
+<h2 id="toc_329">Path</h2>
 
-<h2>Path</h2>
-
-<h2>Net</h2>
+<h2 id="toc_330">Net</h2>
 
 <ul>
-<li>net.createServer([options], [connectionListener])</li>
-</ul>
-
-
+<li><p>net.createServer([options], [connectionListener])<br>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -398,60 +375,50 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8124</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//&#39;listening&#39; listener</span>
 </span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server bound&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>net.connect,net.createConnection
+</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>net.connect,net.createConnection  </p>
 
 <ul>
 <li>也是一样触发<code>connect</code>事件</li>
 <li>net.connect(port, [host], [connectListener])</li>
-<li>net.connect(path, [connectListener])</li>
-</ul>
-</li>
+<li>net.connect(path, [connectListener])<br></li>
+</ul></li>
 </ul>
 
-
-<h3>net.Server</h3>
+<h3 id="toc_331">net.Server</h3>
 
 <ul>
 <li>server.listen(port, [host], [listeningListener])
 
 <ul>
 <li><code>listening</code> event</li>
-</ul>
-</li>
-<li>server.close()
+</ul></li>
+<li>server.close()<br>
 
 <ul>
 <li>也是异步关闭，最终 emit <code>close</code>事件</li>
-</ul>
-</li>
-<li>server.address() <code>{"port":43239,"family":2,"address":"0.0.0.0"}</code></li>
+</ul></li>
+<li>server.address() <code>{&quot;port&quot;:43239,&quot;family&quot;:2,&quot;address&quot;:&quot;0.0.0.0&quot;}</code></li>
 <li>server.maxConnections</li>
 <li><p>server.connections</p></li>
-<li><p>Event</p>
+<li><p>Event  </p>
 
 <ul>
 <li>listening</li>
 <li>connection</li>
 <li>close</li>
 <li>error</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
-
-<h3>net.Socket</h3>
+<h3 id="toc_332">net.Socket</h3>
 
 <ul>
 <li>new net.Socket([options])
 
 <ul>
 <li>fd, type, allowHalfOpen</li>
-</ul>
-</li>
+</ul></li>
 <li>socket.connect 一般用net.connect来新建</li>
 <li>bufferSize() 当前准备发的缓存长度</li>
 <li>setEncoding() 指定接收data的编码</li>
@@ -464,8 +431,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <ul>
 <li>超时，通常没有超时</li>
 <li>0则表示同步操作，而且要求即刻发掉</li>
-</ul>
-</li>
+</ul></li>
 <li>setNoDelay() 默认就是true</li>
 <li>keepAlive()</li>
 <li>address(), remoteAddress(), remotePort()</li>
@@ -480,133 +446,120 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>drain</li>
 <li>error</li>
 <li>close</li>
+</ul></li>
 </ul>
-</li>
-</ul>
 
+<h2 id="toc_333">UDP / Datagram Sockets</h2>
 
-<h2>UDP / Datagram Sockets</h2>
+<p><code>require &#39;dgram&#39;</code>  </p>
 
-<p>  <code>require 'dgram'</code></p>
-
-<h2>DNS</h2>
+<h2 id="toc_334">DNS</h2>
 
 <ul>
-<li>lookup()</li>
+<li>lookup()<br></li>
 <li>resolve()</li>
 </ul>
 
-
-<h2>HTTP</h2>
+<h2 id="toc_335">HTTP</h2>
 
 <p>核心思想： The user is able to <strong>stream data</strong>.</p>
 
-<h3>http</h3>
+<h3 id="toc_336">http</h3>
 
 <ul>
 <li>http.createServer([requestListener])</li>
 </ul>
 
-
-<h4>Event</h4>
-
-<ul>
-<li>&#8216;request&#8217;
+<h4 id="toc_337">Event</h4>
 
 <ul>
-<li>(request, response) -></li>
+<li>&#39;request&#39;
+
+<ul>
+<li>(request, response) -&gt; </li>
 <li>一个connection可能有多个request</li>
-</ul>
-</li>
-<li>&#8216;connection&#8217;
+</ul></li>
+<li>&#39;connection&#39;
 
 <ul>
-<li>(socket) -></li>
+<li>(socket) -&gt;</li>
 <li>一般不会直接处理，也可以通过<code>request.connection</code>获得<code>socket</code></li>
-</ul>
-</li>
-<li>&#8216;close&#8217;</li>
-<li>&#8216;checkContinue&#8217;
+</ul></li>
+<li>&#39;close&#39;</li>
+<li>&#39;checkContinue&#39;
 
 <ul>
-<li>(request, response) -></li>
+<li>(request, response) -&gt;</li>
 <li><a href="http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/">关于100-continue</a>  ,用处就是试探，在发起实际的body前把条件等发给server预审</li>
 <li><code>request</code> event will <strong>not</strong> be emitted.</li>
-</ul>
-</li>
-<li>&#8216;upgrade&#8217;
+</ul></li>
+<li>&#39;upgrade&#39;
 
 <ul>
 <li>不知何意</li>
-<li>(request, socket, head) -></li>
-</ul>
-</li>
-<li>&#8216;clientError&#8217;
+<li>(request, socket, head) -&gt; </li>
+</ul></li>
+<li>&#39;clientError&#39;
 
 <ul>
-<li>(exception) -></li>
-</ul>
-</li>
+<li>(exception) -&gt;</li>
+</ul></li>
 </ul>
 
-
-<h4>method</h4>
+<h4 id="toc_338">method</h4>
 
 <ul>
 <li>listen(port, [hostname], [callback])</li>
 <li>close() = net.Server.close()</li>
 </ul>
 
+<h3 id="toc_339">http.ServerRequest</h3>
 
-<h3>http.ServerRequest</h3>
-
-<h4>Event</h4>
+<h4 id="toc_340">Event</h4>
 
 <ul>
-<li>data</li>
-<li>(chunk) -></li>
+<li>data
+
+<ul>
+<li>(chunk) -&gt;</li>
+</ul></li>
 <li>end</li>
 <li>close</li>
 </ul>
 
-
-<h4>method</h4>
+<h4 id="toc_341">method</h4>
 
 <ul>
-<li>method &#8216;GET&#8217;, &#8216;DELETE&#8217;</li>
+<li>method &#39;GET&#39;, &#39;DELETE&#39;</li>
 <li>url
 
 <ul>
-<li><code>require('url').parse(request.url, true)</code></li>
-<li><code>require('querystring').parse</code></li>
-</ul>
-</li>
+<li><code>require(&#39;url&#39;).parse(request.url, true)</code></li>
+<li><code>require(&#39;querystring&#39;).parse</code></li>
+</ul></li>
 <li>request.headers</li>
-<li>request.trailers
+<li>request.trailers 
 
 <ul>
-<li>Only populated after the &#8216;end&#8217; event.</li>
-</ul>
-</li>
+<li>Only populated after the &#39;end&#39; event.</li>
+</ul></li>
 <li>request.setEncoding([encoding])</li>
 <li>pause()</li>
 <li>resume()</li>
 <li>connection</li>
 </ul>
 
-
-<h3>http.ServerResponse</h3>
+<h3 id="toc_342">http.ServerResponse</h3>
 
 <p>实现了<code>Writable Stream</code></p>
 
-<h4>Event</h4>
+<h4 id="toc_343">Event</h4>
 
 <ul>
-<li>&#8216;close&#8217;</li>
+<li>&#39;close&#39;</li>
 </ul>
 
-
-<h4>Method</h4>
+<h4 id="toc_344">Method</h4>
 
 <ul>
 <li>writeContinue()</li>
@@ -614,16 +567,14 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 
 <ul>
 <li>必须在<code>response.end()</code>被调用之前</li>
-<li><code>response.writeHead(200, {Content-Type: 'text/plain'})</code></li>
-</ul>
-</li>
-<li>statusCode</li>
+<li><code>response.writeHead(200, {Content-Type: &#39;text/plain&#39;})</code></li>
+</ul></li>
+<li>statusCode<br></li>
 <li>setHeader(name, value)
 
 <ul>
-<li><code>response.setHeader("Content-Type", "text/html")</code></li>
-</ul>
-</li>
+<li><code>response.setHeader(&quot;Content-Type&quot;, &quot;text/html&quot;)</code></li>
+</ul></li>
 <li>getHeader(name)</li>
 <li>removeHeader(name)</li>
 <li>write(chunk, [encoding])
@@ -632,12 +583,8 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>stream式的写法</li>
 <li>raw</li>
 <li>implicit header mode</li>
-</ul>
-</li>
-<li>addTrailers(headers)</li>
-</ul>
-
-
+</ul></li>
+<li>addTrailers(headers)
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -648,23 +595,16 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
+</span></code></pre></td></tr></table></div></figure></li>
 <li>end([data], [encoding])</li>
 </ul>
 
-
-<h3>http.request</h3>
+<h3 id="toc_345">http.request</h3>
 
 <p>Node保持有几个可以发起http请求的连接</p>
 
 <ul>
-<li>http.request(options, callback)</li>
-</ul>
-
-
+<li><p>http.request(options, callback)
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -690,7 +630,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;<a href="http://www.google.com&amp;#39">www.google.com&amp;#39</a>;</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/upload&#39;</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span>
@@ -713,19 +653,15 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>http.get(options, callback)</li>
+</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>http.get(options, callback)</p></li>
 </ul>
 
-
-<h4>http.Agent</h4>
+<h4 id="toc_346">http.Agent</h4>
 
 <p>node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent</p>
 
-<h3>http.ClientRequest</h3>
+<h3 id="toc_347">http.ClientRequest</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -739,35 +675,30 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<h4>Event</h4>
+<h4 id="toc_348">Event</h4>
 
 <ul>
 <li>response
 
 <ul>
-<li>(response) -></li>
-</ul>
-</li>
+<li>(response) -&gt;</li>
+</ul></li>
 <li>socket
 
 <ul>
-<li>(socket) -></li>
+<li>(socket) -&gt; </li>
 <li>给该request分配socket后触发</li>
-</ul>
-</li>
+</ul></li>
 <li>upgrade
 
 <ul>
-<li>(response, socket, head) -></li>
+<li>(response, socket, head) -&gt; </li>
 <li>似乎是用来升级到websocket的</li>
-</ul>
-</li>
-<li>continue</li>
+</ul></li>
+<li>continue<br></li>
 </ul>
 
-
-<h4>Method</h4>
+<h4 id="toc_349">Method</h4>
 
 <ul>
 <li>write(chunk, [encoding])</li>
@@ -778,27 +709,25 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>setSocketKeepAlive([enable], [initialDelay])</li>
 </ul>
 
+<h3 id="toc_350">http.ClientResponse</h3>
 
-<h3>http.ClientResponse</h3>
-
-<p>a <code>Readable Stream</code></p>
+<p>a <code>Readable Stream</code> </p>
 
 <ul>
 <li>data</li>
 <li>end</li>
 <li><p>close</p></li>
 <li><p>statusCode</p></li>
-<li>headers</li>
-<li>trailers</li>
-<li>setEncoding([encoding])</li>
-<li>pause()</li>
-<li>resume()</li>
+<li><p>headers</p></li>
+<li><p>trailers</p></li>
+<li><p>setEncoding([encoding])</p></li>
+<li><p>pause()</p></li>
+<li><p>resume()</p></li>
 </ul>
 
+<h2 id="toc_351">HTTPS</h2>
 
-<h2>HTTPS</h2>
-
-<h2>URL</h2>
+<h2 id="toc_352">URL</h2>
 
 <ul>
 <li>href - <code>http://user:pass@host.com:8080/p/a/t/h?query=string#hash</code></li>
@@ -808,13 +737,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>hostname</li>
 <li>port</li>
 <li>pathname</li>
-<li>search</li>
+<li>search </li>
 <li>path</li>
 <li>query</li>
 <li><p>hash</p></li>
 <li><p>url.parse(urlStr)</p></li>
 </ul>
-
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -840,8 +768,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<h2>Readline</h2>
+<h2 id="toc_353">Readline</h2>
 
 <p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
 </div>
@@ -930,7 +857,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

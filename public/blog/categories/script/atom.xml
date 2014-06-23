@@ -4,7 +4,7 @@
   <title><![CDATA[分类: script | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/script/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-22T23:28:52+08:00</updated>
+  <updated>2014-06-23T09:27:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -44,17 +44,12 @@
 
 <p>个人感觉，最有用的当属svn tree 命令</p>
 
-<pre><code>svn tree . --full-paths
-</code></pre>
-
 <p>就能打出成排的版本库中的文件和目录。</p>
 
-<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。</p>
-
-<pre><code>svnlook tree . --full-paths | grep java$ | grep -v tags
-svnlook tree . --full-paths | grep jsp$ | grep -v tags
-svnlook tree . --full-paths | grep xml$ | grep -v tags
-</code></pre>
+<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。
+    svnlook tree . --full-paths | grep java$ | grep -v tags
+    svnlook tree . --full-paths | grep jsp$ | grep -v tags
+    svnlook tree . --full-paths | grep xml$ | grep -v tags</p>
 ]]></content>
   </entry>
   
@@ -64,36 +59,20 @@ svnlook tree . --full-paths | grep xml$ | grep -v tags
     <updated>2011-06-28T18:48:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell</id>
     <content type="html"><![CDATA[<p><code>
-function find_git_branch {</p>
-
-<pre><code>local dir=. head
-until [ "$dir" -ef / ]; do
-    if [ -f "$dir/.git/HEAD" ]; then
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-            git_branch=" (${head#*/*/})"
-        elif [[ $head != '' ]]; then
-            git_branch=' (detached)'
-        else
-            git_branch=' (unknown)'
-        fi
-        return
-    fi
-    dir="../$dir"
-done
-git_branch=''
-</code></pre>
+function find_git_branch {
+    local dir=. head
+    until [ &quot;$dir&quot; -ef / ]; do
+        if [ -f &quot;$dir/.git/HEAD&quot; ]; then
+            head=$(&lt; &quot;$dir/.git/HEAD&quot;)
+            if [[ $head == ref:\ refs/heads/* ]]; then</p>
 
 <p>}
-PROMPT_COMMAND="find_git_branch; $PROMPT_COMMAND"
-green=$'\e[1;32m'
-magenta=$'\e[1;35m'
-normal_colours=$'\e[m'</p>
+PROMPT_COMMAND=&quot;find_git_branch; $PROMPT_COMMAND&quot;
+green=$&#39;\e[1;32m&#39;
+magenta=$&#39;\e[1;35m&#39;
+normal_colours=$&#39;\e[m&#39;</p>
 
-<p>PS1="[$green]\u@\h:\w[$magenta]\$git_branch[$green]\$[$normal_colours] "
+<p>PS1=&quot;[$green]\u@\h:\w[$magenta]\$git_branch[$green]\$[$normal_colours] &quot;
 </code>
 秘密在于PROMPT_COMMAND，以保证每次都会执行以下find_git_branch函数</p>
 ]]></content>

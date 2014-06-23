@@ -1,0 +1,5 @@
+<div class="highlight"><pre>numactl --interleave<span class="o">=</span>all /home/mongodb/mongodb-linux-x86_64-2.0.4/bin/mongod --fork --logpath<span class="o">=</span>/data/log/log
+<span class="nb">echo </span>0 &gt; /proc/sys/vm/zone_reclaim_mode
+
+<span class="nb">kill</span> -2 <span class="o">{</span>proccess_id<span class="o">}</span> <span class="c"># kill -2 = ^C</span>
+</pre></div>

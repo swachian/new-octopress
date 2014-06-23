@@ -1,0 +1,35 @@
+<div class="highlight"><pre><span class="err">###</span> <span class="nx">each</span>
+<span class="nx">fun</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="k">for</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">array</span> 
+
+<span class="err">###</span> <span class="nx">map</span>
+<span class="k">for</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">array</span>
+  <span class="nx">item</span><span class="p">.</span><span class="nx">name</span>
+
+<span class="err">###</span> <span class="nx">select</span>
+<span class="nx">passed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">failed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="nx">score</span> <span class="k">in</span> <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if</span> <span class="nx">score</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="nx">then</span> <span class="nx">passed</span> <span class="k">else</span> <span class="nx">failed</span><span class="p">).</span><span class="nx">push</span> <span class="nx">score</span>
+
+<span class="err">###</span> <span class="nx">includes</span>
+<span class="nx">included</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span> <span class="k">in</span> <span class="nx">array</span> <span class="err">#但不能用于单个字符串的内部模式匹配</span>
+
+<span class="err">###</span> <span class="err">属性遍历</span>
+<span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">one</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span><span class="o">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">object</span>
+  <span class="s2">&quot;#{key} = #{value}&quot;</span>
+
+<span class="err">###</span> <span class="nx">or</span>
+<span class="nx">hash</span> <span class="o">?=</span> <span class="p">{}</span>
+
+<span class="err">###</span> <span class="err">支持多值返回</span>
+
+<span class="err">###</span> <span class="err">外部扩展库</span>
+<span class="err">#</span> <span class="nx">Use</span> <span class="nx">local</span> <span class="nx">alias</span>
+<span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
+
+<span class="nx">$</span> <span class="o">-&gt;</span>
+  <span class="err">#</span><span class="nx">COMContentLoaded</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.js-el&quot;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
+</pre></div>

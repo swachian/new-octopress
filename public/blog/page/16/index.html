@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="牵涉到的软件： vmware ubuntu1104 ssh rvm ruby gem rails thin windows securecrt radrails rse 远程控制插件
-Target Management 3.0 Update Site http://download.eclipse &hellip;">
+  <meta name="description" content="牵涉到的软件： vmware ubuntu1104 windows securecrt radrails 其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,24 +100,13 @@ Target Management 3.0 Update Site http://download.eclipse &hellip;">
 
 <p>vmware</p>
 
-<p>  ubuntu1104</p>
-
-<pre><code>ssh
-
-rvm
-
- ruby gem rails thin
-</code></pre>
+<p>ubuntu1104</p>
 
 <p>windows</p>
 
-<p>  securecrt</p>
+<p>securecrt</p>
 
-<p>  radrails</p>
-
-<pre><code>rse 远程控制插件
-Target Management 3.0 Update Site   http://download.eclipse.org/dsdp/tm/updates/3.0 Enabled
-</code></pre>
+<p>radrails</p>
 
 <p>其实就是通过一个virtualbox的方式，将rails的环境安装在ubuntu上。而ide利用radrails+ssh通道的方式访问整个虚拟机的目录，同时搭配securecrt的console能力。可以说，这是在windows下最好的方案。考虑到中文等支持，可能也是比ubuntu下直接利用netbeans等开发更好的方案了。</p>
 
@@ -215,21 +203,11 @@ sudo apt-get install openssh-server</p>
 <p>update: 2011.6.19
 直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
 
-<pre><code>unicorn -c unicorn.conf.rb 
-</code></pre>
-
 <p>conf.rb文件的内容</p>
-
-<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
-listen 8080
-</code></pre>
 
 <p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
 
 <p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
-
-<pre><code>gem install bundle --source='http://127.0.0.1:3000'
-</code></pre>
 </div>
   
   
@@ -267,90 +245,27 @@ listen 8080
 
   <div class="entry-content"><p>前提：拥有虚拟机并已经安装好ubuntu1104</p>
 
-<h3>1. 默认没有ssh server，所以需要安装.安装完成后，会自动打开每次启动的选项。</h3>
+<h3 id="toc_232">1. 默认没有ssh server，所以需要安装.安装完成后，会自动打开每次启动的选项。</h3>
 
-<pre><code>    $ sudo apt-get install openssh-server
-</code></pre>
+<h3 id="toc_233">2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等</h3>
 
-<h3>2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等</h3>
+<h3 id="toc_234">3. 设置时区，及设置ntpdate定期更新例程</h3>
 
-<pre><code>sudo apt-get install curl libcurl3 libcurl3-dev
-apt-get install zlib1g-dev #安装git需要
-apt-get install bison
-/usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
-</code></pre>
-
-<h3>3. 设置时区，及设置ntpdate定期更新例程</h3>
-
-<pre><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-ntpdate ntp.fudan.edu.cn
-</code></pre>
-
-<h3>4. 安装rvm及ruby环境</h3>
-
-<pre><code>$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
-$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" &gt;&gt;  ~/.bash_profile
-$ source ~/.bash_profile
-</code></pre>
+<h3 id="toc_235">4. 安装rvm及ruby环境</h3>
 
 <p>rvm基本指令</p>
 
-<pre><code>rvm list known
-rvm install 1.9.2
-rvm use 1.9.2
-rvm gemset list
-rvm gemset create r310
-rvm gemset use r310
-rvm use 1.9.2@r310
-</code></pre>
+<h3 id="toc_236">5. 安装mysql</h3>
 
-<h3>5. 安装mysql</h3>
+<h3 id="toc_237">6. 更新rubygem</h3>
 
-<pre><code>$wget http://unmp.googlecode.com/files/mysql-5.1.57.tar.gz
-$tar -zxvf mysql-5.1.57.tar.gz
-$ sudo groupadd mysql
-$ sudo useradd -g mysql mysql
-$ ./configure --prefix=/opt/mysql --with-charset=utf8 --with-extra-charsets="gbk,gb2312,big5" --with-plugins=innobase
-$ make &amp;&amp; make install
+<h3 id="toc_238">7. 安装rails</h3>
 
-cp support-files/my-huge.cnf /etc/my.cnf
-cp support-files/mysql.server /etc/init.d/mysqld
-chmod 755 /etc/init.d/mysqld
-cd /etc/init.d/
-who -r
-cd /ect/rc5.d/
-ln -s ../init.d/mysqld S85mysqld
-ln -s ../init.d/mysqld K85mysqld
-vi /etc/my.cnf
-     在/etc/my.cnf中设置innodb成为默认的数据库引擎
-    default-storage-engine=INNODB
-    transaction-isolation=READ-COMMITTED #将innodb的事务隔离级别调整,以保证提交的数据必定被读取
-    grant all on *.* to 'user'@'%' identified by 'password';
-cd /opt/mysql/
-./bin/mysql_install_db
-chown -R root .
-chown -R mysql var
-/etc/init.d/mysqld start
-</code></pre>
-
-<h3>6. 更新rubygem</h3>
-
-<pre><code>gem install update-system
-update_rubygems
-update_rubygems
-</code></pre>
-
-<h3>7. 安装rails</h3>
-
-<pre><code>gem install rails
-gem install mysql2
-</code></pre>
-
-<h3>附录secure crt相关</h3>
+<h3 id="toc_239">附录secure crt相关</h3>
 
 <p>SecureCRT设置彩色和显示中文
-设置Options->SessionOptions ->Emulation,然后把Terminal类型改成xterm，并点中ANSI Color复选框。
-字体设置：Options->SessionOptions->Appearance->font然后改成你想要的字体就可以了。
+设置Options-&gt;SessionOptions -&gt;Emulation,然后把Terminal类型改成xterm，并点中ANSI Color复选框。
+字体设置：Options-&gt;SessionOptions-&gt;Appearance-&gt;font然后改成你想要的字体就可以了。
 注意：
 1：字符集选择utf8，这样可以避免显示汉字乱码
 2：选择字体的时候，需要选择ture type的字体(如新宋体)，不然会出现汉字乱码
@@ -405,68 +320,37 @@ gem install mysql2
 Sprockets来自动集成js成一个文件，css成一个文件
 uglifier 生产环境下来压缩静态文件</p>
 
-<p>console里面的 <pre>reload!</pre> 可以重新加在修改过的文件</p>
+<p>console里面的 <pre>reload!</pre> 可以重新加在修改过的文件 </p>
 
 <p>view层也带继承了
 这是很大的一个进步，view终于获得了应有的地位</p>
 
-<pre><code>after_find #一个回调函数
-first last #不像find那样会报NoRecord的error
-find_each #批量查询方法，避免整个表拿出来
-find_in_batches #同find_each类似，就是取出的是一个集合
-</code></pre>
-
-<p>join</p>
-
-<pre><code>Post.joins(:category, :comments)
-Category.joins(:posts =&gt; [{:comments =&gt; :guest}, :tags])
-</code></pre>
+<p>join
+    Post.joins(:category, :comments)
+    Category.joins(:posts =&gt; [{:comments =&gt; :guest}, :tags])</p>
 
 <p>clients = Client.includes(:address).limit(10)
   使得原本11句查询，变成了2句，先查出client，然后通过client_id in（x,x &#8230;）查出address的结果</p>
 
-<pre><code>find_by_first_name, find_all_by_first_name, find_by_name!
-Client.find_or_initialize, Client.find_or_create
-
-
-Post.where(:published =&gt; true).any? 检查是否exist?
-
-
-&lt;%=form_for([@post, @post.comments.build]) do |f| %&gt;
-#新版的form_for前用&lt;%=，注意多了=号，挺无聊的追求，对new的要求可以放到view里面来写，一来这确实只是为了view的需要，另一方面今后其他action复用view的话不用再在controller里面new了
-</code></pre>
-
 <p>常用的操作</p>
 
-<pre><code>&lt;%= render :partial =&gt; "comments/comment",
-:collection =&gt; @post.comments %&gt;
-&lt;%= render "comments/form" %&gt;
-&lt;%= link_to 'Destroy Comment', [comment.post, comment],
-:confirm =&gt; 'Are you sure?',:method =&gt; :delete %&gt;
-</code></pre>
-
-<p>嵌套form</p>
-
-<pre><code>accepts_nested_attributes_for :tags, :allow_destroy =&gt; :true,
-    :reject_if =&gt; proc { |attrs| attrs.all? { |k, v| v.blank? } }
-&lt;%= form.fields_for :tags do |tag_form| %&gt;
-</code></pre>
+<p>嵌套form
+    accepts_nested_attributes_for :tags, :allow_destroy =&gt; :true,
+        :reject_if =&gt; proc { |attrs| attrs.all? { |k, v| v.blank? } }
+    &lt;%= form.fields_for :tags do |tag_form| %&gt;</p>
 
 <p>rails的callback不能直接使用def after_safe,而需要用after_save :method的方式来定义一个执行链
 新版的规矩</p>
 
 <p>比较好的<a href="http://phoenixtoday.blogbus.com/logs/33458940.html">git教程</a></p>
 
-<p>ihow的template https://github.com/ihower/rails3-app-template/blob/master/Gemfile,可以发现不少实用的操作，以及一些常用的gem包</p>
+<p>ihow的template <a href="https://github.com/ihower/rails3-app-template/blob/master/Gemfile,%E5%8F%AF%E4%BB%A5%E5%8F%91%E7%8E%B0%E4%B8%8D%E5%B0%91%E5%AE%9E%E7%94%A8%E7%9A%84%E6%93%8D%E4%BD%9C%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84gem%E5%8C%85">https://github.com/ihower/rails3-app-template/blob/master/Gemfile,可以发现不少实用的操作，以及一些常用的gem包</a></p>
 
 <p>simple_form 这个插件</p>
 
 <p>annotate 自动标注，这里面学到了新的配置Gemfile的方法和执行通过Gemfile安装的特定的gem的使用方法</p>
 
 <p>Gemfile</p>
-
-<pre><code>gem 'annotate', :git =&gt; 'https://github.com/ctran/annotate_models.git' #, :branch =&gt; 'rake_compatibility' #指定通过git来安装，也可再跟上一个branch
-</code></pre>
 
 <p>通过上述方法安装的可运行gem，需要通过    <code>bundle exec annotate</code>    来运行</p>
 </div>
@@ -550,7 +434,7 @@ Post.where(:published =&gt; true).any? 检查是否exist?
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

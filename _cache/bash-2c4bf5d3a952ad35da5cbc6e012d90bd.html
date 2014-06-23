@@ -1,0 +1,17 @@
+<div class="highlight"><pre>mkdir /data/node1
+mkdir /data/node2
+mkdir /data/arbiter 
+
+numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/node1 --port 40000 --oplogSize 5000
+numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/node2 --port 40001 --oplogSize 5000
+numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/arbiter --port 40002 --oplogSize 5000
+
+./bin/mongo ngntest:40000
+&gt; rs.initiate<span class="o">()</span>
+&gt; <span class="nv">config</span> <span class="o">=</span>  <span class="o">{</span>_id: <span class="s1">&#39;pcdm&#39;</span>, members: <span class="o">[</span>
+                          <span class="o">{</span>_id: 0, host: <span class="s1">&#39;localhost:40000&#39;</span><span class="o">}</span>,
+                          <span class="o">{</span>_id: 1, host: <span class="s1">&#39;localhost:40001&#39;</span><span class="o">}</span>,
+                          <span class="o">{</span>_id: 2, host: <span class="s1">&#39;localhost:40002&#39;</span><span class="o">}]</span>
+           <span class="o">}</span>
+&gt; rs.initiate<span class="o">(</span>config<span class="o">)</span>
+</pre></div>

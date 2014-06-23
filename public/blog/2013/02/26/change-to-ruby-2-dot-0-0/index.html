@@ -1,25 +1,24 @@
 <p>layout: post
-title: &#8220;Change to Ruby 2.0.0&#8221;
+title: &quot;Change to Ruby 2.0.0&quot;
 date: 2013-02-26 11:30
 comments: true
 categories:
 - ruby
 - heroku</p>
 
-<hr />
+<hr>
 
 <p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
 
 <p>步骤如下：</p>
 
 <ol>
-<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
+<li>在Gemfile中加入 <code>ruby &quot;2.0.0&quot;</code></li>
 <li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
 <li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
 <li><code>git commit -a</code></li>
 <li><code>git push heroku</code></li>
 </ol>
-
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -82,7 +81,6 @@ categories:
 </span><span class='line'>-----&gt; Compiled slug size: 30.5MB
 </span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
 
-
 <p>但我不太理解slug size为啥变大了。</p>
 
 <p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
@@ -90,9 +88,6 @@ categories:
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec unicorn -p $PORT</span></code></pre></td></tr></table></div></figure>
-
-
-
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -153,7 +148,6 @@ categories:
 </span><span class='line'>-----&gt; Compiled slug size: 35.9MB
 </span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
 
-
 <p>最后重新弄了一下，发现还是很大。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -204,7 +198,6 @@ categories:
 </span><span class='line'>-----&gt; Compiled slug size: 27.3MB
 </span><span class='line'>-----&gt; Launching... done, v5
 </span><span class='line'>       http://octopresszhangyu.herokuapp.com deployed to Heroku</span></code></pre></td></tr></table></div></figure>
-
 
 <p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
 明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
