@@ -152,11 +152,12 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>Restful风格的Url，通过声明<code>@ModelAttribute</code>可以注入参数到模型中，
 <code>@PathVariable</code>可以实现从url路径中获取参数，
 <code>userService</code>是注入的服务组件，<code>model.addAttribute</code>则将controller的内容注入给页面模板。
 整个风格已经十分简洁。如果需要其他组件，如<code>session</code>或者<code>request</code>，
-只要在类或者方法的参数中声明即可。<code>return &quot;user/userForm&quot;</code>则通知渲染user目录下的userForm.jsp模板</p>
+只要在类或者方法的参数中声明即可。<code>return "user/userForm"</code>则通知渲染user目录下的userForm.jsp模板</p>
 
 <p>Spring JPA则是最方便的Java ORM描述工具。寻找多年的Java版ActiveRecord终于有了着落。
 需要定义两个文件：1：model本身，2：一个dao文件（reposity）</p>
@@ -164,6 +165,7 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 <ul>
 <li>model：</li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -287,11 +289,13 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>啰嗦是还是有点啰嗦，这个毕竟是java。DAO相对代码少一些。</p>
 
 <ul>
 <li>DAO文件：</li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -306,10 +310,15 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'>  <span class="n">User</span> <span class="nf">findByNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number1</span><span class="o">);</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-这个dao提供了很多默认的方法，包括`findAll`, `findOne`, `save`，底层的
-实现还有很多内容，但使用的话确实只需要声明这些就行了。
 
-- 在Service文件中可这样使用:
+
+<p>这个dao提供了很多默认的方法，包括<code>findAll</code>, <code>findOne</code>, <code>save</code>，底层的
+实现还有很多内容，但使用的话确实只需要声明这些就行了。</p>
+
+<ul>
+<li>在Service文件中可这样使用:</li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -333,12 +342,15 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>而在页面处理上，几年前的Servlet 2.5开始，EL表达式取得了首要被支持的地位。</p>
 
-<p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">$</span><span class="o">{</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-对比ruby在erb里常用的</p>
+
+
+<p>对比ruby在erb里常用的</p>
 
 <p><code>&lt;%=user.name%&gt;</code></p>
 
@@ -423,6 +435,10 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -438,15 +454,11 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

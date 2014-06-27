@@ -100,37 +100,38 @@
 <p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
 总之，流更适合对分布式系统的集中处理。</p>
 
-<h3 id="toc_354">站在开发的角度</h3>
+<h3>站在开发的角度</h3>
 
 <p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
 莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
 实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
 
-<h3 id="toc_355">站在部署的角度</h3>
+<h3>站在部署的角度</h3>
 
 <p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
 一个input stream。</p>
 
 <p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
 
-<h3 id="toc_356">几种技巧和工具</h3>
+<h3>几种技巧和工具</h3>
 
 <ol>
-<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a><br>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
 syslog是要搭配bash的命令<code>logger</code>使用的。
 <code>sh
-mydaemon | tee /var/log/mydaemon.log | logger
+ mydaemon | tee /var/log/mydaemon.log | logger
 </code>
 tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
-<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
 则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
-<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
 这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
 存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
 再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
-<li><p>Upstart launchd  Systemd 
+<li><p>Upstart launchd  Systemd
 这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
 </ol>
+
 </div>
 
 
@@ -194,6 +195,10 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -209,15 +214,11 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

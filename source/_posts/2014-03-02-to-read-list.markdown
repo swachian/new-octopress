@@ -11,7 +11,7 @@ categories:
 
 1. [x] [Flower M. Patterns of Enterprise Application Architecture](/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/), Addison-Wesley Professional. Rails诞生的书，[DHH最爱的五本编程书籍](http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me)，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。
 1. Learning Jquery.
-1. Resig, 精通Javascript.
+1. Resig, 精通Javascript. 简约、精彩、结合实际的书，第一章就很精彩。
 1. [PoEAA的访谈和DHH](http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/)
 1. 曾宪杰. 大型网站系统与Java中间件实践. 2014.
 1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.

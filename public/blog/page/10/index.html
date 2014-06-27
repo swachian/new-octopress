@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
-于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。 个人觉得如何破解foxmail的密码都可以写一篇不错的论文。
-">
+  <meta name="description" content="大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
+中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的concise . 读完之后很是喜欢, 于是买了英文版.
+再后来, 也就淡淡忘了. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/23/javascript-the-good-parts/">JavaScript: The Good Parts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-23T00:08:00+08:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
+中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
+再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
+但是缺乏练习的后果必然是无法掌握的.</p>
+
+<p>最近在看CoffeeScript 和 NodeJS, 进一步领略了JS的威力, 有些地方也不甚明白, 于是又翻出这本书看了一下.这次出奇的顺利, 从翻开
+到看完也就2天的功夫, 而且2天时间内看的比例并不高.下面是看完后对这本书的书评.</p>
+
+<p>这本书确实是一本需要反复阅读的书.作者的话语极其精炼, 招招都是要害, 所以必须要仔细看才能看的明白.而且从书中可以看出作者的造诣
+确实很深, 对js的认识以及语言的评价都是高度与深度相结合, 而且很多反应了使用者的感受, 不是大家是写不出这么有深度的文章的.</p>
+
+<p>书中最有价值的是 3.Objects, 4.Functions, 5.Inheritance 这3章. 如果是用coffeeScript的话, 3和4的价值就更加突出.通过学习,可以掌握
+js的object array的文法, 也可以明白js function的4种调用方式(obj.method, func.func, Obj.construtor(new), func.apply(this, argv)),
+Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了汉诺塔.</p>
+
+<p>Js的另一部分即prototype继承的特性目前还不甚了了, 可能还需呀补充一点其他读物. 做点练习才能领会.</p>
+
+<p>JavaScript确实是门很强悍的语言, 尤其是那句它只关系对象能做什么,而不关心对象的出生是什么.
+一个设计的很有问题的语言,最终统治了web浏览器,是不是有点命中注定的意思?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -139,36 +193,40 @@
 
   <div class="entry-content"><p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
 
-<p>Won&#39;t write js again.</p>
+<p>Won&#8217;t write js again.</p>
 
-<p>2004 Google Map ，build wonderful app with just html &amp; js<br>
+<p>2004 Google Map ，build wonderful app with just html &amp; js<br/>
 improve the language , prototype</p>
 
-<p>1.function Syntax<br>
-2.Significant Whitespace<br>
-  not see braces<br>
-3.Bare Objects, no braces needed<br>
-4.Everything&#39;s an Expression<br>
-5.Comprehensions<br>
+<p>1.function Syntax<br/>
+2.Significant Whitespace<br/>
+  not see braces<br/>
+3.Bare Objects, no braces needed<br/>
+4.Everything&#8217;s an Expression<br/>
+5.Comprehensions</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">names</span> <span class="o">=</span> <span class="k">for</span> <span class="nx">person</span> <span class="k">in</span> <span class="nx">people</span>
 </span><span class='line'>     <span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
 </span><span class='line'>   <span class="err">返回</span><span class="p">[]</span><span class="err">，</span><span class="nx">borrow</span> <span class="nx">from</span> <span class="nx">python</span>
-</span></code></pre></td></tr></table></div></figure><br>
-6.Classes &amp;&amp; Inheritance<br>
-  <code>extends, construct, @, $el=super</code>  </p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>7.Bound Functions<br>
-  <code>=&gt;</code> 取代了bind(this)<br>
-8.Conditionals<br>
- <code>?</code><br>
-9.Destructuring, Assignment<br>
- <code>{name, age} = person</code><br>
+
+<p>
+6.Classes &amp;&amp; Inheritance<br/>
+  <code>extends, construct, @, $el=super</code></p>
+
+<p>7.Bound Functions<br/>
+  <code>=&gt;</code> 取代了bind(this)<br/>
+8.Conditionals<br/>
+ <code>?</code> <br/>
+9.Destructuring, Assignment<br/>
+ <code>{name, age} = person</code><br/>
  <code>[first,seconde] = s.split(//)</code>
-  必须要是{}或者[]对象<br>
-10.String Syntax<br>
+  必须要是{}或者[]对象 <br/>
+10.String Syntax<br/>
   <code>#{}</code></p>
 </div>
   
@@ -211,37 +269,38 @@ improve the language , prototype</p>
 <p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
 总之，流更适合对分布式系统的集中处理。</p>
 
-<h3 id="toc_354">站在开发的角度</h3>
+<h3>站在开发的角度</h3>
 
 <p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
 莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
 实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
 
-<h3 id="toc_355">站在部署的角度</h3>
+<h3>站在部署的角度</h3>
 
 <p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
 一个input stream。</p>
 
 <p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
 
-<h3 id="toc_356">几种技巧和工具</h3>
+<h3>几种技巧和工具</h3>
 
 <ol>
-<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a><br>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
 syslog是要搭配bash的命令<code>logger</code>使用的。
 <code>sh
-mydaemon | tee /var/log/mydaemon.log | logger
+ mydaemon | tee /var/log/mydaemon.log | logger
 </code>
 tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
-<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
 则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
-<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
 这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
 存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
 再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
-<li><p>Upstart launchd  Systemd 
+<li><p>Upstart launchd  Systemd
 这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
 </ol>
+
 </div>
   
   
@@ -283,24 +342,24 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
 <p>而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
 而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.</p>
 
-<p><a href="http://howtonode.org/understanding-process-next-tick">http://howtonode.org/understanding-process-next-tick</a></p>
+<p>http://howtonode.org/understanding-process-next-tick</p>
 
 <p>tick其实就是计算机系统的时隙.</p>
 
-<h2 id="toc_321">util</h2>
+<h2>util</h2>
 
 <p>util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
 两点是多了<code>%j</code>支持json格式的输出.</p>
 
-<p>util.debug() 用于调试的,输出到<code>stderr</code><br>
-util.log() <code>stdout</code><br>
-util.inspect(object) 展开对象信息<br>
-util.isArray, isRegExp, isDate  </p>
+<p>util.debug() 用于调试的,输出到<code>stderr</code><br/>
+util.log() <code>stdout</code><br/>
+util.inspect(object) 展开对象信息<br/>
+util.isArray, isRegExp, isDate</p>
 
-<h2 id="toc_322">Events</h2>
+<h2>Events</h2>
 
-<p>All objects which emit events are instances of <code>require(&#39;events&#39;).EventEmitter</code><br>
-All EventEmitters emit the event <code>newListener</code> when new listeners are added  </p>
+<p>All objects which emit events are instances of <code>require('events').EventEmitter</code><br/>
+All EventEmitters emit the event <code>newListener</code> when new listeners are added</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -341,12 +400,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="err">#</span> <span class="err">触发事件</span>
 </span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">],</span> <span class="p">[</span><span class="nx">arg2</span><span class="p">],</span> <span class="p">[...])</span>
 </span></code></pre></td></tr></table></div></figure>
- 
 
-<h2 id="toc_323">Buffer</h2>
+
+<h2>Buffer</h2>
 
 <p>这个东西和C里面的 <code>bytes c[8192];</code> 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
-自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可. </p>
+自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可.</p>
 
 <ul>
 <li>encodings:
@@ -357,9 +416,11 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>ucs2</li>
 <li>base64</li>
 <li>binary 通常不用,而是直接用Buffer</li>
-<li>hex 十六进制 </li>
-</ul></li>
+<li>hex 十六进制</li>
 </ul>
+</li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -391,22 +452,24 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="err">此外还有一堆读写各种类型的函数</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_324">Stream</h2>
 
-<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br>
-所有的stream, 都是<code>EventEmitter</code>的实现. </p>
+<h2>Stream</h2>
 
-<h3 id="toc_325">Readable Stream</h3>
+<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br/>
+所有的stream, 都是<code>EventEmitter</code>的实现.</p>
+
+<h3>Readable Stream</h3>
 
 <ul>
-<li><p>Event  </p>
+<li><p>Event</p>
 
 <ul>
 <li>data</li>
 <li>end 可能可以继续写</li>
 <li>error</li>
 <li>close 不是所有的流都有关闭,比如进来的http request</li>
-</ul></li>
+</ul>
+</li>
 <li><p>method</p>
 
 <ul>
@@ -415,7 +478,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>pause 停止<code>data</code>事件</li>
 <li>resume 恢复<code>data</code>事件</li>
 <li>destroy</li>
-<li>pipe 
+<li>pipe</li>
+</ul>
+</li>
+</ul>
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -430,11 +498,10 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>  <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Goodbye\n&quot;</span><span class="p">);</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></li>
-</ul></li>
-</ul>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_326">Writable Stream</h3>
+
+<h3>Writable Stream</h3>
 
 <ul>
 <li><p>Event</p>
@@ -444,8 +511,9 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>error</li>
 <li>close</li>
 <li>pipe</li>
-</ul></li>
-<li><p>method  </p>
+</ul>
+</li>
+<li><p>method</p>
 
 <ul>
 <li>writable</li>
@@ -455,10 +523,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>end(string, encoding)</li>
 <li>end(buffer)</li>
 <li>destroy()</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h2 id="toc_327">Crypto</h2>
+
+<h2>Crypto</h2>
 
 <p>加密解密的系类</p>
 
@@ -494,16 +564,22 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_328">File System</h2>
+
+<h2>File System</h2>
 
 <p>异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block</p>
 
 <ul>
-<li>fs.watch<br>
+<li>fs.watch
 
 <ul>
 <li>Linux下用 <code>inotify</code>实现</li>
-<li>返回&#39;rename&#39; or &#39;change&#39; 事件
+<li>返回&#8217;rename&#8217; or &#8216;change&#8217; 事件</li>
+</ul>
+</li>
+</ul>
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -520,20 +596,26 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename not provided&#39;</span><span class="p">);</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></li>
-</ul></li>
-<li>fs.ReadStream<br></li>
-<li>fs.WriteStream </li>
-<li>fs.open(path, flags, [mode], [callback]) 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>fs.ReadStream</li>
+<li>fs.WriteStream</li>
+<li>fs.open(path, flags, [mode], [callback])
 <code>(err, fd)</code></li>
 </ul>
 
-<h2 id="toc_329">Path</h2>
 
-<h2 id="toc_330">Net</h2>
+<h2>Path</h2>
+
+<h2>Net</h2>
 
 <ul>
-<li><p>net.createServer([options], [connectionListener])<br>
+<li>net.createServer([options], [connectionListener])</li>
+</ul>
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -558,50 +640,60 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8124</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//&#39;listening&#39; listener</span>
 </span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server bound&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>net.connect,net.createConnection  </p>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>net.connect,net.createConnection
 
 <ul>
 <li>也是一样触发<code>connect</code>事件</li>
 <li>net.connect(port, [host], [connectListener])</li>
-<li>net.connect(path, [connectListener])<br></li>
-</ul></li>
+<li>net.connect(path, [connectListener])</li>
+</ul>
+</li>
 </ul>
 
-<h3 id="toc_331">net.Server</h3>
+
+<h3>net.Server</h3>
 
 <ul>
 <li>server.listen(port, [host], [listeningListener])
 
 <ul>
 <li><code>listening</code> event</li>
-</ul></li>
-<li>server.close()<br>
+</ul>
+</li>
+<li>server.close()
 
 <ul>
 <li>也是异步关闭，最终 emit <code>close</code>事件</li>
-</ul></li>
-<li>server.address() <code>{&quot;port&quot;:43239,&quot;family&quot;:2,&quot;address&quot;:&quot;0.0.0.0&quot;}</code></li>
+</ul>
+</li>
+<li>server.address() <code>{"port":43239,"family":2,"address":"0.0.0.0"}</code></li>
 <li>server.maxConnections</li>
 <li><p>server.connections</p></li>
-<li><p>Event  </p>
+<li><p>Event</p>
 
 <ul>
 <li>listening</li>
 <li>connection</li>
 <li>close</li>
 <li>error</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h3 id="toc_332">net.Socket</h3>
+
+<h3>net.Socket</h3>
 
 <ul>
 <li>new net.Socket([options])
 
 <ul>
 <li>fd, type, allowHalfOpen</li>
-</ul></li>
+</ul>
+</li>
 <li>socket.connect 一般用net.connect来新建</li>
 <li>bufferSize() 当前准备发的缓存长度</li>
 <li>setEncoding() 指定接收data的编码</li>
@@ -614,7 +706,8 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <ul>
 <li>超时，通常没有超时</li>
 <li>0则表示同步操作，而且要求即刻发掉</li>
-</ul></li>
+</ul>
+</li>
 <li>setNoDelay() 默认就是true</li>
 <li>keepAlive()</li>
 <li>address(), remoteAddress(), remotePort()</li>
@@ -629,120 +722,133 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>drain</li>
 <li>error</li>
 <li>close</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h2 id="toc_333">UDP / Datagram Sockets</h2>
 
-<p><code>require &#39;dgram&#39;</code>  </p>
+<h2>UDP / Datagram Sockets</h2>
 
-<h2 id="toc_334">DNS</h2>
+<p>  <code>require 'dgram'</code></p>
+
+<h2>DNS</h2>
 
 <ul>
-<li>lookup()<br></li>
+<li>lookup()</li>
 <li>resolve()</li>
 </ul>
 
-<h2 id="toc_335">HTTP</h2>
+
+<h2>HTTP</h2>
 
 <p>核心思想： The user is able to <strong>stream data</strong>.</p>
 
-<h3 id="toc_336">http</h3>
+<h3>http</h3>
 
 <ul>
 <li>http.createServer([requestListener])</li>
 </ul>
 
-<h4 id="toc_337">Event</h4>
+
+<h4>Event</h4>
 
 <ul>
-<li>&#39;request&#39;
+<li>&#8216;request&#8217;
 
 <ul>
-<li>(request, response) -&gt; </li>
+<li>(request, response) -></li>
 <li>一个connection可能有多个request</li>
-</ul></li>
-<li>&#39;connection&#39;
+</ul>
+</li>
+<li>&#8216;connection&#8217;
 
 <ul>
-<li>(socket) -&gt;</li>
+<li>(socket) -></li>
 <li>一般不会直接处理，也可以通过<code>request.connection</code>获得<code>socket</code></li>
-</ul></li>
-<li>&#39;close&#39;</li>
-<li>&#39;checkContinue&#39;
+</ul>
+</li>
+<li>&#8216;close&#8217;</li>
+<li>&#8216;checkContinue&#8217;
 
 <ul>
-<li>(request, response) -&gt;</li>
+<li>(request, response) -></li>
 <li><a href="http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/">关于100-continue</a>  ,用处就是试探，在发起实际的body前把条件等发给server预审</li>
 <li><code>request</code> event will <strong>not</strong> be emitted.</li>
-</ul></li>
-<li>&#39;upgrade&#39;
+</ul>
+</li>
+<li>&#8216;upgrade&#8217;
 
 <ul>
 <li>不知何意</li>
-<li>(request, socket, head) -&gt; </li>
-</ul></li>
-<li>&#39;clientError&#39;
+<li>(request, socket, head) -></li>
+</ul>
+</li>
+<li>&#8216;clientError&#8217;
 
 <ul>
-<li>(exception) -&gt;</li>
-</ul></li>
+<li>(exception) -></li>
+</ul>
+</li>
 </ul>
 
-<h4 id="toc_338">method</h4>
+
+<h4>method</h4>
 
 <ul>
 <li>listen(port, [hostname], [callback])</li>
 <li>close() = net.Server.close()</li>
 </ul>
 
-<h3 id="toc_339">http.ServerRequest</h3>
 
-<h4 id="toc_340">Event</h4>
+<h3>http.ServerRequest</h3>
 
-<ul>
-<li>data
+<h4>Event</h4>
 
 <ul>
-<li>(chunk) -&gt;</li>
-</ul></li>
+<li>data</li>
+<li>(chunk) -></li>
 <li>end</li>
 <li>close</li>
 </ul>
 
-<h4 id="toc_341">method</h4>
+
+<h4>method</h4>
 
 <ul>
-<li>method &#39;GET&#39;, &#39;DELETE&#39;</li>
+<li>method &#8216;GET&#8217;, &#8216;DELETE&#8217;</li>
 <li>url
 
 <ul>
-<li><code>require(&#39;url&#39;).parse(request.url, true)</code></li>
-<li><code>require(&#39;querystring&#39;).parse</code></li>
-</ul></li>
+<li><code>require('url').parse(request.url, true)</code></li>
+<li><code>require('querystring').parse</code></li>
+</ul>
+</li>
 <li>request.headers</li>
-<li>request.trailers 
+<li>request.trailers
 
 <ul>
-<li>Only populated after the &#39;end&#39; event.</li>
-</ul></li>
+<li>Only populated after the &#8216;end&#8217; event.</li>
+</ul>
+</li>
 <li>request.setEncoding([encoding])</li>
 <li>pause()</li>
 <li>resume()</li>
 <li>connection</li>
 </ul>
 
-<h3 id="toc_342">http.ServerResponse</h3>
+
+<h3>http.ServerResponse</h3>
 
 <p>实现了<code>Writable Stream</code></p>
 
-<h4 id="toc_343">Event</h4>
+<h4>Event</h4>
 
 <ul>
-<li>&#39;close&#39;</li>
+<li>&#8216;close&#8217;</li>
 </ul>
 
-<h4 id="toc_344">Method</h4>
+
+<h4>Method</h4>
 
 <ul>
 <li>writeContinue()</li>
@@ -750,14 +856,16 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 
 <ul>
 <li>必须在<code>response.end()</code>被调用之前</li>
-<li><code>response.writeHead(200, {Content-Type: &#39;text/plain&#39;})</code></li>
-</ul></li>
-<li>statusCode<br></li>
+<li><code>response.writeHead(200, {Content-Type: 'text/plain'})</code></li>
+</ul>
+</li>
+<li>statusCode</li>
 <li>setHeader(name, value)
 
 <ul>
-<li><code>response.setHeader(&quot;Content-Type&quot;, &quot;text/html&quot;)</code></li>
-</ul></li>
+<li><code>response.setHeader("Content-Type", "text/html")</code></li>
+</ul>
+</li>
 <li>getHeader(name)</li>
 <li>removeHeader(name)</li>
 <li>write(chunk, [encoding])
@@ -766,8 +874,12 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>stream式的写法</li>
 <li>raw</li>
 <li>implicit header mode</li>
-</ul></li>
-<li>addTrailers(headers)
+</ul>
+</li>
+<li>addTrailers(headers)</li>
+</ul>
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -778,16 +890,23 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
 </span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure></li>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
 <li>end([data], [encoding])</li>
 </ul>
 
-<h3 id="toc_345">http.request</h3>
+
+<h3>http.request</h3>
 
 <p>Node保持有几个可以发起http请求的连接</p>
 
 <ul>
-<li><p>http.request(options, callback)
+<li>http.request(options, callback)</li>
+</ul>
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -813,7 +932,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;<a href="http://www.google.com&amp;#39">www.google.com&amp;#39</a>;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/upload&#39;</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span>
@@ -836,15 +955,19 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>http.get(options, callback)</p></li>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>http.get(options, callback)</li>
 </ul>
 
-<h4 id="toc_346">http.Agent</h4>
+
+<h4>http.Agent</h4>
 
 <p>node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent</p>
 
-<h3 id="toc_347">http.ClientRequest</h3>
+<h3>http.ClientRequest</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -858,30 +981,35 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_348">Event</h4>
+
+<h4>Event</h4>
 
 <ul>
 <li>response
 
 <ul>
-<li>(response) -&gt;</li>
-</ul></li>
+<li>(response) -></li>
+</ul>
+</li>
 <li>socket
 
 <ul>
-<li>(socket) -&gt; </li>
+<li>(socket) -></li>
 <li>给该request分配socket后触发</li>
-</ul></li>
+</ul>
+</li>
 <li>upgrade
 
 <ul>
-<li>(response, socket, head) -&gt; </li>
+<li>(response, socket, head) -></li>
 <li>似乎是用来升级到websocket的</li>
-</ul></li>
-<li>continue<br></li>
+</ul>
+</li>
+<li>continue</li>
 </ul>
 
-<h4 id="toc_349">Method</h4>
+
+<h4>Method</h4>
 
 <ul>
 <li>write(chunk, [encoding])</li>
@@ -892,25 +1020,27 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>setSocketKeepAlive([enable], [initialDelay])</li>
 </ul>
 
-<h3 id="toc_350">http.ClientResponse</h3>
 
-<p>a <code>Readable Stream</code> </p>
+<h3>http.ClientResponse</h3>
+
+<p>a <code>Readable Stream</code></p>
 
 <ul>
 <li>data</li>
 <li>end</li>
 <li><p>close</p></li>
 <li><p>statusCode</p></li>
-<li><p>headers</p></li>
-<li><p>trailers</p></li>
-<li><p>setEncoding([encoding])</p></li>
-<li><p>pause()</p></li>
-<li><p>resume()</p></li>
+<li>headers</li>
+<li>trailers</li>
+<li>setEncoding([encoding])</li>
+<li>pause()</li>
+<li>resume()</li>
 </ul>
 
-<h2 id="toc_351">HTTPS</h2>
 
-<h2 id="toc_352">URL</h2>
+<h2>HTTPS</h2>
+
+<h2>URL</h2>
 
 <ul>
 <li>href - <code>http://user:pass@host.com:8080/p/a/t/h?query=string#hash</code></li>
@@ -920,12 +1050,13 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 <li>hostname</li>
 <li>port</li>
 <li>pathname</li>
-<li>search </li>
+<li>search</li>
 <li>path</li>
 <li>query</li>
 <li><p>hash</p></li>
 <li><p>url.parse(urlStr)</p></li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -951,7 +1082,8 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_353">Readline</h2>
+
+<h2>Readline</h2>
 
 <p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
 </div>
@@ -989,10 +1121,10 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
   </header>
 
 
-  <div class="entry-content"><p>这是阅读&#39;The little Book on CoffeeScript&#39;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
+  <div class="entry-content"><p>这是阅读&#8217;The little Book on CoffeeScript&#8217;的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
 不需要太大的部头。</p>
 
-<h1 id="toc_307">安装步骤</h1>
+<h1>安装步骤</h1>
 
 <p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
 
@@ -1007,6 +1139,7 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'><span class="err">#</span> <span class="nx">Some</span> <span class="nx">CoffeeScript</span>
 </span><span class='line'><span class="nt">&lt;/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
+
 
 <p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
 但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
@@ -1025,62 +1158,72 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>npm install -g coffee-script # -g 才能确保不是安装在当前目录
 </span></code></pre></td></tr></table></div></figure>
 
-<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code> 
+
+<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
 <strong>运行</strong> <code>coffee my-script.coffee</code>
 <strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
 
-<h1 id="toc_308">1. Syntax</h1>
+<h1>1. Syntax</h1>
 
-<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br>
-和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than  </p>
+<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
+和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
 
-<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进  </p>
+<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
 
-<p>支持多行注释<br>
+<p>支持多行注释</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="err">###</span>
 </span><span class='line'>    <span class="nx">A</span> <span class="nx">multiline</span> <span class="nx">comment</span><span class="p">,</span>
 </span><span class='line'>  <span class="err">###</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_309">变量和范围</h3>
 
-<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br>
+<h3>变量和范围</h3>
+
+<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
 需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
-<strong>global object</strong><br>
+<strong>global object</strong></p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">exports</span> <span class="o">=</span> <span class="k">this</span>
 </span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">MyVariable</span> <span class="o">=</span> <span class="s2">&quot;foo-bar&quot;</span>
-</span></code></pre></td></tr></table></div></figure>  </p>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_310">Functions</h3>
+
+<p></p>
+
+<h3>Functions</h3>
 
 <p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
-单行函数 <code>func = -&gt; &quot;bar&quot;</code><br>
-多行函数，必须注意<strong>缩进</strong>（indent）<br>
+单行函数 <code>func = -&gt; "bar"</code><br/>
+多行函数，必须注意<strong>缩进</strong>（indent）</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">func</span> <span class="o">=</span> <span class="o">-&gt;</span>
 </span><span class='line'>  <span class="err">#</span> <span class="nx">An</span> <span class="nx">extra</span> <span class="nx">line</span>
 </span><span class='line'>  <span class="s2">&quot;bar&quot;</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br>
+
+<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
 接受多个参数 <code>sum = (nums...) -&gt;</code></p>
 
 <p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
 没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
 
-<p>Function <strong>Context</strong> 待进一步了解<br>
+<p>Function <strong>Context</strong> 待进一步了解<br/>
 <code>=&gt;</code></p>
 
-<h3 id="toc_311">一些表达式</h3>
+<h3>一些表达式</h3>
 
-<p>花括号是可选的，hash和array可以利用缩进完成。
+<p>花括号是可选的，hash和array可以利用缩进完成。</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1107,41 +1250,47 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
 </span><span class='line'>  <span class="mi">2</span>
 </span><span class='line'>  <span class="mi">3</span>
 </span><span class='line'><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Flow Control<br>
+
+<p>Flow Control<br/>
 像python，像ruby</p>
 
 <p>String的解析，和ruby类似</p>
 
-<h3 id="toc_312">循环和综合（类似python)</h3>
+<h3>循环和综合（类似python)</h3>
 
-<p><code>in</code> &#8212;- <code>for name in [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</code><br>
-需要index &#8212;- <code>for name, i in [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</code>， 只需要加一个参数<br>
-把操作也写成一行 &#8212;- <code>release prisoner for prisoner in []</code><br>
-comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] == &quot;R&quot;</code>
-内置的仅支持while  </p>
+<p><code>in</code> &#8212;- <code>for name in ["A", "B", "C"]</code><br/>
+需要index &#8212;- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
+把操作也写成一行 &#8212;- <code>release prisoner for prisoner in []</code><br/>
+comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] == "R"</code>
+内置的仅支持while</p>
 
-<h3 id="toc_313">几个替换和操作符</h3>
+<h3>几个替换和操作符</h3>
 
-<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br>
-<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code>  </p>
+<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
+<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
 
-<p><code>?</code> similiar to Ruby&#39;s nil?, <code>praise if brian?</code> , it&#39;s also a <code>||</code>， <code>velocity = southern ? 40</code>  </p>
+<p><code>?</code> similiar to Ruby&#8217;s nil?, <code>praise if brian?</code> , it&#8217;s also a <code>||</code>， <code>velocity = southern ? 40</code></p>
 
-<h1 id="toc_314">2. CoffeeScript Classes</h1>
+<h1>2. CoffeeScript Classes</h1>
 
 <p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
-使用new 来新建对象 <code>animal = new Animal</code>,<br>
-<code>contructor</code> 类似ruby的initialize， 
+使用new 来新建对象 <code>animal = new Animal</code>,<br/>
+<code>contructor</code> 类似ruby的initialize，</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Animal</span>
 </span><span class='line'>  <span class="nx">constructor</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
 </span><span class='line'>    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
-</span></code></pre></td></tr></table></div></figure><br>
-其中，构造函数的参数如果带@则会自动被当成实例变量进行设置<br>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+其中，构造函数的参数如果带@则会自动被当成实例变量进行设置</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1150,11 +1299,12 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 </span><span class='line'>  <span class="nx">constuctor</span><span class="o">:</span> <span class="p">(</span><span class="err">@</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_315">instance 属性</h3>
 
-<p>给实例加属性如同给object加属性 </p>
+<h3>instance 属性</h3>
+
+<p>给实例加属性如同给object加属性</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1172,12 +1322,14 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 </span><span class='line'><span class="nx">animal</span><span class="p">.</span><span class="nx">sell</span><span class="p">(</span><span class="k">new</span> <span class="nx">Customer</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
 环境的变化而变化。</p>
 
-<h3 id="toc_316">Static 属性</h3>
+<h3>Static 属性</h3>
 
-<p>这就是class变量，需要用到this 或者 @<br>
+<p>这就是class变量，需要用到this 或者 @</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1196,9 +1348,10 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 </span><span class='line'>  <span class="err">@</span><span class="nx">find</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;Parrot&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_317">继承与Super</h3>
+
+<h3>继承与Super</h3>
 
 <p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
 
@@ -1238,7 +1391,8 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 </span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;aaa&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nx">parrot</span><span class="p">.</span><span class="nx">rip</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h1 id="toc_318">3. 惯用法</h1>
+
+<h1>3. 惯用法</h1>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1310,12 +1464,13 @@ comprehensions: &#8212;- <code>release p for p in prisoners when prisoners[0] ==
 </span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h1 id="toc_319">4. 编译</h1>
+
+<h1>4. 编译</h1>
 
 <p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
 跟rake差不多，可以watch，可以自动编译。</p>
 
-<h1 id="toc_320">5.优良部分</h1>
+<h1>5.优良部分</h1>
 
 <p>孙子说，知己知彼百战不殆。</p>
 
@@ -1443,6 +1598,7 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
 </span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
 </span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
 </span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -1478,24 +1634,22 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
   </header>
 
 
-  <div class="entry-content"><p><a href="http://www.designsor.com/">http://www.designsor.com/</a> 
+  <div class="entry-content"><p>http://www.designsor.com/
 原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
 
-<blockquote>
-<p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
+<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
 需要工具：Firefox+Easy Tor+Autoproxy</p>
 
 <p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
 但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
 
 <p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
-用gmail发信到：<a href="mailto:bridges@torproject.org">bridges@torproject.org</a>
+用gmail发信到：bridges@torproject.org
 主题随便，内容写：get bridges
 发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
 打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
 成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
-速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p>
-</blockquote>
+速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
 </div>
   
   
@@ -1549,85 +1703,90 @@ Background processing, G大约有50个不同的类型</li>
 <li>chimney
 All git calls happen over the write</li>
 <li>utils
-意外日志，统计，辅助应用等</li>
+ 意外日志，统计，辅助应用等</li>
 </ul>
 
-<h3 id="toc_303">rails</h3>
 
-<p>他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
+<h3>rails</h3>
+
+<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
 GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
 
 <ul>
-<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br>
-支付的抽象库。有中国人给家里alipay的补丁<br></li>
-<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component<br></li>
-<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a><br></li>
-<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller<br></li>
-<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br>
+<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
+支付的抽象库。有中国人给家里alipay的补丁</li>
+<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
+<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
+<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
+<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
 除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
 </ul>
+
 
 <p>Gems:</p>
 
 <ul>
-<li><a href="https://github.com/github/albino">albino</a> 标记高亮<br></li>
-<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a><br></li>
+<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
+<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
 <li><a href="">aws-s3</a></li>
-<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的<br></li>
-<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究<br></li>
-<li><a href="https://github.com/github/markup">github/markup</a><br></li>
+<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
+<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
+<li><a href="https://github.com/github/markup">github/markup</a></li>
 <li>[jekyll]</li>
-<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎<br></li>
-<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端<br></li>
+<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
+<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
 <li>[unicorn] 16 workers</li>
 </ul>
+
 
 <p>Rack:</p>
 
 <ul>
-<li>Rack::Bug<br>
-Coderack<br></li>
-<li>nerdEd/rack-validate<br></li>
-<li>webficient/rack-tidy<br></li>
-<li>talison/rack-mobile-detect<br></li>
+<li>Rack::Bug<br/>
+Coderack</li>
+<li>nerdEd/rack-validate</li>
+<li>webficient/rack-tidy</li>
+<li>talison/rack-mobile-detect</li>
 </ul>
 
-<p>Nginx当然不让 :<br>
-* Limit Zone<br>
+
+<p>Nginx当然不让 :<br/>
+* Limit Zone<br/>
 * Limit Request: Anti-DDOS
-* memcached support<br>
-* Push Module: comet!  </p>
+* memcached support<br/>
+* Push Module: comet!</p>
 
-<p>Git: 
-* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现  </p>
+<p>Git:
+* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
 
-<h3 id="toc_304">chimney(smoke)</h3>
+<h3>chimney(smoke)</h3>
 
-<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br>
-Smoke calls  </p>
+<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
+Smoke calls</p>
 
 <ul>
-<li>BERT-RPC 
-另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好<br>
-<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a><br></li>
-<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a><br></li>
-<li>[chimney] 
-proprietary 的库，怀疑是erlang写的<br>
-让RPC clients知道如何找到server，路由内容存放在Redis中<br></li>
-<li>proxymachine 
-有点类似nodeload替换的功能，不过这个也用于git clone<br>
-能用来作为所有tcp链接的代理<br></li>
-<li>JSON-RPC </li>
-<li>node.js<br>
-downloads<br>
-event streams<br></li>
-<li>hubot<br></li>
+<li>BERT-RPC
+另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
+<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
+<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
+<li>[chimney]
+proprietary 的库，怀疑是erlang写的<br/>
+让RPC clients知道如何找到server，路由内容存放在Redis中</li>
+<li>proxymachine
+有点类似nodeload替换的功能，不过这个也用于git clone<br/>
+能用来作为所有tcp链接的代理</li>
+<li>JSON-RPC</li>
+<li>node.js<br/>
+downloads<br/>
+event streams</li>
+<li>hubot</li>
 </ul>
 
-<h3 id="toc_305">resque</h3>
+
+<h3>resque</h3>
 
 <ul>
-<li><p><a href="https://github.com/defunkt/resque">resque</a><br>
+<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
 Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
 <li><p>优先等级</p>
 
@@ -1635,35 +1794,43 @@ Resque is a Redis-backed Ruby library for creating background jobs, placing them
 <li>严重</li>
 <li>高</li>
 <li>低</li>
-</ul></li>
-<li><p>队列任务  </p>
+</ul>
+</li>
+<li><p>队列任务</p>
 
 <ul>
-<li>page 产生页面<br></li>
-<li>archive 打包tar<br></li>
-<li>search<br></li>
-<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单<br></li>
-</ul></li>
+<li>page 产生页面</li>
+<li>archive 打包tar</li>
+<li>search
+
+<ul>
+<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><p>数据库是MySql 5</p></li>
 </ul>
 
-<h3 id="toc_306">utils</h3>
+
+<h3>utils</h3>
 
 <ul>
-<li>comet loading<br></li>
+<li>comet loading</li>
 <li>nagios 负责监控</li>
-<li>resque 的web<br></li>
-<li>collectd 用于手机负载、RAM等的信息<br></li>
-<li>pingdom 短信系统<br></li>
-<li>tender 一个客服系统<br></li>
+<li>resque 的web</li>
+<li>collectd 用于手机负载、RAM等的信息</li>
+<li>pingdom 短信系统</li>
+<li>tender 一个客服系统</li>
 </ul>
 
-<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具  </p>
 
-<p>而他的CTO Tom 则给了[这些[(<a href="https://speakerdeck.com/u/mojombo/p/github-flavored-ruby">https://speakerdeck.com/u/mojombo/p/github-flavored-ruby</a>)  </p>
+<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
 
-<p>里面提到了<strong>RDD</strong>的概念:<br>
-readme driven development 
+<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
+
+<p>里面提到了<strong>RDD</strong>的概念:<br/>
+readme driven development
 先把README叫做SPEC，完成一点，就把内容移到README中。</p>
 
 <p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
@@ -1708,9 +1875,10 @@ readme driven development
 
 <ul>
 <li><em>polling</em> ajax 定期轮询</li>
-<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。<br></li>
+<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
 <li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
 </ul>
+
 
 <p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
 
@@ -1721,73 +1889,9 @@ readme driven development
 </pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
 </span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
 
+
 <p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
 Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/27/take-the-exam/">软考回忆</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-27T10:13:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>软考被安排在天等路那边,对我来说是很偏远的地方.路是远了些,但是去了之后发现那边的环境
-也还不错.因为靠近华东理工,而且除了新侨学院还有不少其他的中专职校,所以那边的中小饭店
-很多,而且物价相对便宜.比起公司附近,吃饭的价格大约只有2/3.肉夹馍3-5元,臊子面9元,
-芒果冰沙也只要8元10元,10元的杯子真的很大.
-而在我们公司那边一个馍10元,一碗面12元.尽管偏远,但好处也不少.何况偏远只是从我这边来
-说,毕竟上海太大了.那地方好歹还是中环以内的.因为吃的很不错,对那边的感觉倒也不错.<br>
-交通还算方便,石龙路下来就有一辆终点站的156可以过去,而且也基本是开到门口的.校园的大门
-比想象的好,里面的设备有点老旧,学校的整体外观还是不错的.中午休息也能去华理,校园转转的感觉
-也还不错. </p>
-
-<p>说回考试本身,据说通过率只有10%-20%.不过考试强度本身并不大,也就相当于会考的强度.内容
-也是以死记硬背为主,真的费脑子的东西不多.当然,能不能过关因为没有答案可做参照,现在还
-难以下结论.问题应该不大.今年难在上午,下午还是挺主流的.</p>
-
-<p>准备的日子也不算很少,有空研究研究这玩意的有效期.现在我脑子里对这个还是一片混乱.由此可见,
-培训做的不是很到位.</p>
-
-<p>流程是这样的:</p>
-
-<ol>
-<li>参加软考获得<strong>中华人民共和国计算机技术与软件专业技术资格（水平）证书</strong>, 有效期3年,可以继续教育.</li>
-<li>凭软考证书+资历再申报<strong>项目经理资质证书</strong>, 资质证书也有有效期,继续教育服务平台网址为<a href="http://www.informatization.gov.cn%E5%92%8C">http://www.informatization.gov.cn和</a> <a href="http://www.chinasi.org.cn">http://www.chinasi.org.cn</a></li>
-</ol>
-
-<p>软考从2004年开始就要求继续教育,但2003年前取得的证书不需要登记也就不需要继续教育.
-自从可持续发展深入人心后,软考组织单位倒是落实的挺起劲的. 
-但是这样一来, 实在看不见还有什么要去考证的需要.等到非要用的时候再说吧.毕竟会失效的投资,还是按需努力吧.
-万一以后他们搞联合,要求两个证同时续约才能有效,那有资质的人员岂不是苦死. 真心不喜欢这种敛财的方式.</p>
-
-<p>Update: <a href="http://bbs.educity.cn/bbs/141365_1.html">http://bbs.educity.cn/bbs/141365_1.html</a> 情况可能有变化</p>
 </div>
   
   
@@ -1812,6 +1916,10 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -1827,15 +1935,11 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

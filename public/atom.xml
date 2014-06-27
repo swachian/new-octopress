@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[证券从业资格考试]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/27/sac/"/>
+    <updated>2014-06-27T21:39:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/27/sac</id>
+    <content type="html"><![CDATA[<p>本月抽空去考了证券从业资格考试的两门，证券基础知识和证券交易。
+今天可以查成绩了，最终都是70+，通过考试并圆满达到了复习的目标。</p>
+
+<h3>考试的情况</h3>
+
+<p>考试的日子被分成了两天，分别是周六16:30-18:20的交易，以及后面一天周日10:30-12:20的基础知识。这个安排的坏处是不得不搭上一个半周末考试，好处是最大的提供了临时抱佛脚的时间。所以最终冲刺的复习还算充分。</p>
+
+<p>做题时，交易的单选题感觉很不顺，但做多选题时则感觉很顺畅。最后做完判断题时，也懒得再检查了。因为当天从8点到18点，等于都在看交易的东西，实在有点倒胃口。看了看有没有没选的，就交卷了。</p>
+
+<p>晚上随便看了看基础的东西。看了一整天，脑子过于兴奋，于是顺势半夜起来看来一场球。第二天一早起来利用一个多小时又把笔记过了一遍。基础的考试相对平常，没有哪个题型特别顺，也没有特别不顺。感觉及格应该问题不大。</p>
+
+<p>这个考试缺考的情况还是挺常见的。考试以年轻人居多。</p>
+
+<h3>复习的情况</h3>
+
+<p>报名是4月份的事情，具体复习是过完五一开始的。先从基础着手。预备的材料是：</p>
+
+<ol>
+<li>教材，淘宝购买</li>
+<li>三色笔记，网上下载</li>
+<li>所谓13年的真题四套，当当购买</li>
+</ol>
+
+
+<p>5月份用了2个礼拜看完了书和笔记，做了一套真题及格了。感觉复习的节奏太快，按这个速度可以5月底去考试了。于是开始控制节奏。然后到了6月2号，开始看交易。也是两个礼拜。期间感觉记忆的东西比较多，看书效果不大，所以以看笔记为主，并着重记忆。这两个礼拜的复习不是很好，时间开始感觉紧张了。
+好在打准考证的时候，发现是周六下午和周日上午，这样等于凭空多出一个周末的 复习时间。想想时间应该够了。因为周末占掉每周看书时间的2/3以上，是主要的复习时间。</p>
+
+<h3>资料的情况</h3>
+
+<p>个人感觉三色笔记是最好的材料。唯一的缺点是只找得到2009版的，而不是最新的2012版的。所以有些考点没有覆盖。但强处在于重点突出，针对考试，也能让人理解基本的内容。</p>
+
+<p>书么还是挺权威的，但废话太多，重点也不突出。看完后也不知道怎么应考，也不知道该记住什么东西。时间多可以看看，时间紧就浏览为主吧。</p>
+
+<p>真题的话，我一直怀疑是不是真的。从考试的题目来看，差异还是挺大的。建议还是当一般的练习题对待。辅导资料所谓的真题不见得靠谱。</p>
+
+<p>总体而言，还是一个不难对付的考试。对普及金融、证券方面的知识还是挺有用的。除了通过考试，也对投资-融资有了新的认识。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[中级品牌机和组装机比较]]></title>
@@ -27,44 +71,53 @@
 dell其次，而联想无疑是比较少的。联想主推的是带显示器或者一体机。但好在还是找到了一些。
 以下价格来自京东今天的报价。内存都是4GB，硬盘都500GB。</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
-<th align="left">机器型号</th>
-<th align="center">CPU</th>
-<th>内存插槽</th>
-<th>操作系统</th>
-<th>价格</th>
+<th></th>
+<th align="left"> 机器型号     </th>
+<th align="center"> CPU               </th>
+<th> 内存插槽 </th>
+<th>  操作系统      </th>
+<th> 价格</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
-<td align="left">S520</td>
-<td align="center">奔腾双核</td>
-<td>2</td>
-<td>DOS</td>
-<td>2149</td>
-</tr>
-<tr>
-<td align="left">S520</td>
-<td align="center">同上</td>
-<td>2</td>
-<td>Win8</td>
-<td>2399</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 奔腾双核            </td>
+<td>  2       </td>
+<td> DOS          </td>
+<td> 2149 |</td>
 </tr>
 <tr>
-<td align="left">H520e</td>
-<td align="center">酷睿三代i3-3240T</td>
-<td>1</td>
-<td>DOS</td>
-<td>2799</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 同上               </td>
+<td>   2       </td>
+<td> Win8         </td>
+<td> 2399 |</td>
 </tr>
 <tr>
-<td align="left">S530</td>
-<td align="center">i3-4150 ，独显</td>
-<td>2</td>
-<td>Win8</td>
-<td>3199</td>
+<td></td>
+<td align="left"> H520e      </td>
+<td align="center"> 酷睿三代i3-3240T    </td>
+<td>  1       </td>
+<td>DOS      </td>
+<td> 2799 |</td>
 </tr>
-</tbody></table>
+<tr>
+<td></td>
+<td align="left"> S530       </td>
+<td align="center"> i3-4150 ，独显     </td>
+<td>   2       </td>
+<td>Win8        </td>
+<td>  3199  |</td>
+</tr>
+</tbody>
+</table>
+
 
 <ul>
 <li>组装(通过京东)：
@@ -78,8 +131,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2500左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>将京东组装和S530相比的话，品牌机大约贵了700元。考虑到一个Win8的oem也要值400左右，
 对比起来会发现实际上品牌机并没有贵多少，还多了2年的免费服务和独显。以实际差价300元而言，组装机
@@ -105,8 +160,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2380左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>可以发现在淘宝上攒机还是可以进一步便宜不少的。但就这个价位来讲，品牌机和兼容机的价格差异实在已经不是很重要了。
 组装的优势是更灵活、更自由也可以更合理。不过，任何东西都有一个中国国情，就是组装机确实
@@ -144,9 +201,9 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
     <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/"/>
     <updated>2014-06-12T19:05:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper</id>
-    <content type="html"><![CDATA[<h2 id="toc_463">JSP中的代码</h2>
+    <content type="html"><![CDATA[<h2>JSP中的代码</h2>
 
-<h3 id="toc_464">传统的老三样</h3>
+<h3>传统的老三样</h3>
 
 <p>长久以来的Java Web开发，在jsp层面进行读取或逻辑控制等行为时主要有<strong>Scriptlet</strong>、<strong>Helper</strong>和<strong>标签</strong>三种方式。</p>
 
@@ -154,15 +211,15 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 
 <p>如struts1的：</p>
 
-<p><code>&lt;bean:write name=&quot;spRinglib&quot; property=&quot;down_cnt&quot;/&gt;</code></p>
+<p><code>&lt;bean:write name="spRinglib" property="down_cnt"/&gt;</code></p>
 
 <p>struts2的：</p>
 
-<p><code>&lt;s:property value=&quot;r.department&quot; /&gt;</code></p>
+<p><code>&lt;s:property value="r.department" /&gt;</code></p>
 
 <p>jstl的：</p>
 
-<p><code>&lt;c:out value=&quot;${user.company}&quot; escapeXml==&quot;false&quot;/&gt;</code></p>
+<p><code>&lt;c:out value="${user.company}" escapeXml=="false"/&gt;</code></p>
 
 <p>这种方式的一大特点就是冗长和啰嗦。信息的表达力很差。上述还只是用于输出的，一旦碰到条件判断等，标签的表现更是只能用拙劣二字来加以形容。同时，每个框架各搞一套，给程序员也会带来很大的负担，对项目维护也带来更多的成本。</p>
 
@@ -170,13 +227,13 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 如果这些重新发明的标签，具有比语言更好的表达和组织能力，那么显然大家应该放弃语言本身，比如不使用java，而在MVC的各个部分都
 使用标签。但既然这个没有发生，说明标签在大部分时候并不合适。</p>
 
-<h3 id="toc_465">新的变化-EL表达式的出现</h3>
+<h3>新的变化-EL表达式的出现</h3>
 
 <p>好在随着EL表达式的推出，情况逐步有所改观。比如同样是上面的输出，EL的写法可以是 <code>${r.department}</code>，调用数组也可以是<code>${list[0].name}</code> 。不过EL目前还没有支持逻辑控制，所以逻辑控制还是要用jstl的标签。</p>
 
 <p>但至少在老三样之外提供了新的一种方式，并且使得使用<strong>Helper</strong>模式可以不需要必须用Scriptlet。</p>
 
-<h2 id="toc_466">EL中使用Helper</h2>
+<h2>EL中使用Helper</h2>
 
 <p>说的简单点，其实就是在jsp页面中，通过EL表达式可以调用Java实现的方法。获得类似<code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 。 其中，getflow是一个用Java写的静态方法。</p>
 
@@ -197,6 +254,7 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;%=</span>  <span class="n">helper</span><span class="o">.</span><span class="na">cpSelectHelper</span><span class="o">(</span><span class="n">requestSheetForm</span><span class="o">.</span><span class="na">getManager</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpCode</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpName</span><span class="o">())</span> <span class="o">%&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
+
 
 <p>光写出来的代码方面，不使用EL时已经要长很多了，明明只是一个调用取值显示的操作，却要先声明一系列的东西。同时，这些类型还要在jsp
 的头上import进来。而IDE对jsp的import Class支持的并不好。所以确实相当麻烦。</p>
@@ -256,29 +314,30 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 </span><span class='line'>  <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>这样一来，定义自己的方法和使用这个方法就极为简便了。需要指出的是，EL表达式里面可以调用方法，即支持el里面带()调用，是<strong>直到
 servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是<del>tomcat6也不支持</del>这种调用方式。从中，可以看出EL越来越强大趋势。
 但也反过来可以证明过去方法之错误。</p>
 
-<h2 id="toc_467">EL难道就不是Scriptlet？</h2>
+<h2>EL难道就不是Scriptlet？</h2>
 
-<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code> 
-除了把${}换成了&lt;%=%&gt;实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
+<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code>
+除了把${}换成了&lt;%=%>实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
 
 <p>实际上，目前的EL，除了没有逻辑判断的能力之外，已经具备了很多Scriptlet的特性。那么区别在哪里呢？</p>
 
 <p>我觉得最关键的区别在于语言本身。所谓Scriptlet其实是Java Scriptlet，需要一系列的声明才能使用。强类型编译语言有很多的好处，但在页面
-显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。 </p>
+显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。</p>
 
 <p>EL的Scriptlet和Java的Scriptlet完全是两码事情，倒是和ruby的Scriptlet几乎没有区别。
 EL的支持来的有点慢，但好歹还是来了！</p>
 
-<h3 id="toc_468">对EL未来的期盼</h3>
+<h3>对EL未来的期盼</h3>
 
 <p>作为一个开发者，十分期望未来的EL能够再走一步，增加对 <code>if</code> <code>for</code>的原生支持，而不再需要使用麻烦的标签。能否发生这样的变化，就只有
 再看发展了。</p>
 
-<h3 id="toc_469">标签适用的情况</h3>
+<h3>标签适用的情况</h3>
 
 <p>标签其实也有其存在的价值，至少包括：</p>
 
@@ -286,6 +345,7 @@ EL的支持来的有点慢，但好歹还是来了！</p>
 <li>分页等相对组件化的元素；</li>
 <li>风格一致的表单。</li>
 </ol>
+
 
 <p>对于那些有组件化特征的东西，标签还是很适用的。</p>
 
@@ -356,11 +416,12 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>Restful风格的Url，通过声明<code>@ModelAttribute</code>可以注入参数到模型中，
 <code>@PathVariable</code>可以实现从url路径中获取参数，
 <code>userService</code>是注入的服务组件，<code>model.addAttribute</code>则将controller的内容注入给页面模板。
 整个风格已经十分简洁。如果需要其他组件，如<code>session</code>或者<code>request</code>，
-只要在类或者方法的参数中声明即可。<code>return &quot;user/userForm&quot;</code>则通知渲染user目录下的userForm.jsp模板</p>
+只要在类或者方法的参数中声明即可。<code>return "user/userForm"</code>则通知渲染user目录下的userForm.jsp模板</p>
 
 <p>Spring JPA则是最方便的Java ORM描述工具。寻找多年的Java版ActiveRecord终于有了着落。
 需要定义两个文件：1：model本身，2：一个dao文件（reposity）</p>
@@ -368,6 +429,7 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 <ul>
 <li>model：</li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -491,11 +553,13 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>啰嗦是还是有点啰嗦，这个毕竟是java。DAO相对代码少一些。</p>
 
 <ul>
 <li>DAO文件：</li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -510,10 +574,15 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'>  <span class="n">User</span> <span class="nf">findByNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number1</span><span class="o">);</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-这个dao提供了很多默认的方法，包括`findAll`, `findOne`, `save`，底层的
-实现还有很多内容，但使用的话确实只需要声明这些就行了。
 
-- 在Service文件中可这样使用:
+
+<p>这个dao提供了很多默认的方法，包括<code>findAll</code>, <code>findOne</code>, <code>save</code>，底层的
+实现还有很多内容，但使用的话确实只需要声明这些就行了。</p>
+
+<ul>
+<li>在Service文件中可这样使用:</li>
+</ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -537,12 +606,15 @@ DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了R
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>而在页面处理上，几年前的Servlet 2.5开始，EL表达式取得了首要被支持的地位。</p>
 
-<p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">$</span><span class="o">{</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-对比ruby在erb里常用的</p>
+
+
+<p>对比ruby在erb里常用的</p>
 
 <p><code>&lt;%=user.name%&gt;</code></p>
 
@@ -655,7 +727,7 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
     <content type="html"><![CDATA[<p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
 下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
 
-<h3 id="toc_459">下载ruby 1.8.7</h3>
+<h3>下载ruby 1.8.7</h3>
 
 <p>减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。</p>
 
@@ -675,10 +747,11 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 </span><span class='line'>/usr/local/ruby187/bin/ruby -ropenssl -rzlib -rreadline -e <span class="s2">&quot;puts :success&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>看到输出<code>success</code>后，证明ruby各安装库已全部编译进去。主机是一台CentOS 6.4，所以安装1.8.7相当之顺利。
 安装完毕后，把ruby的运行路径加到环境变量PATH的最前面。</p>
 
-<h3 id="toc_460">安装rubygems</h3>
+<h3>安装rubygems</h3>
 
 <p>这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.</p>
 
@@ -692,7 +765,8 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 </span><span class='line'>ruby setup.rb
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_461">安装Oracle即时客户端和ruby-oci8</h3>
+
+<h3>安装Oracle即时客户端和ruby-oci8</h3>
 
 <p>这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置<code>LD_LIBRARY_PATH</code>的值。关键一点是注意不要配错这个环境变量指向的路径。</p>
 
@@ -710,7 +784,8 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 </span><span class='line'>make install
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_462">Gemfile和bundle</h3>
+
+<h3>Gemfile和bundle</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -780,6 +855,7 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 </span><span class='line'><span class="n">gem</span>  <span class="s1">&#39;rest-client&#39;</span><span class="p">,</span>  <span class="s1">&#39;1.6.7&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>然后执行<code>bundle install</code> , 相关的Gem就可以安装到位了。 <code>thin start -e production</code> ， 通过这个命令应用就能在生产环境下启动了。</p>
 ]]></content>
   </entry>
@@ -805,7 +881,7 @@ Node.js，一个可以在服务器端编写javascript的平台，提供了很多
 
 <p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
 
-<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br>
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
 从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
 
 <p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
@@ -829,6 +905,7 @@ apt-get intall，原因在于apt-get是失败的。</p>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol</span></code></pre></td></tr></table></div></figure>
 
+
 <p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
 
 <p>这里就是遇到的第二个问题，连接共享库失败。</p>
@@ -841,13 +918,14 @@ apt-get intall，原因在于apt-get是失败的。</p>
 <li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
 </ol>
 
+
 <p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
 
 <p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
 
 <p>再在ruby安装包里执行</p>
 
-<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code> </p>
+<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
 
 <p>这样就装好了。</p>
 
@@ -885,10 +963,11 @@ apt-get intall，原因在于apt-get是失败的。</p>
 
 <ol>
 <li>生活在这片地区，丹泽到波罗的海沿岸，<strong>原始</strong>的部族。这部分人很早就被
-灭族了。<br></li>
-<li>原始部族是被<strong>条顿骑士</strong>殖民征服，并逐渐与西斯拉夫人融合，而征服者使用了被征服者的称呼。<br></li>
+灭族了。</li>
+<li>原始部族是被<strong>条顿骑士</strong>殖民征服，并逐渐与西斯拉夫人融合，而征服者使用了被征服者的称呼。</li>
 <li>由<strong>霍恩佐伦家族</strong>夹起来的地区性强权国家，条顿骑士团的最后一任大团长出自霍恩佐伦。第3个普鲁士即教科书里出现的普鲁士。</li>
 </ol>
+
 
 <p>其崛起充满了偶然性，也需要极大的运气，中间有着数个优秀但又性格迥异的君主。
 比如，士兵国王，腓特烈大帝，以及他们的先辈和后代。其中，有的热衷于文化事业，
@@ -939,12 +1018,12 @@ apt-get intall，原因在于apt-get是失败的。</p>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/02/macbook-pro</id>
     <content type="html"><![CDATA[<p>日本之旅买了很多东西，其中就包括了一台Macbook Pro。主要的参数如下：</p>
 
-<p>屏幕: 13寸Retina<br>
-CPU: Intel Core i5 2.4GHz<br>
-Mem: 8GB 1600MHz<br>
-硬盘: 256GB SSD<br>
-显卡: Intel Iris Graphics<br>
-售价: 147800 日元，折合人民币9060  </p>
+<p>屏幕: 13寸Retina<br/>
+CPU: Intel Core i5 2.4GHz<br/>
+Mem: 8GB 1600MHz<br/>
+硬盘: 256GB SSD<br/>
+显卡: Intel Iris Graphics<br/>
+售价: 147800 日元，折合人民币9060</p>
 
 <p>售价比中国便宜了许多主要是受汇率的影响。如果2月份去的话，会更便宜，现在
 的汇率已经到0.061以上了。而最便宜的时候有几个礼拜都是在0.058左右浮动的。
@@ -958,8 +1037,9 @@ Mem: 8GB 1600MHz<br>
 
 <ol>
 <li>只能用visa，不能用银联；</li>
-<li>电器店有5%的折扣+退税8%，而苹果店一般只有后者一个优惠，所以要贵5%。<br></li>
+<li>电器店有5%的折扣+退税8%，而苹果店一般只有后者一个优惠，所以要贵5%。</li>
 </ol>
+
 
 <p>但为了完美一些，只能放弃5%的优惠了。这里还要再吐槽一下visa。用的卡是多币种的
 信用卡，免去了1.5%的中间手续费，但visa的结算日期是按他们自己的节奏来的，不像
@@ -974,7 +1054,7 @@ Mem: 8GB 1600MHz<br>
 表面上看，我并不缺机器用。但有了孩子以后，能正经坐在台式机前的时间很少。而那台sony是
 配ssd的，性能不错，但空间实在有限，装个虚机和基本的系统后，就没多少硬盘了。而且，我尤其
 讨厌这台sony的屏幕，挺贵的机器，屏幕却配了一个永远想继续增加亮度的屏。也略微有点小重，
-放在床上用并不舒服。<br>
+放在床上用并不舒服。<br/>
 而mac就可以较好地解决这些问题了。为了写博客或者浏览信息基本不需要再装虚拟机。而mac的retina
 屏幕实属人间尤物，细腻且亮度极高，一看就喜欢，越用越喜欢。机器本身只有1.5kg，比sony的小本子
 还要轻一些。电池续航能力就更强了，号称可以有9个小时，而一般的本子能有4小时的已经算很强大了。
@@ -1017,6 +1097,7 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <li>物有所值</li>
 </ol>
 
+
 <p>整个日本是相当<strong>干净</strong>的，除了在奈良公园的土路上，我在那里呆了八九天，基本鞋子都是不沾灰的。衣服穿
 2-3天依然还是相当的干净。在上海动不动就脏了，曾经以为是自己脏了，现在看来主要还是环境不干净。</p>
 
@@ -1043,42 +1124,42 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <p>虽然东西很贵很贵，但一分价钱一分货，日本的东西倒也充分应验了这句话。最后让你觉得这一切还是物有所值的。
 尤其是在上海的物价已经上升了很多之后。</p>
 
-<h2 id="toc_458">主要的行程</h2>
+<h2>主要的行程</h2>
 
-<p>第1天<br>
-大阪<br>
+<p>第1天<br/>
+大阪<br/>
 关西机场、难波、海游馆</p>
 
-<p>第2天<br>
-大阪<br>
+<p>第2天<br/>
+大阪<br/>
 天守阁，历史博物馆，心斋桥、biccamer、苹果专卖店</p>
 
-<p>第3天<br>
-大阪<br>
+<p>第3天<br/>
+大阪<br/>
 环球影城、道顿崛</p>
 
-<p>第4天<br>
-京都<br>
+<p>第4天<br/>
+京都<br/>
 京都站、清水寺、二年坂、三年坂</p>
 
-<p>第5天<br>
-京都<br>
+<p>第5天<br/>
+京都<br/>
 岚山、嵯峨野观光小火车、天龙寺、锦市场、蟹道乐</p>
 
-<p>第6天<br>
-奈良<br>
+<p>第6天<br/>
+奈良<br/>
 近铁交通、春日大社、奈良公园</p>
 
-<p>第7天<br>
-京都 东京<br>
+<p>第7天<br/>
+京都 东京<br/>
 伏见稻荷大社、新干线、鸟元</p>
 
-<p>第8天<br>
-东京<br>
+<p>第8天<br/>
+东京<br/>
 川崎、藤子F不二雄博物馆、三鹰吉卜力美术馆</p>
 
-<p>第9天<br>
-东京<br>
+<p>第9天<br/>
+东京<br/>
 羽田机场、利木津机场巴士</p>
 
 <p><a href="http://bbs.qyer.com/viewthread.php?tid=931893&amp;page=1&amp;extra=#pid9177702">旅游的详细链接</a></p>
@@ -1104,8 +1185,9 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
 </ol>
 
+
 <p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
-创造点什么东西，当然，最后一点纯属自娱自乐。<br>
+创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
 不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
 例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
 
@@ -1113,29 +1195,31 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
 至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
 
-<h2 id="toc_451">笔记整理</h2>
+<h2>笔记整理</h2>
 
-<p>业务逻辑其实是业务反逻辑： complex business illogic </p>
+<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
 
-<h3 id="toc_452">分层的坏处</h3>
+<h3>分层的坏处</h3>
 
 <ol>
 <li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
 <li>性能损害</li>
 </ol>
 
-<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br>
+
+<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
 但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
 
-<h3 id="toc_453">常见的业务代码组织形式</h3>
+<h3>常见的业务代码组织形式</h3>
 
 <ul>
-<li>Transaction Script<br></li>
-<li>Domain Module , OO对TS的改变<br></li>
+<li>Transaction Script</li>
+<li>Domain Module , OO对TS的改变</li>
 <li>Service层</li>
 </ul>
 
-<h3 id="toc_454">会话状态</h3>
+
+<h3>会话状态</h3>
 
 <ul>
 <li>客户端 Cookie</li>
@@ -1143,18 +1227,19 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
 </ul>
 
-<h3 id="toc_455">分布式</h3>
+
+<h3>分布式</h3>
 
 <p>i
 * 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
 * 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
-* 同一台服务器内部使用细粒度调用，远程外观模式<br>
+* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
 * Data Transfer Object ，传输对象，上面的那种是调用方法
 * 同步的接口为主
 * 异步的基于消息的处理方式
 * 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
 
-<h3 id="toc_456">锁的种类</h3>
+<h3>锁的种类</h3>
 
 <ol>
 <li>乐观锁，比如自己建立版本号；</li>
@@ -1163,10 +1248,11 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
 </ol>
 
-<h3 id="toc_457">Stub和Mock</h3>
 
-<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br>
-Mock：用一个服务的重写来模拟某服务  </p>
+<h3>Stub和Mock</h3>
+
+<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
+Mock：用一个服务的重写来模拟某服务</p>
 ]]></content>
   </entry>
   
@@ -1175,12 +1261,12 @@ Mock：用一个服务的重写来模拟某服务  </p>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android/"/>
     <updated>2014-04-12T16:18:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android</id>
-    <content type="html"><![CDATA[<p>琢磨了一下Google当初为什么要推安卓，随手记之。起初感觉Google正在成为一个类似SUN的角色，而安卓就是Java。<br>
+    <content type="html"><![CDATA[<p>琢磨了一下Google当初为什么要推安卓，随手记之。起初感觉Google正在成为一个类似SUN的角色，而安卓就是Java。<br/>
 二者的相似之处在于，java和安卓都给世界带来了很大的改变，借助这两样神器都出现了新的行业分支，如Java的企业应用、电商、网银等，安卓的出现才使得中国国产手机大幅度地进步，并在全球化的体系里占据更有优势的地位。但与此同时，不可否认的是，Google和SUN并未从中获得多少直接的收益。还有一点类似的地方，就是这两样神器也并不占用这两个巨头多少成本。相对于整个规模而言，无论是java还是安卓，对SUN或Google的成本比例都是有限的。</p>
 
 <p>然而，转念一想，Google和SUN其实又是完全不一样的。SUN推广Java是希望卖更多的自己的硬件服务器，而且这个思路在90年代中期基本是可行的。而Google的服务现在如日中天，推广安卓确保了他在移动互联网时代（我更愿意称之为终端和使用人群进一步扩大的互联网时代）依然是搜索业务的王者。所以，仅就结果而言，Google是成功的，而SUN确实是被釜底抽薪了。</p>
 
-<p>相比较而言，Google推安卓的动机和效果都更类似于90年代末IBM对Linux的扶持与推广。所欠缺的可能就是IBM没有收购Linux, Linus也没成立一个Linux的公司。<br>
+<p>相比较而言，Google推安卓的动机和效果都更类似于90年代末IBM对Linux的扶持与推广。所欠缺的可能就是IBM没有收购Linux, Linus也没成立一个Linux的公司。<br/>
 IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务器上一统江湖。而Google的安卓，则让智能手机避免了被Apple一家独占。而在此成功狙击的基础上，IBM和Google都继续卖着自己已经处于优势地位的服务。而再看SUN的话，当时的Java并无直接的竞争对手，后来的J2EE也是如此。SUN的目标比较单纯，推广Java只是为了可以让更多的公司做互联网的网络服务，而这必然需要更多的服务器。在PC Server+ Linux未流行的年代，Solaris是较低成本的一种选择。这个算盘其实打的还是不错的。但是，IBM大神对Linux的扶持，彻底让Sun的硬件找到了更廉价也更类似的替代品。当大部分用Java的企业，不去问Sun买Solaris服务器而是选择问IBM HP Dell买硬件、软件则直接使用Linux时，SUN的Java就真的只是当活雷锋了。可能IBM的本意未必是干掉SUN，只是希望M$不要也在服务器市场形成垄断，如同Google只是希望不要苹果在智能小型终端一统天下，但不可避免地误伤了SUN。当然，SUN的倒掉肯定还有其他更重要的因素，毕竟竞争和替代品是市场经济下每个个体和公司都面临的现实。</p>
 
 <p>而IBM和Google的举动，毫无疑问都是成功了。IBM的PC服务器业务虽然卖给了联想，但至少也风光了十几年，而服务则继续在大卖。如果当初M$用windows统一了PC Server，那恐怕IBM现在也没服务好卖了。Google则在移动互联网时代，继续当着搜索的领袖，苹果在无法一统江山的情况下，也只能让Google继续保持是最重要的终端搜索引擎。</p>
@@ -1203,6 +1289,7 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 <li>部分卡识别不出来，虽然是标准卡但可能还是要换卡。手头两张大卡uim，只能识别一张，于是不得不去营业厅花20换卡。要知道，我之前用努比亚z5s，虽然只能插小卡，但自己剪了一下就能用。而这个虽然也是大卡，但却不能用。想想也挺讽刺的。网上查了一下，这个也不是个案。可能只能说uim卡的标准比较古怪吧。好在换了2014版的uim卡也能认。</li>
 <li>后盖很难开。这个可能习惯了就好。不过对于一个可以更换电池板的手机而言，确实不太方便。</li>
 </ol>
+
 
 <p>其他其实还有一些细节方面还是可以改进的。往好处想，小米其实还有提升的余地，毕竟这些是我这个不太挑剔的人都能直接发现的毛病。</p>
 
@@ -1271,92 +1358,58 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
     <link href="http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list/"/>
     <updated>2014-03-02T09:39:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list</id>
-    <content type="html"><![CDATA[<h3 id="toc_447">技术类</h3>
+    <content type="html"><![CDATA[<h3>技术类</h3>
 
 <ol>
 <li>[x] <a href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">Flower M. Patterns of Enterprise Application Architecture</a>, Addison-Wesley Professional. Rails诞生的书，<a href="http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me">DHH最爱的五本编程书籍</a>，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。</li>
 <li>Learning Jquery.</li>
-<li>Resig, 精通Javascript.</li>
+<li>Resig, 精通Javascript. 简约、精彩、结合实际的书，第一章就很精彩。</li>
 <li><a href="http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/">PoEAA的访谈和DHH</a></li>
 <li>曾宪杰. 大型网站系统与Java中间件实践. 2014.</li>
 <li>FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.</li>
-<li>Eric Evans. Domain-Driven Design.<br></li>
+<li>Eric Evans. Domain-Driven Design.</li>
 <li>Beck. Smalltalk best practice patterns, 1996.</li>
 <li>Donald C. Gause, Are you lights on? 1990.</li>
-<li>张昊，Linux Shell编程从入门到精通。<br></li>
-<li>Core Java。有必要更新一下。<br></li>
-<li>Gourley D, Totty B. HTTP权威指南 O’Reilly<br></li>
-<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists<br></li>
-<li>谭云杰,大象–Thinking in UML，水利水电<br></li>
+<li>张昊，Linux Shell编程从入门到精通。</li>
+<li>Core Java。有必要更新一下。</li>
+<li>Gourley D, Totty B. HTTP权威指南 O’Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists</li>
+<li>谭云杰,大象–Thinking in UML，水利水电</li>
 <li>谢希仁.计算机网络，电工</li>
 </ol>
 
-<h3 id="toc_448">经管</h3>
+
+<h3>经管</h3>
 
 <ol>
-<li>[x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。<br></li>
-<li>[x] 汽车文化。<br></li>
-<li>[x] 汽车工程学基础。 上面两边都是汽车构造及文化的基本入门读物，可以填补较大的知识空白。明白汽车的基本构造原理和发展脉络。而对汽车人物的描述则很有特色和启发。让人感叹的是，很多德国的发明家，如奔驰、戴姆勒，他们既是优秀的工程师，但同时也是成功的设计师和成功的企业家。这方面德国人确实一枝独秀。另外，其他国家的汽车杰出人物不是发明家就是工程师，至少也是一个企业家。但中国的汽车代表人物却是官员。<br></li>
+<li>[x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。</li>
+<li>[x] 汽车文化。</li>
+<li>[x] 汽车工程学基础。 上面两边都是汽车构造及文化的基本入门读物，可以填补较大的知识空白。明白汽车的基本构造原理和发展脉络。而对汽车人物的描述则很有特色和启发。让人感叹的是，很多德国的发明家，如奔驰、戴姆勒，他们既是优秀的工程师，但同时也是成功的设计师和成功的企业家。这方面德国人确实一枝独秀。另外，其他国家的汽车杰出人物不是发明家就是工程师，至少也是一个企业家。但中国的汽车代表人物却是官员。</li>
 <li>[x] 海斯勒，寻路中国，上海译文. 十分接地气的一本书，同时也相当的深刻。尤其是当一个中国人读来时，颇印证了横看成岭侧成峰，局外人更容易揭露事实的真相。
 可惜出版的还是晚了些。另外，只是country，没有城市，这一点相当遗憾。更确切的名称应该是中国乡村寻路。</li>
-<li>余江，韦尔奇，Winning（赢），中信<br></li>
-<li>曾志尧, 35岁前要上的33堂理财课,中信<br></li>
-<li>李笑来，把时间当做朋友<br></li>
-<li>蔡康永，说话之道<br></li>
-<li>高盛如何算赢世界<br></li>
-<li>The Intelligent Investor<br></li>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li>曾志尧, 35岁前要上的33堂理财课,中信</li>
+<li>李笑来，把时间当做朋友</li>
+<li>蔡康永，说话之道</li>
+<li>高盛如何算赢世界</li>
+<li>The Intelligent Investor</li>
 </ol>
 
-<h3 id="toc_449">历史文化</h3>
+
+<h3>历史文化</h3>
 
 <ol>
-<li>[x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。<br></li>
-<li>[x] 唐德刚，xxx专政始末。 相对比较一般。<br></li>
+<li>[x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。</li>
+<li>[x] 唐德刚，xxx专政始末。 相对比较一般。</li>
 <li>[x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。</li>
 <li>[x] 哈夫纳，<a href="http://octopresszhangyu.herokuapp.com/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">不含传说的普鲁士</a>。台版书的竖版读起来有点累，不过效果还行。值得反复阅读的图书。</li>
 <li>[x] 权戏。</li>
 </ol>
 
-<h2 id="toc_450">既往</h2>
 
-<p><a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/">2013读书列表</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[锥轮、液压传动和CVT]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/02/15/zhui-lun-ye-ya-chuan-dong-he-cvt/"/>
-    <updated>2014-02-15T11:21:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/02/15/zhui-lun-ye-ya-chuan-dong-he-cvt</id>
-    <content type="html"><![CDATA[<h3 id="toc_442">锥轮</h3>
+<h2>既往</h2>
 
-<p>锥轮其实就是两个圆锥形的转筒，细细的皮带（钢带）每时刻的转动都类似在做圆周运动，但累计的变化多了，圆形就逐步缩小了。所以这种东西的长处在于可以动态地改变转圈的比例。皮带在哪个部位滚动，则是通过液压圆盘的前后移动来实现，类似于抽取出来。</p>
-
-<p>CVT变速箱就是用了两个锥轮，两个锥轮一个是主动轮，接发动机的输出；另一个是接轮胎传动一头的，由主动轮带动，称为从动轮。主动轮和从动轮的液压盘向一个方向运动，从而使得皮带的长度不会被牵拉或缩短。而锥头到锥底之间的各种圆，就提供了连续的转圈比例。相对AT是跳跃式的，CVT就这样实现连续了。</p>
-
-<p>这个截图很好的说明了他们之间的关系。</p>
-
-<h3 id="toc_443">液压传动</h3>
-
-<p>液压传动则是很多AT包括CVT使用的技术。其特点是化手动的硬结合为软结合。通过液体的流动实现涡轮和导轮之间的动力传递。从而可以实现从静止到低速的平稳起步，因为这本身就是一个软的过程，不像手动的离合器就是直接接上了。在加速过程中，也可以相对平稳地增加输出。</p>
-
-<h3 id="toc_444">行星齿轮和AT</h3>
-
-<p>其实对于AT来讲，核心的东西是行星齿轮，这个东西确实挺酷的，但也是第一次了解有这种神器存在。行星齿轮有点用多项式来模拟锥轮这种连续曲线的转速比的意思，4AT模拟4个点，6AT 8AT一路可以模拟的更多，再多一些就也能实现基本连续的变速了。连续的好处是动力损失小，而AT本身的优势是档位切换快速、技术也成熟。相对而言，锥轮最大的问题就是皮带打滑，不如4AT这样那么成熟了。</p>
-
-<p>AT的技术较CVT成熟，6AT以上的效率损失就不高了。但是，档位越多的AT体积越大、重量也越重、制造成本也高，所以比起8AT，CVT反而是廉价的技术了。另外就是CVT无法适应大功率的发动机。所以3.0以上排量的用的就比较少了。大排量上还用CVT的主要就是日产公司了，CVT也可以说是日产的一张王牌。不过日产现在高级的CVT变速箱里面，也加了行星齿轮，严格的说是行星齿轮和锥轮结合的产物。大众奥迪在A4和A6上使用CVT也挺常见，但高功率版本的就是双离合和手自一体的天下了。</p>
-
-<h3 id="toc_445">变速箱的意义</h3>
-
-<p>说一千道一万，变速箱提供了转速比的灵活，使得油耗、传动能适应多种情况。现实中，起步、低速、高速、倒车时确实需要不同的发动机工作效率和传动比例。如果是定一个转速比的话，额外的开销就有点大了。</p>
-
-<p>从作用上来说，汽车的变速箱就是高级自行车上的飞。其实一般的平车都是不带飞的，链条链接的圈圈的尺寸是固定的。这一来是自行车这么开开也确实够了，而且自行车本身就不需要支持倒档。高档的比赛自行车为了获取最佳的性能，也才增加了变速系统。但汽车的质量和时速都和自行车差别太大，所以变速系统基本是标配的了。</p>
-
-<h3 id="toc_446">为什么超车需要降档</h3>
-
-<p>主观感觉上，要提速应该放在高档。但实际上因为高档的传动比是低的，输出到轮胎上的力矩并不大。而加速主要需要增加加速度，即需要输出更高的力矩。而高速降档后，发动机的转速会迅速提高，比如从1500转提高到3000转，此时输出的力矩增加。而一般情况下要求的降档降速是为了让发动机慢下来。但如果此时反而加大油门，则发动机转速会进一步上升，输出力矩会进一步加大，也就可以获得更高的输出力矩从而获得加速度。</p>
-
-<p>所以，降档有利于增加加速度，缺点是油耗会比高档位提速来的高。</p>
+<p> <a href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/">2013读书列表</a></p>
 ]]></content>
   </entry>
   

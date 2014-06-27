@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 装机 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/装机/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -27,44 +27,53 @@
 dell其次，而联想无疑是比较少的。联想主推的是带显示器或者一体机。但好在还是找到了一些。
 以下价格来自京东今天的报价。内存都是4GB，硬盘都500GB。</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
-<th align="left">机器型号</th>
-<th align="center">CPU</th>
-<th>内存插槽</th>
-<th>操作系统</th>
-<th>价格</th>
+<th></th>
+<th align="left"> 机器型号     </th>
+<th align="center"> CPU               </th>
+<th> 内存插槽 </th>
+<th>  操作系统      </th>
+<th> 价格</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
-<td align="left">S520</td>
-<td align="center">奔腾双核</td>
-<td>2</td>
-<td>DOS</td>
-<td>2149</td>
-</tr>
-<tr>
-<td align="left">S520</td>
-<td align="center">同上</td>
-<td>2</td>
-<td>Win8</td>
-<td>2399</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 奔腾双核            </td>
+<td>  2       </td>
+<td> DOS          </td>
+<td> 2149 |</td>
 </tr>
 <tr>
-<td align="left">H520e</td>
-<td align="center">酷睿三代i3-3240T</td>
-<td>1</td>
-<td>DOS</td>
-<td>2799</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 同上               </td>
+<td>   2       </td>
+<td> Win8         </td>
+<td> 2399 |</td>
 </tr>
 <tr>
-<td align="left">S530</td>
-<td align="center">i3-4150 ，独显</td>
-<td>2</td>
-<td>Win8</td>
-<td>3199</td>
+<td></td>
+<td align="left"> H520e      </td>
+<td align="center"> 酷睿三代i3-3240T    </td>
+<td>  1       </td>
+<td>DOS      </td>
+<td> 2799 |</td>
 </tr>
-</tbody></table>
+<tr>
+<td></td>
+<td align="left"> S530       </td>
+<td align="center"> i3-4150 ，独显     </td>
+<td>   2       </td>
+<td>Win8        </td>
+<td>  3199  |</td>
+</tr>
+</tbody>
+</table>
+
 
 <ul>
 <li>组装(通过京东)：
@@ -78,8 +87,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2500左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>将京东组装和S530相比的话，品牌机大约贵了700元。考虑到一个Win8的oem也要值400左右，
 对比起来会发现实际上品牌机并没有贵多少，还多了2年的免费服务和独显。以实际差价300元而言，组装机
@@ -105,8 +116,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2380左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>可以发现在淘宝上攒机还是可以进一步便宜不少的。但就这个价位来讲，品牌机和兼容机的价格差异实在已经不是很重要了。
 组装的优势是更灵活、更自由也可以更合理。不过，任何东西都有一个中国国情，就是组装机确实

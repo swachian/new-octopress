@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。
-公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。 然而， &hellip;">
+  <meta name="description" content="过去一阵子看了不少片子，两部片子印象尤其深刻： 虎胆龙威1
+光荣战役 先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。 从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,58 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/09/01/yi-xie-pian-zi/">一些片子</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-01T18:41:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>过去一阵子看了不少片子，两部片子印象尤其深刻：</p>
+
+<ol>
+<li>虎胆龙威1</li>
+<li>光荣战役</li>
+</ol>
+
+
+<p>先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。</p>
+
+<p>从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片，具备了基本的场面火爆。恐怖分子组织有术，高帅富级别的，布鲁斯倒是显得有点屌丝。而一个接一个消灭恐怖分子，有点七武士的意思，交代的十分清楚。</p>
+
+<p>片子也有典型的80年代末的特征，公司的老板是日本人，大概彼时美国人深感要被日本企业统治。而在这些之外，对官僚主义、白痴媒体也有十分辛辣的讽刺。所以，整部片子就相当有深度，也十分值得让人回味。简单的剧情，却能带来意味深长的东西。绝对是含复杂于简洁中的作品。</p>
+
+<p>第二部作品，看完后才知道是丹泽尔华盛顿的成名作，而摩根弗里曼彼时还根本没出名，居中的白人上校最后到没怎么出名。影片的故事是描述南北战争中北军的第一支黑人军队。上校统带1k个黑人士兵，各级尉官军士长初期都是白人担当，随后也开始提拔黑人担当。</p>
+
+<p>不得不说，美帝的历史其实就是一部外包史。从引入黑奴与白奴并举，到黑奴为主白人帮凶，再到解放黑奴，并且调动黑奴解放黑奴，一步一步扩展了国家的可用之才。而片子也很清晰地表明了让黑人成为有效的反戈力量有多难，需要客服多少障碍。而扩充劳动力的结果，自然就是使得国家的经济得到大幅度进步。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/">Linux下的虚拟化技术</a></h1>
     
     
@@ -97,19 +149,20 @@
   </header>
 
 
-  <div class="entry-content"><p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br>
+  <div class="entry-content"><p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
 公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
-<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br>
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
 所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
 
 <p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
 
 <ul>
-<li>xen: 国内用的最多，因为历史最长，也有商业化的支持<br></li>
-<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持<br></li>
-<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件<br></li>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
 </ul>
+
 
 <p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
 
@@ -152,8 +205,8 @@
   <div class="entry-content"><p>DHH在2013年的rails conf上做了关于类37signals web应用发展方向的报告。听了之后，还是解除了很大的迷茫。</p>
 
 <p>工作十余年，开发Web应用也八九年了。期间研究过Flex，也写过不少ajax。但到今天却觉得Web的form提交然后出结果才是真正最有用的。
-我们的下单，填填表格，登录等等，讲到底需要的只是一个让人知道怎么填的form，然后简单的提交就足够了。其余的东西再花哨，很多时候对解决问题并没有实质性的帮助。<br>
-然而，富客户端应用也是客观存在的，甚至有js重度客户端应用将取代HTML应用的论调甚嚣尘上。以我的感觉判断，这是不太会发生的。原因在于js的开发很麻烦，工作量其实是很大的，而且也限制死了可以使用的工具。要取得一个简单的页面所达到的效果，完全采用js会产生巨大的工作量。而Web应用至今而且也将继续是大量表单类的应用。只要客户端的开发难度、工作量依然如此同服务端不成比例，那么就很难成为主流，更别提替换HTML了。<br>
+我们的下单，填填表格，登录等等，讲到底需要的只是一个让人知道怎么填的form，然后简单的提交就足够了。其余的东西再花哨，很多时候对解决问题并没有实质性的帮助。<br/>
+然而，富客户端应用也是客观存在的，甚至有js重度客户端应用将取代HTML应用的论调甚嚣尘上。以我的感觉判断，这是不太会发生的。原因在于js的开发很麻烦，工作量其实是很大的，而且也限制死了可以使用的工具。要取得一个简单的页面所达到的效果，完全采用js会产生巨大的工作量。而Web应用至今而且也将继续是大量表单类的应用。只要客户端的开发难度、工作量依然如此同服务端不成比例，那么就很难成为主流，更别提替换HTML了。<br/>
 所以，在这一点上毫无疑问我赞同D大神的，重客户端应用不可能取代Web HTML应用。</p>
 
 <p>DHH陈述的突破之处在于提出这种HTML应用为 <strong>document-based</strong> Web ，以同google 地图这种应用区分开来。Web由于其简单或者说简陋，想要丰富它或者取代它的技术一直没中断过。从Java Applet开始，到flash，Siverlight等等，都曾经让Web的效果不堪一击。然而，20年来的现实情况是，不拥抱Document的技术最终都在HTML之前走了下坡路。D大神把从90年代中期至今的挑战HTML技术串联起来说，体现了磅礴的气势和全面的大局观。</p>
@@ -161,11 +214,12 @@
 <p>与此同时，他也认为Document需要继续发展，这就是他说的再Basecamp，其实也就是Rails4中增加的新技术，其实本质就是caching。具体包括：</p>
 
 <ul>
-<li>key-based cache (generational caching)<br></li>
-<li>Russian Doll nested caching, 4 level, touch: true, partial md5<br></li>
-<li>Turbolinks process persistence, (pajx)<br></li>
-<li>Polling for js updates(类似rjs)<br></li>
+<li>key-based cache (generational caching)</li>
+<li>Russian Doll nested caching, 4 level, touch: true, partial md5</li>
+<li>Turbolinks process persistence, (pajx)</li>
+<li>Polling for js updates(类似rjs)</li>
 </ul>
+
 
 <p>核心内容就是提高HTML在浏览器上的速度。而Caching能大规模流行的基础是<strong>内存红利</strong>.</p>
 
@@ -174,7 +228,8 @@
 <tr><td>  2013年  </td><td>  8GB   </td><td>  $29  </td></tr>
 </table>
 
-<p>不过此次Web面临的挑战和多年来历次遇到的还是有很大不同的。不管是flash还是applet，他们都是想作为整体的HTML+CSS+Javascript发起挑战。而这次却是原来Web整体中的Javascript和HTML谁唱主角之争。区别在于JS和HTML所占比例及所显示页面数量的巨大区别。  </p>
+
+<p>不过此次Web面临的挑战和多年来历次遇到的还是有很大不同的。不管是flash还是applet，他们都是想作为整体的HTML+CSS+Javascript发起挑战。而这次却是原来Web整体中的Javascript和HTML谁唱主角之争。区别在于JS和HTML所占比例及所显示页面数量的巨大区别。</p>
 
 <p>但是，只要Web还够简单，只要js的开发工作量还很繁重，那么产生HTML依然还是主要的Web应用模式。</p>
 </div>
@@ -220,10 +275,11 @@
 
 <ul>
 <li>Ubuntu 12.04</li>
-<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) </li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
 <li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
 <li>rails 4</li>
 </ul>
+
 
 <p>而部署环境是这样的：</p>
 
@@ -234,32 +290,36 @@
 <li>rails 4</li>
 </ul>
 
+
 <p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
 
-<p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整
+<p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整</p>
+
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SQLite3::SQLException: SQL logic error or missing database: INSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES (?)</span></code></pre></td></tr></table></div></figure>
-2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
 
 <p>为此，则折腾掉了很多的业余时间。</p>
 
 <p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
 
-<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br>
-为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br>
-随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。<br>
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
 又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
 之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
 
 <p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
 
-<h3 id="toc_425">教训</h3>
+<h3>教训</h3>
 
-<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br>
-之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br>
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
 CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
 
-<h3 id="toc_426">题外话</h3>
+<h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
 </div>
@@ -311,7 +371,7 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
 <p>当然，天下英雄用java做clojure scala甚至jruby也不是没原因的。Jvm的性能确实很好，底层的库也很齐全，安装clojure也比较方便，但clojure又引入了leinxxx。不过Java的开发效率毕竟比C高，基于java开发新的语言大概也容易一些。另外就是需要连接数据库等组件都是现成的。这就使得在java上涌现出了很多二次开发的语言。可能，这才是那么多Java实现的根本原因。</p>
 
-<p>但是，个人不太看好就因为用java实现，这些新语言就会被java开发的主流程接纳。道理很简单，混在jvm里面只是有利于复用已有jvm的机器（这点其实也不太重要），好歹部署还算方便，然而对开发而言完全是另学一套，而同时加上的枷锁和限制却更多了。  </p>
+<p>但是，个人不太看好就因为用java实现，这些新语言就会被java开发的主流程接纳。道理很简单，混在jvm里面只是有利于复用已有jvm的机器（这点其实也不太重要），好歹部署还算方便，然而对开发而言完全是另学一套，而同时加上的枷锁和限制却更多了。</p>
 
 <p>真的要给java注入活力，最直接了当的办法是让java中调用ruby clojure等，而且是要方便地调用。   伟大语言才会诞生伟大的框架和lib，而现在这种只解决新语言中调用java lib，其实是不利于java王者归来的。只是这条路这些年已经无人深入了。</p>
 
@@ -319,8 +379,8 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
 <p>所以看了一圈clojure的内容后，觉得这个语言目前还是浅尝辄止为好。</p>
 
-<p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。<br>
-<img src="/images/screen_print/programming_performance.jpg" alt="image"></p>
+<p>最后，需要提一下的是，这个语言的性能也比较普通。比普通脚本语言快，但比JS V8慢。相较于Scala Haskell，Clojure还是弱了一些。 <br/>
+<img src="/images/screen_print/programming_performance.jpg" alt="image" /></p>
 </div>
   
   
@@ -371,17 +431,19 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <ul>
 <li>第一个是X！=Y</li>
 <li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
-</ul></li>
+</ul>
+</li>
 <li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
 </ul>
 
+
 <p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
 
-<h3 id="toc_423">最大的启发</h3>
+<h3>最大的启发</h3>
 
 <p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
 
-<h3 id="toc_424">试用体验</h3>
+<h3>试用体验</h3>
 
 <p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
 不过确实是只要树立规则，就能输出结果。</p>
@@ -426,10 +488,11 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <li><p>产品经理，1，老板</p></li>
 <li><p>后端开发，1, 技术负责人</p></li>
 <li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
-<li><p>视觉设计师，2 </p></li>
+<li><p>视觉设计师，2</p></li>
 <li><p>ios开发，1，</p></li>
 <li><p>运营，2，应该就是管理员和推销员</p></li>
 </ul>
+
 </div>
   
   
@@ -478,6 +541,7 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 </span><span class='line'>  Version: 0.1.1
 </span><span class='line'>  File: act_as_xxx-0.1.1.gem</span></code></pre></td></tr></table></div></figure>
 
+
 <p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
 
 <p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
@@ -522,13 +586,13 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
 <p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
 
-<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br>
-关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。  </p>
+<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
+关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
 
-<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br>
-所以常常被大公司用了作为日志和搜索系统。<br>
-column里面存放的是map。<br>
-journaling = write-ahead logging.  </p>
+<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
+所以常常被大公司用了作为日志和搜索系统。<br/>
+column里面存放的是map。<br/>
+journaling = write-ahead logging.</p>
 
 <p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。
 N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可以认为写入成功，R则是读取多少就认为读取成功。</p>
@@ -587,50 +651,6 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/05/qian-duan-dao-di-zhong-yao-bu-zhong-yao/">前端到底重要不重要</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-05T21:32:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近发现淘宝的前端大牛似乎想往后端发展，摆脱只做前端的印象；<br>
-另一方面, teahour上的人却认为越来越多的工作从服务器往前端在靠，投入在javascript上面的工作量和时间越来越多。单用围城效应这个不是太能解释的通。</p>
-
-<p>以我个人这段时间的开发经验来看，前端很多事情和很细小，消耗的时间确实很多。比较起来，在这方面花费太多的时间如果能移到后端的话，确实可以完成更多的事情。从Get Things Done的角度而言，前端的意义是不如后端的。毕竟无论界面多么花哨，真正值得关注的还是内容。就像我们去淘宝，不是因为界面有多炫，而是里面的商品价格等吸引着我们。</p>
-
-<p>然而，事情又不那么简单。首先，世上的事情一定要Get Done的讲穿了也不多，如果只盯着最有意义的事情，那么只有长生不老，而这个完成不了的话其实做任何事情最后都是徒劳的。因此，忽视前端的效果是不对的。   其次，前端可以吸引眼球，也和少挨骂有重要相关的作用。虽然吸引我上淘宝的不是其界面，但如果他的界面很傻，那么作为用户还是会骂的。当然，比起完事界面确实是次要的。就像我能忍受12306的界面，只要他能让我订完票能兑现就一切ok。<br>
-还有一点，没有好的前端，服务根本吸引不了人。毕竟大部分人也不会有什么杀手级的内容，这个时候比拼界面反而是能反应团队的水平及做事用心的程度。</p>
-
-<p>所以，我的结论是，如果后端和内容有足够重要的事情，那么还是围绕后端。反之，有余力后可关注前端。毕竟门面功夫也不可小觑。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -648,6 +668,10 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -663,15 +687,11 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

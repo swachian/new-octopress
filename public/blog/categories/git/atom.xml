@@ -4,7 +4,7 @@
   <title><![CDATA[分类: git | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -18,16 +18,32 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init/"/>
     <updated>2012-06-27T16:38:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init</id>
-    <content type="html"><![CDATA[<p>远程的可以这样创建</p>
+    <content type="html"><![CDATA[<p>```
+$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中</p>
+
+<p>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+$ git push origin master
+```
+远程的可以这样创建</p>
+
+<p>```
+$ mkdir northboundhelper.git
+$ cd northboundhelper.git/
+$ git init --bare</p>
+
+<p>```</p>
 
 <p>在config里面指明常用的branch
-<code>
-[branch &quot;master&quot;]
-        remote = origin
-        merge = refs/heads/master
-</code></p>
+```
+[branch "master"]</p>
 
-<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://<a href="mailto:git@dev.lemote.com">git@dev.lemote.com</a>/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://<a href="mailto:git@dev.lemote.com">git@dev.lemote.com</a>/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
+<pre><code>    remote = origin
+    merge = refs/heads/master
+</code></pre>
+
+<p>```</p>
+
+<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
 
 <p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
 如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>

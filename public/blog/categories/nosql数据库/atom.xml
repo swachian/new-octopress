@@ -4,7 +4,7 @@
   <title><![CDATA[分类: nosql数据库 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nosql数据库/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -18,139 +18,181 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod/"/>
     <updated>2012-04-17T11:07:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod</id>
-    <content type="html"><![CDATA[<p>系列链接：  </p>
+    <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
 <li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
 <li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a> </li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
 </ol>
 
-<h3 id="toc_72">部署环境要求</h3>
+
+<h3>部署环境要求</h3>
 
 <ul>
 <li><p>架构</p>
 
 <ul>
-<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间<br></li>
-<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境<br></li>
-</ul></li>
+<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
+<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
+</ul>
+</li>
 <li><p>CPU</p>
 
 <ul>
-<li>非cpu密集型应用<br></li>
-<li>I/O瓶颈远比CPU瓶颈出现的可能性多<br></li>
-<li>多客户端同时读时，多核会被利用<br></li>
-<li>写操作还是单核<br></li>
-</ul></li>
+<li>非cpu密集型应用</li>
+<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
+<li>多客户端同时读时，多核会被利用</li>
+<li>写操作还是单核</li>
+</ul>
+</li>
 <li><p>RAM</p>
 
 <ul>
-<li>越多越好<br></li>
-<li>working set， index size， ram总数<br></li>
-</ul></li>
+<li>越多越好</li>
+<li>working set， index size， ram总数</li>
+</ul>
+</li>
 <li><p>Disk</p>
 
 <ul>
-<li>IOPS 优先<br></li>
-<li><em>background flush</em> 60s sync到磁盘一次<br></li>
-<li>ssd可以优化速度（solid state drive）<br></li>
+<li>IOPS 优先</li>
+<li><em>background flush</em> 60s sync到磁盘一次</li>
+<li>ssd可以优化速度（solid state drive）</li>
 <li>RAID 10 组成 LVM</li>
-</ul></li>
+</ul>
+</li>
 <li><p>文件系统</p>
 
 <ul>
-<li>ext4 或者 xfs，快速、连续的磁盘分配<br></li>
+<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
 <li>禁用access time(atime)更新</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
+
+<p>```sh</p>
+
+<h1>禁用 atime更新</h1>
+
+<p>sudo mv /etc/fstab /etc/fstab.bak
+sudo vim /etc/fstab</p>
+
+<h1>file-system mount type options dump pass</h1>
+
+<p>UUID=8309beda-bf62-43 /ssd ext4 noatime 0 2</p>
+
+<p>改完文件后，可以不用重启
+```</p>
 
 <ul>
 <li>文件描述符(FD)
 
 <ul>
 <li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
-<li>调大 <code>ulimit -Hn</code> 可以查看 </li>
-</ul></li>
+<li>调大 <code>ulimit -Hn</code> 可以查看</li>
 </ul>
+</li>
+</ul>
+
+
+<p><code>sh
+vi /etc/security/limits.conf
+mongodb hard nofile 10240
+下次登录后生效
+</code></p>
 
 <ul>
 <li><p>时钟</p>
 
 <ul>
 <li>ntp协议，在跑shard和replication时候必须启用的东西</li>
-</ul></li>
-<li><p>ec2上使用mongodb </p>
+</ul>
+</li>
+<li><p>ec2上使用mongodb</p>
 
 <ul>
 <li>ec2易用、地理范围广、价格有竞争力</li>
 <li>68GB RAM的限制</li>
 <li>使用  EBS 存储， 吞吐性能一般化</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h3 id="toc_73">服务器配置</h3>
+
+<h3>服务器配置</h3>
 
 <ul>
 <li><p>选择拓扑</p>
 
 <ul>
 <li>是否需要shard， 是否需要replica</li>
-<li>建议多机<br></li>
-</ul></li>
-<li><p>打开journal标志  </p></li>
+<li>建议多机</li>
+</ul>
+</li>
+<li><p>打开journal标志</p></li>
 </ul>
 
-<h3 id="toc_74">安全保障</h3>
+
+<h3>安全保障</h3>
 
 <ul>
 <li><p>环境安全</p>
 
 <ul>
-<li>防火墙<br></li>
+<li>防火墙</li>
 <li>数据的传输是不加密的</li>
-</ul></li>
+</ul>
+</li>
 <li><p>授权</p>
 
 <ul>
-<li>给admin区增加用户<code>use admin; db.addUser(&quot;boss&quot;, &quot;supersecret&quot;)</code></li>
+<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
 <li>启动时带上选项 <code>mongod --auth</code></li>
-<li>使用admin然后再授权 <code>use admin; db.auth(&quot;boss&quot;, &quot;supersecret&quot;)</code></li>
-<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser(&quot;trader&quot;, &quot;moneyfornuthin&quot;)</code></li>
+<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
+<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
 <li>查找用户 <code>db.system.users.find()</code></li>
-</ul></li>
+</ul>
+</li>
 <li><p>keyFile</p>
 
 <ul>
 <li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
-</ul></li>
+</ul>
+</li>
 <li><p>日志记录</p>
 
 <ul>
 <li>运行时--logpath指定</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h3 id="toc_75">监控工具</h3>
+
+<h3>监控工具</h3>
 
 <ul>
-<li><p>serverStatus<br>
-<code>use admin; db.runCommand({serverStatus: 1})</code><br>
-<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br>
+<li><p>serverStatus<br/>
+<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
+<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
 <strong>mem</strong> 段的单位是MB</p></li>
 <li><p>mongostat</p>
 
 <ul>
 <li>类似 iostat 运行的效果</li>
-</ul></li>
+</ul>
+</li>
 <li><p>web console</p>
 
 <ul>
 <li>--rest 标志打开的话，可以从web处得到更多的运行信息</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<h3 id="toc_76">备份与压缩</h3>
+
+<h3>备份与压缩</h3>
 
 <p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
 ]]></content>
@@ -182,20 +224,21 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2/"/>
     <updated>2012-03-30T17:03:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2</id>
-    <content type="html"><![CDATA[<p>系列链接：  </p>
+    <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
 <li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
 <li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a> </li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
 </ol>
 
-<p><strong>Replica sets</strong> vs <strong>Master-Slave</strong><br>
+
+<p><strong>Replica sets</strong> vs <strong>Master-Slave</strong><br/>
 目前已全面倒向支持前者。  前者是后者的加强，但限制是最大的1个set集群只有<strong>12</strong>个节点。</p>
 
-<h3 id="toc_77">Replica sets</h3>
+<h3>Replica sets</h3>
 
-<p>由3个nodes组成：  </p>
+<p>由3个nodes组成：</p>
 
 <ol>
 <li>mongod</li>
@@ -204,45 +247,58 @@
 <li>其实未必需要arbiter，只是要求至少3个mongod的节点，arbiter只是不用写数据</li>
 </ol>
 
-<p>架设代码：<br>
+
+<p>架设代码：<br/>
 ``` bash
 mkdir /data/node1
 mkdir /data/node2
-mkdir /data/arbiter </p>
+mkdir /data/arbiter</p>
 
 <p>numactl --interleave=all mongod --replSet pcdm --dbpath /data/node1 --port 40000 --oplogSize 5000
 numactl --interleave=all mongod --replSet pcdm --dbpath /data/node2 --port 40001 --oplogSize 5000
 numactl --interleave=all mongod --replSet pcdm --dbpath /data/arbiter --port 40002 --oplogSize 5000</p>
 
-<p>./bin/mongo ngntest:40000
-&gt; rs.initiate()
-&gt; config =  {_id: &#39;pcdm&#39;, members: [
-                          {_id: 0, host: &#39;localhost:40000&#39;},
-                          {_id: 1, host: &#39;localhost:40001&#39;},
-                          {_id: 2, host: &#39;localhost:40002&#39;}]
-           }
-&gt; rs.initiate(config)
-``` </p>
+<p>./bin/mongo ngntest:40000</p>
+
+<blockquote><p>rs.initiate()
+config =  {_id: 'pcdm', members: [</p>
+
+<pre><code>                      {_id: 0, host: 'localhost:40000'},
+                      {_id: 1, host: 'localhost:40001'},
+                      {_id: 2, host: 'localhost:40002'}]
+       }
+</code></pre>
+
+<p>rs.initiate(config)
+```</p></blockquote>
 
 <ul>
 <li>oplog and oplogSize</li>
 </ul>
 
-<p><code>oplogSize</code> 是replica里面同步日志的大小，默认是空闲磁盘的5%, 增加限制有利于磁盘空间的实际使用率，这其实是一个capped collection, 存放在叫 <strong>local</strong> 的空间中 ,会重复使用。<br>
-基本机制是这样的，主节点不停的往oplog里面写，从节点会去获取并写入本地的oplog，然后再‘应用&#39;.</p>
+
+<p><code>oplogSize</code> 是replica里面同步日志的大小，默认是空闲磁盘的5%, 增加限制有利于磁盘空间的实际使用率，这其实是一个capped collection, 存放在叫 <strong>local</strong> 的空间中 ,会重复使用。<br/>
+基本机制是这样的，主节点不停的往oplog里面写，从节点会去获取并写入本地的oplog，然后再‘应用'.</p>
 
 <ul>
 <li>heartbeat</li>
 </ul>
 
+
 <p>各节点之间会定期进行心跳交流， <em>如果primary发现四处都不通，则会自动降级为secondary</em> 。 也因此， 整个set需要3个来起步。另外一个其实起的就是检测的作用。</p>
 
 <ul>
-<li>driver<br>
-driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以此确定向哪一个db写数据。根据调试经验，向secondary写的数据实际都不会入库。<br></li>
+<li>driver<br/>
+driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以此确定向哪一个db写数据。根据调试经验，向secondary写的数据实际都不会入库。</li>
 </ul>
 
-<h3 id="toc_78">Sharding</h3>
+
+<p><code>ruby
+   Mongo::RepelSetConnection.new(['localhost', 40000], ['localhost', 40001], :read =&gt; :secondary)
+   # **secondary** 实现了对读的scale
+</code></p>
+
+<h3>Sharding</h3>
 
 <ul>
 <li><p>几时shard</p>
@@ -251,27 +307,29 @@ driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以�
 <li>disk activity</li>
 <li>system load</li>
 <li>ratio of working set size to available RAM.</li>
-</ul></li>
-<li><p>shards<br>
-一个shard其实就是一个replica set，或者mongod</p></li>
-<li><p>mongos router<br>
-访问整个cluster的入口<br>
-将整个系统粘连在一起<br>
-轻量级的，驻留在内存中的，不写硬盘的   </p></li>
-<li><p>config server<br>
-处理存储的可靠性，实现两阶段提交<br>
-mongos 的 config 数据是问 config server 获取<br>
-需要3个独立的机器运行才能保证冗余性  </p></li>
 </ul>
+</li>
+<li><p>shards<br/>
+一个shard其实就是一个replica set，或者mongod</p></li>
+<li><p>mongos router<br/>
+ 访问整个cluster的入口<br/>
+将整个系统粘连在一起 <br/>
+轻量级的，驻留在内存中的，不写硬盘的</p></li>
+<li><p>config server<br/>
+处理存储的可靠性，实现两阶段提交<br/>
+mongos 的 config 数据是问 config server 获取<br/>
+需要3个独立的机器运行才能保证冗余性</p></li>
+</ul>
+
 
 <p>要 shard 则要去确定 <strong>shard key</strong>, key可以是组合的fields。 随后确定key上的值，值之间的区域构成了 <strong>chunk</strong> .</p>
 
-<h3 id="toc_79">配置shard的步骤</h3>
+<h3>配置shard的步骤</h3>
 
 <p>启动shard
 ```bash</p>
 
-<h1 id="toc_80">起shard</h1>
+<h1>起shard</h1>
 
 <p>mkdir -p /data/rs-a-1
 mkdir -p /data/rs-a-2
@@ -283,17 +341,17 @@ mkdir -p /data/rs-b-3</p>
 
 <p>numactl --interleave=all mongod --shardsvr  --dbpath /data/rs-a-1 --port 30000 --logpath /data/rs-a-1.log --fork --nojournal</p>
 
-<h1 id="toc_81">numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-2 --port 30001 --logpath /data/rs-a-2.log --fork --nojournal</h1>
+<h1>numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-2 --port 30001 --logpath /data/rs-a-2.log --fork --nojournal</h1>
 
-<h1 id="toc_82">numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-3 --port 30002 --logpath /data/rs-a-3.log --fork --nojournal</h1>
+<h1>numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-3 --port 30002 --logpath /data/rs-a-3.log --fork --nojournal</h1>
 
 <p>numactl --interleave=all mongod --shardsvr  --dbpath /data/rs-b-1 --port 30100 --logpath /data/rs-b-1.log --fork --nojournal</p>
 
-<h1 id="toc_83">numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-2 --port 30101 --logpath /data/rs-b-2.log --fork --nojournal</h1>
+<h1>numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-2 --port 30101 --logpath /data/rs-b-2.log --fork --nojournal</h1>
 
-<h1 id="toc_84">numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-3 --port 30102 --logpath /data/rs-b-3.log --fork --nojournal</h1>
+<h1>numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-3 --port 30102 --logpath /data/rs-b-3.log --fork --nojournal</h1>
 
-<h1 id="toc_85">起config server，至少3个，可以和数据库节点的mongod运行在一台服务器上</h1>
+<h1>起config server，至少3个，可以和数据库节点的mongod运行在一台服务器上</h1>
 
 <p>mkdir -p /data/config-1
 mkdir -p /data/config-2
@@ -304,25 +362,45 @@ numactl --interleave=all mongod --configsvr --dbpath /data/config-3 --port 27021
 
 <p>sleep 2</p>
 
-<h1 id="toc_86">起mongos，os可以在应用服务器上一台装一个</h1>
+<h1>起mongos，os可以在应用服务器上一台装一个</h1>
 
 <p>mongos --configdb localhost:27019,localhost:27020,localhost:27021 --logpath /data/mongos.log --fork --port 40000</p>
+
+<p>```</p>
+
+<p>使用js设置shard
+```js
+mongo localhost:40000
+mongos> sh.addShard("localhost:30000")
+mongos> sh.addShard("localhost:30100")
+mongos> db.getSiblingDB("config").shards.find()
+{ "<em>id" : "shard0000", "host" : "localhost:30000" }
+{ "</em>id" : "shard0001", "host" : "localhost:30100" }</p>
+
+<p>mongos> sh.enableSharding("myapp")
+mongos> sh.status()</p>
+
+<h1>选择好的sharding key，是设计时的重要考虑对象</h1>
+
+<p>mongos> sh.shardCollection("myapp.pcmds", {c4:1, _id: 1})
+mongos> db.getSiblingDB("config").collections.find()
+```</p>
 
 <p>观察状态
 ```js
 use config
-mongos&gt; db.chunks.count()
+mongos> db.chunks.count()
 1
-mongos&gt; db.chunks.find()
-{ &quot;_id&quot; : &quot;myapp.pcmds-c4_MinKey_id_MinKey&quot;, &quot;lastmod&quot; : { &quot;t&quot; : 1000, &quot;i&quot; : 0 }, &quot;ns&quot; : &quot;myapp.pcmds&quot;, &quot;min&quot; : { &quot;c4&quot; : { $minKey : 1 }, &quot;_id&quot; : { $minKey : 1 } }, &quot;max&quot; : { &quot;c4&quot; : { $maxKey : 1 }, &quot;_id&quot; : { $maxKey : 1 } }, &quot;shard&quot; : &quot;shard0000&quot; }</p>
+mongos> db.chunks.find()
+{ "<em>id" : "myapp.pcmds-c4_MinKey_id_MinKey", "lastmod" : { "t" : 1000, "i" : 0 }, "ns" : "myapp.pcmds", "min" : { "c4" : { $minKey : 1 }, "</em>id" : { $minKey : 1 } }, "max" : { "c4" : { $maxKey : 1 }, "_id" : { $maxKey : 1 } }, "shard" : "shard0000" }</p>
 
-<p>mongos&gt; db.chunks.count({&quot;shard&quot;: &quot;shard0001&quot;})
+<p>mongos> db.chunks.count({"shard": "shard0001"})
 ```</p>
 
-<p>实际<strong>写</strong>操作时分为 <strong>routed</strong> 或 <strong>scattered</strong> 两种模式。<br>
-<strong>读</strong>操作则有 routed / scattered gather / distibuted merge sort.  </p>
+<p>实际<strong>写</strong>操作时分为 <strong>routed</strong> 或 <strong>scattered</strong> 两种模式。<br/>
+<strong>读</strong>操作则有 routed / scattered gather / distibuted merge sort.</p>
 
-<p>尽管里面的mongodb进程很多，但是真正数据量大的还是节点本身。config server占用的资源并不多，可以和数据节点共用一台服务器。  </p>
+<p>尽管里面的mongodb进程很多，但是真正数据量大的还是节点本身。config server占用的资源并不多，可以和数据节点共用一台服务器。</p>
 ]]></content>
   </entry>
   
@@ -331,142 +409,160 @@ mongos&gt; db.chunks.find()
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1/"/>
     <updated>2012-03-29T15:59:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1</id>
-    <content type="html"><![CDATA[<p>一个不错的mongodb<a href="http://tutorial.mongly.com/tutorial/index">入门游戏</a>. 一共二十课，介绍了基本的内容。通常20-60分钟可以通关。<br>
-下面是同一个作者给mongodb写的<a href="https://github.com/karlseguin/the-little-mongodb-book">小书</a>.<br>
-需要执行的脚本可以这样输入 <code>./mongo server:27017/dbname --quiet my_commands.js</code>  </p>
+    <content type="html"><![CDATA[<p>一个不错的mongodb<a href="http://tutorial.mongly.com/tutorial/index">入门游戏</a>. 一共二十课，介绍了基本的内容。通常20-60分钟可以通关。<br/>
+下面是同一个作者给mongodb写的<a href="https://github.com/karlseguin/the-little-mongodb-book">小书</a>.<br/>
+需要执行的脚本可以这样输入 <code>./mongo server:27017/dbname --quiet my_commands.js</code></p>
 
-<p>table - collection<br>
-row - document<br>
-column - field<br>
+<p>table - collection<br/>
+row - document<br/>
+column - field<br/>
 最核心最本质的突破点在于，将定义字段 从table级别  <strong>下放</strong> 到了document的级别，因而起了不同的名字以示区别。</p>
 
-<h3 id="toc_87">selector</h3>
+<h3>selector</h3>
 
-<h3 id="toc_88">replace 和$set及modifier</h3>
+<p><code>js
+{filed, value}
+$lt, $gt, $lte, $gte, $ne
+$or
+  db.unicorns.find({gender: 'f', $or: [{loves: 'apple'}, {weight: {$lt: 500}}]})
+</code></p>
 
-<p>mongodb的update至少跟两个参数：  </p>
+<h3>replace 和$set及modifier</h3>
+
+<p>mongodb的update至少跟两个参数：</p>
 
 <ul>
-<li>selector<br></li>
-<li><strong>replace</strong>的值<br></li>
+<li>selector</li>
+<li><p><strong>replace</strong>的值</p>
+
+<p>这点区别于sql，他会对document的值做全部更新</p></li>
 </ul>
 
-<p>这点区别于sql，他会对document的值做全部更新</p>
 
-<p>如果只是部分更新，请用<code>$set</code>, <code>db.unicorns.update({name: &quot;ooo&quot;}, {$set: {name: &#39;dddd&#39;}})</code></p>
+<p>如果只是部分更新，请用<code>$set</code>, <code>db.unicorns.update({name: "ooo"}, {$set: {name: 'dddd'}})</code></p>
 
-<p><code>$inc</code>: <code>db.unicorns.update({name: &#39;dddd&#39;}, {$inc: {vampires: -2}})</code><br>
-<code>$push</code>: <code>db.unicorns.update({name: &#39;ddd&#39;}, {$push: {loves: &#39;sugar&#39;}})</code><br>
-$inc主要用于整型数据，push主要用于数组等类型。  </p>
+<p><code>$inc</code>: <code>db.unicorns.update({name: 'dddd'}, {$inc: {vampires: -2}})</code><br/>
+<code>$push</code>: <code>db.unicorns.update({name: 'ddd'}, {$push: {loves: 'sugar'}})</code><br/>
+$inc主要用于整型数据，push主要用于数组等类型。</p>
 
 <ul>
-<li>upserts<br>
+<li>upserts<br/>
 第3个参数决定是否upserts，即不存在的时候就插入一笔新的数据, 默认为false不开启。</li>
 <li>multiple update
 第4个参数决定是否批量更新。 默认情况下，只会更新一笔数据，而不是所有满足条件的数据。</li>
 </ul>
 
+
 <p>upserts搭配$inc的威力还是巨大的。</p>
 
-<h3 id="toc_89">find进一步</h3>
+<h3>find进一步</h3>
 
-<p><code>find()</code>返回的仅仅是<code>cursors</code>，以此实现链式反应。  </p>
+<p><code>find()</code>返回的仅仅是<code>cursors</code>，以此实现链式反应。</p>
 
-<p><code>find()</code>还有一个参数，就是指定列名。 <code>db.unicorns.find(null, {name:1, _id: 0})</code>.<br>
+<p><code>find()</code>还有一个参数，就是指定列名。 <code>db.unicorns.find(null, {name:1, _id: 0})</code>.<br/>
   0表示隐藏不要，只有_id能和显示或隐藏混合使用，否则只能使用0或者1</p>
 
-<p><code>sort</code>等于sql里面的order，<code>db.unicorns.find().sort({weight: -1})</code>，1表示升序，-1表示降序。<br>
-对于没有索引的排序，mongodb有最大尺寸的限制，这可以认为是一个瑕疵，但对避免很次的数据库设计有好处。  </p>
+<p><code>sort</code>等于sql里面的order，<code>db.unicorns.find().sort({weight: -1})</code>，1表示升序，-1表示降序。<br/>
+对于没有索引的排序，mongodb有最大尺寸的限制，这可以认为是一个瑕疵，但对避免很次的数据库设计有好处。</p>
 
 <p><strong>paging</strong>通过<code>skip()</code>和<code>limit()</code>来配合实现。limit表示返回几条，skip表示略过前面多少个。</p>
 
-<p><code>count()</code>其实也是cursor方法，只不过shell实现了简写。下面两个是等效的：<br>
-<code>db.unicorns.find({vampires: {$gt: 50}}).count</code> &lt;=&gt; <code>db.unicorns.count({vampires: {$gt: 500}})</code></p>
+<p><code>count()</code>其实也是cursor方法，只不过shell实现了简写。下面两个是等效的：<br/>
+<code>db.unicorns.find({vampires: {$gt: 50}}).count</code> &lt;=> <code>db.unicorns.count({vampires: {$gt: 500}})</code></p>
 
-<h3 id="toc_90">Data模型设计区别</h3>
+<h3>Data模型设计区别</h3>
 
 <ul>
 <li><p>No Joins, 替代品是在client多做一次查询，该查询通常是针对已加索引的字段。</p></li>
 <li><p>Arrays 和 Embedded Documents</p>
 
 <ul>
-<li>arrays适合处理用于many-to-many的关联，在mongodb中，array的等级很高，使用很多<br></li>
-<li>embedded的doc是的可以进一步反范式化，查询可以用面向对象的方式<code>.</code>进行链式表达.<code>db.employees.find({&#39;family.mother&#39;: &#39;Chani&#39;})</code></li>
+<li>arrays适合处理用于many-to-many的关联，在mongodb中，array的等级很高，使用很多</li>
+<li>embedded的doc是的可以进一步反范式化，查询可以用面向对象的方式<code>.</code>进行链式表达.<code>db.employees.find({'family.mother': 'Chani'})</code></li>
 <li>上面两个均可选择，当前的限制是一条doc最大的尺寸是4mB</li>
-</ul></li>
-<li><p>DBRef<br>
+</ul>
+</li>
+<li><p>DBRef<br/>
 等同于外键，是在服务器端支持，但还需客户端支持。</p></li>
-<li><p>collection数量考虑<br>
+<li><p>collection数量考虑<br/>
 以schemaless的角度考虑，一个collection实际上可以支持全部的应用。但是，实际上使用时还是会按照sql数据库表格的设计方式进行区分。
 当然，many_to_many的表格基本是不存在了。而设计时，可以多考虑使用<strong>embedded</strong>的方式。</p></li>
 </ul>
 
-<h3 id="toc_91">何时使用MongoDB</h3>
+
+<h3>何时使用MongoDB</h3>
 
 <ul>
-<li><p>大部分数据其实也是结构化的，所以schemaless实际上并未受到重视。但是在开发流程方面则发生了很大的变化，而这一点对于从java .net过来的程序员是震撼性的。  </p></li>
-<li><p>Writes，也就是logging  </p>
+<li><p>大部分数据其实也是结构化的，所以schemaless实际上并未受到重视。但是在开发流程方面则发生了很大的变化，而这一点对于从java .net过来的程序员是震撼性的。</p></li>
+<li><p>Writes，也就是logging</p>
 
 <ul>
-<li>是因为mongodb的写性能很高。因为它允许写命令即可返回而不用等待真实的写。类似non-block。<br></li>
-<li>1.8以后也增加了safe的模式 ，确保写是成功的； 对于违反约束的写，比如唯一索引，不safe的写也不会返回错误<br></li>
-<li><code>capped collection</code>使得文件尺寸可以设置最大值，或条数设置最大值，有利于反复循环利用现有的空间。 <code>db.createCollection(&#39;logs&#39;, {capped: true, size: 1048576, max: 10000})</code></li>
+<li>是因为mongodb的写性能很高。因为它允许写命令即可返回而不用等待真实的写。类似non-block。</li>
+<li>1.8以后也增加了safe的模式 ，确保写是成功的； 对于违反约束的写，比如唯一索引，不safe的写也不会返回错误</li>
+<li><code>capped collection</code>使得文件尺寸可以设置最大值，或条数设置最大值，有利于反复循环利用现有的空间。 <code>db.createCollection('logs', {capped: true, size: 1048576, max: 10000})</code></li>
 <li>schemaless对日志来说，也可以较易地做修改</li>
-<li><code>journal=true</code>位于<code>mongodb.config</code>中有利于提高durability（耐久性）<br></li>
-</ul></li>
-<li><p>事务性<br>
+<li><code>journal=true</code>位于<code>mongodb.config</code>中有利于提高durability（耐久性）</li>
+</ul>
+</li>
+<li><p>事务性 <br/>
 这并非mongodb的强项。经过有atomic的操作和两段提交的例子。前者用的还是比较多的，如<code>$inc</code>, $<code>set</code></p></li>
-<li><p>数据处理  </p>
+<li><p>数据处理</p>
 
 <ul>
-<li>内建的js的MapReduce，但是js是单线程的<br></li>
-<li>可以使用Hadoop，也存在MongoDB adapter for Hadoop<br></li>
-</ul></li>
-<li><p>地图应用<br>
+<li>内建的js的MapReduce，但是js是单线程的</li>
+<li>可以使用Hadoop，也存在MongoDB adapter for Hadoop</li>
+</ul>
+</li>
+<li><p>地图应用<br/>
 内建有$near $within 的操作符</p></li>
 </ul>
 
-<h3 id="toc_92">MapReduce</h3>
+
+<h3>MapReduce</h3>
 
 <p>尽管 Mongodb 内建 MapReduce 计算模型，自己只要写 hook，然后使用 <code>db.hits.mapReduce(map, reduce, {out: {inline: 1}})</code> 来调用。但是，本质上这其实一种存储过程的写法，用来弥补group计算
-功能的不够强大。毕竟js是 <strong>单线程</strong>，所以这里的MapReduce有点鸡肋，聊胜于无。如果真的大数据量处理，还是用Hadoop等吧。<br>
-毕竟MapReduce是一种模式，而各语言实际上有各自的实现。  </p>
+功能的不够强大。毕竟js是 <strong>单线程</strong>，所以这里的MapReduce有点鸡肋，聊胜于无。如果真的大数据量处理，还是用Hadoop等吧。<br/>
+毕竟MapReduce是一种模式，而各语言实际上有各自的实现。</p>
 
-<h3 id="toc_93">性能及其他</h3>
-
-<ul>
-<li><p>索引  </p>
+<h3>性能及其他</h3>
 
 <ul>
-<li>普通索引 <code>db.unicorns.ensureIndex({name: 1})</code>, 1表示升序<br></li>
-<li>unique <code>db.unicorns.ensureIndex({name: 1}, {unique: true})</code><br></li>
-<li>复合 <code>db.unicorns.ensureIndex({name:1, vampires: -1})</code>, -1表示降序，在复合索引中，有意义<br></li>
-<li>explain: 可以查看查询使用的索引状况; <code>db.unicorns.find().explain()</code>, 例如<code>BasiceCursor</code>, <code>BtreeCursor</code><br></li>
-</ul></li>
-<li><p>Sharding<br>
-MongoDB支持自动partition<br>
-Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard由主从两个mongo组成，中间其实还有一个arbiter  </p></li>
-<li><p>性能信息 </p>
+<li><p>索引</p>
 
 <ul>
-<li><code>stats()</code>可以看状态，主要是size方面的信息<br></li>
-<li>web的接口除了浏览器终端，还有restful的接口<br></li>
-<li><code>db.system.profile.find()</code> 可以分析性能<br></li>
-</ul></li>
+<li>普通索引 <code>db.unicorns.ensureIndex({name: 1})</code>, 1表示升序</li>
+<li>unique <code>db.unicorns.ensureIndex({name: 1}, {unique: true})</code></li>
+<li>复合 <code>db.unicorns.ensureIndex({name:1, vampires: -1})</code>, -1表示降序，在复合索引中，有意义</li>
+<li>explain: 可以查看查询使用的索引状况; <code>db.unicorns.find().explain()</code>, 例如<code>BasiceCursor</code>, <code>BtreeCursor</code></li>
+</ul>
+</li>
+<li><p>Sharding<br/>
+MongoDB支持自动partition<br/>
+Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard由主从两个mongo组成，中间其实还有一个arbiter</p></li>
+<li><p>性能信息</p>
+
+<ul>
+<li><code>stats()</code>可以看状态，主要是size方面的信息</li>
+<li>web的接口除了浏览器终端，还有restful的接口</li>
+<li><code>db.system.profile.find()</code> 可以分析性能</li>
+</ul>
+</li>
 <li><p>备份及恢复
-<code>mongodump --db tutorial --out backup</code> 可把一个schema导入到backup这个目录下，里面的内容是相应的 <strong>bson</strong> 文件<br>
-<code>mongorestore --collection pcmds backup/tutorial/pcmds.bson</code> 可以把数据复原<br>
-<code>mongoexport</code> 和 <code>mongoimport</code> 可以导入导出json和csv文件  </p></li>
+<code>mongodump --db tutorial --out backup</code> 可把一个schema导入到backup这个目录下，里面的内容是相应的 <strong>bson</strong> 文件<br/>
+<code>mongorestore --collection pcmds backup/tutorial/pcmds.bson</code> 可以把数据复原<br/>
+<code>mongoexport</code> 和 <code>mongoimport</code> 可以导入导出json和csv文件</p></li>
 </ul>
 
-<h3 id="toc_94">下一步计划</h3>
+
+<h3>下一步计划</h3>
 
 <ol>
 <li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a> </li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
 <li>GridFS</li>
-<li>Hadoop 的 MapReduce 学习及引用<br></li>
+<li>Hadoop 的 MapReduce 学习及引用</li>
 </ol>
+
 ]]></content>
   </entry>
   
@@ -475,7 +571,7 @@ Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard
     <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/20/no-sql-databases-notes/"/>
     <updated>2012-03-20T21:35:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/20/no-sql-databases-notes</id>
-    <content type="html"><![CDATA[<p>部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个：  </p>
+    <content type="html"><![CDATA[<p>部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个：</p>
 
 <ul>
 <li>大数据量写入，一小时10G</li>
@@ -483,68 +579,97 @@ Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard
 <li>并发数不大，即写入和读取都不是高并发的</li>
 </ul>
 
+
 <p>发现此类数据库普遍从3年前开始流行，主要实现这些数据库的编程语言是下面这些，其实从中也可以看出各种库所擅长的内容，有些强项在存储，有些在路由，即分布式。</p>
 
 <ul>
-<li>C 
+<li>C
 
 <ul>
 <li>MongoDB　 (文档存储)</li>
 <li>Redis (key-value)</li>
-</ul></li>
+</ul>
+</li>
 <li>Erlang &amp; C （erlang管路由，c管数据存储的结构）
 
 <ul>
 <li>Riak (key-value)</li>
 <li>CouchDB (文档存储)</li>
 <li>Membase</li>
-</ul></li>
+</ul>
+</li>
 <li>java (分布式为主，路由功能和存储均不错)
 
 <ul>
-<li>Cassandra [kə&#39;sændrə]</li>
+<li>Cassandra [kə'sændrə]</li>
 <li>HBase</li>
 <li>Neo4j</li>
 <li>SenseiDB (from <a href="http://www.infoq.com/cn/news/2012/03/senseidb-1-0-0?utm_source=bshare&amp;utm_campaign=bshare&amp;utm_medium=sinaminiblog&amp;bsh_bid=85617203">LinkedIn</a>)</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p>参考资料:<br>
-<a href="http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra">http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra</a><br>
-<a href="http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis">http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis</a><br>
-<a href="http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra">http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra</a><br>
-<a href="http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2">http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2</a>  </p>
 
-<h1 id="toc_95"><a href="http://www.mongodb.org/">Mongodb</a></h1>
+<p>参考资料:<br/>
+<a href="http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra">http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra</a><br/>
+<a href="http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis">http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis</a><br/>
+<a href="http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra">http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra</a>    <br/>
+<a href="http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2">http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2</a></p>
 
-<p>保证海量数据存储的同时，具有良好的查询性能。<br>
+<h1><a href="http://www.mongodb.org/">Mongodb</a></h1>
+
+<p>保证海量数据存储的同时，具有良好的查询性能。<br/>
 Schema Free</p>
 
-<p>Mongodb总体介绍
-<div style="width:425px" id="__ss_9209804"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ChrisEdwards357/introduction-to-mongodb-9209804" title="Introduction to MongoDB - Austin Code Camp 2011" target="_blank">Introduction to MongoDB - Austin Code Camp 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9209804" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ChrisEdwards357" target="_blank">Chris Edwards</a> </div> </div></p>
+<p>Mongodb总体介绍</p>
 
-<h3 id="toc_96">安装、建库、索引与备份</h3>
+<div style="width:425px" id="__ss_9209804"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ChrisEdwards357/introduction-to-mongodb-9209804" title="Introduction to MongoDB - Austin Code Camp 2011" target="_blank">Introduction to MongoDB - Austin Code Camp 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9209804" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ChrisEdwards357" target="_blank">Chris Edwards</a> </div> </div>
+
+
+<h3>安装、建库、索引与备份</h3>
+
+<p>``` bash</p>
+
+<h1>下载解压</h1>
+
+<p>wget http://downloads.mongodb.org/src/mongodb-linux-x86_64-2.0.4.tgz
+tar xzf mongodb-src-r2.0.4.tar.gz</p>
+
+<h1>创建数据目录</h1>
+
+<p>mkdir -p /data/db</p>
+
+<h1>启动</h1>
+
+<p>./mongodb-xxxxxxx/bin/mongod</p>
+
+<h1>shell访问</h1>
+
+<p>./mongodb-xxxxxxx/bin/mongo
+```</p>
 
 <p>mongodb可以不事先建schema和表，会在第一次插入数据时自动创建</p>
 
-<p>mongodump 用于备份  </p>
+<p>mongodump 用于备份</p>
 
-<h3 id="toc_97">开发工具及使用方式</h3>
+<h3>开发工具及使用方式</h3>
 
-<p>mongodb shell是基于js的语法<br>
-<code>bash
-&gt; use mydb
-&gt; show dbs
-</code></p>
+<p>mongodb shell是基于js的语法<br/>
+``` bash</p>
+
+<blockquote><p>use mydb
+show dbs
+```</p></blockquote>
 
 <ul>
-<li><a href="http://www.mongodb.org/display/DOCS/Java+Tutorial">Java</a><br>
+<li><a href="http://www.mongodb.org/display/DOCS/Java+Tutorial">Java</a><br/>
 <div style="width:425px" id="__ss_3924691"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ecspike/java-development-with-mongodb" title="Java development with MongoDB" target="_blank">Java development with MongoDB</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/3924691" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> Mophia( a lightweight type-safe library for mapping Java objects to/from MongoDB)值得使用</div> </div></li>
-<li><a href="http://www.mongodb.org/display/DOCS/Ruby+Language+Center">Ruby</a><br></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Ruby+Language+Center">Ruby</a></li>
 <li><a href="http://www.mongodb.org/display/DOCS/C+Language+Center">C</a></li>
 </ul>
 
-<h3 id="toc_98">数据模型</h3>
+
+<h3>数据模型</h3>
 
 <ul>
 <li>database</li>
@@ -554,63 +679,68 @@ Schema Free</p>
 <li>index</li>
 </ul>
 
-<h3 id="toc_99">生产环境配置要点(部署)</h3>
+
+<h3>生产环境配置要点(部署)</h3>
 
 <ul>
 <li>Linux File Systems</li>
 </ul>
 
+
 <p>MongoDB uses large files for storing data, and preallocates these. These filesystems seem to work well:</p>
 
-<p>ext4 ( kernel version &gt;= 2.6.23 )
-xfs ( kernel version &gt;= 2.6.25 )</p>
+<p>ext4 ( kernel version >= 2.6.23 )
+xfs ( kernel version >= 2.6.25 )</p>
 
 <ul>
 <li>NUMA (一种多核cpu的内存绑定结构，同mongodb和mysql的兼容都不好)
 ``` bash
 numactl --interleave=all /home/mongodb/mongodb-linux-x86_64-2.0.4/bin/mongod --fork --logpath=/data/log/log
-echo 0 &gt; /proc/sys/vm/zone_reclaim_mode</li>
+echo 0 > /proc/sys/vm/zone_reclaim_mode</li>
 </ul>
 
-<p>kill -2 {proccess_id} # kill -2 = <sup>C</sup>
+
+<p>kill -2 {proccess_id} # kill -2 = ^C
 ```</p>
 
-<h3 id="toc_100">监控</h3>
+<h3>监控</h3>
 
-<h1 id="toc_101"><a href="http://cassandra.apache.org/">Cassandra</a></h1>
+<h1><a href="http://cassandra.apache.org/">Cassandra</a></h1>
 
-<h3 id="toc_102">开发工具的支持</h3>
+<h3>开发工具的支持</h3>
 
 <p>使用<a href="http://thrift.apache.org/">Thrift</a>作为支持多语言的开发工具。它本身也是facebook开源出来的东西。</p>
 
-<h3 id="toc_103">安装与教程</h3>
+<h3>安装与教程</h3>
 
 <ol>
 <li><a href="http://wiki.apache.org/cassandra/GettingStarted">安装GettingStarted</a>，是安装、配置、启动的上手指南，类似启动一个tomcat；</li>
 <li><a href="http://wiki.apache.org/cassandra/CassandraCli">command line 基础</a>, 包含了基本的建表、索引等实例；</li>
-<li><a href="http://pablete.org/2009/11/cassandra-and-ruby/">Cassandra for Rails的ppt</a><br>
+<li><a href="http://pablete.org/2009/11/cassandra-and-ruby/">Cassandra for Rails的ppt</a><br/>
 <div style="width:480px;text-align:left" id="__ss_2834738">
-<a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/pablete/cassandra-for-rails" title="Cassandra for Rails">Cassandra for Rails</a>
-<object style="margin:0px" width="480" height="355">
-  <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" />
-  <param name="allowFullScreen" value="true"/>
-  <param name="allowScriptAccess" value="always"/>
-  <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>
-</object>
+ <a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/pablete/cassandra-for-rails" title="Cassandra for Rails">Cassandra for Rails</a>
+ <object style="margin:0px" width="480" height="355">
+   <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" />
+   <param name="allowFullScreen" value="true"/>
+   <param name="allowScriptAccess" value="always"/>
+   <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>
+ </object>
 </div></li>
 </ol>
 
-<h3 id="toc_104">其他优秀特性：</h3>
+
+<h3>其他优秀特性：</h3>
 
 <ul>
-<li>比key-value多，比Mongodb做的少。<br></li>
+<li>比key-value多，比Mongodb做的少。</li>
 <li>Range queries</li>
 <li>List datastructures , for per-user indexex</li>
-<li>Distributed writes </li>
+<li>Distributed writes</li>
 <li>cluster里可以指定写的node的数量W，和读的node数量R，以此来实现整个node</li>
 </ul>
 
-<h3 id="toc_105">生产cluster搭配要点:</h3>
+
+<h3>生产cluster搭配要点:</h3>
 
 <ul>
 <li>硬件
@@ -618,40 +748,44 @@ echo 0 &gt; /proc/sys/vm/zone_reclaim_mode</li>
 <ul>
 <li>不需要raid，可以多个节点，即便在同一台机器上，同时运行。</li>
 <li>16GB的内存</li>
-</ul></li>
+</ul>
+</li>
 <li>配置
 
 <ul>
 <li>16GB的内存下，配3个节点，Jvm heap使用4GB</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>在/var/lib 下存放data， log， 和  saved_caches</p>
 
-<h3 id="toc_106">数据模型的概念</h3>
+<h3>数据模型的概念</h3>
 
 <ul>
-<li>keyspace = schema;<br>
-keyspace仅仅是用来决定replication的次数，而不要求所有的内容都关联在一个schema中。 </li>
-<li>column family = table<br>
-由row key +　Columns组成，key可以是自然key也可以是uuid之类的key<br>
+<li>keyspace = schema;<br/>
+keyspace仅仅是用来决定replication的次数，而不要求所有的内容都关联在一个schema中。</li>
+<li>column family = table<br/>
+  由row key +　Columns组成，key可以是自然key也可以是uuid之类的key<br/>
 column 由name, value 和timstamp组成，其中value可以为空
 key默认就有primary index</li>
-<li>特殊的column<br>
-Expiring 可以写入过期时间，用于消息失效之类的应用<br>
-Count 技术的事务性有Cassandra自己保持<br>
-Super  其value是(super) columns的集合，但是该value的全部内容要序列化<br></li>
-<li>对value索引<br>
- 即二级索引，主要起类似位图索引的作用</li>
+<li>特殊的column<br/>
+Expiring 可以写入过期时间，用于消息失效之类的应用<br/>
+Count 技术的事务性有Cassandra自己保持<br/>
+Super  其value是(super) columns的集合，但是该value的全部内容要序列化</li>
+<li>对value索引<br/>
+   即二级索引，主要起类似位图索引的作用</li>
 </ul>
+
 
 <p><a href="http://www.datastax.com/docs/0.7/data_model/twissandra">一个Twissandra 使用cassandra的例子</a></p>
 
-<h3 id="toc_107">Cassandra 小结</h3>
+<h3>Cassandra 小结</h3>
 
 <p>目前分析下来，倾向于使用Cassandra. 理由是，极致的可扩展性，是可以水平扩展的数据库；Java编写，利于改造利用；开发者在去facebook前，也是Amazon Dynamo的开发者；
-已知的已经有300TB使用400台服务器的案例。<br>
-twitter的人写的架设材料 <a href="http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra/">http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra/</a><br>
+已知的已经有300TB使用400台服务器的案例。<br/>
+twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra/<br/>
 但其缺点是过于虚拟化以及理想化，所以实际应用中并不是很稳定，digg和twitter都面临骑虎难下的局面。</p>
 ]]></content>
   </entry>

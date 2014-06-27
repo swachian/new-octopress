@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -26,10 +26,11 @@
 
 <ul>
 <li>Ubuntu 12.04</li>
-<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) </li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
 <li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
 <li>rails 4</li>
 </ul>
+
 
 <p>而部署环境是这样的：</p>
 
@@ -40,11 +41,12 @@
 <li>rails 4</li>
 </ul>
 
+
 <p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
 
 <p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整
 <code>
-SQLite3::SQLException: SQL logic error or missing database: INSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES (?)
+SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)
 </code>
 2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
 
@@ -52,21 +54,21 @@ SQLite3::SQLException: SQL logic error or missing database: INSERT INTO &quot;sc
 
 <p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
 
-<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br>
-为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br>
-随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。<br>
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
 又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
 之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
 
 <p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
 
-<h3 id="toc_108">教训</h3>
+<h3>教训</h3>
 
-<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br>
-之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br>
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
 CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
 
-<h3 id="toc_109">题外话</h3>
+<h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
 ]]></content>
@@ -80,6 +82,13 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
     <content type="html"><![CDATA[<p>今天终于尝试做了第一个<code>gem</code>，其实挺简单的，至少在有了bundler之后。</p>
 
 <p>先 <code>bundle gem act_as_xxx</code>，随后就可以编辑里面的内容，比如在<code>*.gemspec</code>里面加入描述。编辑好自己的gem后，运行<code>gem build act_as_xxx.gemspec</code>，这样一个新的gem就会编译出来。</p>
+
+<p><code>
+  Successfully built RubyGem
+  Name: act_as_xxx
+  Version: 0.1.1
+  File: act_as_xxx-0.1.1.gem
+</code></p>
 
 <p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
 
@@ -96,20 +105,20 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
 <p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
 
-<h3 id="toc_110">1. 简单</h3>
+<h3>1. 简单</h3>
 
 <p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
 
-<h3 id="toc_111">2. 方便</h3>
+<h3>2. 方便</h3>
 
 <p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
 方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
 
-<h3 id="toc_112">3.程序员（IT人员）的朋友</h3>
+<h3>3.程序员（IT人员）的朋友</h3>
 
 <p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
 
-<h3 id="toc_113">4. Rails</h3>
+<h3>4. Rails</h3>
 
 <p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
 的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
@@ -143,9 +152,10 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <li>Sep 2000 1.6</li>
 </ul>
 
+
 <p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
 
-<p>voccation-driven development<br>
+<p>voccation-driven development<br/>
 Anniversary-driven development</p>
 
 <ul>
@@ -156,6 +166,7 @@ Anniversary-driven development</p>
 <li>Feb 2013 2.0.0</li>
 </ul>
 
+
 <p>2.0版最早是在Ruby Conf 2001提出，包括</p>
 
 <ul>
@@ -164,23 +175,89 @@ Anniversary-driven development</p>
 <li>有些特性后来放弃了</li>
 </ul>
 
+
 <p>2.0的发布带来了：</p>
 
 <ul>
 <li>New Hash literals</li>
 </ul>
 
+
+<p><code>
+  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}
+</code></p>
+
 <ul>
 <li>keyword arguments</li>
 </ul>
+
+
+<p>```
+  def log(msg, level: "ERROR", time: Time.now)</p>
+
+<pre><code>puts "..."
+</code></pre>
+
+<p>  end</p>
+
+<p>  # existing hash passing
+  log("Hello!", **hash)
+```</p>
 
 <ul>
 <li>Module#prepend, alias method chain, from CommonLisp</li>
 </ul>
 
+
+<p>```</p>
+
+<h1>prepend put them before to wrap methods</h1>
+
+<p>class Foo
+  def foo; p :foo; end
+end</p>
+
+<p>module Prepend
+  def foo</p>
+
+<pre><code>p :before
+super
+p :after
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>class Foo
+  prepend Prepend # just as include Prepend
+end</p>
+
+<p>Foo.new.foo</p>
+
+<p>```</p>
+
 <ul>
 <li>refine，to constrain open class, scoped monkey patching</li>
 </ul>
+
+
+<p>```
+module R
+  refine String do</p>
+
+<pre><code>def foo
+  puts "aaa"
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>"".foo # => error!</p>
+
+<p>using R
+"".foo
+```</p>
 
 <p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
 
@@ -188,21 +265,37 @@ Anniversary-driven development</p>
 <li>Enumerable#lazy， 受函数式编程影响</li>
 </ul>
 
+
+<p><code>
+(1..Float::INFINITY).lazy.map {|i|
+  i.to_s
+}.select {|s|
+  /3/ === s
+}.first(500000)
+</code></p>
+
 <ul>
 <li>Symbol array literals</li>
 </ul>
 
+
+<p><code>
+%i(foo bar baz) =&gt; [:foo, :bar, :baz]
+</code></p>
+
 <ul>
 <li><p>to_h, to_hash</p></li>
 <li><p>UTF-8 by default</p></li>
-<li><p>Performance Faster: </p>
+<li><p>Performance Faster:</p>
 
 <ul>
 <li>VM(YARV)</li>
 <li>GC</li>
 <li>require</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>Ruby 2.1 maybe 25.12.2013</p>
 ]]></content>
@@ -213,34 +306,40 @@ Anniversary-driven development</p>
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
     <updated>2013-03-04T20:03:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
-    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br>
+    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
 为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
 在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
 
-<h3 id="toc_114">0 事先准备</h3>
+<h3>0 事先准备</h3>
 
 <p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
 但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
 
-<h3 id="toc_115">1 创建应用</h3>
+<h3>1 创建应用</h3>
 
-<p>首先执行 
+<p>首先执行
 ```
 heroku apps:create user-agent-show2</p>
 
-<p>[remote &quot;heroku&quot;]
-        url = <a href="mailto:git@heroku.com">git@heroku.com</a>:user-agent-show.git
-        fetch = +refs/heads/<em>:refs/remotes/heroku/</em>
-```</p>
+<p><code>
+这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
+</code>
+[remote "heroku"]</p>
 
-<h3 id="toc_116">2 Git push</h3>
+<pre><code>    url = git@heroku.com:user-agent-show.git
+    fetch = +refs/heads/*:refs/remotes/heroku/*
+</code></pre>
+
+<p>```</p>
+
+<h3>2 Git push</h3>
 
 <p>随后就可以执行
 <code>
 git push heroku
 </code>
 部署应用了。
-但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem &#39;pg&#39;</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
 基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
 
 <p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
@@ -255,7 +354,11 @@ config.serve_static_assets = true
 </code>
 这样才能保证静态文件被正常访问。</p>
 
-<h3 id="toc_117">3 数据库更新</h3>
+<h3>3 数据库更新</h3>
+
+<p><code>
+heroku run rake db:migrate
+</code></p>
 
 <p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: sass | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/sass/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -49,6 +49,7 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
 <li><a href="http://railscasts.com/episodes/268-sass-basics">rails cast</a></li>
 </ul>
 
+
 <p>sass的几大特性</p>
 
 <ul>
@@ -57,6 +58,7 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
 <li>function</li>
 <li>mixin,variable</li>
 </ul>
+
 
 <p>另外还有files的组织</p>
 ]]></content>

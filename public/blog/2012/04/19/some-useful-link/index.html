@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="发现Ruby Inside最近的
-文章又好看了起来。选了一些细细研究如下。 GitHub&#39;s Ruby Style Guide
+文章又好看了起来。选了一些细细研究如下。 GitHub&#8217;s Ruby Style Guide
 很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。
 此外，还有tomdoc做编码文档的规范， &hellip;">
   
@@ -100,11 +100,12 @@
 文章又好看了起来。选了一些细细研究如下。</p>
 
 <ul>
-<li><p><a href="https://github.com/styleguide/ruby">GitHub&#39;s Ruby Style Guide</a><br>
-很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br>
-此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。  </p></li>
+<li><p><a href="https://github.com/styleguide/ruby">GitHub&#8217;s Ruby Style Guide</a><br/>
+很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
+此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
 <li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
 </ul>
+
 
 <p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
 
@@ -117,7 +118,9 @@
 </span><span class='line'><span class="nv">$ </span>mkdir _layouts _plugins _includes _posts css javascripts images
 </span><span class='line'><span class="nv">$ </span>touch index.html _config.yml _layouts/default.html
 </span></code></pre></td></tr></table></div></figure>
-目录树结构
+
+
+<p>目录树结构</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -149,9 +152,13 @@
 </span><span class='line'>└── index.html
 </span></code></pre></td></tr></table></div></figure>
 
+
+
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>jekyll --server --auto
 </span></code></pre></td></tr></table></div></figure>
+
 
 <p>文档的要求只有一个:</p>
 
@@ -165,6 +172,7 @@
 </span><span class='line'>---
 </span></code></pre></td></tr></table></div></figure>
 
+
 <p>就会按markdown里面的layout产生内容。</p>
 
 <p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
@@ -173,11 +181,13 @@
 <li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
 </ul>
 
-<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。 </p>
+
+<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
 
 <ul>
 <li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
 </ul>
+
 
 <p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
 <strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
@@ -187,6 +197,7 @@
 <li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
 <li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
 </ul>
+
 
 <p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
 </div>
@@ -252,6 +263,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -267,15 +282,11 @@
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

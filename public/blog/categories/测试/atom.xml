@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 测试 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/测试/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -20,12 +20,12 @@
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/12/knowing-what-not-to-test-is-the-harder-part</id>
     <content type="html"><![CDATA[<p>很多次，一直问自己测试代码到底值不值？毕竟我写过几次，但最后发现写测试代码的工作量其实很大。特别是碰到需求变更，本来只要改一处的代码，变得
 必须改  <strong>2x</strong> 处。做了一段时间以后，我承认这是对保证质量有效的，但是往往确实不值得，因为得不偿失。另一个问题是先写
-测试还是先写程序？ </p>
+测试还是先写程序？</p>
 
 <p>按TDD的要求，无疑测试代码在先，实际代码在后。但根据我写web程序的经验，尤其是那些controller的经验，坚持测试代码在先基本没什么意义。在web上和
 数据库上直接看见结果显然更有感觉。</p>
 
-<p>二者结合起来，最后我们就不怎么写测试代码了。尽管对违反TDD有一种罪恶感，但在教条和现实之间，我们还是选择了现实。其实想来比坚持教条要好。但实际上可以处理的更加聪明，也更有效果些。 </p>
+<p>二者结合起来，最后我们就不怎么写测试代码了。尽管对违反TDD有一种罪恶感，但在教条和现实之间，我们还是选择了现实。其实想来比坚持教条要好。但实际上可以处理的更加聪明，也更有效果些。</p>
 
 <p>直到今天读了DHH的 <a href="http://37signals.com/svn/posts/3159-testing-like-the-tsa">测试识别</a> ， 我对上面的问题有了更深一步的认识。</p>
 
@@ -35,6 +35,7 @@
 <li>关键问题在于，也是最难的，是<strong>识别什么东西是需要测试的</strong>，真正值得动脑筋的是这些东西。</li>
 <li>识别出要写的测试后，先写测试还是后写其实和在写什么内容关系重大。针对api的可以tdd，而应用类的实际上还是可以先写代码再写测试，毕竟tdd在web中更多的是一种保障作用。</li>
 </ol>
+
 
 <p>得到的教训：</p>
 

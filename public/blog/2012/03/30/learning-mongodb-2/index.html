@@ -96,20 +96,21 @@
   </header>
 
 
-<div class="entry-content"><p>系列链接：  </p>
+<div class="entry-content"><p>系列链接：</p>
 
 <ol>
 <li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
 <li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a> </li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
 </ol>
 
-<p><strong>Replica sets</strong> vs <strong>Master-Slave</strong><br>
+
+<p><strong>Replica sets</strong> vs <strong>Master-Slave</strong><br/>
 目前已全面倒向支持前者。  前者是后者的加强，但限制是最大的1个set集群只有<strong>12</strong>个节点。</p>
 
-<h3 id="toc_289">Replica sets</h3>
+<h3>Replica sets</h3>
 
-<p>由3个nodes组成：  </p>
+<p>由3个nodes组成：</p>
 
 <ol>
 <li>mongod</li>
@@ -118,7 +119,9 @@
 <li>其实未必需要arbiter，只是要求至少3个mongod的节点，arbiter只是不用写数据</li>
 </ol>
 
-<p>架设代码：<br>
+
+<p>架设代码：</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -151,33 +154,40 @@
 </span><span class='line'>                          <span class="o">{</span>_id: 2, host: <span class="s1">&#39;localhost:40002&#39;</span><span class="o">}]</span>
 </span><span class='line'>           <span class="o">}</span>
 </span><span class='line'>&gt; rs.initiate<span class="o">(</span>config<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure> </p>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <ul>
 <li>oplog and oplogSize</li>
 </ul>
 
-<p><code>oplogSize</code> 是replica里面同步日志的大小，默认是空闲磁盘的5%, 增加限制有利于磁盘空间的实际使用率，这其实是一个capped collection, 存放在叫 <strong>local</strong> 的空间中 ,会重复使用。<br>
-基本机制是这样的，主节点不停的往oplog里面写，从节点会去获取并写入本地的oplog，然后再‘应用&#39;.</p>
+
+<p><code>oplogSize</code> 是replica里面同步日志的大小，默认是空闲磁盘的5%, 增加限制有利于磁盘空间的实际使用率，这其实是一个capped collection, 存放在叫 <strong>local</strong> 的空间中 ,会重复使用。<br/>
+基本机制是这样的，主节点不停的往oplog里面写，从节点会去获取并写入本地的oplog，然后再‘应用&#8217;.</p>
 
 <ul>
 <li>heartbeat</li>
 </ul>
 
+
 <p>各节点之间会定期进行心跳交流， <em>如果primary发现四处都不通，则会自动降级为secondary</em> 。 也因此， 整个set需要3个来起步。另外一个其实起的就是检测的作用。</p>
 
 <ul>
-<li>driver<br>
-driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以此确定向哪一个db写数据。根据调试经验，向secondary写的数据实际都不会入库。<br></li>
+<li>driver<br/>
+driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以此确定向哪一个db写数据。根据调试经验，向secondary写的数据实际都不会入库。</li>
 </ul>
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="no">Mongo</span><span class="o">::</span><span class="no">RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="ss">Mongo</span><span class="p">:</span><span class="ss">:RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
 </span><span class='line'>   <span class="c1"># **secondary** 实现了对读的scale </span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_290">Sharding</h3>
+
+<h3>Sharding</h3>
 
 <ul>
 <li><p>几时shard</p>
@@ -186,24 +196,27 @@ driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以�
 <li>disk activity</li>
 <li>system load</li>
 <li>ratio of working set size to available RAM.</li>
-</ul></li>
-<li><p>shards<br>
-一个shard其实就是一个replica set，或者mongod</p></li>
-<li><p>mongos router<br>
-访问整个cluster的入口<br>
-将整个系统粘连在一起<br>
-轻量级的，驻留在内存中的，不写硬盘的   </p></li>
-<li><p>config server<br>
-处理存储的可靠性，实现两阶段提交<br>
-mongos 的 config 数据是问 config server 获取<br>
-需要3个独立的机器运行才能保证冗余性  </p></li>
 </ul>
+</li>
+<li><p>shards<br/>
+一个shard其实就是一个replica set，或者mongod</p></li>
+<li><p>mongos router<br/>
+ 访问整个cluster的入口<br/>
+将整个系统粘连在一起 <br/>
+轻量级的，驻留在内存中的，不写硬盘的</p></li>
+<li><p>config server<br/>
+处理存储的可靠性，实现两阶段提交<br/>
+mongos 的 config 数据是问 config server 获取<br/>
+需要3个独立的机器运行才能保证冗余性</p></li>
+</ul>
+
 
 <p>要 shard 则要去确定 <strong>shard key</strong>, key可以是组合的fields。 随后确定key上的值，值之间的区域构成了 <strong>chunk</strong> .</p>
 
-<h3 id="toc_291">配置shard的步骤</h3>
+<h3>配置shard的步骤</h3>
 
-<p>启动shard
+<p>启动shard</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -260,9 +273,11 @@ mongos 的 config 数据是问 config server 获取<br>
 </span><span class='line'>sleep 2
 </span><span class='line'><span class="c">#起mongos，os可以在应用服务器上一台装一个</span>
 </span><span class='line'>mongos --configdb localhost:27019,localhost:27020,localhost:27021 --logpath /data/mongos.log --fork --port 40000
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>使用js设置shard
+
+<p>使用js设置shard</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -289,9 +304,11 @@ mongos 的 config 数据是问 config server 获取<br>
 </span><span class='line'><span class="err">#</span> <span class="err">选择好的</span><span class="nx">sharding</span> <span class="nx">key</span><span class="err">，是设计时的重要考虑对象</span>
 </span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">shardCollection</span><span class="p">(</span><span class="s2">&quot;myapp.pcmds&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">c4</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span><span class="p">})</span>
 </span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">).</span><span class="nx">collections</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>观察状态
+
+<p>观察状态</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -306,12 +323,13 @@ mongos 的 config 数据是问 config server 获取<br>
 </span><span class='line'><span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;myapp.pcmds-c4_MinKey_id_MinKey&quot;</span><span class="p">,</span> <span class="s2">&quot;lastmod&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;t&quot;</span> <span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span> <span class="o">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="s2">&quot;ns&quot;</span> <span class="o">:</span> <span class="s2">&quot;myapp.pcmds&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;c4&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$minKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$minKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">},</span> <span class="s2">&quot;max&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;c4&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$maxKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$maxKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">},</span> <span class="s2">&quot;shard&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0000&quot;</span> <span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">chunks</span><span class="p">.</span><span class="nx">count</span><span class="p">({</span><span class="s2">&quot;shard&quot;</span><span class="o">:</span> <span class="s2">&quot;shard0001&quot;</span><span class="p">})</span>
-</span></code></pre></td></tr></table></div></figure></p>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>实际<strong>写</strong>操作时分为 <strong>routed</strong> 或 <strong>scattered</strong> 两种模式。<br>
-<strong>读</strong>操作则有 routed / scattered gather / distibuted merge sort.  </p>
 
-<p>尽管里面的mongodb进程很多，但是真正数据量大的还是节点本身。config server占用的资源并不多，可以和数据节点共用一台服务器。  </p>
+<p>实际<strong>写</strong>操作时分为 <strong>routed</strong> 或 <strong>scattered</strong> 两种模式。<br/>
+<strong>读</strong>操作则有 routed / scattered gather / distibuted merge sort.</p>
+
+<p>尽管里面的mongodb进程很多，但是真正数据量大的还是节点本身。config server占用的资源并不多，可以和数据节点共用一台服务器。</p>
 </div>
 
 
@@ -375,6 +393,10 @@ mongos 的 config 数据是问 config server 获取<br>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -390,15 +412,11 @@ mongos 的 config 数据是问 config server 获取<br>
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论 都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
+  <meta name="description" content="一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
+都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
 篇幅很大， &hellip;">
   
 
@@ -94,7 +95,7 @@
   </header>
 
 
-<div class="entry-content"><p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论 
+<div class="entry-content"><p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
 都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
 篇幅很大，但真正值得读的代码却很少。</p>
 
@@ -112,18 +113,18 @@
 
 <p><a href="https://gist.github.com/f801d7015715f6f10098">gist</a></p>
 
-<p>作者：  </p>
+<p>作者：</p>
 
-<p>吴翰清，西安交通大学少年班，84年生人。<br>
-2007年，成为P7（初级技术专家）；<br>
-2010年，成为P8（高级技术专家）。<br>
+<p>吴翰清，西安交通大学少年班，84年生人。<br/>
+2007年，成为P7（初级技术专家）；<br/>
+2010年，成为P8（高级技术专家）。<br/>
 2012年下半年，跳槽去了安全宝，创新工场下面的一个企业。我对开复不感冒，甚至是负分的哦。</p>
 
 <p><strong>白帽子</strong> 主守， <strong>黑帽子</strong> 主攻。</p>
 
 <p>防火墙及ACL的控制，是的任意攻击系统端口的情况不再可能。而Web端口不能封。加之Web技术的普及和流行，黑客攻击转向Web。</p>
 
-<h3 id="toc_401">安全三要素(CIA)</h3>
+<h3>安全三要素(CIA)</h3>
 
 <ul>
 <li>机密性(Confidentiality)</li>
@@ -131,22 +132,24 @@
 <li>可用性(Availability)</li>
 </ul>
 
+
 <p>其他还有可审计性、不可抵赖性等</p>
 
 <p>第一章很一般，全部都是空谈，讲一些人人都懂的道理。而且归纳的也很不好，基本就是一个列表，列表之间没有逻辑关系。</p>
 
 <p>作者的文字功底和解释能力相当一般。</p>
 
-<h2 id="toc_402">XSS(跨站脚本）</h2>
+<h2>XSS(跨站脚本）</h2>
 
 <p>这章前半部分很无聊，作者罗列了一堆xss的案例，其中贴的js代码就差不多有十页。但没解释，没重点。XSS防御部分介绍的还行。
 xss可以分为参数安全和劫持Cookie两种。可以试试<a href="http://www.fiddler2.com/fiddler2/">fiddler</a>工具。</p>
 
-<h3 id="toc_403">XSS防御</h3>
+<h3>XSS防御</h3>
 
 <ul>
 <li>HttpOnly</li>
 </ul>
+
 
 <p>是设置cookie的属性，即只能Http请求时上传，而不能让JS操作。这样就可以避免cookie被劫持。</p>
 
@@ -154,45 +157,48 @@ xss可以分为参数安全和劫持Cookie两种。可以试试<a href="http://w
 <li>输入检查</li>
 </ul>
 
+
 <p>黑白名单过滤器</p>
 
 <ul>
 <li>输出检查</li>
 </ul>
 
+
 <p>在html文本中用HtmlEncode，在javascript中用JavascriptEncode。</p>
 
 <p>在css和url的输出则较为复杂。 Anti-Samy是一个很好的XSS Filter。</p>
 
-<h2 id="toc_404">CSRF(Cross Site Request Forgery) 跨站点请求伪造</h2>
+<h2>CSRF(Cross Site Request Forgery) 跨站点请求伪造</h2>
 
 <p>有些浏览器本地cookie不会被提交，session型cookie则肯定会被提交。</p>
 
 <p>解决办法是 <strong>验证码</strong> 和 <strong>Anti CSRF Token</strong></p>
 
-<p>就是在表单和session中，都放一个token来确保这个form是本地服务产生的。<br>
+<p>就是在表单和session中，都放一个token来确保这个form是本地服务产生的。<br/>
 Token可以是一个，也可以是多个。</p>
 
 <p>点击劫持和HTML5都讲的比较烂。总是缺乏画龙点睛的那一笔。</p>
 
-<h2 id="toc_405">SQL 注入</h2>
+<h2>SQL 注入</h2>
 
 <p>此章依然很一般。介绍的内容相当不到位。比如只说出了是利用sql拼接的漏洞，但没说具体是怎么应用的。
 不过在 <a href="http://vdisk.weibo.com/s/oHDMV/1359208976">SQL注入攻击技术初探</a> 中，终于搞懂了以前困惑过我的问题：内容到底是怎么显示出去的。道理在于让第一句（自己写的语句）出错无记录，而后面跟随union则返回攻击程序写出来的sql，这样自然内容就回显了。而参数数量等都是通过order by 16等试错来取得的。</p>
 
 <p>使用预编译语句的效果主要是确保SQL语句的结构不会因为输入的参数发生变化。即实现了数据和代码（字段及从句的分离。</p>
 
-<h2 id="toc_406">访问控制</h2>
+<h2>访问控制</h2>
 
 <p>依然讲的不清楚，懂的人不需要读，不懂的人读了也白读。</p>
 
 <ul>
-<li>垂直权限管理 &#8211; 针对URL的访问控制，RBAC<br></li>
+<li>垂直权限管理 &#8211; 针对URL的访问控制，RBAC</li>
 <li>水平权限管理 &#8211; 面对数据资源的</li>
 <li>OAuth &#8211; 和我们的重定向类似，只是更加标准，返回的不是用户数据，而是token</li>
 </ul>
 
-<h2 id="toc_407">加密算法和随机数</h2>
+
+<h2>加密算法和随机数</h2>
 
 <p>这章还算有点料，从使用者的角度讲解了加密解密算法的用法。</p>
 
@@ -204,10 +210,11 @@ Token可以是一个，也可以是多个。</p>
 <li>使用带salt的SHA-256或SHA-512用于Hashing.</li>
 </ul>
 
-<h2 id="toc_408">DDOS</h2>
+
+<h2>DDOS</h2>
 
 <p>亮点在于给了Yahoo的专利，确实是绝佳的主意。
-<a href="http://patft.uspto.gov">Detecting system abuse</a> </p>
+<a href="http://patft.uspto.gov">Detecting system abuse</a></p>
 
 <p>本书不是一本讲解性质的。其特点是列出各个大门，然后读者自己进去领取东西。对比师傅领进门的模式，它的模式是门户告诉你，然后靠自己。</p>
 
@@ -277,6 +284,10 @@ Token可以是一个，也可以是多个。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/">中级品牌机和组装机比较</a>
       </li>
     
@@ -292,15 +303,11 @@ Token可以是一个，也可以是多个。</p>
         <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/车车'>车车 (9)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (7)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/车牌'>车牌 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

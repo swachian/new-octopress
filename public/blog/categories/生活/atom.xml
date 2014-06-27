@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -27,44 +27,53 @@
 dell其次，而联想无疑是比较少的。联想主推的是带显示器或者一体机。但好在还是找到了一些。
 以下价格来自京东今天的报价。内存都是4GB，硬盘都500GB。</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
-<th align="left">机器型号</th>
-<th align="center">CPU</th>
-<th>内存插槽</th>
-<th>操作系统</th>
-<th>价格</th>
+<th></th>
+<th align="left"> 机器型号     </th>
+<th align="center"> CPU               </th>
+<th> 内存插槽 </th>
+<th>  操作系统      </th>
+<th> 价格</th>
 </tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
-<td align="left">S520</td>
-<td align="center">奔腾双核</td>
-<td>2</td>
-<td>DOS</td>
-<td>2149</td>
-</tr>
-<tr>
-<td align="left">S520</td>
-<td align="center">同上</td>
-<td>2</td>
-<td>Win8</td>
-<td>2399</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 奔腾双核            </td>
+<td>  2       </td>
+<td> DOS          </td>
+<td> 2149 |</td>
 </tr>
 <tr>
-<td align="left">H520e</td>
-<td align="center">酷睿三代i3-3240T</td>
-<td>1</td>
-<td>DOS</td>
-<td>2799</td>
+<td></td>
+<td align="left"> S520       </td>
+<td align="center"> 同上               </td>
+<td>   2       </td>
+<td> Win8         </td>
+<td> 2399 |</td>
 </tr>
 <tr>
-<td align="left">S530</td>
-<td align="center">i3-4150 ，独显</td>
-<td>2</td>
-<td>Win8</td>
-<td>3199</td>
+<td></td>
+<td align="left"> H520e      </td>
+<td align="center"> 酷睿三代i3-3240T    </td>
+<td>  1       </td>
+<td>DOS      </td>
+<td> 2799 |</td>
 </tr>
-</tbody></table>
+<tr>
+<td></td>
+<td align="left"> S530       </td>
+<td align="center"> i3-4150 ，独显     </td>
+<td>   2       </td>
+<td>Win8        </td>
+<td>  3199  |</td>
+</tr>
+</tbody>
+</table>
+
 
 <ul>
 <li>组装(通过京东)：
@@ -78,8 +87,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2500左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>将京东组装和S530相比的话，品牌机大约贵了700元。考虑到一个Win8的oem也要值400左右，
 对比起来会发现实际上品牌机并没有贵多少，还多了2年的免费服务和独显。以实际差价300元而言，组装机
@@ -105,8 +116,10 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <li>键鼠100元</li>
 <li>dvd</li>
 <li>合计在2380左右</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+
 
 <p>可以发现在淘宝上攒机还是可以进一步便宜不少的。但就这个价位来讲，品牌机和兼容机的价格差异实在已经不是很重要了。
 组装的优势是更灵活、更自由也可以更合理。不过，任何东西都有一个中国国情，就是组装机确实
@@ -171,12 +184,12 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
     <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/02/macbook-pro</id>
     <content type="html"><![CDATA[<p>日本之旅买了很多东西，其中就包括了一台Macbook Pro。主要的参数如下：</p>
 
-<p>屏幕: 13寸Retina<br>
-CPU: Intel Core i5 2.4GHz<br>
-Mem: 8GB 1600MHz<br>
-硬盘: 256GB SSD<br>
-显卡: Intel Iris Graphics<br>
-售价: 147800 日元，折合人民币9060  </p>
+<p>屏幕: 13寸Retina<br/>
+CPU: Intel Core i5 2.4GHz<br/>
+Mem: 8GB 1600MHz<br/>
+硬盘: 256GB SSD<br/>
+显卡: Intel Iris Graphics<br/>
+售价: 147800 日元，折合人民币9060</p>
 
 <p>售价比中国便宜了许多主要是受汇率的影响。如果2月份去的话，会更便宜，现在
 的汇率已经到0.061以上了。而最便宜的时候有几个礼拜都是在0.058左右浮动的。
@@ -190,8 +203,9 @@ Mem: 8GB 1600MHz<br>
 
 <ol>
 <li>只能用visa，不能用银联；</li>
-<li>电器店有5%的折扣+退税8%，而苹果店一般只有后者一个优惠，所以要贵5%。<br></li>
+<li>电器店有5%的折扣+退税8%，而苹果店一般只有后者一个优惠，所以要贵5%。</li>
 </ol>
+
 
 <p>但为了完美一些，只能放弃5%的优惠了。这里还要再吐槽一下visa。用的卡是多币种的
 信用卡，免去了1.5%的中间手续费，但visa的结算日期是按他们自己的节奏来的，不像
@@ -206,7 +220,7 @@ Mem: 8GB 1600MHz<br>
 表面上看，我并不缺机器用。但有了孩子以后，能正经坐在台式机前的时间很少。而那台sony是
 配ssd的，性能不错，但空间实在有限，装个虚机和基本的系统后，就没多少硬盘了。而且，我尤其
 讨厌这台sony的屏幕，挺贵的机器，屏幕却配了一个永远想继续增加亮度的屏。也略微有点小重，
-放在床上用并不舒服。<br>
+放在床上用并不舒服。<br/>
 而mac就可以较好地解决这些问题了。为了写博客或者浏览信息基本不需要再装虚拟机。而mac的retina
 屏幕实属人间尤物，细腻且亮度极高，一看就喜欢，越用越喜欢。机器本身只有1.5kg，比sony的小本子
 还要轻一些。电池续航能力就更强了，号称可以有9个小时，而一般的本子能有4小时的已经算很强大了。
@@ -249,6 +263,7 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <li>物有所值</li>
 </ol>
 
+
 <p>整个日本是相当<strong>干净</strong>的，除了在奈良公园的土路上，我在那里呆了八九天，基本鞋子都是不沾灰的。衣服穿
 2-3天依然还是相当的干净。在上海动不动就脏了，曾经以为是自己脏了，现在看来主要还是环境不干净。</p>
 
@@ -275,42 +290,42 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 <p>虽然东西很贵很贵，但一分价钱一分货，日本的东西倒也充分应验了这句话。最后让你觉得这一切还是物有所值的。
 尤其是在上海的物价已经上升了很多之后。</p>
 
-<h2 id="toc_11">主要的行程</h2>
+<h2>主要的行程</h2>
 
-<p>第1天<br>
-大阪<br>
+<p>第1天<br/>
+大阪<br/>
 关西机场、难波、海游馆</p>
 
-<p>第2天<br>
-大阪<br>
+<p>第2天<br/>
+大阪<br/>
 天守阁，历史博物馆，心斋桥、biccamer、苹果专卖店</p>
 
-<p>第3天<br>
-大阪<br>
+<p>第3天<br/>
+大阪<br/>
 环球影城、道顿崛</p>
 
-<p>第4天<br>
-京都<br>
+<p>第4天<br/>
+京都<br/>
 京都站、清水寺、二年坂、三年坂</p>
 
-<p>第5天<br>
-京都<br>
+<p>第5天<br/>
+京都<br/>
 岚山、嵯峨野观光小火车、天龙寺、锦市场、蟹道乐</p>
 
-<p>第6天<br>
-奈良<br>
+<p>第6天<br/>
+奈良<br/>
 近铁交通、春日大社、奈良公园</p>
 
-<p>第7天<br>
-京都 东京<br>
+<p>第7天<br/>
+京都 东京<br/>
 伏见稻荷大社、新干线、鸟元</p>
 
-<p>第8天<br>
-东京<br>
+<p>第8天<br/>
+东京<br/>
 川崎、藤子F不二雄博物馆、三鹰吉卜力美术馆</p>
 
-<p>第9天<br>
-东京<br>
+<p>第9天<br/>
+东京<br/>
 羽田机场、利木津机场巴士</p>
 
 <p><a href="http://bbs.qyer.com/viewthread.php?tid=931893&amp;page=1&amp;extra=#pid9177702">旅游的详细链接</a></p>

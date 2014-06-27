@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-06-23T09:31:26+08:00</updated>
+  <updated>2014-06-27T22:04:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -18,19 +18,20 @@
     <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
     <updated>2013-08-17T20:59:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
-    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br>
+    <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
 公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
-<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br>
+<p>然而，在接触了ubuntu的虚拟化后，一下子有茅塞顿开的感觉。首先，windows下我常用的virtualbox就可以在ubuntu下使用。xen和kvm当然ubuntu也是支持的。同时这几种虚拟化技术都可以按命令行的方式使用。其次，ubuntu在安装虚拟化套件方面是十分方便的。主要原因在于它的包要比redhat的时新的多。还有一点，ubuntu比起redhat还是很小巧的。这点在虚拟化的时候显得比较重要。毕竟一台主机的时候，只会安装一个os，如果大2GB那也就只是2GB。一旦云化后，一台主机往往就要4+1个操作系统，在磁盘不富裕的情况下，os的臃肿会成比例的放大。这时候小巧的os就显示出了优势。<br/>
 所以我倾向于采用ubuntu server作为云化的主力os。至少应该是虚机的主体。</p>
 
 <p>接下来就是选择何种东西虚拟化了。主要下面3种：</p>
 
 <ul>
-<li>xen: 国内用的最多，因为历史最长，也有商业化的支持<br></li>
-<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持<br></li>
-<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件<br></li>
+<li>xen: 国内用的最多，因为历史最长，也有商业化的支持</li>
+<li>kvm：半虚拟化技术，做在kernel里面，redhat和ubuntu大力支持</li>
+<li>virtualbox: 是的，其实这可能是最好用的linux虚机软件</li>
 </ul>
+
 
 <p>性能方面，根据<a href="http://www.liangsuilong.info/?p=675">kvm vs Virtualbox</a> 和 <a href="http://server.zol.com.cn/257/2575328.html">Ubuntu11.10 Xen Kvm Virtualbox比拼</a>，总体而言kvm的性能最佳，大文件比virtualbox有所不如。而且从未来规划来看，redhat和ubuntu普遍倾向于支持kvm。但是，virtualbox有两大优势：1.使用是图形化的界面，很简单； 2.与kvm和xen都专注于cpu性能不同，virtualbox的图形化性能要比另外两个都强许多。不过vbox实际上是基于qemu改进的，kvm-qemu也是一个组合。所以，普通用用的情况下可以直接上virtualbox。</p>
 
@@ -51,35 +52,36 @@
 
 <script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
 
-<h2 id="toc_122">存储的发展</h2>
+
+<h2>存储的发展</h2>
 
 <p>封面很山寨，图片有很多。比较有利于增强感性认识，也符合我想认识设备的需求。</p>
 
 <p>纸带 磁存储 硬盘 磁阵 网络磁阵（几百个磁盘） 网络存储（硬盘从主机箱移到外面）</p>
 
-<h2 id="toc_123">总线</h2>
+<h2>总线</h2>
 
-<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br>
+<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br/>
 导线中，有些是<strong>交互数据</strong>用的数据总线，有些是<strong>传递控制信号</strong>的控制总线，包括处理<strong>中断与仲裁</strong>的,另有一些是用来确认目标设备的<strong>地址总线。</strong></p>
 
-<h3 id="toc_124">连找发模型、CPU与硬盘的交互</h3>
+<h3>连找发模型、CPU与硬盘的交互</h3>
 
-<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br>
-CPU和硬盘通过总线相 <strong>连</strong> ；<br>
-<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br>
+<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br/>
+CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
+<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br/>
 <strong>发</strong>即发送操作指令，对于磁盘CPU有如下三条指令：
   1. 读还是写，外加其他选项如是否缓存、是否用中断来通知CPU处理
-  2. 知名应该读取的硬盘逻辑号[LBA]<br>
-  3. 给出读取出来的内容放在内存中的哪个地址。<br>
+  2. 知名应该读取的硬盘逻辑号[LBA]<br/>
+  3. 给出读取出来的内容放在内存中的哪个地址。<br/>
 上面这三个指令其实是发给南桥上的控制器，南桥再将指令翻译成磁盘认识的一系列指令，南桥和磁盘之间的协议接口形成了ATA和SCSI两个指令集。</p>
 
-<h2 id="toc_125">磁盘结构</h2>
+<h2>磁盘结构</h2>
 
-<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br>
-磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br>
-盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br>
-不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br>
-能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细  </p>
+<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br/>
+磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br/>
+盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br/>
+不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br/>
+能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细</p>
 
 <p>扇区传统上采用CHS编码（Cylinder柱面、Header磁头、Sector扇区)，每个扇区包含扇区头信息和数据区两部分，头信息就有CHS信息以及是否为坏扇区这些内容；不过随着发展，目前已经抽象成了LBA寻址方式，但这只是在磁盘外部表现的逻辑</p>
 
@@ -90,7 +92,7 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br>
 
 <p>总有个最小单位（芝诺悖论，龟兔赛跑悖论）</p>
 
-<h3 id="toc_126">硬盘接口技术</h3>
+<h3>硬盘接口技术</h3>
 
 <ul>
 <li><p>ATA</p>
@@ -98,7 +100,8 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br>
 <ul>
 <li>IDE（PIO,DMA两种主要模式，前者的数据通过CPU写入内存，后者磁盘直接写入内存，最高的是ATA133）</li>
 <li>SATA（较PATA的信号干扰小）</li>
-</ul></li>
+</ul>
+</li>
 <li><p>SCSI（带宽大，热插拔，较ATA多了SCSI控制卡，其实就是多了一个处理器）</p>
 
 <ul>
@@ -106,41 +109,49 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br>
 <li>串行</li>
 <li>IBM SSA</li>
 <li>FC接口（FCP）</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
-<p>CPU -----&gt; 磁盘控制器（南桥） -----&gt; 磁盘驱动器控制电路（硬盘内）<br>
-    <code>接口1：磁盘控制器驱动程序</code>   <code>接口2：ATA/SCSI接口</code>  </p>
 
-<p>磁盘数据 -----&gt; 驱动控制电路的缓存 -----&gt; 磁盘控制器<br>
-      <code>内部传输速率</code>               <code>外部传输速率</code>  </p>
+<p>CPU -----> 磁盘控制器（南桥） -----> 磁盘驱动器控制电路（硬盘内）</p>
 
-<h3 id="toc_127">并行的劣势</h3>
+<pre><code>`接口1：磁盘控制器驱动程序`   `接口2：ATA/SCSI接口`  
+</code></pre>
+
+<p>磁盘数据 -----> 驱动控制电路的缓存 -----> 磁盘控制器</p>
+
+<pre><code>  `内部传输速率`               `外部传输速率`  
+</code></pre>
+
+<h3>并行的劣势</h3>
 
 <p>并行是要求同步达到，这给并发信息之间的配合带来问题；它的传输频率不能太高，因为并行会增加干扰增加配合难度，而串行则无此问题，可以通过增加频率来提高速度。这里面的核心问题是<strong>传输距离</strong>，距离低的比如内存到cpu就不用担心干扰和配合带来的难题。而距离远的，如usb ata这是串行优势明显。</p>
 
-<h2 id="toc_128">七种Raid</h2>
+<h2>七种Raid</h2>
 
 <ul>
 <li>Raid 0 --- 几块硬盘全部并发；</li>
-<li>Raid 1 --- 1比1镜像；<br></li>
-<li>Raid 2 --- 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃<br></li>
+<li>Raid 1 --- 1比1镜像；</li>
+<li>Raid 2 --- 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃</li>
 <li>Raid 3 --- 较Raid 2 对校验进行了突破，采用了布尔运算中的抑或算法，可以用更少的<strong>校验盘</strong>，可以校验和找回，但不像R2那样可以纠错，条带也被弄成了4KB；
-每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO<br></li>
-<li>Raid 4 --- 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；<br></li>
+每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO</li>
+<li>Raid 4 --- 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；</li>
 <li><p>Raid 5 --- 继续使用校验，突破点在于不再单独地使用一个硬盘做校验盘，而是在所有的磁盘中都产生了校验区；</p>
 
 <ul>
-<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.<br></li>
-</ul></li>
+<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.</li>
+</ul>
+</li>
 <li><p>Raid 6 --- 另外6种Raid基本只容忍可以损坏一种磁盘，Raid 6允许损坏2块磁盘。在XOR运算之外，又增加了一种校验运算，从而提高了磁阵的可靠性。</p></li>
 </ul>
 
+
 <p>Raid 0速度快所以可以和其他Raid杂交，组成Raid 50 、 Raid 10等等。</p>
 
-<h2 id="toc_129">Raid 虚拟磁盘 卷 和文件系统实现</h2>
+<h2>Raid 虚拟磁盘 卷 和文件系统实现</h2>
 
-<h3 id="toc_130">软硬Raid</h3>
+<h3>软硬Raid</h3>
 
 <p>Raid程序位于OS底层。</p>
 
@@ -148,27 +159,28 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br>
 
 <p>虚拟磁盘是Raid卡把多个磁盘组合出来的，在OS看来就是一个物理磁盘。windows中的动态磁盘。</p>
 
-<h3 id="toc_131">卷管理层</h3>
+<h3>卷管理层</h3>
 
-<p><strong>LV</strong> -- 最后构成了LV<br>
-LP -- 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br>
-PP -- 分成N个可以用于磁盘分配的块<br>
-<strong>VG</strong> -- 卷组，多个磁盘都可以放到一个卷组里面<br>
-<strong>PV</strong> -- 物理磁盘  </p>
+<p><strong>LV</strong> -- 最后构成了LV<br/>
+LP -- 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br/>
+PP -- 分成N个可以用于磁盘分配的块<br/>
+<strong>VG</strong> -- 卷组，多个磁盘都可以放到一个卷组里面<br/>
+<strong>PV</strong> -- 物理磁盘</p>
 
 <p>实际的I/O参与者（1个manager，3个drivers）</p>
 
 <ul>
-<li>I/O manager ---&gt; 寻求FS翻译 </li>
-<li>File System driver ---&gt; 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
-<li>LV manager driver ---&gt; 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager<br></li>
-<li>Disk driver ---&gt; 翻译成磁盘相关的磁盘上的物理便宜位置</li>
+<li>I/O manager ---> 寻求FS翻译</li>
+<li>File System driver ---> 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
+<li>LV manager driver ---> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager</li>
+<li>Disk driver ---> 翻译成磁盘相关的磁盘上的物理便宜位置</li>
 </ul>
+
 
 <p>这个东西从架构风格上而言就是一个manager带着3个driver，采用过滤器式的链式传递。driver的顺序由manager管理，执行顺序由manager负责。
 具体的活则由driver完成。</p>
 
-<h2 id="toc_132">阵列</h2>
+<h2>阵列</h2>
 
 <p>起步，JBOD，Just a Bound Of Disks, 里面就做到电路板上的SCSI线缆，连接15块硬盘，机箱外露出一个SCSI接口，与主机通过SCSI线相连。</p>
 
@@ -187,9 +199,9 @@ Active-Standby和Dual-Active。</p>
 <p>盘阵类型有 SCSI-FC、FC-FC、SATA-FC、SCSI-SCSI等等，前后表示后端，后者表示前端。
 例如，SCSI-FC表示后端为SCSI接口，前端连接主机的是FC接口。</p>
 
-<h2 id="toc_133">FC协议的引入</h2>
+<h2>FC协议的引入</h2>
 
-<h3 id="toc_134">FC协议和以太网</h3>
+<h3>FC协议和以太网</h3>
 
 <p>FC协议其实是Fibre Channel（网状通道）的意思。其传输介质可以是光纤也可以是铜线。就像以太网的传输介质也可以是光纤是一样的。
 只不过用光纤连接的多，于是FC在中国就变成光纤通信了。FC协议的传输效率比以太网高，但实现更复杂。但都是可以适应各种传输介质的，
@@ -197,7 +209,7 @@ Active-Standby和Dual-Active。</p>
 
 <p>FC的适配器也有光纤和RJ45等。</p>
 
-<h3 id="toc_135">前端从SCSI迁移到FC</h3>
+<h3>前端从SCSI迁移到FC</h3>
 
 <p>SCSI指令集在SCSI-3中做了分割，从此应用层的指令语义部分独立出来，下层改造成了一个适配器。而FC只要实现了这个适配器的功能就能
 使用上层的指令语义部分。就这样，FC和SCSI的组合构成了新的SCSI前端。</p>
@@ -205,7 +217,7 @@ Active-Standby和Dual-Active。</p>
 <p>意义（好处）：</p>
 
 <ol>
-<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。<br></li>
+<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。</li>
 <li>增加了传输距离，铜线和光纤的区别。</li>
 <li>有了安全策略：
 
@@ -213,9 +225,11 @@ Active-Standby和Dual-Active。</p>
 <li>磁阵控制器上配置<strong>LUN映射表</strong>，规定只有某些主机能访问某些LUN，解决磁阵共享的问题</li>
 <li>在FC交换机上配置<strong>ZONE</strong>,类似VPN的做法</li>
 <li>磁阵共享的另一个解决办法是集群文件系统。是否磁阵独占由SCSI指令集协议定义</li>
-</ul></li>
+</ul>
+</li>
 <li>可实现冗余和均衡负载</li>
 </ol>
+
 
 <p>FC是<strong>面向无连接</strong>的基于包分发的连接形式，是<strong>串行</strong>的所以适合远距离。</p>
 
@@ -224,7 +238,7 @@ Active-Standby和Dual-Active。</p>
 
 <p>配置LUN（划分磁盘），各个LUN参数（条带深度、数据宽度），配置LUN映射。类似PC上给磁盘分区后格式化。</p>
 
-<h2 id="toc_136">DAS ， SAN 和NAS</h2>
+<h2>DAS ， SAN 和NAS</h2>
 
 <p>NAS(Network Attached Storage)就是把文件系统的功能放置在存储设备中，暴露在外面的不再是一个裸设备。
 Windows使用CIFS协议，Linux使用NFS协议。</p>
@@ -233,7 +247,7 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 <p>实际使用中，NAS后面可以接SAN作为存储。即混合使用。NAS也能作为SAN的一种特例。在我国，通常SAN就是指FC SAN。</p>
 
-<h2 id="toc_137">以太网和TCP/IP概述</h2>
+<h2>以太网和TCP/IP概述</h2>
 
 <ul>
 <li>HUB --- 无对应表</li>
@@ -241,10 +255,11 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 <li>交换机 --- MAC-端口</li>
 </ul>
 
+
 <p>TCP/IP 和 以太网的关系是PoP，即Protocol over Protocol。它们的关系是一对组合。
 协议融合的方式有Tunnel和Map两个大类，PPPoE就是PPP协议 over Ethernet协议。</p>
 
-<h2 id="toc_138">IP SAN</h2>
+<h2>IP SAN</h2>
 
 <p>ISCSI, Internet Small Computer System Interface，SCSI协议走在以太网（通过ISCSI）上，以太网替换了FC，如同FC替换了SCSI链路，
 编号RFC3720,2004年通过。开销比例约6%。</p>
@@ -255,7 +270,7 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
 
 <p>IP SAN的成本低，卡和交换机都便宜的多，速度也还过得去，成本只有1/10以下。</p>
 
-<h3 id="toc_139">IP 与 FC的融合</h3>
+<h3>IP 与 FC的融合</h3>
 
 <p>局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。</p>
 ]]></content>
@@ -268,21 +283,25 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
     <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
 
-<h1 id="toc_140"></h1>
+<p><code>bash
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
+</code></p>
 
-<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
+<p>=======
+<strong>数据源的输入才是Hadoop方便地方</strong></p>
 
-<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br>
-读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br>
-比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br>
-然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br>
-然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br>
-map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的  </p>
+<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
+读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
+比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
+然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
+然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
+map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
 
-<h1 id="toc_141">文献</h1>
+<h1>文献</h1>
 
-<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br>
-<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a>  </p>
+<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
 ]]></content>
   </entry>
   
@@ -297,37 +316,38 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 <p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
 总之，流更适合对分布式系统的集中处理。</p>
 
-<h3 id="toc_142">站在开发的角度</h3>
+<h3>站在开发的角度</h3>
 
 <p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
 莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
 实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
 
-<h3 id="toc_143">站在部署的角度</h3>
+<h3>站在部署的角度</h3>
 
 <p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
 一个input stream。</p>
 
 <p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
 
-<h3 id="toc_144">几种技巧和工具</h3>
+<h3>几种技巧和工具</h3>
 
 <ol>
-<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a><br>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
 syslog是要搭配bash的命令<code>logger</code>使用的。
 <code>sh
-mydaemon | tee /var/log/mydaemon.log | logger
+ mydaemon | tee /var/log/mydaemon.log | logger
 </code>
 tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
-<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
 则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
-<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
 这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
 存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
 再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
-<li><p>Upstart launchd  Systemd 
+<li><p>Upstart launchd  Systemd
 这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
 </ol>
+
 ]]></content>
   </entry>
   
@@ -338,11 +358,11 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/27/the-difference-between-mapreduce-and-hadoop</id>
     <content type="html"><![CDATA[<p>简单地说，MapReduce是一种计算模型，也就是一种设计；而Hadoop则是这种模式的Java实现，由Apache发行。
 2004年的时候，google发布了MapReduce的论文，并给出了一个C++的实现。此后，很多种语言都实现了MapReduce模式，比较有名的有，
-Hadoop(java), Skynet(ruby)等。<br>
+Hadoop(java), Skynet(ruby)等。<br/>
 而Hadoop除了这个计算模型外，还包括分布式数据库和分布式内存存储两大部分内容。</p>
 
 <p>MapReduce实际上是切分+管道技术。可以表述称 Map | Reduce。
-通过Map，将要处理的数据转换成[key, value], 再管道给Reduce继续进行处理。 </p>
+通过Map，将要处理的数据转换成[key, value], 再管道给Reduce继续进行处理。</p>
 ]]></content>
   </entry>
   
