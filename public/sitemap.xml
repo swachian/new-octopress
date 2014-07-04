@@ -735,15 +735,21 @@
         <lastmod>2014-06-27T21:56:30+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/
+        </loc>
+        <lastmod>2014-07-04T23:20:11+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2014-06-29T16:00:31+08:00</lastmod>
+        <lastmod>2014-07-04T23:20:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2014-06-29T16:00:31+08:00</lastmod>
+        <lastmod>2014-07-04T23:20:11+08:00</lastmod>
     </url>
 </urlset>

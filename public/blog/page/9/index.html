@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。 数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
-如果只是一个死记硬背各种开发模型的人，看到这本书可能会有恍然大悟的感觉。但于我而言，一直坚持独立思考， &hellip;">
+  <meta name="description" content="这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。 全篇最精彩的部分在于基础设施章节。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/03/ship-it/">Ship It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-03T09:38:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是此次6本其中3本项目管理书籍中读起来最快速的一本。如果说《用户故事》是告诉你需求怎么收集，《Manage It！》是
+告诉大家如何给项目选择模型、设置生命周期，那么这本书则是开发中关于项目构建的干货，同时也牵涉到了一点项目团队组织的问题。</p>
+
+<p>全篇最精彩的部分在于<strong>基础设施</strong>章节。提出了基础设施的存在是为了解决让人头疼的问题，而且是用轻松的方式予以解决。
+<strong>版本库</strong>、<strong>特性跟踪软件</strong>、<strong>项目待办事宜软件</strong>、<strong>构件机</strong>、<strong>自动构建系统</strong>均属于此类。它们确实是工具和方法
+但又不仅仅只是方法。实际上基础设施通过提供便利的方式轻松地解决了在PM中提到的那些需要处理的问题。对于节约成本、方便沟通、
+加速进度、确定工作范围、提高质量都有巨大的促进作用，而不仅仅只是解决某一领域的问题。真正的进步只能在于人和基础设施，
+这些才是可持续可重复的。</p>
+
+<p>里面的实践大部分应该说我已经在平时的工作、项目管理中实践起来。当然有些东西是没有的，比如构件机，比如自动测试。直到现在
+我依然认为写自动测试带来的工作量的增加很可能是得不偿失的。而且Web UI的测试难点依然没有真正好的办法解决。但其他几条应用已久
+而且确实效果还是很不错的。另外自动构建至今也没流行开来。对于Rails等基于脚本语言的开发方法来说，自动构建还算简单，但对于Java来说可能CruiseControl
+还是过于复杂了。</p>
+
+<p>这本书的原版成版于2005年，很多思路和37signals的类似，确实是中小型团队合作项目的典范。</p>
+
+<p>前面已经提到，此书关注的是内部项目怎么开发，所以无论需求怎么搜集（用户故事、用户案例、用户场景）最终都需要把产品分解
+为<strong>特性</strong>，特性分解为<strong>任务清单</strong>。所有的任务清单都需要记录，<strong>如果没有记录就像从来没有发生过一样</strong>。合作过程中，
+基础设施提供保障，<strong>任务清单则是主要沟通交流的对象</strong>，也是控制彼此节奏和提交物质量的重要根据。<strong>每日例会</strong>的内容
+和清单相关，<strong>代码审查</strong>也和清单相关。可以说，<code>基础设施+任务清单+沟通+动手=软件的优良构建</code>。</p>
+
+<p><strong>曳光弹</strong>的开发其实就是概要设计、分模块开发的意思。强调能独立的组件就独立，彼此通过接口来交互。只要接口稳定，内部
+实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
+所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
+当然是软件开发尤其是应用软件开发应该的样子。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -737,48 +797,6 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/26/programming-language-performance/">Programming Language Performance</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-26T10:06:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
-
-<p>JavaScript是一个很大的亮点。V8的性能确实快。
-相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
-1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
-2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
-而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -796,6 +814,10 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/">开发语言还真是一个问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/27/sac/">证券从业资格考试</a>
       </li>
     
@@ -811,15 +833,11 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
         <a href="/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/">JSP中的EL表达式和Helper</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (45)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (14)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (46)</a></li><li><a href='/blog/categories/生活'>生活 (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (17)</a></li><li><a href='/blog/categories/时评'>时评 (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (10)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>
