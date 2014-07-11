@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 时评 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/时评/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-07-10T22:42:45+08:00</updated>
+  <updated>2014-07-11T22:48:12+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[德国决赛阿根廷]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/11/de-guo-jue-sai-a-gen-ting/"/>
+    <updated>2014-07-11T12:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/11/de-guo-jue-sai-a-gen-ting</id>
+    <content type="html"><![CDATA[<p>我们这代人看世界杯可以说是看着德国和西班牙PK长大的。86年和90年的两场决赛，铁马和马拉多纳代表了
+那个时代得中场者得天下。<br/>
+而勒夫的新德国队和阿根廷的关系更多。这已经是连续第三届世界杯碰面了，只是前两次都是1/4决赛。2006，
+还在新老交接中的德国，艰难地逼平了阿根廷，然后点球决战，留下了经典的小纸条以及莱曼和卡恩之间男人的握手。<br/>
+2010年，意气风发的青春德国，4：0痛快地干掉了阿根廷。这场比赛也被勒夫认为是他在那届世界杯中的最佳比赛。</p>
+
+<p>不曾想，2014年两队又一次相遇，而这次双方都进了决赛。阿根廷后防的实力并不好，但本届比赛打到现在他们的
+失球确实很少。但我依然认为现在的阿根廷和德国并不是一个层面一个档次的球队。能阻止德国夺冠的只有这是一届
+在南美举行的世界杯。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[「转载」政策不仅偏帮新能源，还偏帮了涡轮增压]]></title>
@@ -174,23 +191,6 @@ Javascript，还是在浏览器中发挥威力吧。</p>
 
 <p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
 了的可能还是自己直接创业。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[IBM的Linux和Google的Android]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android/"/>
-    <updated>2014-04-12T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/12/ibmde-linuxhe-googlede-android</id>
-    <content type="html"><![CDATA[<p>琢磨了一下Google当初为什么要推安卓，随手记之。起初感觉Google正在成为一个类似SUN的角色，而安卓就是Java。<br/>
-二者的相似之处在于，java和安卓都给世界带来了很大的改变，借助这两样神器都出现了新的行业分支，如Java的企业应用、电商、网银等，安卓的出现才使得中国国产手机大幅度地进步，并在全球化的体系里占据更有优势的地位。但与此同时，不可否认的是，Google和SUN并未从中获得多少直接的收益。还有一点类似的地方，就是这两样神器也并不占用这两个巨头多少成本。相对于整个规模而言，无论是java还是安卓，对SUN或Google的成本比例都是有限的。</p>
-
-<p>然而，转念一想，Google和SUN其实又是完全不一样的。SUN推广Java是希望卖更多的自己的硬件服务器，而且这个思路在90年代中期基本是可行的。而Google的服务现在如日中天，推广安卓确保了他在移动互联网时代（我更愿意称之为终端和使用人群进一步扩大的互联网时代）依然是搜索业务的王者。所以，仅就结果而言，Google是成功的，而SUN确实是被釜底抽薪了。</p>
-
-<p>相比较而言，Google推安卓的动机和效果都更类似于90年代末IBM对Linux的扶持与推广。所欠缺的可能就是IBM没有收购Linux, Linus也没成立一个Linux的公司。<br/>
-IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务器上一统江湖。而Google的安卓，则让智能手机避免了被Apple一家独占。而在此成功狙击的基础上，IBM和Google都继续卖着自己已经处于优势地位的服务。而再看SUN的话，当时的Java并无直接的竞争对手，后来的J2EE也是如此。SUN的目标比较单纯，推广Java只是为了可以让更多的公司做互联网的网络服务，而这必然需要更多的服务器。在PC Server+ Linux未流行的年代，Solaris是较低成本的一种选择。这个算盘其实打的还是不错的。但是，IBM大神对Linux的扶持，彻底让Sun的硬件找到了更廉价也更类似的替代品。当大部分用Java的企业，不去问Sun买Solaris服务器而是选择问IBM HP Dell买硬件、软件则直接使用Linux时，SUN的Java就真的只是当活雷锋了。可能IBM的本意未必是干掉SUN，只是希望M$不要也在服务器市场形成垄断，如同Google只是希望不要苹果在智能小型终端一统天下，但不可避免地误伤了SUN。当然，SUN的倒掉肯定还有其他更重要的因素，毕竟竞争和替代品是市场经济下每个个体和公司都面临的现实。</p>
-
-<p>而IBM和Google的举动，毫无疑问都是成功了。IBM的PC服务器业务虽然卖给了联想，但至少也风光了十几年，而服务则继续在大卖。如果当初M$用windows统一了PC Server，那恐怕IBM现在也没服务好卖了。Google则在移动互联网时代，继续当着搜索的领袖，苹果在无法一统江山的情况下，也只能让Google继续保持是最重要的终端搜索引擎。</p>
 ]]></content>
   </entry>
   
