@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-07-11T22:48:12+08:00</updated>
+  <updated>2014-07-14T16:09:03+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tomcat7 采用 redis作为session store]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/"/>
+    <updated>2014-07-14T15:57:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store</id>
+    <content type="html"><![CDATA[<p>有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
+同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此，最终决定使用redis来作为公共的session存储空间，实现session的共享。</p>
+
+<p>主要用到的工具包:</p>
+
+<ul>
+<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager#readme">tomcat-redis-session-manager</a></li>
+<li>jedis</li>
+<li>commons-pool</li>
+</ul>
+
+
+<p>需要注意的是，这个session manager已经有挺长时间停止开发了，从issues来看，表现还算基本稳定。目前也已经支持tomcat6和tomcat7，jdk也是6和7均支持。但是，上述几个包却存在着特定的版本依赖。必须为：</p>
+
+<ol>
+<li>tomcat-redis-session-manager-1.2-tomcat-7.jar</li>
+<li>jedis-2.0.0.jar</li>
+<li>commons-pool-1.3.jar<br/>
+尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。</li>
+</ol>
+
+
+<p>然后，再在应用的context.xml加入下列配置即可：</p>
+
+<p>```xml
+<Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
+&lt;Manager className="com.radiadesign.catalina.session.RedisSessionManager"</p>
+
+<pre><code>     host="192.168.203.198" 
+     port="6379" 
+     database="1" 
+     maxInactiveInterval="600" /&gt; 
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[JSP中的EL表达式和Helper]]></title>

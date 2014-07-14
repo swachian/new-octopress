@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-07-11T22:48:12+08:00</updated>
+  <updated>2014-07-14T16:09:03+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tomcat7 采用 redis作为session store]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/"/>
+    <updated>2014-07-14T15:57:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store</id>
+    <content type="html"><![CDATA[<p>有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
+同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此，最终决定使用redis来作为公共的session存储空间，实现session的共享。</p>
+
+<p>主要用到的工具包:</p>
+
+<ul>
+<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager#readme">tomcat-redis-session-manager</a></li>
+<li>jedis</li>
+<li>commons-pool</li>
+</ul>
+
+
+<p>需要注意的是，这个session manager已经有挺长时间停止开发了，从issues来看，表现还算基本稳定。目前也已经支持tomcat6和tomcat7，jdk也是6和7均支持。但是，上述几个包却存在着特定的版本依赖。必须为：</p>
+
+<ol>
+<li>tomcat-redis-session-manager-1.2-tomcat-7.jar</li>
+<li>jedis-2.0.0.jar</li>
+<li>commons-pool-1.3.jar<br/>
+尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。</li>
+</ol>
+
+
+<p>然后，再在应用的context.xml加入下列配置即可：</p>
+
+<p>```xml
+<Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
+&lt;Manager className="com.radiadesign.catalina.session.RedisSessionManager"</p>
+
+<pre><code>     host="192.168.203.198" 
+     port="6379" 
+     database="1" 
+     maxInactiveInterval="600" /&gt; 
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[开发语言还真是一个问题]]></title>
@@ -421,52 +464,6 @@ Node.js，一个可以在服务器端编写javascript的平台，提供了很多
 从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
 
 <p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Openssl and fIPC]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc/"/>
-    <updated>2014-05-06T14:27:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/06/openssl-and-fipc</id>
-    <content type="html"><![CDATA[<p>Openssl还是一个关联很多的基础组件。自从爆出心血漏洞后，给自己的虚机也重新编译了一个新的openssl，
-但是在编译ruby 2.1.1时却发现了新的问题。</p>
-
-<p>第一个问题，是编译时老是认不出已经安装的openssl。可能因为openssl是从源码手工安装，而没有使用
-apt-get intall，原因在于apt-get是失败的。</p>
-
-<p>为解决这个问题，就在<code>/usr/loca/openssl-1.0.1g</code> 下独立编译生成了一个openssl。然后ruby再编译时可以识别openssl组件了。
-但是，编译到一半，会报错</p>
-
-<p><code>
-linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol
-</code></p>
-
-<p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
-
-<p>这里就是遇到的第二个问题，连接共享库失败。</p>
-
-<p>于是检查这个选项是什么意思。查下来后，我大致的理解是：</p>
-
-<ol>
-<li><code>fIPC</code>使得编译出来的库文件(.a, .so等)地址都是相对地址；</li>
-<li>相对地址的好处是适合共享使用，但在装载时不同的进程可能会装载多次这个共享库；</li>
-<li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
-</ol>
-
-
-<p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
-
-<p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
-
-<p>再在ruby安装包里执行</p>
-
-<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
-
-<p>这样就装好了。</p>
-
-<p>其实，我还有一点疑问，就是如何让openssl静态且又能找到。
-估计又是一个属于和ubuntu紧密相关的问题。</p>
 ]]></content>
   </entry>
   
