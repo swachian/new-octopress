@@ -24,7 +24,7 @@ categories:
 3. commons-pool-1.3.jar  
 尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。
 
-然后，再在应用的context.xml加入下列配置即可：
+然后，再在应用的context.xml,可以是应用的该文件也可以是tomcat/conf目录下的该文件，加入下列配置即可：
 
 ```xml
 <Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
