@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="HTML use syntax: true bundle 执行的对象是Gemfile，而bundle install 后会在Gemfile.lock文件中产生gem及其版本的依赖，所以在Gemfile中不再需要声明版本号
-据说这是大胡子忙了1年左右的成果。确实是改善内部关系的好东西。 &hellip;">
+  <meta name="description" content="本地化rubygem cache的git链接 设计思想是：
+1. 将rubygems.com指向本地的地址，例如127.0.0.1;
+2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
+3. 如果本地没有，则先从远端下载到本地，然后再传输回去 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +70,195 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/17/rubygems-cache/">Rubygems的本地化cache</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/akitaonrails/rubygems_proxy.git">本地化rubygem cache的git链接</a></p>
+
+<p>设计思想是：
+1. 将rubygems.com指向本地的地址，例如127.0.0.1;
+2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
+3. 如果本地没有，则先从远端下载到本地，然后再传输回去</p>
+
+<p>这样就保证了自己曾经下载过的gem可以在本地有个案底，既节省下次安装的时间，又获得了备份。</p>
+
+<p>update: 2011.6.19
+直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
+
+<pre><code>unicorn -c unicorn.conf.rb 
+</code></pre>
+
+<p>conf.rb文件的内容</p>
+
+<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
+listen 8080
+</code></pre>
+
+<p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
+
+<p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
+
+<pre><code>gem install bundle --source='http://127.0.0.1:3000'
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/16/ubuntu1104-install/">Ubuntu1104安装手记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-16T14:52:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前提：拥有虚拟机并已经安装好ubuntu1104</p>
+
+<h3>1. 默认没有ssh server，所以需要安装.安装完成后，会自动打开每次启动的选项。</h3>
+
+<pre><code>    $ sudo apt-get install openssh-server
+</code></pre>
+
+<h3>2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等</h3>
+
+<pre><code>sudo apt-get install curl libcurl3 libcurl3-dev
+apt-get install zlib1g-dev #安装git需要
+apt-get install bison
+/usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
+</code></pre>
+
+<h3>3. 设置时区，及设置ntpdate定期更新例程</h3>
+
+<pre><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ntpdate ntp.fudan.edu.cn
+</code></pre>
+
+<h3>4. 安装rvm及ruby环境</h3>
+
+<pre><code>$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" &gt;&gt;  ~/.bash_profile
+$ source ~/.bash_profile
+</code></pre>
+
+<p>rvm基本指令</p>
+
+<pre><code>rvm list known
+rvm install 1.9.2
+rvm use 1.9.2
+rvm gemset list
+rvm gemset create r310
+rvm gemset use r310
+rvm use 1.9.2@r310
+</code></pre>
+
+<h3>5. 安装mysql</h3>
+
+<pre><code>$wget http://unmp.googlecode.com/files/mysql-5.1.57.tar.gz
+$tar -zxvf mysql-5.1.57.tar.gz
+$ sudo groupadd mysql
+$ sudo useradd -g mysql mysql
+$ ./configure --prefix=/opt/mysql --with-charset=utf8 --with-extra-charsets="gbk,gb2312,big5" --with-plugins=innobase
+$ make &amp;&amp; make install
+
+cp support-files/my-huge.cnf /etc/my.cnf
+cp support-files/mysql.server /etc/init.d/mysqld
+chmod 755 /etc/init.d/mysqld
+cd /etc/init.d/
+who -r
+cd /ect/rc5.d/
+ln -s ../init.d/mysqld S85mysqld
+ln -s ../init.d/mysqld K85mysqld
+vi /etc/my.cnf
+     在/etc/my.cnf中设置innodb成为默认的数据库引擎
+    default-storage-engine=INNODB
+    transaction-isolation=READ-COMMITTED #将innodb的事务隔离级别调整,以保证提交的数据必定被读取
+    grant all on *.* to 'user'@'%' identified by 'password';
+cd /opt/mysql/
+./bin/mysql_install_db
+chown -R root .
+chown -R mysql var
+/etc/init.d/mysqld start
+</code></pre>
+
+<h3>6. 更新rubygem</h3>
+
+<pre><code>gem install update-system
+update_rubygems
+update_rubygems
+</code></pre>
+
+<h3>7. 安装rails</h3>
+
+<pre><code>gem install rails
+gem install mysql2
+</code></pre>
+
+<h3>附录secure crt相关</h3>
+
+<p>SecureCRT设置彩色和显示中文
+设置Options->SessionOptions ->Emulation,然后把Terminal类型改成xterm，并点中ANSI Color复选框。
+字体设置：Options->SessionOptions->Appearance->font然后改成你想要的字体就可以了。
+注意：
+1：字符集选择utf8，这样可以避免显示汉字乱码
+2：选择字体的时候，需要选择ture type的字体(如新宋体)，不然会出现汉字乱码
+3：scrollback buffer 调大(5000)，这样你就可以看到以前显示内容，这样方便很多
+4：terminal要选择xtem，这样你ssh到服务器上才能显示颜色，并把ANSI Color打上勾
+5：我选择的颜色方案Windows或Traditional。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -232,6 +423,14 @@ Post.where(:published =&gt; true).any? 检查是否exist?
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/">靠谱的油耗数据库</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/23/le-fu-de-de-guo-dui-zhong-yu-you-guan-liao/">勒夫的德国队终于有冠了</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/23/pro-javascript-techniques/">被低估的JS： 「Pro JavaScript Techniques」读后感</a>
       </li>
     
@@ -243,19 +442,11 @@ Post.where(:published =&gt; true).any? 检查是否exist?
         <a href="/blog/2014/07/11/de-guo-jue-sai-a-gen-ting/">德国决赛阿根廷</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/10/zzzheng-ce-bu-jin-pian-bang-xin-neng-yuan-%2Chuan-pian-bang-liao-wo-lun-zeng-ya/">「转载」政策不仅偏帮新能源，还偏帮了涡轮增压</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/">开发语言还真是一个问题</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/时评'>时评 (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/车车'>车车 (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/时评'>时评 (18)</a></li><li><a href='/blog/categories/车车'>车车 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>
