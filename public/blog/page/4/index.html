@@ -9,12 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="上周日终于买了人生第一辆车，国产东风日产天籁Teana 2.5 XL领先版。
-选中的原因还是如下几个： 较大的空间，座椅等舒适性好
-配置较丰富，虽然显示屏稍微小了些
-价格十分合我的胃口，属于恰到好处的位置
-小毛病相对较少，后期打理保养等相对省事
-日产只嫁了东风一个中国公司，技术方面还是很扎实的， &hellip;">
+  <meta name="description" content="车架号，又叫做VIN（Vehicle Identification Number），是每一辆车的识别号。
+由17位数字组成，ISO组织进行了全世界范围的标准化。我国在90年代就已经采用并加入了这个标准。 以东风日产为例，其车架号类似LGBM4DE43DS000117， 其中，LGB是东风日产的代号 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +68,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/22/about-vehicle-identification-number/">关于车架号的备忘</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-22T13:56:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>车架号，又叫做VIN（Vehicle Identification Number），是每一辆车的识别号。
+由17位数字组成，ISO组织进行了全世界范围的标准化。我国在90年代就已经采用并加入了这个标准。</p>
+
+<p>以东风日产为例，其车架号类似LGBM4DE43DS000117，</p>
+
+<p>其中，LGB是东风日产的代号（WMI，世界制造厂识别码），L表示中国，GB是在中国工信部分配的。其后各字母和数字的含义是：</p>
+
+<p>第4位：表示车辆品牌，M：奇骏，L：逍客，F：天籁<br/>
+第5位：表示车身类型，例如几开门、几厢等<br/>
+第6位：发动机型号，D基本上是2.5排量的意思<br/>
+第7位：约束系统，即安全带和气囊<br/>
+第8位：变速箱说明，0：普通AT<br/>
+第9位：前8位的校验位</p>
+
+<p>第10位：制造年份，从1开始到Y，扣除了0、I、O、Q、U后共有30个字符可以用于表示年份，从71年开始计算，即30年更换一轮。01年就又从1开始，而D的话就表示13年，其余以此类推。  <br/>
+第11位：制造地，Y：花都工厂，R：襄樊工厂，S：郑州工厂<br/>
+第12位：生产顺序号</p>
+
+<p>具体对一辆车子而言，最有用的可能就是制造年份和装配地点，然后可以通过顺序号大致推出是在第几个月生产的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -667,71 +717,6 @@ wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/26/web-and-html-document/">Web and HTML Document</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-26T09:07:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>DHH在2013年的rails conf上做了关于类37signals web应用发展方向的报告。听了之后，还是解除了很大的迷茫。</p>
-
-<p>工作十余年，开发Web应用也八九年了。期间研究过Flex，也写过不少ajax。但到今天却觉得Web的form提交然后出结果才是真正最有用的。
-我们的下单，填填表格，登录等等，讲到底需要的只是一个让人知道怎么填的form，然后简单的提交就足够了。其余的东西再花哨，很多时候对解决问题并没有实质性的帮助。<br/>
-然而，富客户端应用也是客观存在的，甚至有js重度客户端应用将取代HTML应用的论调甚嚣尘上。以我的感觉判断，这是不太会发生的。原因在于js的开发很麻烦，工作量其实是很大的，而且也限制死了可以使用的工具。要取得一个简单的页面所达到的效果，完全采用js会产生巨大的工作量。而Web应用至今而且也将继续是大量表单类的应用。只要客户端的开发难度、工作量依然如此同服务端不成比例，那么就很难成为主流，更别提替换HTML了。<br/>
-所以，在这一点上毫无疑问我赞同D大神的，重客户端应用不可能取代Web HTML应用。</p>
-
-<p>DHH陈述的突破之处在于提出这种HTML应用为 <strong>document-based</strong> Web ，以同google 地图这种应用区分开来。Web由于其简单或者说简陋，想要丰富它或者取代它的技术一直没中断过。从Java Applet开始，到flash，Siverlight等等，都曾经让Web的效果不堪一击。然而，20年来的现实情况是，不拥抱Document的技术最终都在HTML之前走了下坡路。D大神把从90年代中期至今的挑战HTML技术串联起来说，体现了磅礴的气势和全面的大局观。</p>
-
-<p>与此同时，他也认为Document需要继续发展，这就是他说的再Basecamp，其实也就是Rails4中增加的新技术，其实本质就是caching。具体包括：</p>
-
-<ul>
-<li>key-based cache (generational caching)</li>
-<li>Russian Doll nested caching, 4 level, touch: true, partial md5</li>
-<li>Turbolinks process persistence, (pajx)</li>
-<li>Polling for js updates(类似rjs)</li>
-</ul>
-
-
-<p>核心内容就是提高HTML在浏览器上的速度。而Caching能大规模流行的基础是<strong>内存红利</strong>.</p>
-
-<table>
-<tr><td>  2003年  </td><td>  512MB </td><td>  $49  </td></tr>
-<tr><td>  2013年  </td><td>  8GB   </td><td>  $29  </td></tr>
-</table>
-
-
-<p>不过此次Web面临的挑战和多年来历次遇到的还是有很大不同的。不管是flash还是applet，他们都是想作为整体的HTML+CSS+Javascript发起挑战。而这次却是原来Web整体中的Javascript和HTML谁唱主角之争。区别在于JS和HTML所占比例及所显示页面数量的巨大区别。</p>
-
-<p>但是，只要Web还够简单，只要js的开发工作量还很繁重，那么产生HTML依然还是主要的Web应用模式。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -749,6 +734,10 @@ wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/01/xin-che-ping-de-sui-xiang/">新车评网的随想</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/">靠谱的油耗数据库</a>
       </li>
     
@@ -764,15 +753,11 @@ wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一
         <a href="/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/">Tomcat7 采用 redis作为session store</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/11/de-guo-jue-sai-a-gen-ting/">德国决赛阿根廷</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/时评'>时评 (18)</a></li><li><a href='/blog/categories/车车'>车车 (12)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/时评'>时评 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (13)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

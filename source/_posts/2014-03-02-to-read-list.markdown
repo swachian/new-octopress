@@ -10,10 +10,12 @@ categories:
 ### 技术类
 
 1. [x] [Flower M. Patterns of Enterprise Application Architecture](/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/), Addison-Wesley Professional. Rails诞生的书，[DHH最爱的五本编程书籍](http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me)，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。
+1. [x] [PoEAA的访谈和DHH](http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/)
+1. [x] [Resig, 精通Javascript.](/blog/2014/07/23/pro-javascript-techniques/) 简约、精彩、结合实际的书，第一章就很精彩。
 1. Learning Jquery.
-1. Resig, 精通Javascript. 简约、精彩、结合实际的书，第一章就很精彩。
-1. [PoEAA的访谈和DHH](http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/)
-1. 曾宪杰. 大型网站系统与Java中间件实践. 2014.
+1. [x] 曾宪杰. 大型网站系统与Java中间件实践. 2014. 还是有一定收获的，分布式其实就是模块化。淘宝的分布式主要是：消息队列、HSF（High-Speed Service Framework）和mysql代理层。
+但是，淘宝人在电子工业出版社出的书普遍给我的感觉是有一点水，内容讲的比较粗，也有凑数之嫌疑。后来了解了一些，淘宝人出书和评高级职称写论文有点类似，只是高级职称
+是强制要求，而淘宝则把出书与否作为社会影响力的一项KPI。
 1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.
 1. Eric Evans. Domain-Driven Design.  
 1. Beck. Smalltalk best practice patterns, 1996.

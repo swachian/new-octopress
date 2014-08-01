@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 时评 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/时评/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-07-23T23:06:58+08:00</updated>
+  <updated>2014-08-01T22:31:34+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[新车评网的随想]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/08/01/xin-che-ping-de-sui-xiang/"/>
+    <updated>2014-08-01T22:09:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/08/01/xin-che-ping-de-sui-xiang</id>
+    <content type="html"><![CDATA[<p>近几周，挺痴迷<a href="http://www.xincheping.com/">新车评网</a>。原因主要是他们有一个和我同一年高考同一年
+工作的创始人和总编颜宇鹏（俗称yyp），他们的编辑队伍相对稳定，阿聪、阿庆、阿文、稀饭、hh等确实都特性很鲜明。
+从他们的文章、观点中可以学到不少东西，增长不少的见识。而他们的长测节目则尤其精彩，从买车、用车、二手保值等，
+可以阅读到很多用车的细节。这些东西，在汽车之家上是感觉不到的。</p>
+
+<p>比较起来，汽车之家更像一个带产品属性的汽车媒体网站，而新车评则更接近于传统的汽车杂志。以编辑为核心竞争力，
+主要的产品就是文章，当然也有视频。但是视频只是为了更方便一部分懒得看文章的人。这可能和颜宇鹏是从传统杂志走出来的背景有关。</p>
+
+<p>而从新车评上，发现从事汽车报道的媒体人还真的挺多的。既有传统的杂志社，也有爱卡、汽车之家这样的新媒体巨头，
+还有新车评这样极有特色的规模相对小的媒体，更有大量的在大报业汽车版面中的记者和编辑。摆在一汽看的话，数量
+就相当可观了。还给我映像深刻的是，深圳或者说南方系的媒体业确实很兴盛。可以说各路人马很多，虽然有点乱，但确实
+活力十足。长期在上海文广统治之下的上海生活，还是很赞叹南方系媒体的活力。</p>
+
+<p>说回新车评本身，他们其实也有一定的偏向性。给我的感受是，他们和上海通用、广州本田、北京现代的关系尚佳，
+和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
+
+<p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[勒夫的德国队终于有冠了]]></title>
@@ -170,33 +195,6 @@ Node才具备突出的优势。</p>
 Java的优势是大量的人才基础和教育基础，强大的性能和稳定性。也因为人才众多，所以才有足够的人力来打造像Spring这样的
 开发工具。对很多语言来讲，如果像Java那样啰嗦，是很难得到足够多的产出的。<br/>
 Javascript，还是在浏览器中发挥威力吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[车牌原来也是一种投资和筹资]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/"/>
-    <updated>2014-05-24T08:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/24/che-pai-yuan-lai-ye-shi-[?]-chong-tou-zi-he-chou-zi</id>
-    <content type="html"><![CDATA[<p>随着虎牌一级市场和二级市场的价格越拉越大，获利空间越来越多，
-整个车牌市场渐渐有了融资市场的味道。</p>
-
-<p>不是么，没花什么资源，政府就得到了钞票，这属于筹资；拍牌人
-就是投资者，手里的钱得到了保值。政府筹资成功后，和一切筹资者一样，
-拿这笔钱去做事情去了。基建和公共交通又确实都是当前中国还需要的动作。
-这样一来，实质的财富在此过程中确实创造了出来。</p>
-
-<p>现代金融市场的功能不过如此吧！</p>
-
-<p>而随着一级市场执行限价，手里拥有车牌这一金融产品属性产品的人们，开始纷纷谋求流动套利。
-政府现在的做法等于是给老投资者派发红利。只是这个派发并不是平均的。
-但大部分投资者还是可以参与的。就参与的角度而言，也算公平公正。唯独对新投资者有点不太公平了。
-但新投资者也不是被逼进来的，所以还是比较自由的一种个人行为。</p>
-
-<p>上海拍牌比新加坡强大的一点就在于这个牌照是一种较特殊的投资品种，
-而新加坡的就完全属于消耗品。上海的车牌有投资和理财的价值。自己可以使用，同时筹资者也可以利用这笔资金创造财富。</p>
-
-<p>不得不说一句，上海政府是目前中国最佳的金融衍生品创造者。</p>
 ]]></content>
   </entry>
   
