@@ -783,15 +783,21 @@
         <lastmod>2014-08-01T22:31:12+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2014/08/09/xin-che-ping-de-%5B%3F%5D-xie-shu-ju/
+        </loc>
+        <lastmod>2014-08-09T23:16:01+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2014-08-01T22:31:12+08:00</lastmod>
+        <lastmod>2014-08-09T23:16:01+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2014-08-01T22:31:12+08:00</lastmod>
+        <lastmod>2014-08-09T23:16:01+08:00</lastmod>
     </url>
 </urlset>
