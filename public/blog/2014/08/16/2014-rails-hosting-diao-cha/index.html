@@ -5,14 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>rubygems的本地化cache - Hegel2011的博客</title>
+  <title>2014 Rails Hosting 调查 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="本地化rubygem cache的git链接 设计思想是：
-1. 将rubygems.com指向本地的地址，例如127.0.0.1;
-2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
-3. 如果本地没有，则先从远端下载到本地，然后再传输回去 &hellip;">
+  <meta name="description" content="2014年是DHH公开Rails的10周年，整个社区范围又进行了一次关于
+Rails部署主机的调查.
+参加的人数并不算多，1000+。 一. 人口分布 参加调查的人，普遍拥有3-5年和5-7年的Rails工作经历。
+个人差不多是7年了，再早的也确实不多。而小于1年的比例很低， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2011/06/17/rubygems-cache/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/08/16/2014-rails-hosting-diao-cha/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -73,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rubygems的本地化cache</h1>
+      <h1 class="entry-title">2014 Rails Hosting 调查</h1>
     
     
       <p class="meta">
@@ -89,40 +89,106 @@
   
 
 
-<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+<time datetime="2014-08-16T16:03:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://github.com/akitaonrails/rubygems_proxy.git">本地化rubygem cache的git链接</a></p>
+<div class="entry-content"><p>2014年是DHH公开Rails的10周年，整个社区范围又进行了一次关于
+Rails部署主机的<a href="http://rails-hosting.com/Results/2014/index.html">调查</a>.
+参加的人数并不算多，1000+。</p>
 
-<p>设计思想是：
-1. 将rubygems.com指向本地的地址，例如127.0.0.1;
-2. 每次有gem install的请求，先检查本地是否有该gem，已经有了则直接传输回去 ;
-3. 如果本地没有，则先从远端下载到本地，然后再传输回去</p>
+<p>一. 人口分布</p>
 
-<p>这样就保证了自己曾经下载过的gem可以在本地有个案底，既节省下次安装的时间，又获得了备份。</p>
+<p>参加调查的人，普遍拥有3-5年和5-7年的Rails工作经历。
+个人差不多是7年了，再早的也确实不多。而小于1年的比例很低，
+或许是新手都还不会参与部署的事情吧。</p>
 
-<p>update: 2011.6.19
-直接用unicorn跑了起来，还是比较简洁的。unicorn中配置一个unicorn.conf.rb文件，直接用</p>
+<p>除了Rails之外，使用其他Ruby 框架的用户依然不多。
+而且大都只是在一些特定的项目上使用Sinatra Padrino这些更轻量的框架。</p>
 
-<pre><code>unicorn -c unicorn.conf.rb 
-</code></pre>
+<p>参加调研的主要群体还是Web开发者（Web Developer），
+以及部分系统管理员和DevOps（含义为开发带运营）。</p>
 
-<p>conf.rb文件的内容</p>
+<p>大部分现在日常维护的Rails应用在5个以内，超过15个的就比较少了。</p>
 
-<pre><code>timeout(2000) #为了避免被reset，调大timeout的时间
-listen 8080
-</code></pre>
+<p>二. 软件</p>
 
-<p>可在Gemfile中设置本地cache的地址,然后bundle install</p>
+<p>Ruby的版本，主流已经是2.0和2.1，但还有很大一部分在继续使用1.9.3</p>
 
-<p>但bundle 本身可以用下面这个方法来要求通过本地代理来安装</p>
+<p>Rails的版本，则使用最多的是4.0，3.2和2.3.x。
+和我手头的也比较接近吧。</p>
 
-<pre><code>gem install bundle --source='http://127.0.0.1:3000'
-</code></pre>
+<p>开发环境，这方面当然是Mac占据了75%的优势，剩下20%是Linux，
+还有低于3%是Windows。这个毫无疑问，运行Rails至少需要一个
+Linux，而最方便和快捷的确实Mac。而部署的话，最后还是绕不开Linux。</p>
+
+<p>有一半以上的人在生产环境也使用了Rvm和Rbenv这些ruby版本管理工具。
+不过rvm的占有率还是比rbenv高那么多倒是没有想到。<br/>
+30%的人都不跟踪生产环境的运行产生的例外.目前也没有一统江湖的工具选择。
+以前的霸主是Airbrake，不知道<strong>HoneyBadger</strong>是什么状态。</p>
+
+<p>Rails不使用监控工具的比例很高，超过一半了，这可能也是一种社区文化吧。
+<strong>Pingdom</strong>和Nagios使用的还是挺多的。</p>
+
+<p>Nginx+Unicorn已经取代了Nginx+Passenger，成为最主流的部署方式。
+<strong>Puma</strong>也获得了良好的增长。</p>
+
+<p>三. 社区</p>
+
+<p>大部分Rails的软件都是新软件，说不清这点是好是坏。
+参加社区大会活动的也是少数。程序员还是宅男居多啊。</p>
+
+<p>有过部署其他语言应用的调查者比例显著下降，看来新人不少。
+而且即使部署过其他语言的，也是Php,Node.js，3个js前端框架和Django。</p>
+
+<p>Rails的部署大部分人认为比其他的容易。大部分都认为自己的Linux水平是胜任的、精通的、专家级别的。
+是Rails的开发者都那么自信、还是认为这样就算够用了？</p>
+
+<p>性能监控工具的使用比例很高，New Relic是统治者。
+Monit是主要的保证程序继续运行的工具。考虑到Unicorn，确实不是必须的了。</p>
+
+<p><strong>Chef</strong>和<strong>Puppet</strong>是最主要的配置管理工具。</p>
+
+<p>四. 版本控制</p>
+
+<p>不使用版本控制的Rails开发者是不存在的。
+毫无疑问，主流是git，大部分svn的用户都迁移了过来。</p>
+
+<p>github bitbucket是最主要的服务托管主机。当然，也有很多是使用
+自己的主机。</p>
+
+<p>五. 自动化部署</p>
+
+<p>Capistrano是首要的选择，但Git也变成了一种主要是部署工具。
+Heroku是这方面的典型代表吧。</p>
+
+<p>至于对部署过程的满意程度，则是永远没有终点的。</p>
+
+<p>六. 数据库</p>
+
+<p>MySQL 和 PostgreSQL是主要Rails数据库选择。
+其实互联网行业去IOE应该是个伪命题，因为互联网企业普遍起步的时候各种资源紧张，
+一直是以免费的开源的软件为主，也只有阿里这种以前学银行让IBM Sun
+给他们做项目的半路出家的互联网公司，才有去IOE的需求。但反过来对银行、金融界、大国企都带来了冲击。</p>
+
+<p>个人觉得二者之间还是MySQL吧。只是很多托管站点确实不再提供MySQL的选项。</p>
+
+<p>NoSQL里面不出意外，Redis和Mongodb的接触者是较多的。
+但是，竟然把<strong>ElasticSearch</strong>也算作一种NoSQL。
+HBase CouchDB和Rails社区还是不搭。</p>
+
+<p>七. 主机</p>
+
+<p>Amazon的云服务是国外最流行的。自己的业务，确实还是找个虚拟机就好。</p>
+
+<p>大部分人满意现在的部署选择，而最大的不满还是价格。看来用Rails的普遍喜欢精打细算。
+单个应用的月开销集中在25美金一个月以下，但是上万美金一个月的也不少。</p>
+
+<p>大部分在部署和主机上的预算小于月预算的10%。同运营一个公司比较起来，
+部署和服务器方面的开销确实只是小头。</p>
 </div>
 
 
@@ -145,12 +211,12 @@ listen 8080
   
 
 
-<time datetime="2011-06-17T14:48:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2011</time>
+<time datetime="2014-08-16T16:03:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/技术/'>技术</a>
+    <a class='category' href='/blog/categories/rails/'>rails</a>
   
 </span>
 
@@ -159,7 +225,7 @@ listen 8080
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2011/06/17/rubygems-cache/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2011/06/17/rubygems-cache/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/08/16/2014-rails-hosting-diao-cha/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/08/16/2014-rails-hosting-diao-cha/" >Tweet</a>
   
   
   
@@ -168,10 +234,8 @@ listen 8080
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/06/16/ubuntu1104-install/" title="Previous Post: ubuntu1104安装手记">&laquo; ubuntu1104安装手记</a>
+        <a class="basic-alignment left" href="/blog/2014/08/09/xin-che-ping-de-%5B%3F%5D-xie-shu-ju/" title="Previous Post: 新车评的一些数据">&laquo; 新车评的一些数据</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/06/18/two-good-presents/" title="Next Post: 今天读的两个不错的ppt">今天读的两个不错的ppt &raquo;</a>
       
     </p>
   </footer>
