@@ -28,7 +28,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/06/20/trouble-of-mayun/</loc>
-        <lastmod>2014-05-01T14:41:46+08:00</lastmod>
+        <lastmod>2014-08-30T15:47:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/06/21/inside-rails-and-merb/</loc>
@@ -795,15 +795,19 @@
         <lastmod>2014-08-16T17:12:01+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2014/08/30/lao-luo-he-wang-zi-ru/</loc>
+        <lastmod>2014-08-30T15:57:25+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2014-08-16T17:12:01+08:00</lastmod>
+        <lastmod>2014-08-30T15:57:25+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2014-08-16T17:12:01+08:00</lastmod>
+        <lastmod>2014-08-30T15:57:25+08:00</lastmod>
     </url>
 </urlset>

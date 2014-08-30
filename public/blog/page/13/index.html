@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在railscast上看到了一个介绍导入导出数据的工具taps. 最大的亮点在于: 是用起服务的方式来完成。先针对一个数据库启动一个server监听在5000端口，随后在它处启动一个脚本导数据；
-可以跨数据库导入导出。实际上中间是用到了sequel这个ruby的Orm框架， &hellip;">
+  <meta name="description" content="发现Ruby Inside最近的
+文章又好看了起来。选了一些细细研究如下。 GitHub&#8217;s Ruby Style Guide
+很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。
+此外，还有tomdoc做编码文档的规范， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +70,145 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/19/some-useful-link/">Ruby Inside 3月链接</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-19T11:23:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>发现<a href="http://www.rubyinside.com/march-2012-ruby-news-5841.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+RubyInside+%28Ruby+Inside%29">Ruby Inside</a>最近的
+文章又好看了起来。选了一些细细研究如下。</p>
+
+<ul>
+<li><p><a href="https://github.com/styleguide/ruby">GitHub&#8217;s Ruby Style Guide</a><br/>
+很好的ruby编码规范，来自github，还澄清了我一些似是而非的概念。值得ruby学习者经常review。<br/>
+此外，还有<a href="http://tomdoc.org/">tomdoc</a>做编码文档的规范，也需要进一步阅读。</p></li>
+<li><p><a href="http://rubysource.com/zero-to-jekyll-in-20-minutes/">jekyll</a></p></li>
+</ul>
+
+
+<p>jekyll是一个输入markdown文件输出site的html的<strong>引擎</strong>。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir your_blog
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ./your_blog
+</span><span class='line'><span class="nv">$ </span>mkdir _layouts _plugins _includes _posts css javascripts images
+</span><span class='line'><span class="nv">$ </span>touch index.html _config.yml _layouts/default.html
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>目录树结构</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>├── README.md
+</span><span class='line'>├── _config.yml
+</span><span class='line'>├── _layouts
+</span><span class='line'>  └── default.html
+</span><span class='line'>├── _plugins
+</span><span class='line'>├── _includes
+</span><span class='line'>├── _posts
+</span><span class='line'>│   ├── 2012-03-27-your_first_post_in_markdown.md
+</span><span class='line'>│   └── 2012-03-27-your_second_post_in_textile.textile
+</span><span class='line'>├── css
+</span><span class='line'>│   └── screen.css
+</span><span class='line'>├── javascripts
+</span><span class='line'>├── images
+</span><span class='line'>└── index.html
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>jekyll --server --auto
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文档的要求只有一个:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>---
+</span><span class='line'>layout: default
+</span><span class='line'>title: Your First Post In Markdown
+</span><span class='line'>---
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就会按markdown里面的layout产生内容。</p>
+
+<p>这样就可以明白octopress和jekyll的关系了。o是利用了jekyll做引擎，根据jekyll的目录要求加入了css、布局、图片等，同时还有.rb的一些插件，于是有了这个blog系统。而jekyll则还可以用来写书。道理也是一样的。自己设计layout，然后运行上面的命令即可。</p>
+
+<ul>
+<li><a href="http://spin.atomicobject.com/2012/02/28/load-balancing-and-reverse-proxying-with-nginx/">使用Nginx做分发的教程</a></li>
+</ul>
+
+
+<p>基本的内容都有了。而且还有利用nginx实现转发时使用basic验证和加Authorization的例子。</p>
+
+<ul>
+<li><a href="http://news.railstutorial.org/ruby-on-rails-tutorial-now-with-twitters-boot">配备了bootstrap的Rails教程</a></li>
+</ul>
+
+
+<p>Bootstrap 是一个优秀的CSS和UI框架，而这个正好是Rails所欠缺的。二者的结合将是威力巨大的。因为Rails可以解决开发中的
+<strong>编码效率</strong>问题，但对<strong>界面美化</strong>却不能为力。而Bootstrap可以很好地弥补这一点。有点类似Jekyll和Octopress的关系。
+<strong>结果</strong>都是可以让程序员和不具备界面美化能力的项目经理也可以设计出说得过去的应用。</p>
+
+<ul>
+<li><p><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">ruby 2.0 garbage collection</a></p></li>
+<li><p><a href="http://addyosmani.com/blog/building-backbone-js-apps-with-ruby-sinatra-mongodb-and-haml/">building backbone js apps with ruby sinatra mongodb and haml</a></p></li>
+</ul>
+
+
+<p>全篇对backbone基本无介绍，火力集中在sinatra mongodb haml这些东西上了。文章的价值不大。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -926,275 +1067,6 @@ K822(经过5站|4.6公里|27分钟)还可乘:K822822K504K4假日9808
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/30/learning-mongodb-2/">Learning Mongodb (2)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-30T17:03:00+08:00" pubdate data-updated="true">Mar 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>系列链接：</p>
-
-<ol>
-<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
-<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
-</ol>
-
-
-<p><strong>Replica sets</strong> vs <strong>Master-Slave</strong><br/>
-目前已全面倒向支持前者。  前者是后者的加强，但限制是最大的1个set集群只有<strong>12</strong>个节点。</p>
-
-<h3>Replica sets</h3>
-
-<p>由3个nodes组成：</p>
-
-<ol>
-<li>mongod</li>
-<li>mongod</li>
-<li>arbiter（仲裁者）</li>
-<li>其实未必需要arbiter，只是要求至少3个mongod的节点，arbiter只是不用写数据</li>
-</ol>
-
-
-<p>架设代码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir /data/node1
-</span><span class='line'>mkdir /data/node2
-</span><span class='line'>mkdir /data/arbiter
-</span><span class='line'>
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/node1 --port 40000 --oplogSize 5000
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/node2 --port 40001 --oplogSize 5000
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --replSet pcdm --dbpath /data/arbiter --port 40002 --oplogSize 5000
-</span><span class='line'>
-</span><span class='line'>./bin/mongo ngntest:40000
-</span><span class='line'>&gt; rs.initiate<span class="o">()</span>
-</span><span class='line'>&gt; <span class="nv">config</span> <span class="o">=</span>  <span class="o">{</span>_id: <span class="s1">&#39;pcdm&#39;</span>, members: <span class="o">[</span>
-</span><span class='line'>                          <span class="o">{</span>_id: 0, host: <span class="s1">&#39;localhost:40000&#39;</span><span class="o">}</span>,
-</span><span class='line'>                          <span class="o">{</span>_id: 1, host: <span class="s1">&#39;localhost:40001&#39;</span><span class="o">}</span>,
-</span><span class='line'>                          <span class="o">{</span>_id: 2, host: <span class="s1">&#39;localhost:40002&#39;</span><span class="o">}]</span>
-</span><span class='line'>           <span class="o">}</span>
-</span><span class='line'>&gt; rs.initiate<span class="o">(</span>config<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<ul>
-<li>oplog and oplogSize</li>
-</ul>
-
-
-<p><code>oplogSize</code> 是replica里面同步日志的大小，默认是空闲磁盘的5%, 增加限制有利于磁盘空间的实际使用率，这其实是一个capped collection, 存放在叫 <strong>local</strong> 的空间中 ,会重复使用。<br/>
-基本机制是这样的，主节点不停的往oplog里面写，从节点会去获取并写入本地的oplog，然后再‘应用&#8217;.</p>
-
-<ul>
-<li>heartbeat</li>
-</ul>
-
-
-<p>各节点之间会定期进行心跳交流， <em>如果primary发现四处都不通，则会自动降级为secondary</em> 。 也因此， 整个set需要3个来起步。另外一个其实起的就是检测的作用。</p>
-
-<ul>
-<li>driver<br/>
-driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以此确定向哪一个db写数据。根据调试经验，向secondary写的数据实际都不会入库。</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="ss">Mongo</span><span class="p">:</span><span class="ss">:RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
-</span><span class='line'>   <span class="c1"># **secondary** 实现了对读的scale </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Sharding</h3>
-
-<ul>
-<li><p>几时shard</p>
-
-<ul>
-<li>disk activity</li>
-<li>system load</li>
-<li>ratio of working set size to available RAM.</li>
-</ul>
-</li>
-<li><p>shards<br/>
-一个shard其实就是一个replica set，或者mongod</p></li>
-<li><p>mongos router<br/>
- 访问整个cluster的入口<br/>
-将整个系统粘连在一起 <br/>
-轻量级的，驻留在内存中的，不写硬盘的</p></li>
-<li><p>config server<br/>
-处理存储的可靠性，实现两阶段提交<br/>
-mongos 的 config 数据是问 config server 获取<br/>
-需要3个独立的机器运行才能保证冗余性</p></li>
-</ul>
-
-
-<p>要 shard 则要去确定 <strong>shard key</strong>, key可以是组合的fields。 随后确定key上的值，值之间的区域构成了 <strong>chunk</strong> .</p>
-
-<h3>配置shard的步骤</h3>
-
-<p>启动shard</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#起shard</span>
-</span><span class='line'>mkdir -p /data/rs-a-1
-</span><span class='line'>mkdir -p /data/rs-a-2
-</span><span class='line'>mkdir -p /data/rs-a-3
-</span><span class='line'>
-</span><span class='line'>mkdir -p /data/rs-b-1
-</span><span class='line'>mkdir -p /data/rs-b-2
-</span><span class='line'>mkdir -p /data/rs-b-3
-</span><span class='line'>
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --shardsvr  --dbpath /data/rs-a-1 --port 30000 --logpath /data/rs-a-1.log --fork --nojournal
-</span><span class='line'><span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-2 --port 30001 --logpath /data/rs-a-2.log --fork --nojournal</span>
-</span><span class='line'><span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-a --dbpath /data/rs-a-3 --port 30002 --logpath /data/rs-a-3.log --fork --nojournal</span>
-</span><span class='line'>
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --shardsvr  --dbpath /data/rs-b-1 --port 30100 --logpath /data/rs-b-1.log --fork --nojournal
-</span><span class='line'><span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-2 --port 30101 --logpath /data/rs-b-2.log --fork --nojournal</span>
-</span><span class='line'><span class="c">#numactl --interleave=all mongod --shardsvr --replSet shard-b --dbpath /data/rs-b-3 --port 30102 --logpath /data/rs-b-3.log --fork --nojournal</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">#起config server，至少3个，可以和数据库节点的mongod运行在一台服务器上</span>
-</span><span class='line'>mkdir -p /data/config-1
-</span><span class='line'>mkdir -p /data/config-2
-</span><span class='line'>mkdir -p /data/config-3
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-1 --port 27019 --logpath /data/config-1.log --fork --nojournal
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-2 --port 27020 --logpath /data/config-2.log --fork --nojournal
-</span><span class='line'>numactl --interleave<span class="o">=</span>all mongod --configsvr --dbpath /data/config-3 --port 27021 --logpath /data/config-3.log --fork --nojournal
-</span><span class='line'>
-</span><span class='line'>sleep 2
-</span><span class='line'><span class="c">#起mongos，os可以在应用服务器上一台装一个</span>
-</span><span class='line'>mongos --configdb localhost:27019,localhost:27020,localhost:27021 --logpath /data/mongos.log --fork --port 40000
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使用js设置shard</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">mongo</span> <span class="nx">localhost</span><span class="o">:</span><span class="mi">40000</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">addShard</span><span class="p">(</span><span class="s2">&quot;localhost:30000&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">addShard</span><span class="p">(</span><span class="s2">&quot;localhost:30100&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">).</span><span class="nx">shards</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0000&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span> <span class="o">:</span> <span class="s2">&quot;localhost:30000&quot;</span> <span class="p">}</span>
-</span><span class='line'><span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0001&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span> <span class="o">:</span> <span class="s2">&quot;localhost:30100&quot;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">enableSharding</span><span class="p">(</span><span class="s2">&quot;myapp&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">status</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">#</span> <span class="err">选择好的</span><span class="nx">sharding</span> <span class="nx">key</span><span class="err">，是设计时的重要考虑对象</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">sh</span><span class="p">.</span><span class="nx">shardCollection</span><span class="p">(</span><span class="s2">&quot;myapp.pcmds&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">c4</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span><span class="p">})</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s2">&quot;config&quot;</span><span class="p">).</span><span class="nx">collections</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>观察状态</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">use</span> <span class="nx">config</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">chunks</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
-</span><span class='line'><span class="mi">1</span>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">chunks</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="s2">&quot;myapp.pcmds-c4_MinKey_id_MinKey&quot;</span><span class="p">,</span> <span class="s2">&quot;lastmod&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;t&quot;</span> <span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span> <span class="o">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="s2">&quot;ns&quot;</span> <span class="o">:</span> <span class="s2">&quot;myapp.pcmds&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;c4&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$minKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$minKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">},</span> <span class="s2">&quot;max&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;c4&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$maxKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="s2">&quot;_id&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$maxKey</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">},</span> <span class="s2">&quot;shard&quot;</span> <span class="o">:</span> <span class="s2">&quot;shard0000&quot;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">mongos</span><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">chunks</span><span class="p">.</span><span class="nx">count</span><span class="p">({</span><span class="s2">&quot;shard&quot;</span><span class="o">:</span> <span class="s2">&quot;shard0001&quot;</span><span class="p">})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>实际<strong>写</strong>操作时分为 <strong>routed</strong> 或 <strong>scattered</strong> 两种模式。<br/>
-<strong>读</strong>操作则有 routed / scattered gather / distibuted merge sort.</p>
-
-<p>尽管里面的mongodb进程很多，但是真正数据量大的还是节点本身。config server占用的资源并不多，可以和数据节点共用一台服务器。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -1212,6 +1084,10 @@ mongos 的 config 数据是问 config server 获取<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/30/lao-luo-he-wang-zi-ru/">老罗和王自如</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/16/2014-rails-hosting-diao-cha/">2014 Rails Hosting 调查</a>
       </li>
     
@@ -1227,15 +1103,11 @@ mongos 的 config 数据是问 config server 获取<br/>
         <a href="/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/">靠谱的油耗数据库</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/23/le-fu-de-de-guo-dui-zhong-yu-you-guan-liao/">勒夫的德国队终于有冠了</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/时评'>时评 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (14)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/时评'>时评 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (14)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>
