@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="外刊班是丁老师自己的理想。虽然效果很大，买账的学生并不多。毕竟大部分学生的认识能力有限，强求不得的。所有的视频班都是网上播放，唯外刊有光盘刻，也是老丁在坚持自己的理想，自己的快乐。 四期是08年冬天的寒假（“视频拍摄费用很高，三个小时就一两千，希望以后有机会”），但实际上应该是拍了 &hellip;">
+  <meta name="description" content="不曾想只花了半天时间就读完了这本书。一方面这本书确实很薄，只有32k、200来页。另一方面，行文很易懂，说的也很有道理，而且与我的理念基本吻合，所以接受起来相当迅速。 但还需要消化消化。营销是又一个一个分解后的内容组成的，每个组成部分就是一个细节。不能出现太明显的短板。比如1x1x1x0. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,58 +67,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/15/waikanban-diandi/">外刊班点滴</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-15T18:48:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>外刊班是丁老师自己的理想。虽然效果很大，买账的学生并不多。毕竟大部分学生的认识能力有限，强求不得的。所有的视频班都是网上播放，唯外刊有光盘刻，也是老丁在坚持自己的理想，自己的快乐。</p>
-
-<p>四期是08年冬天的寒假（“视频拍摄费用很高，三个小时就一两千，希望以后有机会”），但实际上应该是拍了</p>
-
-<p>三期讲了三十篇文章 07年夏天 无视频</p>
-
-<p>07年寒假第二期 无视频</p>
-
-<p>06年暑假第一期 无视频</p>
-
-<p>09年寒假第五期（石头，于超，这个外刊视频班纯粹是不赚钱，甚至是亏本在做，比去年多了光盘包）.背景是有一排tank的房间。</p>
-
-<p>09年暑假第六期 无视频</p>
-
-<p>10年寒假第七期</p>
-
-<p>11年寒假第八期</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1355,6 +1303,74 @@ alias :old_match :match，
 <p>个人从Rails中获得的东西良多，开拓了思路也眼界，也能站在一个更先进的位置看着各种技术的变迁与发展，这种感觉很棒。</p>
 
 <p>今天还借了另外几本书，大癫狂、吴敬琏传、HTML5，希望可以接下来多看看吧。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/21/inside-rails-and-merb/">[zz]Rails与Merb合并背后的故事</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-21T16:48:00+08:00" pubdate data-updated="true">Jun 21<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails的目标是减少cost并带来极大的方便，而yehuda提出的现代化框架虽然有架构之美，但对方便性却没什么意义，效益增收不明显，而且实践极难，所以rails团队一直没做。</p>
+
+<pre><code>*
+* [閒聊] Rails 與 Merb 合併背後的故事 剛剛有感而發，在公司開發的 microblog上寫了一段 Rails 與 Merb 合併的故事，以作
+</code></pre>
+
+<p>1
+2010-03-10 　　
+发表:xdite</p>
+
+<p>剛剛有感而發，在公司開發的 microblog上寫了一段 Rails 與 Merb 合併的故事，以作為一些事情的借鏡。後來覺得寫太長了，所以就乾脆整理一下貼過來…</p>
+
+<p>====</p>
+
+<p>Merb 當初是為了要解決 Rails 沒辦法解決的問題，比如說上傳檔案會造成整個網站 hang 住才開始開發的。在 Yehuda 當初設計的哲學之中，他認為 Framework 內部要能夠 modularity 。同時要能實現 ORM Agnosticism，甚至不只 ORM ，包括 javascript library 之類的也都必須要可以這麼做。最後幹出了一套 merb。於是在 2008 年逐漸形成了 Rails 與 Merb 之爭。</p>
+
+<p>但 Merb 越來越開發到最後，core team 發現到一件事，”過於自由” 並不會帶來開發上的便利，反而形成 Merb 內部 component dependency 的 conflict。同時，對於寫出一套 Merb application，不像 Rails 一樣，大家並沒有很清楚的開發標準與 Best Practice，而光看教學文件，因為版本與寫法的關係，造成有心踏入 merb 的開發者一天到晚踩中難以解決的地雷。</p>
+
+<p>更糟糕的是，跳槽來 Merb 的人都是前 Rails 開發者，雖然他們多半是不滿 Rails 的束縛過來的，但他們過來之後，對 Merb 最大的抱怨變成：Merb 並沒有 Rails 那麼便利。這個沒有，那個沒有 ….</p>
+
+<p>剛開始，Merb 的核心團隊，對於這些抱怨，解決之道，就是你喊缺，我們就加！但寫到最後越來越不對勁。他們越來越接近在「重寫」一個 Rails 而已。但這些開發者並不會感激他們。開發者還是只會抱怨 Merb 相比起 Rails「還」缺了甚麼。</p>
+
+<p>加功能，並不會讓 Merb 從此以後取代 Rails，只是永無止盡的追趕和重造輪子，但是開發者還是只是會繼續抱怨。而且，一個 Community 再大，力量也只撐的起一個「主流」Framework。Merb 與 Rails 之爭，相當的損害了社群的開發元氣。</p>
+
+<p>Yehuda 覺得這樣發展下去並不是他的本意。於是找上了 Rails core team 談。一談之下，才達成了現在的合併共識。Rails Core Team 覺得 Yehuda 提的 modulity 與 API 是很好的提議，只是他們「不在乎」。這個不在乎並不是真的不在乎，而是 Rails 的 goal 是壓縮開發的 cost，讓 convention 達到最大化，在此目標之下，要做這件事並沒有太大的實質效益，而且他們這些人的力量與技術能力也不夠做這件事。</p>
+
+<p>而 Yehuda 的原意是他要解決 Rails 沒有辦法達成的事，同時帶進他覺得 modern framework 應該要有的設計，這樣才能讓整個 framework scable，連帶 application 也 scable。而非玩到如今的局面 :「 硬是重造一個 Rails」。既然 Rails core team 也覺得 Yehuda 提的很好很重要，只是他們沒能力去做。而如今 Yehuda 也有能力有意願去做，那就讓他加入 Rails core team 做這件事吧。</p>
+
+<p>所以才造就現在看到的偉大 framework : Rails 3。</p>
+
+<p>====</p>
+
+<p>apply 到一些場景，真是感觸良多啊 /_\</p>
 </div>
   
   
