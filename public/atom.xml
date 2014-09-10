@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-09-09T22:34:22+08:00</updated>
+  <updated>2014-09-10T22:27:17+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[有点无聊的汽车发布会]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/10/you-dian-wu-liao-de-qi-che-fa-bu-hui/"/>
+    <updated>2014-09-10T22:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/10/you-dian-wu-liao-de-qi-che-fa-bu-hui</id>
+    <content type="html"><![CDATA[<p>以成都车展为主，陆陆续续看了一些汽车新品的发布会，感觉这些厂家也真够无聊和没谱的。
+以今天刚刚结束的广本缤智为例，整了个发布会最后出来说1.8L的低配低于14w，1.5L的低配低于13w，但先期
+上市的只有1.8，1.5的要到明年一季度。这里面就有很多问题。</p>
+
+<p>第一，最低配的车型通常不是销售的主力。说一个不是主力的入门车型上限并无多少实际意义。<br/>
+第二，如果非要说上限，那也应该是顶配的。顶配小于多少才是真的立了一个价格上限。<br/>
+第三，对广本而言，乞丐版一般是手动的，和自动挡本身就存在较大的定价差异，
+所以以最低版的上限来作为发布价格，参考意义就更小了。
+第四，明确地给出每一档的多少价钱有那么难吗？中国市场目录价格和销售价格可以差好几万，
+卖的好就加价卖不好就减价，即使公布出来以后其实回旋空间依然很大。</p>
+
+<p>现在这种模模糊糊的定价发布会，<strong>只能说明厂家自己心里也没底</strong>。
+作为一个成熟的消费品，这种举动只能显得企业相当不成熟。</p>
+
+<p>再联想起前不久的昂科威发布会，扯了半天，公布了4款车型，但最后连个价钱都没有。
+对比起来的话，广本倒是还比通用强一些。当然也只是五十步笑百步。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[老罗和王自如]]></title>
@@ -1875,147 +1899,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 
 <p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
 了的可能还是自己直接创业。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails2.3老版本的迁移安装手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/"/>
-    <updated>2014-05-08T22:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji</id>
-    <content type="html"><![CDATA[<p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
-下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
-
-<h3>下载ruby 1.8.7</h3>
-
-<p>减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://ruby.taobao.org/mirrors/ruby/ruby-1.8.7-p358.tar.gz
-</span><span class='line'>tar -zxvf ruby-1.8.7-p358.tar.gz
-</span><span class='line'><span class="nb">cd </span>ruby-1.8.7-p358
-</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/ruby187
-</span><span class='line'>make
-</span><span class='line'>make install
-</span><span class='line'>/usr/local/ruby187/bin/ruby -ropenssl -rzlib -rreadline -e <span class="s2">&quot;puts :success&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>看到输出<code>success</code>后，证明ruby各安装库已全部编译进去。主机是一台CentOS 6.4，所以安装1.8.7相当之顺利。
-安装完毕后，把ruby的运行路径加到环境变量PATH的最前面。</p>
-
-<h3>安装rubygems</h3>
-
-<p>这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://rubyforge.org/frs/download.php/73763/rubygems-1.4.0.tgz
-</span><span class='line'>tar -zxvf rubygems-1.4.0.tgz
-</span><span class='line'><span class="nb">cd </span>rubygems-1.4.0
-</span><span class='line'>ruby setup.rb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>安装Oracle即时客户端和ruby-oci8</h3>
-
-<p>这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置<code>LD_LIBRARY_PATH</code>的值。关键一点是注意不要配错这个环境变量指向的路径。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/opt/instantclient_10_2:/usr/local/lib:/usr/lib
-</span><span class='line'>wget http://dl.bintray.com/kubo/generic/ruby-oci8-2.0.6.tar.gz
-</span><span class='line'>tar -zxvf ruby-oci8-2.0.6.tar.gz
-</span><span class='line'><span class="nb">cd </span>ruby-oci8-2.0.6
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Gemfile和bundle</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;http://ruby.taobao.org&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activeresource&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activesupport&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;capistrano&#39;</span><span class="p">,</span> <span class="s1">&#39;2.5.17&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;fastthread&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.7&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;highline&#39;</span><span class="p">,</span> <span class="s1">&#39;1.5.2&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;json_pure&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.3&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.1&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rack&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.1&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rake&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8.7&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;RedCloth&#39;</span><span class="p">,</span> <span class="s1">&#39;4.2.0&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rubyforge&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0.4&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;haml&quot;</span><span class="p">,</span>  <span class="s1">&#39;3.0.12&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;will_paginate&#39;</span><span class="p">,</span> <span class="s1">&#39;2.2.2&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.1&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;formtastic&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9.8&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;jintastic&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.0&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;ruby-mp3info&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6.13&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;mime-types&#39;</span><span class="p">,</span> <span class="s1">&#39;1.16&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;authlogic&quot;</span><span class="p">,</span> <span class="s1">&#39;2.1.5&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;acl9&quot;</span><span class="p">,</span> <span class="s1">&#39;0.12.0&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;paginator&quot;</span><span class="p">,</span> <span class="s1">&#39;1.1.1&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;spreadsheet&quot;</span><span class="p">,</span> <span class="s1">&#39;0.6.4.1&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;thin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5.2&quot;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activerecord-oracle_enhanced-adapter&#39;</span><span class="p">,</span> <span class="s1">&#39;1.2.4&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span>
-</span><span class='line'><span class="n">gem</span>  <span class="s1">&#39;rest-client&#39;</span><span class="p">,</span>  <span class="s1">&#39;1.6.7&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后执行<code>bundle install</code> , 相关的Gem就可以安装到位了。 <code>thin start -e production</code> ， 通过这个命令应用就能在生产环境下启动了。</p>
 ]]></content>
   </entry>
   
