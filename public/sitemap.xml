@@ -632,7 +632,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list/</loc>
-        <lastmod>2014-09-09T22:28:59+08:00</lastmod>
+        <lastmod>2014-09-14T12:25:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2014/03/10/nubia-z5s/</loc>
@@ -801,15 +801,25 @@
         <lastmod>2014-09-10T22:27:06+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/
+        </loc>
+        <lastmod>2014-09-14T15:09:41+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen/</loc>
+        <lastmod>2014-09-14T12:24:00+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2014-09-10T22:27:06+08:00</lastmod>
+        <lastmod>2014-09-14T15:09:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2014-09-10T22:27:06+08:00</lastmod>
+        <lastmod>2014-09-14T15:09:41+08:00</lastmod>
     </url>
 </urlset>

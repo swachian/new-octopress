@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="关于Inside Github
-的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt 创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。 Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。 &hellip;">
+  <meta name="description" content="近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。 参照[1]，并在[2]
+下载配置好后，算是跑了起来 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,179 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/vi-for-aptana/">Vi for Aptana</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T10:38:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
+
+<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
+下载配置好后，算是跑了起来。</p>
+
+<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
+</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
+</span><span class='line'>
+</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
+</span><span class='line'>
+</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
+</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
+</span><span class='line'>
+</span><span class='line'>  4. To delete the character at the cursor type:  x
+</span><span class='line'>
+</span><span class='line'>  5. To insert or append text type:
+</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
+</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
+</span><span class='line'>
+</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span><span class='line'>                           Lesson 2 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
+</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
+</span><span class='line'>  3. To delete a whole line type:    dd
+</span><span class='line'>
+</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
+</span><span class='line'>  5. The format for a change command is:
+</span><span class='line'>           operator   [number]   motion
+</span><span class='line'> where:
+</span><span class='line'>   operator - is what to do, such as  d  for delete
+</span><span class='line'>   [number] - is an optional count to repeat the motion
+</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
+</span><span class='line'>              $ (to the end of line), etc.
+</span><span class='line'>
+</span><span class='line'>  6. To move to the start of the line use a zero:  0
+</span><span class='line'>
+</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
+</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
+</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/yigediaosidenixi/">一个屌丝的逆袭</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T00:13:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>http://www.designsor.com/
+原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记.</p>
+
+<blockquote><p>可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测）
+需要工具：Firefox+Easy Tor+Autoproxy</p>
+
+<p>先下载上面的3个玩意，第一个是FF浏览器了，第2个是一个IP代码工具，第3个是FF一个专门翻墙的插件。安装顺序是先装FF，然后安装ET，然后用FF安装Autoproxy，一切准备就绪，全部安装完成重启FF。然后打开推特或者facebook或者u2b什么的，最近tumblr.com也被墙了，试试这个应该也能测出来，如果都能打开，那么就OVER了。
+但是99%的可能是你装了上面那一堆，你也还是打不开。</p>
+
+<p>嗯，安装Autoproxy的时候有一步界面是提示你订阅他们的RSS的，一定要点了。嗯，依然翻不过去，打开你的gmail吧。
+用gmail发信到：bridges@torproject.org
+主题随便，内容写：get bridges
+发送成功之后应该是立刻会收到回信，因为对方是机器人。回信内容如下：
+打开你安装的ET，然后选择设置中继服务器，点击网络，把上面的3个地址添加上。如下图：
+成功之后重新启动EasyTor，然后会见到下面的提示connect to the tor network！就算结束了，西厢记成功。
+速度有时候会不是很快，因为毕竟代理中转了。如果还有不明白的随时留言或者发邮件给我。：）</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -698,112 +872,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/the-rails-view/">The Rails View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T12:11:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
-是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
-提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
-
-<p>(待续)</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/23/arp-binding/">Arp 绑定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-23T11:46:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>通过ftp备份老是报告登录失败。检查过后，网管告知我们是ip被抢。照理是需要网管执行纪律的，但是这个我就不越俎代庖，反正
-解决问题为主。而且即便执行纪律也不保证下次就不会发生。于是想起来直接绑定arp和ip，这样可以<strong>根除</strong>此类问题。</p>
-
-<p>主要参考了<a href="http://www.xxlinux.com/linux/article/network/security/20070809/9234.html">Linux下绑定IP和MAC地址，防止ARP欺骗</a>.</p>
-
-<p>1.检查当前arp</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -a</span>
-</span><span class='line'>? <span class="o">(</span>192.168.203.22<span class="o">)</span> at 00:A0:D1:E5:D1:A9 <span class="o">[</span>ether<span class="o">]</span> on eth0
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.建立一个mac->ip的对应文件： ip-mac, 将IP和MAC写入才文件</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">echo</span> <span class="s1">&#39;192.168.202.19 00:26:b9:4c:8d:af&#39;</span> &gt; /etc/ip-mac
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.手动执行绑定</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@ngntest ~<span class="o">]</span><span class="c"># arp -f /etc/ip-mac</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>上面的内容也可以存入<code>/etc/rc.d/rc.local</code> ,这样可以实现开机自动绑定。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -821,6 +889,14 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">何伟的甲骨文</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/10/you-dian-wu-liao-de-qi-che-fa-bu-hui/">有点无聊的汽车发布会</a>
       </li>
     
@@ -832,19 +908,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2014/08/16/2014-rails-hosting-diao-cha/">2014 Rails Hosting 调查</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/09/xin-che-ping-de-%5B%3F%5D-xie-shu-ju/">新车评的一些数据</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/01/xin-che-ping-de-sui-xiang/">新车评网的随想</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (48)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (21)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (15)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/java'>Java (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/spring'>Spring (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (49)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (15)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/java'>Java (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/spring'>Spring (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

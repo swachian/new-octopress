@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-09-10T22:27:17+08:00</updated>
+  <updated>2014-09-14T15:10:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,328 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[何伟的甲骨文]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen/"/>
+    <updated>2014-09-14T11:49:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen</id>
+    <content type="html"><![CDATA[<p>书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
+就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
+牵涉到城市，难免会有更敏感的话题出现。
+本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</p>
+
+<p>本书主要描写了在三四个大陆城市：北京、深圳、温州、南京。
+北京主要作者自己、一个维吾尔人以及一些老知识分子。深圳和温州的
+主线是作者在涪陵任外教时的学生在那里闯荡情况的反应。南京等则只是一笔带过。</p>
+
+<p>从中可以反映出彼时的一些政策制定有其合理之初，但在2003之后
+还是坚持某些策略，则产生很多问题。例如，当时的汇率是固定，后来的汇率也是固定的。
+但是，当时的黑市价格美元更值钱，所以政府坚持汇率对人民有益。而后来人民币早就该升值，
+美元已不如过去那么值钱，还坚守汇率就是对使用人民币的人不负责任了。
+即便是同样的措施，在不同的条件下实施其后果是完全不同的。</p>
+
+<p>所以，尽管这本书谈了很多政治的东西，但却完全没有读上本书
+时常常会发出的未尝不痛恨于桓灵也的感觉。很多选择对政府来讲也是别无选择，
+完全不像后10年那样政府其实可以有多种选择。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web容器中通过Spring添加Job任务]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/"/>
+    <updated>2014-09-11T21:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu</id>
+    <content type="html"><![CDATA[<p>实际投入使用的Web站点总有很多例行任务要做，习惯的做法是利用操作系统的crontab定期执行脚本或者Java程序。
+在更早的时候，曾经试过quartz，但后来因为quartz创建的线程属于JVM而不是Web容器，导致停止或
+重新部署应用时线程并未终止，因此后来跑java程序例行任务的话，主要就
+是单独运行jar文件。</p>
+
+<p>时过境迁，了解到Spring已经接管了定时任务的线程处理，之前在
+Web容器里跑多线程任务的最大隐患已经不存在了，所以尝试了一下在
+Spring中使用例行更新。</p>
+
+<p>这样做最大的好处当然就是代码集中，容易维护也容易部署。</p>
+
+<h3>功能说明</h3>
+
+<p>整个功能并不复杂，需要对redis中的设备号列表进行遍历，对每一个
+号码调用远程接口获取该号码的一些动态变化的信息。取得后，这些信息
+的时效时间是6小时，在失效前的10分钟内，需要再次调用远程接口刷新缓存。</p>
+
+<p>因为整个功能的瓶颈在于远程调用，为了提高并发，
+调用远程接口采取多线程的方式。而遍历的性能极好，使用单线程就够了。</p>
+
+<h3>使用组件</h3>
+
+<p>采用Java中线程的Executors实现起来最简单直接。Executors实质上就是一个
+线程池，每塞给一个号码，就调用派发一个线程进行处理。如果没有线程可派，
+则放入队列中，如队列满了则会依据设置再增加线程数量。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span>  <span class="n">TaskExecutor</span> <span class="n">taskExecutor</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Executor确实是一个比较好的多线程编程方式，融合了Actor模式和队列，
+使用起来也比较方便。</p>
+
+<p>Executors可以由spring进行注入，在这个任务里比较合适的是采用ThreadPool*</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;taskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;corePoolSize&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxPoolSize&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;queueCapacity&quot;</span> <span class="na">value=</span><span class="s">&quot;2500&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/bean&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>corePoolSize是例行打开的线程数，queueCapacity是在没有core线程处理时的排队数量，
+当超过这个数量时，会再启动线程直到maxPoolSize。如果都使用完毕，则可指定溢出时的抛弃处理方式。</p>
+
+<p>派发任务由<code>taskExecutor.execute(new PollItInterfaceTask(mdn))</code>表达，
+要同步的数据通过mdn传入。</p>
+
+<p>此外，因为遍历的线程执行速度快，而workers可能需要更长时间才能完成队列中的任务，
+为防止重复提交设置了一个多线程会并发访问的集合<code>private Set&lt;String&gt; mdnInQueue = new ConcurrentSkipListSet&lt;String&gt;(); //用于记录已安排执行但还未执行的号码</code>
+。整个代码的情况如下:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">sanss</span><span class="o">.</span><span class="na">toolbar</span><span class="o">.</span><span class="na">job</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.TimerTask</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.ConcurrentSkipListSet</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.commons.logging.Log</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.commons.logging.LogFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.springframework.core.task.TaskExecutor</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.sanss.toolbar.service.CacheItInterfaceQueryService</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*多线程发起的、向IT抓取用户套餐信息的线程池执行者，由spring中触发，根据接口run()*/</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PollItInterfaceTaskExecutor</span>  <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Log</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LogFactory</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">PollItInterfaceTaskExecutor</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">mdnInQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentSkipListSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span> <span class="c1">//用于记录已安排执行但还未执行的号码</span>
+</span><span class='line'>  <span class="nd">@Autowired</span>
+</span><span class='line'>  <span class="n">CacheItInterfaceQueryService</span> <span class="n">cacheItInterfaceQueryService</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*实际被多线程执行的任务,获取在队列中存放的mdn*/</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">PollItInterfaceTask</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">private</span> <span class="n">String</span> <span class="n">mdn</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">PollItInterfaceTask</span><span class="o">(</span><span class="n">String</span> <span class="n">mdn</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">this</span><span class="o">.</span><span class="na">mdn</span> <span class="o">=</span> <span class="n">mdn</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">cacheItInterfaceQueryService</span><span class="o">.</span><span class="na">setCacheFlux</span><span class="o">(</span><span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">mdnInQueue</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">Thread</span> <span class="n">currentThread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>  <span class="c1">// 获得当前的线程  </span>
+</span><span class='line'>          <span class="n">String</span> <span class="n">threadName</span> <span class="o">=</span> <span class="n">currentThread</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="n">threadName</span> <span class="o">+</span> <span class="s">&quot;: 刷新下面号码的cache: &quot;</span> <span class="o">+</span> <span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">TaskExecutor</span> <span class="n">taskExecutor</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">PollItInterfaceTaskExecutor</span><span class="o">(</span><span class="n">TaskExecutor</span> <span class="n">taskExecutor</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">taskExecutor</span> <span class="o">=</span> <span class="n">taskExecutor</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//任务出发后，被run自动执行的任务。首先获得所有需要提前取得IT流量信息的hashkey集合，随后遍历集合分别取出相关的一系列mdn，</span>
+</span><span class='line'>  <span class="c1">//之后根据mdn检查ttl信息，发现小于500秒就安排Executor执行任务。</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doit</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tlbKeys</span> <span class="o">=</span> <span class="n">cacheItInterfaceQueryService</span><span class="o">.</span><span class="na">getAllTlbsetQueryList</span><span class="o">();</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">//号码列表总数</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">//本轮需要刷新的</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">hshkey</span> <span class="o">:</span> <span class="n">tlbKeys</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">mdns</span> <span class="o">=</span> <span class="n">cacheItInterfaceQueryService</span><span class="o">.</span><span class="na">getAllFieldsByAKey</span><span class="o">(</span><span class="n">hshkey</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">mdn</span> <span class="o">:</span> <span class="n">mdns</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>              <span class="kt">long</span> <span class="n">ttl</span> <span class="o">=</span> <span class="n">cacheItInterfaceQueryService</span><span class="o">.</span><span class="na">ttlFlux</span><span class="o">(</span><span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>              <span class="k">if</span> <span class="o">(</span><span class="n">ttl</span> <span class="o">&lt;</span> <span class="mi">500</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(!</span><span class="n">mdnInQueue</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">mdn</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">mdnInQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>                      <span class="n">taskExecutor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">PollItInterfaceTask</span><span class="o">(</span><span class="n">mdn</span><span class="o">));</span>
+</span><span class='line'>                      <span class="n">count</span><span class="o">++;</span>
+</span><span class='line'>                 <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">total</span><span class="o">++;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;本轮刷新&quot;</span><span class="o">+</span><span class="n">count</span><span class="o">+</span><span class="s">&quot;个记录, 共有&quot;</span><span class="o">+</span><span class="n">total</span><span class="o">+</span><span class="s">&quot;个记录&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Override</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// TODO Auto-generated method stub</span>
+</span><span class='line'>   <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;开始执行 %s ...%n&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Date</span><span class="o">());</span>
+</span><span class='line'>      <span class="n">doit</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>CacheItInterfaceQueryService是项目中的一个服务模块，负责具体设置缓存。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="c">&lt;!-- 定期去IT接口轮训的部署 --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;taskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;corePoolSize&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;maxPoolSize&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;queueCapacity&quot;</span> <span class="na">value=</span><span class="s">&quot;2500&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;pollItInterfaceTaskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;com.sanss.toolbar.job.PollItInterfaceTaskExecutor&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>           <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">&quot;taskExecutor&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>     <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;springScheduleExecutorTask&quot;</span>
+</span><span class='line'>        <span class="na">class=</span><span class="s">&quot;org.springframework.scheduling.concurrent.ScheduledExecutorTask&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;runnable&quot;</span> <span class="na">ref=</span><span class="s">&quot;pollItInterfaceTaskExecutor&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;delay&quot;</span> <span class="na">value=</span><span class="s">&quot;1000&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!-- 每次任务间隔 一分钟--&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;period&quot;</span> <span class="na">value=</span><span class="s">&quot;60000&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;springScheduledExecutorFactoryBean&quot;</span>
+</span><span class='line'>        <span class="na">class=</span><span class="s">&quot;org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;scheduledExecutorTasks&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;list&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&quot;springScheduleExecutorTask&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/list&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/property&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>避免不了的配置如上，<code>taskExecutor</code>已经在前面描述过，第二段的<code>pollItInterfaceTaskExecutor</code>就是把线程池执行者
+作为参数传给自己编写的任务的构造函数，然后第三段定义一个周期执行的任务，设置好执行的间隔，runnable要提供自己编写的业务类（第二段中的内容），
+最后第四步把这个周期任务交给Spring的<code>ScheduledExecutorFactoryBean</code>工厂来负责管理。
+需要注意的是，ScheduledExecutorFactoryBean是spring4中的写法，在spring3中还是另一套描述方式，虽然功能差不多。
+但在版本升级时，这是一个不大不小的坑。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[有点无聊的汽车发布会]]></title>
@@ -1846,59 +2168,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 而新加坡的就完全属于消耗品。上海的车牌有投资和理财的价值。自己可以使用，同时筹资者也可以利用这笔资金创造财富。</p>
 
 <p>不得不说一句，上海政府是目前中国最佳的金融衍生品创造者。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[车位]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/18/che-wei/"/>
-    <updated>2014-05-18T10:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/18/che-wei</id>
-    <content type="html"><![CDATA[<p>自从要开始开车，车位始终是一个问题。目前小区地面是无固定车位，先来先得，抢到了可以用到开走的时候。好处是价格便宜，150/月。很早就申请并开始付钱了，
-但现在发现申请的有点早了，因为小区根本没有控制车辆总数的意思。现在申请也是同样可以的。当然，每月本来开销也不大，这个就只能当小赌赌输了。真的让人头疼的还是每天要停车的现实，特别是以后每天开起来。</p>
-
-<p>小区里面另一种车位就是地下车库了。大概2011年上半年的时候，当时的物业撤离前，把开发商保留的最后一批地下车库卖了出来。
-彼时是20w元一个，且已经租用者可优先购买。我当时还没买车，自然也不是租用者，肯花钱也不一定轮得到。
-如今，再一打听，地下车位已经有人在卖40w了。这个价位有点偏高，很长时间无人问津。</p>
-
-<p>既然卖了这个价，那就更不乐意买了。毕竟现在的理财产品，妥妥的一年有5-6%的收益，40w就意味着每年可以多出来2w。
-这笔增值都可以出国旅游一趟了。何苦变成车位的死投资。地下固定车位尽管长期看涨，但除了停停车也确实没其他用处。
-而其替代品还是有一些的。如现在的小区地面，甚至可能会被贴罚单的小马路上。虽然不方便虽然有风险，但是后二者都很难迅速涨价。
-一般情况下，凑合着停停也就算了。</p>
-
-<p>让人欣慰的是，上海政府至少规定了新造的楼盘车位要达到将近1:1的比例。
-虽说不解决老小区的问题，但好歹也算以后换房多了一些选择。总体而言还是增加了地下车库的供给，而一套房子毕竟也不一定待一辈子。</p>
-
-<p>长远来看，有个固定的地下车位还是很有必要的。只是碍于目前的身价，不舍得花那么一大笔钱。
-真能解决这个问题的唯一办法，还真的只有自己努力赚钱吧。现在固定车位的意义对我而言大于40w，当然只是比如说，那肯定毫不犹豫就会出手了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[老板和技术骨干]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/"/>
-    <updated>2014-05-17T09:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan</id>
-    <content type="html"><![CDATA[<p>蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
-也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
-主要已经是看老板的rp以及骨干成员和老板的关系了。</p>
-
-<p>只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
-比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
-当然，城市的老板一般不给钱只是不给钱了，而乡村企业家拖欠
-工资可能还是想留住员工。</p>
-
-<p>如果真要总结，只有一条最重要：<strong>跟对老板</strong>。其他确实都是其次的。
-至于说保持自己的竞争力，保持自己的核心地位，这些是做任何事情的
-本分。毕竟公司不是家庭，个人的存在是必须有价值才行的。</p>
-
-<p>说回caoz本身，他的博客也是我比较喜欢的一类，尽管更新频率确实很低。
-当然，他所判断的也不全对，比如在房价、在历史方面就挺离谱的。
-但他的文章确实有干货，更重要的打鸡血的效果确实很棒。
-<strong>保持乐观可能比<del>跟对老板</del>更加重要</strong>。</p>
-
-<p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
-了的可能还是自己直接创业。</p>
 ]]></content>
   </entry>
   
