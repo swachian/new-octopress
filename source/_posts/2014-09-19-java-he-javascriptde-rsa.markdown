@@ -87,3 +87,54 @@ Java的RSA代码有很多，可以参考[链接](http://blog.csdn.net/songxiaobi
 
 生成密钥对可以用`generateKeyPair`，并且会生成一个RSA文件。随后的重点是要把里面的公钥私钥转换成有`RSA`前缀的相应类，只有这样才能调出获得Exp和Mod的方法。
 两个ModBytes得到的结果是一样的。所以在js里面，modulu就变成只有一个参数了。
+
+## 二者的异同
+
+如同之前预料的一样，两个语言写出来的加密解密在一些细节上是不一样的。
+
+* java
+  - 默认密文是二进制的，自己主动转成16进制的话是连续的
+  - 原生支持中文
+
+* javascript
+  - 默认密文就是16进制的，且每个分组之间使用一个空格进行分隔
+  - 分组内部的排列是倒序的
+  - 不支持中文
+
+下面的输出比较说明问题
+
+```java
+String s1 = SSOEncrypter.byte2hex(rsa.encrypt(pubKey,str.getBytes()));
+System.out.println("加密后==" + s1); //加密后==0c983a3d17e57037456582ce61bc1276
+System.out.println("解密后==" + Javanew String(rsa.decrypt(priKey, SSOEncrypter.hexStringToByte(s1)))); //解密后==abcdefghijklmn
+
+js相同内容的输出为：
+4831c7394dc3623c 5429366c63908d05 16d4229e4631084a
+```
+差异还是比较显而易见，具体的实现如下：
+
+```java
+/**
+   * 解析js的rsa处理过来的密文
+   * @param jsHex 的特点是每16个字符中间有空格分割，而且block还原的顺序需要颠倒过来
+   * 
+   * @throws Exception 
+   */
+  
+  public String decryptFromJsRSA(String jsHex, RSAPrivateKey priKey ) throws Exception {
+    String[] blocks = jsHex.split(" ");
+    StringBuffer sb = new StringBuffer();
+    String block = "";
+    for (int i=blocks.length; i>0; i--) {
+      block = blocks[i-1];
+      //byte[] en_result = new BigInteger(block, 16).toByteArray();
+      byte[] en_result = SSOEncrypter.hexStringToByte(block);
+      
+        byte[] de_result = decrypt(priKey, en_result);
+        sb.append(new String(de_result));
+    }
+      //返回解密的字符串
+      return sb.reverse().toString();
+  }
+  
+```

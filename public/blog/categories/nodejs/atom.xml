@@ -4,7 +4,7 @@
   <title><![CDATA[分类: nodejs | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-09-18T22:43:22+08:00</updated>
+  <updated>2014-09-22T16:51:25+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java 和 Javascript的RSA]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/19/java-he-javascriptde-rsa/"/>
+    <updated>2014-09-19T13:57:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/19/java-he-javascriptde-rsa</id>
+    <content type="html"><![CDATA[<p>近来安全问题日益被重视，通过HTTP传输的部分数据也有了加密的需求。虽然最到位的办法肯定是HTTPS，但证书的申请是比较麻烦的。所以，还是决定
+通过diy的方式，将浏览器中的部分敏感数据加密后再传给服务器。</p>
+
+<p>说到加密算法，主要是对称或不对称，可逆或不可逆。最保险的当然是不可逆的密文传输，但是部分业务获得不可逆的密文后无法处理，只能选择可逆的形式。
+而在浏览器中加密，显然用对称加密方式就不合适了。所以最后选择了RSA。既是不对称的也是可解密的。</p>
+
+<p>这件事情里面，最麻烦的就是rsa的算法是java和javascript分别实现的。客户端的加密别无选择，只有js胜任。服务端主要提供给现有服务使用，因此主要就是Java。
+而让两者配合，则是需要花费些功夫的。网上尽管资料不少，但讲清楚之间配合的很少。</p>
+
+<h2>Javascript中的RSA</h2>
+
+<p>Java的加密算法之前已经用过多次，了解了一下js的rsa算法，还真的有不少，最后选了一个大家提到的比较多的<a href="http://www.ohdave.com/rsa/">ras in javascript</a>。
+在html中使用的代码如下:</p>
+
+<p>```html
+<html>
+<head></p>
+
+<pre><code>&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;JavaScript RSA&lt;/title&gt;
+&lt;script type="text/javascript" src="http://www.ohdave.com/rsa/BigInt.js"&gt;&lt;/script&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://www.ohdave.com/rsa/RSA.js"&gt;&lt;/script&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://www.ohdave.com/rsa/Barrett.js"&gt;&lt;/script&gt;&lt;/script&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+    //公钥加密明文
+    setMaxDigits(231);
+    var modulu = "00aad04454bda226e1";
+    var key1 = new RSAKeyPair("010001", "", modulu);
+    var password = "jack1234张三";
+    var encryPssword = encryptedString(key1, password);
+    document.write(encryPssword);
+    alert(encryPssword);
+
+    //私钥解密
+    var priExp = "078c4c789faca941";
+    var key2 = new RSAKeyPair("010001", priExp, modulu);
+    var decryptedPssword = decryptedString(key2, encryPssword);
+    alert(decryptedPssword);
+&lt;/script&gt;
+</code></pre>
+
+<p></body>
+</html>
+<code>``
+其中，</code>setMaxDigits<code>我理解下来是给计算留下足够多的空间的，一般选择秘钥位数(key_size)*2/16，每个digit可以放16个bit.  
+</code>RSAKeyPair(encryptionExponent, decryptionExponent, modulus)`是构造钥匙的方法，实际上构造公钥（加密）只需要第一个参数和第三个参数，构造私钥（解密）只需要第二个参数和第三个参数。
+第三个参数是类似模的一个东西，另外两个参数则是指数，根据模和各自的指数，就能生成相应的公钥和私钥的数字。而这个js的版本，都是返回的hex，即16进制的内容，且不支持中文，如果需要支持中文的话，需要自己先转成某种编码。不过，还剩下一个问题，就是模和指数从哪里获取呢？</p>
+
+<h2>Java中的RSA</h2>
+
+<p>Java的RSA代码有很多，可以参考<a href="http://blog.csdn.net/songxiaobing/article/details/17505237">链接</a>。关键在于如何使用这些API。</p>
+
+<p>```java
+  public static void main(String[] argvs) throws Exception {</p>
+
+<pre><code>KeyPair keyPair = RSAUtil.generateKeyPair(null);
+RSAPublicKey pubKey = (RSAPublicKey) keyPair.getPublic();
+RSAPrivateKey priKey = (RSAPrivateKey) keyPair.getPrivate();
+
+byte[] pubModBytes = pubKey.getModulus().toByteArray();
+byte[] pubPubExpBytes = pubKey.getPublicExponent().toByteArray();
+byte[] priModBytes = priKey.getModulus().toByteArray();
+byte[] priPriExpBytes = priKey.getPrivateExponent().toByteArray();
+RSAPublicKey recoveryPubKey = RSAUtil.generateRSAPublicKey(pubModBytes,
+    pubPubExpBytes);
+RSAPrivateKey recoveryPriKey = RSAUtil.generateRSAPrivateKey(
+    priModBytes, priPriExpBytes);
+
+System.out.println("加密指数: "
+    + SSOEncrypter.byte2hex(pubPubExpBytes));
+System.out.println("解密指数： "
+    + SSOEncrypter.byte2hex(priPriExpBytes));
+System.out.println("公钥modulus: "+SSOEncrypter.byte2hex(pubModBytes));
+</code></pre>
+
+<p>  }</p>
+
+<p>```</p>
+
+<p>生成密钥对可以用<code>generateKeyPair</code>，并且会生成一个RSA文件。随后的重点是要把里面的公钥私钥转换成有<code>RSA</code>前缀的相应类，只有这样才能调出获得Exp和Mod的方法。
+两个ModBytes得到的结果是一样的。所以在js里面，modulu就变成只有一个参数了。</p>
+
+<h2>二者的异同</h2>
+
+<p>如同之前预料的一样，两个语言写出来的加密解密在一些细节上是不一样的。</p>
+
+<ul>
+<li><p>java</p>
+
+<ul>
+<li>默认密文是二进制的，自己主动转成16进制的话是连续的</li>
+<li>原生支持中文</li>
+</ul>
+</li>
+<li><p>javascript</p>
+
+<ul>
+<li>默认密文就是16进制的，且每个分组之间使用一个空格进行分隔</li>
+<li>分组内部的排列是倒序的</li>
+<li>不支持中文</li>
+</ul>
+</li>
+</ul>
+
+
+<p>下面的输出比较说明问题</p>
+
+<p>```java
+String s1 = SSOEncrypter.byte2hex(rsa.encrypt(pubKey,str.getBytes()));
+System.out.println("加密后==" + s1); //加密后==0c983a3d17e57037456582ce61bc1276
+System.out.println("解密后==" + Javanew String(rsa.decrypt(priKey, SSOEncrypter.hexStringToByte(s1)))); //解密后==abcdefghijklmn</p>
+
+<p>js相同内容的输出为：
+4831c7394dc3623c 5429366c63908d05 16d4229e4631084a
+```
+差异还是比较显而易见，具体的实现如下：</p>
+
+<p>```java
+/<em>*
+   * 解析js的rsa处理过来的密文
+   * @param jsHex 的特点是每16个字符中间有空格分割，而且block还原的顺序需要颠倒过来
+   *
+   * @throws Exception
+   </em>/</p>
+
+<p>  public String decryptFromJsRSA(String jsHex, RSAPrivateKey priKey ) throws Exception {</p>
+
+<pre><code>String[] blocks = jsHex.split(" ");
+StringBuffer sb = new StringBuffer();
+String block = "";
+for (int i=blocks.length; i&gt;0; i--) {
+  block = blocks[i-1];
+  //byte[] en_result = new BigInteger(block, 16).toByteArray();
+  byte[] en_result = SSOEncrypter.hexStringToByte(block);
+
+    byte[] de_result = decrypt(priKey, en_result);
+    sb.append(new String(de_result));
+}
+  //返回解密的字符串
+  return sb.reverse().toString();
+</code></pre>
+
+<p>  }</p>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[被低估的JS： 「Pro JavaScript Techniques」读后感]]></title>
@@ -1286,282 +1444,6 @@ coffee&gt; url.parse("http://192.168.2.2/?q=1&amp;q=2#sss", true)
 <h2>Readline</h2>
 
 <p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Note on CoffeeScript]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript/"/>
-    <updated>2012-06-01T11:06:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/01/note-on-coffeescript</id>
-    <content type="html"><![CDATA[<p>这是阅读'The little Book on CoffeeScript'的笔记。全书只有60页。和CoffeeScript还是相符合的。毕竟它也是一个清简的工具。
-不需要太大的部头。</p>
-
-<h1>安装步骤</h1>
-
-<p>coffee可以直接运行在浏览器中，只要浏览器引入了一个js文件。</p>
-
-<p>```html</p>
-
-<script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"
-type="text/javascript" charset="utf-8"></script>
-
-
-<script type="text/coffeescript">
-# Some CoffeeScript
-</script>
-
-
-<p>```</p>
-
-<p>但这种是需要运行的时候解析的，所以还是应该运用服务端编译的方法，compile成js。下面是执行步骤，注意这里是基于node.js的，
-但实际上只要有引擎即可。只不过是因为node安装方便，而且已经自带了引擎。</p>
-
-<p><code>
-wget http://nodejs.org/dist/v0.6.18/node-v0.6.18.tar.gz
-tar -zxvf node-v0.6.18.tar.gz
-cd node-v0.6.18.tar.gz
-./configure
-make &amp;&amp; make install
-npm install -g coffee-script # -g 才能确保不是安装在当前目录
-</code></p>
-
-<p><strong>编译</strong> <code>coffee --compile my-script.coffee</code> , 按目录编译 <code>coffee --output lib --compile src</code>
-<strong>运行</strong> <code>coffee my-script.coffee</code>
-<strong>命令行</strong> <code>coffee</code> , 值得注意的是，这时候的if等语句换行需要跟随 <code>\</code></p>
-
-<h1>1. Syntax</h1>
-
-<p>CoffeeScript并不是Js的超集合，所以有些句法是<strong>不能</strong>使用的。<br/>
-和ruby一样，没有分号；if可以尾随的与语法糖；  单行的if需要用than</p>
-
-<p>和python一样，空白是重要的，所以程序必须保持sane manner；if的缩进</p>
-
-<p>支持多行注释<br/>
-```js
-  ###</p>
-
-<pre><code>A multiline comment,
-</code></pre>
-
-<p>  ###
-```</p>
-
-<h3>变量和范围</h3>
-
-<p>CS让所有的变量全部变成局部变量，避免了js这方面的混乱。<br/>
-需要声明全局变量时，可以直接在浏览器的js代码里面生成，也可以使用<code>this</code>关键字，它代表
-<strong>global object</strong><br/>
-<code>js
-exports = this
-exports.MyVariable = "foo-bar"
-</code></p>
-
-<h3>Functions</h3>
-
-<p>cs去掉了js冗长的函数定义语句，改用arrow <code>-&gt;</code>  ，这个替换js的function关键字
-单行函数 <code>func = -&gt; "bar"</code><br/>
-多行函数，必须注意<strong>缩进</strong>（indent）<br/>
-<code>js
-func = -&gt;
-  # An extra line
-  "bar"
-</code></p>
-
-<p>在 <code>-&gt;</code>前配置<strong>arguments</strong> <code>times = (a = 1, b = 2) -&gt; a * b</code><br/>
-接受多个参数 <code>sum = (nums...) -&gt;</code></p>
-
-<p><strong>调用</strong>时，可以跟<code>()</code>或者不跟。当跟上一个或多个参数的时候表现的像ruby，是当函数来调用；但是当
-没有参数时，会死死的被当做变量，此时表现的更像python。与ruby不同，ruby永远把应用当函数来调用。</p>
-
-<p>Function <strong>Context</strong> 待进一步了解<br/>
-<code>=&gt;</code></p>
-
-<h3>一些表达式</h3>
-
-<p>花括号是可选的，hash和array可以利用缩进完成。
-```js
-object2 = one: 1, two: 2</p>
-
-<p>object3 =
-  one: 1
-  two: 2</p>
-
-<p>array1 = [1, 2, 3]</p>
-
-<p>array2 = [
-  1
-  2
-  3
-]
-```</p>
-
-<p>Flow Control<br/>
-像python，像ruby</p>
-
-<p>String的解析，和ruby类似</p>
-
-<h3>循环和综合（类似python)</h3>
-
-<p><code>in</code> ---- <code>for name in ["A", "B", "C"]</code><br/>
-需要index ---- <code>for name, i in ["A", "B", "C"]</code>， 只需要加一个参数<br/>
-把操作也写成一行 ---- <code>release prisoner for prisoner in []</code><br/>
-comprehensions: ---- <code>release p for p in prisoners when prisoners[0] == "R"</code>
-内置的仅支持while</p>
-
-<h3>几个替换和操作符</h3>
-
-<p><code>@</code> serve as <code>this</code>, <code>@saviour = true</code><br/>
-<code>::</code> serve as <code>prototype</code>, <code>User::first = -&gt; @records[0]</code></p>
-
-<p><code>?</code> similiar to Ruby's nil?, <code>praise if brian?</code> , it's also a <code>||</code>， <code>velocity = southern ? 40</code></p>
-
-<h1>2. CoffeeScript Classes</h1>
-
-<p>CS使用<code>class</code>做关键字来定义类 <code>class Animal</code>  ，
-使用new 来新建对象 <code>animal = new Animal</code>,<br/>
-<code>contructor</code> 类似ruby的initialize，
-```js
-class Animal
-  constructor: (name) -></p>
-
-<pre><code>@name = name
-</code></pre>
-
-<p><code>  
-其中，构造函数的参数如果带@则会自动被当成实例变量进行设置  
-</code>js
-class Animal
-  constuctor: (@name) -></p>
-
-<p>animal = new Animal("Parrot")
-```</p>
-
-<h3>instance 属性</h3>
-
-<p>给实例加属性如同给object加属性</p>
-
-<p>```js
-class Animal
-  price: 5</p>
-
-<p>  sell: (customer) =></p>
-
-<p>animal = new Animal
-animal.sell(new Customer)
-```</p>
-
-<p>为了确保将<code>this</code>锁定在它被定义的context中，需要用fat arrow <code>=&gt;</code>，这样this就不会随着event callbacks
-环境的变化而变化。</p>
-
-<h3>Static 属性</h3>
-
-<p>这就是class变量，需要用到this 或者 @<br/>
-```js
-class Animal
-  this.find = (name) -></p>
-
-<p>Animal.find("Parrot")</p>
-
-<p>Class Animal
-  @find: (name) -></p>
-
-<p>Animal.find("Parrot")
-```</p>
-
-<h3>继承与Super</h3>
-
-<p>和ruby python的继承类似，使用<code>extends</code>关键字，内部实现是用prototype完成的。</p>
-
-<p>```js
-class Animal
-  constructor: (@name) -></p>
-
-<p>  alive: -></p>
-
-<pre><code>false
-</code></pre>
-
-<p>class Parrot extends Animal
-  constructor: -></p>
-
-<pre><code>super("Parrot")
-</code></pre>
-
-<p>  dead: -></p>
-
-<pre><code>not @alive()
-</code></pre>
-
-<p>Animal::rip = true</p>
-
-<p>parrot = new Parrot("Macaw")
-console.log("aaa") if parrot.rip
-```</p>
-
-<h1>3. 惯用法</h1>
-
-<p>```js</p>
-
-<h3>each</h3>
-
-<p>fun(n) for n, i in array</p>
-
-<h3>map</h3>
-
-<p>for item in array
-  item.name</p>
-
-<h3>select</h3>
-
-<p>passed = []
-failed = []
-for score in [49, 48, 90]
-  (if score > 60 then passed else failed).push score</p>
-
-<h3>includes</h3>
-
-<p>included = "test" in array #但不能用于单个字符串的内部模式匹配</p>
-
-<h3>属性遍历</h3>
-
-<p>object = {one: 1, two: 2}
-for key, value of object
-  "#{key} = #{value}"</p>
-
-<h3>or</h3>
-
-<p>hash ?= {}</p>
-
-<h3>支持多值返回</h3>
-
-<h3>外部扩展库</h3>
-
-<h1>Use local alias</h1>
-
-<p>$ = jQuery</p>
-
-<p>$ ->
-  #COMContentLoaded
-  $(".js-el").click -></p>
-
-<pre><code>alert("clicked!")
-</code></pre>
-
-<p>```</p>
-
-<h1>4. 编译</h1>
-
-<p>提到了<a href="http://jashkenas.github.com/coffee-script/#cake">Cake</a>这个工具。
-跟rake差不多，可以watch，可以自动编译。</p>
-
-<h1>5.优良部分</h1>
-
-<p>孙子说，知己知彼百战不殆。</p>
-
-<p>CS也只是修复了部分js的缺陷。</p>
-
-<p><code>-&gt;</code> 是从input <em>points to</em> output。这个创意真棒。 <code>(input) -&gt; output</code></p>
 ]]></content>
   </entry>
   
