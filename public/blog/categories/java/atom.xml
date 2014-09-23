@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-09-22T16:51:25+08:00</updated>
+  <updated>2014-09-23T14:49:16+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -168,6 +168,67 @@ for (int i=blocks.length; i&gt;0; i--) {
 <p>  }</p>
 
 <p>```</p>
+
+<h2>中文编码的问题</h2>
+
+<p>上面用到的js的rsa库，写的很小巧，运行速度也很快。唯一的缺点就是不支持中文。好在按上面的算法，试了几千条数据后，确保非中文的情况下java和js之间的明文-密文转换是没有问题的。
+所以只要给js加上Base64的编码，就可以解决问题了。</p>
+
+<p>```javascript</p>
+
+<pre><code>genRandomNum = function(pwdLen) {
+var count = 0; // 生成的密码的长度
+var str = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+    'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    '/', ';', '\'', ']', '{', '!', '#', '%', '^', '&amp;', '*', '(', ')', '-', '#', '+', '=',
+    '我', '爱', '北', '京', '天','安', '门',
+    '日', '产', '别', '克', '大', '众', '丰', '田'];
+var maxNum = str.length;
+var pwd = '';
+while (count &lt; pwdLen) {
+  // 生成随机数，取绝对值，防止生成负数，
+  var i = Math.floor(Math.random()*maxNum); // 生成的数最大为36-1
+  if (i &gt;= 0 &amp;&amp; i &lt; maxNum) {
+    pwd += str[i]
+    count++;
+  }
+}
+//console.log(pwd);
+return pwd;
+
+}
+</code></pre>
+
+<p>  var pwds = [];
+  for (var i=0; i &lt; 100; i++) {</p>
+
+<pre><code>   var pwd = genRandomNum(Math.floor(Math.random()*40));
+   pwds.push(pwd);
+</code></pre>
+
+<p>  }</p>
+
+<pre><code>    //公钥加密明文
+    setMaxDigits(231);
+    var modulu = "0085cf15ef6336cb3f";
+    var key1 = new RSAKeyPair("010001", "", modulu);
+    for (var pwd of pwds) {
+      document.write(pwd+"[ ");
+    }
+    document.write("&lt;br /&gt;");
+    for (var pwd of pwds) {
+      console.log(pwd);
+      var encryPssword = encryptedString(key1, Base64.encode(pwd));
+      document.write(encryPssword+", ");
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>通过上面的程序，可以产生长度不等的多个随机密码，把明文进行base64转码后交给rsa加密成16进制的字符，然后就可以把得到的明文和密文交给java进行比对了。
+另外Base64的编码是url不安全的。因为+ = /都是base64的适用字符，而这些在url传输中都会被转义，所以js的base64编码一般还有一个对url-safe的版本。
+而在此处，rsa会最终转成16进制，因此并不需要使用url-safe的特性。考虑到Java的base64还是标准版的，所以使用标准版的base64更合适。</p>
 ]]></content>
   </entry>
   
