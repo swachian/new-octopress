@@ -9,9 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="六七年来，小组的Java Web开发是用SSH（Struts2+Spring+Hibernate）的框架。
-Struts2充当胶水层，完成request参数的封装、controller的映射以及视图和控制层之间的参数传递。
-Spring在其中充当了注入的角色。Hibernate负责数据持久化。 &hellip;">
+  <meta name="description" content="JSP中的代码 传统的老三样 长久以来的Java Web开发，在jsp层面进行读取或逻辑控制等行为时主要有Scriptlet、Helper和标签三种方式。 其中，Scriptlet是最不受推荐的方式，最为推荐的是用 标签 的方式，而Helper因为免不了会使用Scriptlet，所以流传的也不广。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,191 @@ Spring在其中充当了注入的角色。Hibernate负责数据持久化。 &hel
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/12/jspzhong-de-elbiao-da-shi-he-helper/">JSP中的EL表达式和Helper</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-12T19:05:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>JSP中的代码</h2>
+
+<h3>传统的老三样</h3>
+
+<p>长久以来的Java Web开发，在jsp层面进行读取或逻辑控制等行为时主要有<strong>Scriptlet</strong>、<strong>Helper</strong>和<strong>标签</strong>三种方式。</p>
+
+<p>其中，Scriptlet是最不受推荐的方式，最为推荐的是用 <strong>标签</strong> 的方式，而Helper因为免不了会使用Scriptlet，所以流传的也不广。而标签方式中，不单有相对通用的JSTL（JSP Standard Tag Library，JSP标准标签库)，每个框架往往还有自己的标签库。</p>
+
+<p>如struts1的：</p>
+
+<p><code>&lt;bean:write name="spRinglib" property="down_cnt"/&gt;</code></p>
+
+<p>struts2的：</p>
+
+<p><code>&lt;s:property value="r.department" /&gt;</code></p>
+
+<p>jstl的：</p>
+
+<p><code>&lt;c:out value="${user.company}" escapeXml=="false"/&gt;</code></p>
+
+<p>这种方式的一大特点就是冗长和啰嗦。信息的表达力很差。上述还只是用于输出的，一旦碰到条件判断等，标签的表现更是只能用拙劣二字来加以形容。同时，每个框架各搞一套，给程序员也会带来很大的负担，对项目维护也带来更多的成本。</p>
+
+<p>然而，对于程序员而言，输出内容、流程控制等原本有着更直接和通用的描述方式： 编写代码。比如Java程序员自然用Java编写代码，Ruby的则自然用Ruby。
+如果这些重新发明的标签，具有比语言更好的表达和组织能力，那么显然大家应该放弃语言本身，比如不使用java，而在MVC的各个部分都
+使用标签。但既然这个没有发生，说明标签在大部分时候并不合适。</p>
+
+<h3>新的变化-EL表达式的出现</h3>
+
+<p>好在随着EL表达式的推出，情况逐步有所改观。比如同样是上面的输出，EL的写法可以是 <code>${r.department}</code>，调用数组也可以是<code>${list[0].name}</code> 。不过EL目前还没有支持逻辑控制，所以逻辑控制还是要用jstl的标签。</p>
+
+<p>但至少在老三样之外提供了新的一种方式，并且使得使用<strong>Helper</strong>模式可以不需要必须用Scriptlet。</p>
+
+<h2>EL中使用Helper</h2>
+
+<p>说的简单点，其实就是在jsp页面中，通过EL表达式可以调用Java实现的方法。获得类似<code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 。 其中，getflow是一个用Java写的静态方法。</p>
+
+<p>而使用Scriptlet配合helper，则会出现下面的代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;%</span>
+</span><span class='line'><span class="n">UserInfo</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserInfo</span><span class="o">)</span> <span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="kt">long</span> <span class="n">flow</span> <span class="o">=</span> <span class="o">(</span><span class="kt">long</span><span class="o">[]</span> <span class="o">)(</span><span class="n">userInfo</span><span class="o">.</span><span class="na">getBendiAndNationFlux</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">))[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'><span class="n">SheetAttendAction</span> <span class="n">helper</span> <span class="o">=</span> <span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">sanss</span><span class="o">.</span><span class="na">richtone</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">SheetAttendAction</span> <span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;helper&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;%=</span>  <span class="n">helper</span><span class="o">.</span><span class="na">cpSelectHelper</span><span class="o">(</span><span class="n">requestSheetForm</span><span class="o">.</span><span class="na">getManager</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpCode</span><span class="o">(),</span> <span class="n">spInfo</span><span class="o">.</span><span class="na">getCpName</span><span class="o">())</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>光写出来的代码方面，不使用EL时已经要长很多了，明明只是一个调用取值显示的操作，却要先声明一系列的东西。同时，这些类型还要在jsp
+的头上import进来。而IDE对jsp的import Class支持的并不好。所以确实相当麻烦。</p>
+
+<p>对比一下可以发现，EL能够调用方法的话，可以带来多大的方便。使用Helper方法时，无论是Scriptlet还是EL表达式，在Controller层面，做
+的事情都是类似的。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//在controller里定义方法</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getflow</span><span class="o">(</span><span class="kt">long</span> <span class="n">flow</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">DecimalFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DecimalFormat</span><span class="o">(</span><span class="s">&quot;###0.0&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">tmpFlow</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">;</span>
+</span><span class='line'>    <span class="kt">double</span> <span class="n">df</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">tmpFlow</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">flow</span> <span class="o">+</span> <span class="s">&quot;K&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">tmpFlow</span> <span class="o">&lt;</span> <span class="mf">1024.0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">df</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mf">1024.0</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">df</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;M&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">df</span> <span class="o">=</span> <span class="n">flow</span> <span class="o">/</span> <span class="mf">1024.0</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">df</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;G&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//在action中，注入属性</span>
+</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;myflow&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">myflow</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;mdn&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">mdn</span><span class="o">,</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">)</span> <span class="n">UserInfo</span> <span class="n">userInfo</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;helper&quot;</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;nubia/myflow&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样一来，定义自己的方法和使用这个方法就极为简便了。需要指出的是，EL表达式里面可以调用方法，即支持el里面带()调用，是<strong>直到
+servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是<del>tomcat6也不支持</del>这种调用方式。从中，可以看出EL越来越强大趋势。
+但也反过来可以证明过去方法之错误。</p>
+
+<h2>EL难道就不是Scriptlet？</h2>
+
+<p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code>
+除了把${}换成了&lt;%=%>实在没有其他区别， <code>${helper.getflow(userInfo.bendiAndNationFlux[2][0])}</code> 可能是写成了 <code>&lt;%= getflow(userInfo.bendiAndNationFlux[2][0])%&gt;</code> 。</p>
+
+<p>实际上，目前的EL，除了没有逻辑判断的能力之外，已经具备了很多Scriptlet的特性。那么区别在哪里呢？</p>
+
+<p>我觉得最关键的区别在于语言本身。所谓Scriptlet其实是Java Scriptlet，需要一系列的声明才能使用。强类型编译语言有很多的好处，但在页面
+显示方面，并非其所长。所以，不得不发明一套新语言来走Scriptlet的路子。 而对于另外一些本身就是脚本的语言，重新发明一套EL就显得没有必要了。</p>
+
+<p>EL的Scriptlet和Java的Scriptlet完全是两码事情，倒是和ruby的Scriptlet几乎没有区别。
+EL的支持来的有点慢，但好歹还是来了！</p>
+
+<h3>对EL未来的期盼</h3>
+
+<p>作为一个开发者，十分期望未来的EL能够再走一步，增加对 <code>if</code> <code>for</code>的原生支持，而不再需要使用麻烦的标签。能否发生这样的变化，就只有
+再看发展了。</p>
+
+<h3>标签适用的情况</h3>
+
+<p>标签其实也有其存在的价值，至少包括：</p>
+
+<ol>
+<li>分页等相对组件化的元素；</li>
+<li>风格一致的表单。</li>
+</ol>
+
+
+<p>对于那些有组件化特征的东西，标签还是很适用的。</p>
+
+<p>而在EL有了调用method的能力后，helper模式可以做的更多，很多页面逻辑可以放到helper中去完成，即把<code>if</code> <code>for</code>封装在helper里面。
+这应该是目前最值得推崇的一种页面代码模式了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1033,125 +1216,6 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/01/ri-ben-zhi-lu/">日本之旅</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-01T14:52:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>时隔2年多又出国旅游了一次。这次旅行的地点是日本。</p>
-
-<p>尽管中日关系略显紧张，但经济因素使得日本旅游方兴未艾。这次旅行同上次去意大利不同，
-之前是跟团，这次因为准备的时间较充裕，所以选择了自己做攻略自由行的方式去游玩。
-必须得感谢老婆，整个旅行的计划主要是她做的功课并成形的。</p>
-
-<p>先说说对日本的总体感觉。其实应该说也只是局部的感觉，毕竟这次只是去了大阪 京都 奈良 东京几个地方，
-但管中窥豹，形成印象已经足够了。概括起来，可以简要地变成下面几个关键词：</p>
-
-<ol>
-<li>干净</li>
-<li>秩序</li>
-<li>精细精确</li>
-<li>先进</li>
-<li>昂贵</li>
-<li>物有所值</li>
-</ol>
-
-
-<p>整个日本是相当<strong>干净</strong>的，除了在奈良公园的土路上，我在那里呆了八九天，基本鞋子都是不沾灰的。衣服穿
-2-3天依然还是相当的干净。在上海动不动就脏了，曾经以为是自己脏了，现在看来主要还是环境不干净。</p>
-
-<p>日本的人很多，但并不让人觉得乱哄哄。整个社会极其有 <strong>秩序Â</strong> 和条理，也因此让人感觉足够的 <strong>安全</strong> 。
-走在路上不用担心有人偷包，他们的超市或者药妆店也似乎根本不担心有贼的样子，马路上也没什么乱七八糟的
-不稳定因素，十几年前的上海的治安也是远远不如的。至于各式的排队则更加有序了。顾客一般很自觉，即便
-碰到不自觉的客户，服务人员也会坚持维护秩序，所以当地人基本没有破坏秩序的习惯，外来人员试了几次也就
-习惯按日式规矩行事了。不像我们这边，客人就不说了，服务人员也不懂得在有人破坏秩序的时候他们是有义务
-维护的，不然以后他们的工作只会越来越难越来越做的差。</p>
-
-<p>受制于国土面积狭小同时又人口众多，日本人对任何东西控制的很  <strong>精细</strong>  可以说是被逼出来的。他们没有浪费的余地。
-很多所谓的大寺，在中国可能只能被称作小庙了。但也因此，他们可以把小做精乃至做到极致，在服务水平方面，
-这点尤其突出。同样的，在列车时间的精确性方面相信也很难有第二个国家能做到日本人的地步。</p>
-
-<p>至于 <strong>先进性</strong> 则更是全方面的。从交通到建筑，到人的素质，到产品的品质，这个只有亲临过了
-才能感受到。</p>
-
-<p>所有的东西都是有代价的，日本达到上述优点同时也伴随着高物价。 <strong>昂贵</strong> 的物价是很令人震惊的。
-尤其是谷物类和蔬菜类。那是上海的2-6倍了。而且味道并不怎么灵。同样是吃的，奶制品和巧克力等就和
-我们很接近了。 日本的交通费也是很让中国人发指的。新干线500km要800元人民币了，速度还比我国的
-高铁慢，而同样的距离我国只要200元左右就行了。整个高物价的代价就是他们的生活压力也很大，当然收
-入肯定也很高，这样就更进一步会推高物价。</p>
-
-<p>虽然东西很贵很贵，但一分价钱一分货，日本的东西倒也充分应验了这句话。最后让你觉得这一切还是物有所值的。
-尤其是在上海的物价已经上升了很多之后。</p>
-
-<h2>主要的行程</h2>
-
-<p>第1天<br/>
-大阪<br/>
-关西机场、难波、海游馆</p>
-
-<p>第2天<br/>
-大阪<br/>
-天守阁，历史博物馆，心斋桥、biccamer、苹果专卖店</p>
-
-<p>第3天<br/>
-大阪<br/>
-环球影城、道顿崛</p>
-
-<p>第4天<br/>
-京都<br/>
-京都站、清水寺、二年坂、三年坂</p>
-
-<p>第5天<br/>
-京都<br/>
-岚山、嵯峨野观光小火车、天龙寺、锦市场、蟹道乐</p>
-
-<p>第6天<br/>
-奈良<br/>
-近铁交通、春日大社、奈良公园</p>
-
-<p>第7天<br/>
-京都 东京<br/>
-伏见稻荷大社、新干线、鸟元</p>
-
-<p>第8天<br/>
-东京<br/>
-川崎、藤子F不二雄博物馆、三鹰吉卜力美术馆</p>
-
-<p>第9天<br/>
-东京<br/>
-羽田机场、利木津机场巴士</p>
-
-<p><a href="http://bbs.qyer.com/viewthread.php?tid=931893&amp;page=1&amp;extra=#pid9177702">旅游的详细链接</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1169,6 +1233,10 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">近期比较关注的车-缤智vezel和昂科威</a>
       </li>
     
@@ -1184,15 +1252,11 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
         <a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/09/10/you-dian-wu-liao-de-qi-che-fa-bu-hui/">有点无聊的汽车发布会</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (49)</a></li><li><a href='/blog/categories/生活'>生活 (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/java'>Java (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/spring'>Spring (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (49)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/java'>Java (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/spring'>Spring (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

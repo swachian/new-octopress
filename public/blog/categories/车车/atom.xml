@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 车车 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/车车/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-10-05T20:50:19+08:00</updated>
+  <updated>2014-10-06T15:27:24+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[倒车就是看后轮和摆车尾]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/"/>
+    <updated>2014-10-06T13:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu</id>
+    <content type="html"><![CDATA[<p>开了几个月的车，终于开始练习倒车了。离自己直接上路又近了些。
+两天下来，感觉倒车主要是三点：</p>
+
+<ol>
+<li>设计路线和找准起点</li>
+<li>看后车轮和车尾</li>
+<li>注意车头一角</li>
+</ol>
+
+
+<p>对新手而言，尤其要把握住后车轮，可以把反光镜调低进行观察。倒入的关键是让车屁股彻底绕开障碍物，
+然后就可以死打方向直到后侧车轮靠边，随后回个方向到另一头继续倒出。在此过程中注意对角的前后轮。</p>
+
+<p>不过只在行进中转动方向盘目前我还做不到，仍然需要努力。另外就是发现，家里小区的停车难度远比马路上大。
+如果家里停好了，基本上外面也就可以随便停了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[近期比较关注的车-缤智vezel和昂科威]]></title>
@@ -172,22 +195,6 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
 和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
 
 <p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[靠谱的油耗数据库]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/"/>
-    <updated>2014-07-23T22:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku</id>
-    <content type="html"><![CDATA[<p>油耗一直以来是买车的一个重要考量，之前一直查看汽车之家上的工信部综合油耗数据。
-然而，工信部实际上有更细化的数据，区分了市区工况和市郊工况。这显然更对实践有指导意义。</p>
-
-<p>而且，工信部的信用和客观性也是最有保证的。至少，通过天籁的数据来看，完全符合我遇到的实际情况。
-下面这个<a href="http://chinaafc.miit.gov.cn/n2257/n2280/index.html">链接</a> http://chinaafc.miit.gov.cn/n2257/n2280/index.html
-可供参考。</p>
-
-<p>在高级查询中，通用名称处填写车子的常用称呼即可。访问的速度可能有点慢，但数据真的有效。</p>
 ]]></content>
   </entry>
   
