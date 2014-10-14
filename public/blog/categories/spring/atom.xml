@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-10-06T21:23:59+08:00</updated>
+  <updated>2014-10-14T13:46:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx 处理Spring 静态资源的配置]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/"/>
+    <updated>2014-10-14T13:19:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi</id>
+    <content type="html"><![CDATA[<p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
+但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
+
+<p>需求也算简单：</p>
+
+<ol>
+<li>基于app toolbar的动态请求转发给java</li>
+<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
+<li>部分.js请求如t.js还是转给java，有效期为0；</li>
+<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
+</ol>
+
+
+<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
+
+<p>```</p>
+
+<pre><code>    location /toolbar {
+        root   html;
+        proxy_pass http://192.168.203.198:8080;
+    }
+    location ~ /toolbar/static {
+        root   html;
+        if (-f $request_filename) {
+            expires 1d;
+            break;
+        }
+    }
+    location = /toolbar/enter/t.js {
+        root   html;
+        proxy_pass http://192.168.202.72:8080;
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
+
+<p>这里面用到了几种Nginx的配置。</p>
+
+<ol>
+<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
+<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
+<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
+</ol>
+
+
+<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
+
+<p>整个匹配顺序是：</p>
+
+<ol>
+<li>对<code>=</code>进行匹配，有相符的就停止；</li>
+<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
+<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
+</ol>
+
+
+<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
+
+<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
+
+<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
+http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
+http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
+
+<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Web容器中通过Spring添加Job任务]]></title>
