@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: git | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2014-10-18T23:08:01+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[git init[zz]]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init/"/>
+    <updated>2012-06-27T16:38:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init</id>
+    <content type="html"><![CDATA[<p>```
+$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中</p>
+
+<p>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+$ git push origin master
+```
+远程的可以这样创建</p>
+
+<p>```
+$ mkdir northboundhelper.git
+$ cd northboundhelper.git/
+$ git init --bare</p>
+
+<p>```</p>
+
+<p>在config里面指明常用的branch
+```
+[branch "master"]</p>
+
+<pre><code>    remote = origin
+    merge = refs/heads/master
+</code></pre>
+
+<p>```</p>
+
+<p>这两个操作是等价的，第二个操作的第一行的意思是添加一个标记，让origin指向ssh://git@dev.lemote.com/rt4ls.git，也就是说你操 作origin的时候，实际上就是在操作ssh://git@dev.lemote.com/rt4ls.git。origin在这里完全可以理解为后者 的别名。</p>
+
+<p>需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支。
+如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。</p>
+
+<p>$ git push origin test:master         // 提交本地test分支作为远程的master分支
+$ git push origin test:test              // 提交本地test分支作为远程的test分支</p>
+
+<p>如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。</p>
+
+<p>$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
+]]></content>
+  </entry>
+  
+</feed>

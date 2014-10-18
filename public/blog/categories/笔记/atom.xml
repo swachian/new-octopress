@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2014-10-18T23:08:01+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[被低估的JS： 「Pro JavaScript Techniques」读后感]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/pro-javascript-techniques/"/>
+    <updated>2014-07-23T16:13:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/pro-javascript-techniques</id>
+    <content type="html"><![CDATA[<p>作为一个Web开发者，无法绕开的一个点就是JavaScript。而对于经过C/Java训练出来的计算机专业人员而言，是很容易轻视JS，从而使得在这方面往往要经过很长的时间和经历，才能体会到
+JS的与众不同及其能力。C或者Java同JS的不同已经不用多言，而同为脚本语言的Ruby Php Perl Python 同 JS的差别也是巨大的。有一定编程基础的人，学习其他大众性的语言，比如最常用的10种语言，
+一般都是比较快的。但是，JS是如此的和其他语言不一样，以至于学习起来真的费一番功夫。</p>
+
+<p>不过，直到读了John Resig的「Pro JavaScript Techniques」，终于令我豁然开朗。Resig是大名鼎鼎的JQuery的创始人，这本书中很多主要的API可以说就是介绍了JQuery是怎么实现的。包括Id的选择，
+ajax方法等。最重要的，如他所说，就是第二章面向对象的JavaScript，或者说如何从其他编程语言来理解JavaScript。</p>
+
+<p>笔记的流水账：</p>
+
+<h1>第一章 现代化的JS</h1>
+
+<p>JS和它的队友：</p>
+
+<ul>
+<li>Core Javascript 1.5</li>
+<li>XML2（DOM）</li>
+<li>XMLHttpRequest</li>
+<li>CSS（style）</li>
+<li>事件</li>
+</ul>
+
+
+<p>```javascript</p>
+
+<h1>注意通过prototype定义公共函数的模式</h1>
+
+<p>function Lecture(name, teacher) {</p>
+
+<pre><code>this.name = name;
+this.teacher = teacher;
+</code></pre>
+
+<p>}</p>
+
+<p>// 实例method
+Lecture.prototype.display = function() {</p>
+
+<pre><code>return this.teacher  + " is teaching " + this.name;
+</code></pre>
+
+<p>}</p>
+
+<p>function Schedule(lectures) {</p>
+
+<pre><code>this.lectures = lectures;
+</code></pre>
+
+<p>}</p>
+
+<p>Schedule.prototype.display = function() {</p>
+
+<pre><code>var str = "";
+for (var i = 0; i &lt; this.lectures.length; i++) {
+     str += this.lectures[i].display;
+}       
+return str;
+</code></pre>
+
+<p>}</p>
+
+<p>var mySchedule = new Schedule([</p>
+
+<pre><code>new Lecture("Gym", "Mr. Smith");
+new Lecture("Math", "Mrs. Jones");
+new Lecture("English", "TBD");
+</code></pre>
+
+<p>]);</p>
+
+<p>alert(mySchedule.display());
+```</p>
+
+<h1>第二章 面向对象的JS( javascript的精髓)</h1>
+
+<h3>引用</h3>
+
+<p>引用指向的是具体的对象，引用是一个变量。
+JS中的引用不会指向引用，<code>var b = a;</code>的作用永远是让b指向a表示的实际对象</p>
+
+<h3>参数类型检查和函数重载</h3>
+
+<p><code>if (typeof msg == 'undefined') {}</code></p>
+
+<p>以及js对象都有的属性：构造子</p>
+
+<p><code>if (str.constructor == String) {}</code></p>
+
+<p>后者能够找出具体的构造对象的函数，前者对通过函数构造的对象返回的也是'object'。</p>
+
+<p>js在每个函数里面，有一个隐含属性 <code>arguments</code> ，这是一个伪数组，可以遍历、有.length属性，但不能被修改。可以通过复制遍历变成标准数组。</p>
+
+<p>```javascript
+function sendMessage(msg, obj) {</p>
+
+<pre><code>if ( arguments.length == 2) 
+      ojb.handleMsg(msg);
+else
+     alert( msg );
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>作用域(Scope)</h3>
+
+<p>js通过函数来划分作用域，而不是通过代码块</p>
+
+<p>没有var声明的，则变成全局变量</p>
+
+<h3>闭包</h3>
+
+<p>闭包允许内层函数引用外围函数内的变量，即便外层函数已经终止。</p>
+
+<p>```javascript
+function delayedAlert( msg, time ) {</p>
+
+<pre><code>setTimeoute( function() {
+     alert(msg); // msg就是外围函数中的变量
+}, time);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>curry化： 利用函数生成函数</p>
+
+<p>```javascript
+function addGenerator(num) {</p>
+
+<pre><code> return function( toAdd) {
+    return num + toAdd;
+ };
+</code></pre>
+
+<p>}</p>
+
+<p>var addFive = addGenerator(5);
+alert(addFive(4)==9);
+```</p>
+
+<h3>上下文对象</h3>
+
+<p>通过<code>this</code>表示，永远指向当前代码所处的对象中。
+是调用时确定的对象。</p>
+
+<p>function都有call和apply两个方法，可以用于指定this是什么</p>
+
+<p>```javascript
+function changeColor( color ) {</p>
+
+<pre><code>this.style.color = color;
+</code></pre>
+
+<p>}</p>
+
+<p>changeColor.call(main, "black");</p>
+
+<p>function setBodyColor() {</p>
+
+<pre><code> changeColor.apply(main, arguments); //传入隐含的全部参数
+</code></pre>
+
+<p>}
+setBodyColor( "black" );
+```</p>
+
+<h2>原型式继承</h2>
+
+<p><code>javascript
+User.prototype = new Person();
+</code>
+其效果是每次 new User()时同时执行了new Person，且user对象就这样拥有了person的全部方法</p>
+
+<h2>类似继承</h2>
+
+<p>Douglas Crockford创造的<code>method</code>, <code>inherits</code>, <code>swiss</code> 三个方法。</p>
+
+<p>```javascript
+User.inherits(Person);
+User.method( 'getName', function(){
+  return "My name is: " + this.uber('getName');
+});</p>
+
+<p>```</p>
+
+<h2>Base 库</h2>
+
+<h2>Prototype库</h2>
+
+<p>就是rails原先自带的库</p>
+
+<h2>命名空间</h2>
+
+<p><code>$.</code>其实就是命名空间。
+```javascript
+var YAHOO = {};
+YAHOO.util = {};
+YAHOO.util.Event = {</p>
+
+<pre><code>addEventListner: function() {}
+</code></pre>
+
+<p>};
+YAHOO.util.Event.addEventListener(...);
+```</p>
+
+<h2>清理代码</h2>
+
+<p><code>!=</code> 和<code>==</code> 会对变量进行求值，即把对象变成false或true后进行比较，
+js中， null false 0 undefined 求值后都是false</p>
+
+<p>js一行一行地写可以不用分号，但是一旦被压缩后，换行符号都将取消，此时没有分号就不行了。鉴于js的使用场景，还行建议每行都加上分号。</p>
+
+<p>压缩代码的三种方式:
+1. 只取出空白和注释
+2. 压缩变量
+3. both</p>
+
+<p>IE 是不灵的，在调试方面</p>
+
+<p>Firefox的调试是最好的，尤其搭配firebug和 View Rendered Source，Venkman也是一个ff的扩展</p>
+
+<p>Safari还在迅速变化发展中，Chrome与之类似</p>
+
+<h2>测试套件</h2>
+
+<ul>
+<li>JSUnit: 老牌的</li>
+<li>J3Unit: 稍新的，通Java集成的更好</li>
+<li>Test.Simple , Test.More</li>
+</ul>
+
+
+<h1>第三章 分离式的JavaScript</h1>
+
+<p>DOM(Document Object Model)是表达XML文档的标准，并不是唯一的方式，但确实是应用最广泛的方式。这一点和js能统一浏览器的原因一致，就是因为被广泛使用了。</p>
+
+<p>DOM的模型：
+DOM是一个树结构，根节点是html，
+下属节点分为元素和文本两种类型。
+每个节点包括5个指针:
+1. 父节点parentNode
+2. 兄节点(previousSibling)
+3. 弟节点(nextSibling)
+4. 第一个子节点(firstChild)
+5. 最后一个子节点(lastChild）</p>
+
+<p>整个的遍历和渲染其实都是基于DOM模型的。</p>
+
+<h2>DOM的加载</h2>
+
+<ul>
+<li>html解析完毕</li>
+<li>src中的脚本和css加载完毕</li>
+<li>脚本在文档内解析并执行（此时dom并未构造起来）</li>
+<li>Html DOM完全构造起来</li>
+<li><p>图片和外部内容加载</p></li>
+<li><p>等待整个页面的加载，基于window对象的load事件，速度最慢，因为是在图片下载之后</p></li>
+</ul>
+
+
+<p><code>javascript
+addEvent(window, "load", function (){
+  net( id("everywhere") ).style.background = 'blue';
+});
+</code></p>
+
+<ol>
+<li><p>把script标签放置在页面的最后，这样确保执行的时候dom已建立</p></li>
+<li><p>监听DOM的加载状态，实现复杂。
+jquery实现的方法，$或者说domReady，其主要原理是检查document是否已存在，document.getElementsByTagName和document.getElementById两个函数是否已存在，以及document.body是否已存在。搭配setInterval不停地检查，检查到位后就清楚timer</p></li>
+</ol>
+
+
+<h2>在HTML中寻找元素</h2>
+
+<p>cssQuery， jQuery
+主要是css选择器和xpath选择器</p>
+
+<h2>获取元素的内容</h2>
+
+<ol>
+<li>获取文本 text</li>
+<li>获取 html</li>
+</ol>
+
+
+<h2>操作元素的属性(attribute)</h2>
+
+<p>一旦元素加载到DOM中，元素会有一个管理数组，</p>
+
+<p><code>javascript
+formElem.attributes = {
+  name: "myForm",
+  action: "/test.cgi",
+  method: "POST"
+};
+</code></p>
+
+<p>实际提供了attr方法</p>
+
+<h2>修改DOM</h2>
+
+<ol>
+<li><p>创建节点
+createElement</p></li>
+<li><p>插入到DOM中<br/>
+insertBefore： 在子元素前插入
+<code>parentOfNode.insertBefore(nodeToInsert, beforeNode)
+appendChild: 插入一个父节点中最后一个子节点，</code>parenElem.appendChild(nodeToInsert);`</p></li>
+</ol>
+
+
+<h2>异步与事件处理</h2>
+
+<h3>异步事件与线程</h3>
+
+<h3>事件阶段</h3>
+
+<p>捕获和冒泡，捕获是由外向内，冒泡是由内向外</p>
+
+<p>是否能停止冒泡？</p>
+
+<p>通过对按键事件的处理，停止textarea的正常响应
+```html
+<html>
+<head></p>
+
+<p></head></p>
+
+<p><body></p>
+
+<p><textarea rows="4" cols="50">
+At w3schools.com you will learn how to</p>
+
+<p>make a website. We offer free tutorials</p>
+
+<p>in all web development technologies.
+</textarea></p>
+
+<script>
+document.getElementsByTagName
+
+("textarea")[0].onkeypress = function(e) 
+
+{ 
+e = e || window.event;
+return true;
+
+};
+</script>
+
+
+<p></body>
+```</p>
+
+<p>上面的e是事件对象</p>
+
+<p><code>this</code>作为一种指代，可以泛化成各类元素，使得js的编写变得简单</p>
+
+<p>```javascript
+var li = document.getElemensByTagName("li");
+for (var i = 0; i &lt; li.length; i++) {
+  li[i].onclick = handleClik;
+}</p>
+
+<p>function handleClick() {
+   this.style.backgroundColor = "blue";
+   this.style.color = "white";
+}
+```</p>
+
+<h3>取消冒泡（重载浏览器的事件处理）</h3>
+
+<p>```javascript
+function stopBubble(e) {
+  //如果传入了事件对象，那么就是非IE浏览器
+  if ( e &amp;&amp; e.stopPropagation ）</p>
+
+<pre><code> e.stopPropagation();
+</code></pre>
+
+<p>  else // 否则使用IE的方式来取消事件冒泡</p>
+
+<pre><code> window.event.cancelBubble = true;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<h3>取消浏览器的默认行为（重载）</h3>
+
+<p>```javascript
+function stopDefault(e) {
+  if (e &amp;&amp; e.preventDefault)</p>
+
+<pre><code>e.preventDefault();
+</code></pre>
+
+<p>  else //windows 特供</p>
+
+<pre><code>window.event.returnValue = false;
+</code></pre>
+
+<p>  return false;
+}</p>
+
+<p>li.onclick = function(e) {</p>
+
+<pre><code>iframe.src = this.href
+return stopDefault(e);
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>绑定事件的3中方法</h2>
+
+<ol>
+<li>传统方法</li>
+</ol>
+
+
+<p><code>javascript
+windo.onload = function() {};
+</code></p>
+
+<p>好处在于简单稳定，处理事件时可以使用this关键字；
+坏处是事件只在冒泡时运行，捕获时不运行。且一个元素一次只能绑定一个处理函数，即onload=func2会替换前面已经注册过的函数。同时ie中，还不能得到事件对象e。</p>
+
+<ol>
+<li>W3C</li>
+</ol>
+
+
+<p>```javascript
+window.addEventListener('load', function(){}, false);</p>
+
+<p>```
+相对于第一种，好处是第三个参数指明了哪个阶段处理事件：false（冒泡）或true(捕获)；事件对象可以通过处理函数的第一个参数获取；不会覆盖之前已绑定的事件。缺点就是老的ie不支持。</p>
+
+<ol>
+<li>IE绑定</li>
+</ol>
+
+
+<p><code>javascript
+window.attachEvent('onload', function(){});
+</code></p>
+
+<p>粗看起来和w3c的类似，但细节有很多不同：
+* 仅支持冒泡阶段
+* this关键字指向了window对象
+* 事件对象存在于window.event中
+* 事件必须以ontype的形式命名，如onload而非load</p>
+
+<ol>
+<li>facade的addEvent和removeEvent</li>
+</ol>
+
+
+<p>```javascript
+addEvent( window, "load", function() {</p>
+
+<p>});
+```</p>
+
+<p>唯一的缺点是仅能工作在冒泡阶段</p>
+
+<h2>事件类型</h2>
+
+<ul>
+<li>鼠标</li>
+<li>键盘</li>
+<li>UI，focus，blur</li>
+<li>表单事件</li>
+<li>加载和错误</li>
+</ul>
+
+
+<h2>分离式的javascript</h2>
+
+<p>就是不在html里绑定怎么处理js，是的href可以是有意义的，使得js禁用时系统依然可以使用</p>
+
+<h2>访问CSS属性</h2>
+
+<h2>位置 尺寸和可见性</h2>
+
+<h3>位置</h3>
+
+<p>4种定位</p>
+
+<p>position: static; //top和left不起作用，顺序排版
+position: relative; //top和left相对于static进行偏移
+position: absolute; //相对于它的第一个非静态定位的祖先元素而展示，如没有这样的祖先元素，就是相对于整个文档
+position: fixed; //相对于浏览器窗口
+top: 0px;
+left: 0px;
+right: ;
+bottom: ;</p>
+
+<h3>元素的可见性</h3>
+
+<ul>
+<li>visibility: hidden, visible</li>
+<li>diplay: none, block, inline, ''</li>
+<li>opacity:
+
+<ul>
+<li>filter: 'alpah(opacity='50)</li>
+<li>opacity: 50/100</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>动画效果</h2>
+
+<p>1秒执行20帧动画</p>
+
+<p>```javascript
+for ( var i = 0; i &lt;= 100; i += 5 ） {</p>
+
+<pre><code> (function(){
+     var pos = i;
+     setTimeout(function(){
+
+        elem.style.height = (pos/100)*h + "px";
+     }, (pos+1)*10);
+
+ })();
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<h2>viewport是视口，就是浏览器滚动条内的一切东西</h2>
+
+<p><code>window.scrollTo(0, 0)</code>可以移动浏览器窗口位置</p>
+
+<h2>拖放功能</h2>
+
+<p>使用拖放库可以</p>
+
+<p>P145的悬停真是写的漂亮</p>
+
+<h1>第四章 Ajax</h1>
+
+<p>这部分其实主要就是举例ajax的例子，来做了综合的应用。</p>
+
+<p>responseXML和responseText是xhttprequest的主要返回对象
+其中，xml是响应头的content-type为xml时有效</p>
+
+<p>一个$.ajax的实现，代码真精妙</p>
+
+<p>返回响应的种类：</p>
+
+<ul>
+<li>xml</li>
+<li>json</li>
+<li>html ，可以直接注入html</li>
+<li>script</li>
+</ul>
+
+
+<p>pageHeight(判断整个页面又多高)，scrollY(获知当前视口的顶部滚动到了哪里)，
+windowHeight(获知视口有多高)</p>
+
+<p>四步法：</p>
+
+<ol>
+<li>DOM操作</li>
+<li>获取数据</li>
+<li>事件监测</li>
+<li>发起ajax请求</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一个App站点的人员组织]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site/"/>
+    <updated>2013-06-14T15:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/14/the-orgnization-of-an-app-site</id>
+    <content type="html"><![CDATA[<p>参考了一下残游记的组织与分工，小结如下：</p>
+
+<ul>
+<li><p>产品经理，1，老板</p></li>
+<li><p>后端开发，1, 技术负责人</p></li>
+<li><p>前端，1，解决浏览器兼容等问题, 也可以转app开发，总之就是UI工程师</p></li>
+<li><p>视觉设计师，2</p></li>
+<li><p>ios开发，1，</p></li>
+<li><p>运营，2，应该就是管理员和推销员</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[7dbs in 7wks]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/06/7dbs-in-7wks/"/>
+    <updated>2013-06-06T05:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/06/7dbs-in-7wks</id>
+    <content type="html"><![CDATA[<p>花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。</p>
+
+<p>书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。Neo4J对我而言还属新生事物。</p>
+
+<p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
+
+<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
+关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
+
+<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
+所以常常被大公司用了作为日志和搜索系统。<br/>
+column里面存放的是map。<br/>
+journaling = write-ahead logging.</p>
+
+<p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。
+N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可以认为写入成功，R则是读取多少就认为读取成功。</p>
+
+<p>也谈到了这些数据库中实现Map-Reduce的哲学是把算法分发给各个节点，而不是把数据集中起来送给算法。毕竟传输算法肯定比传输数据的开销要少。</p>
+
+<p>MongoDB则是在关系型和扩展性强的数据库中取到了一个黄金百分点。可以存放复杂的对象是文档数据库最大的优势。CouchDB不如MongoDB灵活，采用视图查询法（事先定义map-reduce），</p>
+
+<p>最后，则主要还是介绍redis，及混合的多数据库应用开发。内建的可以让key失效，以及丰富的数据结构数据库，是redis脱颖而出的法宝。使得极其适合作为缓存使用。</p>
+
+<p>小结，过去人们依赖一个数据库来实现多个应用的整合。现在整合的能力更多地交给了中间层模式，往往多种语言都是基于HTTP实现服务层之间的通信的。这样就使得服务程序从db的限制中解脱了出来，变得可以根据需要选用多种数据库组合。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[期刊读后感]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application/"/>
+    <updated>2013-02-09T16:45:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application</id>
+    <content type="html"><![CDATA[<p>读了去年年底订阅的《计算机应用》，发现还是有一些文章是值得一读的。
+订阅这个杂志是因为觉得发文速度还算快，期刊和文章的档次也还不错。看了2013年第2期，里面还是有六七篇很有收获的文章的。
+必须承认的是，期刊文章的质量普遍比网上的资料要高。</p>
+
+<p>按钱学森的理论，做研究的一大秘诀是阅读文献，因为大部分问题肯定都有人面对过，从中获取启发再进行突破才能取得更好的效果。
+这个理论对计算机也是适用的，实际上信息技术里面阅读文献的效果要超过其他工程专业。毕竟信息行业里思路和实现之间的差距
+比其他的要短的多。</p>
+
+<p>虽然已经是互联网时代，但要探索自己未知的还是离不开杂志的。首先搜索的素材的一大来源就是期刊，搜索本身并不制造内容，内容的一大制造者
+就是期刊。尽管现在网上的博客、科技文章等素材已经很广阔，但其质量普遍还是不如期刊的。原因在于发表期刊真的是挺难的，你给拿出自己的
+拿手好戏才行，没有的点真东西期刊的编辑是不会买账的。质量普遍较高是期刊的第二大优势，毕竟既要自己花钱又有审稿者和编辑把关，质量高于
+网上的其他资料是很正常的。最重要的，只有期刊才能让你可能接触自己不熟悉的东西。搜索是目的性很明显的阅读方式。但当你没有明确的方向时
+搜索是帮不上忙的。而高质量的期刊可以弥补搜索的这个弱点。虽然你要忍受一堆可能没有用或者自己读不进去的内容，但总的来说，产出投入比
+还是很大的，还是很值得这么做的。我阅读了一期，就有了以下几点收获：</p>
+
+<ol>
+<li>对基站提供的定位信息的应用有了新的认识。原来还可以用来跟踪用户的行动路径，为换乘乃至规划和其他促销活动提供依据。</li>
+<li>均衡服务可以使用HiCuts算法，其实就是一种决策树，在分类时可以使用，丰富自己的分类依据，以前主要也就是有个hash的概念。</li>
+<li>小波算法其实和取log差不多，最大的意义在于提高监测值可感知效果。</li>
+<li>聚类后对数据特征值的取顶叫做概化，可以是平均值，也可以是区间。</li>
+<li>网页防篡改分远程和本地两种，远程的把内容按动态和静态区分应该也算一个思路。话说我的第一个防篡改方案也是看期刊获得灵感。</li>
+<li>排班优化原来也是人工智能的一部分。</li>
+<li>网管软件的组件可以按主站、代理、代理数据信息、网管协议4个组件来进行组织，对写此类文章有了更好的心得，毕竟描述一个系统要写成期刊是很难的。</li>
+</ol>
+
+
+<p>短短时间，收获已经很多。</p>
+
+<p>不过期刊也有不足之处。最大的问题可能在于计算机期刊的文章刊出时间都太长了。投稿半年内能读到的已经是凤毛麟角，一年以上是常态，
+最nb的期刊基本要3年。套用一句俗话，这好像是和一个25岁的2个孩子的妈谈恋爱，不新鲜的东西往往有时候就没使用价值了。从这点上来讲，计算机应用和
+计算机系统应用都做的很不错。</p>
+
+<p>还有一点，就是计算机应用里面也包含了大量计算机科学的内容。因为科学两个字，搞得天下计算机从业者往往都喜欢套数学，这个也是阻碍业界接受期刊的一大障碍吧。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《白帽子讲Web安全》]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web/"/>
+    <updated>2013-01-26T22:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/26/bai-mao-zi-web</id>
+    <content type="html"><![CDATA[<p>一天半的功夫，书已经读了一半了。从这半本的情况来看，书写的很一般。首先，交代的不够细致。有些地方是不太能贯通的，背景知识和其间的逻辑推论
+都做的很不扎实。其次，重点难点不突出。有些关键的地方并没有点出来，只能靠读者自己去审阅。第三，代码贴的太多，而且也是毫无重点的代码，
+篇幅很大，但真正值得读的代码却很少。</p>
+
+<p>本书好的地方就是给出了大量的实例，这些例子就在我们身边，百度的、搜狐的、MySpace的。跟着这些案例仔细自己再做分析应该还是会有很多收获的。
+至少让人明白，第一网络确实不安全，第二值得研究的工作还有许多。</p>
+
+<p>但是，被很多人推荐就有点不可理解了。从技术书籍的角度考量，这本书真的很一般。就清晰度、深度、整洁度来讲，都很平平。卖的好，可能主要还是营销
+的好。</p>
+
+<p>花了2天半，这本书也就翻完了。还是过得去的一本书，但有些评价显然过高。Yahoo的算法很有用。几个案例至少也提供了继续跟踪研究的线索。</p>
+
+<p>这本书的总体风格就是这个样子，提供了足够多的案例作为进一步研究的入门线索，但书本身拼凑痕迹严重，存在大量的不负责代码黏贴，也缺乏作为一本技术书籍
+尤其是畅销书籍应该具备的细致入微的分析。不过这个主题的其他书籍也确实不多，作者也算这个领域的牛人了。还是值得推荐给做Web开发的人员读读的，至少可以
+增加点广度的认识。</p>
+
+<p><a href="https://gist.github.com/f801d7015715f6f10098">gist</a></p>
+
+<p>作者：</p>
+
+<p>吴翰清，西安交通大学少年班，84年生人。<br/>
+2007年，成为P7（初级技术专家）；<br/>
+2010年，成为P8（高级技术专家）。<br/>
+2012年下半年，跳槽去了安全宝，创新工场下面的一个企业。我对开复不感冒，甚至是负分的哦。</p>
+
+<p><strong>白帽子</strong> 主守， <strong>黑帽子</strong> 主攻。</p>
+
+<p>防火墙及ACL的控制，是的任意攻击系统端口的情况不再可能。而Web端口不能封。加之Web技术的普及和流行，黑客攻击转向Web。</p>
+
+<h3>安全三要素(CIA)</h3>
+
+<ul>
+<li>机密性(Confidentiality)</li>
+<li>完整性(Integrity)</li>
+<li>可用性(Availability)</li>
+</ul>
+
+
+<p>其他还有可审计性、不可抵赖性等</p>
+
+<p>第一章很一般，全部都是空谈，讲一些人人都懂的道理。而且归纳的也很不好，基本就是一个列表，列表之间没有逻辑关系。</p>
+
+<p>作者的文字功底和解释能力相当一般。</p>
+
+<h2>XSS(跨站脚本）</h2>
+
+<p>这章前半部分很无聊，作者罗列了一堆xss的案例，其中贴的js代码就差不多有十页。但没解释，没重点。XSS防御部分介绍的还行。
+xss可以分为参数安全和劫持Cookie两种。可以试试<a href="http://www.fiddler2.com/fiddler2/">fiddler</a>工具。</p>
+
+<h3>XSS防御</h3>
+
+<ul>
+<li>HttpOnly</li>
+</ul>
+
+
+<p>是设置cookie的属性，即只能Http请求时上传，而不能让JS操作。这样就可以避免cookie被劫持。</p>
+
+<ul>
+<li>输入检查</li>
+</ul>
+
+
+<p>黑白名单过滤器</p>
+
+<ul>
+<li>输出检查</li>
+</ul>
+
+
+<p>在html文本中用HtmlEncode，在javascript中用JavascriptEncode。</p>
+
+<p>在css和url的输出则较为复杂。 Anti-Samy是一个很好的XSS Filter。</p>
+
+<h2>CSRF(Cross Site Request Forgery) 跨站点请求伪造</h2>
+
+<p>有些浏览器本地cookie不会被提交，session型cookie则肯定会被提交。</p>
+
+<p>解决办法是 <strong>验证码</strong> 和 <strong>Anti CSRF Token</strong></p>
+
+<p>就是在表单和session中，都放一个token来确保这个form是本地服务产生的。<br/>
+Token可以是一个，也可以是多个。</p>
+
+<p>点击劫持和HTML5都讲的比较烂。总是缺乏画龙点睛的那一笔。</p>
+
+<h2>SQL 注入</h2>
+
+<p>此章依然很一般。介绍的内容相当不到位。比如只说出了是利用sql拼接的漏洞，但没说具体是怎么应用的。
+不过在 <a href="http://vdisk.weibo.com/s/oHDMV/1359208976">SQL注入攻击技术初探</a> 中，终于搞懂了以前困惑过我的问题：内容到底是怎么显示出去的。道理在于让第一句（自己写的语句）出错无记录，而后面跟随union则返回攻击程序写出来的sql，这样自然内容就回显了。而参数数量等都是通过order by 16等试错来取得的。</p>
+
+<p>使用预编译语句的效果主要是确保SQL语句的结构不会因为输入的参数发生变化。即实现了数据和代码（字段及从句的分离。</p>
+
+<h2>访问控制</h2>
+
+<p>依然讲的不清楚，懂的人不需要读，不懂的人读了也白读。</p>
+
+<ul>
+<li>垂直权限管理 -- 针对URL的访问控制，RBAC</li>
+<li>水平权限管理 -- 面对数据资源的</li>
+<li>OAuth -- 和我们的重定向类似，只是更加标准，返回的不是用户数据，而是token</li>
+</ul>
+
+
+<h2>加密算法和随机数</h2>
+
+<p>这章还算有点料，从使用者的角度讲解了加密解密算法的用法。</p>
+
+<p>建议：</p>
+
+<ul>
+<li>使用CBC模式的AES256用于加密；</li>
+<li>使用HMAC-SHA512用于完整性检查；</li>
+<li>使用带salt的SHA-256或SHA-512用于Hashing.</li>
+</ul>
+
+
+<h2>DDOS</h2>
+
+<p>亮点在于给了Yahoo的专利，确实是绝佳的主意。
+<a href="http://patft.uspto.gov">Detecting system abuse</a></p>
+
+<p>本书不是一本讲解性质的。其特点是列出各个大门，然后读者自己进去领取东西。对比师傅领进门的模式，它的模式是门户告诉你，然后靠自己。</p>
+
+<p>OWASP的ESAPI安全模块</p>
+
+<p>安全监控、入侵检测、Web应用防火墙(Apache的一个模块）</p>
+]]></content>
+  </entry>
+  
+</feed>

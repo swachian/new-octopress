@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>IT系统架构的模式 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="近日终于得以拜读了Martin Fowler的大作《The Patterns of Enterprise Application Architecture》。 最早了解这本书是从robbin那里，在距今很多年前的一个Java书单里。彼时他对这本书的评价大意是适合要自己动手开发框架的人看， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2014/03/02/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">IT系统架构的模式</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T16:18:00+08:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>近日终于得以拜读了Martin Fowler的大作《The Patterns of Enterprise Application Architecture》。</p>
+
+<p>最早了解这本书是从robbin那里，在距今很多年前的一个Java书单里。彼时他对这本书的评价大意是适合要自己动手开发框架的人看，对应用开发没什么直接的帮助。同时，他认为读下来并没有太多感觉。而回过头来看，读过这本书的中国程序员应该是不少的，但真的从中汲取营养做出东西来的人几乎没有。从这也可以看出中国工程师在动手和创新方面确实有些先天不足。</p>
+
+<p>然而，这本书对于DHH、对于Rails则可以说是一切的开端。对这本书贯彻的最到位、突破的最有力的，非DHH用Ruby开创Rails莫属。本书成书于2002年，彼时企业应用这个称呼比较时髦，按作者的说法，他的本意是IT系统的架构，而这也符合后来软件架构所适用的范围。如病人记录、订单跟踪、信用系统、保险、汇率兑换，这些都是IT系统，也就是企业应用。而文字处理、电梯控制、交换机、编译器、操作系统、游戏则基本不能算作企业应用。只是，2002年之后，企业应用这个名字被用的烂了，反而成了大慢笨的代表，导致07/08年的时候，甚至有不少人认为Rails不适合做企业应用。但彼时我感觉Rails对这些简单的所谓企业应用才是大杀器，毕竟大部分企业应用其实就是重度的CRUD应用，而这方面Rails堪比马克沁机枪对单兵的作战效果。至于互联网类的Web应用，交互、设计是占大头的，Rails投入使用的实际效果反而不如企业应用那么明显。</p>
+
+<p>这本书确实是rails的设计指南，或者说是rails的设计文档。但DHH的突破和创新之处还是很明显的：</p>
+
+<ol>
+<li>本书是基于.Net 和 Java的，但提及了Python和Ruby，而作者更多的应该只是一种不抱希望的假设罢了，然而DHH真的用Ruby把这本书实作了出来。</li>
+<li>虽然ActiveRecord取自于本书，然而作者本身并不是把这种模式看成一种自动化的ORM方案。广义的ORM，可以包含Dao(Table Gateway)、Data Transfer Object（json，xml）以及datamapper这些把记录化作内存对象所有模式，但狭义来看ORM是仅包含datamapper的。ActiveRecord在Fowler处其实只是一种Dao的变种。而DHH直接将ActiveRecord升格成了更高度自动化的ORM模式。</li>
+<li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
+</ol>
+
+
+<p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
+创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
+不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
+例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
+
+<p>还有一点值得一提，就是这本书是真的基于Web总结的。很多模式的书籍，其实来源于客户端界面程序，比如从做菜单中提取出来的那些模式，而本书
+是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
+至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
+
+<h2>笔记整理</h2>
+
+<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
+
+<h3>分层的坏处</h3>
+
+<ol>
+<li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
+<li>性能损害</li>
+</ol>
+
+
+<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
+但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
+
+<h3>常见的业务代码组织形式</h3>
+
+<ul>
+<li>Transaction Script</li>
+<li>Domain Module , OO对TS的改变</li>
+<li>Service层</li>
+</ul>
+
+
+<h3>会话状态</h3>
+
+<ul>
+<li>客户端 Cookie</li>
+<li>服务端（内存）</li>
+<li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
+</ul>
+
+
+<h3>分布式</h3>
+
+<p>i
+* 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
+* 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
+* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
+* Data Transfer Object ，传输对象，上面的那种是调用方法
+* 同步的接口为主
+* 异步的基于消息的处理方式
+* 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
+
+<h3>锁的种类</h3>
+
+<ol>
+<li>乐观锁，比如自己建立版本号；</li>
+<li>悲观锁，就是常见的for lock；</li>
+<li>粗颗粒（coarse-grainned)锁，就是一堆对象映射成一个入口，在入口处实施加锁；</li>
+<li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
+</ol>
+
+
+<h3>Stub和Mock</h3>
+
+<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
+Mock：用一个服务的重写来模拟某服务</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T16:18:00+08:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/技术/'>技术</a>, <a class='category' href='/blog/categories/读书笔记/'>读书笔记</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/12/ibmde-linuxhe-googlede-android/" title="Previous Post: IBM的Linux和Google的Android">&laquo; IBM的Linux和Google的Android</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/01/ri-ben-zhi-lu/" title="Next Post: 日本之旅">日本之旅 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

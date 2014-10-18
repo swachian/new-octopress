@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Atom和Node-Webkit - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="Atom是Github投入开发的一个新编辑器。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2014/03/02/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Atom和Node-Webkit</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T16:21:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
+
+<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
+vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
+
+<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
+
+<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
+Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
+
+<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
+，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
+
+<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
+
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
+
+<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T16:21:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/技术/'>技术</a>, <a class='category' href='/blog/categories/神器/'>神器</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/06/openssl-and-fipc/" title="Previous Post: Openssl and fIPC">&laquo; Openssl and fIPC</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/" title="Next Post: Rails2.3老版本的迁移安装手记">Rails2.3老版本的迁移安装手记 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

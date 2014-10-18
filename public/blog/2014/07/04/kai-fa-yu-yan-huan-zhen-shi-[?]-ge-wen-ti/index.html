@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>开发语言还真是一个问题 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+退出使用Node.js。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。 此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2014/03/02/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">开发语言还真是一个问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T22:22:00+08:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+<a href="https://medium.com/code-adventures/farewell-node-js-4ba9e7f3e52b">退出使用Node.js</a>。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。</p>
+
+<p>此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。
+而他使用Go语言开发的分布式系统，则坚固，表现的也更好，代码也更易维护。
+他也提到了同步式的代码比异步式的还是容易测试及理解。</p>
+
+<p>从我个人的经历而言，有一阵子仔细研究过Node，我的硕士毕业论文中Node是最重要的一个组成部分。
+也开发了一个不错的HTTP分发系统。但是，最终我并没有采用Node在生产系统中。
+原因在于，尽管Node的基于事件的并发模式很易于处理大并发的慢速请求，
+但除非去做云计算级别的分发，不然Java的NIO已足够应付性能方面的需要。</p>
+
+<p>而在Node的web开发方面，Node及Express提供的基础设施比Rails差的很远，开发效率和体验都是不能比的。
+所以，看来看去在服务端并没有很适用Node.js的场景。
+至少，在Java和Ruby可以作为选择的场合下，没有Node的发挥空间。</p>
+
+<p>至于Go为什么适合分布式开发，则需要进一步了解。不过以前看见go编译输出的是<code>a.out</code>就很让人有使用的欲望。</p>
+
+<p>Node的崛起很大程度上托V8引擎性能优异的福，在脚本语言中，Node的运行性能就是独一无二的。
+但和编译型语言比起来，Node就没什么优势了。只是有一阵子大家都相信脚本语言天生可以比编译型开发的更有
+效率些，所以万众瞩目于Node。很多受Ruby运行性能之苦的开发者，也转到了Node开发服务。随后，
+移动引用的兴盛使得JSON成为一种标准的传输形式，也由此Node成为了很多接口服务的开发选择。</p>
+
+<p>然而，对此我还是秉承我的观点，仅仅开发接口的话，Java的开发效率也不低，性能一般也不会成为瓶颈。
+而Node的开发还是不如Java方便，人才和教育的基础二者差距就更大了。Javascript只有在浏览器中才是王者。
+因为浏览器的单线程，以及等待事件发生，才是天生适合他的。而且，世上浏览器那么多，所有的浏览器都只认可
+Javascript。
+至于服务端，只有在特定的少数的场合，
+Node才具备突出的优势。</p>
+
+<p>Ruby和Rails的优势是在于开发效率以及让人快乐，性能始终是不让人满意的一个环节。<br/>
+Java的优势是大量的人才基础和教育基础，强大的性能和稳定性。也因为人才众多，所以才有足够的人力来打造像Spring这样的
+开发工具。对很多语言来讲，如果像Java那样啰嗦，是很难得到足够多的产出的。<br/>
+Javascript，还是在浏览器中发挥威力吧。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T22:22:00+08:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/技术/'>技术</a>, <a class='category' href='/blog/categories/时评/'>时评</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/27/sac/" title="Previous Post: 证券从业资格考试">&laquo; 证券从业资格考试</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/07/10/zzzheng-ce-bu-jin-pian-bang-xin-neng-yuan-%2Chuan-pian-bang-liao-wo-lun-zeng-ya/" title="Next Post: 「转载」政策不仅偏帮新能源，还偏帮了涡轮增压">「转载」政策不仅偏帮新能源，还偏帮了涡轮增压 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

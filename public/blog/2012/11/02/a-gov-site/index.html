@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>一个政府网站 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+挂号网做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。 初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/11/02/a-gov-site/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2014/03/02/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">一个政府网站</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-02T10:30:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+<a href="http://www.guahao.com/">挂号网</a>做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。</p>
+
+<p>初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量，
+所以风格上还是很有倾向性的。
+能确定的，就是从页面风格上，这个站点用了大量jquery和bootstrap的前端技术，
+后端的框架可能不是Rails，但这个框架本身借鉴了很多Rails的技巧与实践。</p>
+
+<p>从网站的风格可以看出，受豆瓣的影响挺深。从我的口味来说，这个站点比豆瓣
+做的更加清爽。</p>
+
+<p>后台的技术并不完全确定，不过这个站点也使用了varnish这个组件。</p>
+
+<p>之后，就好奇这个站点是哪家开发。毕竟一个官网做成这样是很罕见的。搜索了半天，
+终于发现原来是浙江杭州的一家公司做的。这家公司其实是一个互联网公司，并不是
+传统的做如软件集成业务的企业，也难怪会做出这样一个与众不同的产品出来。</p>
+
+<p>下面是这个企业的介绍，摘自<a href="http://search.51job.com/list/co,c,2756440,000000,50,1.html">51job</a></p>
+
+<blockquote><p><strong>浙江康健绿线网络技术有限公司 </strong><br/>
+为提高全民健康素养，切实缓解“看病难”问题，2010年3月，经卫生部批准， “全国健康咨询及就医指导平台”正式启动建设，目前为用户提供就医指导、预约挂号、 健康咨询、医疗支付服务，帮助用户合理就诊、方便就医。“全国健康咨询及就医指导平台”由卫生部新闻宣传中心/中国健康教育中心组织实施，中国医院协会提供支持。</p>
+
+<p>作为“全国健康咨询及就医指导平台”的官方网站，Guahao.com通过号源托管、HIS直连、搜索链接三种方式聚合了全国超过400家重点三级医院的预约挂号资源，建立了全国三级医院22万名医生的专长库，帮助全国用户“找对医生挂到号”。</p>
+
+<p>“全国健康咨询及就医指导平台”启动两年来，已成功为全国超过1200万用户提供了预约挂号、就医指导、健康咨询服务，成为了全国规模最大的医疗健康服务平台。</p></blockquote>
+
+<p>不过仔细分辨的话，这个站点不具备一些rails网站的典型特征，尤其缺乏近期Rails的实践特色。目前推测实现上可能是采用的Zend，一个PHP的框架。</p>
+
+<blockquote><p>Zend Framework的设计构思形成于2005年，由Ruby on Rails和Spring Framework的设计思路发展而来的。2005年10月，第一次Zend年会上，Zend公司宣布了ZF的开发计划。[2]
+2007年7月1日，Zend Framework 1.0发布。
+Zend Framework 本身的结构很大程度的模仿了 Ruby on Rails，但又做了足够的改动使其适应 PHP 的特点。所以很多 PHP 框架都或多或少的借鉴、参考了 Zend Framework。由于不满 Zend Framework 中前端控制器重复初始化带来的不必要开销，甚至有开发者用 C/C++ 写 PHP 扩展的方式，重新实现了 Zend Framework ，使前端控制器只需要全局初始化一次（Yaf Framework）。</p></blockquote>
+
+<p>估计挂号网也是用zend写的。也就难怪这东西做出来的html和url确实和rails像极了。</p>
+
+<p>同时，听说<a href="http://xiami.com">虾米网</a>改用PHP了，不过我以前记得是Rails写的。看网站的介绍，推测是08年年底他们改换成的PHP，呵呵，看来不关注这个网的时间蛮久了。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-02T10:30:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/11/02/a-gov-site/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/11/02/a-gov-site/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/05/the-value-of-ruankao-i-learned/" title="Previous Post: 对软考证书价值的理解">&laquo; 对软考证书价值的理解</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/" title="Next Post: 软考之系统架构设计师">软考之系统架构设计师 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

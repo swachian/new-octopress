@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Replace log Files with Streams - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="早前读过adam的Logs Are Stream, Not Files, 但当时是阅读
+整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。 日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入）， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2014/03/02/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Replace Log Files With Streams</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T12:16:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
+整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
+
+<p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
+总之，流更适合对分布式系统的集中处理。</p>
+
+<h3>站在开发的角度</h3>
+
+<p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
+莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
+实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
+
+<h3>站在部署的角度</h3>
+
+<p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
+一个input stream。</p>
+
+<p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
+
+<h3>几种技巧和工具</h3>
+
+<ol>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
+syslog是要搭配bash的命令<code>logger</code>使用的。
+<code>sh
+ mydaemon | tee /var/log/mydaemon.log | logger
+</code>
+tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
+则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
+这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
+存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
+再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
+<li><p>Upstart launchd  Systemd
+这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T12:16:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/云计算/'>云计算</a>, <a class='category' href='/blog/categories/技术/'>技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/04/nodejs/" title="Previous Post: NodeJS">&laquo; NodeJS</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/" title="Next Post: Sam Stephenson's Better JS with CoffeeScript">Sam Stephenson's Better JS with CoffeeScript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
