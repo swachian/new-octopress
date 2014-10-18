@@ -9,11 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="开了几个月的车，终于开始练习倒车了。离自己直接上路又近了些。
-两天下来，感觉倒车主要是三点： 设计路线和找准起点
-看后车轮和车尾
-注意车头一角 对新手而言，尤其要把握住后车轮，可以把反光镜调低进行观察。倒入的关键是让车屁股彻底绕开障碍物，
-然后就可以死打方向直到后侧车轮靠边， &hellip;">
+  <meta name="description" content="用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
+但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +68,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-14T13:19:00+08:00" pubdate data-updated="true">Oct 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
+但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
+
+<p>需求也算简单：</p>
+
+<ol>
+<li>基于app toolbar的动态请求转发给java</li>
+<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
+<li>部分.js请求如t.js还是转给java，有效期为0；</li>
+<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
+</ol>
+
+
+<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>        location /toolbar {
+</span><span class='line'>            root   html;
+</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
+</span><span class='line'>        }
+</span><span class='line'>        location ~ /toolbar/static {
+</span><span class='line'>            root   html;
+</span><span class='line'>            if (-f $request_filename) {
+</span><span class='line'>                expires 1d;
+</span><span class='line'>                break;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>        location = /toolbar/enter/t.js {
+</span><span class='line'>            root   html;
+</span><span class='line'>            proxy_pass http://192.168.202.72:8080;
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
+
+<p>这里面用到了几种Nginx的配置。</p>
+
+<ol>
+<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
+<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
+<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
+</ol>
+
+
+<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
+
+<p>整个匹配顺序是：</p>
+
+<ol>
+<li>对<code>=</code>进行匹配，有相符的就停止；</li>
+<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
+<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
+</ol>
+
+
+<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
+
+<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
+
+<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
+http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
+http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
+
+<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1315,58 +1427,6 @@ HBase CouchDB和Rails社区还是不搭。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/01/xin-che-ping-de-sui-xiang/">新车评网的随想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-01T22:09:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近几周，挺痴迷<a href="http://www.xincheping.com/">新车评网</a>。原因主要是他们有一个和我同一年高考同一年
-工作的创始人和总编颜宇鹏（俗称yyp），他们的编辑队伍相对稳定，阿聪、阿庆、阿文、稀饭、hh等确实都特性很鲜明。
-从他们的文章、观点中可以学到不少东西，增长不少的见识。而他们的长测节目则尤其精彩，从买车、用车、二手保值等，
-可以阅读到很多用车的细节。这些东西，在汽车之家上是感觉不到的。</p>
-
-<p>比较起来，汽车之家更像一个带产品属性的汽车媒体网站，而新车评则更接近于传统的汽车杂志。以编辑为核心竞争力，
-主要的产品就是文章，当然也有视频。但是视频只是为了更方便一部分懒得看文章的人。这可能和颜宇鹏是从传统杂志走出来的背景有关。</p>
-
-<p>而从新车评上，发现从事汽车报道的媒体人还真的挺多的。既有传统的杂志社，也有爱卡、汽车之家这样的新媒体巨头，
-还有新车评这样极有特色的规模相对小的媒体，更有大量的在大报业汽车版面中的记者和编辑。摆在一汽看的话，数量
-就相当可观了。还给我映像深刻的是，深圳或者说南方系的媒体业确实很兴盛。可以说各路人马很多，虽然有点乱，但确实
-活力十足。长期在上海文广统治之下的上海生活，还是很赞叹南方系媒体的活力。</p>
-
-<p>说回新车评本身，他们其实也有一定的偏向性。给我的感受是，他们和上海通用、广州本田、北京现代的关系尚佳，
-和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
-
-<p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1380,6 +1440,10 @@ HBase CouchDB和Rails社区还是不搭。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a>
@@ -1397,15 +1461,11 @@ HBase CouchDB和Rails社区还是不搭。</p>
         <a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">何伟的甲骨文</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (49)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/java'>Java (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/spring'>Spring (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (50)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (21)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/车车'>车车 (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/java'>Java (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>

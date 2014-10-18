@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-10-06T21:23:59+08:00</updated>
+  <updated>2014-10-14T13:46:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx 处理Spring 静态资源的配置]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/"/>
+    <updated>2014-10-14T13:19:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi</id>
+    <content type="html"><![CDATA[<p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
+但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
+
+<p>需求也算简单：</p>
+
+<ol>
+<li>基于app toolbar的动态请求转发给java</li>
+<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
+<li>部分.js请求如t.js还是转给java，有效期为0；</li>
+<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
+</ol>
+
+
+<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>        location /toolbar {
+</span><span class='line'>            root   html;
+</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
+</span><span class='line'>        }
+</span><span class='line'>        location ~ /toolbar/static {
+</span><span class='line'>            root   html;
+</span><span class='line'>            if (-f $request_filename) {
+</span><span class='line'>                expires 1d;
+</span><span class='line'>                break;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>        location = /toolbar/enter/t.js {
+</span><span class='line'>            root   html;
+</span><span class='line'>            proxy_pass http://192.168.202.72:8080;
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
+
+<p>这里面用到了几种Nginx的配置。</p>
+
+<ol>
+<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
+<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
+<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
+</ol>
+
+
+<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
+
+<p>整个匹配顺序是：</p>
+
+<ol>
+<li>对<code>=</code>进行匹配，有相符的就停止；</li>
+<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
+<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
+</ol>
+
+
+<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
+
+<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
+
+<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
+http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
+http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
+
+<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[倒车就是看后轮和摆车尾]]></title>
@@ -2106,29 +2194,6 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 绝大部分情况下都不会去安装正版购买的微软软件，所以diy到最实惠的价格，算上这种不正当的逃帐行为，差价还是很有吸引力的。</p>
 
 <p>对于亲戚的需求，最后决定购买S530。联想的服务是他需要的，也能给我挡下不少事情，另外机箱和电源还是品牌机更漂亮和有保障，而多出的钱还是完全可以接受的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[08年至今我眼中的西班牙]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya/"/>
-    <updated>2014-06-14T14:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/14/08nian-zhi-jin-wo-yan-zhong-de-xi-ban-ya</id>
-    <content type="html"><![CDATA[<p>看见板鸭输给荷兰1：5，说说我眼中这几年的西班牙队。</p>
-
-<p>在我看来，08年的板鸭是完美的。那支球队可以用要啥有啥，随要随到来形容。
-从锋线到门将都相当完美，基本没什么瑕疵。</p>
-
-<p>但10年的时候，板鸭的锋线已经挺烂了，比今年的德国锋线都差的远。所以碰上蟋蟀那样的战术大师，被偷一个后就输掉了比赛。但靠着优秀的反抢和催眠控球流，确实是当届最优秀的队伍，只是比起德国的优势已经不大了。德国队08年输的没有话讲，10年输的是有点太尊重板鸭了，当然和穆勒缺席也有关系，那一届比赛穆勒是全队的触点。</p>
-
-<p>而12年的板鸭和10年挺类似的，锋线继续无力，中场和后防开始了老化，只是还不明显。我一直觉得12年的德国，实力已经超过了当时的板鸭。要不是勒夫自毁长城、拜仁欧冠功败垂成影响备战、外加被有伤的小猪坑了一把，赢下板鸭的希望是很大的。</p>
-
-<p>至于今年的板鸭，没想到会输给荷兰那么多，毕竟荷兰我印象中也是处于新老交替的一只队伍。罗本范佩西自然是顶级的，但其他的基本就拿不出什么像样的来了。而对板鸭本身，我依然认为他们在继续老化中，哈维小白阿隆索都是老爷车级别的了，后防又没了普约尔，锋线托妞可以继续入选，整个队伍除了拉莫斯，其他人的状态都不可能再达到08年的水准。</p>
-
-<p>板鸭的下滑主要还是运动员年龄的客观原因。就像穆帅带的皇马，和巴萨左比右比都觉得主教练已经没什么事情好做了，只有等这些球员继续成长。而巴萨的球员则在老去。
-他们都是顶尖的球员，彼此之间的胜负关键在状态，而状态的关键又是年纪和备战。</p>
-
-<p>板鸭确实还是一支优秀的队伍，但他们也必须承认，在足球场上，他们已经老了。</p>
 ]]></content>
   </entry>
   
