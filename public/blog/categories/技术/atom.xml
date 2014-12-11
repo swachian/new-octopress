@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-11-19T16:42:41+08:00</updated>
+  <updated>2014-12-11T23:12:23+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[并发的ab测试和校验码对并发状况处理的盲区]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/"/>
+    <updated>2014-12-11T21:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu</id>
+    <content type="html"><![CDATA[<p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
+但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
+
+<p>限制的过程是这样的：</p>
+
+<ol>
+<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
+<li>发送短信；</li>
+<li>刷新校验码。</li>
+</ol>
+
+
+<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
+极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
+
+<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
+颇费了一番周折。</p>
+
+<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
+
+<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
+
+<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
+
+<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
+
+<h3>第二个坑： 需要提前放入session</h3>
+
+<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
+因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
+正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
+带cookie上去，因此就得到了错误的响应。</p>
+
+<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
+ruby的rest-client。</p>
+
+<p>```ruby
+require 'rest-client'</p>
+
+<p>jsp = "http://xxx.com/portal/";
+passportUrl = "xxx.com!validate.action?user_id=1xxxxxx&amp;verfiyCode=9813';</p>
+
+<p>def s
+  response = RestClient.get(jsp)
+  @cookies = response.cookies</p>
+
+<p>  @cookies['JSESSIONID'] = '74113695C0FB915393AE69DD63EAE088'
+  p @cookies
+  #puts response.body</p>
+
+<p>  5.times do |n|</p>
+
+<pre><code> response = RestClient.get(passportUrl, cookies: @cookies)
+</code></pre>
+
+<p>  end
+  puts response.body
+end</p>
+
+<p>s()
+```</p>
+
+<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
+模拟不出并发的效果，所以还是需要回到ab测试上。</p>
+
+<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
+
+<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
+
+<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
+
+<h3>得到的教训</h3>
+
+<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tomcat7 采用 Redis作为session Store - 2]]></title>
@@ -922,49 +1004,6 @@ windowHeight(获知视口有多高)</p>
 <li>发起ajax请求</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tomcat7 采用 redis作为session store]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/"/>
-    <updated>2014-07-14T15:57:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store</id>
-    <content type="html"><![CDATA[<p>有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
-同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此，最终决定使用redis来作为公共的session存储空间，实现session的共享。</p>
-
-<p>主要用到的工具包:</p>
-
-<ul>
-<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager#readme">tomcat-redis-session-manager</a></li>
-<li>jedis</li>
-<li>commons-pool</li>
-</ul>
-
-
-<p>需要注意的是，这个session manager已经有挺长时间停止开发了，从issues来看，表现还算基本稳定。目前也已经支持tomcat6和tomcat7，jdk也是6和7均支持。但是，上述几个包却存在着特定的版本依赖。必须为：</p>
-
-<ol>
-<li>tomcat-redis-session-manager-1.2-tomcat-7.jar</li>
-<li>jedis-2.0.0.jar</li>
-<li>commons-pool-1.3.jar<br/>
-尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。</li>
-</ol>
-
-
-<p>然后，再在应用的context.xml,可以是应用的该文件也可以是tomcat/conf目录下的该文件，加入下列配置即可：</p>
-
-<p>```xml
-<Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
-&lt;Manager className="com.radiadesign.catalina.session.RedisSessionManager"</p>
-
-<pre><code>     host="192.168.203.198" 
-     port="6379" 
-     database="1" 
-     maxInactiveInterval="600" /&gt; 
-</code></pre>
-
-<p>```</p>
 ]]></content>
   </entry>
   
