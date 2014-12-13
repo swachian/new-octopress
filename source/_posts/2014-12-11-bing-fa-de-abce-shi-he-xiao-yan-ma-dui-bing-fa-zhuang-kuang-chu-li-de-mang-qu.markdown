@@ -47,7 +47,7 @@ require 'rest-client'
 
 
 jsp = "http://xxx.com/portal/";
-passportUrl = "xxx.com\!validate.action?user_id=1xxxxxx\&verfiyCode=9813';
+passportUrl = 'http://xxx.com\!validate.action?user_id=1xxxxxx\&verfiyCode=9813';
 
 def s
   response = RestClient.get(jsp)

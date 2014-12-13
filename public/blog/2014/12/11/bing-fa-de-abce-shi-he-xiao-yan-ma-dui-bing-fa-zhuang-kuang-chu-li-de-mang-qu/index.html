@@ -155,23 +155,23 @@ ruby的rest-client。</p>
 </span><span class='line'>
 </span><span class='line'>
 </span><span class='line'><span class="n">jsp</span> <span class="o">=</span> <span class="s2">&quot;http://xxx.com/portal/&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="n">passportUrl</span> <span class="o">=</span> <span class="s2">&quot;xxx.com\!validate.action?user_id=1xxxxxx\&amp;verfiyCode=9813&#39;;</span>
+</span><span class='line'><span class="n">passportUrl</span> <span class="o">=</span> <span class="s1">&#39;http://xxx.com\!validate.action?user_id=1xxxxxx\&amp;verfiyCode=9813&#39;</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s2">def s</span>
-</span><span class='line'><span class="s2">  response = RestClient.get(jsp)</span>
-</span><span class='line'><span class="s2">  @cookies = response.cookies</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">s</span>
+</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsp</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@cookies</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">cookies</span>
 </span><span class='line'>
-</span><span class='line'><span class="s2">  @cookies[&#39;JSESSIONID&#39;] = &#39;74113695C0FB915393AE69DD63EAE088&#39;</span>
-</span><span class='line'><span class="s2">  p @cookies</span>
-</span><span class='line'><span class="s2">  #puts response.body</span>
+</span><span class='line'>  <span class="vi">@cookies</span><span class="o">[</span><span class="s1">&#39;JSESSIONID&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;74113695C0FB915393AE69DD63EAE088&#39;</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="vi">@cookies</span>
+</span><span class='line'>  <span class="c1">#puts response.body</span>
 </span><span class='line'>
-</span><span class='line'><span class="s2">  5.times do |n|</span>
-</span><span class='line'><span class="s2">     response = RestClient.get(passportUrl, cookies: @cookies)</span>
-</span><span class='line'><span class="s2">  end</span>
-</span><span class='line'><span class="s2">  puts response.body</span>
-</span><span class='line'><span class="s2">end</span>
+</span><span class='line'>  <span class="mi">5</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+</span><span class='line'>     <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">passportUrl</span><span class="p">,</span> <span class="ss">cookies</span><span class="p">:</span> <span class="vi">@cookies</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="s2">s()</span>
+</span><span class='line'><span class="n">s</span><span class="p">()</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
