@@ -75,6 +75,33 @@ s()
 
 这条命令基本上可收到5条短信，因为并发是5个。
 
+### 解决的办法
+
+最偷懒且管用的办法是使用`synchronized`关键字。需要注意的是两点：
+
+第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
+下面的方式，让锁住类对象来实现static的效果。
+
+```java
+       synchronized (Controller.class) {  
+
+        }
+```
+
+第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
+才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。
+
+```java
+synchronized private static void validCode(HttpSession sesson, String code) {
+  result = false;
+  if (StringUtils.equal(session.getAttribute("rand1"), code)) {
+    result = true;
+  }
+  session.removeAttribute("rand1");
+  return result;
+}
+```
+
 ### 得到的教训
 
 部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。

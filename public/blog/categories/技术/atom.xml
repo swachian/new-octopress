@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-11T23:12:23+08:00</updated>
+  <updated>2014-12-13T21:41:29+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -88,6 +88,39 @@ end</p>
 <p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
 
 <p>这条命令基本上可收到5条短信，因为并发是5个。</p>
+
+<h3>解决的办法</h3>
+
+<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
+
+<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
+下面的方式，让锁住类对象来实现static的效果。</p>
+
+<p>```java</p>
+
+<pre><code>   synchronized (Controller.class) {  
+
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
+才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
+
+<p>```java
+synchronized private static void validCode(HttpSession sesson, String code) {
+  result = false;
+  if (StringUtils.equal(session.getAttribute("rand1"), code)) {</p>
+
+<pre><code>result = true;
+</code></pre>
+
+<p>  }
+  session.removeAttribute("rand1");
+  return result;
+}
+```</p>
 
 <h3>得到的教训</h3>
 
