@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-13T21:48:00+08:00</updated>
+  <updated>2014-12-17T16:48:59+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[独一无二者计数问题（ count-distinct）]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-%5B%3F%5D-wu-er-zhe-ji-shu-wen-ti-%28-count-distinct%29/"/>
+    <updated>2014-12-17T16:14:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-[?]-wu-er-zhe-ji-shu-wen-ti-(-count-distinct)</id>
+    <content type="html"><![CDATA[<p>最近分析一个大日志文件，9亿条记录近300GB的数据。终于体会到一点大数据处理的意思。</p>
+
+<p>之前根据日志，统计出里面各个域名的pv还算简单。为了开发方便，利用了Redis，开10个java线程，分别扫描不同的行，并把domain做关键字写入redis并不断计数，最后从中读出全部的值并排序。
+整个过程主要开销在扫描方面。此时瓶颈出在redis上，基本上5个java线程可以把redis的cpu性能榨干。</p>
+
+<p>9亿条数据分析出来了七十几万个域名，而redis处理70w个key，消耗的内存在100MB以内，所以整个运行跑上几个小时就能得到想要的结果了。</p>
+
+<p>但是，客户进一步提出要分析每个domain下独立访问的用户数量是多少。这下子可就犯难了。
+因为按照传统的做法，碰到需要计算独立用户的需求会建立一个集合，然后把标识往里push，最后获取一下这个set的大小，就可以得到独立用户的数量。
+然而，如果对70w个域名都分别建立一张访问用户的set，则存储的开销实在太大。这意味着key-value的数量将是70w的几千甚至几万倍。
+然后看了一下redis新增加的数据结构类型，发现redis中的hyperloglogs是为此种任务而生的。</p>
+
+<h2>HyperLogLog和count-distinct problem</h2>
+
+<p>建立一个集合并把数据放入，最后计算集合的大小是一种精确的求值方式。而HyperLogLog则是一种会损失一些细节但可以获得很好的近似值的估算方式。</p>
+
+<p>这种算法的核心思想就是MD5+Bitmap。通过某种Hash算法，比如MD5，可以把千变万化的取值收敛成有限的值，而因为这些值也很大，所以可以认为重复的比例会很低。然后，应用Bitmap来表示这些映射结果是否已存在，最后就是计算这个Bitmap中已存在值的数量。尽管损失一些细节，也不是完全精确，但结果是足够准确了。而经过Hash的收敛，再经过Bitmap的收敛，对空间的需求就会变得少了许多许多，也就可以应用于更多关键字的计数。</p>
+
+<p>以我自己对某个域名按两种方式都运行后得到的结果，分别对比如下：</p>
+
+<p>精确的：1687，估计的：1685<br/>
+精确的：93869，估计的：94097</p>
+
+<p>而这种方式最大的好处，自然就是对count-distinct这类问题统计起来毫无压力了,同时得到的数据也足够好用了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[并发的ab测试和校验码对并发状况处理的盲区]]></title>
@@ -479,196 +511,6 @@ return pwd;
 <p>通过上面的程序，可以产生长度不等的多个随机密码，把明文进行base64转码后交给rsa加密成16进制的字符，然后就可以把得到的明文和密文交给java进行比对了。
 另外Base64的编码是url不安全的。因为+ = /都是base64的适用字符，而这些在url传输中都会被转义，所以js的base64编码一般还有一个对url-safe的版本。
 而在此处，rsa会最终转成16进制，因此并不需要使用url-safe的特性。考虑到Java的base64还是标准版的，所以使用标准版的base64更合适。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Web容器中通过Spring添加Job任务]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/"/>
-    <updated>2014-09-11T21:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu</id>
-    <content type="html"><![CDATA[<p>实际投入使用的Web站点总有很多例行任务要做，习惯的做法是利用操作系统的crontab定期执行脚本或者Java程序。
-在更早的时候，曾经试过quartz，但后来因为quartz创建的线程属于JVM而不是Web容器，导致停止或
-重新部署应用时线程并未终止，因此后来跑java程序例行任务的话，主要就
-是单独运行jar文件。</p>
-
-<p>时过境迁，了解到Spring已经接管了定时任务的线程处理，之前在
-Web容器里跑多线程任务的最大隐患已经不存在了，所以尝试了一下在
-Spring中使用例行更新。</p>
-
-<p>这样做最大的好处当然就是代码集中，容易维护也容易部署。</p>
-
-<h3>功能说明</h3>
-
-<p>整个功能并不复杂，需要对redis中的设备号列表进行遍历，对每一个
-号码调用远程接口获取该号码的一些动态变化的信息。取得后，这些信息
-的时效时间是6小时，在失效前的10分钟内，需要再次调用远程接口刷新缓存。</p>
-
-<p>因为整个功能的瓶颈在于远程调用，为了提高并发，
-调用远程接口采取多线程的方式。而遍历的性能极好，使用单线程就够了。</p>
-
-<h3>使用组件</h3>
-
-<p>采用Java中线程的Executors实现起来最简单直接。Executors实质上就是一个
-线程池，每塞给一个号码，就调用派发一个线程进行处理。如果没有线程可派，
-则放入队列中，如队列满了则会依据设置再增加线程数量。</p>
-
-<p><code>java
-private TaskExecutor taskExecutor
-</code></p>
-
-<p>Executor确实是一个比较好的多线程编程方式，融合了Actor模式和队列，
-使用起来也比较方便。</p>
-
-<p>Executors可以由spring进行注入，在这个任务里比较合适的是采用ThreadPool*</p>
-
-<p>```xml</p>
-
-<pre><code>&lt;bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"&gt;
-    &lt;property name="corePoolSize" value="5" /&gt;
-    &lt;property name="maxPoolSize" value="10" /&gt;
-    &lt;property name="queueCapacity" value="2500" /&gt;
-&lt;/bean&gt;
-</code></pre>
-
-<p>```
-corePoolSize是例行打开的线程数，queueCapacity是在没有core线程处理时的排队数量，
-当超过这个数量时，会再启动线程直到maxPoolSize。如果都使用完毕，则可指定溢出时的抛弃处理方式。</p>
-
-<p>派发任务由<code>taskExecutor.execute(new PollItInterfaceTask(mdn))</code>表达，
-要同步的数据通过mdn传入。</p>
-
-<p>此外，因为遍历的线程执行速度快，而workers可能需要更长时间才能完成队列中的任务，
-为防止重复提交设置了一个多线程会并发访问的集合<code>private Set&lt;String&gt; mdnInQueue = new ConcurrentSkipListSet&lt;String&gt;(); //用于记录已安排执行但还未执行的号码</code>
-。整个代码的情况如下:</p>
-
-<p>```java
-package com.sanss.toolbar.job;</p>
-
-<p>import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimerTask;
-import java.util.concurrent.ConcurrentSkipListSet;</p>
-
-<p>import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskExecutor;</p>
-
-<p>import com.sanss.toolbar.service.CacheItInterfaceQueryService;</p>
-
-<p>/<em>多线程发起的、向IT抓取用户套餐信息的线程池执行者，由spring中触发，根据接口run()</em>/
-public class PollItInterfaceTaskExecutor  implements Runnable {</p>
-
-<pre><code>private static Log logger = LogFactory.getLog(PollItInterfaceTaskExecutor.class);
-private Set&lt;String&gt; mdnInQueue = new ConcurrentSkipListSet&lt;String&gt;(); //用于记录已安排执行但还未执行的号码
-@Autowired
-CacheItInterfaceQueryService cacheItInterfaceQueryService;
-
-/*实际被多线程执行的任务,获取在队列中存放的mdn*/
-private class PollItInterfaceTask implements Runnable {
-    private String mdn;
-    public PollItInterfaceTask(String mdn) {
-        this.mdn = mdn;
-    }
-
-    public void run() {
-        cacheItInterfaceQueryService.setCacheFlux(mdn);
-        mdnInQueue.remove(mdn);
-        Thread currentThread = Thread.currentThread();  // 获得当前的线程  
-        String threadName = currentThread.getName();  
-        logger.debug(threadName + ": 刷新下面号码的cache: " + mdn);
-    }
-}
-
-private TaskExecutor taskExecutor;
-
-public PollItInterfaceTaskExecutor(TaskExecutor taskExecutor) {
-    this.taskExecutor = taskExecutor;
-
-}
-
-//任务出发后，被run自动执行的任务。首先获得所有需要提前取得IT流量信息的hashkey集合，随后遍历集合分别取出相关的一系列mdn，
-//之后根据mdn检查ttl信息，发现小于500秒就安排Executor执行任务。
-public void doit() {
-    Set&lt;String&gt; tlbKeys = cacheItInterfaceQueryService.getAllTlbsetQueryList();
-    int total = 0; //号码列表总数
-    int count = 0; //本轮需要刷新的
-    for (String hshkey : tlbKeys) {
-        Map&lt;String, String&gt; mdns = cacheItInterfaceQueryService.getAllFieldsByAKey(hshkey);
-        for(String mdn : mdns.keySet()) {
-            long ttl = cacheItInterfaceQueryService.ttlFlux(mdn);
-            if (ttl &lt; 500 ) {
-                if (!mdnInQueue.contains(mdn)) {
-                    mdnInQueue.add(mdn);
-                    taskExecutor.execute(new PollItInterfaceTask(mdn));
-                    count++;
-               }
-            }
-            total++;
-        }
-    }
-    logger.info("本轮刷新"+count+"个记录, 共有"+total+"个记录");
-}
-
-@Override
-public void run() {
-    // TODO Auto-generated method stub
- System.out.format("开始执行 %s ...%n", new Date());  
-    doit();
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<p>CacheItInterfaceQueryService是项目中的一个服务模块，负责具体设置缓存。</p>
-
-<p>```xml</p>
-
-<!-- 定期去IT接口轮训的部署 -->
-
-
-<pre><code>&lt;bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"&gt;
-    &lt;property name="corePoolSize" value="5" /&gt;
-    &lt;property name="maxPoolSize" value="10" /&gt;
-    &lt;property name="queueCapacity" value="2500" /&gt;
-&lt;/bean&gt;
-
-  &lt;bean id="pollItInterfaceTaskExecutor" class="com.sanss.toolbar.job.PollItInterfaceTaskExecutor"&gt;
-       &lt;constructor-arg ref="taskExecutor" /&gt;
- &lt;/bean&gt;
-
-&lt;bean id="springScheduleExecutorTask"  
-    class="org.springframework.scheduling.concurrent.ScheduledExecutorTask"&gt;  
-
-    &lt;property name="runnable" ref="pollItInterfaceTaskExecutor" /&gt;  
-
-    &lt;property name="delay" value="1000" /&gt;  
-    &lt;!-- 每次任务间隔 一分钟--&gt;  
-    &lt;property name="period" value="60000" /&gt;  
-&lt;/bean&gt;  
-
- &lt;bean id="springScheduledExecutorFactoryBean"  
-    class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean"&gt;  
-    &lt;property name="scheduledExecutorTasks"&gt;  
-        &lt;list&gt;  
-            &lt;ref bean="springScheduleExecutorTask" /&gt;  
-        &lt;/list&gt;  
-    &lt;/property&gt;  
-&lt;/bean&gt;  
-</code></pre>
-
-<p><code>``
-避免不了的配置如上，</code>taskExecutor<code>已经在前面描述过，第二段的</code>pollItInterfaceTaskExecutor<code>就是把线程池执行者
-作为参数传给自己编写的任务的构造函数，然后第三段定义一个周期执行的任务，设置好执行的间隔，runnable要提供自己编写的业务类（第二段中的内容），
-最后第四步把这个周期任务交给Spring的</code>ScheduledExecutorFactoryBean`工厂来负责管理。
-需要注意的是，ScheduledExecutorFactoryBean是spring4中的写法，在spring3中还是另一套描述方式，虽然功能差不多。
-但在版本升级时，这是一个不大不小的坑。</p>
 ]]></content>
   </entry>
   

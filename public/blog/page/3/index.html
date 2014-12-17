@@ -9,10 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="我们这代人看世界杯可以说是看着德国和西班牙PK长大的。86年和90年的两场决赛，铁马和马拉多纳代表了
-那个时代得中场者得天下。
-而勒夫的新德国队和阿根廷的关系更多。这已经是连续第三届世界杯碰面了，只是前两次都是1/4决赛。2006，
-还在新老交接中的德国，艰难地逼平了阿根廷，然后点球决战， &hellip;">
+  <meta name="description" content="有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
+同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +68,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/">Tomcat7 采用 Redis作为session Store</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-14T15:57:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
+同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此，最终决定使用redis来作为公共的session存储空间，实现session的共享。</p>
+
+<p>主要用到的工具包:</p>
+
+<ul>
+<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager#readme">tomcat-redis-session-manager</a></li>
+<li>jedis</li>
+<li>commons-pool</li>
+</ul>
+
+
+<p>需要注意的是，这个session manager已经有挺长时间停止开发了，从issues来看，表现还算基本稳定。目前也已经支持tomcat6和tomcat7，jdk也是6和7均支持。但是，上述几个包却存在着特定的版本依赖。必须为：</p>
+
+<ol>
+<li>tomcat-redis-session-manager-1.2-tomcat-7.jar</li>
+<li>jedis-2.0.0.jar</li>
+<li>commons-pool-1.3.jar<br/>
+尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。</li>
+</ol>
+
+
+<p>然后，再在应用的context.xml,可以是应用的该文件也可以是tomcat/conf目录下的该文件，加入下列配置即可：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">&quot;com.radiadesign.catalina.session.RedisSessionHandlerValve&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;Manager</span> <span class="na">className=</span><span class="s">&quot;com.radiadesign.catalina.session.RedisSessionManager&quot;</span>
+</span><span class='line'>         <span class="na">host=</span><span class="s">&quot;192.168.203.198&quot;</span>
+</span><span class='line'>         <span class="na">port=</span><span class="s">&quot;6379&quot;</span>
+</span><span class='line'>         <span class="na">database=</span><span class="s">&quot;1&quot;</span>
+</span><span class='line'>         <span class="na">maxInactiveInterval=</span><span class="s">&quot;600&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1093,58 +1164,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/18/che-wei/">车位</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-18T10:03:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>自从要开始开车，车位始终是一个问题。目前小区地面是无固定车位，先来先得，抢到了可以用到开走的时候。好处是价格便宜，150/月。很早就申请并开始付钱了，
-但现在发现申请的有点早了，因为小区根本没有控制车辆总数的意思。现在申请也是同样可以的。当然，每月本来开销也不大，这个就只能当小赌赌输了。真的让人头疼的还是每天要停车的现实，特别是以后每天开起来。</p>
-
-<p>小区里面另一种车位就是地下车库了。大概2011年上半年的时候，当时的物业撤离前，把开发商保留的最后一批地下车库卖了出来。
-彼时是20w元一个，且已经租用者可优先购买。我当时还没买车，自然也不是租用者，肯花钱也不一定轮得到。
-如今，再一打听，地下车位已经有人在卖40w了。这个价位有点偏高，很长时间无人问津。</p>
-
-<p>既然卖了这个价，那就更不乐意买了。毕竟现在的理财产品，妥妥的一年有5-6%的收益，40w就意味着每年可以多出来2w。
-这笔增值都可以出国旅游一趟了。何苦变成车位的死投资。地下固定车位尽管长期看涨，但除了停停车也确实没其他用处。
-而其替代品还是有一些的。如现在的小区地面，甚至可能会被贴罚单的小马路上。虽然不方便虽然有风险，但是后二者都很难迅速涨价。
-一般情况下，凑合着停停也就算了。</p>
-
-<p>让人欣慰的是，上海政府至少规定了新造的楼盘车位要达到将近1:1的比例。
-虽说不解决老小区的问题，但好歹也算以后换房多了一些选择。总体而言还是增加了地下车库的供给，而一套房子毕竟也不一定待一辈子。</p>
-
-<p>长远来看，有个固定的地下车位还是很有必要的。只是碍于目前的身价，不舍得花那么一大笔钱。
-真能解决这个问题的唯一办法，还真的只有自己努力赚钱吧。现在固定车位的意义对我而言大于40w，当然只是比如说，那肯定毫不犹豫就会出手了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1162,6 +1181,10 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/17/du-%5B%3F%5D-wu-er-zhe-ji-shu-wen-ti-%28-count-distinct%29/">独一无二者计数问题（ count-distinct）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/">并发的ab测试和校验码对并发状况处理的盲区</a>
       </li>
     
@@ -1177,15 +1200,11 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
         <a href="/blog/2014/10/27/dui-%5B%3F%5D-qi-da-zhong-su-teng-zhao-hui-de-kan-fa/">对一汽大众速腾召回的看法</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (52)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/java'>Java (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/java'>Java (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li></ul>
 </section>
   
 </aside>
