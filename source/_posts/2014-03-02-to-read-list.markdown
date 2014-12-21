@@ -17,6 +17,7 @@ categories:
 但是，淘宝人在电子工业出版社出的书普遍给我的感觉是有一点水，内容讲的比较粗，也有凑数之嫌疑。后来了解了一些，淘宝人出书和评高级职称写论文有点类似，只是高级职称
 是强制要求，而淘宝则把出书与否作为社会影响力的一项KPI。
 1. [x] Core Java。有必要更新一下。
+1. [x] [Chad Fowler, 在软件开发中创造出色的职业生涯]()。
 1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.
 1. Eric Evans. Domain-Driven Design.  
 1. Beck. Smalltalk best practice patterns, 1996.
