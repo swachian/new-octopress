@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-23T23:02:13+08:00</updated>
+  <updated>2014-12-28T15:25:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Spring中的CRON]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron/"/>
+    <updated>2014-12-28T15:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron</id>
+    <content type="html"><![CDATA[<p>在<a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>一文中，
+已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
+<code>period</code> 和 <code>delay</code>两个参数就够了。</p>
+
+<p>这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。好在Spring 4.0版
+开始已经支持cron，配置起来也很简洁。</p>
+
+<p>首先，在<code>spring-mvc.xml</code>中增加要定期执行的类作为bean，作用是把要定期执行的类交给spring扫描</p>
+
+<p><code>xml
+&lt;bean id="LastDayDevicePackorderlogRefreshTaskExecutor" class="com.sanss.toolbar.job.LastDayDevicePackorderlogRefreshTaskExecutor"&gt;
+&lt;/bean&gt;
+</code></p>
+
+<p>其次，在这个类上使用标注<code>@EnableScheduling</code>，让spring意识到这是一个定期调度启动的任务。</p>
+
+<p>```java
+@EnableScheduling
+public class LastDayDevicePackorderlogRefreshTaskExecutor implements Runnable {</p>
+
+<p>}
+```</p>
+
+<p>最后，是在具体要启动的method上标注<code>@Scheduled(cron = "0 * * * * *")</code>，以此给出具体的执行安排。<br/>
+标注中cron的具体含义可以见下面的注释。</p>
+
+<p>```java</p>
+
+<pre><code>/*
+ * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。
+ *
+ * 按顺序依次为 秒（0~59）
+ *
+ * 分钟（0~59）
+ *
+ * 小时（0~23）
+ *
+ * 天（月）（0~31，但是你需要考虑你月的天数）
+ *
+ * 月（0~11）
+ *
+ * 天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）
+ *
+ * 7.年份（1970－2099）
+ */
+@Scheduled(cron = "0 * * * * *")
+public void run() {
+    // TODO Auto-generated method stub
+    // doit();
+    logger.info("定期触发");
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Passionate Programmer]]></title>
@@ -244,81 +306,6 @@ synchronized private static void validCode(HttpSession sesson, String code) {
 <p>同把自己的修改贡献给对方类似，只不过这种pull request需要换成base是自己的库，而head则是原作者库，然后新建pull request，github就会列出发生过的变化。
 这时候又会产生两种结局，其一是github可以自动合并，则再点击按钮即可，另一种是自动合并失败，会提示在本机先建分支，再pull原作者的分支，冲突解决（修改完毕）后合并回自己的主分支，
 然后再push到github。push成功后，github会自动关闭这个pull request。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nginx 处理Spring 静态资源的配置]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/"/>
-    <updated>2014-10-14T13:19:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi</id>
-    <content type="html"><![CDATA[<p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
-但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
-
-<p>需求也算简单：</p>
-
-<ol>
-<li>基于app toolbar的动态请求转发给java</li>
-<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
-<li>部分.js请求如t.js还是转给java，有效期为0；</li>
-<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
-</ol>
-
-
-<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
-
-<p>```</p>
-
-<pre><code>    location /toolbar {
-        root   html;
-        proxy_pass http://192.168.203.198:8080;
-    }
-    location ~ /toolbar/static {
-        root   html;
-        if (-f $request_filename) {
-            expires 1d;
-            break;
-        }
-    }
-    location = /toolbar/enter/t.js {
-        root   html;
-        proxy_pass http://192.168.202.72:8080;
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
-
-<p>这里面用到了几种Nginx的配置。</p>
-
-<ol>
-<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
-<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
-<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
-</ol>
-
-
-<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
-
-<p>整个匹配顺序是：</p>
-
-<ol>
-<li>对<code>=</code>进行匹配，有相符的就停止；</li>
-<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
-<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
-</ol>
-
-
-<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
-
-<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
-
-<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
-http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
-http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
-
-<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
 ]]></content>
   </entry>
   

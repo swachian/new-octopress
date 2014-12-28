@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-23T23:02:13+08:00</updated>
+  <updated>2014-12-28T15:25:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Spring中的CRON]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron/"/>
+    <updated>2014-12-28T15:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron</id>
+    <content type="html"><![CDATA[<p>在<a href="http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>一文中，
+已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
+<code>period</code> 和 <code>delay</code>两个参数就够了。</p>
+
+<p>这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。好在Spring 4.0版
+开始已经支持cron，配置起来也很简洁。</p>
+
+<p>首先，在<code>spring-mvc.xml</code>中增加要定期执行的类作为bean，作用是把要定期执行的类交给spring扫描</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;com.sanss.toolbar.job.LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/bean&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其次，在这个类上使用标注<code>@EnableScheduling</code>，让spring意识到这是一个定期调度启动的任务。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@EnableScheduling</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LastDayDevicePackorderlogRefreshTaskExecutor</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，是在具体要启动的method上标注<code>@Scheduled(cron = "0 * * * * *")</code>，以此给出具体的执行安排。<br/>
+标注中cron的具体含义可以见下面的注释。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 按顺序依次为 秒（0~59）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 分钟（0~59）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 小时（0~23）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 天（月）（0~31，但是你需要考虑你月的天数）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 月（0~11）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 7.年份（1970－2099）</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">&quot;0 * * * * *&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// TODO Auto-generated method stub</span>
+</span><span class='line'>  <span class="c1">// doit();</span>
+</span><span class='line'>  <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;定期触发&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Passionate Programmer]]></title>
@@ -1512,40 +1600,6 @@ HBase CouchDB和Rails社区还是不搭。</p>
 可供参考。</p>
 
 <p>在高级查询中，通用名称处填写车子的常用称呼即可。访问的速度可能有点慢，但数据真的有效。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[勒夫的德国队终于有冠了]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/le-fu-de-de-guo-dui-zhong-yu-you-guan-liao/"/>
-    <updated>2014-07-23T17:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/le-fu-de-de-guo-dui-zhong-yu-you-guan-liao</id>
-    <content type="html"><![CDATA[<p>距离德国队夺冠已经有10天了。这10天中我依旧处于一种球迷的兴奋中。确实，很不容易。</p>
-
-<p>在<a href="http://octopresszhangyu.herokuapp.com/blog/2014/07/11/de-guo-jue-sai-a-gen-ting/">德国决赛阿根廷</a>中，我已经说过，阿根廷和德国并不是一个档次的球队，能阻止德国夺冠的只有这是在南美举办的。但现在看来，勒夫破除了这个魔咒。</p>
-
-<p>虽然决赛打了加时，但德国队的机会其实很多。而且更要考虑到，这是赛前热身赫迪拉意外受伤，而勒夫又用了没什么经验的克拉默打比赛，德国队上半场的发挥是不正常的。如果脸哥能上场，或许90分钟就可拿下比赛。不过，最终终于收获了圆满的结局。</p>
-
-<p>距离德国上次夺取世界杯还是在90年，那时候我才刚从小学毕业进入预备班，而更近一点的96年，我还是一个高二的学生。等到这次见到德国队夺冠，已经是30好几的人了。看球早已理性很多，也明白这主要也是一个游戏，但是依然可以带来很多的快乐。</p>
-
-<p>对于勒夫、对于德国队，我是一直喜爱和支持。要说看不惯绵绵的，仅有一点，他太不爱定位球了。无论守和攻，勒夫执教下的定位球都很差。而这次大赛显然做了很大的改观。恭喜勒夫突破了自己，取得了成就。</p>
-
-<p>而至于德国队，以04年克林斯曼、勒夫执教以来，大致可以分为两个阶段：</p>
-
-<ol>
-<li>04-08，攻击的核心是巴拉克弗林斯和施耐德，尤其是施耐德的传球配合K神或者其他中锋，堪称一绝。这也是06-07德国队表现好的保障。等到08年的时候，弗林斯巴拉克不可避免的老化了，施耐德又因伤无法参加欧锦赛，所以08年的德国队是不如07甚至06的。</li>
-<li>08年之后，勒夫重建了德国队，可以认为勒夫二期基本成型。在08之后，留下来的老将就只有K神和弗里德里希了，以及猪波拉这些当时只有24岁的中坚力量。
-直到2010年，巴拉克因伤退出，而国家队引入了越来越多的09欧青赛冠军的年轻人，从诺伊尔 272，到脸哥 博阿滕，以及稍后才出任主力的狐媚、赫韦德斯，德国队的年纪和实力都让人对他们充满了期待。</li>
-</ol>
-
-
-<p>实际上，这支队伍在2012年就已经应该是全球最强大的国家队，只是因为勒夫用兵失误，才失去了登顶的机会。好在勒夫这次做出了很好的弥补。不过说句实话，即使在2012年，经过论坛讨论的结果也是勒夫是目前最合适的教练。因为其他人也不一定肯来干国家队的差事。而勒夫对这支队伍拥有绝对的控制力。同时，他的专业素养在国家队教练层面也是出色的，除了定位球实在是个外行。</p>
-
-<h2>未来的展望</h2>
-
-<p>德国队依然会是一支强队，尽管拉姆已经决定现在就退出了。但看看平均25的年纪，以及90后球员，德国队的未来还是光明的。运气够好的话，这波人绝对有机会拿下法国欧洲杯和俄罗斯世界杯。</p>
-
-<p>至于拉姆的退出，短期内肯定有影响。但德国队这几年就不是靠队长的领导，巴拉克的时候队长就不怎么起作用了。只是，边后卫这个短板倒是更加突出了。要看勒夫的建设能力还能不能再发挥作用。</p>
 ]]></content>
   </entry>
   

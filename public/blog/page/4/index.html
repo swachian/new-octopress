@@ -9,10 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="随着虎牌一级市场和二级市场的价格越拉越大，获利空间越来越多，
-整个车牌市场渐渐有了融资市场的味道。 不是么，没花什么资源，政府就得到了钞票，这属于筹资；拍牌人
-就是投资者，手里的钱得到了保值。政府筹资成功后，和一切筹资者一样，
-拿这笔钱去做事情去了。基建和公共交通又确实都是当前中国还需要的动作。 &hellip;">
+  <meta name="description" content="六七年来，小组的Java Web开发是用SSH（Struts2+Spring+Hibernate）的框架。
+Struts2充当胶水层，完成request参数的封装、controller的映射以及视图和控制层之间的参数传递。
+Spring在其中充当了注入的角色。Hibernate负责数据持久化。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,318 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/">士别三日 Jave Web非复昔日阿蒙</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-31T10:16:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>六七年来，小组的Java Web开发是用SSH（Struts2+Spring+Hibernate）的框架。
+Struts2充当胶水层，完成request参数的封装、controller的映射以及视图和控制层之间的参数传递。
+Spring在其中充当了注入的角色。Hibernate负责数据持久化。
+这个架构稳定使用了五年以上。</p>
+
+<p>之所以一直使用，一方面在于对Webwork(Struts2)的感情，
+毕竟曾经这个东西在替换struts1时让人映像深刻。其次，
+一个开发架构的迁移牵涉到整个小组，引入、推广和维护都有成本的，
+一成不变固然不行，一直切换也难免开销过大。同时，SSH招收熟手也相对容易些。</p>
+
+<p>然而，Struts2毕竟多年已经没什么发展，
+同时它的安全漏洞始终没能很好地解决，加上老架构也确实使用的时间有点长了。
+因此开始尝试新的方案。主要目标就是替换掉Struts2，也就是选用其他的Controller组件。
+而考察的对象就是Spring，确切地说是Spring MVC。</p>
+
+<p>而在了解的过程中，又仔细学习了一下Spring JPA。当MVC+JPA结合在一起后，
+发现Java Web的进步已然很大。而Spring MVC可以说是Rails的山寨版，
+或者可以称之为 Java on Rails with Java Style。Spring MVC的设计者
+可以说从Rails中借鉴了很多东西，但又最终使用Java的方式实现了出来。</p>
+
+<p>在初学Rails的时候，彼时的版本是1.2.6，一直有个疑问，就是Java能否也有一个
+像Ruby on Rails那样好的Web开发框架？当时有的牛人给出的答案是不依赖Ruby，
+DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了Rails 2的开发便利程度，
+虽然还逊于最新的Rails版本。所以，确切地说，Java至少也可以拥有和Rails 2 <strong>一样方便</strong>的Web框架，
+只是需要投入<strong>更多</strong>的人力，也需要等待长的多的时间。而最后出来的东西肯定还是充满Java味道的。
+现在的Rails已经走的更远了，但Java Web提高的程度这几年却更加显著了。</p>
+
+<p>看一下Controller：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;update/{id}&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">updateForm</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span> <span class="n">Long</span> <span class="n">id</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">,</span> <span class="n">userService</span><span class="o">.</span><span class="na">getUser</span><span class="o">(</span><span class="n">id</span><span class="o">));</span>
+</span><span class='line'>  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;action&quot;</span><span class="o">,</span> <span class="s">&quot;update&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s">&quot;user/userForm&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;update/{id}&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">)</span> <span class="n">User</span> <span class="n">user</span><span class="o">,</span> <span class="n">RedirectAttributes</span> <span class="n">redirectAttributes</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">userService</span><span class="o">.</span><span class="na">updateUser</span><span class="o">(</span><span class="n">user</span><span class="o">,</span> <span class="n">user</span><span class="o">.</span><span class="na">getNumber2</span><span class="o">(),</span> <span class="n">user</span><span class="o">.</span><span class="na">getCurrentshownumber</span><span class="o">());</span>
+</span><span class='line'>  <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;message&quot;</span><span class="o">,</span> <span class="s">&quot;更新任务成功&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s">&quot;redirect:/simuser/&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restful风格的Url，通过声明<code>@ModelAttribute</code>可以注入参数到模型中，
+<code>@PathVariable</code>可以实现从url路径中获取参数，
+<code>userService</code>是注入的服务组件，<code>model.addAttribute</code>则将controller的内容注入给页面模板。
+整个风格已经十分简洁。如果需要其他组件，如<code>session</code>或者<code>request</code>，
+只要在类或者方法的参数中声明即可。<code>return "user/userForm"</code>则通知渲染user目录下的userForm.jsp模板</p>
+
+<p>Spring JPA则是最方便的Java ORM描述工具。寻找多年的Java版ActiveRecord终于有了着落。
+需要定义两个文件：1：model本身，2：一个dao文件（reposity）</p>
+
+<ul>
+<li>model：</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//JPA标识</span>
+</span><span class='line'><span class="nd">@Entity</span>
+</span><span class='line'><span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;users&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="n">IdEntity</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">String</span> <span class="n">login</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Phonenumber</span><span class="o">&gt;</span> <span class="n">phonenumbers</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Useroperlog</span><span class="o">&gt;</span> <span class="n">useroperlogs</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@NotBlank</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNumber1</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">number1</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number1</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">number1</span> <span class="o">=</span> <span class="n">number1</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Transient</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNumber2</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">number2</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNumber2</span><span class="o">(</span><span class="n">String</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">number2</span> <span class="o">=</span> <span class="n">number2</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Transient</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCurrentshownumber</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">currentshownumber</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCurrentshownumber</span><span class="o">(</span><span class="n">String</span> <span class="n">currentshownumber</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">currentshownumber</span> <span class="o">=</span> <span class="n">currentshownumber</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="c1">// join column is in table for Phonenumber</span>
+</span><span class='line'>  <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span><span class="o">=</span><span class="n">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span><span class="n">orphanRemoval</span><span class="o">=</span><span class="kc">true</span><span class="o">,</span><span class="n">cascade</span><span class="o">=</span><span class="n">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+</span><span class='line'>  <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;userid&quot;</span><span class="o">)</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Phonenumber</span><span class="o">&gt;</span> <span class="nf">getPhonenumbers</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">phonenumbers</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhonenumbers</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Phonenumber</span><span class="o">&gt;</span> <span class="n">phonenumbers</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">phonenumbers</span> <span class="o">=</span> <span class="n">phonenumbers</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span><span class="o">=</span><span class="n">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+</span><span class='line'>  <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;userid&quot;</span><span class="o">)</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Useroperlog</span><span class="o">&gt;</span> <span class="nf">getUseroperlogs</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">useroperlogs</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUseroperlogs</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Useroperlog</span><span class="o">&gt;</span> <span class="n">useroperlogs</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">useroperlogs</span> <span class="o">=</span> <span class="n">useroperlogs</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="nd">@Override</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ToStringBuilder</span><span class="o">.</span><span class="na">reflectionToString</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>啰嗦是还是有点啰嗦，这个毕竟是java。DAO相对代码少一些。</p>
+
+<ul>
+<li>DAO文件：</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserDao</span> <span class="kd">extends</span> <span class="n">PagingAndSortingRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;,</span> <span class="n">JpaSpecificationExecutor</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//Page&lt;User&gt; findByUserId(Long id, Pageable pageRequest);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">User</span> <span class="nf">findByNumber1</span><span class="o">(</span><span class="n">String</span> <span class="n">number1</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个dao提供了很多默认的方法，包括<code>findAll</code>, <code>findOne</code>, <code>save</code>，底层的
+实现还有很多内容，但使用的话确实只需要声明这些就行了。</p>
+
+<ul>
+<li>在Service文件中可这样使用:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateUser</span><span class="o">(</span><span class="n">User</span> <span class="n">entity</span><span class="o">,</span> <span class="n">String</span> <span class="n">number2</span><span class="o">,</span> <span class="n">String</span> <span class="n">showNumber</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">loadNumber2</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">resetCurrentshownumber</span><span class="o">(</span><span class="n">entity</span><span class="o">,</span> <span class="n">showNumber</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">resetNumber2</span><span class="o">(</span><span class="n">entity</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">userDao</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">entity</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteUser</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">userDao</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在页面处理上，几年前的Servlet 2.5开始，EL表达式取得了首要被支持的地位。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">$</span><span class="o">{</span><span class="n">user</span><span class="o">.</span><span class="na">name</span><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对比ruby在erb里常用的</p>
+
+<p><code>&lt;%=user.name%&gt;</code></p>
+
+<p>EL表达式其实就是代码了。Java不具备动态语言的特性，所以需要另外造一套表达式。
+ruby的话，直接使用scriptlet其实效果更好也更直白。个人其实认为，逻辑判断、
+取值等都应该使用语言本身，而不是要借助标签。EL表达式是对Java语言的一种很好的补充。
+对Java Web的开发状况改善许多。但在迭代、逻辑判断方面，
+标签使用的机会还是满多的，这个只能再等发展的变化了。</p>
+
+<p>以上是已经进步显著的几个方面。但在布局、分页以及整合上，Spring并没有提供
+一步到位的东西。所以需要进一步参考<a href="https://github.com/springside/springside4">SpringSide</a>。
+这是一个中国人主推的Java Web开发实践整合的开源项目。里面提供了整合的样例，
+其实本身也可以当做一个开发模板来对待。</p>
+
+<p>从<a href="https://github.com/springside/springside4">SpringSide</a>上也可以追踪
+Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的，最近一两年切换到了Spring MVC。
+同时它也是使用的JPA来做ORM的描述。在各方面都很贴合我的需求和口味。考虑到这个项目维护多年，
+且始终保持着很不错的实践，在此推荐一下。</p>
+
+<p>花费多年时间，Jave Web非复昔日阿蒙。开发中的痛苦状况已经得到了极大的改善。
+值得刮目相待。Spring确实极大地改变了Java Web开发，而Rails则影响了十年来的Web开发。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -841,123 +1152,6 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">IT系统架构的模式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-12T16:18:00+08:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近日终于得以拜读了Martin Fowler的大作《The Patterns of Enterprise Application Architecture》。</p>
-
-<p>最早了解这本书是从robbin那里，在距今很多年前的一个Java书单里。彼时他对这本书的评价大意是适合要自己动手开发框架的人看，对应用开发没什么直接的帮助。同时，他认为读下来并没有太多感觉。而回过头来看，读过这本书的中国程序员应该是不少的，但真的从中汲取营养做出东西来的人几乎没有。从这也可以看出中国工程师在动手和创新方面确实有些先天不足。</p>
-
-<p>然而，这本书对于DHH、对于Rails则可以说是一切的开端。对这本书贯彻的最到位、突破的最有力的，非DHH用Ruby开创Rails莫属。本书成书于2002年，彼时企业应用这个称呼比较时髦，按作者的说法，他的本意是IT系统的架构，而这也符合后来软件架构所适用的范围。如病人记录、订单跟踪、信用系统、保险、汇率兑换，这些都是IT系统，也就是企业应用。而文字处理、电梯控制、交换机、编译器、操作系统、游戏则基本不能算作企业应用。只是，2002年之后，企业应用这个名字被用的烂了，反而成了大慢笨的代表，导致07/08年的时候，甚至有不少人认为Rails不适合做企业应用。但彼时我感觉Rails对这些简单的所谓企业应用才是大杀器，毕竟大部分企业应用其实就是重度的CRUD应用，而这方面Rails堪比马克沁机枪对单兵的作战效果。至于互联网类的Web应用，交互、设计是占大头的，Rails投入使用的实际效果反而不如企业应用那么明显。</p>
-
-<p>这本书确实是rails的设计指南，或者说是rails的设计文档。但DHH的突破和创新之处还是很明显的：</p>
-
-<ol>
-<li>本书是基于.Net 和 Java的，但提及了Python和Ruby，而作者更多的应该只是一种不抱希望的假设罢了，然而DHH真的用Ruby把这本书实作了出来。</li>
-<li>虽然ActiveRecord取自于本书，然而作者本身并不是把这种模式看成一种自动化的ORM方案。广义的ORM，可以包含Dao(Table Gateway)、Data Transfer Object（json，xml）以及datamapper这些把记录化作内存对象所有模式，但狭义来看ORM是仅包含datamapper的。ActiveRecord在Fowler处其实只是一种Dao的变种。而DHH直接将ActiveRecord升格成了更高度自动化的ORM模式。</li>
-<li>在视图层，坚决使用了Helper模式，未加入标签也未停留在scriplet阶段。</li>
-</ol>
-
-
-<p>对我而言，遗憾的一点是很晚才真的读了这本书，不知是喜是优的是因为晚读所以对这本书的内容很认可，而聊以自我安慰的是如果早读了说不定我也能
-创造点什么东西，当然，最后一点纯属自娱自乐。<br/>
-不过，这本书以及Rails，确实定义了过去10年Web开发的发展方向。因为Rails框架实际上已经成为了Web后台框架的一个标杆，
-例如Spring MVC现在走的也是类似的道路。所以，这本书确实深深影响了Web应用的开发。</p>
-
-<p>还有一点值得一提，就是这本书是真的基于Web总结的。很多模式的书籍，其实来源于客户端界面程序，比如从做菜单中提取出来的那些模式，而本书
-是基于Web的，这就使得它和很多模式的书籍很不一样了。也因此，它才可以作为Rails的设计蓝图。而所有这些模式，大都来自于实践。实际上，
-至今Rails也是Web开发优秀实践的最佳代表。而且Web开发的实践模式也不止书中提到的这些，实际上了解这些模式最好的方法就是接触Rails。虽然现在的模式比本书包含的更多了，本书依然很值得推荐阅读。</p>
-
-<h2>笔记整理</h2>
-
-<p>业务逻辑其实是业务反逻辑： complex business illogic</p>
-
-<h3>分层的坏处</h3>
-
-<ol>
-<li>级联变更（Cascading Changes），就是改了一个地方往往要改n个地方</li>
-<li>性能损害</li>
-</ol>
-
-
-<p>三层模型之所以能够流行，也是因为Web的流行。Client-Server工具中，是很难实现三层配置使用的。不过如今的App开发，好像也是三层模式。<br/>
-但总体而言三层模型的流行是Web和Java等崛起的后果。</p>
-
-<h3>常见的业务代码组织形式</h3>
-
-<ul>
-<li>Transaction Script</li>
-<li>Domain Module , OO对TS的改变</li>
-<li>Service层</li>
-</ul>
-
-
-<h3>会话状态</h3>
-
-<ul>
-<li>客户端 Cookie</li>
-<li>服务端（内存）</li>
-<li>共享服务端（数据库 Redis Memcache 共享文件夹）</li>
-</ul>
-
-
-<h3>分布式</h3>
-
-<p>i
-* 不要把不同的功能（对象）组件放在不同的服务器上，这样性能有问题
-* 进程间只能尽量使用粗粒度接口，如N+1一次性读取同时返回很多信息
-* 同一台服务器内部使用细粒度调用，远程外观模式<br/>
-* Data Transfer Object ，传输对象，上面的那种是调用方法
-* 同步的接口为主
-* 异步的基于消息的处理方式
-* 推动你思考而不是代替你思考，最终享受乐趣的是你，承担痛苦的也是你</p>
-
-<h3>锁的种类</h3>
-
-<ol>
-<li>乐观锁，比如自己建立版本号；</li>
-<li>悲观锁，就是常见的for lock；</li>
-<li>粗颗粒（coarse-grainned)锁，就是一堆对象映射成一个入口，在入口处实施加锁；</li>
-<li>隐含锁，把锁加到框架里，由Lock Manager和Lock Mapper来实现<strong>模板方法</strong>。</li>
-</ol>
-
-
-<h3>Stub和Mock</h3>
-
-<p>Stub：用一个类直接替换某接口的实现，在测试或开发过程中使用这个替换类<br/>
-Mock：用一个服务的重写来模拟某服务</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -975,6 +1169,10 @@ Mock：用一个服务的重写来模拟某服务</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/28/springzhong-de-cron/">Spring中的CRON</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/21/tpp/">The Passionate Programmer</a>
       </li>
     
@@ -990,15 +1188,11 @@ Mock：用一个服务的重写来模拟某服务</p>
         <a href="/blog/2014/11/19/tomcat7-cai-yong-rediszuo-wei-session-store-2/">Tomcat7 采用 Redis作为session Store - 2</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/11/09/a-qing-dui-bin-zhi-bu-man-de-cai-xiang/">阿庆对缤智不满的猜想</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (12)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/spring'>Spring (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (12)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

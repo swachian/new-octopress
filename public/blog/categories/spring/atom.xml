@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-23T23:02:13+08:00</updated>
+  <updated>2014-12-28T15:25:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Spring中的CRON]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron/"/>
+    <updated>2014-12-28T15:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron</id>
+    <content type="html"><![CDATA[<p>在<a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>一文中，
+已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
+<code>period</code> 和 <code>delay</code>两个参数就够了。</p>
+
+<p>这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。好在Spring 4.0版
+开始已经支持cron，配置起来也很简洁。</p>
+
+<p>首先，在<code>spring-mvc.xml</code>中增加要定期执行的类作为bean，作用是把要定期执行的类交给spring扫描</p>
+
+<p><code>xml
+&lt;bean id="LastDayDevicePackorderlogRefreshTaskExecutor" class="com.sanss.toolbar.job.LastDayDevicePackorderlogRefreshTaskExecutor"&gt;
+&lt;/bean&gt;
+</code></p>
+
+<p>其次，在这个类上使用标注<code>@EnableScheduling</code>，让spring意识到这是一个定期调度启动的任务。</p>
+
+<p>```java
+@EnableScheduling
+public class LastDayDevicePackorderlogRefreshTaskExecutor implements Runnable {</p>
+
+<p>}
+```</p>
+
+<p>最后，是在具体要启动的method上标注<code>@Scheduled(cron = "0 * * * * *")</code>，以此给出具体的执行安排。<br/>
+标注中cron的具体含义可以见下面的注释。</p>
+
+<p>```java</p>
+
+<pre><code>/*
+ * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。
+ *
+ * 按顺序依次为 秒（0~59）
+ *
+ * 分钟（0~59）
+ *
+ * 小时（0~23）
+ *
+ * 天（月）（0~31，但是你需要考虑你月的天数）
+ *
+ * 月（0~11）
+ *
+ * 天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）
+ *
+ * 7.年份（1970－2099）
+ */
+@Scheduled(cron = "0 * * * * *")
+public void run() {
+    // TODO Auto-generated method stub
+    // doit();
+    logger.info("定期触发");
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nginx 处理Spring 静态资源的配置]]></title>
