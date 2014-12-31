@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-28T15:25:49+08:00</updated>
+  <updated>2014-12-31T23:52:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 上折腾Ruby 2.2]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/"/>
+    <updated>2014-12-31T21:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2</id>
+    <content type="html"><![CDATA[<p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
+为此又开始了折腾。</p>
+
+<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
+
+<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
+SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew update <span class="c"># 更新brew</span>
+</span><span class='line'>brew install openssl <span class="c"># 安装最新的ssl</span>
+</span><span class='line'>brew link openssl --force <span class="c">#建立关联</span>
+</span><span class='line'>brew install curl-ca-bundle <span class="c"># 这个执行是失败的，原因似乎是在2014年去除了</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
+下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
+解决办法是建立link或者索性在configure时指定</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure --with-openssl-dir<span class="o">=</span><span class="sb">`</span>brew --prefix openssl<span class="sb">`</span> --disable-install-doc --prefix<span class="o">=</span>/Users/me/.rbenv/versions/ruby-2.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
+
+<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
+很多都是被挡在配置环境这第一道关口。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spring中的CRON]]></title>
@@ -1584,22 +1624,6 @@ HBase CouchDB和Rails社区还是不搭。</p>
 和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
 
 <p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[靠谱的油耗数据库]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/"/>
-    <updated>2014-07-23T22:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku</id>
-    <content type="html"><![CDATA[<p>油耗一直以来是买车的一个重要考量，之前一直查看汽车之家上的工信部综合油耗数据。
-然而，工信部实际上有更细化的数据，区分了市区工况和市郊工况。这显然更对实践有指导意义。</p>
-
-<p>而且，工信部的信用和客观性也是最有保证的。至少，通过天籁的数据来看，完全符合我遇到的实际情况。
-下面这个<a href="http://chinaafc.miit.gov.cn/n2257/n2280/index.html">链接</a> http://chinaafc.miit.gov.cn/n2257/n2280/index.html
-可供参考。</p>
-
-<p>在高级查询中，通用名称处填写车子的常用称呼即可。访问的速度可能有点慢，但数据真的有效。</p>
 ]]></content>
   </entry>
   

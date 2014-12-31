@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2014-12-28T15:25:49+08:00</updated>
+  <updated>2014-12-31T23:52:43+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 上折腾Ruby 2.2]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/"/>
+    <updated>2014-12-31T21:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2</id>
+    <content type="html"><![CDATA[<p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
+为此又开始了折腾。</p>
+
+<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
+
+<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
+SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
+
+<p><code>bash
+brew update # 更新brew
+brew install openssl # 安装最新的ssl
+brew link openssl --force #建立关联
+brew install curl-ca-bundle # 这个执行是失败的，原因似乎是在2014年去除了
+</code></p>
+
+<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
+下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
+解决办法是建立link或者索性在configure时指定</p>
+
+<p><code>``bash
+./configure --with-openssl-dir=</code>brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2</p>
+
+<p>```</p>
+
+<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
+
+<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
+很多都是被挡在配置环境这第一道关口。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Passionate Programmer]]></title>
@@ -156,174 +192,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
 
 <p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[notes of matz on Ruby 2.0 at herokus waza]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/"/>
-    <updated>2013-03-08T11:15:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza</id>
-    <content type="html"><![CDATA[<p><a href="https://speakerdeck.com/yukihiro_matz/ruby-2-dot-0-en">Mats Ruby 2.0</a>
-的笔记。</p>
-
-<p>首先讲了Ruby的历史</p>
-
-<ul>
-<li>Dec 1995 0.95</li>
-<li>Dec 1996 1.0</li>
-<li>Aug 1997 1.1</li>
-<li>Dec 1998 1.2</li>
-<li>Aug 1999 1.4</li>
-<li>Sep 2000 1.6</li>
-</ul>
-
-
-<p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
-
-<p>voccation-driven development<br/>
-Anniversary-driven development</p>
-
-<ul>
-<li>Aug 2003 1.8</li>
-<li>Dec 2007 1.9.0</li>
-<li>Aug 2010 1.9.2</li>
-<li>Oct 2011 1.9.3</li>
-<li>Feb 2013 2.0.0</li>
-</ul>
-
-
-<p>2.0版最早是在Ruby Conf 2001提出，包括</p>
-
-<ul>
-<li>new GC</li>
-<li>native Thread with GIL</li>
-<li>有些特性后来放弃了</li>
-</ul>
-
-
-<p>2.0的发布带来了：</p>
-
-<ul>
-<li>New Hash literals</li>
-</ul>
-
-
-<p><code>
-  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}
-</code></p>
-
-<ul>
-<li>keyword arguments</li>
-</ul>
-
-
-<p>```
-  def log(msg, level: "ERROR", time: Time.now)</p>
-
-<pre><code>puts "..."
-</code></pre>
-
-<p>  end</p>
-
-<p>  # existing hash passing
-  log("Hello!", **hash)
-```</p>
-
-<ul>
-<li>Module#prepend, alias method chain, from CommonLisp</li>
-</ul>
-
-
-<p>```</p>
-
-<h1>prepend put them before to wrap methods</h1>
-
-<p>class Foo
-  def foo; p :foo; end
-end</p>
-
-<p>module Prepend
-  def foo</p>
-
-<pre><code>p :before
-super
-p :after
-</code></pre>
-
-<p>  end
-end</p>
-
-<p>class Foo
-  prepend Prepend # just as include Prepend
-end</p>
-
-<p>Foo.new.foo</p>
-
-<p>```</p>
-
-<ul>
-<li>refine，to constrain open class, scoped monkey patching</li>
-</ul>
-
-
-<p>```
-module R
-  refine String do</p>
-
-<pre><code>def foo
-  puts "aaa"
-end
-</code></pre>
-
-<p>  end
-end</p>
-
-<p>"".foo # => error!</p>
-
-<p>using R
-"".foo
-```</p>
-
-<p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
-
-<ul>
-<li>Enumerable#lazy， 受函数式编程影响</li>
-</ul>
-
-
-<p><code>
-(1..Float::INFINITY).lazy.map {|i|
-  i.to_s
-}.select {|s|
-  /3/ === s
-}.first(500000)
-</code></p>
-
-<ul>
-<li>Symbol array literals</li>
-</ul>
-
-
-<p><code>
-%i(foo bar baz) =&gt; [:foo, :bar, :baz]
-</code></p>
-
-<ul>
-<li><p>to_h, to_hash</p></li>
-<li><p>UTF-8 by default</p></li>
-<li><p>Performance Faster:</p>
-
-<ul>
-<li>VM(YARV)</li>
-<li>GC</li>
-<li>require</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Ruby 2.1 maybe 25.12.2013</p>
 ]]></content>
   </entry>
   

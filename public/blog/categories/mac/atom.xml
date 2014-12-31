@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: mac | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2014-12-31T23:52:43+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 上折腾Ruby 2.2]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/"/>
+    <updated>2014-12-31T21:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2</id>
+    <content type="html"><![CDATA[<p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
+为此又开始了折腾。</p>
+
+<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
+
+<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
+SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
+
+<p><code>bash
+brew update # 更新brew
+brew install openssl # 安装最新的ssl
+brew link openssl --force #建立关联
+brew install curl-ca-bundle # 这个执行是失败的，原因似乎是在2014年去除了
+</code></p>
+
+<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
+下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
+解决办法是建立link或者索性在configure时指定</p>
+
+<p><code>``bash
+./configure --with-openssl-dir=</code>brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2</p>
+
+<p>```</p>
+
+<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
+
+<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
+很多都是被挡在配置环境这第一道关口。</p>
+]]></content>
+  </entry>
+  
+</feed>

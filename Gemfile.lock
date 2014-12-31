@@ -13,7 +13,7 @@ GEM
       sass (~> 3.2.19)
     daemons (1.1.9)
     directory_watcher (1.4.1)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     fast-stemmer (1.0.2)
     fssm (0.2.10)
     haml (3.1.8)
@@ -32,7 +32,7 @@ GEM
     pygments.rb (0.3.7)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
-    rack (1.5.2)
+    rack (1.6.0)
     rack-protection (1.5.3)
       rack
     raindrops (0.13.0)

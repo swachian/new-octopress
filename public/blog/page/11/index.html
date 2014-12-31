@@ -9,7 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="从证书本身来说，高级证书就是相当于高级工程师资格，如果放在学校里就是相当于可以聘为副教授了。 在软考出台规定cancel掉一切计算机工程师评审之前，以及其他至今仍然在评定的中高级职称，通常情况下一个大学本科毕业生需要经过5年才能拿到中级证书，再经过5年才能拿到高级证书。 &hellip;">
+  <meta name="description" content="最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+挂号网做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。 初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +70,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/02/a-gov-site/">一个政府网站</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-02T10:30:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近发现网上预约挂号竟然免费了，确实挺稀奇的。同时，发现全国的那个
+<a href="http://www.guahao.com/">挂号网</a>做的相当有特色，可以说很不像一个官方
+站点，所以记录一下调查出来的结果。</p>
+
+<p>初一看，这个站点很像Rails制作出来的网站。当然，Rails只是后端，任何
+后台程序都可以产生一样的HTML页面。但是实践和习惯也是一种强大的力量，
+所以风格上还是很有倾向性的。
+能确定的，就是从页面风格上，这个站点用了大量jquery和bootstrap的前端技术，
+后端的框架可能不是Rails，但这个框架本身借鉴了很多Rails的技巧与实践。</p>
+
+<p>从网站的风格可以看出，受豆瓣的影响挺深。从我的口味来说，这个站点比豆瓣
+做的更加清爽。</p>
+
+<p>后台的技术并不完全确定，不过这个站点也使用了varnish这个组件。</p>
+
+<p>之后，就好奇这个站点是哪家开发。毕竟一个官网做成这样是很罕见的。搜索了半天，
+终于发现原来是浙江杭州的一家公司做的。这家公司其实是一个互联网公司，并不是
+传统的做如软件集成业务的企业，也难怪会做出这样一个与众不同的产品出来。</p>
+
+<p>下面是这个企业的介绍，摘自<a href="http://search.51job.com/list/co,c,2756440,000000,50,1.html">51job</a></p>
+
+<blockquote><p><strong>浙江康健绿线网络技术有限公司 </strong><br/>
+为提高全民健康素养，切实缓解“看病难”问题，2010年3月，经卫生部批准， “全国健康咨询及就医指导平台”正式启动建设，目前为用户提供就医指导、预约挂号、 健康咨询、医疗支付服务，帮助用户合理就诊、方便就医。“全国健康咨询及就医指导平台”由卫生部新闻宣传中心/中国健康教育中心组织实施，中国医院协会提供支持。</p>
+
+<p>作为“全国健康咨询及就医指导平台”的官方网站，Guahao.com通过号源托管、HIS直连、搜索链接三种方式聚合了全国超过400家重点三级医院的预约挂号资源，建立了全国三级医院22万名医生的专长库，帮助全国用户“找对医生挂到号”。</p>
+
+<p>“全国健康咨询及就医指导平台”启动两年来，已成功为全国超过1200万用户提供了预约挂号、就医指导、健康咨询服务，成为了全国规模最大的医疗健康服务平台。</p></blockquote>
+
+<p>不过仔细分辨的话，这个站点不具备一些rails网站的典型特征，尤其缺乏近期Rails的实践特色。目前推测实现上可能是采用的Zend，一个PHP的框架。</p>
+
+<blockquote><p>Zend Framework的设计构思形成于2005年，由Ruby on Rails和Spring Framework的设计思路发展而来的。2005年10月，第一次Zend年会上，Zend公司宣布了ZF的开发计划。[2]
+2007年7月1日，Zend Framework 1.0发布。
+Zend Framework 本身的结构很大程度的模仿了 Ruby on Rails，但又做了足够的改动使其适应 PHP 的特点。所以很多 PHP 框架都或多或少的借鉴、参考了 Zend Framework。由于不满 Zend Framework 中前端控制器重复初始化带来的不必要开销，甚至有开发者用 C/C++ 写 PHP 扩展的方式，重新实现了 Zend Framework ，使前端控制器只需要全局初始化一次（Yaf Framework）。</p></blockquote>
+
+<p>估计挂号网也是用zend写的。也就难怪这东西做出来的html和url确实和rails像极了。</p>
+
+<p>同时，听说<a href="http://xiami.com">虾米网</a>改用PHP了，不过我以前记得是Rails写的。看网站的介绍，推测是08年年底他们改换成的PHP，呵呵，看来不关注这个网的时间蛮久了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -641,49 +716,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/11/the-hardware-architecture-of-37-signals/">The Hardware Architecture of 37 Signals</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-11T11:10:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
-
-<p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
-就能装进12个u 48根内存条。目前37signals的rails进程跑了8个sleds。
-网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
-备份直接用的S3 storage。</p>
-
-<p><img src="/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -701,6 +733,10 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/">Mac 上折腾Ruby 2.2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/28/springzhong-de-cron/">Spring中的CRON</a>
       </li>
     
@@ -716,15 +752,11 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
         <a href="/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/">并发的ab测试和校验码对并发状况处理的盲区</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/11/19/tomcat7-cai-yong-rediszuo-wei-session-store-2/">Tomcat7 采用 Redis作为session Store - 2</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (12)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/车车'>车车 (20)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li></ul>
 </section>
   
 </aside>
