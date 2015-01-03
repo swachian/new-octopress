@@ -3,6 +3,7 @@ layout: post
 title: "又是新的一年"
 date: 2015-01-01 15:06
 comments: true
+published: true
 categories:
 - 生活
 ---

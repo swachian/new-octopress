@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-01-01T22:03:23+08:00</updated>
+  <updated>2015-01-03T19:30:51+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -98,6 +98,48 @@ SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code
 
 <p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
 很多都是被挡在配置环境这第一道关口。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Papago gosafe520 行车记录仪]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi/"/>
+    <updated>2014-12-28T16:56:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi</id>
+    <content type="html"><![CDATA[<p>算起来今年买的千元左右的台湾制造也不少，夏天时候买过一个浦科特的256GB SSD，然后就是去年年底买的这个Papago gosafe520行车记录仪。</p>
+
+<p>从去年5月份开车之初开始，要不要买一个记录仪就让我很纠结。一方面，有个视频可以方便复盘，方便在有问题的时候还原真相，可以降低行车风险。
+另一方面，很多人装了之后也确实长期没使用价值，而车上多装一个东西总是一件麻烦的事情。</p>
+
+<p>随着驾驶操作逐步熟练，自己对记录仪的必要性是一天比一天认为不重要的。
+开了几个月之后，觉得还是这样开吧，一般问题也不大。但是，在停车后发生的一些事情，最终促使我决定入一个行车记录仪，而且核心功能之一是可以支持停车监控。</p>
+
+<p>很多朋友都知道，上海很多小区的停车环境普遍是比较困难的。而我们小区更是这方面相当出名，每隔几年就能上一次上海本地一线报纸的普通版面。我实际停了之后发现，真正容易刮花车子的，反而是小区的垃圾工和垃圾车。在跟物业交涉的时候，有视频做证据会较有利些。
+所以就决定装一个记录仪，可以给自己多一份保障。</p>
+
+<p>在决定购买之后，又面买什么的问题。之前纠结的一部分原因，就是记录仪真的是一个让人眼花缭乱的市场。并没有众望所归的王者，各种标准也不规范，指标也比较混乱，整个市场其实还在飞速发展中，产品更新换代的节奏很快。
+具体表现在缺乏大牌与领导厂商，山寨横行。产品更新换代迅速，价格跳水事件常见。最后考虑了牌子和芯片，决定还是入了Papago搭载安霸A7芯片的Gosafe520. 选择的原因是安霸看各类报道相对头牌一些，Papago毕竟在这个市场做了挺多年，价钱也可以接受。</p>
+
+<p>Gosafe520主要有以下几点特性：</p>
+
+<ol>
+<li>安霸A7的芯片</li>
+<li>价格千元以内</li>
+<li>视角146°</li>
+<li>3寸屏幕</li>
+<li>最高支持2560x1080分辨率</li>
+<li>内置重力传感器，可记录紧急事件</li>
+<li>内置500ma电池，据称无电池爆裂风险，耐高温</li>
+<li>可用充电宝实现夜晚连续监控</li>
+<li>具备移动监测功能，这个对连续监控很有用，不然32GB的卡也存放不了一晚上的数据</li>
+</ol>
+
+
+<p>使用下来后，其实在动态前进的过程中，要拍清楚前车的号码还是一件不可能完成的任务。在等红灯停车和速度一致时才能拍的清楚。
+只能留待以后的技术发展和进步了。而配合10000ma的充电宝，基本可以支持20小时以上的的持续监控，也算达到购买的初衷。吸盘使用了十来天，也还算吸的牢靠，搭配usb线夹入右遮阳板，就算吸盘松了靠线材也不至于掉到地上。</p>
+
+<p>不好的方面则是夜里还不够清晰，动态前进的拍摄效果还是有待提高。最高目标是能拍清楚对向来车的车牌。（不知道现在有没有已经做到这一点的产品？）
+tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，而在这个记录仪的使用周期里，64G甚至128G卡的价格应该会下来也就能够普及，而520以后也是无法插这些卡的。送的usb线也有点短，而且非用mini usb口也有点蛋疼，和安卓的micro usb兼容应该不难的吧。另外就是自带电池的话，在夏天还是一个隐患，好在现在是冬天意味着我至少可以先用上半年。</p>
 ]]></content>
   </entry>
   
@@ -1590,63 +1632,6 @@ HBase CouchDB和Rails社区还是不搭。</p>
 
 <p>大部分在部署和主机上的预算小于月预算的10%。同运营一个公司比较起来，
 部署和服务器方面的开销确实只是小头。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[新车评的一些数据]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/08/09/xin-che-ping-de-%5B%3F%5D-xie-shu-ju/"/>
-    <updated>2014-08-09T22:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/08/09/xin-che-ping-de-[?]-xie-shu-ju</id>
-    <content type="html"><![CDATA[<p>这阵子看了太多新车评的文章，总想统计一下。于是写了这么个<a href="https://github.com/swachian/xincheping">应用</a>。</p>
-
-<p>从数据来看，yyp无疑是新车评的支柱，也难怪，这个媒体本来就是他创立的。其次是两个曾姓编辑，阿聪和阿庆。
-阿聪是元老级别的，可能也是一个合伙人，2007年长测开始时就已经开始有发文了。而阿庆则是在2010年才入职，
-开始有产出。但从产量上来讲，阿庆很高。而且他还是新车评的两个视频主持人之一。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>颜宇鹏, 长测文章数: 437, 观点文章数: 429
-</span><span class='line'>曾智聪,    长测文章数: 282, 观点文章数: 90
-</span><span class='line'>曾昭庆,    长测文章数: 177, 观点文章数: 116
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上三者无疑是新车评从建立之初至今的绝对支柱。而目前的主力还有阿文、林晋等四人。
-阿文是2011年就在新车评了，另外三个基本上要比他晚了1年半。这几个也是目前长测的主力。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>余恒文, 长测文章数: 93, 观点文章数: 73
-</span><span class='line'>伍澳迦,    长测文章数: 71, 观点文章数: 39
-</span><span class='line'>钟永坚,    长测文章数: 88, 观点文章数: 47
-</span><span class='line'>林晋,   长测文章数: 56, 观点文章数: 22
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>当然，还有一些已毕业的主力。像钟志荣、李尔欣都是元老级的新车评编辑了。我还是很希望能再读到阿荣的文字的。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>钟志荣, 长测文章数: 114, 观点文章数: 18
-</span><span class='line'>许恒生,    长测文章数: 92,    观点文章数: 32
-</span><span class='line'>盛韶光,    长测文章数: 51,  观点文章数: 48
-</span><span class='line'>郝舟,     长测文章数: 25,  观点文章数: 0
-</span><span class='line'>冉亮,     长测文章数: 42,  观点文章数: 0
-</span><span class='line'>武昭博,    长测文章数: 9,   观点文章数: 0
-</span><span class='line'>李尔欣,    长测文章数: 6,   观点文章数: 13
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其他还有一些新人，需要时间继续积淀。或者不太发文的资深编辑，那就是神龙见首不见尾了。</p>
 ]]></content>
   </entry>
   
