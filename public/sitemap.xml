@@ -895,15 +895,21 @@
         <lastmod>2015-01-03T12:50:36+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2015/01/10/dong-jia-shi-de-huan-shi-de-guo-ren/
+        </loc>
+        <lastmod>2015-01-10T17:06:28+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2015-01-03T19:30:40+08:00</lastmod>
+        <lastmod>2015-01-10T17:06:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2015-01-03T19:30:40+08:00</lastmod>
+        <lastmod>2015-01-10T17:06:28+08:00</lastmod>
     </url>
 </urlset>
