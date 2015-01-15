@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="过去一阵子看了不少片子，两部片子印象尤其深刻： 虎胆龙威1
-光荣战役 先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。 从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片， &hellip;">
+  <meta name="description" content="换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。 原理 Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/back-and-forth-with-wlan-card/">对无线网卡的折腾</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T15:39:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。</p>
+
+<h3>原理</h3>
+
+<p>Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。</p>
+
+<p>频带则有20和40MHz两种，一般前者全部开启，而后者就不一定了。</p>
+
+<p>只有20MHz和2.4GHz的情况下，最大只有72Mbps； 同时有5GHz，则可以达到150Mbps。 无论是2.4还是5，同时使用40MHz的话，性能都可以翻倍。再加上一些其他的优化技术，最大可以达到300Mbps。</p>
+
+<p>现实中，20<em>（2.4+5）的情况是很少的，一般150Mbps的是（20+40）</em>2.4。 然而，被割的太厉害的话，就只有20*2.4，那就只有72Mbps了。比如dell国内6430搭配的bcm制造的无线网卡。</p>
+
+<h3>Dell 1504无线网卡</h3>
+
+<p>这款网卡是dell让bcm代工的，而非常见的intel芯片网卡。博通公司的网络设备也久负盛名，国内的路由器大部分也是博通的芯片，然而这款
+wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一基带，最终结果就是明明是n的卡，实际性能只比802.11g的54Mbps好了没有多少，至多72Mbps。</p>
+
+<p>并且，E6430本身也还是一台不错的机器，wifi配了3根天线，但是这块网卡却是只有2根天线。老的E6400倒是intel的5300网卡，3根天线且支持双频，于是最后决定利旧一下。虽然5300已经过气，但性能明显比1504还是要强的。</p>
+
+<h3>更换结果</h3>
+
+<p>三根天线:</p>
+
+<p><img src="/images/screen_print/IMG_20131008_100132.jpg" alt="image" /></p>
+
+<p>两根天线：</p>
+
+<p><img src="/images/screen_print/IMG_20131001_161051.jpg" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -611,46 +673,6 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/05/cong-cong-ban-nian/">匆匆半年</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。</p>
-
-<p>有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。</p>
-
-<p>说句实话，这半年过的还不错。只是飙升的体重真的要想办法调整才行了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -668,6 +690,10 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/15/bi-ji-ben-jia-liao-ssd/">笔记本加了SSD</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/10/dong-jia-shi-de-huan-shi-de-guo-ren/">懂驾驶的还是德国人</a>
       </li>
     
@@ -683,15 +709,11 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
         <a href="/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi/">Papago gosafe520 行车记录仪</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/12/28/springzhong-de-cron/">Spring中的CRON</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (53)</a></li><li><a href='/blog/categories/生活'>生活 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/装机'>装机 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (54)</a></li><li><a href='/blog/categories/生活'>生活 (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li></ul>
 </section>
   
 </aside>
