@@ -18,24 +18,36 @@ categories:
 
 在得知建兴有一款性价比很高的128GB SSD之后，毫无犹豫地入了一款。
 
-![建兴ssd](http://d.pcs.baidu.com/thumbnail/c15c343e74316c7cc9c0e33c9e63f2fa?fid=16876675-250528-728422764696751&time=1421334000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-hREfd0VARX4KNw1VLThaLSOCSn4%3D&expires=2h&prisign=unkown&chkv=0&chkbd=0&chkpc=&size=c850_u580&quality=100)
-![ssd文字](http://d.pcs.baidu.com/thumbnail/6e2037a751c6af9d75e9b098b2dadfa0?fid=16876675-250528-1035096815432286&time=1421334000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-jBZBw6%2B2XJ8eRN59%2B8GfFGT4nuk%3D&expires=2h&prisign=unkown&chkv=0&chkbd=0&chkpc=&size=c850_u580&quality=10)
+![建兴ssd](/images/ssd/1.jpg)
+![ssd文字](/images/ssd/2.jpg)
 
 为了让原装的750GB机械硬盘继续发挥作用，加20块买了个光驱位的SATA接口的硬盘支架，两样东西合计399元。
 
-![硬盘支架](http://d.pcs.baidu.com/thumbnail/ba4f029f749807147bd0b961b7cbc182?fid=16876675-250528-72099845657193&time=1421334000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-qTjFKXSTLALRM54wX4IbPuoWeEk%3D&expires=2h&prisign=unkown&chkv=0&chkbd=0&chkpc=&size=c850_u580&quality=100)
+![硬盘支架](/images/ssd/3.jpg)
 
 上面这幅图里面是已经把机械硬盘装进去之后的效果了。
 
 同时再拆下原装光驱的面板和扳手，下面这幅图是二者的对比。
-![光驱和硬盘支架](http://d.pcs.baidu.com/thumbnail/b58ea6d5336dd57ea27469df80b3d850?fid=16876675-250528-351241314720288&time=1421334000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-kanfL0MsBBuED9NTVeR4ANOFPaA%3D&expires=2h&prisign=unkown&chkv=0&chkbd=0&chkpc=&size=c850_u580&quality=100)
+![光驱和硬盘支架](/images/ssd/4.jpg)
 
 扳手
-![扳手](http://d.pcs.baidu.com/thumbnail/dc13555dfa5ff39b44593393032018d5?fid=16876675-250528-112756031410287&time=1421334000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-vzkGzMttJYHk%2FUYuCxIszQItpN8%3D&expires=2h&prisign=unkown&chkv=0&chkbd=0&chkpc=&size=c850_u580&quality=100)
+![扳手](/images/ssd/5.jpg)
 
 安装过程中唯一有点麻烦的就是SSD插入原本的HDD位置时，由于SSD偏薄，所以要让SSD尽量卡在两个原配的黑色橡皮支架上面一点，这样
 才能确保SATA接口衔接上，否则是认不出SSD硬盘的。
 
 硬件安装完成之后，就是OS的安装。OS安装完成之后，因为有了xxxx软件管家，使得装一些常用的应用简单了许多。
-而经过一番忙(ze)碌(teng)之后，从启动时间上来讲，由几分钟缩短到了20秒左右；从Tomcat启动Spring应用来讲，启动时间由30秒减小到了7秒钟；打开各色应用也自然更快了。
+而经过一番忙(ze)碌(teng)之后，从启动时间上来讲，由几分钟缩短到了20秒左右；
+![image](/images/ssd/6.jpg)
+
+从Tomcat启动Spring应用来讲，启动时间由30秒减小到了7秒钟；打开各色应用也自然更快了。
 效果可谓立竿见影且始终会用到。
+
+跑分的结果
+![image](/images/ssd/7.jpg)
+
+SSD终于到了可以普及的一天了。
+
+
+
+
