@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="WebSocket defines a full-duplex communication channel that operates through a single socket over the Web 现在浏览器对real-time应用的解决办法： polling ajax 定期轮询 &hellip;">
+  <meta name="description" content="关于Inside Github
+的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt 创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。 Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,190 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/29/inside-github/">Inside Github</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-29T11:18:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
+的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
+
+<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
+
+<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
+
+<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
+4四大<strong>frameworks</strong>组成。</p>
+
+<ul>
+<li>rails
+Github.com, Gist, &#8230;</li>
+<li>resque
+Background processing, G大约有50个不同的类型</li>
+<li>chimney
+All git calls happen over the write</li>
+<li>utils
+ 意外日志，统计，辅助应用等</li>
+</ul>
+
+
+<h3>rails</h3>
+
+<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
+GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
+
+<ul>
+<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
+支付的抽象库。有中国人给家里alipay的补丁</li>
+<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
+<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
+<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
+<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
+除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
+</ul>
+
+
+<p>Gems:</p>
+
+<ul>
+<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
+<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
+<li><a href="">aws-s3</a></li>
+<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
+<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
+<li><a href="https://github.com/github/markup">github/markup</a></li>
+<li>[jekyll]</li>
+<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
+<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
+<li>[unicorn] 16 workers</li>
+</ul>
+
+
+<p>Rack:</p>
+
+<ul>
+<li>Rack::Bug<br/>
+Coderack</li>
+<li>nerdEd/rack-validate</li>
+<li>webficient/rack-tidy</li>
+<li>talison/rack-mobile-detect</li>
+</ul>
+
+
+<p>Nginx当然不让 :<br/>
+* Limit Zone<br/>
+* Limit Request: Anti-DDOS
+* memcached support<br/>
+* Push Module: comet!</p>
+
+<p>Git:
+* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
+
+<h3>chimney(smoke)</h3>
+
+<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
+Smoke calls</p>
+
+<ul>
+<li>BERT-RPC
+另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
+<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
+<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
+<li>[chimney]
+proprietary 的库，怀疑是erlang写的<br/>
+让RPC clients知道如何找到server，路由内容存放在Redis中</li>
+<li>proxymachine
+有点类似nodeload替换的功能，不过这个也用于git clone<br/>
+能用来作为所有tcp链接的代理</li>
+<li>JSON-RPC</li>
+<li>node.js<br/>
+downloads<br/>
+event streams</li>
+<li>hubot</li>
+</ul>
+
+
+<h3>resque</h3>
+
+<ul>
+<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
+Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
+<li><p>优先等级</p>
+
+<ul>
+<li>严重</li>
+<li>高</li>
+<li>低</li>
+</ul>
+</li>
+<li><p>队列任务</p>
+
+<ul>
+<li>page 产生页面</li>
+<li>archive 打包tar</li>
+<li>search
+
+<ul>
+<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据库是MySql 5</p></li>
+</ul>
+
+
+<h3>utils</h3>
+
+<ul>
+<li>comet loading</li>
+<li>nagios 负责监控</li>
+<li>resque 的web</li>
+<li>collectd 用于手机负载、RAM等的信息</li>
+<li>pingdom 短信系统</li>
+<li>tender 一个客服系统</li>
+</ul>
+
+
+<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
+
+<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
+
+<p>里面提到了<strong>RDD</strong>的概念:<br/>
+readme driven development
+先把README叫做SPEC，完成一点，就把内容移到README中。</p>
+
+<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -619,175 +804,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/19/heredocs/">Heredocs 和缩进</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-19T12:41:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>heredocs是什么</h3>
-
-<p><strong>heredocs</strong>适用于在代码中写一长串文档赋给变量的情形。标准的ruby heredocs是这样的</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
-</span><span class='line'><span class="sh">aaa</span>
-</span><span class='line'><span class="sh">bbb</span>
-</span><span class='line'><span class="sh">ccc</span>
-</span><span class='line'><span class="no">END</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是使用heredocs的时候常有<strong>时灵时不灵</strong>的情形，这个陷阱在于最后一行的缩进。默认情况下，END是必须顶格的，比如可以这样写</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Poem</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
-</span><span class='line'>    <span class="vi">@text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
-</span><span class='line'><span class="sh">&quot;Faith&quot; is a fine invention</span>
-</span><span class='line'><span class="sh">When Gentlemen can see</span>
-</span><span class='line'><span class="sh">But Microscopes are prudent</span>
-</span><span class='line'><span class="sh">           In an Emergency.</span>
-</span><span class='line'><span class="sh">(Emily Dickinson 1830-1886)</span>
-</span><span class='line'><span class="no">END</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">recite</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="vi">@text</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但是这样写就是<strong>不行</strong>了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
-</span><span class='line'><span class="err">  aaa</span>
-</span><span class='line'><span class="err">  bbb</span>
-</span><span class='line'><span class="err">  END #END加了缩进就失败</span>
-</span><span class='line'>  <span class="n">aaa</span>
-</span><span class='line'>  <span class="n">bbb</span>
-</span><span class='line'>  <span class="k">END</span> <span class="c1">#END加了缩进就失败</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>解决办法</h3>
-
-<p>在第一个END前面加<code>-</code>，即使用<code>-END</code>，会让最后结束符<code> END</code>前的空白都被忽略，而<strong>内容前面的空白则会被保留</strong>。如果也要去掉，可以使用gsub.
-此处END可以换成任意大写字符，只要成对匹配即可。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Poem</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
-</span><span class='line'>    <span class="vi">@text</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">END</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/^ {6}/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="sh">      &quot;Faith&quot; is a fine invention</span>
-</span><span class='line'><span class="sh">      When Gentlemen can see</span>
-</span><span class='line'><span class="sh">      But Microscopes are prudent</span>
-</span><span class='line'><span class="sh">                 In an Emergency.</span>
-</span><span class='line'><span class="sh">      (Emily Dickinson 1830-1886)</span>
-</span><span class='line'><span class="no">    END</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">recite</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="vi">@text</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3><code>%w</code>是何方神圣</h3>
-
-<p>有几次，我直接使用<code>%w{}</code>以为解决了这个问题。但实际上得到是一个Array。只不过Array.to_s又会获得和heredocs一样的效果，在使用ruby1.9的前提下。
-%w要灵活方便的多吧，但这个确实不是heredocs，它只是数组。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">text2</span> <span class="o">=</span> <span class="sx">%w{</span>
-</span><span class='line'><span class="sx">aaa</span>
-</span><span class='line'><span class="sx">bbb</span>
-</span><span class='line'><span class="sx">ccc</span>
-</span><span class='line'><span class="sx">  dddd</span>
-</span><span class='line'><span class="sx">      }</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">text2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><a href="http://www.bitcetera.com/en/techblog/2009/07/02/heredoc-with-indent-in-ruby/">引用链接1</a></li>
-<li><a href="https://github.com/styleguide/ruby">引用链接2</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -805,6 +821,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/21/safaribu-zhi-chi-di-san-fang-cookieyin-qi-de-sessiongai-zao/">Safari不支持第三方cookie引起的session改造</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/15/bi-ji-ben-jia-liao-ssd/">笔记本加了SSD</a>
       </li>
     
@@ -820,15 +840,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/">Mac 上折腾Ruby 2.2</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi/">Papago gosafe520 行车记录仪</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (54)</a></li><li><a href='/blog/categories/生活'>生活 (35)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/java'>Java (11)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (55)</a></li><li><a href='/blog/categories/生活'>生活 (35)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/神器'>神器 (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/java'>Java (12)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/spring'>Spring (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>
