@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-01-21T16:37:31+08:00</updated>
+  <updated>2015-01-22T10:43:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/"/>
+    <updated>2015-01-22T09:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua</id>
+    <content type="html"><![CDATA[<p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
+
+<p>```jsp
+<link href='http://octopresszhangyu.herokuapp.com/toolbar/static/orderFlow/css/reset.css' rel="stylesheet" type="text/css" /></p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/jquery.min.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
+
+<p>```jsp</p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
+
+<p>style.tag
+<code>jsp
+&lt;%@ tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper" %&gt;
+&lt;%@ attribute name="file" type="java.lang.String" required="true" %&gt;
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /&gt;
+&lt;link href='${ctx}&lt;%=BaseHelper.rtg(file) %&gt;' rel="stylesheet" type="text/css" /&gt;
+</code></p>
+
+<p>javascript.tag
+```jsp
+&lt;%@tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper"%>
+&lt;%@ attribute name="file" type="java.lang.String" required="true"%>
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /></p>
+
+<script src="${ctx}<%=BaseHelper.rtg(file) %>" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
+
+<p>```java
+/<em>* 生成静态文件链接的公共方法，加上md5后缀或者时间戳。
+   * @param resource
+   * @return
+   </em>/
+  public static String rtg(String resource) {</p>
+
+<pre><code>String fileMd5 = fileMD5s.get(resource);
+if (StringUtils.isEmpty(fileMd5)) {
+  System.out.println(System.getProperty("user.dir"));
+  fileMd5 = getFileMD5("../webapps/toolbar/static/"+resource);
+  if (StringUtils.isEmpty(fileMd5)) {
+    fileMd5 = timestamp;
+  }
+  fileMD5s.put(resource, fileMd5);
+}
+
+return "/static/"+resource+"?"+fileMd5;
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
+
+<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
+
+<p><code>jsp
+&lt;tags:style file="styles/css1.css" /&gt;
+&lt;tags:javascript file="jquery/jquery.min.js" /&gt;
+&lt;tags:javascript file="jquery/tl.js" /&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Safari不支持第三方cookie引起的session改造]]></title>
@@ -263,66 +347,6 @@ synchronized private static void validCode(HttpSession sesson, String code) {
 <h3>得到的教训</h3>
 
 <p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tomcat7 采用 Redis作为session Store - 2]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/11/19/tomcat7-cai-yong-rediszuo-wei-session-store-2/"/>
-    <updated>2014-11-19T15:57:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/11/19/tomcat7-cai-yong-rediszuo-wei-session-store-2</id>
-    <content type="html"><![CDATA[<p>在<a href="/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/">Tomcat7 采用 Redis作为session Store</a>中，使用了redis作为tomcat的session共享。
-在打过几个补丁后，基本也算运作正常。只是偶尔总是有些null的session需要定期清理。而当时的作者已经近2年没再处理相关的pull request，所以我提交到了另外一个库中。</p>
-
-<p>上个月发现作者又回来了，接受处理了一系列的pull request并且还增加了一些新的配置。于是做了一下更新。</p>
-
-<p>原本提过需要3个包：</p>
-
-<ol>
-<li><del>tomcat-redis-session-manager-1.2-tomcat-7.jar</del></li>
-<li><del>jedis-2.0.0.jar</del></li>
-<li><del>commons-pool-1.3.jar</del></li>
-</ol>
-
-
-<p>这次作者终于在readme中也加以了描述，并且更新了版本：</p>
-
-<ol>
-<li>tomcat-redis-session-manager-VERSION.jar</li>
-<li>jedis-2.5.2.jar</li>
-<li>commons-pool2-2.2.jar</li>
-</ol>
-
-
-<p>在context.xml中的配法也做了一些调整，主要是类名发生了变化，
-```xml
-<Valve className="com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve" />
-&lt;Manager className="com.orangefunction.tomcat.redissessions.RedisSessionManager"</p>
-
-<pre><code>     host="localhost" &lt;!-- optional: defaults to "localhost" --&gt;
-     port="6379" &lt;!-- optional: defaults to "6379" --&gt;
-     database="0" &lt;!-- optional: defaults to "0" --&gt;
-     maxInactiveInterval="60" &lt;!-- optional: defaults to "60" (in seconds) --&gt;
-     sessionPersistPolicy="ALWAYS" &lt;!-- optional: defaults to "DEFAULT" --&gt; /&gt;
-     sessionPersistPolicies="PERSIST_POLICY_1,PERSIST_POLICY_2,.." &lt;!-- optional --&gt;
-     sentinelMaster="SentinelMasterName" &lt;!-- optional --&gt;
-     sentinels="sentinel-host-1:port,sentinel-host-2:port,.." &lt;!-- optional --&gt;
-    connectionPoolMaxIdle="20"
-     connectionPoolMaxTotal="500" 
-</code></pre>
-
-<p> /></p>
-
-<p>```</p>
-
-<p>另外就是增加了sessionPersistPolicies，建议选择<code>SAVE_ON_CHANGE</code>，如果选择<code>ALWAYS_SAVE_AFTER_REQUEST</code>，更容易诱发写竞争。而且有些场合，如果在request结束之后再写入，
-中间的状态可能时间会拖得太长。如果真的对竞争情况很敏感的场合，就需要自己手动设置锁。</p>
-
-<h3>github上把原作者的提交合并到自己的库中</h3>
-
-<p>同把自己的修改贡献给对方类似，只不过这种pull request需要换成base是自己的库，而head则是原作者库，然后新建pull request，github就会列出发生过的变化。
-这时候又会产生两种结局，其一是github可以自动合并，则再点击按钮即可，另一种是自动合并失败，会提示在本机先建分支，再pull原作者的分支，冲突解决（修改完毕）后合并回自己的主分支，
-然后再push到github。push成功后，github会自动关闭这个pull request。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-01-21T16:37:31+08:00</updated>
+  <updated>2015-01-22T10:43:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/"/>
+    <updated>2015-01-22T09:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua</id>
+    <content type="html"><![CDATA[<p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
+
+<p>```jsp
+<link href='http://octopresszhangyu.herokuapp.com/toolbar/static/orderFlow/css/reset.css' rel="stylesheet" type="text/css" /></p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/jquery.min.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
+
+<p>```jsp</p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
+
+<p>style.tag
+<code>jsp
+&lt;%@ tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper" %&gt;
+&lt;%@ attribute name="file" type="java.lang.String" required="true" %&gt;
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /&gt;
+&lt;link href='${ctx}&lt;%=BaseHelper.rtg(file) %&gt;' rel="stylesheet" type="text/css" /&gt;
+</code></p>
+
+<p>javascript.tag
+```jsp
+&lt;%@tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper"%>
+&lt;%@ attribute name="file" type="java.lang.String" required="true"%>
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /></p>
+
+<script src="${ctx}<%=BaseHelper.rtg(file) %>" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
+
+<p>```java
+/<em>* 生成静态文件链接的公共方法，加上md5后缀或者时间戳。
+   * @param resource
+   * @return
+   </em>/
+  public static String rtg(String resource) {</p>
+
+<pre><code>String fileMd5 = fileMD5s.get(resource);
+if (StringUtils.isEmpty(fileMd5)) {
+  System.out.println(System.getProperty("user.dir"));
+  fileMd5 = getFileMD5("../webapps/toolbar/static/"+resource);
+  if (StringUtils.isEmpty(fileMd5)) {
+    fileMd5 = timestamp;
+  }
+  fileMD5s.put(resource, fileMd5);
+}
+
+return "/static/"+resource+"?"+fileMd5;
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
+
+<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
+
+<p><code>jsp
+&lt;tags:style file="styles/css1.css" /&gt;
+&lt;tags:javascript file="jquery/jquery.min.js" /&gt;
+&lt;tags:javascript file="jquery/tl.js" /&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Safari不支持第三方cookie引起的session改造]]></title>
@@ -189,121 +273,6 @@ public void run() {
 精确的：305084，估计的：305281</p>
 
 <p>而这种方式最大的好处，自然就是对count-distinct这类问题统计起来毫无压力了,同时得到的数据也足够好用了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[并发的ab测试和校验码对并发状况处理的盲区]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/"/>
-    <updated>2014-12-11T21:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu</id>
-    <content type="html"><![CDATA[<p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
-但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
-
-<p>限制的过程是这样的：</p>
-
-<ol>
-<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
-<li>发送短信；</li>
-<li>刷新校验码。</li>
-</ol>
-
-
-<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
-极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
-
-<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
-颇费了一番周折。</p>
-
-<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
-
-<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
-
-<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
-
-<h3>第二个坑： 需要提前放入session</h3>
-
-<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
-因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
-正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
-带cookie上去，因此就得到了错误的响应。</p>
-
-<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
-ruby的rest-client。</p>
-
-<p>```ruby
-require 'rest-client'</p>
-
-<p>jsp = "http://xxx.com/portal/";
-passportUrl = 'http://xxx.com!validate.action?user_id=1xxxxxx&amp;verfiyCode=9813';</p>
-
-<p>def s
-  response = RestClient.get(jsp)
-  @cookies = response.cookies</p>
-
-<p>  @cookies['JSESSIONID'] = '74113695C0FB915393AE69DD63EAE088'
-  p @cookies
-  #puts response.body</p>
-
-<p>  5.times do |n|</p>
-
-<pre><code> response = RestClient.get(passportUrl, cookies: @cookies)
-</code></pre>
-
-<p>  end
-  puts response.body
-end</p>
-
-<p>s()
-```</p>
-
-<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
-模拟不出并发的效果，所以还是需要回到ab测试上。</p>
-
-<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
-
-<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
-
-<h3>解决的办法</h3>
-
-<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
-
-<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
-下面的方式，让锁住类对象来实现static的效果。</p>
-
-<p>```java</p>
-
-<pre><code>   synchronized (Controller.class) {  
-
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
-才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
-
-<p>```java
-synchronized private static void validCode(HttpSession sesson, String code) {
-  result = false;
-  if (StringUtils.equal(session.getAttribute("rand1"), code)) {</p>
-
-<pre><code>result = true;
-</code></pre>
-
-<p>  }
-  session.removeAttribute("rand1");
-  return result;
-}
-```</p>
-
-<h3>得到的教训</h3>
-
-<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
 ]]></content>
   </entry>
   

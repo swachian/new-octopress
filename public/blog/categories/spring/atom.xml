@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-01-21T16:37:31+08:00</updated>
+  <updated>2015-01-22T10:43:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/"/>
+    <updated>2015-01-22T09:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua</id>
+    <content type="html"><![CDATA[<p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
+
+<p>```jsp
+<link href='http://octopresszhangyu.herokuapp.com/toolbar/static/orderFlow/css/reset.css' rel="stylesheet" type="text/css" /></p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/jquery.min.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
+
+<p>```jsp</p>
+
+<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
+
+<p>style.tag
+<code>jsp
+&lt;%@ tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper" %&gt;
+&lt;%@ attribute name="file" type="java.lang.String" required="true" %&gt;
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /&gt;
+&lt;link href='${ctx}&lt;%=BaseHelper.rtg(file) %&gt;' rel="stylesheet" type="text/css" /&gt;
+</code></p>
+
+<p>javascript.tag
+```jsp
+&lt;%@tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper"%>
+&lt;%@ attribute name="file" type="java.lang.String" required="true"%>
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /></p>
+
+<script src="${ctx}<%=BaseHelper.rtg(file) %>" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
+
+<p>```java
+/<em>* 生成静态文件链接的公共方法，加上md5后缀或者时间戳。
+   * @param resource
+   * @return
+   </em>/
+  public static String rtg(String resource) {</p>
+
+<pre><code>String fileMd5 = fileMD5s.get(resource);
+if (StringUtils.isEmpty(fileMd5)) {
+  System.out.println(System.getProperty("user.dir"));
+  fileMd5 = getFileMD5("../webapps/toolbar/static/"+resource);
+  if (StringUtils.isEmpty(fileMd5)) {
+    fileMd5 = timestamp;
+  }
+  fileMD5s.put(resource, fileMd5);
+}
+
+return "/static/"+resource+"?"+fileMd5;
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
+
+<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
+
+<p><code>jsp
+&lt;tags:style file="styles/css1.css" /&gt;
+&lt;tags:javascript file="jquery/jquery.min.js" /&gt;
+&lt;tags:javascript file="jquery/tl.js" /&gt;
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spring中的CRON]]></title>
@@ -467,215 +551,6 @@ EL的支持来的有点慢，但好歹还是来了！</p>
 
 <p>而在EL有了调用method的能力后，helper模式可以做的更多，很多页面逻辑可以放到helper中去完成，即把<code>if</code> <code>for</code>封装在helper里面。
 这应该是目前最值得推崇的一种页面代码模式了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[士别三日 Jave Web非复昔日阿蒙]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng/"/>
-    <updated>2014-05-31T10:16:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/31/shi-bie-san-ri-jave-webfei-fu-xi-ri-a-meng</id>
-    <content type="html"><![CDATA[<p>六七年来，小组的Java Web开发是用SSH（Struts2+Spring+Hibernate）的框架。
-Struts2充当胶水层，完成request参数的封装、controller的映射以及视图和控制层之间的参数传递。
-Spring在其中充当了注入的角色。Hibernate负责数据持久化。
-这个架构稳定使用了五年以上。</p>
-
-<p>之所以一直使用，一方面在于对Webwork(Struts2)的感情，
-毕竟曾经这个东西在替换struts1时让人映像深刻。其次，
-一个开发架构的迁移牵涉到整个小组，引入、推广和维护都有成本的，
-一成不变固然不行，一直切换也难免开销过大。同时，SSH招收熟手也相对容易些。</p>
-
-<p>然而，Struts2毕竟多年已经没什么发展，
-同时它的安全漏洞始终没能很好地解决，加上老架构也确实使用的时间有点长了。
-因此开始尝试新的方案。主要目标就是替换掉Struts2，也就是选用其他的Controller组件。
-而考察的对象就是Spring，确切地说是Spring MVC。</p>
-
-<p>而在了解的过程中，又仔细学习了一下Spring JPA。当MVC+JPA结合在一起后，
-发现Java Web的进步已然很大。而Spring MVC可以说是Rails的山寨版，
-或者可以称之为 Java on Rails with Java Style。Spring MVC的设计者
-可以说从Rails中借鉴了很多东西，但又最终使用Java的方式实现了出来。</p>
-
-<p>在初学Rails的时候，彼时的版本是1.2.6，一直有个疑问，就是Java能否也有一个
-像Ruby on Rails那样好的Web开发框架？当时有的牛人给出的答案是不依赖Ruby，
-DHH变不出那么多魔术。但是，如今的Spring MVC至少已经赶上了Rails 2的开发便利程度，
-虽然还逊于最新的Rails版本。所以，确切地说，Java至少也可以拥有和Rails 2 <strong>一样方便</strong>的Web框架，
-只是需要投入<strong>更多</strong>的人力，也需要等待长的多的时间。而最后出来的东西肯定还是充满Java味道的。
-现在的Rails已经走的更远了，但Java Web提高的程度这几年却更加显著了。</p>
-
-<p>看一下Controller：</p>
-
-<p>```java</p>
-
-<pre><code>@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-public String updateForm(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("user", userService.getUser(id));
-    model.addAttribute("action", "update");
-    return "user/userForm";
-}
-
-@RequestMapping(value = "update/{id}", method = RequestMethod.POST)
-public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
-    userService.updateUser(user, user.getNumber2(), user.getCurrentshownumber());
-    redirectAttributes.addFlashAttribute("message", "更新任务成功");
-    return "redirect:/simuser/";
-}
-</code></pre>
-
-<p>```</p>
-
-<p>Restful风格的Url，通过声明<code>@ModelAttribute</code>可以注入参数到模型中，
-<code>@PathVariable</code>可以实现从url路径中获取参数，
-<code>userService</code>是注入的服务组件，<code>model.addAttribute</code>则将controller的内容注入给页面模板。
-整个风格已经十分简洁。如果需要其他组件，如<code>session</code>或者<code>request</code>，
-只要在类或者方法的参数中声明即可。<code>return "user/userForm"</code>则通知渲染user目录下的userForm.jsp模板</p>
-
-<p>Spring JPA则是最方便的Java ORM描述工具。寻找多年的Java版ActiveRecord终于有了着落。
-需要定义两个文件：1：model本身，2：一个dao文件（reposity）</p>
-
-<ul>
-<li>model：</li>
-</ul>
-
-
-<p>```java</p>
-
-<p>//JPA标识
-@Entity
-@Table(name = "users")
-public class User extends IdEntity {</p>
-
-<pre><code>private String login;
-</code></pre>
-
-<p>  ...</p>
-
-<pre><code>private Set&lt;Phonenumber&gt; phonenumbers;
-private List&lt;Useroperlog&gt; useroperlogs;
-
-@NotBlank
-public String getNumber1() {
-    return number1;
-}
-
-public void setNumber1(String number1) {
-    this.number1 = number1;
-}
-
-@Transient
-public String getNumber2() {
-    return number2;
-}
-
-public void setNumber2(String number2) {
-    this.number2 = number2;
-}
-
-@Transient
-public String getCurrentshownumber() {
-    return currentshownumber;
-}
-
-public void setCurrentshownumber(String currentshownumber) {
-    this.currentshownumber = currentshownumber;
-}
-// join column is in table for Phonenumber
-@OneToMany(fetch=FetchType.LAZY,orphanRemoval=true,cascade=CascadeType.ALL)
-@JoinColumn(name = "userid")
-public Set&lt;Phonenumber&gt; getPhonenumbers() {
-    return phonenumbers;
-}
-
-public void setPhonenumbers(Set&lt;Phonenumber&gt; phonenumbers) {
-    this.phonenumbers = phonenumbers;
-}
-
-@OneToMany(fetch=FetchType.LAZY)
-@JoinColumn(name = "userid")
-public List&lt;Useroperlog&gt; getUseroperlogs() {
-    return useroperlogs;
-}
-
-public void setUseroperlogs(List&lt;Useroperlog&gt; useroperlogs) {
-    this.useroperlogs = useroperlogs;
-}
-@Override
-public String toString() {
-    return ToStringBuilder.reflectionToString(this);
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<p>啰嗦是还是有点啰嗦，这个毕竟是java。DAO相对代码少一些。</p>
-
-<ul>
-<li>DAO文件：</li>
-</ul>
-
-
-<p>```java
-public interface UserDao extends PagingAndSortingRepository&lt;User, Long>, JpaSpecificationExecutor<User> {</p>
-
-<pre><code>//Page&lt;User&gt; findByUserId(Long id, Pageable pageRequest);
-
-User findByNumber1(String number1);
-</code></pre>
-
-<p>}
-<code>``
-这个dao提供了很多默认的方法，包括</code>findAll<code>,</code>findOne<code>,</code>save`，底层的
-实现还有很多内容，但使用的话确实只需要声明这些就行了。</p>
-
-<ul>
-<li>在Service文件中可这样使用:</li>
-</ul>
-
-
-<p>```java</p>
-
-<pre><code>public void updateUser(User entity, String number2, String showNumber) {
-    loadNumber2(entity);
-    resetCurrentshownumber(entity, showNumber);
-    resetNumber2(entity, number2);
-    userDao.save(entity);
-}
-
-public void deleteUser(Long id) {
-    userDao.delete(id);
-}
-</code></pre>
-
-<p>```</p>
-
-<p>而在页面处理上，几年前的Servlet 2.5开始，EL表达式取得了首要被支持的地位。</p>
-
-<p><code>java
-${user.name}
-</code>
-对比ruby在erb里常用的</p>
-
-<p><code>&lt;%=user.name%&gt;</code></p>
-
-<p>EL表达式其实就是代码了。Java不具备动态语言的特性，所以需要另外造一套表达式。
-ruby的话，直接使用scriptlet其实效果更好也更直白。个人其实认为，逻辑判断、
-取值等都应该使用语言本身，而不是要借助标签。EL表达式是对Java语言的一种很好的补充。
-对Java Web的开发状况改善许多。但在迭代、逻辑判断方面，
-标签使用的机会还是满多的，这个只能再等发展的变化了。</p>
-
-<p>以上是已经进步显著的几个方面。但在布局、分页以及整合上，Spring并没有提供
-一步到位的东西。所以需要进一步参考<a href="https://github.com/springside/springside4">SpringSide</a>。
-这是一个中国人主推的Java Web开发实践整合的开源项目。里面提供了整合的样例，
-其实本身也可以当做一个开发模板来对待。</p>
-
-<p>从<a href="https://github.com/springside/springside4">SpringSide</a>上也可以追踪
-Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的，最近一两年切换到了Spring MVC。
-同时它也是使用的JPA来做ORM的描述。在各方面都很贴合我的需求和口味。考虑到这个项目维护多年，
-且始终保持着很不错的实践，在此推荐一下。</p>
-
-<p>花费多年时间，Jave Web非复昔日阿蒙。开发中的痛苦状况已经得到了极大的改善。
-值得刮目相待。Spring确实极大地改变了Java Web开发，而Rails则影响了十年来的Web开发。</p>
 ]]></content>
   </entry>
   
