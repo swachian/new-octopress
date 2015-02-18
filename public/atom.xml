@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-01-22T10:43:19+08:00</updated>
+  <updated>2015-02-18T16:49:27+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nano小卡和iphone6 plus]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/02/18/nanoxiao-qia/"/>
+    <updated>2015-02-18T16:36:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/02/18/nanoxiao-qia</id>
+    <content type="html"><![CDATA[<p>差不多一年前，因为用了<a href="http://octopresszhangyu.herokuapp.com/blog/2014/03/10/nubia-z5s/">nubia z5s 把sim卡剪成了micro-sim卡</a>。
+而在昨天，因为几个巧合，最后我开始使用iphone6p，但这个手机又是只能用nano的，于是再次剪卡。</p>
+
+<p>正常情况下，应该是去营业厅重新换nano卡的，但我的套餐要3月底才到期，只有到下个月才能去申请新的4G套餐。
+如果现在去换卡，只能更换3G的nano卡，那么半个月后依然要去跑一趟营业厅再次换卡。两个折腾比较下来，
+还是情愿自己剪卡了。</p>
+
+<p>好在有之前的剪卡经验，依然是分两步走的方案。</p>
+
+<ol>
+<li>拨打*72189xxxxxxxx设置号呼叫转移，万一剪卡失败，则电话还能接的到</li>
+<li>拿出卡，搞清楚自己的sim卡是三对六块还是四对八块，随后依照标准的nano卡大小，剪个大小类似的形状，目标是能放进卡套里</li>
+<li>动手能力还行，运气也不错，新剪的卡插入后读取成功，于是拨打*720取消呼叫转移</li>
+</ol>
+
+
+<p>整个过程的体验还算不错。尽管下个月还要跑一趟营业厅，目前也依然只是3G网络，但好歹确实立马就用上了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
@@ -1368,43 +1393,6 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
 <p>通过上面的程序，可以产生长度不等的多个随机密码，把明文进行base64转码后交给rsa加密成16进制的字符，然后就可以把得到的明文和密文交给java进行比对了。
 另外Base64的编码是url不安全的。因为+ = /都是base64的适用字符，而这些在url传输中都会被转义，所以js的base64编码一般还有一个对url-safe的版本。
 而在此处，rsa会最终转成16进制，因此并不需要使用url-safe的特性。考虑到Java的base64还是标准版的，所以使用标准版的base64更合适。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[何伟的甲骨文]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen/"/>
-    <updated>2014-09-14T11:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen</id>
-    <content type="html"><![CDATA[<p>书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
-就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
-牵涉到城市，难免会有更敏感的话题出现。
-本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</p>
-
-<p>本书主要描写了在三四个大陆城市：北京、深圳、温州、南京。
-北京主要作者自己、一个维吾尔人以及一些老知识分子。深圳和温州的
-主线是作者在涪陵任外教时的学生在那里闯荡情况的反应。南京等则只是一笔带过。
-而所谓甲骨文的发现地&#8211;安阳，书中尽管多次提到，但并未加以详细描述。安阳只是作为介绍甲骨文专家
-<strong>陈梦家</strong>（甲骨文专家、留美学者、右派、66年自杀）的引子。
-简单地说，甲骨文其实是在讲文革中一些知识分子的命运，和作者的几个学生的人身经历并没有直接的关系。
-而维吾尔的故事，则是在北京和华盛顿两个地方展开。这里面敏感内容较多，作者的描述并没有很明显的倾向性，
-尽管作者和维吾尔人是朋友。</p>
-
-<p>阅读2000年前后中国故事，从中可以反映出彼时的一些政策制定有其合理之处。但在2003之后
-还是坚持某些策略，则产生很多问题。例如，当时的汇率是固定，后来的汇率也是固定的。
-但是，当时的黑市价格美元更值钱，所以政府坚持汇率对人民有益。而后来人民币早就该升值，
-美元已不如过去那么有价，还坚守汇率就是对使用人民币的人不负责任了。
-即便是同样的措施，在不同的条件下实施其后果是完全不同的。</p>
-
-<p>所以，尽管这本书谈了很多政治的东西，但却完全没有读上本书
-时常常会发出的未尝不痛恨于桓灵也的感觉。很多选择对政府来讲也是别无选择，
-完全不像后10年那样政府其实可以有多种选择。</p>
-
-<p>作者也在新疆采访了当时正在拍摄天地英雄的姜文，也提到了他因为鬼子来了而受到封杀。
-姜文故事的系统性并不强，可能只是作者曾经写过的一篇报道也放了进来。</p>
-
-<p>总体而言，作者的视角很独特，借助甲骨文也介绍了中国的近代文字变革历史，确实是调查研究后的优秀记者的水平。
-整本书读完后，会对中国的文字变化、政策导向、年轻人在城市的奋斗生活有更深入或更新鲜的认识。是一本开卷有益的好书。</p>
 ]]></content>
   </entry>
   
