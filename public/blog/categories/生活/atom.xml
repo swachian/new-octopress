@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-02-18T16:49:27+08:00</updated>
+  <updated>2015-02-20T15:47:35+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2015]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list/"/>
+    <updated>2015-02-20T15:40:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list</id>
+    <content type="html"><![CDATA[<h3>技术类</h3>
+
+<ol>
+<li>FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.</li>
+<li>Eric Evans. Domain-Driven Design.</li>
+<li>Beck. Smalltalk best practice patterns, 1996.</li>
+<li>Donald C. Gause, Are you lights on? 1990.</li>
+<li>张昊，Linux Shell编程从入门到精通。</li>
+<li>Gourley D, Totty B. HTTP权威指南 O’Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists</li>
+<li>谭云杰,大象–Thinking in UML，水利水电</li>
+<li>谢希仁.计算机网络，电工</li>
+</ol>
+
+
+<h3>经管</h3>
+
+<ol>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li>曾志尧, 35岁前要上的33堂理财课,中信</li>
+<li>李笑来，把时间当做朋友</li>
+<li>蔡康永，说话之道</li>
+<li>高盛如何算赢世界</li>
+<li>The Intelligent Investor</li>
+</ol>
+
+
+<h3>历史文化</h3>
+
+<ol>
+<li>[x] 哈夫纳，一个德国人的故事（哈夫纳1914~1933回忆录）。本书系统性并不强，但内容十分贴近现实，对个人的世界观冲击也较大。</li>
+<li>喻大华，帝制往事</li>
+</ol>
+
+
+<h2>既往</h2>
+
+<p> <a href="/blog/2013/01/11/to-read-list/">2013读书列表</a><br/>
+ <a href="/blog/2014/03/02/to-read-list/">2014读书列表</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nano小卡和iphone6 plus]]></title>
@@ -131,22 +178,6 @@
 和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
 
 <p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[靠谱的油耗数据库]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/"/>
-    <updated>2014-07-23T22:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku</id>
-    <content type="html"><![CDATA[<p>油耗一直以来是买车的一个重要考量，之前一直查看汽车之家上的工信部综合油耗数据。
-然而，工信部实际上有更细化的数据，区分了市区工况和市郊工况。这显然更对实践有指导意义。</p>
-
-<p>而且，工信部的信用和客观性也是最有保证的。至少，通过天籁的数据来看，完全符合我遇到的实际情况。
-下面这个<a href="http://chinaafc.miit.gov.cn/n2257/n2280/index.html">链接</a> http://chinaafc.miit.gov.cn/n2257/n2280/index.html
-可供参考。</p>
-
-<p>在高级查询中，通用名称处填写车子的常用称呼即可。访问的速度可能有点慢，但数据真的有效。</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="关于上沪牌和外牌似乎尚有争论，但目前看来其实是没必要的。
-因为很简单，只要经济条件足够，情愿先上沪牌，如果确实米缺缺，那外牌也只能凑合一下了。
-之所以这么选择，不是因为担心外牌会受限制。限制外牌是忽悠人的，买虎牌当前的主要意义在于保值和升值。 北京广州和上海是不一样的。拿北京来讲， &hellip;">
+  <meta name="description" content="云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。 先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/30/ji-yu-linux-de-oracle-shu-ju-ku-guan-li/">基于Linux 的Oracle 数据库管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-30T22:01:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>云化工程里要装Oracle，于是研究了一下Oracle在Linux上部署的细节。最近一个礼拜基本查了很多资料，不过读了两本相对基础但又很重要的书后，还是有不少收获。</p>
+
+<p>先说今天看完的这本原创。08年出版的书了，整个只有280页左右的篇幅，内容很精悍，废话很少，但又会把细节介绍的十分清楚。比如Linux各发行版和Oracle的兼容性，ext2（有点老了）的文件系统磁盘数据结构，bios-grub-linux的启动顺序等。</p>
+
+<p>整本书是一个很简洁的linux常用功能的介绍，并以oracle安装维护为中心，展现了使用的方式。虽然有些地方相对简陋，但确属作者的经验之谈。有工程和实际经验才能提炼出来的东西。比如补充的配置环境命令别名<code>udump, bdump</code>等，安装用于sqlplus操作方便的<code>rlwrap</code>。当然还有一系列的shell脚本。</p>
+
+<p>但限于篇幅，有些东西确实没谈。而且整本书的重点在于linux如何使用oracle，对oracle的介绍着墨很少。又比如讲了rman，只讲了怎么打开，怎么用许多东西备份，但没提及怎么用这些东西来恢复。但总的来说还是很值得一读的一本书。至少可以了解职业实施人员的部署情况。</p>
+
+<p>整本书只花了一个下午就读完了，至少说明书的可读性不错。</p>
+
+<p>第二本是一个老外写的翻译的书。不少评价不太好，但我读下来还是挺有收获。因为这部书是一本偏原理的书，作者喜欢把Oracle运行是怎么一回事情交代清楚。适合于对oracle的安装已经比较了解，但并不明白其中原理的层次阅读。读完之后，基本就可以自己判断该怎么玩了。很多人评价不高，是因为这本书对部署的细节交代的并不清楚，如果只是想拿来按部就班完成任务，这本书是会令人气馁的。</p>
+
+<p>同时，作者又偏向于介绍一些计算机的基础知识。虽然很精悍这些介绍，但是不明白的人还是看不明白，看的懂的人才会觉得作者点到位了。所以这本书落得评价不高也十分正常。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -630,72 +676,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/16/prolog/">Prolog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-16T22:46:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>七周七语言看完了Ruby，又继续看了Io，这是一个prototype的语言，确实和js很像，也挺有启发。不过决定还是
-好好去学javascript吧。其实<a href="http://www.w3school.com.cn/js/index.asp">w3school</a>的这份js教程很棒，
-相当言简意赅。入门是最重要的。入门之后才能走的更远。很多时候究竟有多远看的还是基础，但没有摸起来，那
-基本功就无从发挥了。</p>
-
-<p>随后看了<a href="http://www.gprolog.org">Prolog</a>，其实是<strong>gprolog</strong>。
-这个语言跟我过去学习的语言都很不一样。完全抛弃了过程语言所拥有的能力，全部都集中在了逻辑判断上。实际上其组成结构是这样的：</p>
-
-<ul>
-<li>事实。就是自己先设定一些前提，指定一些事实，比如<code>likes(wallace, cheese).</code></li>
-<li>规则。规则就是关于一些事实的推论。比如<code>friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).</code>，这个规则由3个条件构成，
-
-<ul>
-<li>第一个是X！=Y</li>
-<li>第二个和第三个是X和Y都喜欢Z，然后他们就符合friend这条规则</li>
-</ul>
-</li>
-<li>查询。查询就是使用时给出问题，然后让prolog根据规则库（<strong>事实</strong>+<strong>规则</strong>）循环访问得出结果或判断出结果。</li>
-</ul>
-
-
-<p>本质上，应该是用过程语言写了一系列的判断和分析语句（<strong>引擎</strong>）,这样使用时使得编码行为就完全不一样了。</p>
-
-<h3>最大的启发</h3>
-
-<p>最大的启发在于，这一门应该算是我首次学的不是过程式的编程语言。当然，前提是HTML和CSS不能算编程语言。其他的，如C、C++、Java、Ruby、Python、Javascript乃至shell等，虽然有的是纯过程式的，有的是面向对象的，但实际上都<strong>包含了过程式</strong> 的风格。</p>
-
-<h3>试用体验</h3>
-
-<p>还是有点别扭的。它的语法确实很古老，而且很不顺手，这点和<code>erlang</code>有的一拼。
-不过确实是只要树立规则，就能输出结果。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -713,6 +693,10 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/20/to-read-list/">读书列表2015</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/18/nanoxiao-qia/">nano小卡和iphone6 plus</a>
       </li>
     
@@ -728,15 +712,11 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
         <a href="/blog/2015/01/15/bi-ji-ben-jia-liao-ssd/">笔记本加了SSD</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/01/10/dong-jia-shi-de-huan-shi-de-guo-ren/">懂驾驶的还是德国人</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (56)</a></li><li><a href='/blog/categories/生活'>生活 (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (20)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/java'>Java (13)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/spring'>Spring (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (56)</a></li><li><a href='/blog/categories/生活'>生活 (37)</a></li><li><a href='/blog/categories/车车'>车车 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (20)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (13)</a></li><li><a href='/blog/categories/java'>Java (13)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/spring'>Spring (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li></ul>
 </section>
   
 </aside>

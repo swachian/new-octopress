@@ -5,6 +5,7 @@ date: 2014-03-02 09:39
 comments: true
 categories:
 - 生活
+- 读书列表
 ---
 
 ### 技术类
@@ -18,15 +19,6 @@ categories:
 是强制要求，而淘宝则把出书与否作为社会影响力的一项KPI。
 1. [x] Core Java。有必要更新一下。
 1. [x] [Chad Fowler, 在软件开发中创造出色的职业生涯](/blog/2014/03/02/to-read-list/)。
-1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.
-1. Eric Evans. Domain-Driven Design.  
-1. Beck. Smalltalk best practice patterns, 1996.
-1. Donald C. Gause, Are you lights on? 1990.
-1. 张昊，Linux Shell编程从入门到精通。  
-1. Gourley D, Totty B. HTTP权威指南 O’Reilly  
-1. Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists  
-1. 谭云杰,大象–Thinking in UML，水利水电  
-1. 谢希仁.计算机网络，电工
 
 ### 经管
 
@@ -45,12 +37,7 @@ categories:
 也是希望学好中文。以一月一千人民币的收入而言，在彼时的重庆可能已经算是不错的了，但对一个老外而言，这份工作真的不可能是冲着这点钱去的。虽然我到现在也不太理解成为知名作家为什么
 要走成为中国通这条路，但必须承认，海斯勒的冒险是成功的。第五，当看见一个外国人竟然对中国的内陆地区有那么强烈的了解兴趣，并且做了那么到位的功课，写出那么好的书籍，
 让我感到震惊的同时也有点羞愧，但转念一想，似乎全中国的记者和作家也都写不出这种东西，也都对中国内陆缺乏那么深入和细致地剖析，也就释然了。
-1. 余江，韦尔奇，Winning（赢），中信  
-1. 曾志尧, 35岁前要上的33堂理财课,中信  
-1. 李笑来，把时间当做朋友  
-1. 蔡康永，说话之道  
-1. 高盛如何算赢世界  
-1. The Intelligent Investor  
+
 
 ### 历史文化
 

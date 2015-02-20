@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: 读书列表 | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书列表/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2015-02-20T15:47:35+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2015]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list/"/>
+    <updated>2015-02-20T15:40:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list</id>
+    <content type="html"><![CDATA[<h3>技术类</h3>
+
+<ol>
+<li>FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.</li>
+<li>Eric Evans. Domain-Driven Design.</li>
+<li>Beck. Smalltalk best practice patterns, 1996.</li>
+<li>Donald C. Gause, Are you lights on? 1990.</li>
+<li>张昊，Linux Shell编程从入门到精通。</li>
+<li>Gourley D, Totty B. HTTP权威指南 O’Reilly</li>
+<li>Shash D, Lazere. Out of their Minds: The Lives and Discoveries of 15 Great Computer Scientists</li>
+<li>谭云杰,大象–Thinking in UML，水利水电</li>
+<li>谢希仁.计算机网络，电工</li>
+</ol>
+
+
+<h3>经管</h3>
+
+<ol>
+<li>余江，韦尔奇，Winning（赢），中信</li>
+<li>曾志尧, 35岁前要上的33堂理财课,中信</li>
+<li>李笑来，把时间当做朋友</li>
+<li>蔡康永，说话之道</li>
+<li>高盛如何算赢世界</li>
+<li>The Intelligent Investor</li>
+</ol>
+
+
+<h3>历史文化</h3>
+
+<ol>
+<li>[x] 哈夫纳，一个德国人的故事（哈夫纳1914~1933回忆录）。本书系统性并不强，但内容十分贴近现实，对个人的世界观冲击也较大。</li>
+<li>喻大华，帝制往事</li>
+</ol>
+
+
+<h2>既往</h2>
+
+<p> <a href="/blog/2013/01/11/to-read-list/">2013读书列表</a><br/>
+ <a href="/blog/2014/03/02/to-read-list/">2014读书列表</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2014]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list/"/>
+    <updated>2014-03-02T09:39:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list</id>
+    <content type="html"><![CDATA[<h3>技术类</h3>
+
+<ol>
+<li>[x] <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">Flower M. Patterns of Enterprise Application Architecture</a>, Addison-Wesley Professional. Rails诞生的书，<a href="http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me">DHH最爱的五本编程书籍</a>，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。</li>
+<li>[x] <a href="http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/">PoEAA的访谈和DHH</a></li>
+<li>[x] <a href="/blog/2014/07/23/pro-javascript-techniques/">Resig, 精通Javascript.</a> 简约、精彩、结合实际的书，第一章就很精彩。</li>
+<li>Learning Jquery.</li>
+<li>[x] 曾宪杰. 大型网站系统与Java中间件实践. 2014. 还是有一定收获的，分布式其实就是模块化。淘宝的分布式主要是：消息队列、HSF（High-Speed Service Framework）和mysql代理层。
+但是，淘宝人在电子工业出版社出的书普遍给我的感觉是有一点水，内容讲的比较粗，也有凑数之嫌疑。后来了解了一些，淘宝人出书和评高级职称写论文有点类似，只是高级职称
+是强制要求，而淘宝则把出书与否作为社会影响力的一项KPI。</li>
+<li>[x] Core Java。有必要更新一下。</li>
+<li>[x] <a href="/blog/2014/03/02/to-read-list/">Chad Fowler, 在软件开发中创造出色的职业生涯</a>。</li>
+</ol>
+
+
+<h3>经管</h3>
+
+<ol>
+<li>[x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。</li>
+<li>[x] 汽车文化。</li>
+<li>[x] 汽车工程学基础。 上面两边都是汽车构造及文化的基本入门读物，可以填补较大的知识空白。明白汽车的基本构造原理和发展脉络。而对汽车人物的描述则很有特色和启发。让人感叹的是，很多德国的发明家，如奔驰、戴姆勒，他们既是优秀的工程师，但同时也是成功的设计师和成功的企业家。这方面德国人确实一枝独秀。另外，其他国家的汽车杰出人物不是发明家就是工程师，至少也是一个企业家。但中国的汽车代表人物却是官员。</li>
+<li>[x] 海斯勒，寻路中国，上海译文. 十分接地气的一本书，同时也相当的深刻。尤其是当一个中国人读来时，颇印证了横看成岭侧成峰，局外人更容易揭露事实的真相。
+可惜出版的还是晚了些。另外，只是country，没有城市，这一点相当遗憾。更确切的名称应该是中国乡村寻路。</li>
+<li>[x] <a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">海斯勒，Oracle</a>。书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
+而且由于某些原因无法在大陆出版。本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</li>
+<li>[x] 海斯勒，江城，上海译文。不知不觉，何伟的书逆着出版的时间顺序已经基本读完了三部曲。三本书里，江城的视角最为独特，也最深入。
+首先在于本书是作者关于中国图书的处女作，作者的梦想是成为伟大的作家，而这也是他第一个成功的大作品。其次，这本书的主角是作者，甚至可以理解为是作者的日记记录，
+何伟在江城的主要身份是涪陵师范的外教老师，然后才是一个作家或者说是记者。而在寻路中国乡村和甲骨文中，何伟则就完全是一个记者的身份了。
+也因此，这本书更多的让我可以了解何伟这个人和他在江城的处境。第三，何伟在这说师专服务的年份是96-98年，本人进入大学的年份是97年，所以对很多东西如香港回归、发大水、学校教育等
+都极其容易引起共鸣。然而内陆地区的学校在97年的时候还那么在乎政治思想教育，倒是我从来未曾了解或者想到的。第四，海斯勒的梦想是成为知名作家，选择支教更多的是为了体验生活，
+也是希望学好中文。以一月一千人民币的收入而言，在彼时的重庆可能已经算是不错的了，但对一个老外而言，这份工作真的不可能是冲着这点钱去的。虽然我到现在也不太理解成为知名作家为什么
+要走成为中国通这条路，但必须承认，海斯勒的冒险是成功的。第五，当看见一个外国人竟然对中国的内陆地区有那么强烈的了解兴趣，并且做了那么到位的功课，写出那么好的书籍，
+让我感到震惊的同时也有点羞愧，但转念一想，似乎全中国的记者和作家也都写不出这种东西，也都对中国内陆缺乏那么深入和细致地剖析，也就释然了。</li>
+</ol>
+
+
+<h3>历史文化</h3>
+
+<ol>
+<li>[x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。</li>
+<li>[x] 唐德刚，xxx专政始末。 相对比较一般。</li>
+<li>[x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。</li>
+<li>[x] 哈夫纳，<a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">不含传说的普鲁士</a>。台版书的竖版读起来有点累，不过效果还行。值得反复阅读的图书。</li>
+<li>[x] 权戏。</li>
+</ol>
+
+
+<h2>既往</h2>
+
+<p> <a href="/blog/2013/01/11/to-read-list/">2013读书列表</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[读书列表2013]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/"/>
+    <updated>2013-01-11T12:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list</id>
+    <content type="html"><![CDATA[<p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
+
+<h2>技术类</h2>
+
+<ol>
+<li>[X] <a href="/blog/2013/01/08/da-hua-cun-chu/">张冬，大话存储，清华</a> 这本书前后总共读了18天，中间有八九天没有读</li>
+<li>[x] <a href="/blog/2013/01/26/bai-mao-zi-web/">吴翰清，白帽子讲Web安全，电工</a> 比较一般 没有fenng评价的那么好，2天半搞定，内容掺水比较多，所以阅读时间少</li>
+<li>[x] <a href="/blog/2013/02/19/about-awk/">AWK,The Awk programming language.</a> 好书，科尔尼汉的文笔没的挑，不过内容确实只要浅尝辄止就行，在Ruby Python流行之后，AWK只需要最简单的运用。</li>
+<li>[x] <a href="/blog/2013/03/16/sass-and-compass/">Pragmatic Guide to Sass</a> 第一本kindle上看完的计算机书籍，作者的版面完全是冲着epub格式来的</li>
+<li>[x] <a href="/blog/2013/06/06/7dbs-in-7wks/">seven databases in seven weeks</a>， 不是seven days，慢慢来吧，收货颇丰。尤其是对HBase Redis的了解，也第一次接触到了Neo4j。</li>
+<li>[x] <a href="">孙卫琴，精通Hibernate</a>,补了一下hibernate的知识，确实比较繁琐，但考虑的还是比较周全的。另外孙学姐的书写的条理很清晰，作风严谨，前后一致连贯，像是交大计算机的文风。不过就是孙姐姐似乎已经有3年没发书了，javathinker站点也已经易主。不知近况如何。</li>
+<li>[x] <a href="">seven languages in seven weeks</a>， 看了第一个Ruby，复习了下yield，把metaprogramming局限在了open class、method_missing和module include。</li>
+<li>[x] <a href="">spring in action 3</a> 重新修了一下spring mvc，struts2可以基本不用了</li>
+<li>[x] <a href="https://gist.github.com/swachian/6070011">spring in practice</a> 主要讲spring的web开发的，比in action 这本更易应用以及贴近实际。</li>
+<li>[x] <a href="https://gist.github.com/swachian/6590735">余红春,构建高可用Linux服务器,机工</a>. 精选出了一套脚本，值了</li>
+<li>[x] <a href="">李爱武，基于Linux的Oracle数据库管理</a></li>
+<li>[x] <a href="">Whalen，陈曙晖译，基于Linux平台的Oracle Database 10g 管理</a></li>
+</ol>
+
+
+<h2>经管</h2>
+
+<ol>
+<li><a href="/blog/2012/12/25/lang-chao-zhi-dian/">吴军,浪潮之巅</a>, it经管入门必读</li>
+<li><a href="/blog/2013/01/14/out-the-firm/">阿朱，走出软件作坊，电工</a>， it职场经验谈，有一定局限，但作者的勇气确实可嘉</li>
+<li><a href="/blog/2013/01/20/hackers-and-painters/">Paul Graham。 Hackers &amp; Painters.</a>，前后看了十来天，一开始中英双语，后来还是直接看中文了。创业教父之名名不虚传。</li>
+<li><a href="">何飞鹏,自慢</a> 一般般，跟传统那套差不多，决定不继续看下去了，还不如张超的书实在</li>
+<li><a href="">A&amp;R</a>, Why nations fail, 来自DHH的推荐，看下来感觉很不错</li>
+</ol>
+
+
+<h2>文化</h2>
+
+<ol>
+<li><a href="">王力雄,我的西域 你的东土</a></li>
+<li><a href="/blog/2012/12/15/tianzang/">王力雄，天葬</a></li>
+<li><a href="/blog/2013/01/07/huanghuo-give-way-to-fanghuo/">王力雄，黄祸</a></li>
+<li><a href="/blog/2012/12/25/ziyang/">ziyang</a></li>
+<li><a href="">西游记</a>, 原著很丰富,改编的电视剧也足够出彩</li>
+<li>张鸣，北洋裂变--军阀与五四</li>
+</ol>
+
+
+<p><a href="http://benhoskin.gs/2013/02/24/ruby-2-0-by-example?utm_source=rubyweekly&amp;utm_medium=email">ruby 2.0 by example</a> , 值得反复看的ruby 2.0特性文章</p>
+]]></content>
+  </entry>
+  
+</feed>
