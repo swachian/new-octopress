@@ -1,6 +1,6 @@
 source "https://ruby.taobao.org/"
 
-ruby "2.2.0"
+ruby "2.2.1"
 
 group :development do
   gem 'rake', '~> 0.9'
