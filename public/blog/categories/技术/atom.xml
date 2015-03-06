@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-03-04T22:15:03+08:00</updated>
+  <updated>2015-03-06T16:51:06+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQLMAP手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji/"/>
+    <updated>2015-03-06T16:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji</id>
+    <content type="html"><![CDATA[<p><a href="http://sqlmap.org/">SQLMAP</a>确实是一个神器，而<a href="http://www.binarytides.com/sqlmap-hacking-tutorial/">这篇文章</a>则从判断是什么库开始，
+历经获取dbs，获取单个db中的tables，获取单个table里面的字段，直至获取每个记录每个字段的数据，做了一步一步细致的讲解。</p>
+
+<p>其实SQLMAP的用法真的挺暴力的。基本通过穷举的办法，根据页面返回内容的变与不变来判断输入的条件是否成立，以此来断定某些信息是否存在。
+很脏很暴力的做法。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
@@ -232,121 +245,6 @@ return "/static/"+resource+"?"+fileMd5;
 精确的：305084，估计的：305281</p>
 
 <p>而这种方式最大的好处，自然就是对count-distinct这类问题统计起来毫无压力了,同时得到的数据也足够好用了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[并发的ab测试和校验码对并发状况处理的盲区]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/"/>
-    <updated>2014-12-11T21:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu</id>
-    <content type="html"><![CDATA[<p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
-但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
-
-<p>限制的过程是这样的：</p>
-
-<ol>
-<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
-<li>发送短信；</li>
-<li>刷新校验码。</li>
-</ol>
-
-
-<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
-极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
-
-<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
-颇费了一番周折。</p>
-
-<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
-
-<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
-
-<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
-
-<h3>第二个坑： 需要提前放入session</h3>
-
-<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
-因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
-正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
-带cookie上去，因此就得到了错误的响应。</p>
-
-<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
-ruby的rest-client。</p>
-
-<p>```ruby
-require 'rest-client'</p>
-
-<p>jsp = "http://xxx.com/portal/";
-passportUrl = 'http://xxx.com!validate.action?user_id=1xxxxxx&amp;verfiyCode=9813';</p>
-
-<p>def s
-  response = RestClient.get(jsp)
-  @cookies = response.cookies</p>
-
-<p>  @cookies['JSESSIONID'] = '74113695C0FB915393AE69DD63EAE088'
-  p @cookies
-  #puts response.body</p>
-
-<p>  5.times do |n|</p>
-
-<pre><code> response = RestClient.get(passportUrl, cookies: @cookies)
-</code></pre>
-
-<p>  end
-  puts response.body
-end</p>
-
-<p>s()
-```</p>
-
-<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
-模拟不出并发的效果，所以还是需要回到ab测试上。</p>
-
-<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
-
-<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
-
-<h3>解决的办法</h3>
-
-<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
-
-<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
-下面的方式，让锁住类对象来实现static的效果。</p>
-
-<p>```java</p>
-
-<pre><code>   synchronized (Controller.class) {  
-
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
-才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
-
-<p>```java
-synchronized private static void validCode(HttpSession sesson, String code) {
-  result = false;
-  if (StringUtils.equal(session.getAttribute("rand1"), code)) {</p>
-
-<pre><code>result = true;
-</code></pre>
-
-<p>  }
-  session.removeAttribute("rand1");
-  return result;
-}
-```</p>
-
-<h3>得到的教训</h3>
-
-<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
 ]]></content>
   </entry>
   

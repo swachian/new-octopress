@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-03-04T22:15:03+08:00</updated>
+  <updated>2015-03-06T16:51:06+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQLMAP手记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji/"/>
+    <updated>2015-03-06T16:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji</id>
+    <content type="html"><![CDATA[<p><a href="http://sqlmap.org/">SQLMAP</a>确实是一个神器，而<a href="http://www.binarytides.com/sqlmap-hacking-tutorial/">这篇文章</a>则从判断是什么库开始，
+历经获取dbs，获取单个db中的tables，获取单个table里面的字段，直至获取每个记录每个字段的数据，做了一步一步细致的讲解。</p>
+
+<p>其实SQLMAP的用法真的挺暴力的。基本通过穷举的办法，根据页面返回内容的变与不变来判断输入的条件是否成立，以此来断定某些信息是否存在。
+很脏很暴力的做法。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nano小卡和iphone6 plus]]></title>
@@ -143,36 +156,6 @@ mac竟然预装了ruby，而且还是2.0版本的ruby。尽管我还是会用rbe
 IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务器上一统江湖。而Google的安卓，则让智能手机避免了被Apple一家独占。而在此成功狙击的基础上，IBM和Google都继续卖着自己已经处于优势地位的服务。而再看SUN的话，当时的Java并无直接的竞争对手，后来的J2EE也是如此。SUN的目标比较单纯，推广Java只是为了可以让更多的公司做互联网的网络服务，而这必然需要更多的服务器。在PC Server+ Linux未流行的年代，Solaris是较低成本的一种选择。这个算盘其实打的还是不错的。但是，IBM大神对Linux的扶持，彻底让Sun的硬件找到了更廉价也更类似的替代品。当大部分用Java的企业，不去问Sun买Solaris服务器而是选择问IBM HP Dell买硬件、软件则直接使用Linux时，SUN的Java就真的只是当活雷锋了。可能IBM的本意未必是干掉SUN，只是希望M$不要也在服务器市场形成垄断，如同Google只是希望不要苹果在智能小型终端一统天下，但不可避免地误伤了SUN。当然，SUN的倒掉肯定还有其他更重要的因素，毕竟竞争和替代品是市场经济下每个个体和公司都面临的现实。</p>
 
 <p>而IBM和Google的举动，毫无疑问都是成功了。IBM的PC服务器业务虽然卖给了联想，但至少也风光了十几年，而服务则继续在大卖。如果当初M$用windows统一了PC Server，那恐怕IBM现在也没服务好卖了。Google则在移动互联网时代，继续当着搜索的领袖，苹果在无法一统江山的情况下，也只能让Google继续保持是最重要的终端搜索引擎。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[小米的红米]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi/"/>
-    <updated>2014-04-07T16:17:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/07/xiao-mi-de-hong-mi</id>
-    <content type="html"><![CDATA[<p>尽管红米电信版在小米网站是一直没抢到，但在电商的站点倒有不少已经上市的，只是贵200左右，为了赶上老妈的生日，还是直接去电商渠道购买了。</p>
-
-<p>中间还有个插曲。原本是想在京东定的，然后要定了京东告知上海缺货。而在苏宁，反而发现还比京东便宜100，只要899. 当然，比小米官方的原价却又贵了100.但这个不用抢，就不是期货更不是神话了。</p>
-
-<p>机器确实很新，3月底才新鲜出炉的。但拿到手后不得不有下面一些吐槽：</p>
-
-<ol>
-<li>cdma卡槽标记不明显。打开机盖后，只在很不显眼的地方能看见很小的cdma和gsm字样，除非凑到10公分以内，不然很难看清楚哪个是gsm哪个是cdma的卡槽。而且，在说明书上是完全没有标识的。</li>
-<li>部分卡识别不出来，虽然是标准卡但可能还是要换卡。手头两张大卡uim，只能识别一张，于是不得不去营业厅花20换卡。要知道，我之前用努比亚z5s，虽然只能插小卡，但自己剪了一下就能用。而这个虽然也是大卡，但却不能用。想想也挺讽刺的。网上查了一下，这个也不是个案。可能只能说uim卡的标准比较古怪吧。好在换了2014版的uim卡也能认。</li>
-<li>后盖很难开。这个可能习惯了就好。不过对于一个可以更换电池板的手机而言，确实不太方便。</li>
-</ol>
-
-
-<p>其他其实还有一些细节方面还是可以改进的。往好处想，小米其实还有提升的余地，毕竟这些是我这个不太挑剔的人都能直接发现的毛病。</p>
-
-<p>整个手机的质感比较一般，很类似于多年前买的台电的mp3，从塑料到面板都很像，中国制造还需努力。当然，这也是一分价钱一分货，努比亚Z5S的接触材料的质感就比红米好多了。</p>
-
-<p>此外，也用了下小米的rom软件，因为用的时间也不算长，主要只是教会老妈使用，感觉并不比中兴的强，可选的主题倒是比较多，但这个对我来讲确实不重要。</p>
-
-<p>说了那么多不足，其实我还是很喜欢这个红米手机的。毕竟好处更多。只是说小米的好已经铺天盖地了，对于安卓的好处我也很认可，所以也就不再多说了。虽然是借助安卓和高通，但小米好歹是开创了属于中国的智能手机制造时代。还是很令人钦佩的。</p>
-
-<p>最后，感概一下，形势还是比人强。我一直很讨厌双模双待，认为除了费电没有半分好处。然而，现在c网适合数据、gsm只适合电话的现实、以及有宽带必有c网流量，使得使用双卡已经变成一种很平常的行为。和我讨厌双网双待有一个最大的区别，彼时所谓双模只能用来打电话，而如今数据和电话确实已经是两种需求了。而且，数据业务确实基本不需要你告诉别人你的手机号。所以，c网数据、g网维持语音业务，也是当前比较合适的一种模式。</p>
 ]]></content>
   </entry>
   
