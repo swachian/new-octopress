@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-03-06T16:51:06+08:00</updated>
+  <updated>2015-03-28T23:07:07+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[云梯]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/28/yun-ti/"/>
+    <updated>2015-03-28T23:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/28/yun-ti</id>
+    <content type="html"><![CDATA[<p>众所周知，在我国想要自由地访问互联网是有很大阻碍的。目前来讲，突破这个阻碍的方式就是vpn。
+自己买vps后装vpn是最独立的方式，但成本较高，毕竟vps也不便宜。
+如果购买服务的话，云梯在这方面做的还是相当出色的。</p>
+
+<p><a href="http://datatizi.com/?r=f6301c426c6b45bb">购买链接</a>，这是通过我介绍购买的云梯链接，
+有兴趣者建议可以从此入口进入。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQLMAP手记]]></title>
@@ -1033,29 +1047,6 @@ http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
 http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
 
 <p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[倒车就是看后轮和摆车尾]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/"/>
-    <updated>2014-10-06T13:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu</id>
-    <content type="html"><![CDATA[<p>开了几个月的车，终于开始练习倒车了。离自己直接上路又近了些。
-两天下来，感觉倒车主要是三点：</p>
-
-<ol>
-<li>设计路线和找准起点</li>
-<li>看后车轮和车尾</li>
-<li>注意车头一角</li>
-</ol>
-
-
-<p>对新手而言，尤其要把握住后车轮，可以把反光镜调低进行观察。倒入的关键是让车屁股彻底绕开障碍物，
-然后就可以死打方向直到后侧车轮靠边，随后回个方向到另一头继续倒出。在此过程中注意对角的前后轮。</p>
-
-<p>不过只在行进中转动方向盘目前我还做不到，仍然需要努力。另外就是发现，家里小区的停车难度远比马路上大。
-如果家里停好了，基本上外面也就可以随便停了。</p>
 ]]></content>
   </entry>
   
