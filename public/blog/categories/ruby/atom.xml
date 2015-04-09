@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-03-28T23:07:07+08:00</updated>
+  <updated>2015-04-09T12:45:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自己生产sdoc]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc/"/>
+    <updated>2015-04-09T12:26:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc</id>
+    <content type="html"><![CDATA[<p>很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
+原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。</p>
+
+<ol>
+<li><p>先安装sdoc， <code>gem install sdoc</code>, 安装完成后会新增两个可执行文件<code>sdoc</code>和<code>sdoc-merge</code></p></li>
+<li><p>进入自己下载的ruby源代码的父目录，执行
+<code>sdoc --main ruby-2.2.1/README.md  -x test -x example -x bin -N -x lib/rdoc  --title "Ruby 2.2" --op ~/sdocruby-2.2 ruby-2.2.1 ruby-2.2.1/README</code></p></li>
+</ol>
+
+
+<p>其中，ruby-2.2.1是当前rails的版本，--op指示生成的sdoc所在的目录，-x是不要去解析这些内容，运行几分钟后，文件就生成了。</p>
+
+<p>然后把生成的目录放到自己方便的地方即可。</p>
+
+<p>参考链接：</p>
+
+<p><a href="http://pjkh.com/articles/building-your-own-rails-and-ruby-searchable-api-docs/">1</a>
+<a href="http://pan.baidu.com/s/1i3vgC09">2 懒人下载</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac 上折腾Ruby 2.2]]></title>
@@ -155,43 +181,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
 
 <p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为什么ruby不火仍然值得学]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue/"/>
-    <updated>2013-03-24T16:14:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/24/wei-shi-yao-rubybu-huo-reng-ran-zhi-de-xue</id>
-    <content type="html"><![CDATA[<p>从某些角度而言，这本不是问题，毕竟因为什么东西火就去学习什么东西的话，那么学与不学什么就无需再计较了。世上总有火的和流行的东西，仅就IT而言，Java火了很多年，这几年安卓 iOS的开发者的需求也很旺盛。如果想学火的东西，那么尽可以去学这些。一旦一样一个东西不怎么火，<strong>反而更可以看出大家为什么要学它。</strong></p>
-
-<p>喜欢ruby可以有多个理由，特别是在rails引进门之后。在我看来，可以有以下几点。</p>
-
-<h3>1. 简单</h3>
-
-<p>换个术语可以叫做用户友好。ruby确实是简单的，相对于C、JavaScript而言。当然，ruby也可以用的很复杂，只是那通常是不需要进入的。</p>
-
-<h3>2. 方便</h3>
-
-<p>这是所有脚本语言的特长，写起来比较方便，不啰嗦。Java也很简单，但是太啰嗦，还需要编译等，所以我还是倾向于在辅助任务中使用ruby而非java。
-方便的另一个同义词是表达力强。拥有的表达方式多，而且够简短，即信息量高。</p>
-
-<h3>3.程序员（IT人员）的朋友</h3>
-
-<p>和友好性不同，这是指真的可以用来作为日常工作的工具，用IT技术解决自己工作中的问题。而不仅仅是用IT技术解决客户等其他人的问题。</p>
-
-<h3>4. Rails</h3>
-
-<p>不可忽视，很多人是因为Rails才接触了ruby。至于为什么要学Rails，那可以单独再开一片文章了。大体上是因为Rails的先进和效率。但是，Rails
-的引入<strong>大大提高了学习曲线</strong>。Ruby是简单的，不过加进Rails，那就复杂了。
-不过如果想用Rails，想通过Rails学习东西，学习一些好的实践和想法，就必须去学习Ruby。</p>
-
-<p>以上是我对ruby不够火的回答。希望学习火的东西人可以去学当前热门的那些东西。Java太平常的话，那就iOS开发、安卓开发，这些都是大面积缺人的。当然，我揣测提问者心里真实的想法是：
-现在学ruby是希望今后有一天她能火，然后自己就可以抬高身价。而这东西既然始终不火，那似乎就没有投资学习的必要。</p>
-
-<p>对于这种想法，自然是没有问题的。关键还是在于有没有其他的投资方向。如果有而且看准了，自然可以去新的方向。我们不是Mats也不是DHH，即使是学ruby的人离开也不会有很大的损失，何况本来就持观望态度的人呢？</p>
-
-<p>如果是想靠web技术发财，那么最重要的还是棒个好的创业伙伴，技术此时是次要的，业务和产品才是关键。</p>
 ]]></content>
   </entry>
   

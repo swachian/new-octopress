@@ -4,7 +4,7 @@
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-03-28T23:07:07+08:00</updated>
+  <updated>2015-04-09T12:45:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自己生产sdoc]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc/"/>
+    <updated>2015-04-09T12:26:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc</id>
+    <content type="html"><![CDATA[<p>很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
+原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。</p>
+
+<ol>
+<li><p>先安装sdoc， <code>gem install sdoc</code>, 安装完成后会新增两个可执行文件<code>sdoc</code>和<code>sdoc-merge</code></p></li>
+<li><p>进入自己下载的ruby源代码的父目录，执行
+<code>sdoc --main ruby-2.2.1/README.md  -x test -x example -x bin -N -x lib/rdoc  --title "Ruby 2.2" --op ~/sdocruby-2.2 ruby-2.2.1 ruby-2.2.1/README</code></p></li>
+</ol>
+
+
+<p>其中，ruby-2.2.1是当前rails的版本，--op指示生成的sdoc所在的目录，-x是不要去解析这些内容，运行几分钟后，文件就生成了。</p>
+
+<p>然后把生成的目录放到自己方便的地方即可。</p>
+
+<p>参考链接：</p>
+
+<p><a href="http://pjkh.com/articles/building-your-own-rails-and-ruby-searchable-api-docs/">1</a>
+<a href="http://pan.baidu.com/s/1i3vgC09">2 懒人下载</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2014 Rails Hosting 调查]]></title>
@@ -353,69 +379,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Deploy a Rails 4 app to Heroku]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
-    <updated>2013-03-04T20:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
-    <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
-为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
-在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
-
-<h3>0 事先准备</h3>
-
-<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
-但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
-
-<h3>1 创建应用</h3>
-
-<p>首先执行
-```
-heroku apps:create user-agent-show2</p>
-
-<p><code>
-这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
-</code>
-[remote "heroku"]</p>
-
-<pre><code>    url = git@heroku.com:user-agent-show.git
-    fetch = +refs/heads/*:refs/remotes/heroku/*
-</code></pre>
-
-<p>```</p>
-
-<h3>2 Git push</h3>
-
-<p>随后就可以执行
-<code>
-git push heroku
-</code>
-部署应用了。
-但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
-基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
-
-<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
-因为rails 4默认生成environments/production.rb中是这样配置的
-<code>
-config.serve_static_assets = false
-</code>
-这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
-对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成
-<code>
-config.serve_static_assets = true
-</code>
-这样才能保证静态文件被正常访问。</p>
-
-<h3>3 数据库更新</h3>
-
-<p><code>
-heroku run rake db:migrate
-</code></p>
-
-<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
 ]]></content>
   </entry>
   
