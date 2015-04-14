@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-04-09T12:45:54+08:00</updated>
+  <updated>2015-04-14T17:12:27+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[小米拖线板]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/04/14/xiao-mi-tuo-xian-ban/"/>
+    <updated>2015-04-14T16:59:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/04/14/xiao-mi-tuo-xian-ban</id>
+    <content type="html"><![CDATA[<p>上礼拜4月8日入了一个<a href="http://www.mi.com/powerstrip/#init">小米拖线板</a>，使用近一周后来评价评价。</p>
+
+<p>小米的这款拖线板吸引我的地方是3个做在板上的USB插口，可以提供最大每口2A的输出，3个同时工作时可以提供各1A的输出。对于现在家中主要以苹果设备为主的情况，这种配置还是很有针对性的。
+买回来之后，确实可以把给pad iphone min等的充电器都收起来了。而且据说其待机的功率只有0.22w，可谓很节能环保。也确实能自动识别是何种设备，并提供相应的电流进行充电。</p>
+
+<p>在做工和售价方面也算和目前市场主流的拖线板匹配，尽管实际拿到手里的东西感觉和小米的宣传图片还是有很大的差距。但比起公牛等，也不算差。整个还算比较小，携带还算方便。</p>
+
+<p>说完好的，再说点不足的。
+最主要的，插口数量还是有点少，毕竟算上3个usb口子，也至多算是六口的拖线板，家用的话还是有点不太够的。</p>
+
+<p>其次，儿童安全门虽然安全了，但也过重了些，插拔相对费劲些。如果这个东西是放在单位里的，那基本没多大意义了。因为单位笔记本上的usb插口还是很多的。</p>
+
+<p>这个产品亮点突出，但真的用起来发现还是有点不太够。考虑到不算49元的售价，基本还算值吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[读书列表2015]]></title>
@@ -153,31 +174,6 @@
 
 <p>不过只在行进中转动方向盘目前我还做不到，仍然需要努力。另外就是发现，家里小区的停车难度远比马路上大。
 如果家里停好了，基本上外面也就可以随便停了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[新车评网的随想]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/08/01/xin-che-ping-de-sui-xiang/"/>
-    <updated>2014-08-01T22:09:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/08/01/xin-che-ping-de-sui-xiang</id>
-    <content type="html"><![CDATA[<p>近几周，挺痴迷<a href="http://www.xincheping.com/">新车评网</a>。原因主要是他们有一个和我同一年高考同一年
-工作的创始人和总编颜宇鹏（俗称yyp），他们的编辑队伍相对稳定，阿聪、阿庆、阿文、稀饭、hh等确实都特性很鲜明。
-从他们的文章、观点中可以学到不少东西，增长不少的见识。而他们的长测节目则尤其精彩，从买车、用车、二手保值等，
-可以阅读到很多用车的细节。这些东西，在汽车之家上是感觉不到的。</p>
-
-<p>比较起来，汽车之家更像一个带产品属性的汽车媒体网站，而新车评则更接近于传统的汽车杂志。以编辑为核心竞争力，
-主要的产品就是文章，当然也有视频。但是视频只是为了更方便一部分懒得看文章的人。这可能和颜宇鹏是从传统杂志走出来的背景有关。</p>
-
-<p>而从新车评上，发现从事汽车报道的媒体人还真的挺多的。既有传统的杂志社，也有爱卡、汽车之家这样的新媒体巨头，
-还有新车评这样极有特色的规模相对小的媒体，更有大量的在大报业汽车版面中的记者和编辑。摆在一汽看的话，数量
-就相当可观了。还给我映像深刻的是，深圳或者说南方系的媒体业确实很兴盛。可以说各路人马很多，虽然有点乱，但确实
-活力十足。长期在上海文广统治之下的上海生活，还是很赞叹南方系媒体的活力。</p>
-
-<p>说回新车评本身，他们其实也有一定的偏向性。给我的感受是，他们和上海通用、广州本田、北京现代的关系尚佳，
-和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
-
-<p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
 ]]></content>
   </entry>
   
