@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
-中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的concise . 读完之后很是喜欢, 于是买了英文版.
-再后来, 也就淡淡忘了. &hellip;">
+  <meta name="description" content="JavaScript是一个很大的亮点。V8的性能确实快。
+相对于Ruby Python的eveneted-driven编程库，JS的优势在于：
+1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；
+2. 它的执行速度要比其他脚本语言快的多的多，比ruby &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/26/programming-language-performance/">Programming Language Performance</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-26T10:06:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/screen_print/programming_performance.jpg" alt="语言性能排名" /></p>
+
+<p>JavaScript是一个很大的亮点。V8的性能确实快。
+相对于Ruby Python的eveneted-driven编程库，JS的优势在于：<br/>
+1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；<br/>
+2. 它的执行速度要比其他脚本语言快的多的多，比ruby python的执行速度平均快15x，甚至比erlang还要快5x。
+而且在可以预见的5-10年内，这个优势应该还会继续扩大。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1841,64 +1884,6 @@ readme driven development
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/28/websocket/">WebSocket</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-28T14:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.websocket.org/quantum.html"><strong>WebSocket</strong></a> defines a full-duplex communication channel that operates through a single socket over the Web</p>
-
-<p>现在浏览器对real-time应用的解决办法：</p>
-
-<ul>
-<li><em>polling</em> ajax 定期轮询</li>
-<li><em>long_polling</em> 有请求上来后，不直接回应。但这样做未必能带来比前一种稍好的性能表现。</li>
-<li><em>streaming</em> server不关闭链接，发送并维持住一个打开的response。但会导致HTTP buffer 回应的问题，因为一直不给complete信号会导致不即刻传回去。</li>
-</ul>
-
-
-<p>结论：这种实时体验的代价高昂。这些代价包括： <strong>延误</strong>, <strong>没必要的网络流量</strong>， <strong>cpu性能的拖累</strong></p>
-
-<p>WebSocket这是下一代的web通信&#8212;full-duplex, bidirectional, a single socket。看下来是对HTTP协议的一个替换。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GET /text HTTP/1.1\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n Host: www.websocket.org\r\n …\r\n 
-</span><span class='line'>HTTP/1.1 101 WebSocket Protocol Handshake\r\n Upgrade: WebSocket\r\n Connection: Upgrade\r\n …\r\n</span></code></pre></td></tr></table></div></figure>
-
-
-<p>WebSocket目前只有chrome有实现。 Server端的编程工具也还不是很多。
-Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -1916,6 +1901,10 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/20/crv/">CRV</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/18/xin-kuan-crvhe-q3/">新款CR-V和Q3</a>
       </li>
     
@@ -1931,15 +1920,11 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
         <a href="/blog/2015/03/28/yun-ti/">云梯</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/03/06/sqlmapshou-ji/">SQLMAP手记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (57)</a></li><li><a href='/blog/categories/生活'>生活 (39)</a></li><li><a href='/blog/categories/车车'>车车 (23)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/java'>Java (13)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/spring'>Spring (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (57)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (22)</a></li><li><a href='/blog/categories/神器'>神器 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/java'>Java (13)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/spring'>Spring (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
 </section>
   
 </aside>
