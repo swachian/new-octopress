@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-05-04T15:14:03+08:00</updated>
+  <updated>2015-05-05T23:21:42+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[地铁二号线限流与陆家嘴上海中心]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin/"/>
+    <updated>2015-05-05T23:05:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin</id>
+    <content type="html"><![CDATA[<p>微博上的<strong>上海发布</strong>公布了如下信息，大意是二号线陆家嘴站和世纪大道站将在高峰时期限流。</p>
+
+<blockquote><p>即日起在高峰时段对江苏路、静安寺、陆家嘴、世纪大道等4站采取限流措施，包括关闭部分自动扶梯、利用限流栏杆减缓换乘速度等。</p></blockquote>
+
+<p>对于二号线如今拥挤情况的认识我是上月外出开会才进一步感受到更加严重了。
+越来越挤可以预料，挤成这样还是出乎意料。结合另一则新闻，猜测大概是这么回事情。</p>
+
+<p>根据解放日报的<a href="http://www.jfdaily.com/shanghai/bw/201411/t20141127_998633.html">上海中心将建成全球最高观光厅</a>,</p>
+
+<blockquote><p>今年(2014)年底前，陆家嘴地区共有9个商办楼宇项目竣工，其中陆家嘴世纪金融广场3幢办公楼等6项商办楼宇已投入使用，上海中心大厦等3项楼宇正进行装修收尾工作.</p></blockquote>
+
+<p>这意味着包含上海中心在内，从去年下半年至今大约有9个办公楼竣工。
+而且目前陆家嘴地区竣工的写字楼都不会太矮，意味着普遍是巨型的办公楼。
+巨型办公楼是什么概念？</p>
+
+<p>以上海中心为例，建筑面积433954平方米，建筑主体为118层，以人均可分配10平方米计算，
+可容纳4万3千人在里面办公。官方给出的数字是3万，和我自己估算的也差不多。9个这样的大楼，
+就是说新增了30万个供人办公的block，以目前的经济热度而言基本可以满员，或者会逐步爆满。
+那就是说新增了30万职员在那里上班，陆家嘴站将一下子增加30万高峰客流。
+即使强如上海，也没有一个区域真能一下子承担多出来的那么多客流量。</p>
+
+<p>而一个能容纳4万人办公的大楼，只准备了2000个停车位。真的就把所有的交通压力都丢给了地铁了。如此高的密度不以为耻，反以为荣，实在令人无语。</p>
+
+<p>我的结论很简单，二号线世纪大道、陆家嘴的限流主要是陆家嘴又有包括上海中心在内的几幢巨型商务楼竣工并陆续投入使用造成的。脱离了以人为本这个中心思想，一切最终都将没的谈。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spring 4 中的新东西]]></title>
@@ -794,145 +826,6 @@ tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，
 精确的：305084，估计的：305281</p>
 
 <p>而这种方式最大的好处，自然就是对count-distinct这类问题统计起来毫无压力了,同时得到的数据也足够好用了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[并发的ab测试和校验码对并发状况处理的盲区]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/"/>
-    <updated>2014-12-11T21:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu</id>
-    <content type="html"><![CDATA[<p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
-但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
-
-<p>限制的过程是这样的：</p>
-
-<ol>
-<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
-<li>发送短信；</li>
-<li>刷新校验码。</li>
-</ol>
-
-
-<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
-极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
-
-<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
-颇费了一番周折。</p>
-
-<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
-
-<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
-
-<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
-
-<h3>第二个坑： 需要提前放入session</h3>
-
-<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
-因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
-正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
-带cookie上去，因此就得到了错误的响应。</p>
-
-<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
-ruby的rest-client。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rest-client&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">jsp</span> <span class="o">=</span> <span class="s2">&quot;http://xxx.com/portal/&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="n">passportUrl</span> <span class="o">=</span> <span class="s1">&#39;http://xxx.com\!validate.action?user_id=1xxxxxx\&amp;verfiyCode=9813&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">s</span>
-</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsp</span><span class="p">)</span>
-</span><span class='line'>  <span class="vi">@cookies</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">cookies</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="vi">@cookies</span><span class="o">[</span><span class="s1">&#39;JSESSIONID&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;74113695C0FB915393AE69DD63EAE088&#39;</span>
-</span><span class='line'>  <span class="nb">p</span> <span class="vi">@cookies</span>
-</span><span class='line'>  <span class="c1">#puts response.body</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="mi">5</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
-</span><span class='line'>     <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">passportUrl</span><span class="p">,</span> <span class="ss">cookies</span><span class="p">:</span> <span class="vi">@cookies</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">s</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
-模拟不出并发的效果，所以还是需要回到ab测试上。</p>
-
-<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
-
-<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
-
-<h3>解决的办法</h3>
-
-<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
-
-<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
-下面的方式，让锁住类对象来实现static的效果。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'>   <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
-才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">synchronized</span> <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">validCode</span><span class="o">(</span><span class="n">HttpSession</span> <span class="n">sesson</span><span class="o">,</span> <span class="n">String</span> <span class="n">code</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">equal</span><span class="o">(</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">),</span> <span class="n">code</span><span class="o">))</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="n">session</span><span class="o">.</span><span class="na">removeAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>得到的教训</h3>
-
-<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
 ]]></content>
   </entry>
   
