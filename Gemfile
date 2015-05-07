@@ -22,6 +22,7 @@ group :development do
 end
 
 gem 'sinatra', '~> 1.4.2'
-gem 'unicorn'
+#gem 'unicorn'
 gem 'stringex', '~> 1.4.0'
+gem 'puma'
 
