@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 读书列表 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书列表/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-05-07T10:53:08+08:00</updated>
+  <updated>2015-05-17T00:26:45+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -21,6 +21,8 @@
     <content type="html"><![CDATA[<h3>技术类</h3>
 
 <ol>
+<li><a href="">spring in action 4</a> 经典书籍又除了第4版，很值得一读和学习。</li>
+<li><a href="">Storm分布式实时计算模式</a> 可以学习一些场景，storm是简化版的hadoop，只管计算不管存储。</li>
 <li>FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.</li>
 <li>Eric Evans. Domain-Driven Design.</li>
 <li>Beck. Smalltalk best practice patterns, 1996.</li>

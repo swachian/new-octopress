@@ -11,6 +11,8 @@ categories:
 
 ### 技术类
 
+1. [spring in action 4]() 经典书籍又除了第4版，很值得一读和学习。
+1. [Storm分布式实时计算模式]() 可以学习一些场景，storm是简化版的hadoop，只管计算不管存储。
 1. FRW,Beck. Refactoring: Improving the Design of Existing Code,1999.
 1. Eric Evans. Domain-Driven Design.  
 1. Beck. Smalltalk best practice patterns, 1996.
