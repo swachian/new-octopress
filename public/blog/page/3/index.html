@@ -9,7 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最近分析一个大日志文件，9亿条记录近300GB的数据。终于体会到一点大数据处理的意思。 之前根据日志，统计出里面各个域名的pv还算简单。为了开发方便，利用了Redis，开10个java线程，分别扫描不同的行，并把domain做关键字写入redis并不断计数，最后从中读出全部的值并排序。 &hellip;">
+  <meta name="description" content="中文翻译是《我编程，我快乐&#8211;程序员职业规划之道》。在陪老婆做头发的过程中，看完了这本书。
+本书还有一个更大名鼎鼎的名字：My Job Went to India。整本书其实更确切地说是如何
+追求成为卓越的软件开发者。中文名字起的其实有点文不对题。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/21/tpp/">The Passionate Programmer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-21T17:21:00+08:00" pubdate data-updated="true">Dec 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>中文翻译是《我编程，我快乐&#8211;程序员职业规划之道》。在陪老婆做头发的过程中，看完了这本书。
+本书还有一个更大名鼎鼎的名字：My Job Went to India。整本书其实更确切地说是如何
+追求成为卓越的软件开发者。中文名字起的其实有点文不对题。</p>
+
+<p>书中比较有意义的是提到了程序语言的选择是一种投资，低风险必然低回报，而高风险可能高回报也可能
+无回报。所以对于选择小众还是大众化的区别和结果给了完整的分析。
+而同时，对于继续在大众语言中立足的开发者而言，作者提出来因为需求的提高，初级程序员会增多，
+而对高级开发者的需求也会因此增强。也算是给高级开发者指明了出路。此外，作者也区分了经理和
+带路人的区别。经理的职责并非是替补，事实上经理的主要职责是确定事情的优先级，保证部门的运行
+效率等。这也是管理真正的目的。</p>
+
+<p>整本书读起来还是比较轻松的，首先当然是因为这本书确实很薄。其次，书中很多内容也确实和我一直
+以来做的差不多。其实对于小公司工作的人来讲，书中提到的做法也几乎是一种自然而且必然的选择。</p>
+
+<p>而保持激情一切一切的关键在于当代社会确实需要软件，也确实需要程序员。同时由于
+软件开发者智力劳动的属性，注定必须强调自我驱动，很难完全规范化和流水线化，因此从业人员的能力对产出
+也会产生极大的差别化结果。
+ 所以在这个时代，安心地当个软件开发者还是有出路且挺幸福的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -843,356 +898,6 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-19T13:57:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近来安全问题日益被重视，通过HTTP传输的部分数据也有了加密的需求。虽然最到位的办法肯定是HTTPS，但证书的申请是比较麻烦的。所以，还是决定
-通过diy的方式，将浏览器中的部分敏感数据加密后再传给服务器。</p>
-
-<p>说到加密算法，主要是对称或不对称，可逆或不可逆。最保险的当然是不可逆的密文传输，但是部分业务获得不可逆的密文后无法处理，只能选择可逆的形式。
-而在浏览器中加密，显然用对称加密方式就不合适了。所以最后选择了RSA。既是不对称的也是可解密的。</p>
-
-<p>这件事情里面，最麻烦的就是rsa的算法是java和javascript分别实现的。客户端的加密别无选择，只有js胜任。服务端主要提供给现有服务使用，因此主要就是Java。
-而让两者配合，则是需要花费些功夫的。网上尽管资料不少，但讲清楚之间配合的很少。</p>
-
-<h2>Javascript中的RSA</h2>
-
-<p>Java的加密算法之前已经用过多次，了解了一下js的rsa算法，还真的有不少，最后选了一个大家提到的比较多的<a href="http://www.ohdave.com/rsa/">ras in javascript</a>。
-在html中使用的代码如下:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>JavaScript RSA<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/BigInt.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/RSA.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/Barrett.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="c1">//公钥加密明文</span>
-</span><span class='line'>        <span class="nx">setMaxDigits</span><span class="p">(</span><span class="mi">231</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">modulu</span> <span class="o">=</span> <span class="s2">&quot;00aad04454bda226e1&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">key1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">&quot;jack1234张三&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">encryPssword</span> <span class="o">=</span> <span class="nx">encryptedString</span><span class="p">(</span><span class="nx">key1</span><span class="p">,</span> <span class="nx">password</span><span class="p">);</span>
-</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span><span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//私钥解密</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">priExp</span> <span class="o">=</span> <span class="s2">&quot;078c4c789faca941&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">key2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="nx">priExp</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">decryptedPssword</span> <span class="o">=</span> <span class="nx">decryptedString</span><span class="p">(</span><span class="nx">key2</span><span class="p">,</span> <span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span><span class="nx">decryptedPssword</span><span class="p">);</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>setMaxDigits</code>我理解下来是给计算留下足够多的空间的，一般选择秘钥位数(key_size)*2/16，每个digit可以放16个bit.<br/>
-<code>RSAKeyPair(encryptionExponent, decryptionExponent, modulus)</code>是构造钥匙的方法，实际上构造公钥（加密）只需要第一个参数和第三个参数，构造私钥（解密）只需要第二个参数和第三个参数。
-第三个参数是类似模的一个东西，另外两个参数则是指数，根据模和各自的指数，就能生成相应的公钥和私钥的数字。而这个js的版本，都是返回的hex，即16进制的内容，且不支持中文，如果需要支持中文的话，需要自己先转成某种编码。不过，还剩下一个问题，就是模和指数从哪里获取呢？</p>
-
-<h2>Java中的RSA</h2>
-
-<p>Java的RSA代码有很多，可以参考<a href="http://blog.csdn.net/songxiaobing/article/details/17505237">链接</a>。关键在于如何使用这些API。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argvs</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">KeyPair</span> <span class="n">keyPair</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateKeyPair</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">RSAPublicKey</span> <span class="n">pubKey</span> <span class="o">=</span> <span class="o">(</span><span class="n">RSAPublicKey</span><span class="o">)</span> <span class="n">keyPair</span><span class="o">.</span><span class="na">getPublic</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">RSAPrivateKey</span> <span class="n">priKey</span> <span class="o">=</span> <span class="o">(</span><span class="n">RSAPrivateKey</span><span class="o">)</span> <span class="n">keyPair</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">pubModBytes</span> <span class="o">=</span> <span class="n">pubKey</span><span class="o">.</span><span class="na">getModulus</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">pubPubExpBytes</span> <span class="o">=</span> <span class="n">pubKey</span><span class="o">.</span><span class="na">getPublicExponent</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">priModBytes</span> <span class="o">=</span> <span class="n">priKey</span><span class="o">.</span><span class="na">getModulus</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">priPriExpBytes</span> <span class="o">=</span> <span class="n">priKey</span><span class="o">.</span><span class="na">getPrivateExponent</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">RSAPublicKey</span> <span class="n">recoveryPubKey</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateRSAPublicKey</span><span class="o">(</span><span class="n">pubModBytes</span><span class="o">,</span>
-</span><span class='line'>        <span class="n">pubPubExpBytes</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">RSAPrivateKey</span> <span class="n">recoveryPriKey</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateRSAPrivateKey</span><span class="o">(</span>
-</span><span class='line'>        <span class="n">priModBytes</span><span class="o">,</span> <span class="n">priPriExpBytes</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;加密指数: &quot;</span>
-</span><span class='line'>        <span class="o">+</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">pubPubExpBytes</span><span class="o">));</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;解密指数： &quot;</span>
-</span><span class='line'>        <span class="o">+</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">priPriExpBytes</span><span class="o">));</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;公钥modulus: &quot;</span><span class="o">+</span><span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">pubModBytes</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>生成密钥对可以用<code>generateKeyPair</code>，并且会生成一个RSA文件。随后的重点是要把里面的公钥私钥转换成有<code>RSA</code>前缀的相应类，只有这样才能调出获得Exp和Mod的方法。
-两个ModBytes得到的结果是一样的。所以在js里面，modulu就变成只有一个参数了。</p>
-
-<h2>二者的异同</h2>
-
-<p>如同之前预料的一样，两个语言写出来的加密解密在一些细节上是不一样的。</p>
-
-<ul>
-<li><p>java</p>
-
-<ul>
-<li>默认密文是二进制的，自己主动转成16进制的话是连续的</li>
-<li>原生支持中文</li>
-</ul>
-</li>
-<li><p>javascript</p>
-
-<ul>
-<li>默认密文就是16进制的，且每个分组之间使用一个空格进行分隔</li>
-<li>分组内部的排列是倒序的</li>
-<li>不支持中文</li>
-</ul>
-</li>
-</ul>
-
-
-<p>下面的输出比较说明问题</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">rsa</span><span class="o">.</span><span class="na">encrypt</span><span class="o">(</span><span class="n">pubKey</span><span class="o">,</span><span class="n">str</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
-</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;加密后==&quot;</span> <span class="o">+</span> <span class="n">s1</span><span class="o">);</span> <span class="c1">//加密后==0c983a3d17e57037456582ce61bc1276</span>
-</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;解密后==&quot;</span> <span class="o">+</span> <span class="n">Javanew</span> <span class="n">String</span><span class="o">(</span><span class="n">rsa</span><span class="o">.</span><span class="na">decrypt</span><span class="o">(</span><span class="n">priKey</span><span class="o">,</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">hexStringToByte</span><span class="o">(</span><span class="n">s1</span><span class="o">))));</span> <span class="c1">//解密后==abcdefghijklmn</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">js</span><span class="err">相同内容的输出为：</span>
-</span><span class='line'><span class="mi">4831</span><span class="n">c7394dc3623c</span> <span class="mi">5429366</span><span class="n">c63908d05</span> <span class="mi">16</span><span class="n">d4229e4631084a</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>差异还是比较显而易见，具体的实现如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm">   * 解析js的rsa处理过来的密文</span>
-</span><span class='line'><span class="cm">   * @param jsHex 的特点是每16个字符中间有空格分割，而且block还原的顺序需要颠倒过来</span>
-</span><span class='line'><span class="cm">   * </span>
-</span><span class='line'><span class="cm">   * @throws Exception </span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">decryptFromJsRSA</span><span class="o">(</span><span class="n">String</span> <span class="n">jsHex</span><span class="o">,</span> <span class="n">RSAPrivateKey</span> <span class="n">priKey</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">String</span><span class="o">[]</span> <span class="n">blocks</span> <span class="o">=</span> <span class="n">jsHex</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">String</span> <span class="n">block</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">blocks</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
-</span><span class='line'>      <span class="c1">//byte[] en_result = new BigInteger(block, 16).toByteArray();</span>
-</span><span class='line'>      <span class="kt">byte</span><span class="o">[]</span> <span class="n">en_result</span> <span class="o">=</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">hexStringToByte</span><span class="o">(</span><span class="n">block</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="kt">byte</span><span class="o">[]</span> <span class="n">de_result</span> <span class="o">=</span> <span class="n">decrypt</span><span class="o">(</span><span class="n">priKey</span><span class="o">,</span> <span class="n">en_result</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">de_result</span><span class="o">));</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>      <span class="c1">//返回解密的字符串</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">reverse</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>中文编码的问题</h2>
-
-<p>上面用到的js的rsa库，写的很小巧，运行速度也很快。唯一的缺点就是不支持中文。好在按上面的算法，试了几千条数据后，确保非中文的情况下java和js之间的明文-密文转换是没有问题的。
-所以只要给js加上Base64的编码，就可以解决问题了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">genRandomNum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pwdLen</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 生成的密码的长度</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;\&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;我&#39;</span><span class="p">,</span> <span class="s1">&#39;爱&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">,</span> <span class="s1">&#39;京&#39;</span><span class="p">,</span> <span class="s1">&#39;天&#39;</span><span class="p">,</span><span class="s1">&#39;安&#39;</span><span class="p">,</span> <span class="s1">&#39;门&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;日&#39;</span><span class="p">,</span> <span class="s1">&#39;产&#39;</span><span class="p">,</span> <span class="s1">&#39;别&#39;</span><span class="p">,</span> <span class="s1">&#39;克&#39;</span><span class="p">,</span> <span class="s1">&#39;大&#39;</span><span class="p">,</span> <span class="s1">&#39;众&#39;</span><span class="p">,</span> <span class="s1">&#39;丰&#39;</span><span class="p">,</span> <span class="s1">&#39;田&#39;</span><span class="p">];</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">maxNum</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">pwd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&lt;</span> <span class="nx">pwdLen</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// 生成随机数，取绝对值，防止生成负数，</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="nx">maxNum</span><span class="p">);</span> <span class="c1">// 生成的数最大为36-1</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">maxNum</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">pwd</span> <span class="o">+=</span> <span class="nx">str</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-</span><span class='line'>    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">//console.log(pwd);</span>
-</span><span class='line'><span class="k">return</span> <span class="nx">pwd</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">pwds</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="kd">var</span> <span class="nx">pwd</span> <span class="o">=</span> <span class="nx">genRandomNum</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40</span><span class="p">));</span>
-</span><span class='line'>   <span class="nx">pwds</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pwd</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>    <span class="c1">//公钥加密明文</span>
-</span><span class='line'>    <span class="nx">setMaxDigits</span><span class="p">(</span><span class="mi">231</span><span class="p">);</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">modulu</span> <span class="o">=</span> <span class="s2">&quot;0085cf15ef6336cb3f&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">key1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pwd</span> <span class="nx">of</span> <span class="nx">pwds</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">pwd</span><span class="o">+</span><span class="s2">&quot;[ &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pwd</span> <span class="nx">of</span> <span class="nx">pwds</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pwd</span><span class="p">);</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">encryPssword</span> <span class="o">=</span> <span class="nx">encryptedString</span><span class="p">(</span><span class="nx">key1</span><span class="p">,</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">pwd</span><span class="p">));</span>
-</span><span class='line'>      <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">encryPssword</span><span class="o">+</span><span class="s2">&quot;, &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过上面的程序，可以产生长度不等的多个随机密码，把明文进行base64转码后交给rsa加密成16进制的字符，然后就可以把得到的明文和密文交给java进行比对了。
-另外Base64的编码是url不安全的。因为+ = /都是base64的适用字符，而这些在url传输中都会被转义，所以js的base64编码一般还有一个对url-safe的版本。
-而在此处，rsa会最终转成16进制，因此并不需要使用url-safe的特性。考虑到Java的base64还是标准版的，所以使用标准版的base64更合适。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1210,6 +915,10 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/17/lao-luo-he-chi-jian-qiang/">老罗和池建强，现代创业和打工</a>
       </li>
     
@@ -1225,15 +934,11 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
         <a href="/blog/2015/04/20/crv/">CRV</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/04/18/xin-kuan-crvhe-q3/">新款CR-V和Q3</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (57)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (22)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/spring'>Spring (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/神器'>神器 (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/spring'>Spring (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-05-17T12:48:48+08:00</updated>
+  <updated>2015-05-19T17:41:58+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HttpSession在Spring中的配法和问题]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/"/>
+    <updated>2015-05-19T17:22:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti</id>
+    <content type="html"><![CDATA[<p>最早出于使用struts2的习惯，在Spring中如果需要使用<code>HttpSession</code>，做法是把这个对象作为整个类的一个实例对象。</p>
+
+<p>1</p>
+
+<p>```java
+public class TestController {</p>
+
+<p>  private static final Log logger = LogFactory.getLog(TestController.class);</p>
+
+<p>  @Autowired
+  HttpSession session;</p>
+
+<p>  ...
+}
+```</p>
+
+<p>后来因为担心Controller在Spring中是单例的（在struts2中是多例的），怕引出线程安全问题，于是把<code>session</code>放入了method中进行注入。</p>
+
+<p>2</p>
+
+<p>```java
+@ResponseBody
+  @RequestMapping(method = RequestMethod.GET,  produces = MediaTypes.TEXT_HTML_UTF_8)
+  public String testSession(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {</p>
+
+<pre><code>int hashCode = session.hashCode();
+
+int i = 0  ;
+if (session.getAttribute("val")!=null) {
+  i = (int)session.getAttribute("val");
+  i++;
+} 
+
+session.setAttribute("val", i%3);
+
+logger.info("hashCode: " + hashCode);
+
+return ""+hashCode + ": " + i;
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>近日在学习Spring in Action的过程中，发现其实第一种方式下使用了<code>proxy 模式</code>, 实际被注入的类是<code>session  $Proxy38</code>这样的代理类，
+类似于避免反复调用<code>createEntityManager</code>的做法，该代理类会寻找实际对应的session并进行操作,只是给controller注入了一个壳。</p>
+
+<p>而第2种方法中，注入的则是标准的容器session: <code>org.apache.catalina.session.StandardSessionFacade</code></p>
+
+<p>3</p>
+
+<p>此外，受到推崇的是第三种写法，</p>
+
+<p><code>java
+@Component
+@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS, value="session")
+public class ShoppingCart implements Serializable{
+}
+</code></p>
+
+<p>这种写法将整个购物车变成一个scope属于session的bean，由spring注入并负责保存。</p>
+
+<p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
+毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQLMAP手记]]></title>
@@ -212,39 +283,6 @@ return "/static/"+resource+"?"+fileMd5;
 <img src="/images/ssd/7.jpg" alt="image" /></p>
 
 <p>SSD终于到了可以普及的一天了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[独一无二者计数问题（ count-distinct）]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-%5B%3F%5D-wu-er-zhe-ji-shu-wen-ti-%28-count-distinct%29/"/>
-    <updated>2014-12-17T16:14:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-[?]-wu-er-zhe-ji-shu-wen-ti-(-count-distinct)</id>
-    <content type="html"><![CDATA[<p>最近分析一个大日志文件，9亿条记录近300GB的数据。终于体会到一点大数据处理的意思。</p>
-
-<p>之前根据日志，统计出里面各个域名的pv还算简单。为了开发方便，利用了Redis，开10个java线程，分别扫描不同的行，并把domain做关键字写入redis并不断计数，最后从中读出全部的值并排序。
-整个过程主要开销在扫描方面。此时瓶颈出在redis上，基本上5个java线程可以把redis的cpu性能榨干。</p>
-
-<p>9亿条数据分析出来了七十几万个域名，而redis处理70w个key，消耗的内存在100MB以内，所以整个运行跑上几个小时就能得到想要的结果了。</p>
-
-<p>但是，客户进一步提出要分析每个domain下独立访问的用户数量是多少。这下子可就犯难了。
-因为按照传统的做法，碰到需要计算独立用户的需求会建立一个集合，然后把标识往里push，最后获取一下这个set的大小，就可以得到独立用户的数量。
-然而，如果对70w个域名都分别建立一张访问用户的set，则存储的开销实在太大。这意味着key-value的数量将是70w的几千甚至几万倍。
-然后看了一下redis新增加的数据结构类型，发现redis中的hyperloglogs是为此种任务而生的。</p>
-
-<h2>HyperLogLog和count-distinct problem</h2>
-
-<p>建立一个集合并把数据放入，最后计算集合的大小是一种精确的求值方式。而HyperLogLog则是一种会损失一些细节但可以获得很好的近似值的估算方式。</p>
-
-<p>这种算法的核心思想就是MD5+Bitmap。通过某种Hash算法，比如MD5，可以把千变万化的取值收敛成有限的值，而因为这些值也很大，所以可以认为重复的比例会很低。然后，应用Bitmap来表示这些映射结果是否已存在，最后就是计算这个Bitmap中已存在值的数量。尽管损失一些细节，也不是完全精确，但结果是足够准确了。而经过Hash的收敛，再经过Bitmap的收敛，对空间的需求就会变得少了许多许多，也就可以应用于更多关键字的计数。</p>
-
-<p>以我自己对某个域名按两种方式都运行后得到的结果，分别对比如下：</p>
-
-<p>精确的：1687，估计的：1685<br/>
-精确的：93869，估计的：94097<br/>
-精确的：305084，估计的：305281</p>
-
-<p>而这种方式最大的好处，自然就是对count-distinct这类问题统计起来毫无压力了,同时得到的数据也足够好用了。</p>
 ]]></content>
   </entry>
   
