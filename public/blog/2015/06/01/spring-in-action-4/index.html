@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Spring In Action 4 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
+《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。
+好在，In action在14年年末又出了新的版本。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2015/02/20/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Spring in Action 4</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T10:31:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
+《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。<br/>
+好在，In action在14年年末又出了新的版本。
+经典的Spring系列又出了第4版，这一版是完全跟上了Spring发展的脚步，呈现的也是最新的Spring开发内容，而且聚焦于Spring Web。</p>
+
+<p>内容比较新颖，作者的文章也总喜欢和读者拉拉家常，所以整个书读起来也比较有意思。不过，这本书不适合完全没Java Web开发基础的读者，
+其整个书还是写给已经使用Spring进行开发或者至少已经略懂什么是Java Web开发的人，所以，学这本书前必须要有一点基础。</p>
+
+<h2>Spring的基础介绍</h2>
+
+<p>这部分也是整个系列一直的拿手好戏，现在总结的是越来越精彩，在Xml配置和Java Config中也完全倒向后者了，不过更多的也是通过这两个配置结合了自动扫描的配置方法，即Annotation。</p>
+
+<h3>Spring 的四大法宝：</h3>
+
+<ol>
+<li>PoJo</li>
+<li>DI（依赖注入，取代各个类之间的内部new）</li>
+<li>Aspect（Feature），给每个method加上chain，主要用于Transaction、logging、security、cacching这些领域</li>
+<li>Template（JDBCTemplate等等)，即模板方法，用于减少冗长代码的写入。</li>
+</ol>
+
+
+<p>而这一切的基础是Java的动态编程，除了Java自带的反射，其实大量使用了CGLib库。</p>
+
+<h3>Profile</h3>
+
+<p>通过<code>@Profile("dev")</code>来表明在什么情况下使用下面的标注或配置，即激活哪一种配置属性。有两个变量可以指定值</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>spring.profiles.active
+</span><span class='line'>spring.profiles.default</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，<code>default</code>可以在web.xml中定义，而<code>active</code>可以在系统属性、环境变量、JNDI或者@ActiveProfiles中定义，因为<code>active</code>的优先级更高。</p>
+
+<h3>其他一些标注</h3>
+
+<p>@Primary 用于消除bean的歧义性（比如有多个同名或同类型、同接口），在声明是可以使用表明这个为主。<br/>
+@Qualifier，用于一步一步的Narrow指定匹配，不过似乎耦合了点，个人觉得不推荐使用<br/>
+@Scope，这个很关键，指定了生成bean使用的容器, Prototype是每次new一个，大部分默认是单例，还有基于Session和Scope的bean注入，解决了web开发时的有些信息注入的难题。具体可参看<a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>。</p>
+
+<h2>Aop</h2>
+
+<p>Aop 提供了在method的前后增加功能（Feature）的能力，而这些功能往往是针对业务某些统一的能力的，所以称之为切面，意在把日志、事物、安全等功能提取出来，并且Spring配套了一系列术语称呼AOP中的各个角色。
+但本质上还是一种定义Hook的模式。</p>
+
+<ul>
+<li>Advice ， 功能本身</li>
+<li>PointCut，实际需要使用的Join Points</li>
+<li>Joinpoints，在哪些点（方法中插入）</li>
+</ul>
+
+
+<p>插入的时机有：
+1. Before: method调用前
+2. After all: method调用后
+3. After returning success: method调用成功
+4. After throwing: method调用出现例外
+5. Around: 写法最复杂，需要把调用的chain写在Advice里面</p>
+
+<p>具体用分为:<br/>
+1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
+2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T10:31:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/spring/'>spring</a>, <a class='category' href='/blog/categories/读书笔记/'>读书笔记</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/" title="Previous Post: HttpSession在Spring中的配法和问题">&laquo; HttpSession在Spring中的配法和问题</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/" title="Next Post: 云梯越来越烂了">云梯越来越烂了 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/">云梯越来越烂了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/spring-in-action-4/">Spring In Action 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/17/lao-luo-he-chi-jian-qiang/">老罗和池建强，现代创业和打工</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin/">地铁二号线限流与陆家嘴上海中心</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+Included file 'twitter_sharing.html' not found in _includes directory
+
+
+
+</body>
+</html>

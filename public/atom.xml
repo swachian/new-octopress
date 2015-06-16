@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-05-19T17:41:58+08:00</updated>
+  <updated>2015-06-16T21:50:59+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[云梯越来越烂了]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/"/>
+    <updated>2015-06-16T21:46:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao</id>
+    <content type="html"><![CDATA[<p>唉，云梯是越来越不给力了。之前的新加坡1站点还能用用，最近这个月来基本是没法用了。
+绝对令人失望。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Spring In Action 4]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/"/>
+    <updated>2015-06-01T10:31:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4</id>
+    <content type="html"><![CDATA[<p>大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
+《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。<br/>
+好在，In action在14年年末又出了新的版本。
+经典的Spring系列又出了第4版，这一版是完全跟上了Spring发展的脚步，呈现的也是最新的Spring开发内容，而且聚焦于Spring Web。</p>
+
+<p>内容比较新颖，作者的文章也总喜欢和读者拉拉家常，所以整个书读起来也比较有意思。不过，这本书不适合完全没Java Web开发基础的读者，
+其整个书还是写给已经使用Spring进行开发或者至少已经略懂什么是Java Web开发的人，所以，学这本书前必须要有一点基础。</p>
+
+<h2>Spring的基础介绍</h2>
+
+<p>这部分也是整个系列一直的拿手好戏，现在总结的是越来越精彩，在Xml配置和Java Config中也完全倒向后者了，不过更多的也是通过这两个配置结合了自动扫描的配置方法，即Annotation。</p>
+
+<h3>Spring 的四大法宝：</h3>
+
+<ol>
+<li>PoJo</li>
+<li>DI（依赖注入，取代各个类之间的内部new）</li>
+<li>Aspect（Feature），给每个method加上chain，主要用于Transaction、logging、security、cacching这些领域</li>
+<li>Template（JDBCTemplate等等)，即模板方法，用于减少冗长代码的写入。</li>
+</ol>
+
+
+<p>而这一切的基础是Java的动态编程，除了Java自带的反射，其实大量使用了CGLib库。</p>
+
+<h3>Profile</h3>
+
+<p>通过<code>@Profile("dev")</code>来表明在什么情况下使用下面的标注或配置，即激活哪一种配置属性。有两个变量可以指定值</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>spring.profiles.active
+</span><span class='line'>spring.profiles.default</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，<code>default</code>可以在web.xml中定义，而<code>active</code>可以在系统属性、环境变量、JNDI或者@ActiveProfiles中定义，因为<code>active</code>的优先级更高。</p>
+
+<h3>其他一些标注</h3>
+
+<p>@Primary 用于消除bean的歧义性（比如有多个同名或同类型、同接口），在声明是可以使用表明这个为主。<br/>
+@Qualifier，用于一步一步的Narrow指定匹配，不过似乎耦合了点，个人觉得不推荐使用<br/>
+@Scope，这个很关键，指定了生成bean使用的容器, Prototype是每次new一个，大部分默认是单例，还有基于Session和Scope的bean注入，解决了web开发时的有些信息注入的难题。具体可参看<a href="http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>。</p>
+
+<h2>Aop</h2>
+
+<p>Aop 提供了在method的前后增加功能（Feature）的能力，而这些功能往往是针对业务某些统一的能力的，所以称之为切面，意在把日志、事物、安全等功能提取出来，并且Spring配套了一系列术语称呼AOP中的各个角色。
+但本质上还是一种定义Hook的模式。</p>
+
+<ul>
+<li>Advice ， 功能本身</li>
+<li>PointCut，实际需要使用的Join Points</li>
+<li>Joinpoints，在哪些点（方法中插入）</li>
+</ul>
+
+
+<p>插入的时机有：
+1. Before: method调用前
+2. After all: method调用后
+3. After returning success: method调用成功
+4. After throwing: method调用出现例外
+5. Around: 写法最复杂，需要把调用的chain写在Advice里面</p>
+
+<p>具体用分为:<br/>
+1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
+2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HttpSession在Spring中的配法和问题]]></title>
@@ -775,136 +857,6 @@ SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code
 
 <p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
 很多都是被挡在配置环境这第一道关口。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Papago gosafe520 行车记录仪]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi/"/>
-    <updated>2014-12-28T16:56:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi</id>
-    <content type="html"><![CDATA[<p>算起来今年买的千元左右的台湾制造也不少，夏天时候买过一个浦科特的256GB SSD，然后就是去年年底买的这个Papago gosafe520行车记录仪。</p>
-
-<p>从去年5月份开车之初开始，要不要买一个记录仪就让我很纠结。一方面，有个视频可以方便复盘，方便在有问题的时候还原真相，可以降低行车风险。
-另一方面，很多人装了之后也确实长期没使用价值，而车上多装一个东西总是一件麻烦的事情。</p>
-
-<p>随着驾驶操作逐步熟练，自己对记录仪的必要性是一天比一天认为不重要的。
-开了几个月之后，觉得还是这样开吧，一般问题也不大。但是，在停车后发生的一些事情，最终促使我决定入一个行车记录仪，而且核心功能之一是可以支持停车监控。</p>
-
-<p>很多朋友都知道，上海很多小区的停车环境普遍是比较困难的。而我们小区更是这方面相当出名，每隔几年就能上一次上海本地一线报纸的普通版面。我实际停了之后发现，真正容易刮花车子的，反而是小区的垃圾工和垃圾车。在跟物业交涉的时候，有视频做证据会较有利些。
-所以就决定装一个记录仪，可以给自己多一份保障。</p>
-
-<p>在决定购买之后，又面买什么的问题。之前纠结的一部分原因，就是记录仪真的是一个让人眼花缭乱的市场。并没有众望所归的王者，各种标准也不规范，指标也比较混乱，整个市场其实还在飞速发展中，产品更新换代的节奏很快。
-具体表现在缺乏大牌与领导厂商，山寨横行。产品更新换代迅速，价格跳水事件常见。最后考虑了牌子和芯片，决定还是入了Papago搭载安霸A7芯片的Gosafe520. 选择的原因是安霸看各类报道相对头牌一些，Papago毕竟在这个市场做了挺多年，价钱也可以接受。</p>
-
-<p>Gosafe520主要有以下几点特性：</p>
-
-<ol>
-<li>安霸A7的芯片</li>
-<li>价格千元以内</li>
-<li>视角146°</li>
-<li>3寸屏幕</li>
-<li>最高支持2560x1080分辨率</li>
-<li>内置重力传感器，可记录紧急事件</li>
-<li>内置500ma电池，据称无电池爆裂风险，耐高温</li>
-<li>可用充电宝实现夜晚连续监控</li>
-<li>具备移动监测功能，这个对连续监控很有用，不然32GB的卡也存放不了一晚上的数据</li>
-</ol>
-
-
-<p>使用下来后，其实在动态前进的过程中，要拍清楚前车的号码还是一件不可能完成的任务。在等红灯停车和速度一致时才能拍的清楚。
-只能留待以后的技术发展和进步了。而配合10000ma的充电宝，基本可以支持20小时以上的的持续监控，也算达到购买的初衷。吸盘使用了十来天，也还算吸的牢靠，搭配usb线夹入右遮阳板，就算吸盘松了靠线材也不至于掉到地上。</p>
-
-<p>不好的方面则是夜里还不够清晰，动态前进的拍摄效果还是有待提高。最高目标是能拍清楚对向来车的车牌。（不知道现在有没有已经做到这一点的产品？）
-tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，而在这个记录仪的使用周期里，64G甚至128G卡的价格应该会下来也就能够普及，而520以后也是无法插这些卡的。送的usb线也有点短，而且非用mini usb口也有点蛋疼，和安卓的micro usb兼容应该不难的吧。另外就是自带电池的话，在夏天还是一个隐患，好在现在是冬天意味着我至少可以先用上半年。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Spring中的CRON]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron/"/>
-    <updated>2014-12-28T15:12:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/28/springzhong-de-cron</id>
-    <content type="html"><![CDATA[<p>在<a href="http://octopresszhangyu.herokuapp.com/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>一文中，
-已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
-<code>period</code> 和 <code>delay</code>两个参数就够了。</p>
-
-<p>这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。好在Spring 4.0版
-开始已经支持cron，配置起来也很简洁。</p>
-
-<p>首先，在<code>spring-mvc.xml</code>中增加要定期执行的类作为bean，作用是把要定期执行的类交给spring扫描</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;com.sanss.toolbar.job.LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/bean&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其次，在这个类上使用标注<code>@EnableScheduling</code>，让spring意识到这是一个定期调度启动的任务。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@EnableScheduling</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LastDayDevicePackorderlogRefreshTaskExecutor</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后，是在具体要启动的method上标注<code>@Scheduled(cron = "0 * * * * *")</code>，以此给出具体的执行安排。<br/>
-标注中cron的具体含义可以见下面的注释。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*</span>
-</span><span class='line'><span class="cm"> * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 按顺序依次为 秒（0~59）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 分钟（0~59）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 小时（0~23）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 天（月）（0~31，但是你需要考虑你月的天数）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 月（0~11）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）</span>
-</span><span class='line'><span class="cm"> *</span>
-</span><span class='line'><span class="cm"> * 7.年份（1970－2099）</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">&quot;0 * * * * *&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// TODO Auto-generated method stub</span>
-</span><span class='line'>  <span class="c1">// doit();</span>
-</span><span class='line'>  <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;定期触发&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

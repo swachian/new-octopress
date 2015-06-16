@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最早知道clojure，是在Heroku宣布支持它，这是Heroku支持的第三种语言。知道彼时这个东西挺火。应该和闭包什么的有关联。 这次看七周七语言，终于得以一睹真容。知道了clojure其实就是Lisp的一个JVM实现。
-不过今天试用了一下clojure，感觉这个东西不太灵。 &hellip;">
+  <meta name="description" content="补记，原始记录与gist上。 用SSH进行开发已经五六年了，这个架构这些年一直没动过。随着Spring的日益兴盛，而Struts2相对停滞沉闷且安全漏洞始终没有很好地解决。
+因此决定全面转换到Spring，即采用Spring MVC。下面是一些自己的体会。 总体感觉 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,201 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/24/spring3-de-xue-xi-ji-tong-railsde-dui-bi/">Spring3 的学习及同Rails的对比</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T23:53:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>补记，原始记录与<a href="https://gist.github.com/swachian/6070011">gist</a>上。</p>
+
+<p>用SSH进行开发已经五六年了，这个架构这些年一直没动过。随着Spring的日益兴盛，而Struts2相对停滞沉闷且安全漏洞始终没有很好地解决。
+因此决定全面转换到Spring，即采用Spring MVC。下面是一些自己的体会。</p>
+
+<h2>总体感觉</h2>
+
+<p>Spring引以为豪的是依赖注入，其目的是方便组装，更现实的意义应该是方便测试。放在main或者test文件里，就可以调用。这一点确实对
+web开发很重要，避免了对容器的过度依赖。</p>
+
+<p>而它的MVC凑合着也能用用。比起Struts2几乎已经不分伯仲了，比Rails那就差的远了。</p>
+
+<h2>静态资源</h2>
+
+<p>静态资源的处理是最大的进入。终于全部放到某个目录下了，这样偏于集中管理和存放规范。配置也比较简单。</p>
+
+<h2>控制器</h2>
+
+<p>MVC中的C，由Mapping选择和交付处理两个模块组成。Mapping基本不需要写什么xml的内容了，改成了在controller的class文件里写annotation。<code>@RequestMapping</code>, <code>@Controller</code> 虽然还是有点啰嗦，还是可以接受的。引入Restful可以说是一大进步，Java的框架页终于开始支持 <strong>PathParameter</strong> 。这些都是明显受到了Rails的影响，而且也学的相当到位。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  @Autowired
+</span><span class='line'>  HttpServletRequest request = null;
+</span><span class='line'>
+</span><span class='line'>  @Autowired
+</span><span class='line'>    HttpSession session = null;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样写，request和session就可以被注入了，甚至连setter的方法也不用设置，应该是直接类型注入的。查了一下<code>@Autowired</code>也确实优先按类的类型注入。</p>
+
+<h3>参数填写</h3>
+
+<p>尤其是依靠 <strong>依赖注入</strong> 在设置参数、设置request等方面有着突出的表现。较之struts2的 <code>user.name</code>式命名方式， <code>name</code>直接赋值给User类型的参数是更合理些的。这方面做得真的很棒。</p>
+
+<h3>参数验证</h3>
+
+<p>这个就比较差了。写在model里的annotation会一场臃肿，表现力远远还不如直接写java。</p>
+
+<h3>C和V之间的信息传递</h3>
+
+<p>Controller和View之间传递主要包含两个部分，一个是渲染的view的类型，另一个就是controller里面参数的数据。这部分也已经做的很不错了。<code>model.addAttribution()</code> <code>return "sss/home</code> 都已经很简洁。对HTML和JSON的支持也都不错。</p>
+
+<h2>视图</h2>
+
+<h3>视图的代码</h3>
+
+<p>视图层方面又多了很多标签。个人不喜欢标签，标签就是code，表达力还不如java的code制造方式。每个框架还企图再造一套标签，这有什么用的意义呢？</p>
+
+<h3>布局</h3>
+
+<p>视图方面是用的tiles，伴随着struts1出来的东西了，凑合着也能用用，比Rails是差远了。</p>
+
+<h3>分页</h3>
+
+<p><del>这个可能不单单是视图层面的问题，而是属于整个栈的。没有特别简单的整合办法。</del></p>
+
+<p>JpaRepositories, PageRepositories都支持分页和排序了，再加一个绘制的标签或helper，基本也相当凑合了可以。</p>
+
+<h2>模型</h2>
+
+<p>之前认为spring没有自己的模型。但仔细看下来，spring data jpa正是spring的模型层。借用hibernate做provider，可以提供相当优秀的存储层和Pojo模型。加之java spring擅长的事务处理，这部分已经很强悍了。</p>
+
+<p>并且，居然还增加了对动态find方法的支持，进步相当明显。</p>
+
+<p>Spring3已经具备了一个可以独立运作的MVC库，去除Struts2已经水到渠成。模型层和控制层已经很强了。当然，视图层还是比较弱的。
+所以，对于没有视图的web应用，比如作为接口机或者配合json的应用，spring已经很不错。性能、事务方面java还是很强悍的。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/">CentOS5 Ruby2.0 and Rails4.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-12T12:55:00+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用<code>git diff</code>对一个一个目录或者文件进行比对与合并。整个过程下来，发现rails默认生成的文件，3.1和4.0的区别并非很大。</p>
+
+<p>这个过程也就是只有几个小时，半天不到的时间就让应用可以跑起来了。本地测试了一下，写入数据库、查询、写入文件等都没什么问题。随后自然就是部署。</p>
+
+<p>但此时，问题来了. 本地开发的环境是这样的：</p>
+
+<ul>
+<li>Ubuntu 12.04</li>
+<li>gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5)</li>
+<li>ruby 2.0.0p195 (2013-05-14 revision 40734) [x86_64-linux]</li>
+<li>rails 4</li>
+</ul>
+
+
+<p>而部署环境是这样的：</p>
+
+<ul>
+<li>CentOS release 5.4</li>
+<li>gcc 版本 4.1.2 20080704</li>
+<li>ruby 2.0.0p247 (2013-06-27) [i686-linux]</li>
+<li>rails 4</li>
+</ul>
+
+
+<p>在本地运作良好的rails4应用，部署到生产环境后发生下面两个异常：</p>
+
+<p>1 <code>rake db:migrate</code>每次只能成功一个migrate，但经反复执行后，能够migrate完整</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SQLite3::SQLException: SQL logic error or missing database: INSERT INTO "schema_migrations" ("version") VALUES (?)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 开发环境下正常，生产环境下会报告<code>nil?</code>在某个object上不存在。</p>
+
+<p>为此，则折腾掉了很多的业余时间。</p>
+
+<p>怀疑过是Gem的版本问题，怀疑过是ruby版本的问题,也怀疑过是ruby编译问题。</p>
+
+<p>针对第一种可能，重新生成了一个rails应用，执行的结果照旧。<br/>
+为了第二种可能，使用了ruby2.0.0p195，异常依旧；换成ruby1.9.3，但发现有个atom的gem都不能bundle上去。<br/>
+随后，针对第三个可能，不惜<strong>升级的了CentOS到5.9</strong>(<code>yum upgrade</code>),为此下载了600MB的更新包。 <br/>
+又重新编译安装了ruby2.0.0p0, 哦?!，世界太平了。虽然第一个异常依然，但第二个异常没了，应用是能够跑的起来了。
+之后，再重新编译另外两个ruby版本就都可以正常工作了（第一个问题还是在的）。</p>
+
+<p>由此可见，这是一个和gcc版本、os版本及ruby版本都相关的bug。</p>
+
+<h3>教训</h3>
+
+<p>新版的ruby或Rails同CentOS接触的并不好，如果要少麻烦的话，APP的OS还是应该选择Ubuntu。从生态的情况来看，这个责任只能怨CentOS支持的内核、gcc、lib库都过于老旧了。<br/>
+之所以这么说，不单单是因为在ruby上碰到这种要比在ubuntu上麻烦的多的情形。从七周七语言的情况看，CentOS即使是CentOS6，也不支持对Haskell的安装，在安装其他语言时，多多少少都会遇到编译麻烦的问题。<br/>
+CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发展的，因此二者极其容易脱节。所以，APP服务器首选Ubuntu。</p>
+
+<h3>题外话</h3>
+
+<p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -472,117 +667,6 @@ Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/08/ruankao-qian-jiming/">软考的名次</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T20:36:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不知为何, 这次软考名次出来的特别晚. 往年2月底3月中旬就都出来了, 这次却直到今天, <a href="http://www.rkb.gov.cn/jsj/cms/s_contents/download/s_dt2013040802.html">4月8日才将将公布</a>. 可能是好事多磨吧.</p>
-
-<p>尽管知道自己的成绩有望排进前50, 甚至前十前五都很正常, 不过最后的名次还是让我激动了一小把.</p>
-
-<p><img src="/images/screen_print/ruankaopaimin.png" alt="image" /></p>
-
-<p>必须得说, 这个名次还真的是挺高的.</p>
-
-<p>这个好名次献给我亲爱的外婆.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/vim-and-lampbroter/">Vim and Lampbrother</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T11:34:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>中了vim的毒之后, 开始学起了vim. 这东西在windows下也能用,而且扩展性极佳, 确实值得学学. 添加syntax和
-snippet都极其简单, 如果还要写代码的话, 确实值得掌握. 主要是发现这个工具就是给我这类人用的.</p>
-
-<p>台湾人的视频太简单, 很多基础的东西没有讲好, 好处就是他是按照git加载众多挂件之后演示并授课的, 所以
-比较吸引人. 但光那些显然也不够, 而且他本身也不算很熟练. 于是开始找其他视频. 找了一圈以后, 发现了
-<a href="http://www.lampbrother.net/">lamp兄弟连</a>的视频. 我个人比较喜欢里面李强强的linux课程. 另一位稍早录制
-的李阳的linux视频也很不错. 这家培训机构感觉还是很不错的, 培养的确实是业界最急需的一线工人.不过他的培训主要
-针对全脱产的、尤其是那些正要找工作的20岁出头的年轻人, 我是挺难报他们的班. 毕竟不太可能有什么时间和精力能够
-连续坐在实验机房里一整天. 而且这样的效率其实也不高.</p>
-
-<p>然后顺便看了一下RHCE和RHCA. 发现lampbrother的课程基本是按RHCE的脉络来的, 这门课其实可以直接改为通过RHCE.
-RHCE的范围基本如下:</p>
-
-<ul>
-<li>Hardware installation and configuration</li>
-<li>The boot process</li>
-<li>Linux filesystem administration</li>
-<li>Package management and Kickstart</li>
-<li>User and group administration</li>
-<li>System administration tools</li>
-<li>Kernel services and configuration</li>
-<li>Apache and Squid</li>
-<li>Network file sharing services (NFS, FTP, and Samba)</li>
-<li>Domain Name System (DNS)</li>
-<li>E-mail (servers and clients)</li>
-<li>Extended Internet Services Daemon (xinetd), the Secure package, and DHCP</li>
-<li>The X Window System</li>
-<li>Firewalls, SELinux, and troubleshooting</li>
-</ul>
-
-
-<p>只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -600,6 +684,14 @@ RHCE的范围基本如下:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/">云梯越来越烂了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/spring-in-action-4/">Spring In Action 4</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>
       </li>
     
@@ -611,19 +703,11 @@ RHCE的范围基本如下:</p>
         <a href="/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin/">地铁二号线限流与陆家嘴上海中心</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi/">Spring 4 中的新东西</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/20/crv/">CRV</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (22)</a></li><li><a href='/blog/categories/神器'>神器 (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (16)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/spring'>Spring (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
 </section>
   
 </aside>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-05-19T17:41:58+08:00</updated>
+  <updated>2015-06-16T21:50:59+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Spring In Action 4]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/"/>
+    <updated>2015-06-01T10:31:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4</id>
+    <content type="html"><![CDATA[<p>大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
+《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。<br/>
+好在，In action在14年年末又出了新的版本。
+经典的Spring系列又出了第4版，这一版是完全跟上了Spring发展的脚步，呈现的也是最新的Spring开发内容，而且聚焦于Spring Web。</p>
+
+<p>内容比较新颖，作者的文章也总喜欢和读者拉拉家常，所以整个书读起来也比较有意思。不过，这本书不适合完全没Java Web开发基础的读者，
+其整个书还是写给已经使用Spring进行开发或者至少已经略懂什么是Java Web开发的人，所以，学这本书前必须要有一点基础。</p>
+
+<h2>Spring的基础介绍</h2>
+
+<p>这部分也是整个系列一直的拿手好戏，现在总结的是越来越精彩，在Xml配置和Java Config中也完全倒向后者了，不过更多的也是通过这两个配置结合了自动扫描的配置方法，即Annotation。</p>
+
+<h3>Spring 的四大法宝：</h3>
+
+<ol>
+<li>PoJo</li>
+<li>DI（依赖注入，取代各个类之间的内部new）</li>
+<li>Aspect（Feature），给每个method加上chain，主要用于Transaction、logging、security、cacching这些领域</li>
+<li>Template（JDBCTemplate等等)，即模板方法，用于减少冗长代码的写入。</li>
+</ol>
+
+
+<p>而这一切的基础是Java的动态编程，除了Java自带的反射，其实大量使用了CGLib库。</p>
+
+<h3>Profile</h3>
+
+<p>通过<code>@Profile("dev")</code>来表明在什么情况下使用下面的标注或配置，即激活哪一种配置属性。有两个变量可以指定值</p>
+
+<p><code>
+spring.profiles.active
+spring.profiles.default
+</code></p>
+
+<p>其中，<code>default</code>可以在web.xml中定义，而<code>active</code>可以在系统属性、环境变量、JNDI或者@ActiveProfiles中定义，因为<code>active</code>的优先级更高。</p>
+
+<h3>其他一些标注</h3>
+
+<p>@Primary 用于消除bean的歧义性（比如有多个同名或同类型、同接口），在声明是可以使用表明这个为主。<br/>
+@Qualifier，用于一步一步的Narrow指定匹配，不过似乎耦合了点，个人觉得不推荐使用<br/>
+@Scope，这个很关键，指定了生成bean使用的容器, Prototype是每次new一个，大部分默认是单例，还有基于Session和Scope的bean注入，解决了web开发时的有些信息注入的难题。具体可参看<a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>。</p>
+
+<h2>Aop</h2>
+
+<p>Aop 提供了在method的前后增加功能（Feature）的能力，而这些功能往往是针对业务某些统一的能力的，所以称之为切面，意在把日志、事物、安全等功能提取出来，并且Spring配套了一系列术语称呼AOP中的各个角色。
+但本质上还是一种定义Hook的模式。</p>
+
+<ul>
+<li>Advice ， 功能本身</li>
+<li>PointCut，实际需要使用的Join Points</li>
+<li>Joinpoints，在哪些点（方法中插入）</li>
+</ul>
+
+
+<p>插入的时机有：
+1. Before: method调用前
+2. After all: method调用后
+3. After returning success: method调用成功
+4. After throwing: method调用出现例外
+5. Around: 写法最复杂，需要把调用的chain写在Advice里面</p>
+
+<p>具体用分为:<br/>
+1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
+2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HttpSession在Spring中的配法和问题]]></title>
@@ -276,81 +347,6 @@ public void run() {
 </code></pre>
 
 <p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nginx 处理Spring 静态资源的配置]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/"/>
-    <updated>2014-10-14T13:19:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi</id>
-    <content type="html"><![CDATA[<p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
-但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
-
-<p>需求也算简单：</p>
-
-<ol>
-<li>基于app toolbar的动态请求转发给java</li>
-<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
-<li>部分.js请求如t.js还是转给java，有效期为0；</li>
-<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
-</ol>
-
-
-<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
-
-<p>```</p>
-
-<pre><code>    location /toolbar {
-        root   html;
-        proxy_pass http://192.168.203.198:8080;
-    }
-    location ~ /toolbar/static {
-        root   html;
-        if (-f $request_filename) {
-            expires 1d;
-            break;
-        }
-    }
-    location = /toolbar/enter/t.js {
-        root   html;
-        proxy_pass http://192.168.202.72:8080;
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
-
-<p>这里面用到了几种Nginx的配置。</p>
-
-<ol>
-<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
-<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
-<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
-</ol>
-
-
-<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
-
-<p>整个匹配顺序是：</p>
-
-<ol>
-<li>对<code>=</code>进行匹配，有相符的就停止；</li>
-<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
-<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
-</ol>
-
-
-<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
-
-<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
-
-<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
-http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
-http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
-
-<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
 ]]></content>
   </entry>
   
