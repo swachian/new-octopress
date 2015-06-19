@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-06-16T21:50:59+08:00</updated>
+  <updated>2015-06-19T14:07:26+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nscd]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/"/>
+    <updated>2015-06-19T13:56:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd</id>
+    <content type="html"><![CDATA[<p>NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。</p>
+
+<p>服务的安装很简单，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>yum install nscd
+</span><span class='line'>service nscd start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样就可以开启nscd的服务了。
+如果本身就面临性能问题，可以直接测试一下看看性能有没有提高。除此之外可以通过下列命令检查一下效果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nscd -g | grep <span class="s1">&#39;hosts cache&#39;</span> -A 22
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以得到如下的信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>hosts cache:
+</span><span class='line'>
+</span><span class='line'>            yes  cache is enabled
+</span><span class='line'>            yes  cache is persistent
+</span><span class='line'>             no  cache is shared
+</span><span class='line'>            211  suggested size
+</span><span class='line'>         216064  total data pool size
+</span><span class='line'>            336  used data pool size
+</span><span class='line'>           3600  seconds <span class="nb">time </span>to live <span class="k">for </span>positive entries
+</span><span class='line'>             20  seconds <span class="nb">time </span>to live <span class="k">for </span>negative entries
+</span><span class='line'>            139  cache hits on positive entries
+</span><span class='line'>              4  cache hits on negative entries
+</span><span class='line'>              8  cache misses on positive entries
+</span><span class='line'>              6  cache misses on negative entries
+</span><span class='line'>             91% cache hit rate
+</span><span class='line'>              2  current number of cached values
+</span><span class='line'>              4  maximum number of cached values
+</span><span class='line'>              1  maximum chain length searched
+</span><span class='line'>              0  number of delays on rdlock
+</span><span class='line'>              0  number of delays on wrlock
+</span><span class='line'>              0  memory allocations failed
+</span><span class='line'>            yes  check /etc/hosts <span class="k">for </span>changes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中有命中率，cache命中的次数等信息。positive是指查询成功，negative是指查询失败。</p>
+
+<p>但是，很多情况下，可能开启nscd之后，会发现命中率一直为0。原因在于很多linux服务会采用直接访问的模式来读取缓存，
+直读的模式性能更好，但因为不经过daemon，所以无法进行统计。解决办法是把<code>shared</code>的属性关闭。</p>
+
+<p>修改<code>/etc/nscd.conf</code>，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>   <span class="nb">enable</span>-cache            hosts           yes
+</span><span class='line'>    positive-time-to-live   hosts           3600
+</span><span class='line'>    negative-time-to-live   hosts           20
+</span><span class='line'>    suggested-size          hosts           211
+</span><span class='line'>    check-files             hosts           yes
+</span><span class='line'>    persistent              hosts           yes
+</span><span class='line'>    shared                  hosts           no
+</span><span class='line'>    max-db-size             hosts           3355443
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[云梯越来越烂了]]></title>
@@ -817,46 +919,6 @@
 
 <p>至于新年心愿，最大的愿望当然就是宝宝顺利健康地成长，家人亲友都能平平安安。其次希望工作中能有更新的创造。
 随后是希望能有一个自己的车位。最后是希望可以经常体育锻炼，体重得到下降。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac 上折腾Ruby 2.2]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/"/>
-    <updated>2014-12-31T21:23:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2</id>
-    <content type="html"><![CDATA[<p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
-为此又开始了折腾。</p>
-
-<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
-
-<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
-SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew update <span class="c"># 更新brew</span>
-</span><span class='line'>brew install openssl <span class="c"># 安装最新的ssl</span>
-</span><span class='line'>brew link openssl --force <span class="c">#建立关联</span>
-</span><span class='line'>brew install curl-ca-bundle <span class="c"># 这个执行是失败的，原因似乎是在2014年去除了</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
-下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
-解决办法是建立link或者索性在configure时指定</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure --with-openssl-dir<span class="o">=</span><span class="sb">`</span>brew --prefix openssl<span class="sb">`</span> --disable-install-doc --prefix<span class="o">=</span>/Users/me/.rbenv/versions/ruby-2.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
-
-<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
-很多都是被挡在配置环境这第一道关口。</p>
 ]]></content>
   </entry>
   

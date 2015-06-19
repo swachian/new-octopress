@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>nscd - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。 服务的安装很简单， 1
+2
+yum install nscd &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2015/02/20/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Nscd</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-19T13:56:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。</p>
+
+<p>服务的安装很简单，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>yum install nscd
+</span><span class='line'>service nscd start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样就可以开启nscd的服务了。
+如果本身就面临性能问题，可以直接测试一下看看性能有没有提高。除此之外可以通过下列命令检查一下效果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nscd -g | grep <span class="s1">&#39;hosts cache&#39;</span> -A 22
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以得到如下的信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>hosts cache:
+</span><span class='line'>
+</span><span class='line'>            yes  cache is enabled
+</span><span class='line'>            yes  cache is persistent
+</span><span class='line'>             no  cache is shared
+</span><span class='line'>            211  suggested size
+</span><span class='line'>         216064  total data pool size
+</span><span class='line'>            336  used data pool size
+</span><span class='line'>           3600  seconds <span class="nb">time </span>to live <span class="k">for </span>positive entries
+</span><span class='line'>             20  seconds <span class="nb">time </span>to live <span class="k">for </span>negative entries
+</span><span class='line'>            139  cache hits on positive entries
+</span><span class='line'>              4  cache hits on negative entries
+</span><span class='line'>              8  cache misses on positive entries
+</span><span class='line'>              6  cache misses on negative entries
+</span><span class='line'>             91% cache hit rate
+</span><span class='line'>              2  current number of cached values
+</span><span class='line'>              4  maximum number of cached values
+</span><span class='line'>              1  maximum chain length searched
+</span><span class='line'>              0  number of delays on rdlock
+</span><span class='line'>              0  number of delays on wrlock
+</span><span class='line'>              0  memory allocations failed
+</span><span class='line'>            yes  check /etc/hosts <span class="k">for </span>changes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中有命中率，cache命中的次数等信息。positive是指查询成功，negative是指查询失败。</p>
+
+<p>但是，很多情况下，可能开启nscd之后，会发现命中率一直为0。原因在于很多linux服务会采用直接访问的模式来读取缓存，
+直读的模式性能更好，但因为不经过daemon，所以无法进行统计。解决办法是把<code>shared</code>的属性关闭。</p>
+
+<p>修改<code>/etc/nscd.conf</code>，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>   <span class="nb">enable</span>-cache            hosts           yes
+</span><span class='line'>    positive-time-to-live   hosts           3600
+</span><span class='line'>    negative-time-to-live   hosts           20
+</span><span class='line'>    suggested-size          hosts           211
+</span><span class='line'>    check-files             hosts           yes
+</span><span class='line'>    persistent              hosts           yes
+</span><span class='line'>    shared                  hosts           no
+</span><span class='line'>    max-db-size             hosts           3355443
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-19T13:56:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/" title="Previous Post: 云梯越来越烂了">&laquo; 云梯越来越烂了</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/19/nscd/">nscd</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/">云梯越来越烂了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/spring-in-action-4/">Spring In Action 4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/17/lao-luo-he-chi-jian-qiang/">老罗和池建强，现代创业和打工</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+Included file 'twitter_sharing.html' not found in _includes directory
+
+
+
+</body>
+</html>

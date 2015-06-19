@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。
-今天又读到一篇讲为什么从NodeJS迁移到RoR。
-作者列举的主要理由如下： NodeJS适合 short lived requests。 并不是很明确这里的request是指什么，似乎就是异步先返回的意思， &hellip;">
+  <meta name="description" content="应公司要求,参加了软考的系统集成项目管理工程师培训, 也将在后天参加这门考试.
+这是软考里面的一个中级资格.软考就是多年前已经存在系统分析师/高级程序员的考试.随着发展,后来又补充了几个门类.管理工程师(项目经理)和
+项目管理师(高级)就是这么来的. 这门考试本身的含义仁者见仁智者见智. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/24/ruankao/">软考</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-24T23:29:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>应公司要求,参加了<a href="http://baike.baidu.com/view/2174403.htm#5">软考</a>的<a href="http://baike.baidu.com/view/1278553.htm">系统集成项目管理工程师</a>培训, 也将在后天参加这门考试.
+这是软考里面的一个中级资格.软考就是多年前已经存在系统分析师/高级程序员的考试.随着发展,后来又补充了几个门类.管理工程师(项目经理)和
+项目管理师(高级)就是这么来的.</p>
+
+<p>这门考试本身的含义仁者见仁智者见智.站在一个全局的层面,确实有促进产业发展的作用.当然,个人并不希望这个指挥棒今后的威力变大.毕竟这东西
+既有利于质量的控制和某些层次水平的提升,但也存在一些问题.这里就不展开了.</p>
+
+<p>顺便看了一下高级的科目:<a href="http://baike.baidu.com/view/1760754.htm">信息系统项目管理师</a>. 内容范围和中级的其实也差不多,通过率也差不多,
+在想要不要下半年趁没全部忘光把高级的也考掉.毕竟看上去也不是很难.</p>
+
+<p>打到秦淮河边了,哪有不进总督府的道理?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -814,66 +860,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/17/gimli-and-markdown-2-pdf/">Gimli and Markdown 2 Pdf</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-17T15:24:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
-最终在这个法国人的<a href="http://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/">博客</a>中找到了很好的解决办法。
-最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。</p>
-
-<p>先安装 Pandoc</p>
-
-<p><code>sudo agt-get install pandoc nbibtex texlive-latex-base texlive-latex-recommended texlive-latex-extra preview-latex-style dvipng texlive-fonts-recommended</code></p>
-
-<p>安装ruby的gem gimli</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo agt-get install wkhtmltopdf
-</span><span class='line'>gem install gimli
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后运行</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>gimli -f ./README.md
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>即可得到类似GitHub风格的pdf文档。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -891,6 +877,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/19/nscd/">nscd</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/">云梯越来越烂了</a>
       </li>
     
@@ -906,15 +896,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2015/05/17/lao-luo-he-chi-jian-qiang/">老罗和池建强，现代创业和打工</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin/">地铁二号线限流与陆家嘴上海中心</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/linux'>Linux (9)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (40)</a></li><li><a href='/blog/categories/车车'>车车 (24)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

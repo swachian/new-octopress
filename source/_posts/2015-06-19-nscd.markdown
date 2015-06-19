@@ -1,0 +1,69 @@
+---
+layout: post
+title: "nscd"
+date: 2015-06-19 13:56
+comments: true
+categories: 
+- linux
+---
+
+NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。
+
+服务的安装很简单，
+
+```sh
+yum install nscd
+service nscd start
+```
+
+这样就可以开启nscd的服务了。
+如果本身就面临性能问题，可以直接测试一下看看性能有没有提高。除此之外可以通过下列命令检查一下效果：
+
+```sh
+nscd -g | grep 'hosts cache' -A 22
+```
+
+可以得到如下的信息：
+
+```sh
+hosts cache:
+
+            yes  cache is enabled
+            yes  cache is persistent
+             no  cache is shared
+            211  suggested size
+         216064  total data pool size
+            336  used data pool size
+           3600  seconds time to live for positive entries
+             20  seconds time to live for negative entries
+            139  cache hits on positive entries
+              4  cache hits on negative entries
+              8  cache misses on positive entries
+              6  cache misses on negative entries
+             91% cache hit rate
+              2  current number of cached values
+              4  maximum number of cached values
+              1  maximum chain length searched
+              0  number of delays on rdlock
+              0  number of delays on wrlock
+              0  memory allocations failed
+            yes  check /etc/hosts for changes
+```
+其中有命中率，cache命中的次数等信息。positive是指查询成功，negative是指查询失败。
+
+但是，很多情况下，可能开启nscd之后，会发现命中率一直为0。原因在于很多linux服务会采用直接访问的模式来读取缓存，
+直读的模式性能更好，但因为不经过daemon，所以无法进行统计。解决办法是把`shared`的属性关闭。
+
+修改`/etc/nscd.conf`，
+
+```sh
+       enable-cache            hosts           yes
+        positive-time-to-live   hosts           3600
+        negative-time-to-live   hosts           20
+        suggested-size          hosts           211
+        check-files             hosts           yes
+        persistent              hosts           yes
+        shared                  hosts           no
+        max-db-size             hosts           3355443
+```
