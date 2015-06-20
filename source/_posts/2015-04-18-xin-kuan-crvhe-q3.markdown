@@ -6,6 +6,7 @@ comments: true
 categories:
 - 车车
 - 生活
+- CR-V
 ---
 
 改款CR-V即将上市，最近花时间关注了一下。
