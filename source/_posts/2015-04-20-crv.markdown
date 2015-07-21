@@ -6,7 +6,7 @@ comments: true
 categories:
 - 生活
 - 车车
-- CR-V
+- crv 
 ---
 
 改款CR-V终于在今天，4月20号公布售价了。东本这次还是很务实的，
