@@ -9,13 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="layout: post
-title: &#8220;Change to Ruby 2.0.0&#8221;
-date: 2013-02-26 11:30
-comments: true
-categories:
-- ruby
-- heroku 借着Ruby 2.0.0发布的东风，又加之Rails &hellip;">
+  <meta name="description" content="近期从rvm切换到了rbenv, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析User-Agent的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +69,104 @@ categories:
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">Deploy a Rails 4 App to Heroku</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-04T20:03:00+08:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
+为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
+在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
+
+<h3>0 事先准备</h3>
+
+<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
+但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
+
+<h3>1 创建应用</h3>
+
+<p>首先执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku apps:create user-agent-show2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会在heroku处创建一个stack，目前版本是<code>cedar</code>. 同时，在.git/config里面会增加一个heroku分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[remote "heroku"]
+</span><span class='line'>        url = git@heroku.com:user-agent-show.git
+</span><span class='line'>        fetch = +refs/heads/*:refs/remotes/heroku/*</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2 Git push</h3>
+
+<p>随后就可以执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push heroku</span></code></pre></td></tr></table></div></figure>
+
+
+<p>部署应用了。
+但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
+基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
+
+<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
+因为rails 4默认生成environments/production.rb中是这样配置的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
+对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样才能保证静态文件被正常访问。</p>
+
+<h3>3 数据库更新</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku run rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -972,113 +1066,6 @@ Token可以是一个，也可以是多个。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/14/out-the-firm/">《走出软件作坊》读后感</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-14T22:47:00+08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://blog.csdn.net/david_lv">阿朱</a>的这本走出作坊现身说法，很贴合实际，所以容易引起共鸣给人启发，也确实找到了很多问题过得去的解决办法。
-尽管个人认为叫做走进 软件作坊更合适些。</p>
-
-<p>首先说说阿朱的背景。从文章看的出来，阿朱走的是Windows的路线，他开发软件从C/S开始，也以C/S为主，现在也逐步有了一些B/S的东西。
-由此背景，决定了他的很多开发观和实际操作的守则。他熟悉Windows的机制，熟悉SQL Server的内部情况，对UI那套比较熟，对MS的工具（Excel Word PPT)
-很偏爱，但对console不熟，所以自动化操作方面不强大。然后他受微软的影响很深，所以管理团队喜欢把员工拆成螺丝钉，而不是独当一面的人才。
-符合老外的发展思路。但又控制成本，因为能力弱的人成本自然低。从这点上来说，给他打工就不太值得。因为发展空间和薪水空间都有限。他自己也明言，
-这样做主要就是为了控制成本。当然，以中国现实来讲这个策略也没什么不对。都像DHH那样，中国人能就业的就没多少人了。</p>
-
-<p>他的背景的另一大特点就是他是卖软件的。这个模式也是微软的模式，而不是卖服务的。软件的销售主要靠售前和销售去打单，实施经理负责项目现场部署和培训，
-(ps. 大辉同学原来就是做<strong>实施</strong>的，说白了就是装机的做集成的，所以熟悉OS和Oracle)
-他的软件有大量的培训工作要做。研发则在家里支撑。这个模式里面研发和电话支持（call center）确实很像。因为卖软件和实施的关系，这就使得他很善于同不同的客户打交道，见过的
-经历过的人足够多，所以他在交际、沟通方面的能力是要强于大部分技术人员的。</p>
-
-<p>他的技术特点是精通数据库和精通操作系统及其应用。对网络等实际一般般。在技术上，我想自己可以做的比他更好。当然，我的数据库还有欠缺。但和他
-相比，最欠缺的是和人混熟的能力。虽然他自己也说不喜应酬，他能迅速要到全部联系方式、能迅速与人沟通（吃饭），这些说明他绝不是一个不善于同人应酬的。
-这方面，我做的就比较欠缺了。</p>
-
-<p>文章是很贴近实战，也相当直面惨淡的IT人生，是值得一读的文章。上面谈完对作者的基本认识后，将继续写对书内容的感受。</p>
-
-<p>其次，这本书最有价值的地方在于作者真实地描述了自己的研发与管理的状况。仅仅冲着这份勇气，这本书就值得一读。不是人人都乐于或敢于把自己的工作经历
-示人的。毕竟现实往往琐碎，有些话有些事情做做可以，说出来就未必敢了。不过作者冲破了这个限制，展现了相当真实的微软系、卖软件、低成本、多营销的
-CTO的生活。包括同老板的关系，同下属的关系，同客户的关系，如何提升研发部门的地位等等，这些都很实在也很具体，基本上很多都可以立马借鉴运用。<br/>
-拿软考的标准，有些内容像需求管理等都是直接可以作为论文的范文的。</p>
-
-<p>回到自己身上。在对比大辉时，我觉得自己落后这个同龄人3-4年，这个数字和我的整个职业生涯前面脱掉的4年时间大致相等。个人的目标也是再用3年时间，可以
-达到他们的成绩，做出和他们类似的事情，拿和他们类似的待遇，并拥有类似的影响力。</p>
-
-<p>而在看了《走出》之后，个人也想对自己的成长关键点作一下小结。</p>
-
-<h3>学习期</h3>
-
-<p>我对计算机真正的认识是在大四下才开始的。在我读书的年代，资料并不多，影印版的流行是大三以后的事情。<strong>《The C programming Language》</strong>第一次让我意识到
-程序书可以写的如此简洁清晰而又例子丰富，看了之后才明白C语言应该用来干些什么。可以说，K&amp;R带我入了门，也使我开始习惯看原版技术书籍。
-随后影响较深的是<strong>William Stalling是《操作系统原理》</strong>。这是我在即将赴公司报道前的半个暑假看完的。由此才对操作系统有了初步的认识，明白了操作系统发展
-的来龙去脉。直到毕业，我的计算机知识才算入门。尽管我经历了我们国家位列前三的计算机系的4年培养，但真的入门的感觉是在毕业那年的7月份了。当然，
-没有之前的基础和培养出来的毅力，这两本书不会带给我那么大的收益。而且在9年后的考研中，我进一步确信我的学校我的系确实不愧是中国前三。尽管也不那么完美，
-但在比很多学校强大的多。</p>
-
-<p>之后是作为程序员工作的2年。也还是以学习为主。期间用Power Builder写了点client的小东西，主要是用VC开发了一些采集程序之类的东西。跟了几个项目，学习了Java
-的基础内容，但没有应用也没什么感觉。这段日子里，收益最大的就是看了Stevens的一系列图书，从<strong>《APUE》</strong>到<strong>《UNP》</strong>，再到TCP系列。除了TCP第二册，其他的
-都消化吸收的不错。看UNP的感觉更好，但APUE给我补充的进程等知识让我基本搞明白了OS是怎么回事情，而UNP造就了我的技术口味。后来去做Web能迅速提升，
-和这也有很大的关系。</p>
-
-<p>严格的说，这两年不能算荒废，只能说没有经历很好的项目成长的有点慢且漫无目的，针对性不够强。但随后的两年时间则是基本和之后的发展方向脱离的。</p>
-
-<h3>进入Web界</h3>
-
-<p>直到毕业4年后，我的工作重心开始转向Web应用的开发。那时候公司整个的方向也往软件开发转移了。系统从技术上讲就是Java的简单企业应用。技术难度上和业务类型
-上和阿朱的公司也差不多，只是路线不一样些。开发工具自然是Java，运行的服务器普遍是Linux或各变种的Unix，数据库则是MySQL和Oracle。起初我对前端
-和页面一窍不通，主要负责用Java写后端。有APUE的底子，我的Java能力没用多少时间就已经走在公司的前面。做Java Web用公司惯用的框架Struts做了一年半，
-期间项目很多，当然技术上都类似，不过我也逐步从只做后端开始后端到前端通吃，写页面时长让我感觉很痛苦。一年半后，部门组织调整，我也不愿再做IPTV，
-于是撤出繁忙的IPTV任务组后，我稍微有了点空闲时间。而在那一年半中，通过读原始的帮助文档及孙卫琴的Tomcat书籍，我基本搞清了Java Web的原理。但是我对
-Struts的框架带来的痛苦很不满意。<br/>
-07年开始，终于又有了一个跨越和突破，那就是开始学习并引入了Webwork。在读<strong>《Webwork in Action》</strong>的过程中，技术能力得到了提高，而且很多时候都会产生
-我也是这么想的感觉，而且认为webwork所做的和我设想的类似，这样一步一步树立起来了对自己技术感觉的信心。随后的项目中，就引入了Webwork框架，确实提高了效率
-减轻了不少工作量。从此之后的项目就再也没有回到struts。直到webwork更名为struts2，就更验证了自己的品味和技术感觉还是很出色的。</p>
-
-<h3>高速发展</h3>
-
-<p>而在应用webwork之后，也在07年，开始接触了<strong>Rails</strong>。而这使我的技术能力及解决办法坐上了高速火车。通过应用和熟悉这个框架，逐步熟悉了
-Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、Mysql、Ruby、Git/Github、Heroku、Redis、MongoDB、Node.js。Rails直接作为项目使用的主体工具并不多，
-至今也只有六七个项目使用了Rails做框架来实现Web界面。出于成本和用人的考虑，部门领导最终还是决定走Java路线。但之后的工作就主要变成了架构师，
-所以应用什么语言并非影响很大。反而是架构、设计间共通的东西可以带来更大的影响。在Rails熟悉的过程中，所掌握的设计方法及Web的关键元素，使得我
-在应用Java技术时可以更加游刃有余，很多时候有种以高看远的感觉。后来写Rails的评测论文，使得自己对操作系统、性能响应的认识又更进了一步。<br/>
-而从Rails引申出来的项目管理、Nginx等种种神器，对个人也有很大的进步，而且很多可以直接运用。也由此，我对自己的定位是技术管理人才。
-以统管全体的技术为目的，解难题和立规则，从而提高集体的竞争能力。这个活应该说是最适合我干的。</p>
-
-<h3>转战云计算</h3>
-
-<p>考虑到公司提供的平台和我个人的喜好，希望可以在云计算方面有一番作为。我的硕士毕业论文也是写的这方面的相关内容。而<strong>Node.js</strong>的出现，也给云计算
-的发展提供了进一步的条件。前路漫漫，事情多多，到底怎么样也只有继续努力下去。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -1096,6 +1083,10 @@ Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、My
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng/">基于OAuth的API Token生成</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/03/2015kuan-ben-tian-cr-v-2-dot-4liang-qu-ban-ru-shou/">2015款本田CR-V 2.4两驱版入手</a>
       </li>
     
@@ -1111,15 +1102,11 @@ Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、My
         <a href="/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/">云梯越来越烂了</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/06/01/spring-in-action-4/">Spring In Action 4</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (58)</a></li><li><a href='/blog/categories/生活'>生活 (42)</a></li><li><a href='/blog/categories/车车'>车车 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (59)</a></li><li><a href='/blog/categories/生活'>生活 (42)</a></li><li><a href='/blog/categories/车车'>车车 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (17)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (12)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/spring'>Spring (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>
