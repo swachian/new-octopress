@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-07-24T22:51:45+08:00</updated>
+  <updated>2015-08-01T22:26:40+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于handling rails view的神作]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/"/>
+    <updated>2015-08-01T22:25:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo</id>
+    <content type="html"><![CDATA[<p>http://tutor.lugolabs.com/articles/18-handling-csv-views-in-ruby-on-rails</p>
+
+<p>确实扩展的够方便，实施的够优雅。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为什么车牌换号不用去验车]]></title>
@@ -785,115 +796,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 
 
 <p>整个过程的体验还算不错。尽管下个月还要跑一趟营业厅，目前也依然只是3G网络，但好歹确实立马就用上了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/"/>
-    <updated>2015-01-22T09:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua</id>
-    <content type="html"><![CDATA[<p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;/toolbar/static/orderFlow/css/reset.css&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/jquery.min.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
-
-<p>style.tag</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span> <span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span> <span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> <span class="k">%&gt;</span>
-</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>javascript.tag</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span><span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/** 生成静态文件链接的公共方法，加上md5后缀或者时间戳。</span>
-</span><span class='line'><span class="cm">   * @param resource</span>
-</span><span class='line'><span class="cm">   * @return</span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">rtg</span><span class="o">(</span><span class="n">String</span> <span class="n">resource</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">String</span> <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">fileMD5s</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;user.dir&quot;</span><span class="o">));</span>
-</span><span class='line'>      <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">getFileMD5</span><span class="o">(</span><span class="s">&quot;../webapps/toolbar/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">);</span>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
-</span><span class='line'>      <span class="o">}</span>
-</span><span class='line'>      <span class="n">fileMD5s</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">resource</span><span class="o">,</span> <span class="n">fileMd5</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">+</span><span class="s">&quot;?&quot;</span><span class="o">+</span><span class="n">fileMd5</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
-
-<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;tags:style</span> <span class="na">file=</span><span class="s">&quot;styles/css1.css&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/jquery.min.js&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/tl.js&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
