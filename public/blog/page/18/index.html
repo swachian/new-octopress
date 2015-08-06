@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Salesforce.com在1999年由前甲骨文高管 Marc Benioff 创立，他创办Salesforce的核心理念就是&#8221;No Software（消灭软件）&#8221;. 指消灭安装在企业内部的软件，
-转而使用互联网上的服务。 Salesforce的主要产品包括Sales &hellip;">
+  <meta name="description" content="研究mongod的时候，知道了一个关于cpu的概念&#8211;numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行: numactl --interleave=all mongod --dbpath /data/db --fork --logpath /data/db.log &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/08/what-is-numa-and-the-effect-of-it/">What Is Numa and the Effect of It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-08T22:38:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>研究mongod的时候，知道了一个关于cpu的概念&#8211;numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
+
+<p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
+
+<p>而拜读了这篇<a href="http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">mysql 和 numa架构关联</a>
+的文章，让人豁然开朗。</p>
+
+<p>实际上，numa的本质就是牵涉到如何对内存进行分配，是一个在多cpu、多核中引入的概念。</p>
+
+<p>比如，一个cpu时，那么全部的内存自然只有这个u可用。 但是，2个时呢? 如果一个u里面又有多个核心时，该怎么处理呢？</p>
+
+<p>简而言之，numa的方法是让内存按cpu所属的node进行隔离，好处是提高了内存分配的公平性。但是对于mongod mysqld这样会
+吃尽内存的应用，这种确保公平的分配方案并不好。因为根本没有其他核心需要用内存，但需要用内存的核心却会吃不饱。所以需要加上参数，使得这种公平性被取消，从而提高整体效能，其实就是发挥出mongod和mysqld的能力。因为这些应用都是单进程多线程的应用。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1266,53 +1313,6 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/05/fldk/">风陵渡口</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-05T17:09:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>民族主义还是国际主义？</p>
-
-<p>民族主义同共产国际主义的矛盾。共产国际主义当时的实质就是忠于苏联和斯大林。
-而毛是马克思主义中国化的代表人物，延安整风刷清苏联崇拜情结相当不易，也把‘国际主义’代表人物赶下了台。但48年因利益关系，必须争取斯大林的支持，于是刘对铁托匆忙表态，反苏分子也被调离原岗位。</p>
-
-<p>共字上必须有个‘中’，才是名副其实的中共。
-马克思共产主义学校&#8211;>中央党校
-马列学院->中央研究院</p>
-
-<p>林彪南下后，高成为了‘国际主义者’。忘记了他是毛委任的中共东北局第一书记，而不是斯大林派任的‘新关东总督’。</p>
-
-<p>其实，政治是最现实的。一切从需要出发。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -1330,6 +1330,10 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui/">zz 日本的房产税</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/">关于handling rails view的神作</a>
       </li>
     
@@ -1343,10 +1347,6 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
     
       <li class="post">
         <a href="/blog/2015/07/03/2015kuan-ben-tian-cr-v-2-dot-4liang-qu-ban-ru-shou/">2015款本田CR-V 2.4两驱版入手</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/20/shi-jia-crv/">试驾CR-V</a>
       </li>
     
   </ul>

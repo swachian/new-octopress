@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="The Rails View有pdf版。
-是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
-提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品 &hellip;">
+  <meta name="description" content="又听到查老师的声音了。想当初在邯郸校区上研究生英语课的时候，就感觉这是一个好老师。爱学生，懂生活。后来知道他还是MBA
+英语辅导的专家。听了几次讲座，幽默风趣依旧，体贴入微润物无声。听下来还是有一些收获： 英语二机器阅卷，全部在上海进行阅卷，包含了一切专硕，20多万份
+硕士普及不可能， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/25/zaguosen2012/">查国生2012讲座</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-25T15:22:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>又听到查老师的声音了。想当初在邯郸校区上研究生英语课的时候，就感觉这是一个好老师。爱学生，懂生活。后来知道他还是MBA
+英语辅导的专家。听了几次讲座，幽默风趣依旧，体贴入微润物无声。听下来还是有一些收获：</p>
+
+<ol>
+<li>英语二机器阅卷，全部在上海进行阅卷，包含了一切专硕，20多万份</li>
+<li>硕士普及不可能，本科都没普及好，所以几十年内不可能了，博士没意义，除非是教师、医生</li>
+<li>MBA一线首选，二线（同济、财大）也可以考虑，再差的就没意义了</li>
+<li>How to <strong>make more money</strong>. Better Money, Better Life.</li>
+</ol>
+
+
+<p>说的话让人信服的老师就是好老师。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -958,54 +1005,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/08/what-is-numa-and-the-effect-of-it/">What Is Numa and the Effect of It</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-08T22:38:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>研究mongod的时候，知道了一个关于cpu的概念&#8211;numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
-
-<p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
-
-<p>而拜读了这篇<a href="http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">mysql 和 numa架构关联</a>
-的文章，让人豁然开朗。</p>
-
-<p>实际上，numa的本质就是牵涉到如何对内存进行分配，是一个在多cpu、多核中引入的概念。</p>
-
-<p>比如，一个cpu时，那么全部的内存自然只有这个u可用。 但是，2个时呢? 如果一个u里面又有多个核心时，该怎么处理呢？</p>
-
-<p>简而言之，numa的方法是让内存按cpu所属的node进行隔离，好处是提高了内存分配的公平性。但是对于mongod mysqld这样会
-吃尽内存的应用，这种确保公平的分配方案并不好。因为根本没有其他核心需要用内存，但需要用内存的核心却会吃不饱。所以需要加上参数，使得这种公平性被取消，从而提高整体效能，其实就是发挥出mongod和mysqld的能力。因为这些应用都是单进程多线程的应用。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -1023,6 +1022,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui/">zz 日本的房产税</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/">关于handling rails view的神作</a>
       </li>
     
@@ -1036,10 +1039,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/03/2015kuan-ben-tian-cr-v-2-dot-4liang-qu-ban-ru-shou/">2015款本田CR-V 2.4两驱版入手</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/20/shi-jia-crv/">试驾CR-V</a>
       </li>
     
   </ul>
