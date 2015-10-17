@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-09-28T22:28:27+08:00</updated>
+  <updated>2015-10-17T19:12:45+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[看了新逍客的定价和配置庆幸没等待]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/10/17/kan-liao-xin-xiao-ke-de-ding-jie-he-pei-zhi-qing-xing-mei-deng-dai/"/>
+    <updated>2015-10-17T19:11:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/10/17/kan-liao-xin-xiao-ke-de-ding-jie-he-pei-zhi-qing-xing-mei-deng-dai</id>
+    <content type="html"><![CDATA[<p>逍客一直挺心仪的一辆车，原本是替换家里老凯越的重要备选对象。老一代的逍客据说做工和用料越来越渣，尽管车价也是越来越便宜了，所以主要考虑换代的新逍客。无奈车险八九月间就要到期，而之前逍客说要到11月份才会上市，于是来不及等待改提了CRV 2.4的入门版。</p>
+
+<p>但新逍客出来之后，老实讲挺让人失望的。于是反而庆幸没有等逍客而入手了CRV。拿2.4入门版和逍客2.0顶配版来论，逍客作为一个全新换代的车型，配置上竟然比配置已经很一般的CRV还要渣。顶配还算比crv多了前雷达和全景视频系统，但次配以下竟然雷达基本不配，一副有了摄像头就不要雷达的样子。但根据我的经验，雷达的帮助绝对比视频多。而且也同样没有很有用的自动大灯，比起crv还少了后排出风口、后视镜电动折叠这样一些很实用的舒适性配置。可能逍客在高速、操控等方面是有优势的，但确实和我的需求关系不大。至于价钱，目录价只差4万，以本田这样一路奔着3万优惠下去的腔调，实在还是CRV值多了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[老罗和锤子899元的坚果手机]]></title>
@@ -812,19 +823,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 
 <p><a href="http://datatizi.com/?r=f6301c426c6b45bb">购买链接</a>，这是通过我介绍购买的云梯链接，
 有兴趣者建议可以从此入口进入。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQLMAP手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji/"/>
-    <updated>2015-03-06T16:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji</id>
-    <content type="html"><![CDATA[<p><a href="http://sqlmap.org/">SQLMAP</a>确实是一个神器，而<a href="http://www.binarytides.com/sqlmap-hacking-tutorial/">这篇文章</a>则从判断是什么库开始，
-历经获取dbs，获取单个db中的tables，获取单个table里面的字段，直至获取每个记录每个字段的数据，做了一步一步细致的讲解。</p>
-
-<p>其实SQLMAP的用法真的挺暴力的。基本通过穷举的办法，根据页面返回内容的变与不变来判断输入的条件是否成立，以此来断定某些信息是否存在。
-很脏很暴力的做法。</p>
 ]]></content>
   </entry>
   

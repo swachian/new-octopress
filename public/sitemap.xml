@@ -1033,15 +1033,21 @@
         <lastmod>2015-08-26T23:28:32+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2015/10/17/kan-liao-xin-xiao-ke-de-ding-jie-he-pei-zhi-qing-xing-mei-deng-dai/
+        </loc>
+        <lastmod>2015-10-17T19:12:33+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2015-08-26T23:28:32+08:00</lastmod>
+        <lastmod>2015-10-17T19:12:33+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2015-08-26T23:28:32+08:00</lastmod>
+        <lastmod>2015-10-17T19:12:33+08:00</lastmod>
     </url>
 </urlset>
