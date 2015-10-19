@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-10-17T19:12:45+08:00</updated>
+  <updated>2015-10-19T20:49:33+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[安卓开发初体验]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan/"/>
+    <updated>2015-10-18T17:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan</id>
+    <content type="html"><![CDATA[<p>鉴于项目形势所迫，对一个安卓的demo只能自己直接来了。
+也算半逼之下入门了安卓开发。以下面这张图来论，</p>
+
+<p><img src="../images/androidmap.jpg" alt="安卓学习路线图" /></p>
+
+<p>基础部分基本上java web开发工程师都是具备的，入门部分大致跟着google的开发
+文档做完第一个例子也就都接触到了。
+高级主题里面倒是碰了百度地图和Webview这两个必须接触的东西。</p>
+
+<p>就入门而言，学习资料很丰富，尤其是安卓的开发文档还是很全面的，比大部分开源软件的
+教程要强许多，毕竟是有正经的商业公司全面支持的。</p>
+
+<p>就编程而言，全部基于Java的，不像Web开发要再切换到Javascript，整个体系的一致性
+更好，编写起来还是轻松愉快的。而传递参数方面，摆脱了必须从客户端到服务端，如果是在
+界面中跳转其实要比Web方便。这其实也是一个进程间、线程间通信的事情，而作为App，
+其通信的方式还是很丰富的。从最基础的Intent，到手机上各应用系统的彼此调用，
+以及Json传递会服务端等，可以玩的花样很多。</p>
+
+<p>对于任何写过界面的Java程序员，上手安卓应用开发应该还都是挺轻松的。
+毕竟大部分需要的技能有重合，而体系上安卓也更适合学习。当然，学安卓也有特定的痛苦，
+比如屏幕尺寸及比例、API升级快导致节奏混乱。不过在手机端确实是个值得投入的东西。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[基于OAuth的API Token生成]]></title>
@@ -202,64 +231,6 @@ return "/static/"+resource+"?"+fileMd5;
 &lt;tags:javascript file="jquery/jquery.min.js" /&gt;
 &lt;tags:javascript file="jquery/tl.js" /&gt;
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Safari不支持第三方cookie引起的session改造]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/21/safaribu-zhi-chi-di-san-fang-cookieyin-qi-de-sessiongai-zao/"/>
-    <updated>2015-01-21T13:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/21/safaribu-zhi-chi-di-san-fang-cookieyin-qi-de-sessiongai-zao</id>
-    <content type="html"><![CDATA[<p>近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
-问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的，所以这个问题很让人困惑。
-反复查找，最后明白原因是：首先，对于第三方cookie，Safari升级后确实有禁止写入cookie的特性；其次，但是对于已存在cookie的情况，则尽管是第三方cookie依然还会写入。</p>
-
-<p>就是因为其次这个因素存在，所以之前进行测试的一些手机照样可以写入session了。</p>
-
-<p>问题是找到了，但怎么解决呢？Java中最简单就是让url中带入jsessionid，只是这个方式确实有好多年没有使用过了。虽然是第三方cookie，但因为测试时有过session了，所以还能继续写入。</p>
-
-<p><code>response.encodeURL(url)</code></p>
-
-<p>-- 查文档，这个api的含义是对于如果是可以用cookie追踪sessionid的则不会在url后加入jsessionid，而对于不支持cookie追踪的则会在url中写入id。<br/>
-这引发了我的好奇心，只有response怎么能判断cookie是否能追踪呢？</p>
-
-<p>一看Tomcat的源码，实现倒也简单，就是根据当前session的id是否从cookie中获取的来决定的。如果首次访问网站，此时不会有sessionid，则自然不是从cookie追踪的，于是生成的url都有jsessionid。
-二次请求上来，如果是cookie中读取的，则不再写入了。如果不是从cookie中读取的，则继续写入jsessionid。也就是说，<strong>不管是不是支持cookie写入，第一笔encodeURL的调用都会加上jessionid</strong>。</p>
-
-<p>例如，第一次访问都会生成这样的链接 <code>http://192.168.202.72:8080/toolbar/home/nav;jsessionid=EFC1A53F48CC5BC9BE58F50830296FBB</code>, 如果再次访问就是<code>http://192.168.202.72:8080/toolbar/home/nav</code>.</p>
-
-<p>这个东西的缺点公开的说法有如下两点：</p>
-
-<ol>
-<li>sessionid暴露在url链接中并不安全；</li>
-<li>sessionid这样子会保存在地址栏中，容易引发保存后歧义，因为sessionid其实每一次都会是不一样的。</li>
-</ol>
-
-
-<p>简而言之就是这样的链接不好看外加安全性有一定的问题。</p>
-
-<p>不过这个安全性问题如果从网络的角度来看有点勉强。因为http头也是明文传输的，只是浏览器中不显示罢了。以机器的角度来看，jsessionid放在header还是uri中的区别并不大。鉴于业务需要，还是采用吧。于是引发这种写法最大的毛病，需要在jsp中每个自己的链接都加上<code>&lt;%=response.encodeURL(url)%&gt;</code> 。此时不免想起如果都像<code>link_to</code>那样生成链接的话，改起来就方便多了。</p>
-
-<p>Java Web的开发至今没有很方便的helper机制，能用用的还是tags的办法，于是写一个hrefto.tag放到tags下面。</p>
-
-<p>hrefto.tag
-```jsp
-&lt;%@tag pageEncoding="UTF-8"%>
-&lt;%@ attribute name="uri" type="java.lang.String" required="true"%></p>
-
-<p>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%></p>
-
-<p>&lt;% String ctx = request.getContextPath(); %>
-&lt;%= response.encodeURL(ctx + uri) %>
-```</p>
-
-<p>在jsp中的应用主要是两句话，第一是引入，第二是调用</p>
-
-<p><code>jsp
-&lt;%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%&gt; &lt;!--hrefto.tag存放的位置--&gt;
-&lt;a id="help" href='&lt;tags:hrefto uri="/home" /&gt;' target="_blank"&gt;&lt;/a&gt;
-</code>
-其中<code>&lt;tags:hrefto uri="/home" /&gt;</code>就会调用hrefto.tag中的内容，生成链接。</p>
 ]]></content>
   </entry>
   
