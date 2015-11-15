@@ -9,8 +9,17 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="@ModelAttribute 在Spring中有两个用法： Controller的Action method的参数前标注，提示需要设置该值
-Controller中单独的方法前标注，改方法通常不是action，但加注@ModelAttribute后会在Action method执行前被调用 &hellip;">
+  <meta name="description" content="@ModelAttribute 在Spring中有两个地方可以填写： Controller的Action method的参数前标注，提示需要设置该值 1
+2
+3
+4
+5
+6
+7
+8
+9
+@ModelAttribute
+public void getUser(HttpServletRequest &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,15 +103,194 @@ Controller中单独的方法前标注，改方法通常不是action，但加注@
   </header>
 
 
-<div class="entry-content"><p><code>@ModelAttribute</code> 在Spring中有两个用法：</p>
+<div class="entry-content"><p><code>@ModelAttribute</code> 在Spring中有两个地方可以填写：</p>
+
+<ul>
+<li>Controller的Action method的参数前标注，提示需要设置该值</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@ModelAttribute</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">getUser</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">HttpSession</span> <span class="n">session</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;mdn&quot;</span><span class="o">,</span> <span class="n">mdn</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">,</span> <span class="n">userInfo</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&quot;helper&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">HomeHelper</span><span class="o">(</span><span class="n">userInfo</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Controller中单独的方法前标注，该方法通常不是action，但加注<code>@ModelAttribute</code>后会在Action method执行前被调用</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/addDiy&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">ModelAndView</span> <span class="nf">addDiy</span><span class="o">(</span><span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;operator&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">operator</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用效果来讲就是确保第一种情况下，action method的参数会被设置，而设置的根据主要是以下4种：</p>
 
 <ol>
-<li>Controller的Action method的参数前标注，提示需要设置该值</li>
-<li>Controller中单独的方法前标注，改方法通常不是action，但加注<code>@ModelAttribute</code>后会在Action method执行前被调用</li>
+<li>来自<code>@SessionAttributes</code>使用中被设置在session中的<code>ModelAttribute</code></li>
+<li>上面提到的第二个使用的方法中产生的对象</li>
+<li>基于URI的模板变量+type converter</li>
+<li>直接new的，即默认的构建方法</li>
 </ol>
 
 
-<p>Spring Controller中用于在执行action前</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Controller</span>
+</span><span class='line'><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/home&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="nd">@SessionAttributes</span><span class="o">({</span><span class="s">&quot;operator&quot;</span> <span class="o">})</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomeController</span> <span class="o">{</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>    <span class="cm">/*登陆验证，成功后转至home action，验证失败则继续显示login页面*/</span>
+</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;login&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">loginPost</span><span class="o">(</span><span class="n">HttpSession</span> <span class="n">session</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">,</span> <span class="n">String</span> <span class="n">username</span><span class="o">,</span> <span class="n">String</span> <span class="n">password</span><span class="o">,</span> <span class="n">String</span> <span class="n">yzm</span><span class="o">,</span> <span class="n">RedirectAttributes</span> <span class="n">redirectAttributes</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">,</span> <span class="n">username</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="cm">/*检测验证码是否正确*/</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(!</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">equals</span><span class="o">((</span><span class="n">String</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;rand&quot;</span><span class="o">),</span> <span class="n">yzm</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;errorMessage&quot;</span><span class="o">,</span> <span class="s">&quot;验证码不正确，请输入正确的验证码&quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="s">&quot;redirect:/home/login&quot;</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">CInterfaceOper</span> <span class="n">ciop</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">String</span> <span class="n">status</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">ciop</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CInterfaceOper</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">status</span> <span class="o">=</span> <span class="n">ciop</span><span class="o">.</span><span class="na">getUserStatus</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">// TODO Auto-generated catch block</span>
+</span><span class='line'>          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">status</span><span class="o">,</span> <span class="n">ConstVar</span><span class="o">.</span><span class="na">Status</span><span class="o">.</span><span class="na">Normal</span><span class="o">))</span> <span class="o">{</span> <span class="c1">//用户业务状体正常</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//由modelattribute获取operator时使用</span>
+</span><span class='line'>          <span class="c1">// redirect的情况下，加在model里面不会被sessionAttributes处理到session中</span>
+</span><span class='line'>          <span class="c1">//model.addAttribute(&quot;operator&quot;, operator);</span>
+</span><span class='line'>          <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;operator&quot;</span><span class="o">,</span> <span class="n">username</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">String</span> <span class="n">lastUri</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">ConstVar</span><span class="o">.</span><span class="na">REQUEST_URI</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">lastUri</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;redirect:/home&quot;</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="s">&quot;redirect:&quot;</span><span class="o">+</span><span class="n">lastUri</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;errorMessage&quot;</span><span class="o">,</span> <span class="s">&quot;登录失败，请检查用户名和密码&quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="s">&quot;redirect:/home/login&quot;</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在<code>Controller</code>类前标注的<code>@sessionAttributes</code>就可以把action中的model包含的同名属性固化在session中。
+但是，因为整个action的返回不是直接渲染jsp，而是使用了<code>redirect:/home</code>这样的重定向语句，所以起初并没有奏效。
+而是要把<code>operator</code>放在<code>redirectAttributes</code>中，才会被固化。这说明spring选择固化属性是当且仅当
+在渲染页面前。</p>
+
+<p>在需要使用该session的属性action处，直接使用下面代码即可。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/addDiy&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">ModelAndView</span> <span class="nf">addDiy</span><span class="o">(</span><span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;operator&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">operator</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">ModelAndView</span> <span class="n">mav</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelAndView</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">RingRequest</span><span class="o">&gt;</span> <span class="n">ringrequest</span><span class="o">=</span><span class="n">ConstVar</span><span class="o">.</span><span class="na">DIV_LIST</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">RingRequest</span> <span class="n">ringrequest1</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="o">(</span><span class="n">ringrequest</span><span class="o">!=</span><span class="kc">null</span><span class="o">&amp;&amp;</span><span class="n">ringrequest</span><span class="o">.</span><span class="na">size</span><span class="o">()&gt;</span><span class="mi">0</span><span class="o">){</span>
+</span><span class='line'>       <span class="n">ringrequest1</span><span class="o">=</span><span class="n">lingyingdiyService</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">ringrequest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">operator</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="n">mav</span><span class="o">.</span><span class="na">setViewName</span><span class="o">(</span><span class="s">&quot;webapp/ringDiy/lingyindiy4&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">mav</span><span class="o">.</span><span class="na">addObject</span><span class="o">(</span><span class="s">&quot;ringrequest&quot;</span><span class="o">,</span> <span class="n">ringrequest1</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">mav</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在Session范围内使用注入的逻辑还是很清晰的，只是需要注意一下redirect带来的坑。</p>
 </div>
 
 
