@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="应公司要求,参加了软考的系统集成项目管理工程师培训, 也将在后天参加这门考试.
-这是软考里面的一个中级资格.软考就是多年前已经存在系统分析师/高级程序员的考试.随着发展,后来又补充了几个门类.管理工程师(项目经理)和
-项目管理师(高级)就是这么来的. 这门考试本身的含义仁者见仁智者见智. &hellip;">
+  <meta name="description" content="软考被安排在天等路那边,对我来说是很偏远的地方.路是远了些,但是去了之后发现那边的环境
+也还不错.因为靠近华东理工,而且除了新侨学院还有不少其他的中专职校,所以那边的中小饭店
+很多,而且物价相对便宜.比起公司附近,吃饭的价格大约只有2/3.肉夹馍3-5元,臊子面9元,
+芒果冰沙也只要8元10元, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/27/take-the-exam/">软考回忆</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-27T10:13:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>软考被安排在天等路那边,对我来说是很偏远的地方.路是远了些,但是去了之后发现那边的环境
+也还不错.因为靠近华东理工,而且除了新侨学院还有不少其他的中专职校,所以那边的中小饭店
+很多,而且物价相对便宜.比起公司附近,吃饭的价格大约只有2/3.肉夹馍3-5元,臊子面9元,
+芒果冰沙也只要8元10元,10元的杯子真的很大.
+而在我们公司那边一个馍10元,一碗面12元.尽管偏远,但好处也不少.何况偏远只是从我这边来
+说,毕竟上海太大了.那地方好歹还是中环以内的.因为吃的很不错,对那边的感觉倒也不错.<br/>
+交通还算方便,石龙路下来就有一辆终点站的156可以过去,而且也基本是开到门口的.校园的大门
+比想象的好,里面的设备有点老旧,学校的整体外观还是不错的.中午休息也能去华理,校园转转的感觉
+也还不错.</p>
+
+<p>说回考试本身,据说通过率只有10%-20%.不过考试强度本身并不大,也就相当于会考的强度.内容
+也是以死记硬背为主,真的费脑子的东西不多.当然,能不能过关因为没有答案可做参照,现在还
+难以下结论.问题应该不大.今年难在上午,下午还是挺主流的.</p>
+
+<p>准备的日子也不算很少,有空研究研究这玩意的有效期.现在我脑子里对这个还是一片混乱.由此可见,
+培训做的不是很到位.</p>
+
+<p>流程是这样的:</p>
+
+<ol>
+<li>参加软考获得<strong>中华人民共和国计算机技术与软件专业技术资格（水平）证书</strong>, 有效期3年,可以继续教育.</li>
+<li>凭软考证书+资历再申报<strong>项目经理资质证书</strong>, 资质证书也有有效期,继续教育服务平台网址为http://www.informatization.gov.cn和 http://www.chinasi.org.cn</li>
+</ol>
+
+
+<p>软考从2004年开始就要求继续教育,但2003年前取得的证书不需要登记也就不需要继续教育.
+自从可持续发展深入人心后,软考组织单位倒是落实的挺起劲的.
+但是这样一来, 实在看不见还有什么要去考证的需要.等到非要用的时候再说吧.毕竟会失效的投资,还是按需努力吧.
+万一以后他们搞联合,要求两个证同时续约才能有效,那有资质的人员岂不是苦死. 真心不喜欢这种敛财的方式.</p>
+
+<p>Update: http://bbs.educity.cn/bbs/141365_1.html 情况可能有变化</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -805,61 +872,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/19/taps-a-simple-app-to-transfer-data/">Taps： 一个导数据的工具</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-19T10:21:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在railscast上看到了一个介绍导入导出数据的工具<a href="https://github.com/ricardochimal/taps">taps</a>.</p>
-
-<p>最大的亮点在于:</p>
-
-<ol>
-<li>是用起服务的方式来完成。先针对一个数据库启动一个server监听在5000端口，随后在它处启动一个脚本导数据；</li>
-<li>可以跨数据库导入导出。实际上中间是用到了<a href="sequel.rubyforge.org/">sequel</a>这个ruby的Orm框架，所以理论上应该是只要有adapter的数据库就都能被匹配。</li>
-</ol>
-
-
-<p>使用也非常之简单与直接</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gem install taps
-</span><span class='line'><span class="nv">$ </span>taps server postgres://localdbuser:localdbpass@localhost/dbname httpuser httppassword
-</span><span class='line'><span class="nv">$ </span>taps pull postgres://dbuser:dbpassword@localhost/dbname http://httpuser:httppassword@example.com:5000
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -877,6 +889,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/">文艺的HashMap初始化</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/11/14/springde-at-sessionattributeshe-at-modelattribute/">Spring的@SessionAttributes和@ModelAttribute在Redirect时的特殊表现</a>
       </li>
     
@@ -892,15 +908,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2015/08/26/lao-luo-he-chui-zi-899yuan-de-jian-guo-shou-ji/">老罗和锤子899元的坚果手机</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui/">zz 日本的房产税</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (61)</a></li><li><a href='/blog/categories/生活'>生活 (42)</a></li><li><a href='/blog/categories/车车'>车车 (28)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/java'>Java (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (62)</a></li><li><a href='/blog/categories/生活'>生活 (42)</a></li><li><a href='/blog/categories/车车'>车车 (28)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/java'>Java (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/旅游'>旅游 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/mac'>Mac (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
 </section>
   
 </aside>

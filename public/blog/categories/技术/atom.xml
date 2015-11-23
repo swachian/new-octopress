@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-11-15T15:02:14+08:00</updated>
+  <updated>2015-11-23T20:45:18+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[文艺的HashMap初始化]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/"/>
+    <updated>2015-11-23T20:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua</id>
+    <content type="html"><![CDATA[<p>多年以来，受制于java没有初始设置<code>hash</code>对-值的方法，例如js有：</p>
+
+<p><code>javascript
+var obj = {
+  a: 1, b: 2
+};
+</code></p>
+
+<p>ruby在借鉴js的文法之前，有著名的rocket标注</p>
+
+<p><code>ruby
+obj = {:a=&gt;1, :b=:2}
+</code></p>
+
+<p>而java则只能继续使用过程定义来描述</p>
+
+<p><code>java
+Map&lt;String, integer&gt; map = new HashMap&lt;String, integer&gt;();
+map.put("a", 1);
+map.put("b", 2);
+</code></p>
+
+<p>而最近发现了一种文艺一些的写法：</p>
+
+<p>```java
+Map&lt;String, integer> map = new HashMap&lt;String, integer>(){
+  {</p>
+
+<pre><code>put("a", 1);
+put("b", 2);
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>```</p>
+
+<p>此种写法是利用了创建一个匿名类的文法，该匿名类直接继承自HashMap，而第二套花括弧则是实例初始化。</p>
+
+<p>实例初始化是对应于静态初始化，后者属于整个类，而前者属于某个对象初始化时进行。</p>
+
+<p>```java
+public class demo {
+  static {</p>
+
+<pre><code>do sth of class
+</code></pre>
+
+<p>  }</p>
+
+<p>  {</p>
+
+<pre><code>do sth of instance
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>其实这种写法的代码行数并不少，但是语意，主要是段落的分割清楚了许多。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spring的@SessionAttributes和@ModelAttribute在Redirect时的特殊表现]]></title>
@@ -262,19 +330,6 @@ public class ShoppingCart implements Serializable{
 
 <p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
 毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQLMAP手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji/"/>
-    <updated>2015-03-06T16:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji</id>
-    <content type="html"><![CDATA[<p><a href="http://sqlmap.org/">SQLMAP</a>确实是一个神器，而<a href="http://www.binarytides.com/sqlmap-hacking-tutorial/">这篇文章</a>则从判断是什么库开始，
-历经获取dbs，获取单个db中的tables，获取单个table里面的字段，直至获取每个记录每个字段的数据，做了一步一步细致的讲解。</p>
-
-<p>其实SQLMAP的用法真的挺暴力的。基本通过穷举的办法，根据页面返回内容的变与不变来判断输入的条件是否成立，以此来断定某些信息是否存在。
-很脏很暴力的做法。</p>
 ]]></content>
   </entry>
   

@@ -1051,15 +1051,21 @@
         <lastmod>2015-11-15T15:01:39+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/
+        </loc>
+        <lastmod>2015-11-23T20:44:47+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2015-11-15T15:01:39+08:00</lastmod>
+        <lastmod>2015-11-23T20:44:47+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2015-11-15T15:01:39+08:00</lastmod>
+        <lastmod>2015-11-23T20:44:47+08:00</lastmod>
     </url>
 </urlset>
