@@ -108,9 +108,19 @@
 
 <p>所以在前次的基础上，要进一步增加编译选项。</p>
 
-<p><code>./configure --with-openssl-dir=</code>brew &#8211;prefix openssl<code>--disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2  --with-readline-dir=</code>brew &#8211;prefix readline`</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure --with-openssl-dir<span class="o">=</span><span class="sb">`</span>brew --prefix openssl<span class="sb">`</span> --disable-install-doc --prefix<span class="o">=</span>/Users/me/.rbenv/versions/ruby-2.2  --with-readline-dir<span class="o">=</span><span class="sb">`</span>brew --prefix readline<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>其中 <code>--with-readline-dir=</code>brew &#8211;prefix readline` 就是针对readline增加的选项。</p>
+
+<p>其中</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>--with-readline-dir<span class="o">=</span><span class="sb">`</span>brew --prefix readline<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 就是针对readline增加的选项。</p>
 
 <p>加上之后，irb支持中文了，pry也支持历史记录浏览了。</p>
 </div>
