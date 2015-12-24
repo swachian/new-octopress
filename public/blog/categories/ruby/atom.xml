@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-12-22T15:23:48+08:00</updated>
+  <updated>2015-12-24T21:29:58+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 上折腾Ruby 2.2(续)]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/12/24/mac-shang-zhe-teng-ruby-2-dot-2/"/>
+    <updated>2015-12-24T21:24:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2015/12/24/mac-shang-zhe-teng-ruby-2-dot-2</id>
+    <content type="html"><![CDATA[<p>又是一年圣诞了，继去年<a href="http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/">Mac上折腾Ruby</a>之后，这次继续折腾。只是版本换成了2.2.4以及
+是为了解决readline的问题。</p>
+
+<p>按 https://github.com/guard/guard/wiki/Add-Readline-support-to-Ruby-on-Mac-OS-X<br/>
+的说法:</p>
+
+<blockquote><p>If you are on Mac OS X and have problems with either Guard not reacting to file changes or Pry behaving strangely, then you probably suffer under a Ruby build that uses libedit instead of readline.</p></blockquote>
+
+<p>所以在前次的基础上，要进一步增加编译选项。</p>
+
+<p><code>./configure --with-openssl-dir=</code>brew --prefix openssl<code>--disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2  --with-readline-dir=</code>brew --prefix readline`</p>
+
+<p>其中 <code>--with-readline-dir=</code>brew --prefix readline` 就是针对readline增加的选项。</p>
+
+<p>加上之后，irb支持中文了，pry也支持历史记录浏览了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自己生产sdoc]]></title>
@@ -159,28 +182,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[my first gem]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/12/my-first-gem/"/>
-    <updated>2013-06-12T17:02:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/12/my-first-gem</id>
-    <content type="html"><![CDATA[<p>今天终于尝试做了第一个<code>gem</code>，其实挺简单的，至少在有了bundler之后。</p>
-
-<p>先 <code>bundle gem act_as_xxx</code>，随后就可以编辑里面的内容，比如在<code>*.gemspec</code>里面加入描述。编辑好自己的gem后，运行<code>gem build act_as_xxx.gemspec</code>，这样一个新的gem就会编译出来。</p>
-
-<p><code>
-  Successfully built RubyGem
-  Name: act_as_xxx
-  Version: 0.1.1
-  File: act_as_xxx-0.1.1.gem
-</code></p>
-
-<p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
-
-<p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
 ]]></content>
   </entry>
   
