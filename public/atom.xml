@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2015-12-25T20:17:01+08:00</updated>
+  <updated>2016-02-11T16:42:30+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[时间长了发现还是挺喜欢本田的]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/"/>
+    <updated>2016-02-11T09:42:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de</id>
+    <content type="html"><![CDATA[<p>开CRV有半年多了，近来发现越发喜欢这个车甚至本田这个品牌。喜欢的原因首先是来源于和日产两个细节的比较。<br/>
+东本CRV的<strong>说明书</strong>是写的比日产好许多的，读起来很易读，不像日产是标准的非面向人类的说明书。而且这个说明书
+里面还会教用户如何自己拆换空调滤芯，而日产翻遍了也是没有的。在说明书的信息化方面，东本的app有详细的pdf说明书可供参考检索，
+而日产在这一部分是完全空白。对于和用户实际沟通上，本田要好出许多。</p>
+
+<p>另一个细节则来自<strong>智能钥匙</strong>。根据同事八代雅阁的经历，五六年前本田的智能钥匙是一块很简陋的电路板，更换电池时是直接
+以电路板示人的。但经过几年发展后，我的CRV上这个细节得到了很大的改善，电路板不再是粗糙地打开即见，然而仍然可以换电池。
+轮到日产的话，则所有的钥匙还是本田五六年前的水准，一块电路板大大裸露在外面。</p>
+
+<p>这个车之所以越开越喜欢，主要原因就是确实很对技术男的味。实际上美版的前雷达什么更对我的胃口，只是被东本改乱了。</p>
+
+<p>而之前一直不满的手机连接导航，用的多了感觉还是可以的。尽管连线比较麻烦，系统也还不够稳定，发展方向却是极其正确的。
+目前的水平也足以一用，虽然希望可以更方便些更快捷些更稳定些。对本田的倒车无力和杂音遍地有各种不满，至今依然不满，但鉴于CRV和本田实际各种良好的体验，
+这车确实越来越让人喜欢了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac 上折腾Ruby 2.2(续)]]></title>
@@ -1030,55 +1052,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 <p>而一个能容纳4万人办公的大楼，只准备了2000个停车位。真的就把所有的交通压力都丢给了地铁了。如此高的密度不以为耻，反以为荣，实在令人无语。</p>
 
 <p>我的结论很简单，二号线世纪大道、陆家嘴的限流主要是陆家嘴又有包括上海中心在内的几幢巨型商务楼竣工并陆续投入使用造成的。脱离了以人为本这个中心思想，一切最终都将没的谈。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Spring 4 中的新东西]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi/"/>
-    <updated>2015-05-04T14:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi</id>
-    <content type="html"><![CDATA[<p>Spring还在继续提高与演进中。</p>
-
-<h3>3.1中的新东西</h3>
-
-<ul>
-<li>environment profiles，支持development、test和production等条件下独特的配置</li>
-<li>增加enable annotations，在Java文件配置中</li>
-<li>Declarative caching support，像支持事务一样支持缓存</li>
-<li>支持Servlet 3.0，包括在java文件中声明servlets和filters，而不仅仅是在web.xml中</li>
-<li>JPA支持的提升，可以不再需要persistence.xml</li>
-<li>自动绑定路径便利给model属性</li>
-<li>支持对Accept和Content-Type消息头的匹配，通过@RequestMappingproduces</li>
-<li>绑定部分二进制表单请求给方法参数，通过@RequestPart，比@RequestParam更强大（只能对请求参数数据绑定，key-alue格式），而@RequestPart支持如JSON、XML内容区数据的绑定</li>
-<li>flash属性的支持</li>
-<li>JpaTemplate和JpaDaoSupport让位于EntityManager</li>
-</ul>
-
-
-<h3>3.2中的新东西</h3>
-
-<ul>
-<li>支持servlet 3中的异步请求，使得一个请求可以在独立的线程中被处理，让servlet线程可以处理更多的请求</li>
-<li>Spring MVC的test框架，包括RestTemplate的测试支持</li>
-<li>@controllerAdvice使得@ModelAttributes等控制器的方法可以在单个类中重新组织</li>
-<li>ContentNegotiatingViewResolver</li>
-<li>@MatrixVariable</li>
-<li>Rest方面的改进与支持</li>
-</ul>
-
-
-<h3>4.0中的新东西</h3>
-
-<ul>
-<li>WebSocket的支持，包括JSR-356中Java API对WebSocket的支持</li>
-<li>SockJS/STOMP对WebSocket和消息模块的封装</li>
-<li>Java 8 特性的应用，比如lambda。callback interface的使用变简单了，如RowMapper和JdbcTemplate</li>
-<li>Java 8中的时间日期api</li>
-<li>RestTemplate的一个异步版实现</li>
-<li>新增对JMS 2.0 JTA 1.2， JPA 2.1的支持</li>
-</ul>
-
 ]]></content>
   </entry>
   

@@ -1067,15 +1067,21 @@
         <lastmod>2015-12-25T20:16:02+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/
+        </loc>
+        <lastmod>2016-02-11T16:42:19+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2014-05-01T14:41:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2015-12-25T20:16:02+08:00</lastmod>
+        <lastmod>2016-02-11T16:42:19+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2015-12-25T20:16:02+08:00</lastmod>
+        <lastmod>2016-02-11T16:42:19+08:00</lastmod>
     </url>
 </urlset>
