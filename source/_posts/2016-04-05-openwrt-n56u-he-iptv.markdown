@@ -54,3 +54,35 @@ Select firmware *.trx and upload
 
 做完这些之后，至少目前中兴的机顶盒是全面支持了。
 
+配置附录
+
+/etc/config/network
+```
+config switch                                                                                                                                                                        
+        option name 'switch0'                                                                                                                                                        
+        option reset '1'                                                                                                                                                             
+        option enable_vlan '1'                                                                                                                                                       
+        option enable_vlan4k '1'                                                                                                                                                     
+                                                                                                                                                                                     
+config switch_vlan                                                                                                                                                                   
+        option device 'switch0'                                                                                                                                                      
+        option vlan '1'                                                                                                                                                              
+        option ports '0 1 2 3 8t'                                                                                                                                                    
+                                                                                                                                                                                     
+config switch_vlan                                                                                                                                                                   
+        option device 'switch0'                                                                                                                                                      
+        option vlan '2'                                                                                                                                                              
+        option ports '4 8t'                                                                                                                                                          
+                                                                                                                                                                                     
+config switch_vlan                                                                                                                                                                   
+        option device 'switch0'                                                                                                                                                      
+        option vlan '85'                                                                                                                                                             
+        option vid '85'                                                                                                                                                              
+        option ports '1t 2t 4t 8t'    
+```
+
+/etc/dnsmasq.conf
+```
+#cname=bertand,bert
+dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e
+```
