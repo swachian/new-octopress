@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-02-11T16:42:30+08:00</updated>
+  <updated>2016-04-05T13:04:21+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,744 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[openwrt n56u 和iptv]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/05/openwrt-n56u-he-iptv/"/>
+    <updated>2016-04-05T12:14:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/05/openwrt-n56u-he-iptv</id>
+    <content type="html"><![CDATA[<p>四年以前写的<a href="http://octopresszhangyu.herokuapp.com/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/">上海电信IPTV的VLAN ID和通过交换机连接两路IPTV</a>，而由于4k高清IPTV机顶盒的推广，
+当时的内容已经有些不合时宜。尽管，用一个交换机还是可以实现连接两路iptv。</p>
+
+<p>区别主要在于新的4k高清机顶盒同小红等盒子一样，需要双平面才能跑得起来。所谓双平面就是在专网之外机顶盒也要能够连接公网。
+这个变化其实是带来一大好处的，即通过一个路由设备接光猫的一个口子，也可以让iptv和公网业务同时跑起来。下面记录一下操作过程。</p>
+
+<h3>openwrt</h3>
+
+<p>首先，这么灵活的配法，当前asus netgear等原厂的固件是不支持此种功能的，所以需要第三方固件，如openwrt dd-wrt。我选择了openwrt，是因为其官网支持asus-n56u路由器。
+<a href="https://wiki.openwrt.org/toh/asus/rt-n56u">官方链接</a> ，可以从前面这个链接获得操作过程和固件。注意下载<code>squashfs-factory.bin</code>，不要下载chaos版。我就误下了chaos版，导致只能采用reset的办法重新装回了华硕的固件。openwrt很贴心的一点就是在网页里提供了恢复固件的操作步骤</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Download &amp; Install the asus <span class="s2">&quot;Firmware Restoration&quot;</span> from asus website
+</span><span class='line'>Download the factory image from asus
+</span><span class='line'>Enter Recovery Mode
+</span><span class='line'>Unplug Router
+</span><span class='line'>Hold Reset Button and Plug in Router
+</span><span class='line'>Release button when front LED flashes slowly
+</span><span class='line'>Use the following to <span class="nb">set </span>up your TCP/IP settings:IP address: 192.168.1.x Subnet mask: 255.255.255.0
+</span><span class='line'>Select firmware *.trx and upload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要点是把本机的ip设置成192.168.1.2,而且如果本机有多块网卡（包括虚拟网卡）则只保留一个连接路由器lan口的网口活跃。这样华硕的固件才
+明确会打开这个网口并同已进入恢复模式的路由器相连。有了这个恢复模式存在，意味着asus的这款路由器基本是刷不死的。</p>
+
+<p>安装完openwrt，设置好基本的wan口，我是采用的dhcp方式获取wan地址，就可以进入配置iptv vlan的过程了。</p>
+
+<h3>关于4k高清机顶盒获取公网和专网IP的流程</h3>
+
+<p>参考<a href="https://www.ydkfblog.com/?m=201602">上海电信光猫一体机配合Openwrt拨号正常使用OTT 4K IPTV</a>，
+找到了iptv dhcp的流程
+<img src="http://octopresszhangyu.herokuapp.com/images/openwrt/4kiptvdhcp.png" alt="image" /></p>
+
+<p>看清流程后，就可以知道：
+1. 要先让4k iptv机顶盒接入公网<br/>
+2. 路由器要支持DHCP-Option：125<br/>
+3. 路由器要支持vlan 85的进出</p>
+
+<p>公网配置是基础，剩余两点的配置可以归纳为</p>
+
+<blockquote><ol>
+<li><p>接在自备路由器上时，将路由器WAN口、CPU口、接IPTV的口 一起新建一个VLAN 85，3个端口全部为tagged</p></li>
+<li><p><code>/etc/dnsmasq.conf</code>中要加入<code>dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e</code> ,即对Option 125的支持</p></li>
+</ol>
+</blockquote>
+
+<p>做完这些之后，至少目前中兴的机顶盒是全面支持了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[试用Cap3]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/02/15/shi-yong-cap3/"/>
+    <updated>2016-02-15T16:42:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/02/15/shi-yong-cap3</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
+<span class='line-number'>216</span>
+<span class='line-number'>217</span>
+<span class='line-number'>218</span>
+<span class='line-number'>219</span>
+<span class='line-number'>220</span>
+<span class='line-number'>221</span>
+<span class='line-number'>222</span>
+<span class='line-number'>223</span>
+<span class='line-number'>224</span>
+<span class='line-number'>225</span>
+<span class='line-number'>226</span>
+<span class='line-number'>227</span>
+<span class='line-number'>228</span>
+<span class='line-number'>229</span>
+<span class='line-number'>230</span>
+<span class='line-number'>231</span>
+<span class='line-number'>232</span>
+<span class='line-number'>233</span>
+<span class='line-number'>234</span>
+<span class='line-number'>235</span>
+<span class='line-number'>236</span>
+<span class='line-number'>237</span>
+<span class='line-number'>238</span>
+<span class='line-number'>239</span>
+<span class='line-number'>240</span>
+<span class='line-number'>241</span>
+<span class='line-number'>242</span>
+<span class='line-number'>243</span>
+<span class='line-number'>244</span>
+<span class='line-number'>245</span>
+<span class='line-number'>246</span>
+<span class='line-number'>247</span>
+<span class='line-number'>248</span>
+<span class='line-number'>249</span>
+<span class='line-number'>250</span>
+<span class='line-number'>251</span>
+<span class='line-number'>252</span>
+<span class='line-number'>253</span>
+<span class='line-number'>254</span>
+<span class='line-number'>255</span>
+<span class='line-number'>256</span>
+<span class='line-number'>257</span>
+<span class='line-number'>258</span>
+<span class='line-number'>259</span>
+<span class='line-number'>260</span>
+<span class='line-number'>261</span>
+<span class='line-number'>262</span>
+<span class='line-number'>263</span>
+<span class='line-number'>264</span>
+<span class='line-number'>265</span>
+<span class='line-number'>266</span>
+<span class='line-number'>267</span>
+<span class='line-number'>268</span>
+<span class='line-number'>269</span>
+<span class='line-number'>270</span>
+<span class='line-number'>271</span>
+<span class='line-number'>272</span>
+<span class='line-number'>273</span>
+<span class='line-number'>274</span>
+<span class='line-number'>275</span>
+<span class='line-number'>276</span>
+<span class='line-number'>277</span>
+<span class='line-number'>278</span>
+<span class='line-number'>279</span>
+<span class='line-number'>280</span>
+<span class='line-number'>281</span>
+<span class='line-number'>282</span>
+<span class='line-number'>283</span>
+<span class='line-number'>284</span>
+<span class='line-number'>285</span>
+<span class='line-number'>286</span>
+<span class='line-number'>287</span>
+<span class='line-number'>288</span>
+<span class='line-number'>289</span>
+<span class='line-number'>290</span>
+<span class='line-number'>291</span>
+<span class='line-number'>292</span>
+<span class='line-number'>293</span>
+<span class='line-number'>294</span>
+<span class='line-number'>295</span>
+<span class='line-number'>296</span>
+<span class='line-number'>297</span>
+<span class='line-number'>298</span>
+<span class='line-number'>299</span>
+<span class='line-number'>300</span>
+<span class='line-number'>301</span>
+<span class='line-number'>302</span>
+<span class='line-number'>303</span>
+<span class='line-number'>304</span>
+<span class='line-number'>305</span>
+<span class='line-number'>306</span>
+<span class='line-number'>307</span>
+<span class='line-number'>308</span>
+<span class='line-number'>309</span>
+<span class='line-number'>310</span>
+<span class='line-number'>311</span>
+<span class='line-number'>312</span>
+<span class='line-number'>313</span>
+<span class='line-number'>314</span>
+<span class='line-number'>315</span>
+<span class='line-number'>316</span>
+<span class='line-number'>317</span>
+<span class='line-number'>318</span>
+<span class='line-number'>319</span>
+<span class='line-number'>320</span>
+<span class='line-number'>321</span>
+<span class='line-number'>322</span>
+<span class='line-number'>323</span>
+<span class='line-number'>324</span>
+<span class='line-number'>325</span>
+<span class='line-number'>326</span>
+<span class='line-number'>327</span>
+<span class='line-number'>328</span>
+<span class='line-number'>329</span>
+<span class='line-number'>330</span>
+<span class='line-number'>331</span>
+<span class='line-number'>332</span>
+<span class='line-number'>333</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diff --git a/Capfile b/Capfile
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..51c3955
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/Capfile
+</span><span class='line'>@@ -0,0 +1,29 @@
+</span><span class='line'>+# Load DSL and set up stages
+</span><span class='line'>+require 'capistrano/setup'
+</span><span class='line'>+
+</span><span class='line'>+# Include default deployment tasks
+</span><span class='line'>+require 'capistrano/deploy'
+</span><span class='line'>+
+</span><span class='line'>+require 'capistrano/rails'
+</span><span class='line'>+
+</span><span class='line'>+# Include tasks from other gems included in your Gemfile
+</span><span class='line'>+#
+</span><span class='line'>+# For documentation on these, see for example:
+</span><span class='line'>+#
+</span><span class='line'>+#   https://github.com/capistrano/rvm
+</span><span class='line'>+#   https://github.com/capistrano/rbenv
+</span><span class='line'>+#   https://github.com/capistrano/chruby
+</span><span class='line'>+#   https://github.com/capistrano/bundler
+</span><span class='line'>+#   https://github.com/capistrano/rails
+</span><span class='line'>+#   https://github.com/capistrano/passenger
+</span><span class='line'>+#
+</span><span class='line'>+# require 'capistrano/rvm'
+</span><span class='line'>+# require 'capistrano/rbenv'
+</span><span class='line'>+# require 'capistrano/chruby'
+</span><span class='line'>+# require 'capistrano/bundler'
+</span><span class='line'>+# require 'capistrano/rails/assets'
+</span><span class='line'>+# require 'capistrano/rails/migrations'
+</span><span class='line'>+# require 'capistrano/passenger'
+</span><span class='line'>+
+</span><span class='line'>+# Load custom tasks from `lib/capistrano/tasks` if you have any defined
+</span><span class='line'>+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+</span><span class='line'>diff --git a/Gemfile b/Gemfile
+</span><span class='line'>index 9786bc1..60dd07d 100644
+</span><span class='line'>--- a/Gemfile
+</span><span class='line'>+++ b/Gemfile
+</span><span class='line'>@@ -10,11 +10,11 @@ gem 'mysql2'
+</span><span class='line'> # Use SCSS for stylesheets
+</span><span class='line'> gem 'sass-rails', '~&gt; 5.0.0.beta1'
+</span><span class='line'> # Use Uglifier as compressor for JavaScript assets
+</span><span class='line'>-gem 'uglifier', '&gt;= 1.3.0'
+</span><span class='line'>+#gem 'uglifier', '&gt;= 1.3.0'
+</span><span class='line'> # Use CoffeeScript for .js.coffee assets and views
+</span><span class='line'> gem 'coffee-rails', '~&gt; 4.1.0'
+</span><span class='line'> # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+</span><span class='line'>-# gem 'therubyracer',  platforms: :ruby
+</span><span class='line'>+gem 'therubyracer',  platforms: :ruby
+</span><span class='line'> 
+</span><span class='line'> # Use jquery as the JavaScript library
+</span><span class='line'> gem 'jquery-rails'
+</span><span class='line'>@@ -46,7 +46,10 @@ gem 'unicorn'
+</span><span class='line'> gem 'thin'
+</span><span class='line'> # Use Capistrano for deployment
+</span><span class='line'> # gem 'capistrano-rails', group: :development
+</span><span class='line'>-
+</span><span class='line'>+group :development do
+</span><span class='line'>+    gem 'capistrano', '~&gt; 3.1'
+</span><span class='line'>+    gem 'capistrano-rails', '~&gt; 1.1'
+</span><span class='line'>+end
+</span><span class='line'> 
+</span><span class='line'> gem 'kaminari', github: 'amatsuda/kaminari', branch: 'master'
+</span><span class='line'> gem 'nokogiri'
+</span><span class='line'>diff --git a/config/deploy.rb b/config/deploy.rb
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..7af9419
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/config/deploy.rb
+</span><span class='line'>@@ -0,0 +1,60 @@
+</span><span class='line'>+# config valid only for current version of Capistrano
+</span><span class='line'>+lock '3.4.0'
+</span><span class='line'>+
+</span><span class='line'>+set :application, 'xincheping'
+</span><span class='line'>+set :repo_url, 'git@github.com:swachian/xincheping.git'
+</span><span class='line'>+
+</span><span class='line'>+# Default branch is :master
+</span><span class='line'>+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+</span><span class='line'>+
+</span><span class='line'>+# Default deploy_to directory is /var/www/my_app_name
+</span><span class='line'>+set :deploy_to, '/opt/deploy/xincheping'
+</span><span class='line'>+
+</span><span class='line'>+# Default value for :scm is :git
+</span><span class='line'>+# set :scm, :git
+</span><span class='line'>+
+</span><span class='line'>+# Default value for :format is :pretty
+</span><span class='line'>+# set :format, :pretty
+</span><span class='line'>+
+</span><span class='line'>+# Default value for :log_level is :debug
+</span><span class='line'>+# set :log_level, :debug
+</span><span class='line'>+
+</span><span class='line'>+# Default value for :pty is false
+</span><span class='line'>+# set :pty, true
+</span><span class='line'>+
+</span><span class='line'>+# Default value for :linked_files is []
+</span><span class='line'>+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+</span><span class='line'>+
+</span><span class='line'>+# Default value for linked_dirs is []
+</span><span class='line'>+# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+</span><span class='line'>+ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets')
+</span><span class='line'>+
+</span><span class='line'>+# Default value for default_env is {}
+</span><span class='line'>+set :default_env, { path: "/home/zhangyu/.rbenv/versions/ruby-2.3/bin:$PATH" }
+</span><span class='line'>+
+</span><span class='line'>+# Default value for keep_releases is 5
+</span><span class='line'>+# set :keep_releases, 5
+</span><span class='line'>+
+</span><span class='line'>+namespace :deploy do
+</span><span class='line'>+
+</span><span class='line'>+  after :restart, :clear_cache do
+</span><span class='line'>+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+</span><span class='line'>+      # Here we can do anything such as:
+</span><span class='line'>+      # within release_path do
+</span><span class='line'>+      #   execute :rake, 'cache:clear'
+</span><span class='line'>+      # end
+</span><span class='line'>+    end
+</span><span class='line'>+  end
+</span><span class='line'>+
+</span><span class='line'>+  task :restart_server do
+</span><span class='line'>+    on roles(:web) do
+</span><span class='line'>+      within current_path do
+</span><span class='line'>+        with rails_env: fetch(:rails_env), rails_relative_url_root: '/xincheping' do
+</span><span class='line'>+          execute :rake, 'thin:restart', env: {rails_env: fetch(:rails_env) }
+</span><span class='line'>+        end
+</span><span class='line'>+      end
+</span><span class='line'>+    end
+</span><span class='line'>+  end
+</span><span class='line'>+  after "deploy:published", "restart_server"
+</span><span class='line'>+
+</span><span class='line'>+end
+</span><span class='line'>diff --git a/config/deploy/production.rb b/config/deploy/production.rb
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..a396f40
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/config/deploy/production.rb
+</span><span class='line'>@@ -0,0 +1,61 @@
+</span><span class='line'>+# server-based syntax
+</span><span class='line'>+# ======================
+</span><span class='line'>+# Defines a single server with a list of roles and multiple properties.
+</span><span class='line'>+# You can define all roles on a single server, or split them:
+</span><span class='line'>+
+</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
+</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
+</span><span class='line'>+# server 'db.example.com', user: 'deploy', roles: %w{db}
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# role-based syntax
+</span><span class='line'>+# ==================
+</span><span class='line'>+
+</span><span class='line'>+# Defines a role with one or multiple servers. The primary server in each
+</span><span class='line'>+# group is considered to be the first unless any  hosts have the primary
+</span><span class='line'>+# property set. Specify the username and a domain or IP for the server.
+</span><span class='line'>+# Don't use `:all`, it's a meta role.
+</span><span class='line'>+
+</span><span class='line'>+role :app, %w{zhangyu@192.168.203.198}, my_property: :my_value
+</span><span class='line'>+role :web, %w{zhangyu@192.168.203.198}, other_property: :other_value
+</span><span class='line'>+role :db,  %w{zhangyu@192.168.203.198}
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# Configuration
+</span><span class='line'>+# =============
+</span><span class='line'>+# You can set any configuration variable like in config/deploy.rb
+</span><span class='line'>+# These variables are then only loaded and set in this stage.
+</span><span class='line'>+# For available Capistrano configuration variables see the documentation page.
+</span><span class='line'>+# http://capistranorb.com/documentation/getting-started/configuration/
+</span><span class='line'>+# Feel free to add new variables to customise your setup.
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# Custom SSH Options
+</span><span class='line'>+# ==================
+</span><span class='line'>+# You may pass any option but keep in mind that net/ssh understands a
+</span><span class='line'>+# limited set of options, consult the Net::SSH documentation.
+</span><span class='line'>+# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
+</span><span class='line'>+#
+</span><span class='line'>+# Global options
+</span><span class='line'>+# --------------
+</span><span class='line'>+#  set :ssh_options, {
+</span><span class='line'>+#    keys: %w(/home/rlisowski/.ssh/id_rsa),
+</span><span class='line'>+#    forward_agent: false,
+</span><span class='line'>+#    auth_methods: %w(password)
+</span><span class='line'>+#  }
+</span><span class='line'>+#
+</span><span class='line'>+# The server-based syntax can be used to override options:
+</span><span class='line'>+# ------------------------------------
+</span><span class='line'>+# server 'example.com',
+</span><span class='line'>+#   user: 'user_name',
+</span><span class='line'>+#   roles: %w{web app},
+</span><span class='line'>+#   ssh_options: {
+</span><span class='line'>+#     user: 'user_name', # overrides user setting above
+</span><span class='line'>+#     keys: %w(/home/user_name/.ssh/id_rsa),
+</span><span class='line'>+#     forward_agent: false,
+</span><span class='line'>+#     auth_methods: %w(publickey password)
+</span><span class='line'>+#     # password: 'please use keys'
+</span><span class='line'>+#   }
+</span><span class='line'>diff --git a/config/deploy/staging.rb b/config/deploy/staging.rb
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..4fc06fa
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/config/deploy/staging.rb
+</span><span class='line'>@@ -0,0 +1,61 @@
+</span><span class='line'>+# server-based syntax
+</span><span class='line'>+# ======================
+</span><span class='line'>+# Defines a single server with a list of roles and multiple properties.
+</span><span class='line'>+# You can define all roles on a single server, or split them:
+</span><span class='line'>+
+</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
+</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
+</span><span class='line'>+# server 'db.example.com', user: 'deploy', roles: %w{db}
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# role-based syntax
+</span><span class='line'>+# ==================
+</span><span class='line'>+
+</span><span class='line'>+# Defines a role with one or multiple servers. The primary server in each
+</span><span class='line'>+# group is considered to be the first unless any  hosts have the primary
+</span><span class='line'>+# property set. Specify the username and a domain or IP for the server.
+</span><span class='line'>+# Don't use `:all`, it's a meta role.
+</span><span class='line'>+
+</span><span class='line'>+# role :app, %w{deploy@example.com}, my_property: :my_value
+</span><span class='line'>+# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
+</span><span class='line'>+# role :db,  %w{deploy@example.com}
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# Configuration
+</span><span class='line'>+# =============
+</span><span class='line'>+# You can set any configuration variable like in config/deploy.rb
+</span><span class='line'>+# These variables are then only loaded and set in this stage.
+</span><span class='line'>+# For available Capistrano configuration variables see the documentation page.
+</span><span class='line'>+# http://capistranorb.com/documentation/getting-started/configuration/
+</span><span class='line'>+# Feel free to add new variables to customise your setup.
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+
+</span><span class='line'>+# Custom SSH Options
+</span><span class='line'>+# ==================
+</span><span class='line'>+# You may pass any option but keep in mind that net/ssh understands a
+</span><span class='line'>+# limited set of options, consult the Net::SSH documentation.
+</span><span class='line'>+# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
+</span><span class='line'>+#
+</span><span class='line'>+# Global options
+</span><span class='line'>+# --------------
+</span><span class='line'>+#  set :ssh_options, {
+</span><span class='line'>+#    keys: %w(/home/rlisowski/.ssh/id_rsa),
+</span><span class='line'>+#    forward_agent: false,
+</span><span class='line'>+#    auth_methods: %w(password)
+</span><span class='line'>+#  }
+</span><span class='line'>+#
+</span><span class='line'>+# The server-based syntax can be used to override options:
+</span><span class='line'>+# ------------------------------------
+</span><span class='line'>+# server 'example.com',
+</span><span class='line'>+#   user: 'user_name',
+</span><span class='line'>+#   roles: %w{web app},
+</span><span class='line'>+#   ssh_options: {
+</span><span class='line'>+#     user: 'user_name', # overrides user setting above
+</span><span class='line'>+#     keys: %w(/home/user_name/.ssh/id_rsa),
+</span><span class='line'>+#     forward_agent: false,
+</span><span class='line'>+#     auth_methods: %w(publickey password)
+</span><span class='line'>+#     # password: 'please use keys'
+</span><span class='line'>+#   }
+</span><span class='line'>diff --git a/config/environments/production.rb b/config/environments/production.rb
+</span><span class='line'>index f572341..cd0d766 100644
+</span><span class='line'>--- a/config/environments/production.rb
+</span><span class='line'>+++ b/config/environments/production.rb
+</span><span class='line'>@@ -19,7 +19,7 @@ Rails.application.configure do
+</span><span class='line'>   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+</span><span class='line'> 
+</span><span class='line'>   # Compress JavaScripts and CSS.
+</span><span class='line'>-  config.assets.js_compressor = :uglifier
+</span><span class='line'>+  #config.assets.js_compressor = :uglifier
+</span><span class='line'>   # config.assets.css_compressor = :sass
+</span><span class='line'> 
+</span><span class='line'>   # Do not fallback to assets pipeline if a precompiled asset is missed.
+</span><span class='line'> 
+</span><span class='line'>diff --git a/lib/tasks/sync.rake b/lib/tasks/sync.rake
+</span><span class='line'>index 6d371d6..bd87ca3 100644
+</span><span class='line'>--- a/lib/tasks/sync.rake
+</span><span class='line'>+++ b/lib/tasks/sync.rake
+</span><span class='line'>@@ -1,10 +1,10 @@
+</span><span class='line'> namespace :sync do
+</span><span class='line'>-  desc "TODO"
+</span><span class='line'>+  desc "长测新车评同步"
+</span><span class='line'>   task changce: :environment do
+</span><span class='line'>     Changce.fetch
+</span><span class='line'>   end
+</span><span class='line'> 
+</span><span class='line'>-  desc "TODO"
+</span><span class='line'>+  desc "新车评内容全部同步"
+</span><span class='line'>   task all: :environment do
+</span><span class='line'>     Daogoulist.all.each {|dgl| dgl.sync_daogous(2)}
+</span><span class='line'>     Guandian.fetch
+</span><span class='line'>@@ -12,4 +12,8 @@ namespace :sync do
+</span><span class='line'>     Changce.fetch_changceing
+</span><span class='line'>   end
+</span><span class='line'> 
+</span><span class='line'>+  desc "同sh.122.gov.cn同步电子警察信息"
+</span><span class='line'>+  task police2: :environment do
+</span><span class='line'>+    ElectronicPoloce2.test_fetch_one_page
+</span><span class='line'>+  end
+</span><span class='line'> end
+</span><span class='line'>diff --git a/lib/tasks/thin.rake b/lib/tasks/thin.rake
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..9fa35cd
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/lib/tasks/thin.rake
+</span><span class='line'>@@ -0,0 +1,8 @@
+</span><span class='line'>+namespace :thin do
+</span><span class='line'>+  desc "重启thin"
+</span><span class='line'>+  task restart: :environment do
+</span><span class='line'>+    system " if [ -f tmp/pids/thin.pid ]; then kill `cat tmp/pids/thin.pid` && rm tmp/pids/thin.pid; fi"
+</span><span class='line'>+    system  "./bin/thin start --prefix=/xincheping  -p 3001 -P tmp/pids/thin.pid -d"
+</span><span class='line'>+  end
+</span><span class='line'>+
+</span><span class='line'>+end
+</span><span class='line'>diff --git a/lib/tasks/unicorn.rake b/lib/tasks/unicorn.rake
+</span><span class='line'>new file mode 100644
+</span><span class='line'>index 0000000..7df54be
+</span><span class='line'>--- /dev/null
+</span><span class='line'>+++ b/lib/tasks/unicorn.rake
+</span><span class='line'>@@ -0,0 +1,8 @@
+</span><span class='line'>+namespace :unicorn do
+</span><span class='line'>+  desc "重启unicorn"
+</span><span class='line'>+  task restart: :environment do
+</span><span class='line'>+    system " if [ -f tmp/pids/unicorn.pid ]; then kill `cat tmp/pids/unicorn.pid`; fi"
+</span><span class='line'>+    system  "./bin/unicorn -c unicorn.conf.rb -D"
+</span><span class='line'>+  end
+</span><span class='line'>+
+</span><span class='line'>+end</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[时间长了发现还是挺喜欢本田的]]></title>
@@ -982,76 +1720,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 
 <p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
 毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[老罗和池建强，现代创业和打工]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/17/lao-luo-he-chi-jian-qiang/"/>
-    <updated>2015-05-17T00:15:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/17/lao-luo-he-chi-jian-qiang</id>
-    <content type="html"><![CDATA[<p>老罗和他的锤子手机是一直存有很大的争议，在去年<a href="http://octopresszhangyu.herokuapp.com/blog/2014/08/30/lao-luo-he-wang-zi-ru/">老罗pk刘翔</a>就显露无疑。</p>
-
-<p>回过头来看9个月过去了，当初的判断有些是应验了：</p>
-
-<ol>
-<li>锤子手机的价格客户基本不买账，于是3000元的售价<strong>跌了500-1000</strong>。</li>
-<li>老罗赢了王自如，但不代表能<strong>赢得市场</strong>，锤子手机依然需要大规模输血。</li>
-<li><strong>老罗是个人物</strong>，继续招兵买马，虽然有点病急乱投医的意思，但意志确实坚定。</li>
-<li>刘翔是只能唯雷军是从了，因为雷军已经<strong>是他的老板而不只是客户</strong>。</li>
-</ol>
-
-
-<p>上周稍微新鲜点的就是老罗把池建强老师招入麾下了。池老师是一个传统企业软件公司的技术负责人，
-文章和mac方面的技术在程序员圈中还是相当有名的。文笔确实不错，难能可贵的是坚持笔耕不辍，长期能保持
-较高的水准，这对一个非媒体的编辑而言还是很不容易的。
-老罗给池建强的职务是：<strong>锤子科技云平台研发总监</strong>。
-即锤子从传统软件企业那里挖了个人去负责电商和锤子云，这没啥好多说的，槽点是据说给的年薪是4赵多人民币。
-让我感觉老罗太能烧钱了。后来了解到是在4月下旬的时候，郑刚在天使轮给罗永浩投了4000万， B轮又追加投资，
-累计重仓已经超过一亿元人民币。也难怪锤子又有燃料可以继续前进。很可能就是因为投资确定拿到了，
-然后这个雇人的举动也就公布了。如果之前4kw（其实应该还有其他投资）就做出了产品上市，那这6kw至少可以坚持不少时间的，
-毕竟主要就是付工资而不是开模具了。</p>
-
-<p>老罗会不会因为此事成功？在我看来，老罗成功的可能性始终很小，能烧钱当然就能继续。而招入池老师很可能跟
-锤子能不能混出来的相关性也有限，即成功了可能跟这次举动关系不大、失败了可能就更没关系。毕竟能否成功取决于
-太多的因素。</p>
-
-<p>回想起Fenng写的如今创业的描述，确实现在创业好像是也有点像打工了：是有人出钱的，只是创业者的自主权很大，
-回报比普通打工更多，虽然成功几率依然很小，但创业的风险和难度都实打实地降低了。
-烧别人的钱做事情的后果是好是坏很难讲，有好有坏只是一种笼统的说法，我目前也分析不出来到底是好处多还是坏处多。
-但是，这肯定代表着一种活力，这也是过去十几年IT行业能快速发展的基础动力之一。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[地铁二号线限流与陆家嘴上海中心]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin/"/>
-    <updated>2015-05-05T23:05:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/05/di-tie-er-hao-xian-xian-liu-yu-lu-jia-zui-shang-hai-zhong-xin</id>
-    <content type="html"><![CDATA[<p>微博上的<strong>上海发布</strong>公布了如下信息，大意是二号线陆家嘴站和世纪大道站将在高峰时期限流。</p>
-
-<blockquote><p>即日起在高峰时段对江苏路、静安寺、陆家嘴、世纪大道等4站采取限流措施，包括关闭部分自动扶梯、利用限流栏杆减缓换乘速度等。</p></blockquote>
-
-<p>对于二号线如今拥挤情况的认识我是上月外出开会才进一步感受到更加严重了。
-越来越挤可以预料，挤成这样还是出乎意料。结合另一则新闻，猜测大概是这么回事情。</p>
-
-<p>根据解放日报的<a href="http://www.jfdaily.com/shanghai/bw/201411/t20141127_998633.html">上海中心将建成全球最高观光厅</a>,</p>
-
-<blockquote><p>今年(2014)年底前，陆家嘴地区共有9个商办楼宇项目竣工，其中陆家嘴世纪金融广场3幢办公楼等6项商办楼宇已投入使用，上海中心大厦等3项楼宇正进行装修收尾工作.</p></blockquote>
-
-<p>这意味着包含上海中心在内，从去年下半年至今大约有9个办公楼竣工。
-而且目前陆家嘴地区竣工的写字楼都不会太矮，意味着普遍是巨型的办公楼。
-巨型办公楼是什么概念？</p>
-
-<p>以上海中心为例，建筑面积433954平方米，建筑主体为118层，以人均可分配10平方米计算，
-可容纳4万3千人在里面办公。官方给出的数字是3万，和我自己估算的也差不多。9个这样的大楼，
-就是说新增了30万个供人办公的block，以目前的经济热度而言基本可以满员，或者会逐步爆满。
-那就是说新增了30万职员在那里上班，陆家嘴站将一下子增加30万高峰客流。
-即使强如上海，也没有一个区域真能一下子承担多出来的那么多客流量。</p>
-
-<p>而一个能容纳4万人办公的大楼，只准备了2000个停车位。真的就把所有的交通压力都丢给了地铁了。如此高的密度不以为耻，反以为荣，实在令人无语。</p>
-
-<p>我的结论很简单，二号线世纪大道、陆家嘴的限流主要是陆家嘴又有包括上海中心在内的几幢巨型商务楼竣工并陆续投入使用造成的。脱离了以人为本这个中心思想，一切最终都将没的谈。</p>
 ]]></content>
   </entry>
   

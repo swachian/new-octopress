@@ -9,20 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="景点： 植物园
-划船（自开船）
-灵隐寺
-岳庙
-雷峰塔
-胡庆余堂（胡雪岩故居，元宝街18号）
-心源茶楼庆春店（非诚勿扰景点）
-虎跑
-西湖天地
-郭庄 美食 武林广场美食
-知味观味庄（杨公堤10-12号，花港观鱼西门外）
-楼外楼，孤山路30号（岳王庙）
-山外山菜馆（植物园北门或者岳王庙）
-黄饭儿（ &hellip;">
+  <meta name="description" content="研究mongod的时候，知道了一个关于cpu的概念&#8211;numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行: numactl --interleave=all mongod --dbpath /data/db --fork --logpath /data/db.log &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +67,113 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/08/what-is-numa-and-the-effect-of-it/">What Is Numa and the Effect of It</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-08T22:38:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>研究mongod的时候，知道了一个关于cpu的概念&#8211;numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
+
+<p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
+
+<p>而拜读了这篇<a href="http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">mysql 和 numa架构关联</a>
+的文章，让人豁然开朗。</p>
+
+<p>实际上，numa的本质就是牵涉到如何对内存进行分配，是一个在多cpu、多核中引入的概念。</p>
+
+<p>比如，一个cpu时，那么全部的内存自然只有这个u可用。 但是，2个时呢? 如果一个u里面又有多个核心时，该怎么处理呢？</p>
+
+<p>简而言之，numa的方法是让内存按cpu所属的node进行隔离，好处是提高了内存分配的公平性。但是对于mongod mysqld这样会
+吃尽内存的应用，这种确保公平的分配方案并不好。因为根本没有其他核心需要用内存，但需要用内存的核心却会吃不饱。所以需要加上参数，使得这种公平性被取消，从而提高整体效能，其实就是发挥出mongod和mysqld的能力。因为这些应用都是单进程多线程的应用。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/08/about-salesforce/">About Salesforce</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-08T13:41:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Salesforce.com在1999年由前甲骨文高管 Marc Benioff 创立，他创办Salesforce的核心理念就是&#8221;No Software（消灭软件）&#8221;. 指消灭安装在企业内部的软件，
+转而使用互联网上的服务。</p>
+
+<p>Salesforce的主要产品包括Sales Cloud（CRM）、Service Cloud、Chatter和Force.com等。下面是它的主要发展史：</p>
+
+<ul>
+<li>1999年，Salesforce在美国旧金山成立。</li>
+<li>2001年，推出了第一款SaaS应用CRM，同时也受到众多厂商和客户的热议。</li>
+<li>2004年，Sunguard成为Salesforce第1000位用户。</li>
+<li>2005年，推出了名为&#8221;AppExchange&#8221;的程序商店，以丰富用户选择。</li>
+<li>2006年，推出了首个运行在云计算平台的语言Apex，并在语法上类似Java。</li>
+<li>2007年，推出了它的PaaS平台Force.com，来让用户更方便地在Saleforce平台上开发在线应用，同时Salesforce凭借Force.com得到了华尔街日报的科技创新奖（Technology Innovation Award）。</li>
+<li>2009年，Salesforce成为首家年收入达到10亿美元的云计算公司，并在年初推出了名为&#8221;Service Cloud&#8221;在线客户服务应用。</li>
+<li>2010年，Salesforce将推出名为&#8221;Chatter&#8221;的企业级在线SNS服务，类似于企业内部的&#8221;LinkedIn&#8221;，同时其CRM应用已更名为&#8221;Sales Cloud&#8221;。</li>
+</ul>
+
+
+<p>实现了多租户的模型，即每个用户享有一个虚拟出的应用实例，背后的数据库设计是关键。</p>
+
+<p>Salesforce 团队不仅做了优化，
+而且凭借着其很多核心成员来自于 Oracle 的背景，在数据库端做了很多高水平的优化，比如添加了很多貌似累赘的 Pivot 表来加快部分常用数据的读取。</p>
+
+<p>salesforce的核心竞争力在于他们的数据库优化。<br/>
+他的s云就跑在他们的p云上面，他们的p云叫做force。有一套类似java的语言，允许他人作二次开发后进行部署。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -338,7 +432,7 @@ driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以�
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="ss">Mongo</span><span class="p">:</span><span class="ss">:RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="no">Mongo</span><span class="o">::</span><span class="no">RepelSetConnection</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40000</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">40001</span><span class="o">]</span><span class="p">,</span> <span class="ss">:read</span> <span class="o">=&gt;</span> <span class="ss">:secondary</span><span class="p">)</span>
 </span><span class='line'>   <span class="c1"># **secondary** 实现了对读的scale </span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -1219,112 +1313,6 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/05/fldk/">风陵渡口</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-05T17:09:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>民族主义还是国际主义？</p>
-
-<p>民族主义同共产国际主义的矛盾。共产国际主义当时的实质就是忠于苏联和斯大林。
-而毛是马克思主义中国化的代表人物，延安整风刷清苏联崇拜情结相当不易，也把‘国际主义’代表人物赶下了台。但48年因利益关系，必须争取斯大林的支持，于是刘对铁托匆忙表态，反苏分子也被调离原岗位。</p>
-
-<p>共字上必须有个‘中’，才是名副其实的中共。
-马克思共产主义学校&#8211;>中央党校
-马列学院->中央研究院</p>
-
-<p>林彪南下后，高成为了‘国际主义者’。忘记了他是毛委任的中共东北局第一书记，而不是斯大林派任的‘新关东总督’。</p>
-
-<p>其实，政治是最现实的。一切从需要出发。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/05/ukgov-notes/">不列颠网站</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-05T14:37:00+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一个曾经让我们的国家蒙羞的日不落帝国，即便早已今非昔比，但实际上已经进展到相当现代化的阶段。这从他们最近公布的一组政府网站的制造方式和制造工具上可见一端。</p>
-
-<p>首先，整个网站倡导的是 government as a platform，高度融合了政府为人民服务，政府其实就是一种云。</p>
-
-<p>其次，整个网站不单使用大量的开源工具和软件来构造，网站本身的代码也是开源的，就托管在GitHub上。而被问及为何考虑开源自己的代码时，他们的政府负责人回答是既然是政府平台，
-那么它就是大家的，既然是大家的我们希望可以在开发中贡献和分享给每一个人。</p>
-
-<p>整个项目的预算则是1.7百万英镑。这个价格确实不高。我们的孔子学院门户就要3kw人民币，而英国政府的网站造价仅有中国一个官办学院的一半。那是相当之便宜。</p>
-
-<p>以上是整个网站的构造思想，它是开源的、开放的，价格合理的，全民参与和分享的。而在技术实现上也更进一步体现了这种平民化的政府网站哲学。</p>
-
-<p>英国政府并没有买大量的服务器，也没有以国家安全为由自己组建机房。而是选择了Amazon EC2作为存放的主机，存储也是采用的A的S3.这在我们看来是难以想象的。简直有损国家的尊严。身为
-一个历史悠久的帝国，怎能连自己的服务器和机房都不具备？实际上，大英帝国政府连email服务器也是租用的。很可能他们用的Gmail和Amazon的mail服务还是免费的。</p>
-
-<p>而在语言和框架方面，也尽显开源和先进的本色。</p>
-
-<pre><code>Javascript uses jQuery, jQuery UI, Chosen, and a variety of other plugins
-Most of the application code is written in Ruby, running on a mixture of Rails and Sinatra
-router用Scala编写
-</code></pre>
-
-<p>数据库当然也是开源的，MongDB起NoSQL的部分，MySQL作为传统的关系型数据库，MaPit做地图数据库。</p>
-
-<p>一个优雅、合理的新时代的网站架构。一句话形容，这才tmd真是先进国家的先进政府网站。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -1342,6 +1330,14 @@ router用Scala编写
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/05/openwrt-n56u-he-iptv/">openwrt n56u 和iptv</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/15/shi-yong-cap3/">试用Cap3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/">时间长了发现还是挺喜欢本田的</a>
       </li>
     
@@ -1353,19 +1349,11 @@ router用Scala编写
         <a href="/blog/2015/12/22/deutschland-holiday/">Deutschland Holiday</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/">文艺的HashMap初始化</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/11/14/springde-at-sessionattributeshe-at-modelattribute/">Spring的@SessionAttributes和@ModelAttribute在Redirect时的特殊表现</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (62)</a></li><li><a href='/blog/categories/生活'>生活 (44)</a></li><li><a href='/blog/categories/车车'>车车 (29)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (45)</a></li><li><a href='/blog/categories/车车'>车车 (29)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>
