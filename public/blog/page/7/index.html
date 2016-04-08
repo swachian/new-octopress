@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
-同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此， &hellip;">
+  <meta name="description" content="作为一个Web开发者，无法绕开的一个点就是JavaScript。而对于经过C/Java训练出来的计算机专业人员而言，是很容易轻视JS，从而使得在这方面往往要经过很长的时间和经历，才能体会到
+JS的与众不同及其能力。C或者Java同JS的不同已经不用多言，而同为脚本语言的Ruby Php Perl &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,722 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/pro-javascript-techniques/">被低估的JS： 「Pro JavaScript Techniques」读后感</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T16:13:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>作为一个Web开发者，无法绕开的一个点就是JavaScript。而对于经过C/Java训练出来的计算机专业人员而言，是很容易轻视JS，从而使得在这方面往往要经过很长的时间和经历，才能体会到
+JS的与众不同及其能力。C或者Java同JS的不同已经不用多言，而同为脚本语言的Ruby Php Perl Python 同 JS的差别也是巨大的。有一定编程基础的人，学习其他大众性的语言，比如最常用的10种语言，
+一般都是比较快的。但是，JS是如此的和其他语言不一样，以至于学习起来真的费一番功夫。</p>
+
+<p>不过，直到读了John Resig的「Pro JavaScript Techniques」，终于令我豁然开朗。Resig是大名鼎鼎的JQuery的创始人，这本书中很多主要的API可以说就是介绍了JQuery是怎么实现的。包括Id的选择，
+ajax方法等。最重要的，如他所说，就是第二章面向对象的JavaScript，或者说如何从其他编程语言来理解JavaScript。</p>
+
+<p>笔记的流水账：</p>
+
+<h1>第一章 现代化的JS</h1>
+
+<p>JS和它的队友：</p>
+
+<ul>
+<li>Core Javascript 1.5</li>
+<li>XML2（DOM）</li>
+<li>XMLHttpRequest</li>
+<li>CSS（style）</li>
+<li>事件</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="err">注意通过</span><span class="nx">prototype</span><span class="err">定义公共函数的模式</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">Lecture</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">teacher</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">teacher</span> <span class="o">=</span> <span class="nx">teacher</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 实例method</span>
+</span><span class='line'><span class="nx">Lecture</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">teacher</span>  <span class="o">+</span> <span class="s2">&quot; is teaching &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">Schedule</span><span class="p">(</span><span class="nx">lectures</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span> <span class="o">=</span> <span class="nx">lectures</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Schedule</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">str</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">display</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">mySchedule</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schedule</span><span class="p">([</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;Gym&quot;</span><span class="p">,</span> <span class="s2">&quot;Mr. Smith&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="s2">&quot;Mrs. Jones&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">,</span> <span class="s2">&quot;TBD&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">mySchedule</span><span class="p">.</span><span class="nx">display</span><span class="p">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第二章 面向对象的JS( javascript的精髓)</h1>
+
+<h3>引用</h3>
+
+<p>引用指向的是具体的对象，引用是一个变量。
+JS中的引用不会指向引用，<code>var b = a;</code>的作用永远是让b指向a表示的实际对象</p>
+
+<h3>参数类型检查和函数重载</h3>
+
+<p><code>if (typeof msg == 'undefined') {}</code></p>
+
+<p>以及js对象都有的属性：构造子</p>
+
+<p><code>if (str.constructor == String) {}</code></p>
+
+<p>后者能够找出具体的构造对象的函数，前者对通过函数构造的对象返回的也是&#8217;object&#8217;。</p>
+
+<p>js在每个函数里面，有一个隐含属性 <code>arguments</code> ，这是一个伪数组，可以遍历、有.length属性，但不能被修改。可以通过复制遍历变成标准数组。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>          <span class="nx">ojb</span><span class="p">.</span><span class="nx">handleMsg</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>         <span class="nx">alert</span><span class="p">(</span> <span class="nx">msg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>作用域(Scope)</h3>
+
+<p>js通过函数来划分作用域，而不是通过代码块</p>
+
+<p>没有var声明的，则变成全局变量</p>
+
+<h3>闭包</h3>
+
+<p>闭包允许内层函数引用外围函数内的变量，即便外层函数已经终止。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">delayedAlert</span><span class="p">(</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">time</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">setTimeoute</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// msg就是外围函数中的变量</span>
+</span><span class='line'>    <span class="p">},</span> <span class="nx">time</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>curry化： 利用函数生成函数</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">addGenerator</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>     <span class="k">return</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">toAdd</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">num</span> <span class="o">+</span> <span class="nx">toAdd</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">addFive</span> <span class="o">=</span> <span class="nx">addGenerator</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">addFive</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">==</span><span class="mi">9</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>上下文对象</h3>
+
+<p>通过<code>this</code>表示，永远指向当前代码所处的对象中。
+是调用时确定的对象。</p>
+
+<p>function都有call和apply两个方法，可以用于指定this是什么</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">changeColor</span><span class="p">(</span> <span class="nx">color</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">changeColor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">setBodyColor</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">changeColor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span> <span class="c1">//传入隐含的全部参数</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">setBodyColor</span><span class="p">(</span> <span class="s2">&quot;black&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>原型式继承</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其效果是每次 new User()时同时执行了new Person，且user对象就这样拥有了person的全部方法</p>
+
+<h2>类似继承</h2>
+
+<p>Douglas Crockford创造的<code>method</code>, <code>inherits</code>, <code>swiss</code> 三个方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">Person</span><span class="p">);</span>
+</span><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">method</span><span class="p">(</span> <span class="s1">&#39;getName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;My name is: &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">uber</span><span class="p">(</span><span class="s1">&#39;getName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Base 库</h2>
+
+<h2>Prototype库</h2>
+
+<p>就是rails原先自带的库</p>
+
+<h2>命名空间</h2>
+
+<p><code>$.</code>其实就是命名空间。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">YAHOO</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">addEventListner</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(...);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>清理代码</h2>
+
+<p><code>!=</code> 和<code>==</code> 会对变量进行求值，即把对象变成false或true后进行比较，
+js中， null false 0 undefined 求值后都是false</p>
+
+<p>js一行一行地写可以不用分号，但是一旦被压缩后，换行符号都将取消，此时没有分号就不行了。鉴于js的使用场景，还行建议每行都加上分号。</p>
+
+<p>压缩代码的三种方式:
+1. 只取出空白和注释
+2. 压缩变量
+3. both</p>
+
+<p>IE 是不灵的，在调试方面</p>
+
+<p>Firefox的调试是最好的，尤其搭配firebug和 View Rendered Source，Venkman也是一个ff的扩展</p>
+
+<p>Safari还在迅速变化发展中，Chrome与之类似</p>
+
+<h2>测试套件</h2>
+
+<ul>
+<li>JSUnit: 老牌的</li>
+<li>J3Unit: 稍新的，通Java集成的更好</li>
+<li>Test.Simple , Test.More</li>
+</ul>
+
+
+<h1>第三章 分离式的JavaScript</h1>
+
+<p>DOM(Document Object Model)是表达XML文档的标准，并不是唯一的方式，但确实是应用最广泛的方式。这一点和js能统一浏览器的原因一致，就是因为被广泛使用了。</p>
+
+<p>DOM的模型：
+DOM是一个树结构，根节点是html，
+下属节点分为元素和文本两种类型。
+每个节点包括5个指针:
+1. 父节点parentNode
+2. 兄节点(previousSibling)
+3. 弟节点(nextSibling)
+4. 第一个子节点(firstChild)
+5. 最后一个子节点(lastChild）</p>
+
+<p>整个的遍历和渲染其实都是基于DOM模型的。</p>
+
+<h2>DOM的加载</h2>
+
+<ul>
+<li>html解析完毕</li>
+<li>src中的脚本和css加载完毕</li>
+<li>脚本在文档内解析并执行（此时dom并未构造起来）</li>
+<li>Html DOM完全构造起来</li>
+<li><p>图片和外部内容加载</p></li>
+<li><p>等待整个页面的加载，基于window对象的load事件，速度最慢，因为是在图片下载之后</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">addEvent</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span>
+</span><span class='line'>  <span class="nx">net</span><span class="p">(</span> <span class="nx">id</span><span class="p">(</span><span class="s2">&quot;everywhere&quot;</span><span class="p">)</span> <span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>把script标签放置在页面的最后，这样确保执行的时候dom已建立</p></li>
+<li><p>监听DOM的加载状态，实现复杂。
+jquery实现的方法，$或者说domReady，其主要原理是检查document是否已存在，document.getElementsByTagName和document.getElementById两个函数是否已存在，以及document.body是否已存在。搭配setInterval不停地检查，检查到位后就清楚timer</p></li>
+</ol>
+
+
+<h2>在HTML中寻找元素</h2>
+
+<p>cssQuery， jQuery
+主要是css选择器和xpath选择器</p>
+
+<h2>获取元素的内容</h2>
+
+<ol>
+<li>获取文本 text</li>
+<li>获取 html</li>
+</ol>
+
+
+<h2>操作元素的属性(attribute)</h2>
+
+<p>一旦元素加载到DOM中，元素会有一个管理数组，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">formElem</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">action</span><span class="o">:</span> <span class="s2">&quot;/test.cgi&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s2">&quot;POST&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实际提供了attr方法</p>
+
+<h2>修改DOM</h2>
+
+<ol>
+<li><p>创建节点
+createElement</p></li>
+<li><p>插入到DOM中<br/>
+insertBefore： 在子元素前插入
+<code>parentOfNode.insertBefore(nodeToInsert, beforeNode)
+appendChild: 插入一个父节点中最后一个子节点，</code>parenElem.appendChild(nodeToInsert);`</p></li>
+</ol>
+
+
+<h2>异步与事件处理</h2>
+
+<h3>异步事件与线程</h3>
+
+<h3>事件阶段</h3>
+
+<p>捕获和冒泡，捕获是由外向内，冒泡是由内向外</p>
+
+<p>是否能停止冒泡？</p>
+
+<p>通过对按键事件的处理，停止textarea的正常响应</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">rows=</span><span class="s">&quot;4&quot;</span> <span class="na">cols=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>At w3schools.com you will learn how to
+</span><span class='line'>
+</span><span class='line'>make a website. We offer free tutorials
+</span><span class='line'>
+</span><span class='line'>in all web development technologies.
+</span><span class='line'><span class="nt">&lt;/textarea&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="s2">&quot;textarea&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">onkeypress</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
+</span><span class='line'><span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的e是事件对象</p>
+
+<p><code>this</code>作为一种指代，可以泛化成各类元素，使得js的编写变得简单</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElemensByTagName</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">li</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">li</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">handleClik</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">handleClick</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>取消冒泡（重载浏览器的事件处理）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">stopBubble</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//如果传入了事件对象，那么就是非IE浏览器</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span> <span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span> <span class="err">）</span>
+</span><span class='line'>     <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">else</span> <span class="c1">// 否则使用IE的方式来取消事件冒泡</span>
+</span><span class='line'>     <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">cancelBubble</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>取消浏览器的默认行为（重载）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">stopDefault</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">else</span> <span class="c1">//windows 特供</span>
+</span><span class='line'>    <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">li</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">iframe</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">href</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">stopDefault</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>绑定事件的3中方法</h2>
+
+<ol>
+<li>传统方法</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">windo</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>好处在于简单稳定，处理事件时可以使用this关键字；
+坏处是事件只在冒泡时运行，捕获时不运行。且一个元素一次只能绑定一个处理函数，即onload=func2会替换前面已经注册过的函数。同时ie中，还不能得到事件对象e。</p>
+
+<ol>
+<li>W3C</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>相对于第一种，好处是第三个参数指明了哪个阶段处理事件：false（冒泡）或true(捕获)；事件对象可以通过处理函数的第一个参数获取；不会覆盖之前已绑定的事件。缺点就是老的ie不支持。</p>
+
+<ol>
+<li>IE绑定</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;onload&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>粗看起来和w3c的类似，但细节有很多不同：
+* 仅支持冒泡阶段
+* this关键字指向了window对象
+* 事件对象存在于window.event中
+* 事件必须以ontype的形式命名，如onload而非load</p>
+
+<ol>
+<li>facade的addEvent和removeEvent</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">addEvent</span><span class="p">(</span> <span class="nb">window</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>唯一的缺点是仅能工作在冒泡阶段</p>
+
+<h2>事件类型</h2>
+
+<ul>
+<li>鼠标</li>
+<li>键盘</li>
+<li>UI，focus，blur</li>
+<li>表单事件</li>
+<li>加载和错误</li>
+</ul>
+
+
+<h2>分离式的javascript</h2>
+
+<p>就是不在html里绑定怎么处理js，是的href可以是有意义的，使得js禁用时系统依然可以使用</p>
+
+<h2>访问CSS属性</h2>
+
+<h2>位置 尺寸和可见性</h2>
+
+<h3>位置</h3>
+
+<p>4种定位</p>
+
+<p>position: static; //top和left不起作用，顺序排版
+position: relative; //top和left相对于static进行偏移
+position: absolute; //相对于它的第一个非静态定位的祖先元素而展示，如没有这样的祖先元素，就是相对于整个文档
+position: fixed; //相对于浏览器窗口
+top: 0px;
+left: 0px;
+right: ;
+bottom: ;</p>
+
+<h3>元素的可见性</h3>
+
+<ul>
+<li>visibility: hidden, visible</li>
+<li>diplay: none, block, inline, &#8221;</li>
+<li>opacity:
+
+<ul>
+<li>filter: &#8216;alpah(opacity=&#8217;50)</li>
+<li>opacity: 50/100</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>动画效果</h2>
+
+<p>1秒执行20帧动画</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">for</span> <span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">5</span> <span class="err">）</span> <span class="p">{</span>
+</span><span class='line'>     <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>         <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+</span><span class='line'>         <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">elem</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="p">(</span><span class="nx">pos</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="nx">h</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+</span><span class='line'>         <span class="p">},</span> <span class="p">(</span><span class="nx">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="p">})();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>viewport是视口，就是浏览器滚动条内的一切东西</h2>
+
+<p><code>window.scrollTo(0, 0)</code>可以移动浏览器窗口位置</p>
+
+<h2>拖放功能</h2>
+
+<p>使用拖放库可以</p>
+
+<p>P145的悬停真是写的漂亮</p>
+
+<h1>第四章 Ajax</h1>
+
+<p>这部分其实主要就是举例ajax的例子，来做了综合的应用。</p>
+
+<p>responseXML和responseText是xhttprequest的主要返回对象
+其中，xml是响应头的content-type为xml时有效</p>
+
+<p>一个$.ajax的实现，代码真精妙</p>
+
+<p>返回响应的种类：</p>
+
+<ul>
+<li>xml</li>
+<li>json</li>
+<li>html ，可以直接注入html</li>
+<li>script</li>
+</ul>
+
+
+<p>pageHeight(判断整个页面又多高)，scrollY(获知当前视口的顶部滚动到了哪里)，
+windowHeight(获知视口有多高)</p>
+
+<p>四步法：</p>
+
+<ol>
+<li>DOM操作</li>
+<li>获取数据</li>
+<li>事件监测</li>
+<li>发起ajax请求</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1110,60 +1826,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/24/che-pai-yuan-lai-ye-shi-%5B%3F%5D-chong-tou-zi-he-chou-zi/">车牌原来也是一种投资和筹资</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-24T08:52:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>随着虎牌一级市场和二级市场的价格越拉越大，获利空间越来越多，
-整个车牌市场渐渐有了融资市场的味道。</p>
-
-<p>不是么，没花什么资源，政府就得到了钞票，这属于筹资；拍牌人
-就是投资者，手里的钱得到了保值。政府筹资成功后，和一切筹资者一样，
-拿这笔钱去做事情去了。基建和公共交通又确实都是当前中国还需要的动作。
-这样一来，实质的财富在此过程中确实创造了出来。</p>
-
-<p>现代金融市场的功能不过如此吧！</p>
-
-<p>而随着一级市场执行限价，手里拥有车牌这一金融产品属性产品的人们，开始纷纷谋求流动套利。
-政府现在的做法等于是给老投资者派发红利。只是这个派发并不是平均的。
-但大部分投资者还是可以参与的。就参与的角度而言，也算公平公正。唯独对新投资者有点不太公平了。
-但新投资者也不是被逼进来的，所以还是比较自由的一种个人行为。</p>
-
-<p>上海拍牌比新加坡强大的一点就在于这个牌照是一种较特殊的投资品种，
-而新加坡的就完全属于消耗品。上海的车牌有投资和理财的价值。自己可以使用，同时筹资者也可以利用这笔资金创造财富。</p>
-
-<p>不得不说一句，上海政府是目前中国最佳的金融衍生品创造者。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1181,6 +1843,10 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/08/jpade-naming-strate/">JPA的naming strate</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/04/05/openwrt-n56u-he-iptv/">openwrt n56u 和iptv</a>
       </li>
     
@@ -1196,15 +1862,11 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
         <a href="/blog/2015/12/24/mac-shang-zhe-teng-ruby-2-dot-2/">Mac 上折腾Ruby 2.2(续)</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/12/22/deutschland-holiday/">Deutschland Holiday</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (45)</a></li><li><a href='/blog/categories/车车'>车车 (29)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (19)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (45)</a></li><li><a href='/blog/categories/车车'>车车 (29)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (20)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (11)</a></li><li><a href='/blog/categories/linux'>Linux (10)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

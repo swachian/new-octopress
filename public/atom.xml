@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-04-06T07:24:20+08:00</updated>
+  <updated>2016-04-08T17:13:11+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JPA的naming strate]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/08/jpade-naming-strate/"/>
+    <updated>2016-04-08T17:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/08/jpade-naming-strate</id>
+    <content type="html"><![CDATA[<p>JPA的配置通常如下即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;!-- Jpa Entity Manager 配置 --&gt;
+</span><span class='line'>  &lt;bean id="entityManagerFactory"
+</span><span class='line'>    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"&gt;
+</span><span class='line'>    &lt;property name="dataSource" ref="dataSource" /&gt;
+</span><span class='line'>    &lt;property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" /&gt;
+</span><span class='line'>    &lt;property name="packagesToScan" value="com.sanss." /&gt;
+</span><span class='line'>    &lt;property name="jpaProperties"&gt;
+</span><span class='line'>      &lt;props&gt;
+</span><span class='line'>        &lt;!-- 命名规则 My_NAME-&gt;MyName --&gt;
+</span><span class='line'>        &lt;prop key="hibernate.ejb.naming_strategy"&gt;org.hibernate.cfg.DefaultComponentSafeNamingStrategy&lt;/prop&gt;
+</span><span class='line'>        &lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;
+</span><span class='line'>      &lt;/props&gt;
+</span><span class='line'>    &lt;/property&gt;
+</span><span class='line'>  &lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中值得注意的是Resposity的生成其实依赖于里面的<code>packagesToScan</code>，而表名、表字段和对象之间的映射转换则依赖于<code>hibernate.ejb.naming_strategy</code></p>
+
+<p>此属性共有四个选项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+</span><span class='line'>org.hibernate.cfg.DefaultNamingStrategy
+</span><span class='line'>org.hibernate.cfg.EJB3NamingStrategy
+</span><span class='line'>org.hibernate.cfg.ImprovedNamingStrategy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>首两个选项基本就是不做命名的转换，后面两个会把大小写的骆驼写法转换成带下划线的小写字符。同时，这个类可以自己继承并进行扩展定制，如果命名要求实在特殊，可以自行编写。
+甚至表名后带日期等均可以自行定制。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[openwrt n56u 和iptv]]></title>
@@ -1680,104 +1736,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 <p>具体用分为:<br/>
 1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
 2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HttpSession在Spring中的配法和问题]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/"/>
-    <updated>2015-05-19T17:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti</id>
-    <content type="html"><![CDATA[<p>最早出于使用struts2的习惯，在Spring中如果需要使用<code>HttpSession</code>，做法是把这个对象作为整个类的一个实例对象。</p>
-
-<p>1</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Log</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LogFactory</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">TestController</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Autowired</span>
-</span><span class='line'>  <span class="n">HttpSession</span> <span class="n">session</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">...</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>后来因为担心Controller在Spring中是单例的（在struts2中是多例的），怕引出线程安全问题，于是把<code>session</code>放入了method中进行注入。</p>
-
-<p>2</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@ResponseBody</span>
-</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>  <span class="n">produces</span> <span class="o">=</span> <span class="n">MediaTypes</span><span class="o">.</span><span class="na">TEXT_HTML_UTF_8</span><span class="o">)</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">testSession</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">Model</span> <span class="n">model</span><span class="o">,</span> <span class="n">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">hashCode</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="o">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;val&quot;</span><span class="o">)!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;val&quot;</span><span class="o">);</span>
-</span><span class='line'>      <span class="n">i</span><span class="o">++;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">session</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;val&quot;</span><span class="o">,</span> <span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;hashCode: &quot;</span> <span class="o">+</span> <span class="n">hashCode</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">+</span><span class="n">hashCode</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>近日在学习Spring in Action的过程中，发现其实第一种方式下使用了<code>proxy 模式</code>, 实际被注入的类是<code>session  $Proxy38</code>这样的代理类，
-类似于避免反复调用<code>createEntityManager</code>的做法，该代理类会寻找实际对应的session并进行操作,只是给controller注入了一个壳。</p>
-
-<p>而第2种方法中，注入的则是标准的容器session: <code>org.apache.catalina.session.StandardSessionFacade</code></p>
-
-<p>3</p>
-
-<p>此外，受到推崇的是第三种写法，</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Component</span>
-</span><span class='line'><span class="nd">@Scope</span><span class="o">(</span><span class="n">proxyMode</span><span class="o">=</span><span class="n">ScopedProxyMode</span><span class="o">.</span><span class="na">TARGET_CLASS</span><span class="o">,</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;session&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShoppingCart</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="o">{</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这种写法将整个购物车变成一个scope属于session的bean，由spring注入并负责保存。</p>
-
-<p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
-毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
 ]]></content>
   </entry>
   
