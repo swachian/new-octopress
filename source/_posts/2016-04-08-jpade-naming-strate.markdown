@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "JPA的naming strate"
+title: "JPA的naming strategy"
 date: 2016-04-08 17:08
 comments: true
-categories: 
+categories:
 - java
 ---
 
