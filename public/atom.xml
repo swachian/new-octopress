@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-04-21T11:52:47+08:00</updated>
+  <updated>2016-04-21T16:20:31+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[两次苏州游]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/liang-ci-su-zhou-you/"/>
+    <updated>2016-04-21T15:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/21/liang-ci-su-zhou-you</id>
+    <content type="html"><![CDATA[<p>阳春三月，正是江南好风景，3月初和4月中旬分别去了苏州的阳澄湖和金鸡湖。出行的方式选择了自驾。
+两次自驾类似的地方很多，都是从家里出发，经内环走武宁路到G2京沪高速，高速上开50KM左右后从苏州工业园区出口下去，再开10公里左右即可抵达目的地。
+<img src="http://thumbnail0.baidupcs.com/thumbnail/29383cdc43ae18a6523ae60f09ad5d46?fid=16876675-250528-633394479587299&amp;time=1461222000&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-vj9Gs6vj4npbW6HL0lUzLOTN8do%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=2589678811159112526&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Maven的Dependency和打包]]></title>
@@ -1678,19 +1689,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 </span><span class='line'>    max-db-size             hosts           3355443
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[云梯越来越烂了]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/"/>
-    <updated>2015-06-16T21:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao</id>
-    <content type="html"><![CDATA[<p>唉，云梯是越来越不给力了。之前的新加坡1站点还能用用，最近这个月来基本是没法用了。
-绝对令人失望。</p>
-
-<p>Update on 2015.07.22: 据说是因为517电信网通大提速后国内开展了大量50M 100M的带宽，导致骨干网资源严重不足造成的。
-客服mm回答根据以往的经验一般电信等运营商在2周左右会调整好。而后续的发展也证明了此种说法，只是时间稍微又长了一两个礼拜。</p>
 ]]></content>
   </entry>
   
