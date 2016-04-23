@@ -42,7 +42,7 @@ categories:
 ![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wui7haij20qo0zktga.jpg)
 
 这个金融中心还有诚品书店，不过似乎都是光看不买的，很可能会步百思买的后尘。
-而比较后悔的是没去逛逛附件的Flexa专卖。
+而比较后悔的是没去逛逛附近的Flexa专卖。
 ![image](http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35wuhlud6j20qo0zkqbj.jpg)
 ![image](http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wuiz3jfj20qo0zktk0.jpg)
 
@@ -73,4 +73,26 @@ categories:
 逛完拙政园，在旁边马路的朱鸿兴吃完中饭，就开车返程了。一路还算顺利，就上内环高架堵了一下，最后用了
 2个小时回到家中。
 
-四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。
+
+## 3月阳澄湖
+
+阳澄湖去的是苏州阳澄湖澜廷度假酒店，在阳澄湖半岛上，半岛上还有一个重元寺。
+
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4suo43j20zk0qodp4.jpg)
+酒店是泰式风格的，没有金鸡湖的酒店大，整个半岛其实还在大规模地建设中。
+工地比较多。但封闭性好，更适合在岛上骑自行车游玩。
+
+停车场的充电桩很多。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4s1udnj20zk0qowth.jpg)
+苏州度假区的酒店此类东西其实都不少。不过最喜欢的还是直接走坡道上去停在大堂门口。
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4xeq3dj20zk0qotiu.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4u5b7uj20qo0zktg7.jpg)
+
+
+第二天就去了重元寺。跟灵隐寺的布局有很多类似的地方，但依水而建是其一大特色，环境非常不错，寺庙也很整洁。
+![image](http://ww2.sinaimg.cn/mw1024/726f24e7gw1f36n4yid1pj20zk0qowtw.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4z3tg3j20qo0zk7an.jpg)
+
+在庙里吃完一碗素面之后，就开车回家了。
+
+三四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。
