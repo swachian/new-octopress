@@ -95,6 +95,28 @@ SheetAttendAction helper = (com.sanss.richtone.web.action.request.SheetAttendAct
 servlet3.0标**准出现才成形的，只有在tomcat7使用，即便是~~tomcat6也不支持~~这种调用方式。从中，可以看出EL越来越强大趋势。
 但也反过来可以证明过去方法之错误。
 
+### el使用的进阶
+
+在部分场合，可能不太好把helper变成attribute放在request中，此时另一种办法是直接在jsp中进行set.
+
+```
+<c:set var="UsermainHelper"
+value=""<%=com.xxxx.helper.UsermainHelper()%>" scope="session" />
+
+${UsermainHelper.getPassAndOtherNameLink(loginform) }
+```
+set之后就可以在el中用`${}`访问了。
+
+更优化一点，在使用spring的情况下，可以用静态方法得到这个bean，此时可以这么写
+
+```
+<c:set var="UsermainHelper"
+value='<%=com.xxxx.util.MyApplicationContextUtil.getBean("usermainHelper")%>' />
+```
+
+需要注意的是，因为getBean里面给入了字符串参数，所以value的引号**不能使用双引号，而要改用单引号**, 此时这个scope可以去掉也可以不去掉
+
+
 ## EL难道就不是Scriptlet？
 
 如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 `${r.department}` 和 `<%= r.department%>` 
@@ -126,4 +148,5 @@ EL的支持来的有点慢，但好歹还是来了！
 
 而在EL有了调用method的能力后，helper模式可以做的更多，很多页面逻辑可以放到helper中去完成，即把`if` `for`封装在helper里面。
 这应该是目前最值得推崇的一种页面代码模式了。
+
 

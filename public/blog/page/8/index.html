@@ -265,6 +265,34 @@
 servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是<del>tomcat6也不支持</del>这种调用方式。从中，可以看出EL越来越强大趋势。
 但也反过来可以证明过去方法之错误。</p>
 
+<h3>el使用的进阶</h3>
+
+<p>在部分场合，可能不太好把helper变成attribute放在request中，此时另一种办法是直接在jsp中进行set.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="nl">c:</span><span class="n">set</span> <span class="n">var</span><span class="o">=</span><span class="s">&quot;UsermainHelper&quot;</span>
+</span><span class='line'><span class="n">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">&lt;%=</span><span class="n">com</span><span class="o">.</span><span class="na">xxxx</span><span class="o">.</span><span class="na">helper</span><span class="o">.</span><span class="na">UsermainHelper</span><span class="o">()%&gt;</span><span class="s">&quot; scope=&quot;</span><span class="n">session</span><span class="err">&quot;</span> <span class="o">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">$</span><span class="o">{</span><span class="n">UsermainHelper</span><span class="o">.</span><span class="na">getPassAndOtherNameLink</span><span class="o">(</span><span class="n">loginform</span><span class="o">)</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>set之后就可以在el中用<code>${}</code>访问了。</p>
+
+<p>更优化一点，在使用spring的情况下，可以用静态方法得到这个bean，此时可以这么写</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="nl">c:</span><span class="n">set</span> <span class="n">var</span><span class="o">=</span><span class="s">&quot;UsermainHelper&quot;</span>
+</span><span class='line'><span class="n">value</span><span class="o">=</span><span class="err">&#39;</span><span class="o">&lt;%=</span><span class="n">com</span><span class="o">.</span><span class="na">xxxx</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">MyApplicationContextUtil</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&quot;usermainHelper&quot;</span><span class="o">)%&gt;</span><span class="err">&#39;</span> <span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>需要注意的是，因为getBean里面给入了字符串参数，所以value的引号<strong>不能使用双引号，而要改用单引号</strong>, 此时这个scope可以去掉也可以不去掉</p>
+
 <h2>EL难道就不是Scriptlet？</h2>
 
 <p>如果使用过其他Web开发语言的话，可以发现EL表达式和在页面模板里写脚本语言很类似。比如 <code>${r.department}</code> 和 <code>&lt;%= r.department%&gt;</code>
