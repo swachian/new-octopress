@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-04-21T17:09:25+08:00</updated>
+  <updated>2016-04-29T10:40:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iptables 的一些解释]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi/"/>
+    <updated>2016-04-29T09:45:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi</id>
+    <content type="html"><![CDATA[<p>在<strong>物理机</strong>部署的年代里，组网通常是分层而建。例如所有的服务器都接到二层交换机组成<strong>内网</strong>，随后交换机上联三层交换机及防火墙。彼时，防火墙通常由专用
+的设备承担。所有的路由规则、端口开放等也均在网络设备上进行配置。对于服务器而言，通常最简单的做法就是关闭iptables，在内部实现完全互通，而把防护任务交给专用设备。</p>
+
+<p>然而转到<strong>云部署</strong>的年代，专用的网络设备大都收归云所有，此时虽然还有内网的概念，但已经模糊，从而要求把防火墙建在主机上。做到几个域的隔离。</p>
+
+<p>iptables的配法有命令行和配置文件，此处以配置文件<code>/etc/sysconfig/iptables</code>为例，说明一些概念。</p>
+
+<p>对于安全类的防护,集中在<code>*filter</code>上，nat 等是管映射和路由的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*filter
+</span><span class='line'>:INPUT ACCEPT [1194191:146127015]
+</span><span class='line'>:FORWARD ACCEPT [159938:8304428]
+</span><span class='line'>:OUTPUT ACCEPT [1044829:126818322]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面这段代码表示对三种包的处理状态及已处理的包和字节数量。
+<code>INPUT</code>就是输入的包，<code>ACCEPT</code>表示默认都可以进入，如果设置成<code>DROP</code>就是都废弃输入包了。如果主要以开白名单的方式，<code>INPUT后</code>可以接<code>DROP</code>。中括号里面的数字，冒号前是包数量统计，冒号后是字节数统计。<br/>
+<code>FORWARD</code>表示转发，<code>OUTPUT</code>表示输出访问，通常这两个可以设置成<code>ACCEPT</code>即表示允许。<br/>
+这3个表示的是基础的规则，类似默认路由，优先级是最低的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>随后就是很重要的这一段。这段的含义表示对连接状态是<code>ESTABLISHED</code>, <code>RELATED</code>的链接全部放行。iptables中的链接共有4种，<code>established</code>表示链接已建立，<code>related</code>的含义是由已建立的链接产生的链接，此外还有<code>new</code>和<code>invalid</code>两种链接状态，
+其实这段话的含义也可以理解成<code>invalid</code>链接放弃，<code>new</code>状态之外的连接则允许通过。
+这个指示关键的原因在于，比如本机设置了禁止外网访问本机的各个端口，同时本机作为客户端访问了另一个外网服务，那么外网服务的响应信息允许被接收。否则，就会面临只有一个单工链路的情况。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 80 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8080 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8081 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 22 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 21 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 20 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -s 10.3.1.0/24 -j ACCEPT
+</span><span class='line'>-A INPUT -d 192.168.1.202 -j DROP
+</span><span class='line'>
+</span><span class='line'>-A INPUT -d 10.10.10.222 -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个机器有两块网卡，分别有两个地址<code>192.168.1.202</code>和<code>10.10.10.222</code>,对于后者，只允许从这个口子发出包以及收入已建立连接的包（通过上面的 <code>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code>)。<br/>
+而对于前一个地址，则打开了http相关的80 8080 8081端口，开放了ssh和ftp端口，并对来自10.3.1.0网段的全部IP开放访问权限。</p>
+
+<p>对于包的动作有ACCEPT DROP 和REJECT，后两个都表示拒绝，只是REJECT是明确拒绝，DROP只是沉默不答。</p>
+
+<p>对于iptables，简单的用用，安全防护做到这样也就够了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[两次苏州游]]></title>
@@ -26,9 +94,85 @@
 
 <h2>4月金鸡湖</h2>
 
-<p>入驻的是苏州凯宾斯基酒店，一路很顺，只开了一小时40分钟不到就到了酒店。车直接停在酒店大堂门口。</p>
+<p>入驻的是苏州凯宾斯基酒店，一路很顺，只开了1小时40分钟不到就到了酒店。车直接停在酒店大堂门口。
+由于是周日12点之前到的，正直退房高峰且房间都在打扫中，check in需要等待，于是带孩子去后面的后花园转了一下。</p>
 
-<p><img src="http://thumbnail0.baidupcs.com/thumbnail/29383cdc43ae18a6523ae60f09ad5d46?fid=16876675-250528-633394479587299&amp;time=1461222000&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-vj9Gs6vj4npbW6HL0lUzLOTN8do%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=2589678811159112526&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100" alt="image" /></p>
+<p>花园在酒店的南面，所对的湖面是独墅湖。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wtal9vkj20zk0qo0y9.jpg" alt="image" />
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wta7rq4j20zk0qon30.jpg" alt="image" /></p>
+
+<p>花园转了一圈后去酒店的中餐厅吃饭，吃完后继续去办理check in，这回终于有房了。
+前台等待期间拿了一粒糖给小家伙吃。最近懂事很多，反问我这个不用付（钱）就能吃啦？
+我只能简单地告诉他这个东西是免费的，可以拿了就吃。</p>
+
+<p>入住房间对应的就是金鸡湖了。其实整个凯宾斯基就是位于南北两个湖中间。
+从房间正中望出去可以看见金鸡湖大致的样子。
+<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wtb7ohvj20zk0qoajf.jpg" alt="image" /></p>
+
+<p>摩天轮在右面，左面则是苏州的新地标<strong>东方之门</strong>，俗称秋裤。</p>
+
+<p>从酒店出发，开七八公里就可以到这个摩天轮公园。
+<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35wtc364wj20qo0zk7fy.jpg" alt="image" /></p>
+
+<p>要去需要趁早，5点就不让客人进去了。整个新区的停车倒还很友好，大部分停车场是不要钱的。
+商场下面的停车场也有3小时免费的政策。整个新区开车的节奏很慢，红绿灯起步比上海还要慢一倍。</p>
+
+<p>夜景也还不错，关键是这个地方的人口密度确实比上海低很多了，后来百科一下，整个新区其实只有100万人，其中本地户籍的40万，还有60万外来人口。所以感觉密度低是正常的。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wui7haij20qo0zktga.jpg" alt="image" /></p>
+
+<p>这个金融中心还有诚品书店，不过似乎都是光看不买的，很可能会步百思买的后尘。
+而比较后悔的是没去逛逛附近的Flexa专卖。
+<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35wuhlud6j20qo0zkqbj.jpg" alt="image" />
+<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wuiz3jfj20qo0zktk0.jpg" alt="image" /></p>
+
+<p>然后在苏浙汇吃完饭就开车回酒店了。正好赶上当地人在酒店办婚礼，二楼大堂门前的车位客满，
+只能停到一楼的车库里面去了。</p>
+
+<p>第二天酒店用完早餐，和小家伙在后面的草坪打了会儿童羽毛球，随后就出发去拙政园了。</p>
+
+<p>原本也没打算去苏州市中心，老婆提了一下我又研究了一下路线，发现其实新区离市中心很近，
+所以决定开过去了还是。顺道去看了看东方之门。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wujey06j20qo0zk487.jpg" alt="image" />
+其实对比名字，倒也不算刮三。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wulbws7j20zk0qodku.jpg" alt="iamge" />
+整个广场其实还行。秋裤其实也还在建设中，并未完工。可惜湖面的喷泉没开。</p>
+
+<p>拙政园倒是不错的去处，尤其是这个游览时间特别好。门票也是够贵的了，现在是旺季，单人就要90元了。淡季稍便宜20。</p>
+
+<p>拙政园的南北其实都有较大的停车场，但南面的路不好走，最后我还是停到北面去了。两三个小时下来最后付了12块停车费。这也是此次苏州之行唯一付停车费的地方。
+从北停车场过去有450米的距离，走走其实也还可以。</p>
+
+<p>对园林的欣赏一方面是因为年纪渐长，另一方面也是因为如今的园林确实修补的比小时候要号许多。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf7kahaj20zk0qoari.jpg" alt="image" />
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf0v25mj20qo0zkask.jpg" alt="image" />
+<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35xf3uszmj20qo0zkqgi.jpg" alt="image" />
+<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35xf2hsc0j20qo0zk7lq.jpg" alt="image" />
+<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35xewwwo8j20qo0zktrn.jpg" alt="image" /></p>
+
+<p>逛完拙政园，在旁边马路的朱鸿兴吃完中饭，就开车返程了。一路还算顺利，就上内环高架堵了一下，最后用了
+2个小时回到家中。</p>
+
+<h2>3月阳澄湖</h2>
+
+<p>阳澄湖去的是苏州阳澄湖澜廷度假酒店，在阳澄湖半岛上，半岛上还有一个重元寺。</p>
+
+<p><img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4suo43j20zk0qodp4.jpg" alt="image" />
+酒店是泰式风格的，没有金鸡湖的酒店大，整个半岛其实还在大规模地建设中。
+工地比较多。但封闭性好，更适合在岛上骑自行车游玩。</p>
+
+<p>停车场的充电桩很多。
+<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4s1udnj20zk0qowth.jpg" alt="image" />
+苏州度假区的酒店此类东西其实都不少。不过最喜欢的还是直接走坡道上去停在大堂门口。
+<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4xeq3dj20zk0qotiu.jpg" alt="image" />
+<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4u5b7uj20qo0zktg7.jpg" alt="image" /></p>
+
+<p>第二天就去了重元寺。跟灵隐寺的布局有很多类似的地方，但依水而建是其一大特色，环境非常不错，寺庙也很整洁。
+<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f36n4yid1pj20zk0qowtw.jpg" alt="image" />
+<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4z3tg3j20qo0zk7an.jpg" alt="image" /></p>
+
+<p>在庙里吃完一碗素面之后，就开车回家了。</p>
+
+<p>三四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。</p>
 ]]></content>
   </entry>
   
@@ -1595,108 +1739,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 原地挪车的话方向盘可是足够轻的，适合单手揉轮。</p>
 
 <p>总的来讲，此次试驾的结果让我相当满意，原本打算立刻下单的，不过因为家长的原因还要再等几天。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[nscd]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/"/>
-    <updated>2015-06-19T13:56:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd</id>
-    <content type="html"><![CDATA[<p>NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
-默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。</p>
-
-<p>服务的安装很简单，</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>yum install nscd
-</span><span class='line'>service nscd start
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样就可以开启nscd的服务了。
-如果本身就面临性能问题，可以直接测试一下看看性能有没有提高。除此之外可以通过下列命令检查一下效果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nscd -g | grep <span class="s1">&#39;hosts cache&#39;</span> -A 22
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以得到如下的信息：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>hosts cache:
-</span><span class='line'>
-</span><span class='line'>            yes  cache is enabled
-</span><span class='line'>            yes  cache is persistent
-</span><span class='line'>             no  cache is shared
-</span><span class='line'>            211  suggested size
-</span><span class='line'>         216064  total data pool size
-</span><span class='line'>            336  used data pool size
-</span><span class='line'>           3600  seconds <span class="nb">time </span>to live <span class="k">for </span>positive entries
-</span><span class='line'>             20  seconds <span class="nb">time </span>to live <span class="k">for </span>negative entries
-</span><span class='line'>            139  cache hits on positive entries
-</span><span class='line'>              4  cache hits on negative entries
-</span><span class='line'>              8  cache misses on positive entries
-</span><span class='line'>              6  cache misses on negative entries
-</span><span class='line'>             91% cache hit rate
-</span><span class='line'>              2  current number of cached values
-</span><span class='line'>              4  maximum number of cached values
-</span><span class='line'>              1  maximum chain length searched
-</span><span class='line'>              0  number of delays on rdlock
-</span><span class='line'>              0  number of delays on wrlock
-</span><span class='line'>              0  memory allocations failed
-</span><span class='line'>            yes  check /etc/hosts <span class="k">for </span>changes
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中有命中率，cache命中的次数等信息。positive是指查询成功，negative是指查询失败。</p>
-
-<p>但是，很多情况下，可能开启nscd之后，会发现命中率一直为0。原因在于很多linux服务会采用直接访问的模式来读取缓存，
-直读的模式性能更好，但因为不经过daemon，所以无法进行统计。解决办法是把<code>shared</code>的属性关闭。</p>
-
-<p>修改<code>/etc/nscd.conf</code>，</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>   <span class="nb">enable</span>-cache            hosts           yes
-</span><span class='line'>    positive-time-to-live   hosts           3600
-</span><span class='line'>    negative-time-to-live   hosts           20
-</span><span class='line'>    suggested-size          hosts           211
-</span><span class='line'>    check-files             hosts           yes
-</span><span class='line'>    persistent              hosts           yes
-</span><span class='line'>    shared                  hosts           no
-</span><span class='line'>    max-db-size             hosts           3355443
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

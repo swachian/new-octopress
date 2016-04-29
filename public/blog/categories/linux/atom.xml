@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-04-21T17:09:25+08:00</updated>
+  <updated>2016-04-29T10:40:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iptables 的一些解释]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi/"/>
+    <updated>2016-04-29T09:45:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi</id>
+    <content type="html"><![CDATA[<p>在<strong>物理机</strong>部署的年代里，组网通常是分层而建。例如所有的服务器都接到二层交换机组成<strong>内网</strong>，随后交换机上联三层交换机及防火墙。彼时，防火墙通常由专用
+的设备承担。所有的路由规则、端口开放等也均在网络设备上进行配置。对于服务器而言，通常最简单的做法就是关闭iptables，在内部实现完全互通，而把防护任务交给专用设备。</p>
+
+<p>然而转到<strong>云部署</strong>的年代，专用的网络设备大都收归云所有，此时虽然还有内网的概念，但已经模糊，从而要求把防火墙建在主机上。做到几个域的隔离。</p>
+
+<p>iptables的配法有命令行和配置文件，此处以配置文件<code>/etc/sysconfig/iptables</code>为例，说明一些概念。</p>
+
+<p>对于安全类的防护,集中在<code>*filter</code>上，nat 等是管映射和路由的</p>
+
+<p><code>
+*filter
+:INPUT ACCEPT [1194191:146127015]
+:FORWARD ACCEPT [159938:8304428]
+:OUTPUT ACCEPT [1044829:126818322]
+</code></p>
+
+<p>上面这段代码表示对三种包的处理状态及已处理的包和字节数量。
+<code>INPUT</code>就是输入的包，<code>ACCEPT</code>表示默认都可以进入，如果设置成<code>DROP</code>就是都废弃输入包了。如果主要以开白名单的方式，<code>INPUT后</code>可以接<code>DROP</code>。中括号里面的数字，冒号前是包数量统计，冒号后是字节数统计。<br/>
+<code>FORWARD</code>表示转发，<code>OUTPUT</code>表示输出访问，通常这两个可以设置成<code>ACCEPT</code>即表示允许。<br/>
+这3个表示的是基础的规则，类似默认路由，优先级是最低的。</p>
+
+<p><code>
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+</code></p>
+
+<p>随后就是很重要的这一段。这段的含义表示对连接状态是<code>ESTABLISHED</code>, <code>RELATED</code>的链接全部放行。iptables中的链接共有4种，<code>established</code>表示链接已建立，<code>related</code>的含义是由已建立的链接产生的链接，此外还有<code>new</code>和<code>invalid</code>两种链接状态，
+其实这段话的含义也可以理解成<code>invalid</code>链接放弃，<code>new</code>状态之外的连接则允许通过。
+这个指示关键的原因在于，比如本机设置了禁止外网访问本机的各个端口，同时本机作为客户端访问了另一个外网服务，那么外网服务的响应信息允许被接收。否则，就会面临只有一个单工链路的情况。</p>
+
+<p>```
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 80 -j ACCEPT
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8080 -j ACCEPT
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8081 -j ACCEPT
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 21 -j ACCEPT
+-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 20 -j ACCEPT
+-A INPUT -d 192.168.1.202 -s 10.3.1.0/24 -j ACCEPT
+-A INPUT -d 192.168.1.202 -j DROP</p>
+
+<p>-A INPUT -d 10.10.10.222 -j DROP
+```</p>
+
+<p>这个机器有两块网卡，分别有两个地址<code>192.168.1.202</code>和<code>10.10.10.222</code>,对于后者，只允许从这个口子发出包以及收入已建立连接的包（通过上面的 <code>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code>)。<br/>
+而对于前一个地址，则打开了http相关的80 8080 8081端口，开放了ssh和ftp端口，并对来自10.3.1.0网段的全部IP开放访问权限。</p>
+
+<p>对于包的动作有ACCEPT DROP 和REJECT，后两个都表示拒绝，只是REJECT是明确拒绝，DROP只是沉默不答。</p>
+
+<p>对于iptables，简单的用用，安全防护做到这样也就够了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nscd]]></title>
@@ -210,24 +266,6 @@ RHCE的范围基本如下:</p>
 
 
 <p>只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[About AWK]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk/"/>
-    <updated>2013-02-19T14:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/19/about-awk</id>
-    <content type="html"><![CDATA[<p>受 <a href="http://coolshell.cn/articles/9070.html">AWK简明教程</a> 的影响，学习了一下仰慕已久却始终不得要领的AWK，
-甚至还下载了著名的科尔尼汉写的《The AWK programming Language》并看完了第一章和后面的一些内容。</p>
-
-<p>学习之后，发现这个东西其实还是很简洁的，同bash的配合确实很好，在某些应用场合下，处理文本、截取文本、调整文本，的确是利器。
-但是，也必须注意到，这个东西确实已经是上古一代的东西了。不是说上古的东西就一定使用价值降低，不过AWK的作用和处理范围
-已经大大地被Python和Ruby侵占。在Unix/C之下，他是足够简便的，对bash是很好的补充。如今已经是Ruby Python这些
-script流行的年代，而这些脚本语言可以很大程度上替代AWK。AWK保留的优势仅仅是最简单的场合下，比如<code>{print $1}</code>之类时
-显得足够简洁的优势。稍微复杂一些，如循环、分支判断一多，就显得不如Ruby Python了。</p>
-
-<p>所以，看AWK的第一章以及简明教程就足够了。因为基本上也只要用到这些最简单的应用，写出优雅的bash命令。是用来写程序<strong>命令</strong>而不是程序<strong>文件</strong>。</p>
 ]]></content>
   </entry>
   

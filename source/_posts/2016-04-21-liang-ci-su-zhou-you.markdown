@@ -3,7 +3,7 @@ layout: post
 title: "两次苏州游"
 date: 2016-04-21 15:33
 comments: true
-categories: 
+categories:
 - 生活
 ---
 
@@ -15,7 +15,84 @@ categories:
 
 ## 4月金鸡湖
 
-入驻的是苏州凯宾斯基酒店，一路很顺，只开了一小时40分钟不到就到了酒店。车直接停在酒店大堂门口。
+入驻的是苏州凯宾斯基酒店，一路很顺，只开了1小时40分钟不到就到了酒店。车直接停在酒店大堂门口。
+由于是周日12点之前到的，正直退房高峰且房间都在打扫中，check in需要等待，于是带孩子去后面的后花园转了一下。
 
-![image](http://thumbnail0.baidupcs.com/thumbnail/29383cdc43ae18a6523ae60f09ad5d46?fid=16876675-250528-633394479587299&time=1461222000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-vj9Gs6vj4npbW6HL0lUzLOTN8do%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=2589678811159112526&dp-callid=0&size=c710_u400&quality=100)
+花园在酒店的南面，所对的湖面是独墅湖。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wtal9vkj20zk0qo0y9.jpg)
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wta7rq4j20zk0qon30.jpg)
 
+花园转了一圈后去酒店的中餐厅吃饭，吃完后继续去办理check in，这回终于有房了。
+前台等待期间拿了一粒糖给小家伙吃。最近懂事很多，反问我这个不用付（钱）就能吃啦？
+我只能简单地告诉他这个东西是免费的，可以拿了就吃。
+
+入住房间对应的就是金鸡湖了。其实整个凯宾斯基就是位于南北两个湖中间。
+从房间正中望出去可以看见金鸡湖大致的样子。
+![image](http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wtb7ohvj20zk0qoajf.jpg)
+
+摩天轮在右面，左面则是苏州的新地标**东方之门**，俗称秋裤。
+
+从酒店出发，开七八公里就可以到这个摩天轮公园。
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35wtc364wj20qo0zk7fy.jpg)
+
+要去需要趁早，5点就不让客人进去了。整个新区的停车倒还很友好，大部分停车场是不要钱的。
+商场下面的停车场也有3小时免费的政策。整个新区开车的节奏很慢，红绿灯起步比上海还要慢一倍。
+
+夜景也还不错，关键是这个地方的人口密度确实比上海低很多了，后来百科一下，整个新区其实只有100万人，其中本地户籍的40万，还有60万外来人口。所以感觉密度低是正常的。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wui7haij20qo0zktga.jpg)
+
+这个金融中心还有诚品书店，不过似乎都是光看不买的，很可能会步百思买的后尘。
+而比较后悔的是没去逛逛附近的Flexa专卖。
+![image](http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35wuhlud6j20qo0zkqbj.jpg)
+![image](http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wuiz3jfj20qo0zktk0.jpg)
+
+然后在苏浙汇吃完饭就开车回酒店了。正好赶上当地人在酒店办婚礼，二楼大堂门前的车位客满，
+只能停到一楼的车库里面去了。
+
+第二天酒店用完早餐，和小家伙在后面的草坪打了会儿童羽毛球，随后就出发去拙政园了。
+
+原本也没打算去苏州市中心，老婆提了一下我又研究了一下路线，发现其实新区离市中心很近，
+所以决定开过去了还是。顺道去看了看东方之门。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wujey06j20qo0zk487.jpg)
+其实对比名字，倒也不算刮三。
+![iamge](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wulbws7j20zk0qodku.jpg)
+整个广场其实还行。秋裤其实也还在建设中，并未完工。可惜湖面的喷泉没开。
+
+拙政园倒是不错的去处，尤其是这个游览时间特别好。门票也是够贵的了，现在是旺季，单人就要90元了。淡季稍便宜20。
+
+拙政园的南北其实都有较大的停车场，但南面的路不好走，最后我还是停到北面去了。两三个小时下来最后付了12块停车费。这也是此次苏州之行唯一付停车费的地方。
+从北停车场过去有450米的距离，走走其实也还可以。
+
+对园林的欣赏一方面是因为年纪渐长，另一方面也是因为如今的园林确实修补的比小时候要号许多。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf7kahaj20zk0qoari.jpg)
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf0v25mj20qo0zkask.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35xf3uszmj20qo0zkqgi.jpg)
+![image](http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35xf2hsc0j20qo0zk7lq.jpg)
+![image](http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35xewwwo8j20qo0zktrn.jpg)
+
+逛完拙政园，在旁边马路的朱鸿兴吃完中饭，就开车返程了。一路还算顺利，就上内环高架堵了一下，最后用了
+2个小时回到家中。
+
+
+## 3月阳澄湖
+
+阳澄湖去的是苏州阳澄湖澜廷度假酒店，在阳澄湖半岛上，半岛上还有一个重元寺。
+
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4suo43j20zk0qodp4.jpg)
+酒店是泰式风格的，没有金鸡湖的酒店大，整个半岛其实还在大规模地建设中。
+工地比较多。但封闭性好，更适合在岛上骑自行车游玩。
+
+停车场的充电桩很多。
+![image](http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4s1udnj20zk0qowth.jpg)
+苏州度假区的酒店此类东西其实都不少。不过最喜欢的还是直接走坡道上去停在大堂门口。
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4xeq3dj20zk0qotiu.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4u5b7uj20qo0zktg7.jpg)
+
+
+第二天就去了重元寺。跟灵隐寺的布局有很多类似的地方，但依水而建是其一大特色，环境非常不错，寺庙也很整洁。
+![image](http://ww2.sinaimg.cn/mw1024/726f24e7gw1f36n4yid1pj20zk0qowtw.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4z3tg3j20qo0zk7an.jpg)
+
+在庙里吃完一碗素面之后，就开车回家了。
+
+三四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。

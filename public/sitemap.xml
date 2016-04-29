@@ -1092,15 +1092,21 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2016/04/21/liang-ci-su-zhou-you/</loc>
-        <lastmod>2016-04-21T17:09:24+08:00</lastmod>
+        <lastmod>2016-04-29T09:31:20+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi/
+        </loc>
+        <lastmod>2016-04-29T10:18:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2016-04-21T17:09:24+08:00</lastmod>
+        <lastmod>2016-04-29T10:18:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2016-04-21T17:09:24+08:00</lastmod>
+        <lastmod>2016-04-29T10:18:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
