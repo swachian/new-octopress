@@ -274,7 +274,7 @@ servlet3.0标</strong>准出现才成形的，只有在tomcat7使用，即便是
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="nl">c:</span><span class="n">set</span> <span class="n">var</span><span class="o">=</span><span class="s">&quot;UsermainHelper&quot;</span>
-</span><span class='line'><span class="n">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">&lt;%=</span><span class="n">com</span><span class="o">.</span><span class="na">xxxx</span><span class="o">.</span><span class="na">helper</span><span class="o">.</span><span class="na">UsermainHelper</span><span class="o">()%&gt;</span><span class="s">&quot; scope=&quot;</span><span class="n">session</span><span class="err">&quot;</span> <span class="o">/&gt;</span>
+</span><span class='line'><span class="n">value</span><span class="o">=</span><span class="s">&quot;&lt;%=new com.xxxx.helper.UsermainHelper()%&gt;&quot;</span> <span class="n">scope</span><span class="o">=</span><span class="s">&quot;session&quot;</span> <span class="o">/&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">$</span><span class="o">{</span><span class="n">UsermainHelper</span><span class="o">.</span><span class="na">getPassAndOtherNameLink</span><span class="o">(</span><span class="n">loginform</span><span class="o">)</span> <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>

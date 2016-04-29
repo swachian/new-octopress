@@ -101,7 +101,7 @@ servlet3.0标**准出现才成形的，只有在tomcat7使用，即便是~~tomca
 
 ```
 <c:set var="UsermainHelper"
-value=""<%=com.xxxx.helper.UsermainHelper()%>" scope="session" />
+value="<%=new com.xxxx.helper.UsermainHelper()%>" scope="session" />
 
 ${UsermainHelper.getPassAndOtherNameLink(loginform) }
 ```
@@ -115,6 +115,7 @@ value='<%=com.xxxx.util.MyApplicationContextUtil.getBean("usermainHelper")%>' />
 ```
 
 需要注意的是，因为getBean里面给入了字符串参数，所以value的引号**不能使用双引号，而要改用单引号**, 此时这个scope可以去掉也可以不去掉
+
 
 
 ## EL难道就不是Scriptlet？
@@ -148,5 +149,6 @@ EL的支持来的有点慢，但好歹还是来了！
 
 而在EL有了调用method的能力后，helper模式可以做的更多，很多页面逻辑可以放到helper中去完成，即把`if` `for`封装在helper里面。
 这应该是目前最值得推崇的一种页面代码模式了。
+
 
 
