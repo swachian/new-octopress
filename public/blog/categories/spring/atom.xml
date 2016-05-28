@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-05-10T22:39:53+08:00</updated>
+  <updated>2016-05-28T14:22:55+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
+    <updated>2016-05-19T17:22:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
+    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
+其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
+
+<p>要解决可以在xml的配置中设置</p>
+
+<p>```xml</p>
+
+<p>  &lt;mvc:annotation-driven></p>
+
+<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
+  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
+  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+    &lt;constructor-arg value="UTF-8" /&gt;
+    &lt;property name="writeAcceptCharset" value="false" /&gt;
+  &lt;/bean&gt;
+&lt;/mvc:message-converters&gt;
+</code></pre>
+
+<p>  &lt;/mvc:annotation-driven>
+```</p>
+
+<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Spring的@SessionAttributes和@ModelAttribute在Redirect时的特殊表现]]></title>
@@ -329,90 +359,6 @@ public class ShoppingCart implements Serializable{
 <li>新增对JMS 2.0 JTA 1.2， JPA 2.1的支持</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[静态文件的url后缀md5化]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/"/>
-    <updated>2015-01-22T09:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua</id>
-    <content type="html"><![CDATA[<p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
-
-<p>```jsp
-<link href='http://octopresszhangyu.herokuapp.com/toolbar/static/orderFlow/css/reset.css' rel="stylesheet" type="text/css" /></p>
-
-<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/jquery.min.js" charset="utf-8"></script>
-
-
-<p>```</p>
-
-<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
-
-<p>```jsp</p>
-
-<script src="http://octopresszhangyu.herokuapp.com/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20" charset="utf-8"></script>
-
-
-<p>```</p>
-
-<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
-
-<p>style.tag
-<code>jsp
-&lt;%@ tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper" %&gt;
-&lt;%@ attribute name="file" type="java.lang.String" required="true" %&gt;
-&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
-&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /&gt;
-&lt;link href='${ctx}&lt;%=BaseHelper.rtg(file) %&gt;' rel="stylesheet" type="text/css" /&gt;
-</code></p>
-
-<p>javascript.tag
-```jsp
-&lt;%@tag pageEncoding="UTF-8" import="com.sanss.toolbar.hepler.BaseHelper"%>
-&lt;%@ attribute name="file" type="java.lang.String" required="true"%>
-&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-&lt;c:set var="ctx" value="${pageContext.request.contextPath}" /></p>
-
-<script src="${ctx}<%=BaseHelper.rtg(file) %>" charset="utf-8"></script>
-
-
-<p>```</p>
-
-<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
-
-<p>```java
-/<em>* 生成静态文件链接的公共方法，加上md5后缀或者时间戳。
-   * @param resource
-   * @return
-   </em>/
-  public static String rtg(String resource) {</p>
-
-<pre><code>String fileMd5 = fileMD5s.get(resource);
-if (StringUtils.isEmpty(fileMd5)) {
-  System.out.println(System.getProperty("user.dir"));
-  fileMd5 = getFileMD5("../webapps/toolbar/static/"+resource);
-  if (StringUtils.isEmpty(fileMd5)) {
-    fileMd5 = timestamp;
-  }
-  fileMD5s.put(resource, fileMd5);
-}
-
-return "/static/"+resource+"?"+fileMd5;
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
-
-<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
-
-<p><code>jsp
-&lt;tags:style file="styles/css1.css" /&gt;
-&lt;tags:javascript file="jquery/jquery.min.js" /&gt;
-&lt;tags:javascript file="jquery/tl.js" /&gt;
-</code></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-05-10T22:39:53+08:00</updated>
+  <updated>2016-05-28T14:22:55+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
+    <updated>2016-05-19T17:22:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
+    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
+其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
+
+<p>要解决可以在xml的配置中设置</p>
+
+<p>```xml</p>
+
+<p>  &lt;mvc:annotation-driven></p>
+
+<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
+  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
+  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+    &lt;constructor-arg value="UTF-8" /&gt;
+    &lt;property name="writeAcceptCharset" value="false" /&gt;
+  &lt;/bean&gt;
+&lt;/mvc:message-converters&gt;
+</code></pre>
+
+<p>  &lt;/mvc:annotation-driven>
+```</p>
+
+<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Maven的Dependency和打包]]></title>
@@ -276,77 +306,6 @@ if(ringrequest!=null&amp;&amp;ringrequest.size()&gt;0){
 ```</p>
 
 <p>在Session范围内使用注入的逻辑还是很清晰的，只是需要注意一下redirect带来的坑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Spring In Action 4]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/"/>
-    <updated>2015-06-01T10:31:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4</id>
-    <content type="html"><![CDATA[<p>大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
-《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。<br/>
-好在，In action在14年年末又出了新的版本。
-经典的Spring系列又出了第4版，这一版是完全跟上了Spring发展的脚步，呈现的也是最新的Spring开发内容，而且聚焦于Spring Web。</p>
-
-<p>内容比较新颖，作者的文章也总喜欢和读者拉拉家常，所以整个书读起来也比较有意思。不过，这本书不适合完全没Java Web开发基础的读者，
-其整个书还是写给已经使用Spring进行开发或者至少已经略懂什么是Java Web开发的人，所以，学这本书前必须要有一点基础。</p>
-
-<h2>Spring的基础介绍</h2>
-
-<p>这部分也是整个系列一直的拿手好戏，现在总结的是越来越精彩，在Xml配置和Java Config中也完全倒向后者了，不过更多的也是通过这两个配置结合了自动扫描的配置方法，即Annotation。</p>
-
-<h3>Spring 的四大法宝：</h3>
-
-<ol>
-<li>PoJo</li>
-<li>DI（依赖注入，取代各个类之间的内部new）</li>
-<li>Aspect（Feature），给每个method加上chain，主要用于Transaction、logging、security、cacching这些领域</li>
-<li>Template（JDBCTemplate等等)，即模板方法，用于减少冗长代码的写入。</li>
-</ol>
-
-
-<p>而这一切的基础是Java的动态编程，除了Java自带的反射，其实大量使用了CGLib库。</p>
-
-<h3>Profile</h3>
-
-<p>通过<code>@Profile("dev")</code>来表明在什么情况下使用下面的标注或配置，即激活哪一种配置属性。有两个变量可以指定值</p>
-
-<p><code>
-spring.profiles.active
-spring.profiles.default
-</code></p>
-
-<p>其中，<code>default</code>可以在web.xml中定义，而<code>active</code>可以在系统属性、环境变量、JNDI或者@ActiveProfiles中定义，因为<code>active</code>的优先级更高。</p>
-
-<h3>其他一些标注</h3>
-
-<p>@Primary 用于消除bean的歧义性（比如有多个同名或同类型、同接口），在声明是可以使用表明这个为主。<br/>
-@Qualifier，用于一步一步的Narrow指定匹配，不过似乎耦合了点，个人觉得不推荐使用<br/>
-@Scope，这个很关键，指定了生成bean使用的容器, Prototype是每次new一个，大部分默认是单例，还有基于Session和Scope的bean注入，解决了web开发时的有些信息注入的难题。具体可参看<a href="/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/">HttpSession在Spring中的配法和问题</a>。</p>
-
-<h2>Aop</h2>
-
-<p>Aop 提供了在method的前后增加功能（Feature）的能力，而这些功能往往是针对业务某些统一的能力的，所以称之为切面，意在把日志、事物、安全等功能提取出来，并且Spring配套了一系列术语称呼AOP中的各个角色。
-但本质上还是一种定义Hook的模式。</p>
-
-<ul>
-<li>Advice ， 功能本身</li>
-<li>PointCut，实际需要使用的Join Points</li>
-<li>Joinpoints，在哪些点（方法中插入）</li>
-</ul>
-
-
-<p>插入的时机有：
-1. Before: method调用前
-2. After all: method调用后
-3. After returning success: method调用成功
-4. After throwing: method调用出现例外
-5. Around: 写法最复杂，需要把调用的chain写在Advice里面</p>
-
-<p>具体用分为:<br/>
-1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
-2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
 ]]></content>
   </entry>
   
