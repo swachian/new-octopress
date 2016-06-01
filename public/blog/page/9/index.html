@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Openssl还是一个关联很多的基础组件。自从爆出心血漏洞后，给自己的虚机也重新编译了一个新的openssl，
-但是在编译ruby 2.1.1时却发现了新的问题。 第一个问题，是编译时老是认不出已经安装的openssl。可能因为openssl是从源码手工安装，而没有使用
-apt-get &hellip;">
+  <meta name="description" content="Atom是Github投入开发的一个新编辑器。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,61 @@ apt-get &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T16:21:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
+比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
+
+<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
+vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
+
+<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
+
+<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
+Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
+
+<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
+，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
+
+<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
+
+<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
+从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
+
+<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -778,91 +832,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/02/to-read-list/">读书列表2014</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-02T09:39:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>技术类</h3>
-
-<ol>
-<li>[x] <a href="/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/">Flower M. Patterns of Enterprise Application Architecture</a>, Addison-Wesley Professional. Rails诞生的书，<a href="http://signalvnoise.com/posts/3375-the-five-programming-books-that-meant-most-to-me">DHH最爱的五本编程书籍</a>，可以说这本书支撑了rails的诞生，是rails基础架构的功能定义。DHH的突破之处在于他用Ruby实现了里面的很多可选择的模式，甚至他还是为FRW画了草图。</li>
-<li>[x] <a href="http://rubyrogues.com/097-rr-book-club-patterns-of-enterprise-architecture-with-martin-fowler/">PoEAA的访谈和DHH</a></li>
-<li>[x] <a href="/blog/2014/07/23/pro-javascript-techniques/">Resig, 精通Javascript.</a> 简约、精彩、结合实际的书，第一章就很精彩。</li>
-<li>Learning Jquery.</li>
-<li>[x] 曾宪杰. 大型网站系统与Java中间件实践. 2014. 还是有一定收获的，分布式其实就是模块化。淘宝的分布式主要是：消息队列、HSF（High-Speed Service Framework）和mysql代理层。
-但是，淘宝人在电子工业出版社出的书普遍给我的感觉是有一点水，内容讲的比较粗，也有凑数之嫌疑。后来了解了一些，淘宝人出书和评高级职称写论文有点类似，只是高级职称
-是强制要求，而淘宝则把出书与否作为社会影响力的一项KPI。</li>
-<li>[x] Core Java。有必要更新一下。</li>
-<li>[x] <a href="/blog/2014/03/02/to-read-list/">Chad Fowler, 在软件开发中创造出色的职业生涯</a>。</li>
-</ol>
-
-
-<h3>经管</h3>
-
-<ol>
-<li>[x] 汽车和我 皮耶希自传。伟大的保时捷家族，皮耶希是发明家保时捷的女婿，而作者是皮耶希的后人，后来成为了大众的老总。</li>
-<li>[x] 汽车文化。</li>
-<li>[x] 汽车工程学基础。 上面两边都是汽车构造及文化的基本入门读物，可以填补较大的知识空白。明白汽车的基本构造原理和发展脉络。而对汽车人物的描述则很有特色和启发。让人感叹的是，很多德国的发明家，如奔驰、戴姆勒，他们既是优秀的工程师，但同时也是成功的设计师和成功的企业家。这方面德国人确实一枝独秀。另外，其他国家的汽车杰出人物不是发明家就是工程师，至少也是一个企业家。但中国的汽车代表人物却是官员。</li>
-<li>[x] 海斯勒，寻路中国，上海译文. 十分接地气的一本书，同时也相当的深刻。尤其是当一个中国人读来时，颇印证了横看成岭侧成峰，局外人更容易揭露事实的真相。
-可惜出版的还是晚了些。另外，只是country，没有城市，这一点相当遗憾。更确切的名称应该是中国乡村寻路。</li>
-<li>[x] <a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">海斯勒，Oracle</a>。书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
-而且由于某些原因无法在大陆出版。本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</li>
-<li>[x] 海斯勒，江城，上海译文。不知不觉，何伟的书逆着出版的时间顺序已经基本读完了三部曲。三本书里，江城的视角最为独特，也最深入。
-首先在于本书是作者关于中国图书的处女作，作者的梦想是成为伟大的作家，而这也是他第一个成功的大作品。其次，这本书的主角是作者，甚至可以理解为是作者的日记记录，
-何伟在江城的主要身份是涪陵师范的外教老师，然后才是一个作家或者说是记者。而在寻路中国乡村和甲骨文中，何伟则就完全是一个记者的身份了。
-也因此，这本书更多的让我可以了解何伟这个人和他在江城的处境。第三，何伟在这说师专服务的年份是96-98年，本人进入大学的年份是97年，所以对很多东西如香港回归、发大水、学校教育等
-都极其容易引起共鸣。然而内陆地区的学校在97年的时候还那么在乎政治思想教育，倒是我从来未曾了解或者想到的。第四，海斯勒的梦想是成为知名作家，选择支教更多的是为了体验生活，
-也是希望学好中文。以一月一千人民币的收入而言，在彼时的重庆可能已经算是不错的了，但对一个老外而言，这份工作真的不可能是冲着这点钱去的。虽然我到现在也不太理解成为知名作家为什么
-要走成为中国通这条路，但必须承认，海斯勒的冒险是成功的。第五，当看见一个外国人竟然对中国的内陆地区有那么强烈的了解兴趣，并且做了那么到位的功课，写出那么好的书籍，
-让我感到震惊的同时也有点羞愧，但转念一想，似乎全中国的记者和作家也都写不出这种东西，也都对中国内陆缺乏那么深入和细致地剖析，也就释然了。</li>
-</ol>
-
-
-<h3>历史文化</h3>
-
-<ol>
-<li>[x] 唐德刚，晚晴七十年。幽默的文笔简直就是郭德纲，看问题的深度和广度进一步让人叹为观止，而且联系当代史更是妙趣横生。作者学识、经历造就了这本书。</li>
-<li>[x] 唐德刚，xxx专政始末。 相对比较一般。</li>
-<li>[x] 哈夫纳，从俾斯麦到希特勒。又一本颠覆国内常见历史观的作品。作者对普鲁士、德意志以及大德意志进行了十分到位的区分和分析。俾斯麦首先的普鲁士的宰相，其次才是德国的首相。所以，以他的角度而言，德国是为普鲁士服务的，即普鲁士支配整个德国。而彼时德国的版图（第二帝国），他认为已经足够。但是，德意志人则希望借助普鲁士，主要是普鲁士的军队，继续对外扩张。而这在俾斯麦看来其实就是普鲁士去为德国流血了，明显违反了他的初衷和立场。而大德意志的代表非希特勒莫属。首先因为他是一个奥地利人，在俾斯麦规划的德意志中希特勒根本就不是德国人。但希特勒作为德意志人，梦想就是建立大德意志，所以不但“回归”了奥地利，还把周边国家一系列有德意志人的地区，比如苏台德，都并入了德国。而普鲁士的容克们就开始为希特勒服务了。时至今日，德国依然在究竟是让德国支配欧洲还是让德国服务欧洲之间纠结。但像俾斯麦和希特勒这样的杰出人物当今是空白的。</li>
-<li>[x] 哈夫纳，<a href="/blog/2014/05/03/pu-lu-shi-bu-han-chuan-shuo/">不含传说的普鲁士</a>。台版书的竖版读起来有点累，不过效果还行。值得反复阅读的图书。</li>
-<li>[x] 权戏。</li>
-</ol>
-
-
-<h2>既往</h2>
-
-<p> <a href="/blog/2013/01/11/to-read-list/">2013读书列表</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -880,6 +849,10 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/05/31/che-xian/">车险</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/">StringHttpMessageConverter的头属性</a>
       </li>
     
@@ -895,15 +868,11 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
         <a href="/blog/2016/04/21/liang-ci-su-zhou-you/">两次苏州游</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/21/mavende-dependencyhe-da-bao/">Maven的Dependency和打包</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (30)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (31)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

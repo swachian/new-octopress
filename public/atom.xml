@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-05-28T14:22:55+08:00</updated>
+  <updated>2016-06-01T22:09:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[车险]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/"/>
+    <updated>2016-05-31T22:49:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian</id>
+    <content type="html"><![CDATA[<p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
+只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
+
+<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
+
+<ul>
+<li>车损：现2109.58，原3514.15</li>
+<li>三责：现1176，   原1689.48</li>
+<li>盗抢：现取消，    原977.02</li>
+<li>划痕：现339.5,   原486.35</li>
+<li>各项不计免赔：现543.77，原1049.04</li>
+</ul>
+
+
+<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
+保险公司是活雷锋？</p>
+
+<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
+差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
+甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
+
+<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
@@ -1635,37 +1665,6 @@
 <p>后来跟师傅了解了一下，原因倒是也很简单，更换新号码的话是可以在4S的社会上牌点搞定的，
 而保留原号码这必须到交管所才能办理，交管所的办理新牌又是要新车上门验车的。实际上如果你是去交管所上
 新的牌照号码，也是要验车。是否需要验车和是否要保留号码没有直接关系，是由在哪里办理决定的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[基于OAuth的API Token生成]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng/"/>
-    <updated>2015-07-22T16:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng</id>
-    <content type="html"><![CDATA[<p>基本思路是对方要先注册一下，<strong>注册的时候提供回调地址</strong>，服务平台生成一个<strong>id</strong>给该用户。</p>
-
-<p>然后，用户用这个id来访问平台公开的认证链接，平台生成<strong>code</strong>并通过注册时提供的<strong>回调地址</strong>发送给对方。</p>
-
-<p>对方最后根据code到<strong>token</strong>获取地址拿到实际的token内容：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{
-</span><span class='line'>  "access_token":"01234567-89ab-cdef-0123-456789abcdef",
-</span><span class='line'>  "expires_in":28799,
-</span><span class='line'>  "refresh_token":"01234567-89ab-cdef-0123-456789abcdef",
-</span><span class='line'>  "token_type":"Bearer",
-</span><span class='line'>  "user_id":"01234567-89ab-cdef-0123-456789abcdef",
-</span><span class='line'>  "session_nonce":"2bf3ec81701ec291"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

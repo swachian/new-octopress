@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="本月抽空去考了证券从业资格考试的两门，证券基础知识和证券交易。
-今天可以查成绩了，最终都是70+，通过考试并圆满达到了复习的目标。 考试的情况 考试的日子被分成了两天，分别是周六16:30-18:20的交易，以及后面一天周日10:30-12:20的基础知识。这个安排的坏处是不得不搭上一个半周末考试 &hellip;">
+  <meta name="description" content="使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+退出使用Node.js。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。 此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +70,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/">开发语言还真是一个问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T22:22:00+08:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+<a href="https://medium.com/code-adventures/farewell-node-js-4ba9e7f3e52b">退出使用Node.js</a>。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。</p>
+
+<p>此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。
+而他使用Go语言开发的分布式系统，则坚固，表现的也更好，代码也更易维护。
+他也提到了同步式的代码比异步式的还是容易测试及理解。</p>
+
+<p>从我个人的经历而言，有一阵子仔细研究过Node，我的硕士毕业论文中Node是最重要的一个组成部分。
+也开发了一个不错的HTTP分发系统。但是，最终我并没有采用Node在生产系统中。
+原因在于，尽管Node的基于事件的并发模式很易于处理大并发的慢速请求，
+但除非去做云计算级别的分发，不然Java的NIO已足够应付性能方面的需要。</p>
+
+<p>而在Node的web开发方面，Node及Express提供的基础设施比Rails差的很远，开发效率和体验都是不能比的。
+所以，看来看去在服务端并没有很适用Node.js的场景。
+至少，在Java和Ruby可以作为选择的场合下，没有Node的发挥空间。</p>
+
+<p>至于Go为什么适合分布式开发，则需要进一步了解。不过以前看见go编译输出的是<code>a.out</code>就很让人有使用的欲望。</p>
+
+<p>Node的崛起很大程度上托V8引擎性能优异的福，在脚本语言中，Node的运行性能就是独一无二的。
+但和编译型语言比起来，Node就没什么优势了。只是有一阵子大家都相信脚本语言天生可以比编译型开发的更有
+效率些，所以万众瞩目于Node。很多受Ruby运行性能之苦的开发者，也转到了Node开发服务。随后，
+移动引用的兴盛使得JSON成为一种标准的传输形式，也由此Node成为了很多接口服务的开发选择。</p>
+
+<p>然而，对此我还是秉承我的观点，仅仅开发接口的话，Java的开发效率也不低，性能一般也不会成为瓶颈。
+而Node的开发还是不如Java方便，人才和教育的基础二者差距就更大了。Javascript只有在浏览器中才是王者。
+因为浏览器的单线程，以及等待事件发生，才是天生适合他的。而且，世上浏览器那么多，所有的浏览器都只认可
+Javascript。
+至于服务端，只有在特定的少数的场合，
+Node才具备突出的优势。</p>
+
+<p>Ruby和Rails的优势是在于开发效率以及让人快乐，性能始终是不让人满意的一个环节。<br/>
+Java的优势是大量的人才基础和教育基础，强大的性能和稳定性。也因为人才众多，所以才有足够的人力来打造像Spring这样的
+开发工具。对很多语言来讲，如果像Java那样啰嗦，是很难得到足够多的产出的。<br/>
+Javascript，还是在浏览器中发挥威力吧。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1187,61 +1260,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-07T16:21:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
-比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
-
-<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
-vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
-
-<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
-
-<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
-Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
-
-<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
-，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
-
-<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
-
-<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
-从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
-
-<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1259,6 +1277,10 @@ Node.js，一个可以在服务器端编写javascript的平台，提供了很多
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/05/31/che-xian/">车险</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/">StringHttpMessageConverter的头属性</a>
       </li>
     
@@ -1274,15 +1296,11 @@ Node.js，一个可以在服务器端编写javascript的平台，提供了很多
         <a href="/blog/2016/04/21/liang-ci-su-zhou-you/">两次苏州游</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/21/mavende-dependencyhe-da-bao/">Maven的Dependency和打包</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (30)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (31)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

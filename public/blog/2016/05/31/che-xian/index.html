@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Maven的Dependency和打包 - Hegel2011的博客</title>
+  <title>车险 - Hegel2011的博客</title>
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="使用Maven一大便捷之处就是管理依赖变得方便了，另一个好处就是打包更加灵活。 以前全部用jar包加入到工程里面，如果实际部署的时候需要剔除个别包，就需要自己手工在war包里删除。
-而实际上需要这么干的情况还是有一些的，比如一些公共的包像ojdbc.jar，都已经放到容器里面了，如果war包里再有 &hellip;">
+  <meta name="description" content="时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
+只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。 因为没有出险，所以商业险给打了七折，下面是对比 车损：现2109.58，原3514.15
+三责： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/mavende-dependencyhe-da-bao/">
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">Maven的Dependency和打包</h1>
+      <h1 class="entry-title">车险</h1>
     
     
       <p class="meta">
@@ -87,32 +88,35 @@
   
 
 
-<time datetime="2016-04-21T11:32:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2016</time>
+<time datetime="2016-05-31T22:49:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2016</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>使用Maven一大便捷之处就是管理依赖变得方便了，另一个好处就是打包更加灵活。</p>
+<div class="entry-content"><p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
+只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
 
-<p>以前全部用jar包加入到工程里面，如果实际部署的时候需要剔除个别包，就需要自己手工在war包里删除。
-而实际上需要这么干的情况还是有一些的，比如一些公共的包像ojdbc.jar，都已经放到容器里面了，如果war包里再有，则容易引发冲突。
-删除公共的包，另一个好处就是可以给war包瘦身，这样在传递、部署时都会更加便捷。</p>
-
-<p>6种范围依赖：</p>
+<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
 
 <ul>
-<li>compile: 默认的选项，会在export的时候加入全部依赖</li>
-<li>provided: 由其他环境提供，如容器或jdk，但在编译和测试的时候还是会导入，对于容器公共的包，可以使用这个选项</li>
-<li>runtime</li>
-<li>test</li>
-<li>system: 和provided很类似，但需要自己指名jar所处的位置，类似于以前直接把jar包加到工程里面的做法</li>
-<li>import</li>
+<li>车损：现2109.58，原3514.15</li>
+<li>三责：现1176，   原1689.48</li>
+<li>盗抢：现取消，    原977.02</li>
+<li>划痕：现339.5,   原486.35</li>
+<li>各项不计免赔：现543.77，原1049.04</li>
 </ul>
 
 
-<p>个人用的比较多的还是compile和provided两种。</p>
+<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
+保险公司是活雷锋？</p>
+
+<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
+差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
+甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
+
+<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
 </div>
 
 
@@ -135,12 +139,12 @@
   
 
 
-<time datetime="2016-04-21T11:32:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2016</time>
+<time datetime="2016-05-31T22:49:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2016</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/java/'>java</a>
+    <a class='category' href='/blog/categories/车车/'>车车</a>
   
 </span>
 
@@ -149,7 +153,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/mavende-dependencyhe-da-bao/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/mavende-dependencyhe-da-bao/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/" >Tweet</a>
   
   
   
@@ -158,10 +162,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/08/jpade-naming-strate/" title="Previous Post: JPA的naming strategy">&laquo; JPA的naming strategy</a>
+        <a class="basic-alignment left" href="/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/" title="Previous Post: StringHttpMessageConverter的头属性">&laquo; StringHttpMessageConverter的头属性</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/04/21/liang-ci-su-zhou-you/" title="Next Post: 两次苏州游">两次苏州游 &raquo;</a>
       
     </p>
   </footer>
