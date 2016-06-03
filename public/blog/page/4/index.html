@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="改款CR-V终于在今天，4月20号公布售价了。东本这次还是很务实的，
-发布会没有整很多没用的，简洁明了直接到位。 和对比配置预料的差不多，果然是2.0官降两万，2.4变化不大。不过2.4的顶配也降了1万多。 2.4的主力目录价没优惠肯定让一部分人失望，2.0的官降2万，基本也差不多了。 2. &hellip;">
+  <meta name="description" content="Spring还在继续提高与演进中。 3.1中的新东西 environment profiles，支持development、test和production等条件下独特的配置
+增加enable annotations，在Java文件配置中
+Declarative caching support， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi/">Spring 4 中的新东西</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-04T14:30:00+08:00" pubdate data-updated="true">May 4<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Spring还在继续提高与演进中。</p>
+
+<h3>3.1中的新东西</h3>
+
+<ul>
+<li>environment profiles，支持development、test和production等条件下独特的配置</li>
+<li>增加enable annotations，在Java文件配置中</li>
+<li>Declarative caching support，像支持事务一样支持缓存</li>
+<li>支持Servlet 3.0，包括在java文件中声明servlets和filters，而不仅仅是在web.xml中</li>
+<li>JPA支持的提升，可以不再需要persistence.xml</li>
+<li>自动绑定路径便利给model属性</li>
+<li>支持对Accept和Content-Type消息头的匹配，通过@RequestMappingproduces</li>
+<li>绑定部分二进制表单请求给方法参数，通过@RequestPart，比@RequestParam更强大（只能对请求参数数据绑定，key-alue格式），而@RequestPart支持如JSON、XML内容区数据的绑定</li>
+<li>flash属性的支持</li>
+<li>JpaTemplate和JpaDaoSupport让位于EntityManager</li>
+</ul>
+
+
+<h3>3.2中的新东西</h3>
+
+<ul>
+<li>支持servlet 3中的异步请求，使得一个请求可以在独立的线程中被处理，让servlet线程可以处理更多的请求</li>
+<li>Spring MVC的test框架，包括RestTemplate的测试支持</li>
+<li>@controllerAdvice使得@ModelAttributes等控制器的方法可以在单个类中重新组织</li>
+<li>ContentNegotiatingViewResolver</li>
+<li>@MatrixVariable</li>
+<li>Rest方面的改进与支持</li>
+</ul>
+
+
+<h3>4.0中的新东西</h3>
+
+<ul>
+<li>WebSocket的支持，包括JSR-356中Java API对WebSocket的支持</li>
+<li>SockJS/STOMP对WebSocket和消息模块的封装</li>
+<li>Java 8 特性的应用，比如lambda。callback interface的使用变简单了，如RowMapper和JdbcTemplate</li>
+<li>Java 8中的时间日期api</li>
+<li>RestTemplate的一个异步版实现</li>
+<li>新增对JMS 2.0 JTA 1.2， JPA 2.1的支持</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -625,104 +702,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/21/safaribu-zhi-chi-di-san-fang-cookieyin-qi-de-sessiongai-zao/">Safari不支持第三方cookie引起的session改造</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-21T13:48:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
-问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的，所以这个问题很让人困惑。
-反复查找，最后明白原因是：首先，对于第三方cookie，Safari升级后确实有禁止写入cookie的特性；其次，但是对于已存在cookie的情况，则尽管是第三方cookie依然还会写入。</p>
-
-<p>就是因为其次这个因素存在，所以之前进行测试的一些手机照样可以写入session了。</p>
-
-<p>问题是找到了，但怎么解决呢？Java中最简单就是让url中带入jsessionid，只是这个方式确实有好多年没有使用过了。虽然是第三方cookie，但因为测试时有过session了，所以还能继续写入。</p>
-
-<p><code>response.encodeURL(url)</code></p>
-
-<p>&#8211; 查文档，这个api的含义是对于如果是可以用cookie追踪sessionid的则不会在url后加入jsessionid，而对于不支持cookie追踪的则会在url中写入id。<br/>
-这引发了我的好奇心，只有response怎么能判断cookie是否能追踪呢？</p>
-
-<p>一看Tomcat的源码，实现倒也简单，就是根据当前session的id是否从cookie中获取的来决定的。如果首次访问网站，此时不会有sessionid，则自然不是从cookie追踪的，于是生成的url都有jsessionid。
-二次请求上来，如果是cookie中读取的，则不再写入了。如果不是从cookie中读取的，则继续写入jsessionid。也就是说，<strong>不管是不是支持cookie写入，第一笔encodeURL的调用都会加上jessionid</strong>。</p>
-
-<p>例如，第一次访问都会生成这样的链接 <code>http://192.168.202.72:8080/toolbar/home/nav;jsessionid=EFC1A53F48CC5BC9BE58F50830296FBB</code>, 如果再次访问就是<code>http://192.168.202.72:8080/toolbar/home/nav</code>.</p>
-
-<p>这个东西的缺点公开的说法有如下两点：</p>
-
-<ol>
-<li>sessionid暴露在url链接中并不安全；</li>
-<li>sessionid这样子会保存在地址栏中，容易引发保存后歧义，因为sessionid其实每一次都会是不一样的。</li>
-</ol>
-
-
-<p>简而言之就是这样的链接不好看外加安全性有一定的问题。</p>
-
-<p>不过这个安全性问题如果从网络的角度来看有点勉强。因为http头也是明文传输的，只是浏览器中不显示罢了。以机器的角度来看，jsessionid放在header还是uri中的区别并不大。鉴于业务需要，还是采用吧。于是引发这种写法最大的毛病，需要在jsp中每个自己的链接都加上<code>&lt;%=response.encodeURL(url)%&gt;</code> 。此时不免想起如果都像<code>link_to</code>那样生成链接的话，改起来就方便多了。</p>
-
-<p>Java Web的开发至今没有很方便的helper机制，能用用的还是tags的办法，于是写一个hrefto.tag放到tags下面。</p>
-
-<p>hrefto.tag</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span><span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;uri&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">&lt;%</span> <span class="n">String</span> <span class="n">ctx</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getContextPath</span><span class="o">();</span> <span class="k">%&gt;</span>
-</span><span class='line'><span class="k">&lt;%=</span> <span class="n">response</span><span class="o">.</span><span class="na">encodeURL</span><span class="o">(</span><span class="n">ctx</span> <span class="o">+</span> <span class="n">uri</span><span class="o">)</span> <span class="k">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在jsp中的应用主要是两句话，第一是引入，第二是调用</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;tags&quot;</span> <span class="n">tagdir</span><span class="o">=</span><span class="s">&quot;/WEB-INF/tags&quot;</span><span class="k">%&gt;</span> <span class="c">&lt;!--hrefto.tag存放的位置--&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;help&quot;</span> <span class="na">href=</span><span class="s">&#39;&lt;tags:hrefto uri=&quot;/home&quot; /&gt;&#39;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中<code>&lt;tags:hrefto uri="/home" /&gt;</code>就会调用hrefto.tag中的内容，生成链接。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -740,6 +719,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/06/03/jin-yong-httpde-%5B%3F%5D-xie-fang-fa/">禁用http的一些方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/31/che-xian/">车险</a>
       </li>
     
@@ -755,15 +738,11 @@
         <a href="/blog/2016/04/29/iptables-de-yi-xie-jie-shi/">iptables 的一些解释</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/21/liang-ci-su-zhou-you/">两次苏州游</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (31)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/java'>Java (22)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (63)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (31)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/装机'>装机 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

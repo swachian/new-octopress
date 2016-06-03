@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-06-01T22:09:00+08:00</updated>
+  <updated>2016-06-03T14:31:16+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[禁用http的一些方法]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/06/03/jin-yong-httpde-%5B%3F%5D-xie-fang-fa/"/>
+    <updated>2016-06-03T14:24:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/06/03/jin-yong-httpde-[?]-xie-fang-fa</id>
+    <content type="html"><![CDATA[<p>本来是挺正常的HTTP方法，现在变成了安全隐患。当然，也不能说不合理，毕竟基于能关的都关掉的思路，不使用的东西是可以禁掉。</p>
+
+<p>Nginx的配法</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if ($request_method !~* GET|HEAD|POST) {
+</span><span class='line'>            return 403;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于请求方法不是GET HEAD和POST的都返回403.</p>
+
+<p>Tomcat的配法</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;security-constraint&gt;
+</span><span class='line'>        &lt;web-resource-collection&gt;
+</span><span class='line'>                &lt;web-resource-name&gt;fortune&lt;/web-resource-name&gt;
+</span><span class='line'>                &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+</span><span class='line'>                &lt;http-method&gt;PUT&lt;/http-method&gt;
+</span><span class='line'>                &lt;http-method&gt;DELETE&lt;/http-method&gt;
+</span><span class='line'>                &lt;http-method&gt;OPTIONS&lt;/http-method&gt;
+</span><span class='line'>                &lt;http-method&gt;TRACE&lt;/http-method&gt;
+</span><span class='line'>        &lt;/web-resource-collection&gt;
+</span><span class='line'>        &lt;auth-constraint&gt;&lt;/auth-constraint&gt;
+</span><span class='line'>&lt;/security-constraint&gt;
+</span><span class='line'>&lt;login-config&gt;
+</span><span class='line'>        &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+</span><span class='line'>&lt;/login-config&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里面login-config可以不配，也不会影响效果。auth-constraint一定要配，如果不出现（即值为null），则全部的限制将不起作用。
+元素出现而值不填，则所有的这种请求都会被拒绝。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[车险]]></title>
@@ -1651,20 +1707,6 @@
     <content type="html"><![CDATA[<p>http://tutor.lugolabs.com/articles/18-handling-csv-views-in-ruby-on-rails</p>
 
 <p>确实扩展的够方便，实施的够优雅。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为什么车牌换号不用去验车]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/07/24/wei-shi-yao-che-pai-huan-hao-bu-yong-qu-yan-che/"/>
-    <updated>2015-07-24T21:26:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/07/24/wei-shi-yao-che-pai-huan-hao-bu-yong-qu-yan-che</id>
-    <content type="html"><![CDATA[<p>上海由于车牌最早拍卖的缘故，所以一直允许换车的时候可以保留原号牌。也算是一种对私人财产的尊重。
-这次买车，一直不太理解为什么重新换个号不需要开车去验车，但保留原号就必须去验车。</p>
-
-<p>后来跟师傅了解了一下，原因倒是也很简单，更换新号码的话是可以在4S的社会上牌点搞定的，
-而保留原号码这必须到交管所才能办理，交管所的办理新牌又是要新车上门验车的。实际上如果你是去交管所上
-新的牌照号码，也是要验车。是否需要验车和是否要保留号码没有直接关系，是由在哪里办理决定的。</p>
 ]]></content>
   </entry>
   
