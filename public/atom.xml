@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-06-03T14:31:16+08:00</updated>
+  <updated>2016-06-12T12:47:09+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[车位问题该不该找政府？]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu-%3F/"/>
+    <updated>2016-06-12T12:42:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu-?</id>
+    <content type="html"><![CDATA[<p>关于小区车位问题该不该找政府，我是这么看的：</p>
+
+<p>拿某些人生很多个孩子来讲，如果是政府鼓励的，那政府就该负责，就像以前的光荣妈妈。如果政府是反对的，而且做了措施，那么就是自己承担。</p>
+
+<p>而以用车来讲，住宅、道路是政府规划的，道路更是只有政府才能建设，住宅区域的停车位配套比例也是政府定的，那么有了问题不找政府找谁？难道小区没水没电也来一句不应该怪政府配套不到位吗？车位的配套和水电的配套并无差异，这本来就应该是基本的配套需求。就像小区周边要配绿地、学校、医院等，这本来就是很起码的要求。</p>
+
+<p>何况在中国，大部分汽车都是这些国企以及国企的合资企业造的，他们造了那么多，卖了那么多，收获了那么多，买车的有了问题不找获益的政府又找谁呢？就像上火车的话，如果没那么多车皮，卖那么多票干嘛。
+总不见得大家钱付了，票买了，然后上不了车，再对大家讲一句“有没有车厢有没有座位”你们这些买票的应该事先考察清楚了再决定是不是要买票。</p>
+
+<p>再说一个上海特色的问题。既然问沪牌收了钱了，就该办事啊。现在市区是沪牌一半，外牌一半，严打起来又一点不区分的。虽然也不指望警察能改，但大家谈谈总是可以的吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[禁用http的一些方法]]></title>
@@ -1696,17 +1714,6 @@
 <p>房产总评估价值为3000万日元，年度税率为：0.6%。实际上，固定资产的评价额是有些水分的，土地价格一般是按照当时土地价格的60%&#8211;70%、建筑物价格是按照建筑费的50%&#8211;70%进行评价的，所以，评价额度为3000万的别墅式住宅实际购置价格是4500万或者更多，这样看来，日本人房产税的年度实际税率为：0.4%。其中评价额尤其是土地的评价额是随着市场状况的变化而变化的。</p>
 
 <p>给出的是某块土地价格变化的曲线图，用的是日本年度，2年是平成2年，也就是1990年，3年是1991年，以此类推。可以看出，日本泡沫经济时代的土地价格以及泡沫破灭以后房地产价格的连年下降，需要注意的是，日本房产泡沫（1993年）破灭稍稍晚于日本经济泡沫破灭（1991年）。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于handling rails view的神作]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/"/>
-    <updated>2015-08-01T22:25:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo</id>
-    <content type="html"><![CDATA[<p>http://tutor.lugolabs.com/articles/18-handling-csv-views-in-ruby-on-rails</p>
-
-<p>确实扩展的够方便，实施的够优雅。</p>
 ]]></content>
   </entry>
   
