@@ -58,4 +58,34 @@ public class LastDayDevicePackorderlogRefreshTaskExecutor implements Runnable {
 		// doit();
 		logger.info("定期触发");
 	}
+o
 ```
+
+## 补充
+
+在`applicationContext.xml`中可加入` layoutxmlns:task="http://www.springframework.org/schema/task"`,使得可以用task标注。
+
+同时在xsi:schemaLocation中加入`http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd`
+
+随后就可以启用
+
+```
+    <!-- 定时任务相关启动 -->
+<task:executor id="mvcyExecutor" pool-size="5"/>
+<task:scheduler id="myScheduler" pool-size=layout"10"/>
+<task:annotation-driven executor="myExecutor" scheduler="mySchedulerduler"/>
+```
+
+其作用类似于java配置的
+```
+@Configuration
+@EnableAsync
+@EnableScheduling
+public class AppConfig {
+}
+```
+
+其中executor用于异步，scheduler用于同步执行。
+
+另外，对Bean做注解的时候一般使用@Component或其子注解（如：@Service）但是一定要注意使用@Lazy(false)（一般我们会在applicationContext.xml里根级标签，一般为beans里面设置default-lazy-init="true"，所以要想spring启动后定时任务就运行，必须用@Lazy(false）。)
+

@@ -150,6 +150,7 @@ period 和 delay两个参数就够了。 这次新遇到的需求是要求定点
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
+<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*</span>
 </span><span class='line'><span class="cm"> * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。</span>
 </span><span class='line'><span class="cm"> *</span>
@@ -173,8 +174,47 @@ period 和 delay两个参数就够了。 这次新遇到的需求是要求定点
 </span><span class='line'>  <span class="c1">// doit();</span>
 </span><span class='line'>  <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;定期触发&quot;</span><span class="o">);</span>
 </span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="n">o</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h2>补充</h2>
+
+<p>在<code>applicationContext.xml</code>中可加入<code>layoutxmlns:task="http://www.springframework.org/schema/task"</code>,使得可以用task标注。</p>
+
+<p>同时在xsi:schemaLocation中加入<code>http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd</code></p>
+
+<p>随后就可以启用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;!--</span> <span class="err">定时任务相关启动</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">executor</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;mvcyExecutor&quot;</span> <span class="n">pool</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">scheduler</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;myScheduler&quot;</span> <span class="n">pool</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="n">layout</span><span class="s">&quot;10&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">annotation</span><span class="o">-</span><span class="n">driven</span> <span class="n">executor</span><span class="o">=</span><span class="s">&quot;myExecutor&quot;</span> <span class="n">scheduler</span><span class="o">=</span><span class="s">&quot;mySchedulerduler&quot;</span><span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其作用类似于java配置的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Configuration</span>
+</span><span class='line'><span class="nd">@EnableAsync</span>
+</span><span class='line'><span class="nd">@EnableScheduling</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="o">{</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中executor用于异步，scheduler用于同步执行。</p>
+
+<p>另外，对Bean做注解的时候一般使用@Component或其子注解（如：@Service）但是一定要注意使用@Lazy(false)（一般我们会在applicationContext.xml里根级标签，一般为beans里面设置default-lazy-init=&#8221;true&#8221;，所以要想spring启动后定时任务就运行，必须用@Lazy(false）。)</p>
 </div>
 
 
