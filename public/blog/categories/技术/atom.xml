@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-06-29T16:54:17+08:00</updated>
+  <updated>2016-09-18T23:09:48+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nginx 通过Lua输出response body]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/"/>
+    <updated>2016-08-25T23:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body</id>
+    <content type="html"><![CDATA[<p>Nginx默认是不只支持<code>$request_body</code> 而不支持response的body输出的。这个设定是合理的，因为大量的html响应或者静态文件的内容输出将使得整个日志毫无意义。
+然而，response body输出对api的请求来讲，则很多时候、尤其是在调试的时候是很有必要的。取代了抓包的作用，且简单直观许多。
+搜寻之下，发现使用lua的话，可以达到此目的。</p>
+
+<ol>
+<li>下载并安装lua语言的安装包</li>
+</ol>
+
+
+<p><code>
+ wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz
+tar -zxvf LuaJIT-2.0.3.tar.gz
+cd LuaJIT-2.0.3.tar.gz
+make &amp;&amp; make install
+</code>
+注意，可能你的服务器的wget会实际下载一个html到本地导致tar解压失败，此时可以用浏览器下载完毕后再次上传到服务器上。</p>
+
+<ol>
+<li>下载并解压ngx_devel_kit套件</li>
+</ol>
+
+
+<p><code>
+wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
+tar v0.2.19
+</code></p>
+
+<ol>
+<li>下载并解压lua-nginx-module模块</li>
+</ol>
+
+
+<p><code>
+wget https://github.com/chaoslawful/lua-nginx-module/archive/v0.9.6.tar.gz
+tar v0.9.6
+</code></p>
+
+<ol>
+<li>下载并解压nginx后，使用下面的命令重新编译nginx</li>
+</ol>
+
+
+<p>```
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-pcre --sbin-path=/usr/sbin/nginx --add-module=/root/lua-nginx-module-0.9.6 --add-module=/root/ngx_devel_kit-0.2.19
+make &amp;&amp; make install
+cp /usr/sbin/nginx /usr/local/nginx/sbin/</p>
+
+<p>```</p>
+
+<p>最后，在nginx的conf文件中的<code>server{}</code>上下文里加入下面代码</p>
+
+<p>```
+log_format  main_with_response  '$remote_addr - $remote_user [$time_local] "$request" '</p>
+
+<pre><code>                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent" "$http_x_forwarded_for"'
+                  'request: "$request_body"' 'response: $resp_body';
+</code></pre>
+
+<p>server {</p>
+
+<p>...
+   lua_need_request_body on;</p>
+
+<pre><code>set $resp_body "";
+body_filter_by_lua '
+    local resp_body = string.sub(ngx.arg[1], 1, 1000)
+    ngx.ctx.buffered = (ngx.ctx.buffered or "") .. resp_body
+    if ngx.arg[2] then
+         ngx.var.resp_body = ngx.ctx.buffered
+    end
+';
+
+   location /xxxx {
+        root   html;
+        access_log  logs/access.log  main_with_response;
+        proxy_pass http://192.168.203.198:8080;
+    }
+</code></pre>
+
+<p>}
+```</p>
+
+<p>为避免response溢出整个日志，可选择在特定的location中使用输出response body。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[openwrt n56u 和iptv]]></title>
@@ -334,30 +426,6 @@ if(ringrequest!=null&amp;&amp;ringrequest.size()&gt;0){
 <p>对于任何写过界面的Java程序员，上手安卓应用开发应该还都是挺轻松的。
 毕竟大部分需要的技能有重合，而体系上安卓也更适合学习。当然，学安卓也有特定的痛苦，
 比如屏幕尺寸及比例、API升级快导致节奏混乱。不过在手机端确实是个值得投入的东西。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[基于OAuth的API Token生成]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng/"/>
-    <updated>2015-07-22T16:00:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng</id>
-    <content type="html"><![CDATA[<p>基本思路是对方要先注册一下，<strong>注册的时候提供回调地址</strong>，服务平台生成一个<strong>id</strong>给该用户。</p>
-
-<p>然后，用户用这个id来访问平台公开的认证链接，平台生成<strong>code</strong>并通过注册时提供的<strong>回调地址</strong>发送给对方。</p>
-
-<p>对方最后根据code到<strong>token</strong>获取地址拿到实际的token内容：</p>
-
-<p><code>
-{
-  "access_token":"01234567-89ab-cdef-0123-456789abcdef",
-  "expires_in":28799,
-  "refresh_token":"01234567-89ab-cdef-0123-456789abcdef",
-  "token_type":"Bearer",
-  "user_id":"01234567-89ab-cdef-0123-456789abcdef",
-  "session_nonce":"2bf3ec81701ec291"
-}
-</code></p>
 ]]></content>
   </entry>
   

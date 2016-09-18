@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-06-29T16:54:17+08:00</updated>
+  <updated>2016-09-18T23:09:48+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于冠道]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/08/27/guan-yu-guan-dao/"/>
+    <updated>2016-08-27T15:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/08/27/guan-yu-guan-dao</id>
+    <content type="html"><![CDATA[<p>本田的冠道近日宣传的比较多，虽然价格还没最后公布，但车还是造成了足够的话题。
+因为这车既是本田目前的旗舰suv，也是首次使用了2.0T发动机的中国产本田车型。</p>
+
+<p>其实这个车挺像昂科威的，只是更高级也更大些。CRV相对这类车，最大的优势还是在于尺寸、操控，尤其是尺寸相对冠道的优势更大。毕竟CRV这种4米6以下的长度，1米8左右的宽度，在城市开还是挺舒服的，再搭配一个装载能力很大的尾箱，是各方面都很均衡的车型。
+而冠道，对拥挤的中国城市来讲，它的尺寸还是大了些。而尺寸大的车，操控必然是要打折扣的。
+而从空间看，尾箱部分因为溜背造型，并不如crv的尾箱实惠。
+油耗、可靠性方面可能也是crv更有优势些。
+当然，同昂科威一样，冠道内饰的高级感、拥有税金更省的涡轮、拥有at变速箱、静音等方面都是对crv碾压了。</p>
+
+<p>不过问我会不会买冠道？只要这个车不是比crv便宜，那肯定还是crv，毕竟crv开着更舒服。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[nginx 通过Lua输出response body]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/"/>
+    <updated>2016-08-25T23:03:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body</id>
+    <content type="html"><![CDATA[<p>Nginx默认是不只支持<code>$request_body</code> 而不支持response的body输出的。这个设定是合理的，因为大量的html响应或者静态文件的内容输出将使得整个日志毫无意义。
+然而，response body输出对api的请求来讲，则很多时候、尤其是在调试的时候是很有必要的。取代了抓包的作用，且简单直观许多。
+搜寻之下，发现使用lua的话，可以达到此目的。</p>
+
+<ol>
+<li>下载并安装lua语言的安装包</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz
+</span><span class='line'>tar -zxvf LuaJIT-2.0.3.tar.gz
+</span><span class='line'>cd LuaJIT-2.0.3.tar.gz
+</span><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意，可能你的服务器的wget会实际下载一个html到本地导致tar解压失败，此时可以用浏览器下载完毕后再次上传到服务器上。</p>
+
+<ol>
+<li>下载并解压ngx_devel_kit套件</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
+</span><span class='line'>tar v0.2.19</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>下载并解压lua-nginx-module模块</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/chaoslawful/lua-nginx-module/archive/v0.9.6.tar.gz
+</span><span class='line'>tar v0.9.6</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>下载并解压nginx后，使用下面的命令重新编译nginx</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-pcre --sbin-path=/usr/sbin/nginx --add-module=/root/lua-nginx-module-0.9.6 --add-module=/root/ngx_devel_kit-0.2.19 
+</span><span class='line'>make && make install
+</span><span class='line'>cp /usr/sbin/nginx /usr/local/nginx/sbin/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，在nginx的conf文件中的<code>server{}</code>上下文里加入下面代码</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>log_format  main_with_response  '$remote_addr - $remote_user [$time_local] "$request" '
+</span><span class='line'>                      '$status $body_bytes_sent "$http_referer" '
+</span><span class='line'>                      '"$http_user_agent" "$http_x_forwarded_for"'
+</span><span class='line'>                      'request: "$request_body"' 'response: $resp_body';
+</span><span class='line'>
+</span><span class='line'>server {
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'>   lua_need_request_body on;
+</span><span class='line'>    set $resp_body "";
+</span><span class='line'>    body_filter_by_lua '
+</span><span class='line'>        local resp_body = string.sub(ngx.arg[1], 1, 1000)
+</span><span class='line'>        ngx.ctx.buffered = (ngx.ctx.buffered or "") .. resp_body
+</span><span class='line'>        if ngx.arg[2] then
+</span><span class='line'>             ngx.var.resp_body = ngx.ctx.buffered
+</span><span class='line'>        end
+</span><span class='line'>    ';
+</span><span class='line'>
+</span><span class='line'>       location /xxxx {
+</span><span class='line'>            root   html;
+</span><span class='line'>            access_log  logs/access.log  main_with_response;
+</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为避免response溢出整个日志，可选择在特定的location中使用输出response body。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[车位问题该不该找政府？]]></title>
@@ -1635,85 +1773,6 @@
     <content type="html"><![CDATA[<p>逍客一直挺心仪的一辆车，原本是替换家里老凯越的重要备选对象。老一代的逍客据说做工和用料越来越渣，尽管车价也是越来越便宜了，所以主要考虑换代的新逍客。无奈车险八九月间就要到期，而之前逍客说要到11月份才会上市，于是来不及等待改提了CRV 2.4的入门版。</p>
 
 <p>但新逍客出来之后，老实讲挺让人失望的。于是反而庆幸没有等逍客而入手了CRV。拿2.4入门版和逍客2.0顶配版来论，逍客作为一个全新换代的车型，配置上竟然比配置已经很一般的CRV还要渣。顶配还算比crv多了前雷达和全景视频系统，但次配以下竟然雷达基本不配，一副有了摄像头就不要雷达的样子。但根据我的经验，雷达的帮助绝对比视频多。而且也同样没有很有用的自动大灯，比起crv还少了后排出风口、后视镜电动折叠这样一些很实用的舒适性配置。可能逍客在高速、操控等方面是有优势的，但确实和我的需求关系不大。至于价钱，目录价只差4万，以本田这样一路奔着3万优惠下去的腔调，实在还是CRV值多了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[老罗和锤子899元的坚果手机]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/08/26/lao-luo-he-chui-zi-899yuan-de-jian-guo-shou-ji/"/>
-    <updated>2015-08-26T23:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/08/26/lao-luo-he-chui-zi-899yuan-de-jian-guo-shou-ji</id>
-    <content type="html"><![CDATA[<p>老罗这次在梅赛德斯奔驰中心开了坚果手机的发布会。
-发布会一如老罗既往的表现一样好看，相较于一年多以前的3k元的锤子手机，这款定价
-899/999的坚果手机倒是可以一战的。原因么也很简单，就是够便宜也够有性价比。这个价位
-能买到5.5寸1080p的屏确实已经很不错了。</p>
-
-<p>工业设计方面推出了自己的设计师，整个造型确实很iphone，同时正面是用的白色边框，这点很不容易。
-因为13年的时候我就发现为啥那么多手机都是黑的，而白的往往要贵一些。按老罗的说法这是色差导致了良品率不同。</p>
-
-<p>软件的话，还是在一个红海里面做道场。但是，锤子确实开发出了一些很不错的应用。在一个竞争那么白热化的
-市场，能想出这些东西来必然是废了很多脑细胞的。</p>
-
-<p>硬件方面倒是用的高通的芯片，那配置基本就算过得去了。</p>
-
-<p>这款手机肯定能卖的比锤子好许多，至少会帮老罗在这个市场占的一席之地。
-定位确实低端了点，利润方面能不能维持锤子生存下去，还是比较难讲的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[zz 日本的房产税]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui/"/>
-    <updated>2015-08-06T22:19:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui</id>
-    <content type="html"><![CDATA[<p>转载自<a href="http://www.517japan.com/viewnews-8652.html">http://www.517japan.com/viewnews-8652.html</a></p>
-
-<p>日本的房产税叫做“不动产固定资产税”，跟“都市计画税”捆绑在一起。征收的条款很简单，下面就给大家介绍一下。这里需要说明的是，日本土地是私有制，买到手以后，就世世代代是自己的了，也是世世代代要缴纳资产税的了。</p>
-
-<p>一、不动产固定资产税</p>
-
-<p>1、不动产固定资产税是一种地方税，是以每年1月1日为时点，对在城市规划内的不动产（土地、房屋）的所有人征收的一个税种。</p>
-
-<p>2、税额的计算方法：税额=课税标准× 1.4%，课税标准是当地政府机关登录的不动产台帐的固定资产的评价额。</p>
-
-<p>3、住宅用地的减免政策：住宅用地200平方米以下的部分，称为“小规模住宅用地”，按课税标准额度的六分之一计算。200平方米以上的部分，称为“一般住宅用地”，按课税标准额度的三分之一计算。但是，土地上的建筑面积，不能超过土地面积的10倍。</p>
-
-<p>4、建筑物的减免政策：新建的建筑物到120平方米为止的部分，一般住宅的前三年，三层以上的耐火或者准耐火住宅的前5年，固定资产税减半。但必须住宅的居住部分是建筑物面积的1/2以上；或者：居住面积是100平方以上200平方以下，出租用住宅35平方以上200平方以下，而且，1平方的评价额有限制，木造不超过112000日元，准耐火构造不超过144000日元，耐火构造176000日元。</p>
-
-<p>5，纳税日期：每年4-5月收到纳税通知书，纳税者可以选择一次或者分季度缴纳。</p>
-
-<p>二、都市计画税</p>
-
-<p>1、都市计画税也是一种地方税，也是以每年1月1日为时点，对在城市规划内的不动产（土地、房屋）的所有人征收的一个税种。与固定资产税一起缴纳。</p>
-
-<p>2、税额的计算方法：税额=课税标准× 0.3%，课税标准是当地政府机关登录的不动产台帐的固定资产的评价额。</p>
-
-<p>3、住宅用地的减免政策：住宅用地200平方米以下的部分，称为“小规模住宅用地”，按课税标准额度的三分之一计算。200平方米以上的部分，称为“一般住宅用地”，按课税标准额度的三分之二计算。</p>
-
-<p>4，建筑物的减免政策：没有。</p>
-
-<p>三、举例计算</p>
-
-<p>有了上面的政策解释，所有人都可以比较轻松的计算出每年的应缴纳税额，下面举一个一般情况的例子来计算一下，看看日本人一年缴纳多少房产税。比如：一家人刚买了一套新建的别墅，土地面积是165，建筑面积是100，
-其中，土地的评价额为1800万，建筑物的评价额为1200万。计算方法如下：</p>
-
-<p>固定资产税为=土地部分+建筑物部分</p>
-
-<pre><code>               = 1800 × 1/6 × 1.4% + 1200 × 1.4% × 1/2
-               = 12.6万
-</code></pre>
-
-<p>都市计画税=土地部分+建筑物部分</p>
-
-<pre><code>             = 1800 × 1/3 × 0.3% + 1200 × 0.3%
-             = 5.4万
-</code></pre>
-
-<p>年度缴纳税额=固定资产税+都市计画税= 18万日元</p>
-
-<p>房产总评估价值为3000万日元，年度税率为：0.6%。实际上，固定资产的评价额是有些水分的，土地价格一般是按照当时土地价格的60%&#8211;70%、建筑物价格是按照建筑费的50%&#8211;70%进行评价的，所以，评价额度为3000万的别墅式住宅实际购置价格是4500万或者更多，这样看来，日本人房产税的年度实际税率为：0.4%。其中评价额尤其是土地的评价额是随着市场状况的变化而变化的。</p>
-
-<p>给出的是某块土地价格变化的曲线图，用的是日本年度，2年是平成2年，也就是1990年，3年是1991年，以此类推。可以看出，日本泡沫经济时代的土地价格以及泡沫破灭以后房地产价格的连年下降，需要注意的是，日本房产泡沫（1993年）破灭稍稍晚于日本经济泡沫破灭（1991年）。</p>
 ]]></content>
   </entry>
   
