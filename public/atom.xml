@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-09-18T23:09:48+08:00</updated>
+  <updated>2016-09-20T15:00:13+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[装机i5-6500]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500/"/>
+    <updated>2016-09-19T22:08:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500</id>
+    <content type="html"><![CDATA[<p>许久没有装机了，入了如下的配置:</p>
+
+<p>intel i5-6500 1150，散热器采融B48 99，技嘉 B150M-D3H 599，芝奇 DDR4 2400 395，2016年买入， 合计2243元</p>
+
+<ol>
+<li>货物来源</li>
+</ol>
+
+
+<p>某宝买散片和散热器，某东买入主板和内存。原因在于散片确实比盒装的便宜很多，差价在300的样子，而京东等电商基本不做散片的生意。而主板的价格相对统一的多，内存差价也不大，所以就还是京东买了。</p>
+
+<ol>
+<li>cpu插座保护盖及安装注意事项</li>
+</ol>
+
+
+<p>自己diy还是有一定的风险。而且真的自己装cpu还是第一次，一开始搞主板的cpu保护插座还费了点事情。好在有惊无险。这个保护盖一定不要先揭走，而是要等到安装完cpu后自己会弹出来。主要是保护插座上的针脚。iU现在本身只有垫片了，针脚全在主板上，所以主板容易弄坏。</p>
+
+<ol>
+<li>散热器的安装，包括硅胶涂在cpu上</li>
+</ol>
+
+
+<p>cpu安装好，压好架子后就可以涂硅胶装散热器了。硅胶可以用九点法后直接压上去，也可以涂在中间，然后用散热器磨开来。我用的是后面这个法子。一般都应该行得通，反正只是为了保证散热器和cpu的接触面积。
+分散和散热器采融48采用的是搭扣，其实就是靠线扣的弹力自己箍上去的。</p>
+
+<ol>
+<li>UEFI与GPT和win10</li>
+</ol>
+
+
+<p>技嘉这个新板子默认就是UEFI的界面，比bios启动快一些吧。win10装好，10秒内可以启动成功。2年前买的ssd终于找到了相得益彰的平台。</p>
+
+<ol>
+<li>网卡驱动，win10默认也没有</li>
+</ol>
+
+
+<p>即使装了win10，网卡驱动也要另外装的，默认并不提供。</p>
+
+<p>附最近12年的配过的自己的机器，应该还漏了一台</p>
+
+<p>AMD barton 2500+ KST 512M ddr400 日立 7k250 120g/2m 华硕 a7v600-x 迪兰横进 9600pro 2004年4月买的，花了38xx</p>
+
+<p>AMD Athlon II X4 640,4GB KST DDR1333，技嘉 MA770T-UD3P 主板，华硕EAH5750显卡，安钛克BP430plus电源，机箱，无硬盘，2011年买入，花了2615元。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[spring boot in action]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action/"/>
+    <updated>2016-09-19T14:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action</id>
+    <content type="html"><![CDATA[<ul>
+<li>Auto-Config</li>
+<li>用starter处理依赖</li>
+<li>CLI 命令行处理启动等</li>
+<li>Actuator 监控组件 , 通过web或者shell</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>spring version 
+</span><span class='line'>spring --version
+</span><span class='line'>spring shell # windows下打开可以自动补全的功能</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>工程初始化</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
+</span><span class='line'>spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@SpringBootApplication
+</span><span class='line'>public class DemoddfApplication {
+</span><span class='line'>
+</span><span class='line'>public static void main(String[] args) {
+</span><span class='line'>SpringApplication.run(DemoddfApplication.class, args);
+</span><span class='line'>}
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
+
+<p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
+starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于冠道]]></title>
@@ -1733,46 +1840,6 @@
 
 
 <p>在Session范围内使用注入的逻辑还是很清晰的，只是需要注意一下redirect带来的坑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[安卓开发初体验]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan/"/>
-    <updated>2015-10-18T17:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan</id>
-    <content type="html"><![CDATA[<p>鉴于项目形势所迫，对一个安卓的demo只能自己直接来了。
-也算半逼之下入门了安卓开发。以下面这张图来论，</p>
-
-<p><img src="../images/androidmap.jpg" alt="安卓学习路线图" /></p>
-
-<p>基础部分基本上java web开发工程师都是具备的，入门部分大致跟着google的开发
-文档做完第一个例子也就都接触到了。
-高级主题里面倒是碰了百度地图和Webview这两个必须接触的东西。</p>
-
-<p>就入门而言，学习资料很丰富，尤其是安卓的开发文档还是很全面的，比大部分开源软件的
-教程要强许多，毕竟是有正经的商业公司全面支持的。</p>
-
-<p>就编程而言，全部基于Java的，不像Web开发要再切换到Javascript，整个体系的一致性
-更好，编写起来还是轻松愉快的。而传递参数方面，摆脱了必须从客户端到服务端，如果是在
-界面中跳转其实要比Web方便。这其实也是一个进程间、线程间通信的事情，而作为App，
-其通信的方式还是很丰富的。从最基础的Intent，到手机上各应用系统的彼此调用，
-以及Json传递会服务端等，可以玩的花样很多。</p>
-
-<p>对于任何写过界面的Java程序员，上手安卓应用开发应该还都是挺轻松的。
-毕竟大部分需要的技能有重合，而体系上安卓也更适合学习。当然，学安卓也有特定的痛苦，
-比如屏幕尺寸及比例、API升级快导致节奏混乱。不过在手机端确实是个值得投入的东西。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[看了新逍客的定价和配置庆幸没等待]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/10/17/kan-liao-xin-xiao-ke-de-ding-jie-he-pei-zhi-qing-xing-mei-deng-dai/"/>
-    <updated>2015-10-17T19:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/10/17/kan-liao-xin-xiao-ke-de-ding-jie-he-pei-zhi-qing-xing-mei-deng-dai</id>
-    <content type="html"><![CDATA[<p>逍客一直挺心仪的一辆车，原本是替换家里老凯越的重要备选对象。老一代的逍客据说做工和用料越来越渣，尽管车价也是越来越便宜了，所以主要考虑换代的新逍客。无奈车险八九月间就要到期，而之前逍客说要到11月份才会上市，于是来不及等待改提了CRV 2.4的入门版。</p>
-
-<p>但新逍客出来之后，老实讲挺让人失望的。于是反而庆幸没有等逍客而入手了CRV。拿2.4入门版和逍客2.0顶配版来论，逍客作为一个全新换代的车型，配置上竟然比配置已经很一般的CRV还要渣。顶配还算比crv多了前雷达和全景视频系统，但次配以下竟然雷达基本不配，一副有了摄像头就不要雷达的样子。但根据我的经验，雷达的帮助绝对比视频多。而且也同样没有很有用的自动大灯，比起crv还少了后排出风口、后视镜电动折叠这样一些很实用的舒适性配置。可能逍客在高速、操控等方面是有优势的，但确实和我的需求关系不大。至于价钱，目录价只差4万，以本田这样一路奔着3万优惠下去的腔调，实在还是CRV值多了。</p>
 ]]></content>
   </entry>
   

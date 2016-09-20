@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-09-18T23:09:48+08:00</updated>
+  <updated>2016-09-20T15:00:13+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[spring boot in action]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action/"/>
+    <updated>2016-09-19T14:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action</id>
+    <content type="html"><![CDATA[<ul>
+<li>Auto-Config</li>
+<li>用starter处理依赖</li>
+<li>CLI 命令行处理启动等</li>
+<li>Actuator 监控组件 , 通过web或者shell</li>
+</ul>
+
+
+<p><code>
+spring version
+spring --version
+spring shell # windows下打开可以自动补全的功能
+</code></p>
+
+<h3>工程初始化</h3>
+
+<p><code>
+spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
+spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录
+</code></p>
+
+<p>```
+@SpringBootApplication
+public class DemoddfApplication {</p>
+
+<p>public static void main(String[] args) {
+SpringApplication.run(DemoddfApplication.class, args);
+}
+}
+```</p>
+
+<p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
+
+<p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
+starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[禁用http的一些方法]]></title>
@@ -159,74 +202,6 @@ org.hibernate.cfg.ImprovedNamingStrategy
 
 <p>首两个选项基本就是不做命名的转换，后面两个会把大小写的骆驼写法转换成带下划线的小写字符。同时，这个类可以自己继承并进行扩展定制，如果命名要求实在特殊，可以自行编写。
 甚至表名后带日期等均可以自行定制。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[文艺的HashMap初始化]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/"/>
-    <updated>2015-11-23T20:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua</id>
-    <content type="html"><![CDATA[<p>多年以来，受制于java没有初始设置<code>hash</code>对-值的方法，例如js有：</p>
-
-<p><code>javascript
-var obj = {
-  a: 1, b: 2
-};
-</code></p>
-
-<p>ruby在借鉴js的文法之前，有著名的rocket标注</p>
-
-<p><code>ruby
-obj = {:a=&gt;1, :b=:2}
-</code></p>
-
-<p>而java则只能继续使用过程定义来描述</p>
-
-<p><code>java
-Map&lt;String, integer&gt; map = new HashMap&lt;String, integer&gt;();
-map.put("a", 1);
-map.put("b", 2);
-</code></p>
-
-<p>而最近发现了一种文艺一些的写法：</p>
-
-<p>```java
-Map&lt;String, integer> map = new HashMap&lt;String, integer>(){
-  {</p>
-
-<pre><code>put("a", 1);
-put("b", 2);
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>```</p>
-
-<p>此种写法是利用了创建一个匿名类的文法，该匿名类直接继承自HashMap，而第二套花括弧则是实例初始化。</p>
-
-<p>实例初始化是对应于静态初始化，后者属于整个类，而前者属于某个对象初始化时进行。</p>
-
-<p>```java
-public class demo {
-  static {</p>
-
-<pre><code>do sth of class
-</code></pre>
-
-<p>  }</p>
-
-<p>  {</p>
-
-<pre><code>do sth of instance
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<p>其实这种写法的代码行数并不少，但是语意，主要是段落的分割清楚了许多。</p>
 ]]></content>
   </entry>
   

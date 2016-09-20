@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-09-18T23:09:48+08:00</updated>
+  <updated>2016-09-20T15:00:13+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[spring boot in action]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action/"/>
+    <updated>2016-09-19T14:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action</id>
+    <content type="html"><![CDATA[<ul>
+<li>Auto-Config</li>
+<li>用starter处理依赖</li>
+<li>CLI 命令行处理启动等</li>
+<li>Actuator 监控组件 , 通过web或者shell</li>
+</ul>
+
+
+<p><code>
+spring version
+spring --version
+spring shell # windows下打开可以自动补全的功能
+</code></p>
+
+<h3>工程初始化</h3>
+
+<p><code>
+spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
+spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录
+</code></p>
+
+<p>```
+@SpringBootApplication
+public class DemoddfApplication {</p>
+
+<p>public static void main(String[] args) {
+SpringApplication.run(DemoddfApplication.class, args);
+}
+}
+```</p>
+
+<p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
+
+<p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
+starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
@@ -310,55 +353,6 @@ public class ShoppingCart implements Serializable{
 
 <p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
 毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Spring 4 中的新东西]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi/"/>
-    <updated>2015-05-04T14:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/04/spring-4-zhong-de-xin-dong-xi</id>
-    <content type="html"><![CDATA[<p>Spring还在继续提高与演进中。</p>
-
-<h3>3.1中的新东西</h3>
-
-<ul>
-<li>environment profiles，支持development、test和production等条件下独特的配置</li>
-<li>增加enable annotations，在Java文件配置中</li>
-<li>Declarative caching support，像支持事务一样支持缓存</li>
-<li>支持Servlet 3.0，包括在java文件中声明servlets和filters，而不仅仅是在web.xml中</li>
-<li>JPA支持的提升，可以不再需要persistence.xml</li>
-<li>自动绑定路径便利给model属性</li>
-<li>支持对Accept和Content-Type消息头的匹配，通过@RequestMappingproduces</li>
-<li>绑定部分二进制表单请求给方法参数，通过@RequestPart，比@RequestParam更强大（只能对请求参数数据绑定，key-alue格式），而@RequestPart支持如JSON、XML内容区数据的绑定</li>
-<li>flash属性的支持</li>
-<li>JpaTemplate和JpaDaoSupport让位于EntityManager</li>
-</ul>
-
-
-<h3>3.2中的新东西</h3>
-
-<ul>
-<li>支持servlet 3中的异步请求，使得一个请求可以在独立的线程中被处理，让servlet线程可以处理更多的请求</li>
-<li>Spring MVC的test框架，包括RestTemplate的测试支持</li>
-<li>@controllerAdvice使得@ModelAttributes等控制器的方法可以在单个类中重新组织</li>
-<li>ContentNegotiatingViewResolver</li>
-<li>@MatrixVariable</li>
-<li>Rest方面的改进与支持</li>
-</ul>
-
-
-<h3>4.0中的新东西</h3>
-
-<ul>
-<li>WebSocket的支持，包括JSR-356中Java API对WebSocket的支持</li>
-<li>SockJS/STOMP对WebSocket和消息模块的封装</li>
-<li>Java 8 特性的应用，比如lambda。callback interface的使用变简单了，如RowMapper和JdbcTemplate</li>
-<li>Java 8中的时间日期api</li>
-<li>RestTemplate的一个异步版实现</li>
-<li>新增对JMS 2.0 JTA 1.2， JPA 2.1的支持</li>
-</ul>
-
 ]]></content>
   </entry>
   
