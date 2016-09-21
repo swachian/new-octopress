@@ -63,3 +63,75 @@ username: dbuser
 password: dbpass
 driver-class-name: com.mysql.jdbc.Driver
 ```
+
+### 属性信息的几种来源
+
+1 Command-line arguments
+2 JNDI attributes from java:comp/env
+3 JVM system properties
+4 Operating system environment variables
+5 Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})
+6 An application.properties or application.yml file outside of the application
+7 An application.properties or application.yml file packaged inside of the application
+8 Property sources specified by @PropertySource
+9 Default properties
+
+在application.properties中指定`spring.profiles.active`的值后，boot就会读取application-{active}.properties的值
+
+
+### 自动化测试
+
+@WebIntegrationTest Test class有这个标注就会让spring启动一个测试的tomcat或jetty进程
+
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(
+classes=ReadingListApplication.class)
+@WebIntegrationTest
+
+public class SimpleWebTest {
+@Test(expected=HttpClientErrorException.class)
+public void pageNotFound() {
+try {
+RestTemplate rest = new RestTemplate();
+rest.getForObject(
+"http://localhost:8080/bogusPage", String.class);
+fail("Should result in HTTP 404");
+} catch (HttpClientErrorException e) {
+assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
+throw e;
+}
+}
+}
+```
+
+代入参数
+`@WebIntegrationTest(value={"server.port=0"})` 和 `@WebIntegrationTest("server.port=0")`
+
+selenium的用ie模拟访问自己的服务很有意思，值得制作一个。
+
+```java
+                FirefoxDriver browser = new FirefoxDriver();
+    browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    String baseUrl = "http://www.baidu.com/";
+    browser.get(baseUrl);
+    String currentUrl = browser.getCurrentUrl();
+    assertEquals(baseUrl +"/readingList", currentUrl);
+
+    assertEquals("You have no books in your book list", 
+                 browser.findElementByTagName("div").getText());
+
+    browser.findElementByName("title").sendKeys("BOOK TITLE");
+    browser.findElementByName("author").sendKeys("BOOK AUTHOR");
+    browser.findElementByName("isbn").sendKeys("1234567890");
+    browser.findElementByName("description").sendKeys("DESCRIPTION");
+    browser.findElementByTagName("form").submit();
+    
+    WebElement dl = 
+        browser.findElementByCssSelector("dt.bookHeadline");
+    assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", 
+                 dl.getText());
+    WebElement dt = 
+        browser.findElementByCssSelector("dd.bookDescription");
+    assertEquals("DESCRIPTION", dt.getText());
+```
