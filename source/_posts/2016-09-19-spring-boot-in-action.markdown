@@ -135,3 +135,80 @@ selenium的用ie模拟访问自己的服务很有意思，值得制作一个。
         browser.findElementByCssSelector("dd.bookDescription");
     assertEquals("DESCRIPTION", dt.getText());
 ```
+
+《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版 
+
+
+/beans 列出创建的全部bean
+/autoconfig 列出自动配置生效和未生效的内容
+/env 列出设置的环境
+/configprops 列出所有的参数
+/metrics 列出访问的指标
+/trace 给出近100个http请求的处理信息
+/dump 给出所有线程的情况
+/health 表明是否UP
+/info 列出属性文件中info.开头的信息，但似乎有乱码
+
+actuator的remote shell
+默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问
+
+```
+ssh user@localhost -p 2000
+Password authentication
+Password:
+```
+
+自己定义metrics：
+
+actuator有CounterService服务，可以用于增加值。
+```
+public interface CounterService {
+void increment(String metricName);
+void decrement(String metricName);
+void reset(String metricName);
+}
+
+
+
+```
+
+GaugeService是记录值
+
+```
+public interface GaugeService {
+void submit(String metricName, double value);
+}
+```
+
+自定义Health
+
+```
+@Component
+public class AmazonHealth implements HealthIndicator {
+@Override
+public Health health() {
+try {
+RestTemplate rest = new RestTemplate();
+rest.getForObject("http://www.amazon.com", String.class);
+return Health.up().build();
+} catch (Exception e) {
+return Health.down().build();
+}
+}
+}
+
+//还可以加入更多的细节内容，使用withDetail
+
+return Health.down().withDetail("reason", e.getMessage()).build();
+
+
+
+```
+
+上述endPoint的保护需采用所有spring暴露的链接一致的方式
+
+`management.context-path=/mgmt`，其中的`management.context-path`可以给spring actuator定义全部的前缀
+
+这样可便于统一控制
+`.antMatchers("/mgmt/**").access("hasRole('ADMIN')")`
+
