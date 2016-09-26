@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-09-20T15:00:13+08:00</updated>
+  <updated>2016-09-26T16:10:10+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -53,6 +53,205 @@ SpringApplication.run(DemoddfApplication.class, args);
 
 <p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
 starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
+
+<h3>自动配置定制化的举例</h3>
+
+<p>安全是最好的需要自己自行设置的例子，not one--size-fits-all。
+这是yml方式
+<code>
+server:
+port: 8443
+ssl:
+key-store: file:///path/to/mykeys.jks
+key-store-password: letmein
+key-password: letmein
+</code></p>
+
+<p>配置数据源</p>
+
+<p><code>
+spring:
+datasource:
+url: jdbc:mysql://localhost/readinglist
+username: dbuser
+password: dbpass
+driver-class-name: com.mysql.jdbc.Driver
+</code></p>
+
+<h3>属性信息的几种来源</h3>
+
+<ol>
+<li>Command-line arguments</li>
+<li>JNDI attributes from java:comp/env</li>
+<li>JVM system properties</li>
+<li>Operating system environment variables</li>
+<li>Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})</li>
+<li>An application.properties or application.yml file outside of the application</li>
+<li>An application.properties or application.yml file packaged inside of the application</li>
+<li>Property sources specified by @PropertySource</li>
+<li>Default properties</li>
+</ol>
+
+
+<p>在application.properties中指定<code>spring.profiles.active</code>的值后，boot就会读取application-{active}.properties的值</p>
+
+<h3>自动化测试</h3>
+
+<p>@WebIntegrationTest Test class有这个标注就会让spring启动一个测试的tomcat或jetty进程</p>
+
+<p>```
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(
+classes=ReadingListApplication.class)
+@WebIntegrationTest</p>
+
+<p>public class SimpleWebTest {
+@Test(expected=HttpClientErrorException.class)
+public void pageNotFound() {
+try {
+RestTemplate rest = new RestTemplate();
+rest.getForObject(
+"http://localhost:8080/bogusPage", String.class);
+fail("Should result in HTTP 404");
+} catch (HttpClientErrorException e) {
+assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
+throw e;
+}
+}
+}
+```</p>
+
+<p>代入参数
+<code>@WebIntegrationTest(value={"server.port=0"})</code> 和 <code>@WebIntegrationTest("server.port=0")</code></p>
+
+<p>selenium的用ie模拟访问自己的服务很有意思，值得制作一个。</p>
+
+<p>```java</p>
+
+<pre><code>            FirefoxDriver browser = new FirefoxDriver();
+browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+String baseUrl = "http://www.baidu.com/";
+browser.get(baseUrl);
+String currentUrl = browser.getCurrentUrl();
+assertEquals(baseUrl +"/readingList", currentUrl);
+
+assertEquals("You have no books in your book list", 
+             browser.findElementByTagName("div").getText());
+
+browser.findElementByName("title").sendKeys("BOOK TITLE");
+browser.findElementByName("author").sendKeys("BOOK AUTHOR");
+browser.findElementByName("isbn").sendKeys("1234567890");
+browser.findElementByName("description").sendKeys("DESCRIPTION");
+browser.findElementByTagName("form").submit();
+
+WebElement dl = 
+    browser.findElementByCssSelector("dt.bookHeadline");
+assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", 
+             dl.getText());
+WebElement dt = 
+    browser.findElementByCssSelector("dd.bookDescription");
+assertEquals("DESCRIPTION", dt.getText());
+</code></pre>
+
+<p>```</p>
+
+<p>《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版</p>
+
+<p>/beans 列出创建的全部bean<br/>
+/autoconfig 列出自动配置生效和未生效的内容<br/>
+/env 列出设置的环境<br/>
+/configprops 列出所有的参数<br/>
+/metrics 列出访问的指标<br/>
+/trace 给出近100个http请求的处理信息<br/>
+/dump 给出所有线程的情况<br/>
+/health 表明是否UP<br/>
+/info 列出属性文件中info.开头的信息，但似乎有乱码</p>
+
+<p>actuator的remote shell
+默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问</p>
+
+<p><code>
+ssh user@localhost -p 2000
+Password authentication
+Password:
+</code></p>
+
+<p>自己定义metrics：</p>
+
+<p>actuator有CounterService服务，可以用于增加值。
+```
+public interface CounterService {
+void increment(String metricName);
+void decrement(String metricName);
+void reset(String metricName);
+}</p>
+
+<p>```</p>
+
+<p>GaugeService是记录值</p>
+
+<p><code>
+public interface GaugeService {
+void submit(String metricName, double value);
+}
+</code></p>
+
+<p>自定义Health</p>
+
+<p>```
+@Component
+public class AmazonHealth implements HealthIndicator {
+@Override
+public Health health() {
+try {
+RestTemplate rest = new RestTemplate();
+rest.getForObject("http://www.amazon.com", String.class);
+return Health.up().build();
+} catch (Exception e) {
+return Health.down().build();
+}
+}
+}</p>
+
+<p>//还可以加入更多的细节内容，使用withDetail</p>
+
+<p>return Health.down().withDetail("reason", e.getMessage()).build();</p>
+
+<p>```</p>
+
+<p>上述endPoint的保护需采用所有spring暴露的链接一致的方式</p>
+
+<p><code>management.context-path=/mgmt</code>，其中的<code>management.context-path</code>可以给spring actuator定义全部的前缀</p>
+
+<p>这样可便于统一控制
+<code>.antMatchers("/mgmt/**").access("hasRole('ADMIN')")</code></p>
+
+<h3>部署时调整production环境变量</h3>
+
+<p><code>@Profile("production")</code></p>
+
+<p><code>export SPRING_PROFILES_ACTIVE=production</code></p>
+
+<p>最简单的是export active的环境变量为<code>production</code></p>
+
+<h3>spring的db migrate，不算很实用吧</h3>
+
+<p>Spring Boot includes auto-configuration support for two popular database migration
+libraries:<br/>
+■ Flyway (http://flywaydb.org)  --- 直接采用SQL编写ddl<br/>
+■ Liquibase (www.liquibase.org) --- 使用yaml json等</p>
+
+<h3>附录</h3>
+
+<p><code>
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></p>
+
+<p>开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
+public, /templates.</p>
 ]]></content>
   </entry>
   

@@ -66,17 +66,18 @@ driver-class-name: com.mysql.jdbc.Driver
 
 ### 属性信息的几种来源
 
-1 Command-line arguments
-2 JNDI attributes from java:comp/env
-3 JVM system properties
-4 Operating system environment variables
-5 Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})
-6 An application.properties or application.yml file outside of the application
-7 An application.properties or application.yml file packaged inside of the application
-8 Property sources specified by @PropertySource
-9 Default properties
+1. Command-line arguments
+2. JNDI attributes from java:comp/env
+3. JVM system properties
+4. Operating system environment variables
+5. Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})
+6. An application.properties or application.yml file outside of the application
+7. An application.properties or application.yml file packaged inside of the application
+8. Property sources specified by @PropertySource
+9. Default properties
 
 在application.properties中指定`spring.profiles.active`的值后，boot就会读取application-{active}.properties的值
+
 
 
 ### 自动化测试
@@ -139,15 +140,15 @@ selenium的用ie模拟访问自己的服务很有意思，值得制作一个。
 《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版 
 
 
-/beans 列出创建的全部bean
-/autoconfig 列出自动配置生效和未生效的内容
-/env 列出设置的环境
-/configprops 列出所有的参数
-/metrics 列出访问的指标
-/trace 给出近100个http请求的处理信息
-/dump 给出所有线程的情况
-/health 表明是否UP
-/info 列出属性文件中info.开头的信息，但似乎有乱码
+/beans 列出创建的全部bean  
+/autoconfig 列出自动配置生效和未生效的内容  
+/env 列出设置的环境  
+/configprops 列出所有的参数  
+/metrics 列出访问的指标  
+/trace 给出近100个http请求的处理信息  
+/dump 给出所有线程的情况  
+/health 表明是否UP  
+/info 列出属性文件中info.开头的信息，但似乎有乱码  
 
 actuator的remote shell
 默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问
@@ -211,4 +212,31 @@ return Health.down().withDetail("reason", e.getMessage()).build();
 
 这样可便于统一控制
 `.antMatchers("/mgmt/**").access("hasRole('ADMIN')")`
+
+###部署时调整production环境变量
+
+`@Profile("production")`
+
+`export SPRING_PROFILES_ACTIVE=production`
+
+最简单的是export active的环境变量为`production`
+
+### spring的db migrate，不算很实用吧  
+Spring Boot includes auto-configuration support for two popular database migration
+libraries:  
+■ Flyway (http://flywaydb.org)  --- 直接采用SQL编写ddl  
+■ Liquibase (www.liquibase.org) --- 使用yaml json等  
+
+
+###附录
+
+```
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-devtools</artifactId>
+</dependency>
+```
+
+开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
+public, /templates.
 
