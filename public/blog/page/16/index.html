@@ -9,9 +9,16 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="距上次考软考的中级项目经理已经有将近半年的时间。看了软考证书的性质一直想再去考一个高级的证书出来。
-毕竟这个证书既然上海居转户认可，那么就有其权威的性质。起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年
-论文等事宜，准备一门新的考试的时间并非很充足， &hellip;">
+  <meta name="description" content="来自视频的笔记 Rails.queue 1
+2
+3
+4
+5
+6
+7
+8
+class ExpensiveOperation def run end
+end Rails.queue.push(ExpensiveOperation.new) config.queue = Sidekiq::Client &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +76,149 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/23/whats-new-in-rails-4/">What&#8217;s New in Rails 4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T22:00:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>来自<a href="http://vimeo.com/51181496">视频</a>的笔记</p>
+
+<h3>Rails.queue</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ExpensiveOperation
+</span><span class='line'>  def run
+</span><span class='line'>   
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Rails.queue.push(ExpensiveOperation.new)
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>config.queue = Sidekiq::Client::Queue #Resque, delayed_job</p>
+
+<h3>strong_parameters</h3>
+
+<p>Alternative to MassAssignmentSecurity</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class PostsController &lt; ApplicationController
+</span><span class='line'>  def create
+</span><span class='line'>     @post = Post.create(post_params)
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  private
+</span><span class='line'>  def post_params
+</span><span class='line'>    params.require(:post).permit(:title, :body)
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Turbolinks</h3>
+
+<h3>Cache Digests(Russian Doll Caching)</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># app/views/projects/show.html.erb
+</span><span class='line'>&lt;% cache project do %&gt;
+</span><span class='line'>  &lt;h1&gt; &lt;/h1&gt;
+</span><span class='line'>  &lt;%= render project.documents %&gt;
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ActionController::Live</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>include ActionController::Live
+</span><span class='line'>
+</span><span class='line'>response.stream.write "hello\n"
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PATCH Verb</h3>
+
+<p>just as PUT</p>
+
+<h3>Plugins are dead; long live plugins</h3>
+
+<p>use gems with bundle</p>
+
+<h3>lambda scope</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scope :published, -&gt; { where(:published =&gt; true) }
+</span><span class='line'>
+</span><span class='line'>#Pitfall 
+</span><span class='line'>scoped :recent, where("created_at &gt; ?", 1.week.ago)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>@sikachu</p>
+
+<p>Routing Concerns</p>
+
+<p>Long live activeresource</p>
+
+<p>The changes seem not to be surprising compared with those from Rails 2.3 to Rails 3.0. And perhaps less than from 3.0 to 3.1.
+They are real slight for Rails. I guess this is due to DHH have just had a Colt HH. The same for me!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -684,56 +834,6 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/">Heroku&#8217;s Buildpacks and Redeploy for Jekyll and Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-21T09:46:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
-只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
-难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
-
-<p>试了一下，jekyll的是完全可以产生的。但是对octopress并非完全适用。
-首先，对heroku而言，默认有一个<code>.slugignore</code>文件中会把source等3个文件排除在外，而没有这3个文件无法generate。但有了这3个文件，slug的体积就变大。</p>
-
-<p>其次，有个gem需要使用python的库，无法在heroku上直接运行。</p>
-
-<p>而作为苦逼的中国用户，还会碰到编码问题。</p>
-
-<p>合在一起，其实原因可归结为一个，即如果generate牵涉的东西太多则不适合在heroku这样的平台按照 build/run的方式使用，毕竟环境不是完全能模拟本机的，
-也不是自己的服务器环境可以自己装。</p>
-
-<p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -751,6 +851,10 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/28/hun-dong-ya-ge/">混动雅阁</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/19/zhuang-ji-i5-6500/">装机i5-6500</a>
       </li>
     
@@ -766,15 +870,11 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
         <a href="/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/">nginx 通过Lua输出response body</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu-%3F/">车位问题该不该找政府？</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (33)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (34)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

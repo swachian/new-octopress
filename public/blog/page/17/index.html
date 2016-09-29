@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content=" 来自37sigals的转载 个人觉得应当以‘Really works’为最低目标， 大部分组件的使用都应该达到&#8217;Well engineered&#8217;，
-至于Beautiful和Moving industry forward则要看运气了。
-">
+  <meta name="description" content="Heroku是永远能给人带来惊喜的厂商，Builpacks
+只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成buildpack。
+难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。 试了一下， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/">Heroku&#8217;s Buildpacks and Redeploy for Jekyll and Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-21T09:46:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
+只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
+难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
+
+<p>试了一下，jekyll的是完全可以产生的。但是对octopress并非完全适用。
+首先，对heroku而言，默认有一个<code>.slugignore</code>文件中会把source等3个文件排除在外，而没有这3个文件无法generate。但有了这3个文件，slug的体积就变大。</p>
+
+<p>其次，有个gem需要使用python的库，无法在heroku上直接运行。</p>
+
+<p>而作为苦逼的中国用户，还会碰到编码问题。</p>
+
+<p>合在一起，其实原因可归结为一个，即如果generate牵涉的东西太多则不适合在heroku这样的平台按照 build/run的方式使用，毕竟环境不是完全能模拟本机的，
+也不是自己的服务器环境可以自己装。</p>
+
+<p>所以，在浪费了无数的时间之后，决定还是先用略显不舒服的办法继续运行。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -732,45 +782,6 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/13/yueyin-foxmail-cracker/">月影 Foxmail Cracker</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-13T10:28:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我的邮箱帐号密码还是挺成体系的。但是还是有一个的帐号比较特殊，使得我也忘了。
-于是找了一个月影foxmail密码的cracker工具。使用下来，效果很不错。也足够简练。</p>
-
-<p>个人觉得如何破解foxmail的密码都可以写一篇不错的论文。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -788,6 +799,10 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/28/hun-dong-ya-ge/">混动雅阁</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/19/zhuang-ji-i5-6500/">装机i5-6500</a>
       </li>
     
@@ -803,15 +818,11 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
         <a href="/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/">nginx 通过Lua输出response body</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu-%3F/">车位问题该不该找政府？</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (33)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (34)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>
