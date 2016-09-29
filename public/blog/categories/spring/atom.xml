@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-10-07T15:22:15+08:00</updated>
+  <updated>2016-09-29T17:20:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -282,6 +282,27 @@ public, /templates.</p>
 ```</p>
 
 <p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+
+<p>---- update on 2016.10.17</p>
+
+<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
+
+<p>```java
+static RestTemplate restTemplate = new RestTemplate();
+  static {</p>
+
+<pre><code>List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
+for (HttpMessageConverter&lt;?&gt; convert : converts) {
+  if (convert.getClass() == StringHttpMessageConverter.class) {
+    ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
+  }
+}
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   

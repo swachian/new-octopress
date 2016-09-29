@@ -9,11 +9,12 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="混动雅阁千呼万唤历经两年时间终于摆在了中国消费者的面前。而其定价也可谓
-相当合理： 酷版： 23.98万元
-领版： 25.98万元
-尊版： 27.98万元 价格基本和2.4版本的衔接，并且顶配也没超过原来3.0的次顶配。
-因此，这个价钱是定的相当有诚意。 本田在日系里还是有点运动基因， &hellip;">
+  <meta name="description" content="最近买了几款车用空调滤芯。 韦斯特带炭
+高仿本田原厂
+博世不带炭 三款里用下来其实还是韦斯特的最好些，仿品可能也不错，但用的时间不够长。
+至于博世不带炭的，那真的是对柴油车尾气毫无过滤能力的，可能虑灰还不错，
+但对异味和柴油颗粒物就有点无能为力了。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +72,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">几种空调滤芯</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-10-07T15:24:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近买了几款车用空调滤芯。</p>
+
+<ol>
+<li>韦斯特带炭</li>
+<li>高仿本田原厂</li>
+<li>博世不带炭</li>
+</ol>
+
+
+<p>三款里用下来其实还是韦斯特的最好些，仿品可能也不错，但用的时间不够长。
+至于博世不带炭的，那真的是对柴油车尾气毫无过滤能力的，可能虑灰还不错，
+但对异味和柴油颗粒物就有点无能为力了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1031,74 +1079,33 @@ public, /templates.</p>
 
 
 <p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
-</div>
-  
-  
+
+<p>&#8212;- update on 2016.10.17</p>
+
+<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">converts</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getMessageConverters</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;</span> <span class="n">convert</span> <span class="o">:</span> <span class="n">converts</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">convert</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">StringHttpMessageConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="o">((</span><span class="n">StringHttpMessageConverter</span><span class="o">)</span> <span class="n">convert</span><span class="o">).</span><span class="na">setWriteAcceptCharset</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/10/zzhuan-zheng-liu-cheng/">换证流程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-10T21:57:00+08:00" pubdate data-updated="true">May 10<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>地点</strong>： 杨高中路1500号， 浦东交警支队<br/>
-<strong>时间</strong>: 2016年5月10日下午3点半</p>
-
-<p>三点多从公司出发，20分钟左右抵达。到门口发现说停车场不对外接待，其实也不是不对外，只是确实很容易就满了然后就不放了。
-建议停蓝天路等社会停车场。于是转到蓝天路，停车费<u>10</u>块。收费的师傅还问我来的挺晚啊，不过这个点到人应该少了。
-看来附近也是肥缺。</p>
-
-<p>3点半到大厅，看上去人也不是很多。</p>
-
-<ol>
-<li><p>先问左手边的老爷苏领了表格，他看了看我的身份证和驾照，确定是在90天之内后，
-表格给我并告诉我拍照、复印、体检都在左面一排。</p></li>
-<li><p>复印件已经有了，只要正面就可以，最后在窗口工作人员会剪下正面并贴在申报的材料上。</p></li>
-<li><p>牌照<u>25</u>元，需要提供身份证和驾照，付完钱当场拍，还是会让你尽量衣服整理好并摆好姿势。</p></li>
-<li><p>等照片的过程中，可以去体检的地方填表，提交要交<u>60</u>元。填完个人信息后，一般照片也就打印好了，
-体检工作人员会帮忙剪下来并贴到刚填的体检表上。今天碰到的医生挺认真负责，视力检查每个眼睛要看3个标识，
-色盲色弱也要看很多图形，而且她那个色盲检查本还是挺混淆的，属于比较吃力的一类。而前面其他两个人则被她要求重测和找眼镜废了
-不少时间。至于握力、蹲下等动作倒是没有测试。最后给的发票是杨思医院出具的，看来也是合作医院。</p></li>
-<li><p>弄好之后，拿上照片、体检表、登记表就可以再找老爷叔去了，会给一个排队的号，到手的时候提示前面还有9人。
-当天有4个换证窗口开放，所以等待的时间并不多。</p></li>
-<li><p>在窗口递上材料，然后就是等工作人员干活，就没我什么事情了。她输入各种信息结束后，给一张牌子，告知在旁边的窗口凭牌子领证。
-问了下大概要多少时间，直接答复一刻钟左右。</p></li>
-<li><p>实际上很快，去趟厕所的时间然后再等了1分钟，就叫到号了。付<u>10</u>元，给你驾照的正页、副页、封皮。</p></li>
-</ol>
-
-
-<p>整个过程还是很快的，40分钟左右基本就办完了。</p>
-
-<p>查了下现行的规定，如果在过去的6年内有过一年满12分的记录，那这次的有效期
-就只有6年而不是10年了。我的新证件的有效期是10年，正页上开始和结束结束的月、日和过去的一样，副页上会写上从当天开始生效。
-所以对记分周期没有任何影响。</p>
-
-<p>总体而言，还是挺愉快的一次和政府打交道的体验。</p>
+<p>获得converts，然后对String的Convert进行设置</p>
 </div>
   
   
@@ -1121,6 +1128,10 @@ public, /templates.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">几种空调滤芯</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/28/hun-dong-ya-ge/">混动雅阁</a>
       </li>
     
@@ -1136,15 +1147,11 @@ public, /templates.</p>
         <a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/">nginx 通过Lua输出response body</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (34)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li></ul>
 </section>
   
 </aside>

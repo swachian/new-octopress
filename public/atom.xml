@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-10-07T15:22:15+08:00</updated>
+  <updated>2016-09-29T17:20:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[几种空调滤芯]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/10/07/ji-chong-kong-diao-lu-xin/"/>
+    <updated>2016-10-07T15:24:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/10/07/ji-chong-kong-diao-lu-xin</id>
+    <content type="html"><![CDATA[<p>最近买了几款车用空调滤芯。</p>
+
+<ol>
+<li>韦斯特带炭</li>
+<li>高仿本田原厂</li>
+<li>博世不带炭</li>
+</ol>
+
+
+<p>三款里用下来其实还是韦斯特的最好些，仿品可能也不错，但用的时间不够长。
+至于博世不带炭的，那真的是对柴油车尾气毫无过滤能力的，可能虑灰还不错，
+但对异味和柴油颗粒物就有点无能为力了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[混动雅阁]]></title>
@@ -733,6 +753,33 @@ public, /templates.</p>
 
 
 <p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+
+<p>&#8212;- update on 2016.10.17</p>
+
+<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">converts</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getMessageConverters</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;</span> <span class="n">convert</span> <span class="o">:</span> <span class="n">converts</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">convert</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">StringHttpMessageConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="o">((</span><span class="n">StringHttpMessageConverter</span><span class="o">)</span> <span class="n">convert</span><span class="o">).</span><span class="na">setWriteAcceptCharset</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   
@@ -1903,86 +1950,6 @@ public, /templates.</p>
 <p>D9： 上午慕尼黑市中心参观。到了周日人就很少了，马路上基本只有游客，所以一早很空，顺便还去了王宫博物馆，也看见了玛利亚广场是钟人表演。下午则是去安联足球场和拜仁慕尼黑足球纪念馆参观，对中国人来讲也就是看一个水立方的体育场版本。</p>
 
 <p>D10： 上午又在市中心逛了一下，随后就直接出发去慕尼黑机场，地铁40分钟可达，距离类似上海从市中心去虹桥机场。早早checkin，随后等登机，又经过10小时的飞行我们终于回到了上海。回程的飞机经济舱没卖光，商务舱却都售罄了。不过这种直飞的长途，经济舱和公务舱的差异确实类似以前火车硬座和软卧的差异。也难怪公务舱的比例会那么高。慕尼黑后3天都碰到了难民问题。我们住在火车站旁边，所以看见很多难民和警察，秩序虽不乱但总让我感到紧张。回来后，还是发现上海更好。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[文艺的HashMap初始化]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/"/>
-    <updated>2015-11-23T20:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua</id>
-    <content type="html"><![CDATA[<p>多年以来，受制于java没有初始设置<code>hash</code>对-值的方法，例如js有：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ruby在借鉴js的文法之前，有著名的rocket标注</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">obj</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:a</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:b</span><span class="o">=</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而java则只能继续使用过程定义来描述</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;();</span>
-</span><span class='line'><span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
-</span><span class='line'><span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而最近发现了一种文艺一些的写法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;(){</span>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="n">put</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">put</span><span class="o">(</span><span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>此种写法是利用了创建一个匿名类的文法，该匿名类直接继承自HashMap，而第二套花括弧则是实例初始化。</p>
-
-<p>实例初始化是对应于静态初始化，后者属于整个类，而前者属于某个对象初始化时进行。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">demo</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">do</span> <span class="n">sth</span> <span class="n">of</span> <span class="kd">class</span>
-</span><span class='line'>  <span class="err">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>    <span class="k">do</span> <span class="n">sth</span> <span class="n">of</span> <span class="n">instance</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其实这种写法的代码行数并不少，但是语意，主要是段落的分割清楚了许多。</p>
 ]]></content>
   </entry>
   

@@ -27,3 +27,21 @@ categories:
 ```
 
 注意给`StringHttpMessageConverter`的属性`writeAcceptCharset`设置成`false`
+
+---- update on 2016.10.17
+
+`RestTemplate`作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:
+
+```java
+static RestTemplate restTemplate = new RestTemplate();
+  static {
+    List<HttpMessageConverter<?>> converts = restTemplate.getMessageConverters();
+    for (HttpMessageConverter<?> convert : converts) {
+      if (convert.getClass() == StringHttpMessageConverter.class) {
+        ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
+      }
+    }
+  }
+```
+
+获得converts，然后对String的Convert进行设置
