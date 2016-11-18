@@ -274,11 +274,16 @@ listen 8080
 
 <h3>2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等</h3>
 
-<pre><code>sudo apt-get install curl libcurl3 libcurl3-dev
-apt-get install zlib1g-dev #安装git需要
-apt-get install bison
-/usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install curl libcurl3 libcurl3-dev
+</span><span class='line'>apt-get install zlib1g-dev #安装git需要
+</span><span class='line'>apt-get install bison
+</span><span class='line'>apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev openssl libssl-dev libreadline-dev libgdbm-dev zlib1g-dev
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>3. 设置时区，及设置ntpdate定期更新例程</h3>
 

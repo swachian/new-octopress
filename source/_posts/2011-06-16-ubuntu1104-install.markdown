@@ -18,11 +18,13 @@ categories:
 
 ###2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等
 
+```
     sudo apt-get install curl libcurl3 libcurl3-dev
     apt-get install zlib1g-dev #安装git需要
     apt-get install bison
-    /usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
+    apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev openssl libssl-dev libreadline-dev libgdbm-dev zlib1g-dev
 
+```
 
 ###3. 设置时区，及设置ntpdate定期更新例程
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -98,3 +100,4 @@ SecureCRT设置彩色和显示中文
 3：scrollback buffer 调大(5000)，这样你就可以看到以前显示内容，这样方便很多
 4：terminal要选择xtem，这样你ssh到服务器上才能显示颜色，并把ANSI Color打上勾
 5：我选择的颜色方案Windows或Traditional。
+

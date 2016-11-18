@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 安装 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/安装/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-09-29T17:20:54+08:00</updated>
+  <updated>2016-11-18T14:19:54+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -27,11 +27,15 @@
 
 <h3>2. 安装一堆可能会用到的包，包括git需要的curl ， zlib等</h3>
 
+<p>```</p>
+
 <pre><code>sudo apt-get install curl libcurl3 libcurl3-dev
 apt-get install zlib1g-dev #安装git需要
 apt-get install bison
-/usr/bin/apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev
+apt-get install build-essential bison openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev openssl libssl-dev libreadline-dev libgdbm-dev zlib1g-dev
 </code></pre>
+
+<p>```</p>
 
 <h3>3. 设置时区，及设置ntpdate定期更新例程</h3>
 
