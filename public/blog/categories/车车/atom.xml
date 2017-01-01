@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 车车 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/车车/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2016-11-20T09:50:30+08:00</updated>
+  <updated>2017-01-01T21:44:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2016 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv/"/>
+    <updated>2016-12-31T21:33:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv</id>
+    <content type="html"><![CDATA[<p><img src="/images/yangche2016.jpg" alt="image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DIY的好处以及雨刮和滤芯]]></title>
@@ -120,36 +129,6 @@
 总不见得大家钱付了，票买了，然后上不了车，再对大家讲一句“有没有车厢有没有座位”你们这些买票的应该事先考察清楚了再决定是不是要买票。</p>
 
 <p>再说一个上海特色的问题。既然问沪牌收了钱了，就该办事啊。现在市区是沪牌一半，外牌一半，严打起来又一点不区分的。虽然也不指望警察能改，但大家谈谈总是可以的吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[车险]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/"/>
-    <updated>2016-05-31T22:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian</id>
-    <content type="html"><![CDATA[<p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
-只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
-
-<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
-
-<ul>
-<li>车损：现2109.58，原3514.15</li>
-<li>三责：现1176，   原1689.48</li>
-<li>盗抢：现取消，    原977.02</li>
-<li>划痕：现339.5,   原486.35</li>
-<li>各项不计免赔：现543.77，原1049.04</li>
-</ul>
-
-
-<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
-保险公司是活雷锋？</p>
-
-<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
-差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
-甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
-
-<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
 ]]></content>
   </entry>
   

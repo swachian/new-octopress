@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。
-公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。 然而， &hellip;">
+  <meta name="description" content="换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。 原理 Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/back-and-forth-with-wlan-card/">对无线网卡的折腾</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T15:39:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>换了新机器难免要折腾一番。折腾来折腾去，终于折腾到了无线网卡。最后的结果是拆了过去的intel 5300装给新机器，又花了539买了华硕N56u千兆双频路由器。</p>
+
+<h3>原理</h3>
+
+<p>Wifi标准802.11n的频带有2.4和5GHz两个，大部分路由器只支持前者。11年以后，支持5GHz的日益增多。</p>
+
+<p>频带则有20和40MHz两种，一般前者全部开启，而后者就不一定了。</p>
+
+<p>只有20MHz和2.4GHz的情况下，最大只有72Mbps； 同时有5GHz，则可以达到150Mbps。 无论是2.4还是5，同时使用40MHz的话，性能都可以翻倍。再加上一些其他的优化技术，最大可以达到300Mbps。</p>
+
+<p>现实中，20<em>（2.4+5）的情况是很少的，一般150Mbps的是（20+40）</em>2.4。 然而，被割的太厉害的话，就只有20*2.4，那就只有72Mbps了。比如dell国内6430搭配的bcm制造的无线网卡。</p>
+
+<h3>Dell 1504无线网卡</h3>
+
+<p>这款网卡是dell让bcm代工的，而非常见的intel芯片网卡。博通公司的网络设备也久负盛名，国内的路由器大部分也是博通的芯片，然而这款
+wlan网卡则有点残疾。第一没有5GHz的频段，第二不支持40M这一基带，最终结果就是明明是n的卡，实际性能只比802.11g的54Mbps好了没有多少，至多72Mbps。</p>
+
+<p>并且，E6430本身也还是一台不错的机器，wifi配了3根天线，但是这块网卡却是只有2根天线。老的E6400倒是intel的5300网卡，3根天线且支持双频，于是最后决定利旧一下。虽然5300已经过气，但性能明显比1504还是要强的。</p>
+
+<h3>更换结果</h3>
+
+<p>三根天线:</p>
+
+<p><img src="/images/screen_print/IMG_20131008_100132.jpg" alt="image" /></p>
+
+<p>两根天线：</p>
+
+<p><img src="/images/screen_print/IMG_20131001_161051.jpg" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/01/yi-xie-pian-zi/">一些片子</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-01T18:41:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>过去一阵子看了不少片子，两部片子印象尤其深刻：</p>
+
+<ol>
+<li>虎胆龙威1</li>
+<li>光荣战役</li>
+</ol>
+
+
+<p>先说第一部。虎胆龙威之前竟然真的一部都没看过，在看了第一部后，又看了另外的4部，但个人还行觉得第一部最棒。原因很简单，这是各方面都很完美的片子。</p>
+
+<p>从片子的主题来讲，首开了在一个孤单的场合里对恐怖袭击的故事。作为动作片，具备了基本的场面火爆。恐怖分子组织有术，高帅富级别的，布鲁斯倒是显得有点屌丝。而一个接一个消灭恐怖分子，有点七武士的意思，交代的十分清楚。</p>
+
+<p>片子也有典型的80年代末的特征，公司的老板是日本人，大概彼时美国人深感要被日本企业统治。而在这些之外，对官僚主义、白痴媒体也有十分辛辣的讽刺。所以，整部片子就相当有深度，也十分值得让人回味。简单的剧情，却能带来意味深长的东西。绝对是含复杂于简洁中的作品。</p>
+
+<p>第二部作品，看完后才知道是丹泽尔华盛顿的成名作，而摩根弗里曼彼时还根本没出名，居中的白人上校最后到没怎么出名。影片的故事是描述南北战争中北军的第一支黑人军队。上校统带1k个黑人士兵，各级尉官军士长初期都是白人担当，随后也开始提拔黑人担当。</p>
+
+<p>不得不说，美帝的历史其实就是一部外包史。从引入黑奴与白奴并举，到黑奴为主白人帮凶，再到解放黑奴，并且调动黑奴解放黑奴，一步一步扩展了国家的可用之才。而片子也很清晰地表明了让黑人成为有效的反戈力量有多难，需要客服多少障碍。而扩充劳动力的结果，自然就是使得国家的经济得到大幅度进步。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -605,105 +719,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/06/7dbs-in-7wks/">7dbs in 7wks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-06T05:59:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。</p>
-
-<p>书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。Neo4J对我而言还属新生事物。</p>
-
-<p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
-
-<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
-关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
-
-<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
-所以常常被大公司用了作为日志和搜索系统。<br/>
-column里面存放的是map。<br/>
-journaling = write-ahead logging.</p>
-
-<p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。
-N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可以认为写入成功，R则是读取多少就认为读取成功。</p>
-
-<p>也谈到了这些数据库中实现Map-Reduce的哲学是把算法分发给各个节点，而不是把数据集中起来送给算法。毕竟传输算法肯定比传输数据的开销要少。</p>
-
-<p>MongoDB则是在关系型和扩展性强的数据库中取到了一个黄金百分点。可以存放复杂的对象是文档数据库最大的优势。CouchDB不如MongoDB灵活，采用视图查询法（事先定义map-reduce），</p>
-
-<p>最后，则主要还是介绍redis，及混合的多数据库应用开发。内建的可以让key失效，以及丰富的数据结构数据库，是redis脱颖而出的法宝。使得极其适合作为缓存使用。</p>
-
-<p>小结，过去人们依赖一个数据库来实现多个应用的整合。现在整合的能力更多地交给了中间层模式，往往多种语言都是基于HTTP实现服务层之间的通信的。这样就使得服务程序从db的限制中解脱了出来，变得可以根据需要选用多种数据库组合。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/05/cong-cong-ban-nian/">匆匆半年</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。</p>
-
-<p>有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。</p>
-
-<p>说句实话，这半年过的还不错。只是飙升的体重真的要想办法调整才行了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -721,6 +736,14 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/31/2016-crv/">2016 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/di-shi-ni-he-zui-jin-de-ji-ci-xiao-chang-tu/">迪士尼和最近的几次小长途</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">DIY的好处以及雨刮和滤芯</a>
       </li>
     
@@ -732,19 +755,11 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
         <a href="/blog/2016/09/19/zhuang-ji-i5-6500/">装机i5-6500</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/19/spring-boot-in-action/">spring boot in action</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -752,7 +767,7 @@ N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Hegel 2011 -
+  Copyright &copy; 2017 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

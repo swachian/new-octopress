@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最近发现淘宝的前端大牛似乎想往后端发展，摆脱只做前端的印象；
-另一方面, teahour上的人却认为越来越多的工作从服务器往前端在靠，投入在javascript上面的工作量和时间越来越多。单用围城效应这个不是太能解释的通。 以我个人这段时间的开发经验来看，前端很多事情和很细小，消耗的时间确实很多。 &hellip;">
+  <meta name="description" content="花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。 书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,105 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/06/7dbs-in-7wks/">7dbs in 7wks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-06T05:59:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。</p>
+
+<p>书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。Neo4J对我而言还属新生事物。</p>
+
+<p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
+
+<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
+关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
+
+<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
+所以常常被大公司用了作为日志和搜索系统。<br/>
+column里面存放的是map。<br/>
+journaling = write-ahead logging.</p>
+
+<p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。
+N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可以认为写入成功，R则是读取多少就认为读取成功。</p>
+
+<p>也谈到了这些数据库中实现Map-Reduce的哲学是把算法分发给各个节点，而不是把数据集中起来送给算法。毕竟传输算法肯定比传输数据的开销要少。</p>
+
+<p>MongoDB则是在关系型和扩展性强的数据库中取到了一个黄金百分点。可以存放复杂的对象是文档数据库最大的优势。CouchDB不如MongoDB灵活，采用视图查询法（事先定义map-reduce），</p>
+
+<p>最后，则主要还是介绍redis，及混合的多数据库应用开发。内建的可以让key失效，以及丰富的数据结构数据库，是redis脱颖而出的法宝。使得极其适合作为缓存使用。</p>
+
+<p>小结，过去人们依赖一个数据库来实现多个应用的整合。现在整合的能力更多地交给了中间层模式，往往多种语言都是基于HTTP实现服务层之间的通信的。这样就使得服务程序从db的限制中解脱了出来，变得可以根据需要选用多种数据库组合。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/05/cong-cong-ban-nian/">匆匆半年</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。</p>
+
+<p>有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。</p>
+
+<p>说句实话，这半年过的还不错。只是飙升的体重真的要想办法调整才行了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -674,352 +772,6 @@ Anniversary-driven development</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/">Deploy a Rails 4 App to Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-04T20:03:00+08:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
-为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
-在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
-
-<h3>0 事先准备</h3>
-
-<p>虽然我用Heroku的时间可以追溯到很久以前，从 scanty 到 octopress，但到这次才发现其实之前我没在heroku上部署过Rails应用。
-但这也意味着，第一我很早以前就有了Heroku的帐号，第二我的机器上的ssh-key同heroku都是打通的，第三已经安装了heroku这个gem。</p>
-
-<h3>1 创建应用</h3>
-
-<p>首先执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heroku apps:create user-agent-show2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样会在heroku处创建一个stack，目前版本是<code>cedar</code>. 同时，在.git/config里面会增加一个heroku分支</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[remote "heroku"]
-</span><span class='line'>        url = git@heroku.com:user-agent-show.git
-</span><span class='line'>        fetch = +refs/heads/*:refs/remotes/heroku/*</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2 Git push</h3>
-
-<p>随后就可以执行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git push heroku</span></code></pre></td></tr></table></div></figure>
-
-
-<p>部署应用了。
-但这里就会碰到陷阱。首先，Heroku是支持pg的应用，所以需要在Gemfile里增加<code>gem 'pg'</code>，同时也要确保这个gem在本机有依赖的Native包。对于ubuntu，
-基本需要安装<code>apt-get install libpq-dev</code> 这个包，不过这个包很小，只有900多KB。</p>
-
-<p>其次，对于assets，可以选择预先执行<code>rake assets:precompile</code>，也可也让heroku在部署时执行。但默认情况下生成的js和css文件是访问不到的。
-因为rails 4默认生成environments/production.rb中是这样配置的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = false</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个会导致thin或者unicorn不负责对静态文件的处理。如果是基于Nginx或者Apache之类的部署，这点毫无问题，因为代理在收到请求后就处理掉了，但
-对于heroku，则在起初时是必须由thin负责这部分内容的，因此需要把上面的配置改成</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.serve_static_assets = true</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这样才能保证静态文件被正常访问。</p>
-
-<h3>3 数据库更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heroku run rake db:migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/26/change-to-ruby-2-dot-0-0/">Change to Ruby 2 Dot 0 0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-26T00:00:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>layout: post
-title: &#8220;Change to Ruby 2.0.0&#8221;
-date: 2013-02-26 11:30
-comments: true
-categories:
-- ruby
-- heroku</p>
-
-<hr />
-
-<p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
-
-<p>步骤如下：</p>
-
-<ol>
-<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
-<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
-<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
-<li><code>git commit -a</code></li>
-<li><code>git push heroku</code></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 119, done.
-</span><span class='line'>Compressing objects: 100% (59/59), done.
-</span><span class='line'>Writing objects: 100% (60/60), 5.46 KiB, done.
-</span><span class='line'>Total 60 (delta 32), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Ruby version change detected. Clearing bundler cache.
-</span><span class='line'>       Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
-</span><span class='line'>       New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Fetching gem metadata from http://ruby.taobao.org/.
-</span><span class='line'>       Fetching full source index from http://ruby.taobao.org/
-</span><span class='line'>       Installing daemons (1.1.8)
-</span><span class='line'>       Installing eventmachine (0.12.10)
-</span><span class='line'>       Installing rack (1.4.1)
-</span><span class='line'>       Installing rack-protection (1.3.2)
-</span><span class='line'>       Installing tilt (1.3.3)
-</span><span class='line'>       Installing sinatra (1.3.5)
-</span><span class='line'>       Installing thin (1.4.1)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; (none)
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 30.5MB
-</span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但我不太理解slug size为啥变大了。</p>
-
-<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
-于是改用了unicorn，又折腾了Procfile</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec unicorn -p $PORT</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>       Would have removed thin (1.4.1)
-</span><span class='line'>       Would have removed daemons (1.1.9)
-</span><span class='line'>       Would have removed daemons (1.1.8)
-</span><span class='line'>       Would have removed thin (1.5.0)
-</span><span class='line'>       Would have removed rack (1.4.1)
-</span><span class='line'>       Would have removed eventmachine (1.0.0)
-</span><span class='line'>       Would have removed eventmachine (0.12.10)
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 35.9MB
-</span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后重新弄了一下，发现还是很大。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Writing objects: 100% (3/3), 281 bytes, done.
-</span><span class='line'>Total 3 (delta 2), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 27.3MB
-</span><span class='line'>-----&gt; Launching... done, v5
-</span><span class='line'>       http://octopresszhangyu.herokuapp.com deployed to Heroku</span></code></pre></td></tr></table></div></figure>
-
-
-<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
-明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
-
-<p>今日装某个系统，发现有掉到了libyaml这个沟里。试了几次，最后发现是 <code>LD_LIBRARY_PATH=</code>的缘故。
-编译好libyaml，在加入到上面这个环境变量中，ruby才能读的出来。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -1037,6 +789,14 @@ categories:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/31/2016-crv/">2016 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/di-shi-ni-he-zui-jin-de-ji-ci-xiao-chang-tu/">迪士尼和最近的几次小长途</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">DIY的好处以及雨刮和滤芯</a>
       </li>
     
@@ -1048,19 +808,11 @@ categories:
         <a href="/blog/2016/09/19/zhuang-ji-i5-6500/">装机i5-6500</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/19/spring-boot-in-action/">spring boot in action</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1068,7 +820,7 @@ categories:
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Hegel 2011 -
+  Copyright &copy; 2017 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

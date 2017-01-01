@@ -9,10 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近日帮一个打算用品牌机的亲戚换机器，因为他之前用的品牌机感觉还不错。并且提出最好要联想的机器。
-原因么依然是目前的一台机器就是联想，但又不想更换显示器，同时希望主机在两三千搞定。
-不换显示器，对于自己组装机器来讲，
-是很轻松可以办到的。碰到品牌机，就有些费周折了。 &hellip;">
+  <meta name="description" content="使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+退出使用Node.js。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。 此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +70,148 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/04/kai-fa-yu-yan-huan-zhen-shi-%5B%3F%5D-ge-wen-ti/">开发语言还真是一个问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-04T22:22:00+08:00" pubdate data-updated="true">Jul 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用Node.js开发Express框架的的牛人TJ Holowaychuk宣布
+<a href="https://medium.com/code-adventures/farewell-node-js-4ba9e7f3e52b">退出使用Node.js</a>。
+这个效果有点类似于如果DHH宣布不再使用Ruby进行开发。</p>
+
+<p>此牛希望开发分布式的系统，但受不了Node倾向于性能而忽略
+使用的便利性（usability）和鲁棒性（robustness）。
+而他使用Go语言开发的分布式系统，则坚固，表现的也更好，代码也更易维护。
+他也提到了同步式的代码比异步式的还是容易测试及理解。</p>
+
+<p>从我个人的经历而言，有一阵子仔细研究过Node，我的硕士毕业论文中Node是最重要的一个组成部分。
+也开发了一个不错的HTTP分发系统。但是，最终我并没有采用Node在生产系统中。
+原因在于，尽管Node的基于事件的并发模式很易于处理大并发的慢速请求，
+但除非去做云计算级别的分发，不然Java的NIO已足够应付性能方面的需要。</p>
+
+<p>而在Node的web开发方面，Node及Express提供的基础设施比Rails差的很远，开发效率和体验都是不能比的。
+所以，看来看去在服务端并没有很适用Node.js的场景。
+至少，在Java和Ruby可以作为选择的场合下，没有Node的发挥空间。</p>
+
+<p>至于Go为什么适合分布式开发，则需要进一步了解。不过以前看见go编译输出的是<code>a.out</code>就很让人有使用的欲望。</p>
+
+<p>Node的崛起很大程度上托V8引擎性能优异的福，在脚本语言中，Node的运行性能就是独一无二的。
+但和编译型语言比起来，Node就没什么优势了。只是有一阵子大家都相信脚本语言天生可以比编译型开发的更有
+效率些，所以万众瞩目于Node。很多受Ruby运行性能之苦的开发者，也转到了Node开发服务。随后，
+移动引用的兴盛使得JSON成为一种标准的传输形式，也由此Node成为了很多接口服务的开发选择。</p>
+
+<p>然而，对此我还是秉承我的观点，仅仅开发接口的话，Java的开发效率也不低，性能一般也不会成为瓶颈。
+而Node的开发还是不如Java方便，人才和教育的基础二者差距就更大了。Javascript只有在浏览器中才是王者。
+因为浏览器的单线程，以及等待事件发生，才是天生适合他的。而且，世上浏览器那么多，所有的浏览器都只认可
+Javascript。
+至于服务端，只有在特定的少数的场合，
+Node才具备突出的优势。</p>
+
+<p>Ruby和Rails的优势是在于开发效率以及让人快乐，性能始终是不让人满意的一个环节。<br/>
+Java的优势是大量的人才基础和教育基础，强大的性能和稳定性。也因为人才众多，所以才有足够的人力来打造像Spring这样的
+开发工具。对很多语言来讲，如果像Java那样啰嗦，是很难得到足够多的产出的。<br/>
+Javascript，还是在浏览器中发挥威力吧。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/27/sac/">证券从业资格考试</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T21:39:00+08:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本月抽空去考了证券从业资格考试的两门，证券基础知识和证券交易。
+今天可以查成绩了，最终都是70+，通过考试并圆满达到了复习的目标。</p>
+
+<h3>考试的情况</h3>
+
+<p>考试的日子被分成了两天，分别是周六16:30-18:20的交易，以及后面一天周日10:30-12:20的基础知识。这个安排的坏处是不得不搭上一个半周末考试，好处是最大的提供了临时抱佛脚的时间。所以最终冲刺的复习还算充分。</p>
+
+<p>做题时，交易的单选题感觉很不顺，但做多选题时则感觉很顺畅。最后做完判断题时，也懒得再检查了。因为当天从8点到18点，等于都在看交易的东西，实在有点倒胃口。看了看有没有没选的，就交卷了。</p>
+
+<p>晚上随便看了看基础的东西。看了一整天，脑子过于兴奋，于是顺势半夜起来看来一场球。第二天一早起来利用一个多小时又把笔记过了一遍。基础的考试相对平常，没有哪个题型特别顺，也没有特别不顺。感觉及格应该问题不大。</p>
+
+<p>这个考试缺考的情况还是挺常见的。考试以年轻人居多。</p>
+
+<h3>复习的情况</h3>
+
+<p>报名是4月份的事情，具体复习是过完五一开始的。先从基础着手。预备的材料是：</p>
+
+<ol>
+<li>教材，淘宝购买</li>
+<li>三色笔记，网上下载</li>
+<li>所谓13年的真题四套，当当购买</li>
+</ol>
+
+
+<p>5月份用了2个礼拜看完了书和笔记，做了一套真题及格了。感觉复习的节奏太快，按这个速度可以5月底去考试了。于是开始控制节奏。然后到了6月2号，开始看交易。也是两个礼拜。期间感觉记忆的东西比较多，看书效果不大，所以以看笔记为主，并着重记忆。这两个礼拜的复习不是很好，时间开始感觉紧张了。
+好在打准考证的时候，发现是周六下午和周日上午，这样等于凭空多出一个周末的 复习时间。想想时间应该够了。因为周末占掉每周看书时间的2/3以上，是主要的复习时间。</p>
+
+<h3>资料的情况</h3>
+
+<p>个人感觉三色笔记是最好的材料。唯一的缺点是只找得到2009版的，而不是最新的2012版的。所以有些考点没有覆盖。但强处在于重点突出，针对考试，也能让人理解基本的内容。</p>
+
+<p>书么还是挺权威的，但废话太多，重点也不突出。看完后也不知道怎么应考，也不知道该记住什么东西。时间多可以看看，时间紧就浏览为主吧。</p>
+
+<p>真题的话，我一直怀疑是不是真的。从考试的题目来看，差异还是挺大的。建议还是当一般的练习题对待。辅导资料所谓的真题不见得靠谱。</p>
+
+<p>总体而言，还是一个不难对付的考试。对普及金融、证券方面的知识还是挺有用的。除了通过考试，也对投资-融资有了新的认识。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1118,134 +1260,6 @@ Java Web开发历史的变迁，看了几年前的版本也是主要基于SSH的
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/07/atomhe-node-webkit/">Atom和Node-Webkit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-07T16:21:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
-比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
-
-<p>在使用体验方面，比较起来，和Textmate更接近些，但扩展应该方便很多。而比起vi的话，主要优势在于是GUI的，支持command+s保存，也支持鼠标选取文本，对中文输入而言明显要比
-vi更合适。高亮、快捷等简单用用差别并不大，美观度当然都可以配置的不错。</p>
-
-<p>而在昨天，Atom进一步把他们的核心模块开源了，另外提到了他们是基于<a href="https://github.com/rogerwang/node-webkit/wiki">Node-Webkit</a> 开发的这款工具。</p>
-
-<p>这个组合就让我有点费解了。因为webkit是一个当代浏览器的引擎，safari chrome chromium等都使用了webkit，可以理解webkit就是一个浏览器。而node是指的
-Node.js，一个可以在服务器端编写javascript的平台，提供了很多的js库。而这么一个组合，干文本编辑器什么事情？在我开来，文本编辑器应该是很原生的一种应用软件。</p>
-
-<p>仔细阅读了一下Node-Webkit的官方介绍以及一些其他材料，尤其是这篇<a href="http://blog.whattoc.com/2013/12/16/node-webkit01/">你所不知道的Node-webkit</a>
-，忽然明白了所谓跑起来的Atom，其实就是运行了一个浏览器。只是这个浏览器里面的输入元素都是用HTML5编写的，而这个浏览器就是chromium，chrome的免安装的一个分支的名称。然后Atom又加了很多事件响应处理的注册代码段在里面。整个编辑类似于在线编辑，只是保存是在本地的。也因此，这个东西要往Linux和Windows迁移是轻而易举的。因为chromium和Node.js本来就是跨平台的。</p>
-
-<p>然而，一旦有那么美好的事情，这个世界上就有银弹了。而历史的经验告诉我们，世上是没有银弹的。</p>
-
-<p>Atom之所以在mbp上使用的体验还不错，主要是因为mbp搭载了大内存、ssd硬盘以及性能走在前列的x86处理器，所以并没有<strong>卡</strong>。而一旦这些条件不具备，情况就不是那么回事情了。这种类似phonegap，用浏览器来模拟原生应用的最大<strong>弱点</strong>无疑是性能差以及开销大。因此会有人提出打开大文件的效果不堪想象。<br/>
-从口味上来讲，个人不太喜欢编辑器也Web化。虽然内存cpu的发展依然迅速，Atom的性能问题可能是可以被硬件性能的提升弥补的，但这种做法还是有其先天的缺陷。</p>
-
-<p>所以，如果是脚本的开发，可能还是要继续用vi编写。如果是输入大量中文的话，Atom可以优先考虑。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/06/openssl-and-fipc/">Openssl and fIPC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-06T14:27:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Openssl还是一个关联很多的基础组件。自从爆出心血漏洞后，给自己的虚机也重新编译了一个新的openssl，
-但是在编译ruby 2.1.1时却发现了新的问题。</p>
-
-<p>第一个问题，是编译时老是认不出已经安装的openssl。可能因为openssl是从源码手工安装，而没有使用
-apt-get intall，原因在于apt-get是失败的。</p>
-
-<p>为解决这个问题，就在<code>/usr/loca/openssl-1.0.1g</code> 下独立编译生成了一个openssl。然后ruby再编译时可以识别openssl组件了。
-但是，编译到一半，会报错</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>linking shared-object digest/md5.solibcrypto.a(md5_dgst.o): relocation R_X86_64_PC32 against undefined symbol</span></code></pre></td></tr></table></div></figure>
-
-
-<p>错误具体是连接报错。建议是要编译时加上 <code>-fIPC</code> 的选项。初看起来有点摸不着头脑，到底是给ruby编译时加上还是给openssl加上呢？</p>
-
-<p>这里就是遇到的第二个问题，连接共享库失败。</p>
-
-<p>于是检查这个选项是什么意思。查下来后，我大致的理解是：</p>
-
-<ol>
-<li><code>fIPC</code>使得编译出来的库文件(.a, .so等)地址都是相对地址；</li>
-<li>相对地址的好处是适合共享使用，但在装载时不同的进程可能会装载多次这个共享库；</li>
-<li>如果没有此选项，则是按绝地地址来编译，好处是内存中只有一份。</li>
-</ol>
-
-
-<p>了解了fIPC是什么东西，上述报错就好理解了，是需要在openssl编译时加上此选项。</p>
-
-<p><code>./config --prefix=/usr/local/openssl-1.0.1g -shared -fPIC</code> 然后<code>make &amp;&amp; make install</code></p>
-
-<p>再在ruby安装包里执行</p>
-
-<p><code>./configure --prefix=/home/user/.rbenv/versions/ruby-2.1.1 --disable-install-doc --with-openssl-dir=/usr/local/openssl-1.0.1g</code> , 然后 <code>make &amp;&amp; make install &amp;&amp; rbenv rehash</code></p>
-
-<p>这样就装好了。</p>
-
-<p>其实，我还有一点疑问，就是如何让openssl静态且又能找到。
-估计又是一个属于和ubuntu紧密相关的问题。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -1263,6 +1277,14 @@ apt-get intall，原因在于apt-get是失败的。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/12/31/2016-crv/">2016 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/di-shi-ni-he-zui-jin-de-ji-ci-xiao-chang-tu/">迪士尼和最近的几次小长途</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">DIY的好处以及雨刮和滤芯</a>
       </li>
     
@@ -1274,19 +1296,11 @@ apt-get intall，原因在于apt-get是失败的。</p>
         <a href="/blog/2016/09/19/zhuang-ji-i5-6500/">装机i5-6500</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/19/spring-boot-in-action/">spring boot in action</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (64)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1294,7 +1308,7 @@ apt-get intall，原因在于apt-get是失败的。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Hegel 2011 -
+  Copyright &copy; 2017 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>
