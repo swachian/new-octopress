@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-01-01T21:44:00+08:00</updated>
+  <updated>2017-01-15T21:54:47+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[zookeeper]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper/"/>
+    <updated>2017-01-15T10:27:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper</id>
+    <content type="html"><![CDATA[<p>用于协作的服务，提供目录树的结构。基本可以认为是Yahoo出品。</p>
+
+<p>data registers - called znodes, file
+parlance - directory</p>
+
+<p>数据全部保存在内存中。</p>
+
+<p>优势：
+1. 性能好，可在大规模的分布式系统里使用
+2. 可靠性高，可防止单点故障
+3. 严格的顺序性，可满足复杂的、高精的客户端同步实现要求</p>
+
+<p>znode的读写有acl控制以及版本号</p>
+
+<p>leader nodes负责接受写的请求，follower nodes负责被同步和读取</p>
+
+<p>配置示例</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tickTime=2000
+</span><span class='line'>dataDir=/var/lib/zookeeper
+</span><span class='line'>clientPort=2181
+</span><span class='line'>initLimit=5
+</span><span class='line'>syncLimit=2
+</span><span class='line'>server.1=zoo1:2888:3888
+</span><span class='line'>server.2=zoo2:2888:3888
+</span><span class='line'>server.3=zoo3:2888:3888</span></code></pre></td></tr></table></div></figure>
+
+
+<p>tickTime是一个即使单元，单位是毫秒，2000表示2秒。<br/>
+dataDir是存放数据文件的物理位置。<br/>
+initLimit表示n个tickTime，上面这个就是10秒的意思，表示连接上leader nodes需要的时间单元数量。<br/>
+syncLimit表示山离皇帝能有多远过期<br/>
+server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址，第二个port即2888用于follewer连接leader，
+第三更port 3888用于选举leader。</p>
+
+<p>基本上，zookeeper可以理解成一个分布式系统里，用于进程间通信的中间件，所以剩下的就是客户端调用了。
+项目本身提供了C和Java的binding，具体实现时每个客户端会分为IO线程和watch线程两个。而Netflix在此基础上，
+构造了wrapper: <code>curator</code>，以方便开发。</p>
+
+<p>首先，引入maven依赖:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;  
+</span><span class='line'>    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;  
+</span><span class='line'>    &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;  
+</span><span class='line'>    &lt;version&gt;3.2.1&lt;/version&gt;  
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后，在代码中可如下调用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">zookeepertest</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.RetryPolicy</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.framework.CuratorFramework</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.framework.CuratorFrameworkFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.retry.ExponentialBackoffRetry</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CuratorTest</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">String</span> <span class="n">zookeeperConnectionString</span><span class="o">=</span><span class="s">&quot;127.0.0.1:2181&quot;</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">RetryPolicy</span> <span class="n">retryPolicy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExponentialBackoffRetry</span><span class="o">(</span><span class="mi">1000</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">CuratorFramework</span> <span class="n">client</span> <span class="o">=</span> <span class="n">CuratorFrameworkFactory</span><span class="o">.</span><span class="na">newClient</span><span class="o">(</span><span class="n">zookeeperConnectionString</span><span class="o">,</span> <span class="n">retryPolicy</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>              <span class="n">client</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">,</span> <span class="s">&quot;555&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">);</span>
+</span><span class='line'>                  <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">setData</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">,</span> <span class="s">&quot;666&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="c1">// TODO Auto-generated catch block</span>
+</span><span class='line'>                  <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">CuratorTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CuratorTest</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">test</span><span class="o">.</span><span class="na">set</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
+如lock、semaphore、确认leader等，可以直接使用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2016 CRV养车成本汇总]]></title>
@@ -1899,28 +2047,6 @@ public, /templates.</p>
 </span><span class='line'>+
 </span><span class='line'>+end</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[时间长了发现还是挺喜欢本田的]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/"/>
-    <updated>2016-02-11T09:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de</id>
-    <content type="html"><![CDATA[<p>开CRV有半年多了，近来发现越发喜欢这个车甚至本田这个品牌。喜欢的原因首先是来源于和日产两个细节的比较。<br/>
-东本CRV的<strong>说明书</strong>是写的比日产好许多的，读起来很易读，不像日产是标准的非面向人类的说明书。而且这个说明书
-里面还会教用户如何自己拆换空调滤芯，而日产翻遍了也是没有的。在说明书的信息化方面，东本的app有详细的pdf说明书可供参考检索，
-而日产在这一部分是完全空白。对于和用户实际沟通上，本田要好出许多。</p>
-
-<p>另一个细节则来自<strong>智能钥匙</strong>。根据同事八代雅阁的经历，五六年前本田的智能钥匙是一块很简陋的电路板，更换电池时是直接
-以电路板示人的。但经过几年发展后，我的CRV上这个细节得到了很大的改善，电路板不再是粗糙地打开即见，然而仍然可以换电池。
-轮到日产的话，则所有的钥匙还是本田五六年前的水准，一块电路板大大裸露在外面。</p>
-
-<p>这个车之所以越开越喜欢，主要原因就是确实很对技术男的味。实际上美版的前雷达什么更对我的胃口，只是被东本改乱了。</p>
-
-<p>而之前一直不满的手机连接导航，用的多了感觉还是可以的。尽管连线比较麻烦，系统也还不够稳定，发展方向却是极其正确的。
-目前的水平也足以一用，虽然希望可以更方便些更快捷些更稳定些。对本田的倒车无力和杂音遍地有各种不满，至今依然不满，但鉴于CRV和本田实际各种良好的体验，
-这车确实越来越让人喜欢了。</p>
 ]]></content>
   </entry>
   

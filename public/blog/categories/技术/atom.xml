@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-01-01T21:44:00+08:00</updated>
+  <updated>2017-01-15T21:54:47+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[zookeeper]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper/"/>
+    <updated>2017-01-15T10:27:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper</id>
+    <content type="html"><![CDATA[<p>用于协作的服务，提供目录树的结构。基本可以认为是Yahoo出品。</p>
+
+<p>data registers - called znodes, file
+parlance - directory</p>
+
+<p>数据全部保存在内存中。</p>
+
+<p>优势：
+1. 性能好，可在大规模的分布式系统里使用
+2. 可靠性高，可防止单点故障
+3. 严格的顺序性，可满足复杂的、高精的客户端同步实现要求</p>
+
+<p>znode的读写有acl控制以及版本号</p>
+
+<p>leader nodes负责接受写的请求，follower nodes负责被同步和读取</p>
+
+<p>配置示例</p>
+
+<p><code>
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+initLimit=5
+syncLimit=2
+server.1=zoo1:2888:3888
+server.2=zoo2:2888:3888
+server.3=zoo3:2888:3888
+</code></p>
+
+<p>tickTime是一个即使单元，单位是毫秒，2000表示2秒。<br/>
+dataDir是存放数据文件的物理位置。<br/>
+initLimit表示n个tickTime，上面这个就是10秒的意思，表示连接上leader nodes需要的时间单元数量。<br/>
+syncLimit表示山离皇帝能有多远过期<br/>
+server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址，第二个port即2888用于follewer连接leader，
+第三更port 3888用于选举leader。</p>
+
+<p>基本上，zookeeper可以理解成一个分布式系统里，用于进程间通信的中间件，所以剩下的就是客户端调用了。
+项目本身提供了C和Java的binding，具体实现时每个客户端会分为IO线程和watch线程两个。而Netflix在此基础上，
+构造了wrapper: <code>curator</code>，以方便开发。</p>
+
+<p>首先，引入maven依赖:</p>
+
+<p>```
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;  
+&lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;  
+&lt;version&gt;3.2.1&lt;/version&gt;  
+</code></pre>
+
+<p></dependency>
+```</p>
+
+<p>然后，在代码中可如下调用：</p>
+
+<p>```java
+package zookeepertest;</p>
+
+<p>import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;</p>
+
+<p>public class CuratorTest {</p>
+
+<pre><code>public void set() {
+    String zookeeperConnectionString="127.0.0.1:2181";
+    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+            CuratorFramework client = CuratorFrameworkFactory.newClient(zookeeperConnectionString, retryPolicy);
+
+
+            client.start();
+
+            try {
+                client.create().forPath("/my", "555".getBytes());
+
+                client.getData().forPath("/my");
+                Thread.sleep(1000);
+
+                client.setData().forPath("/my", "666".getBytes());
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+}
+
+public static void main(String[] args) {
+    CuratorTest test = new CuratorTest();
+    test.set();
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
+如lock、semaphore、确认leader等，可以直接使用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nginx 通过Lua输出response body]]></title>
@@ -397,35 +504,6 @@ if(ringrequest!=null&amp;&amp;ringrequest.size()&gt;0){
 ```</p>
 
 <p>在Session范围内使用注入的逻辑还是很清晰的，只是需要注意一下redirect带来的坑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[安卓开发初体验]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan/"/>
-    <updated>2015-10-18T17:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/10/18/an-zhuo-kai-fa-chu-ti-yan</id>
-    <content type="html"><![CDATA[<p>鉴于项目形势所迫，对一个安卓的demo只能自己直接来了。
-也算半逼之下入门了安卓开发。以下面这张图来论，</p>
-
-<p><img src="../images/androidmap.jpg" alt="安卓学习路线图" /></p>
-
-<p>基础部分基本上java web开发工程师都是具备的，入门部分大致跟着google的开发
-文档做完第一个例子也就都接触到了。
-高级主题里面倒是碰了百度地图和Webview这两个必须接触的东西。</p>
-
-<p>就入门而言，学习资料很丰富，尤其是安卓的开发文档还是很全面的，比大部分开源软件的
-教程要强许多，毕竟是有正经的商业公司全面支持的。</p>
-
-<p>就编程而言，全部基于Java的，不像Web开发要再切换到Javascript，整个体系的一致性
-更好，编写起来还是轻松愉快的。而传递参数方面，摆脱了必须从客户端到服务端，如果是在
-界面中跳转其实要比Web方便。这其实也是一个进程间、线程间通信的事情，而作为App，
-其通信的方式还是很丰富的。从最基础的Intent，到手机上各应用系统的彼此调用，
-以及Json传递会服务端等，可以玩的花样很多。</p>
-
-<p>对于任何写过界面的Java程序员，上手安卓应用开发应该还都是挺轻松的。
-毕竟大部分需要的技能有重合，而体系上安卓也更适合学习。当然，学安卓也有特定的痛苦，
-比如屏幕尺寸及比例、API升级快导致节奏混乱。不过在手机端确实是个值得投入的东西。</p>
 ]]></content>
   </entry>
   
