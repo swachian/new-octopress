@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
-问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的， &hellip;">
+  <meta name="description" content="长久以来，在jsp中引入css和JavaScript都是手工硬编的: 1
+2
+&lt;link href=&#39;/toolbar/static/orderFlow/css/reset.css&#39; rel=&quot;stylesheet&quot; type=&quot;text/css &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,142 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/">静态文件的url后缀md5化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-22T09:55:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;/toolbar/static/orderFlow/css/reset.css&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/jquery.min.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
+
+<p>style.tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span> <span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>javascript.tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span><span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/** 生成静态文件链接的公共方法，加上md5后缀或者时间戳。</span>
+</span><span class='line'><span class="cm">   * @param resource</span>
+</span><span class='line'><span class="cm">   * @return</span>
+</span><span class='line'><span class="cm">   */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">rtg</span><span class="o">(</span><span class="n">String</span> <span class="n">resource</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">String</span> <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">fileMD5s</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;user.dir&quot;</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">getFileMD5</span><span class="o">(</span><span class="s">&quot;../webapps/toolbar/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">fileMD5s</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">resource</span><span class="o">,</span> <span class="n">fileMd5</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">+</span><span class="s">&quot;?&quot;</span><span class="o">+</span><span class="n">fileMd5</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
+
+<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;tags:style</span> <span class="na">file=</span><span class="s">&quot;styles/css1.css&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/jquery.min.js&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/tl.js&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -781,172 +918,6 @@ tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/">并发的ab测试和校验码对并发状况处理的盲区</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-11T21:55:00+08:00" pubdate data-updated="true">Dec 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
-但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
-
-<p>限制的过程是这样的：</p>
-
-<ol>
-<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
-<li>发送短信；</li>
-<li>刷新校验码。</li>
-</ol>
-
-
-<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
-极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
-
-<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
-颇费了一番周折。</p>
-
-<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
-
-<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
-
-<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
-
-<h3>第二个坑： 需要提前放入session</h3>
-
-<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
-因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
-正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
-带cookie上去，因此就得到了错误的响应。</p>
-
-<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
-ruby的rest-client。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rest-client&#39;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="n">jsp</span> <span class="o">=</span> <span class="s2">&quot;http://xxx.com/portal/&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="n">passportUrl</span> <span class="o">=</span> <span class="s1">&#39;http://xxx.com\!validate.action?user_id=1xxxxxx\&amp;verfiyCode=9813&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">s</span>
-</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsp</span><span class="p">)</span>
-</span><span class='line'>  <span class="vi">@cookies</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">cookies</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="vi">@cookies</span><span class="o">[</span><span class="s1">&#39;JSESSIONID&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;74113695C0FB915393AE69DD63EAE088&#39;</span>
-</span><span class='line'>  <span class="nb">p</span> <span class="vi">@cookies</span>
-</span><span class='line'>  <span class="c1">#puts response.body</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="mi">5</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
-</span><span class='line'>     <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">passportUrl</span><span class="p">,</span> <span class="ss">cookies</span><span class="p">:</span> <span class="vi">@cookies</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">s</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
-模拟不出并发的效果，所以还是需要回到ab测试上。</p>
-
-<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
-
-<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
-
-<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
-
-<h3>解决的办法</h3>
-
-<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
-
-<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
-下面的方式，让锁住类对象来实现static的效果。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'>   <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
-才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">synchronized</span> <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">validCode</span><span class="o">(</span><span class="n">HttpSession</span> <span class="n">sesson</span><span class="o">,</span> <span class="n">String</span> <span class="n">code</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">equal</span><span class="o">(</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">),</span> <span class="n">code</span><span class="o">))</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  <span class="n">session</span><span class="o">.</span><span class="na">removeAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>得到的教训</h3>
-
-<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -964,6 +935,10 @@ ruby的rest-client。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/01/15/zookeeper/">zookeeper</a>
       </li>
     
@@ -979,15 +954,11 @@ ruby的rest-client。</p>
         <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">DIY的好处以及雨刮和滤芯</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/09/28/hun-dong-ya-ge/">混动雅阁</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (65)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (66)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
