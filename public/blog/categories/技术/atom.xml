@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-03-01T19:20:37+08:00</updated>
+  <updated>2017-03-01T20:58:19+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -29,6 +29,20 @@
 <p>此后，该申请的组织就可以把获得的证书交给客户，客户会去CA处验证证书的有效性等。</p>
 
 <p>在现实中，浏览器、手机等默认内建很多知名CA，可能有几百个，对于这些CA颁发的证书均认为是安全的。</p>
+
+<p>上述只是颁发完毕，之后进入使用阶段。</p>
+
+<p>公钥与私钥的理解：
+　(1)私钥用来进行解密和签名，是给自己用的。<br/>
+　(2)公钥由本人公开，用于加密和验证签名，是给别人用的。<br/>
+  (3)当该用户发送文件时，用私钥签名，别人用他给的公钥验证签名，可以保证该信息是由他发送的。当该用户接受文件时，别人用他的公钥加密，他用私钥解密，可以保证该信息只能由他接收到。</p>
+
+<h3>数字签名的基本用法</h3>
+
+<p>由于私钥加密东西长度是有限制的，所以一般私钥只用于对内容散列后的签名。
+比如<code>SHA1withRSA</code>，顾名思义就是SHA1散列后用rsa加密散列值。</p>
+
+<p>公钥端收到后，可对散列值进行解密，解密后再和收到的数据进行散列操作后的结果进行比对，如果散列值一致，那么该签名就是有效的。</p>
 ]]></content>
   </entry>
   
