@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/ Google的工程师讲解的P2P去中心化现金交易的底层技术&#8212;区块链（Block Chain），然后发现区块链的一大基石
-是公钥私钥的加密技术， &hellip;">
+  <meta name="description" content="CA是Certificate Authority的缩写，就是一个证书颁发机构的意思。
+它的作用是给某些公钥证书进行背书，以让调用者相信所获得的公钥证书确实的某个组织给予的。 具体做法可抽象为：
+1. 某个组织自己生成一个公钥/私钥对
+2. 该组织向某CA申请证书，需要把自己的身份信息、公钥交给ca &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +70,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/01/cazheng-shu-lue-ji/">CA证书略记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-01T19:08:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CA是Certificate Authority的缩写，就是一个证书颁发机构的意思。
+它的作用是给某些公钥证书进行背书，以让调用者相信所获得的公钥证书确实的某个组织给予的。</p>
+
+<p>具体做法可抽象为：<br/>
+1. 某个组织自己生成一个公钥/私钥对<br/>
+2. 该组织向某CA申请证书，需要把自己的身份信息、公钥交给ca，同时用自己的私钥给以上信息签名形成一个CSR，格式可以说pkcs10等<br/>
+3. CA生成证书，比如P7b格式的证书。</p>
+
+<p>此后，该申请的组织就可以把获得的证书交给客户，客户会去CA处验证证书的有效性等。</p>
+
+<p>在现实中，浏览器、手机等默认内建很多知名CA，可能有几百个，对于这些CA颁发的证书均认为是安全的。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/28/icechu-tan/">ICE初探</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-02-28T17:46:00+08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -993,198 +1077,6 @@ public, /templates.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-27T15:37:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本田的冠道近日宣传的比较多，虽然价格还没最后公布，但车还是造成了足够的话题。
-因为这车既是本田目前的旗舰suv，也是首次使用了2.0T发动机的中国产本田车型。</p>
-
-<p>其实这个车挺像昂科威的，只是更高级也更大些。CRV相对这类车，最大的优势还是在于尺寸、操控，尤其是尺寸相对冠道的优势更大。毕竟CRV这种4米6以下的长度，1米8左右的宽度，在城市开还是挺舒服的，再搭配一个装载能力很大的尾箱，是各方面都很均衡的车型。
-而冠道，对拥挤的中国城市来讲，它的尺寸还是大了些。而尺寸大的车，操控必然是要打折扣的。
-而从空间看，尾箱部分因为溜背造型，并不如crv的尾箱实惠。
-油耗、可靠性方面可能也是crv更有优势些。
-当然，同昂科威一样，冠道内饰的高级感、拥有税金更省的涡轮、拥有at变速箱、静音等方面都是对crv碾压了。</p>
-
-<p>不过问我会不会买冠道？只要这个车不是比crv便宜，那肯定还是crv，毕竟crv开着更舒服。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/">Nginx 通过Lua输出response Body</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-25T23:03:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nginx默认是不只支持<code>$request_body</code> 而不支持response的body输出的。这个设定是合理的，因为大量的html响应或者静态文件的内容输出将使得整个日志毫无意义。
-然而，response body输出对api的请求来讲，则很多时候、尤其是在调试的时候是很有必要的。取代了抓包的作用，且简单直观许多。
-搜寻之下，发现使用lua的话，可以达到此目的。</p>
-
-<ol>
-<li>下载并安装lua语言的安装包</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz
-</span><span class='line'>tar -zxvf LuaJIT-2.0.3.tar.gz
-</span><span class='line'>cd LuaJIT-2.0.3.tar.gz
-</span><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意，可能你的服务器的wget会实际下载一个html到本地导致tar解压失败，此时可以用浏览器下载完毕后再次上传到服务器上。</p>
-
-<ol>
-<li>下载并解压ngx_devel_kit套件</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
-</span><span class='line'>tar v0.2.19</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>下载并解压lua-nginx-module模块</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/chaoslawful/lua-nginx-module/archive/v0.9.6.tar.gz
-</span><span class='line'>tar v0.9.6</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>下载并解压nginx后，使用下面的命令重新编译nginx</li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-pcre --sbin-path=/usr/sbin/nginx --add-module=/root/lua-nginx-module-0.9.6 --add-module=/root/ngx_devel_kit-0.2.19 
-</span><span class='line'>make && make install
-</span><span class='line'>cp /usr/sbin/nginx /usr/local/nginx/sbin/
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后，在nginx的conf文件中的<code>server{}</code>上下文里加入下面代码</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>log_format  main_with_response  '$remote_addr - $remote_user [$time_local] "$request" '
-</span><span class='line'>                      '$status $body_bytes_sent "$http_referer" '
-</span><span class='line'>                      '"$http_user_agent" "$http_x_forwarded_for"'
-</span><span class='line'>                      'request: "$request_body"' 'response: $resp_body';
-</span><span class='line'>
-</span><span class='line'>server {
-</span><span class='line'>
-</span><span class='line'>...
-</span><span class='line'>   lua_need_request_body on;
-</span><span class='line'>    set $resp_body "";
-</span><span class='line'>    body_filter_by_lua '
-</span><span class='line'>        local resp_body = string.sub(ngx.arg[1], 1, 1000)
-</span><span class='line'>        ngx.ctx.buffered = (ngx.ctx.buffered or "") .. resp_body
-</span><span class='line'>        if ngx.arg[2] then
-</span><span class='line'>             ngx.var.resp_body = ngx.ctx.buffered
-</span><span class='line'>        end
-</span><span class='line'>    ';
-</span><span class='line'>
-</span><span class='line'>       location /xxxx {
-</span><span class='line'>            root   html;
-</span><span class='line'>            access_log  logs/access.log  main_with_response;
-</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>为避免response溢出整个日志，可选择在特定的location中使用输出response body。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1200,6 +1092,14 @@ public, /templates.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/01/cazheng-shu-lue-ji/">CA证书略记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/28/icechu-tan/">ICE初探</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a>
       </li>
     
@@ -1211,19 +1111,11 @@ public, /templates.</p>
         <a href="/blog/2016/12/31/2016-crv/">2016 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/17/di-shi-ni-he-zui-jin-de-ji-ci-xiao-chang-tu/">迪士尼和最近的几次小长途</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/10/07/ji-chong-kong-diao-lu-xin/">DIY的好处以及雨刮和滤芯</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (66)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (68)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li></ul>
 </section>
   
 </aside>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: ice | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ice/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2017-03-01T19:20:37+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ICE初探]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/02/28/icechu-tan/"/>
+    <updated>2017-02-28T17:46:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/02/28/icechu-tan</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
