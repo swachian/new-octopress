@@ -1,0 +1,53 @@
+---
+layout: post
+title: "Truffle And Solidity"
+date: 2017-05-01 10:11
+comments: true
+categories:
+- 技术
+- 区块链
+---
+
+区块链应用的开发，主要指用`Solidity`编写合约(Contract)，然后部署到区块链上去。
+注意，此处的区块链特指`以太坊`，而比特币的区块链是没有Solidity这种东西的。
+
+因为是把sol编写的合约部署到区块链上去，所以可以进一步分解为3个问题：
+
+1. 区块链的安装(testrpc ethereum)  
+2. sol合约编写(Solidity)  
+3. 对sol合约进行编译以及发布(truffle)  
+
+目前来看，整个以太坊很喜欢借用node即javascript来构建他们的环境，尽管区块链和sol本身其实和javascript关系不大。
+关于ethereum可查相关的安装手册，这里主要记录一下Solidity和truffle。
+
+Sol的编辑器可以用atom vscode等等，submiline也没问题。
+这门语言其实还是比较原始的，合约间的调用甚至不能传递结构（struct），更可悲的是返回string也不行。基本上任何不定长的返回
+在sol的ethvm（以太坊虚拟机）中都不太好调用。
+功能上来讲，solidity可以理解成数据存放在一个类似levelDB的内存数据库，这是ethvm会做的事情。
+```javascript
+
+  mapping(uint=>LibDisSecPledgeApply.DisSecPledgeApply)  disSecPledgeApplyMap;
+	uint[] disSecPledgeApplyIds;
+```
+
+上述代码定义了一个用于存放对象数据的mapping，因为mapping无循环遍历的功能，所以又增加了一个ids的数组保留所有对象的编号。
+
+整个合约的编写，其实对写惯后台程序的人来讲还是不难上手的（类似用java操作redis写业务逻辑），只是限制确实比较多。
+但solidity可以支持的变化太少，所以写起来是复杂不到哪里去。相当于成熟的脚本或编译型语言，solidity麻烦的地方在于其调试，
+可简单罗列的就有两点：
+
+1. 编译速度慢。十几个文件的情况下，用 truffle编译就要3分钟以上  
+2. 发布调试困难。必须发布到某个链的环境才能测试，而这个就真的很不友好了，断点还不支持，日志也很麻烦。  
+
+truffle是现在以太坊主要推荐的编写solidity的编译、测试运行和部署工具，能处理较复杂的sol文件关联引用，就是耗时很长，且
+程序版本很不稳定，变化发展都依然极快。truffle是基于node和npm的，所以要先装好node。
+
+```javascript
+npm uninstall truffle
+npm install -g truffle@2.1.2
+truffle compile  //编译合约
+truffle migrate --reset //部署合约
+truffle exec xxxx.js //执行某个js文件
+```
+
+和区块链一样，solidity，truffle都是刚刚涌现的东西，所以问题很多，用起来也不一定顺手。但，这个行业就是这样的。

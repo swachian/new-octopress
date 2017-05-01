@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="惊讶地发现我原来一直是按scrum在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
-比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
-一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作， &hellip;">
+  <meta name="description" content="37signals发文讲了他们的硬件架构 老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
+就能装进12个u 48根内存条。目前37signals的rails进程跑了8个sleds。
+网络设施中1G的是主流 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/the-hardware-architecture-of-37-signals/">The Hardware Architecture of 37 Signals</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T11:10:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>37signals发文讲了他们的<a href="http://37signals.com/svn/posts/3202-behind-the-scenes-the-hardware-that-powers-basecamp-campfire-and-highrise">硬件架构</a></p>
+
+<p>老外的硬件设施还是很先进的。比如Dell C5220可以有12个sleds，每个sled可以插一个cpu和4根内存条。这样一个3U高度的机箱
+就能装进12个u 48根内存条。目前37signals的rails进程跑了8个sleds。
+网络设施中1G的是主流，个别的有10G的。存储是大量采用了ssds，磁阵用的倒是EMC的方案，实现了400TB。
+备份直接用的S3 storage。</p>
+
+<p><img src="/images/screen_print/37%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.jpg" alt="37硬件架构" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -759,79 +802,6 @@ improve the language , prototype</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/05/replace-log-files-with-streams/">Replace Log Files With Streams</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-05T12:16:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
-整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
-
-<p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
-总之，流更适合对分布式系统的集中处理。</p>
-
-<h3>站在开发的角度</h3>
-
-<p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
-莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
-实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
-
-<h3>站在部署的角度</h3>
-
-<p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
-一个input stream。</p>
-
-<p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
-
-<h3>几种技巧和工具</h3>
-
-<ol>
-<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
-syslog是要搭配bash的命令<code>logger</code>使用的。
-<code>sh
- mydaemon | tee /var/log/mydaemon.log | logger
-</code>
-tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
-<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
-则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
-<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
-这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
-存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
-再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
-<li><p>Upstart launchd  Systemd
-这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -849,6 +819,10 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/01/truffle-and-solidity/">Truffle And Solidity</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/01/cazheng-shu-lue-ji/">CA证书略记</a>
       </li>
     
@@ -864,15 +838,11 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
         <a href="/blog/2017/01/15/zookeeper/">zookeeper</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/12/31/2016-crv/">2016 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (68)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (69)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>
