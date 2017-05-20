@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-01T10:47:45+08:00</updated>
+  <updated>2017-05-21T00:44:15+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thymeleaf感想]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang/"/>
+    <updated>2017-05-21T00:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang</id>
+    <content type="html"><![CDATA[<p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
+然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
+服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
+
+<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
+可以认为这块已经处于冷淡的状态。</p>
+
+<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
+新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
+
+<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
+这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
+花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Truffle And Solidity]]></title>
@@ -170,113 +191,6 @@ truffle exec xxxx.js //执行某个js文件
 
 
 <p>然而集合起来就又构成了一个新的精巧的方案。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[zookeeper]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper/"/>
-    <updated>2017-01-15T10:27:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper</id>
-    <content type="html"><![CDATA[<p>用于协作的服务，提供目录树的结构。基本可以认为是Yahoo出品。</p>
-
-<p>data registers - called znodes, file
-parlance - directory</p>
-
-<p>数据全部保存在内存中。</p>
-
-<p>优势：
-1. 性能好，可在大规模的分布式系统里使用
-2. 可靠性高，可防止单点故障
-3. 严格的顺序性，可满足复杂的、高精的客户端同步实现要求</p>
-
-<p>znode的读写有acl控制以及版本号</p>
-
-<p>leader nodes负责接受写的请求，follower nodes负责被同步和读取</p>
-
-<p>配置示例</p>
-
-<p><code>
-tickTime=2000
-dataDir=/var/lib/zookeeper
-clientPort=2181
-initLimit=5
-syncLimit=2
-server.1=zoo1:2888:3888
-server.2=zoo2:2888:3888
-server.3=zoo3:2888:3888
-</code></p>
-
-<p>tickTime是一个即使单元，单位是毫秒，2000表示2秒。<br/>
-dataDir是存放数据文件的物理位置。<br/>
-initLimit表示n个tickTime，上面这个就是10秒的意思，表示连接上leader nodes需要的时间单元数量。<br/>
-syncLimit表示山离皇帝能有多远过期<br/>
-server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址，第二个port即2888用于follewer连接leader，
-第三更port 3888用于选举leader。</p>
-
-<p>基本上，zookeeper可以理解成一个分布式系统里，用于进程间通信的中间件，所以剩下的就是客户端调用了。
-项目本身提供了C和Java的binding，具体实现时每个客户端会分为IO线程和watch线程两个。而Netflix在此基础上，
-构造了wrapper: <code>curator</code>，以方便开发。</p>
-
-<p>首先，引入maven依赖:</p>
-
-<p>```
-<dependency></p>
-
-<pre><code>&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;  
-&lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;  
-&lt;version&gt;3.2.1&lt;/version&gt;  
-</code></pre>
-
-<p></dependency>
-```</p>
-
-<p>然后，在代码中可如下调用：</p>
-
-<p>```java
-package zookeepertest;</p>
-
-<p>import org.apache.curator.RetryPolicy;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.retry.ExponentialBackoffRetry;</p>
-
-<p>public class CuratorTest {</p>
-
-<pre><code>public void set() {
-    String zookeeperConnectionString="127.0.0.1:2181";
-    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
-            CuratorFramework client = CuratorFrameworkFactory.newClient(zookeeperConnectionString, retryPolicy);
-
-
-            client.start();
-
-            try {
-                client.create().forPath("/my", "555".getBytes());
-
-                client.getData().forPath("/my");
-                Thread.sleep(1000);
-
-                client.setData().forPath("/my", "666".getBytes());
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-}
-
-public static void main(String[] args) {
-    CuratorTest test = new CuratorTest();
-    test.set();
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
-如lock、semaphore、确认leader等，可以直接使用。</p>
 ]]></content>
   </entry>
   

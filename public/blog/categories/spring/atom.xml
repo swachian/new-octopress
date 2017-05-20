@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-01T10:47:45+08:00</updated>
+  <updated>2017-05-21T00:44:15+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thymeleaf感想]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang/"/>
+    <updated>2017-05-21T00:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang</id>
+    <content type="html"><![CDATA[<p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
+然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
+服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
+
+<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
+可以认为这块已经处于冷淡的状态。</p>
+
+<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
+新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
+
+<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
+这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
+花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[spring boot in action]]></title>
@@ -502,77 +523,6 @@ spring.profiles.default
 <p>具体用分为:<br/>
 1. Introductions: 给现有的class <strong>加</strong>(新增)方法或属性, 类似加入一个模块
 2. weaving（编织、插入）：代理插入，可以在编译时、加载class时以及运行时混入</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HttpSession在Spring中的配法和问题]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti/"/>
-    <updated>2015-05-19T17:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/05/19/httpsessionzai-springzhong-de-pei-fa-he-wen-ti</id>
-    <content type="html"><![CDATA[<p>最早出于使用struts2的习惯，在Spring中如果需要使用<code>HttpSession</code>，做法是把这个对象作为整个类的一个实例对象。</p>
-
-<p>1</p>
-
-<p>```java
-public class TestController {</p>
-
-<p>  private static final Log logger = LogFactory.getLog(TestController.class);</p>
-
-<p>  @Autowired
-  HttpSession session;</p>
-
-<p>  ...
-}
-```</p>
-
-<p>后来因为担心Controller在Spring中是单例的（在struts2中是多例的），怕引出线程安全问题，于是把<code>session</code>放入了method中进行注入。</p>
-
-<p>2</p>
-
-<p>```java
-@ResponseBody
-  @RequestMapping(method = RequestMethod.GET,  produces = MediaTypes.TEXT_HTML_UTF_8)
-  public String testSession(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) {</p>
-
-<pre><code>int hashCode = session.hashCode();
-
-int i = 0  ;
-if (session.getAttribute("val")!=null) {
-  i = (int)session.getAttribute("val");
-  i++;
-} 
-
-session.setAttribute("val", i%3);
-
-logger.info("hashCode: " + hashCode);
-
-return ""+hashCode + ": " + i;
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>近日在学习Spring in Action的过程中，发现其实第一种方式下使用了<code>proxy 模式</code>, 实际被注入的类是<code>session  $Proxy38</code>这样的代理类，
-类似于避免反复调用<code>createEntityManager</code>的做法，该代理类会寻找实际对应的session并进行操作,只是给controller注入了一个壳。</p>
-
-<p>而第2种方法中，注入的则是标准的容器session: <code>org.apache.catalina.session.StandardSessionFacade</code></p>
-
-<p>3</p>
-
-<p>此外，受到推崇的是第三种写法，</p>
-
-<p><code>java
-@Component
-@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS, value="session")
-public class ShoppingCart implements Serializable{
-}
-</code></p>
-
-<p>这种写法将整个购物车变成一个scope属于session的bean，由spring注入并负责保存。</p>
-
-<p>但这种写法我个人感觉有点过于抛离了web开发。尽管Spring的一大好处是取消对容器的依赖，从而做到测试的方便。但完全和Web容器隔离，变得不像Web开发也不是什么好的策略。
-毕竟Session的概念几乎每个Web开发者都有，而scope=session则反而会增加沟通的难度。</p>
 ]]></content>
   </entry>
   

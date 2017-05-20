@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-01T10:47:45+08:00</updated>
+  <updated>2017-05-21T00:44:15+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[thymeleaf感想]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang/"/>
+    <updated>2017-05-21T00:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang</id>
+    <content type="html"><![CDATA[<p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
+然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
+服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
+
+<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
+可以认为这块已经处于冷淡的状态。</p>
+
+<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
+新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
+
+<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
+这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
+花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[zookeeper]]></title>
@@ -459,33 +480,6 @@ for (HttpMessageConverter&lt;?&gt; convert : converts) {
 ```</p>
 
 <p>获得converts，然后对String的Convert进行设置</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Maven的Dependency和打包]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/mavende-dependencyhe-da-bao/"/>
-    <updated>2016-04-21T11:32:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/21/mavende-dependencyhe-da-bao</id>
-    <content type="html"><![CDATA[<p>使用Maven一大便捷之处就是管理依赖变得方便了，另一个好处就是打包更加灵活。</p>
-
-<p>以前全部用jar包加入到工程里面，如果实际部署的时候需要剔除个别包，就需要自己手工在war包里删除。
-而实际上需要这么干的情况还是有一些的，比如一些公共的包像ojdbc.jar，都已经放到容器里面了，如果war包里再有，则容易引发冲突。
-删除公共的包，另一个好处就是可以给war包瘦身，这样在传递、部署时都会更加便捷。</p>
-
-<p>6种范围依赖：</p>
-
-<ul>
-<li>compile: 默认的选项，会在export的时候加入全部依赖</li>
-<li>provided: 由其他环境提供，如容器或jdk，但在编译和测试的时候还是会导入，对于容器公共的包，可以使用这个选项</li>
-<li>runtime</li>
-<li>test</li>
-<li>system: 和provided很类似，但需要自己指名jar所处的位置，类似于以前直接把jar包加到工程里面的做法</li>
-<li>import</li>
-</ul>
-
-
-<p>个人用的比较多的还是compile和provided两种。</p>
 ]]></content>
   </entry>
   

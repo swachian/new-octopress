@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看别人的一些文章，谈谈
-自己的想法。 整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
-把大瀑布分拆成了n个小瀑布。 &hellip;">
+  <meta name="description" content="系列链接： mongodb基础
+尝试分布式及复制 （sharding and replication)
+部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
+little-endian , 不适合SPARC, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,224 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">Learning Mongodb (3) 部署和管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T11:07:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>系列链接：</p>
+
+<ol>
+<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
+<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
+</ol>
+
+
+<h3>部署环境要求</h3>
+
+<ul>
+<li><p>架构</p>
+
+<ul>
+<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
+<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
+</ul>
+</li>
+<li><p>CPU</p>
+
+<ul>
+<li>非cpu密集型应用</li>
+<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
+<li>多客户端同时读时，多核会被利用</li>
+<li>写操作还是单核</li>
+</ul>
+</li>
+<li><p>RAM</p>
+
+<ul>
+<li>越多越好</li>
+<li>working set， index size， ram总数</li>
+</ul>
+</li>
+<li><p>Disk</p>
+
+<ul>
+<li>IOPS 优先</li>
+<li><em>background flush</em> 60s sync到磁盘一次</li>
+<li>ssd可以优化速度（solid state drive）</li>
+<li>RAID 10 组成 LVM</li>
+</ul>
+</li>
+<li><p>文件系统</p>
+
+<ul>
+<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
+<li>禁用access time(atime)更新</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 禁用 atime更新</span>
+</span><span class='line'>sudo mv /etc/fstab /etc/fstab.bak
+</span><span class='line'>sudo vim /etc/fstab
+</span><span class='line'><span class="c"># file-system mount type options dump pass</span>
+</span><span class='line'><span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
+</span><span class='line'>
+</span><span class='line'>改完文件后，可以不用重启
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文件描述符(FD)
+
+<ul>
+<li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
+<li>调大 <code>ulimit -Hn</code> 可以查看</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>vi /etc/security/limits.conf
+</span><span class='line'>mongodb hard nofile 10240
+</span><span class='line'>下次登录后生效
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>时钟</p>
+
+<ul>
+<li>ntp协议，在跑shard和replication时候必须启用的东西</li>
+</ul>
+</li>
+<li><p>ec2上使用mongodb</p>
+
+<ul>
+<li>ec2易用、地理范围广、价格有竞争力</li>
+<li>68GB RAM的限制</li>
+<li>使用  EBS 存储， 吞吐性能一般化</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>服务器配置</h3>
+
+<ul>
+<li><p>选择拓扑</p>
+
+<ul>
+<li>是否需要shard， 是否需要replica</li>
+<li>建议多机</li>
+</ul>
+</li>
+<li><p>打开journal标志</p></li>
+</ul>
+
+
+<h3>安全保障</h3>
+
+<ul>
+<li><p>环境安全</p>
+
+<ul>
+<li>防火墙</li>
+<li>数据的传输是不加密的</li>
+</ul>
+</li>
+<li><p>授权</p>
+
+<ul>
+<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
+<li>启动时带上选项 <code>mongod --auth</code></li>
+<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
+<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
+<li>查找用户 <code>db.system.users.find()</code></li>
+</ul>
+</li>
+<li><p>keyFile</p>
+
+<ul>
+<li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
+</ul>
+</li>
+<li><p>日志记录</p>
+
+<ul>
+<li>运行时&#8211;logpath指定</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>监控工具</h3>
+
+<ul>
+<li><p>serverStatus<br/>
+<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
+<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
+<strong>mem</strong> 段的单位是MB</p></li>
+<li><p>mongostat</p>
+
+<ul>
+<li>类似 iostat 运行的效果</li>
+</ul>
+</li>
+<li><p>web console</p>
+
+<ul>
+<li>&#8211;rest 标志打开的话，可以从web处得到更多的运行信息</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>备份与压缩</h3>
+
+<p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1040,95 +1259,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/21/braces-and-do-end/">Braces 和 Do End</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-21T10:12:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this means in practice.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="p">{</span><span class="o">|</span><span class="n">where</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;inner called me&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="k">do</span> <span class="o">|</span><span class="n">where</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;outer called me&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>区别在于block属于谁，是前一个（outer）还是后一个（inner）。</p>
-
-<p>类似的例子还有高见龙的：
-http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[2, 4, 6, 8, 10]</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[1, 2, 3, 4, 5]</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
-但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
-总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -1146,6 +1276,10 @@ http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/21/thymeleafgan-xiang/">thymeleaf感想</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/01/truffle-and-solidity/">Truffle And Solidity</a>
       </li>
     
@@ -1161,15 +1295,11 @@ http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
         <a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/01/15/zookeeper/">zookeeper</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (69)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (13)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (70)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>
