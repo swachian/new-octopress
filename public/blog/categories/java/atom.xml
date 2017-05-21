@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-21T00:44:15+08:00</updated>
+  <updated>2017-05-21T22:17:46+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[java新的兼容性挑战者Kotlin]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/"/>
+    <updated>2017-05-21T16:39:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin</id>
+    <content type="html"><![CDATA[<p>520期间被刷屏的除了show 恩爱，就是Kotlin了。
+原本只是在一个做安卓的小朋友发的pdf里看见了Kotlin，想想应该又是一个和scala groovy或者closure类似的东西---
+可以跑在jvm上，能利用jdk的库，语言表达力又强于java。</p>
+
+<p>Java尽管有点啰嗦，语言表达力确实一般，但企业级的支持很强，jvm的性能更是出色，所以在类库、ide、甚至大型开发框架方面是无与伦比的。在jvm上跑的语言很多，甚至想部分替代的如scala closure groovy等等都火过一阵子，但是java继续维持着自己的优势地位。</p>
+
+<p>然而这次真正被刷屏的，是因为Google认了Kotlin为<strong>干儿子</strong>，甚至以后可能是亲儿子，将kotlin变成了
+头等安卓开发语言。查了一下，此前获得此定位的仅有java，这就可能有很大的不同了。kotlin有了google的支持，而其他所谓挑战者可没这个干爹。并且，Kotlin的创建者又是目前最流行的java ide的公司贡献的，可以保证在<strong>开发工具上的体验和支持</strong>，这么看来它的优势就比scala等强多了。</p>
+
+<p>希望还是能帮助java改进吧，当然这个有点难，即使java8好几年下来了，也不知道有没有普及率超过java程序员的50%</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[thymeleaf感想]]></title>
@@ -429,57 +447,6 @@ if ($request_method !~* GET|HEAD|POST) {</p>
 
 <p>这里面login-config可以不配，也不会影响效果。auth-constraint一定要配，如果不出现（即值为null），则全部的限制将不起作用。
 元素出现而值不填，则所有的这种请求都会被拒绝。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
-    <updated>2016-05-19T17:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
-    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
-其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
-
-<p>要解决可以在xml的配置中设置</p>
-
-<p>```xml</p>
-
-<p>  &lt;mvc:annotation-driven></p>
-
-<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
-  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
-  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
-    &lt;constructor-arg value="UTF-8" /&gt;
-    &lt;property name="writeAcceptCharset" value="false" /&gt;
-  &lt;/bean&gt;
-&lt;/mvc:message-converters&gt;
-</code></pre>
-
-<p>  &lt;/mvc:annotation-driven>
-```</p>
-
-<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
-
-<p>---- update on 2016.10.17</p>
-
-<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
-
-<p>```java
-static RestTemplate restTemplate = new RestTemplate();
-  static {</p>
-
-<pre><code>List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
-for (HttpMessageConverter&lt;?&gt; convert : converts) {
-  if (convert.getClass() == StringHttpMessageConverter.class) {
-    ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
-  }
-}
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   

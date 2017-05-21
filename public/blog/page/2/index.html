@@ -9,11 +9,11 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="许久没有装机了，入了如下的配置: intel i5-6500 1150元，
-散热器采融B48 99元，
-技嘉 B150M-D3H 599元，
-芝奇 DDR4 2400 395元,
-合计2243元 1.货物来源 某宝买散片和散热器，某东买入主板和内存。原因在于散片确实比盒装的便宜很多， &hellip;">
+  <meta name="description" content="混动雅阁千呼万唤历经两年时间终于摆在了中国消费者的面前。而其定价也可谓
+相当合理： 酷版： 23.98万元
+领版： 25.98万元
+尊版： 27.98万元 价格基本和2.4版本的衔接，并且顶配也没超过原来3.0的次顶配。
+因此，这个价钱是定的相当有诚意。 本田在日系里还是有点运动基因， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/28/hun-dong-ya-ge/">混动雅阁</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-09-28T23:17:00+08:00" pubdate data-updated="true">Sep 28<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>混动雅阁千呼万唤历经两年时间终于摆在了中国消费者的面前。而其定价也可谓
+相当合理：</p>
+
+<ul>
+<li>酷版： 23.98万元</li>
+<li>领版： 25.98万元</li>
+<li>尊版： 27.98万元</li>
+</ul>
+
+
+<p>价格基本和2.4版本的衔接，并且顶配也没超过原来3.0的次顶配。
+<strong>因此，这个价钱是定的相当有诚意。</strong></p>
+
+<p>本田在日系里还是有点运动基因，所以那种混动也走向sporty的道路，
+发挥了电机启动快扭矩大的优势。电池给了10年保也算负责了。</p>
+
+<p>但是，仔细看看混雅的配置，尤其是丐版的，还是过于寒酸了。</p>
+
+<ol>
+<li>2款低配没有后雷达，而顶配有前后雷达</li>
+<li>最低配没有驾驶座电动调节</li>
+<li>最低配没有车载蓝牙</li>
+</ol>
+
+
+<p>以上3者都是我认为不可缺少的现代汽车的配置。那么就只能上27.98万元这个版本，
+而这个价位下，A4 三系在品牌上的优势就大了。所以混雅的前途大概只是投石问路。
+希望这套系统早日用在CRV上。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1070,101 +1133,6 @@ public, /templates.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/29/iptables-de-yi-xie-jie-shi/">Iptables 的一些解释</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-04-29T09:45:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在<strong>物理机</strong>部署的年代里，组网通常是分层而建。例如所有的服务器都接到二层交换机组成<strong>内网</strong>，随后交换机上联三层交换机及防火墙。彼时，防火墙通常由专用
-的设备承担。所有的路由规则、端口开放等也均在网络设备上进行配置。对于服务器而言，通常最简单的做法就是关闭iptables，在内部实现完全互通，而把防护任务交给专用设备。</p>
-
-<p>然而转到<strong>云部署</strong>的年代，专用的网络设备大都收归云所有，此时虽然还有内网的概念，但已经模糊，从而要求把防火墙建在主机上。做到几个域的隔离。</p>
-
-<p>iptables的配法有命令行和配置文件，此处以配置文件<code>/etc/sysconfig/iptables</code>为例，说明一些概念。</p>
-
-<p>对于安全类的防护,集中在<code>*filter</code>上，nat 等是管映射和路由的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*filter
-</span><span class='line'>:INPUT ACCEPT [1194191:146127015]
-</span><span class='line'>:FORWARD ACCEPT [159938:8304428]
-</span><span class='line'>:OUTPUT ACCEPT [1044829:126818322]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面这段代码表示对三种包的处理状态及已处理的包和字节数量。
-<code>INPUT</code>就是输入的包，<code>ACCEPT</code>表示默认都可以进入，如果设置成<code>DROP</code>就是都废弃输入包了。如果主要以开白名单的方式，<code>INPUT后</code>可以接<code>DROP</code>。中括号里面的数字，冒号前是包数量统计，冒号后是字节数统计。<br/>
-<code>FORWARD</code>表示转发，<code>OUTPUT</code>表示输出访问，通常这两个可以设置成<code>ACCEPT</code>即表示允许。<br/>
-这3个表示的是基础的规则，类似默认路由，优先级是最低的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span></code></pre></td></tr></table></div></figure>
-
-
-<p>随后就是很重要的这一段。这段的含义表示对连接状态是<code>ESTABLISHED</code>, <code>RELATED</code>的链接全部放行。iptables中的链接共有4种，<code>established</code>表示链接已建立，<code>related</code>的含义是由已建立的链接产生的链接，此外还有<code>new</code>和<code>invalid</code>两种链接状态，
-其实这段话的含义也可以理解成<code>invalid</code>链接放弃，<code>new</code>状态之外的连接则允许通过。
-这个指示关键的原因在于，比如本机设置了禁止外网访问本机的各个端口，同时本机作为客户端访问了另一个外网服务，那么外网服务的响应信息允许被接收。否则，就会面临只有一个单工链路的情况。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 80 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8080 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8081 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 22 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 21 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 20 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -s 10.3.1.0/24 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -j DROP
-</span><span class='line'>
-</span><span class='line'>-A INPUT -d 10.10.10.222 -j DROP</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个机器有两块网卡，分别有两个地址<code>192.168.1.202</code>和<code>10.10.10.222</code>,对于后者，只允许从这个口子发出包以及收入已建立连接的包（通过上面的 <code>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code>)。<br/>
-而对于前一个地址，则打开了http相关的80 8080 8081端口，开放了ssh和ftp端口，并对来自10.3.1.0网段的全部IP开放访问权限。</p>
-
-<p>对于包的动作有ACCEPT DROP 和REJECT，后两个都表示拒绝，只是REJECT是明确拒绝，DROP只是沉默不答。</p>
-
-<p>对于iptables，简单的用用，安全防护做到这样也就够了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1182,6 +1150,10 @@ public, /templates.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/">java新的兼容性挑战者Kotlin</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/21/thymeleafgan-xiang/">thymeleaf感想</a>
       </li>
     
@@ -1197,15 +1169,11 @@ public, /templates.</p>
         <a href="/blog/2017/02/28/icechu-tan/">ICE初探</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (70)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (71)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

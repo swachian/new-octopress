@@ -9,10 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="系列链接： mongodb基础
-尝试分布式及复制 （sharding and replication)
-部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
-little-endian , 不适合SPARC, &hellip;">
+  <meta name="description" content="想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的博客中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。 先安装 Pandoc sudo agt-get install &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,66 @@ little-endian , 不适合SPARC, &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/gimli-and-markdown-2-pdf/">Gimli and Markdown 2 Pdf</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T15:24:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>想把博客部分文章转换成pdf，利于直接把文件分发。试了很多东西，包括 pandoc、little book 等等。
+最终在这个法国人的<a href="http://kevin.deldycke.com/2012/01/how-to-generate-pdf-markdown/">博客</a>中找到了很好的解决办法。
+最后因为安装了gimli，最终直接解决了格式、中文编码等各种问题。</p>
+
+<p>先安装 Pandoc</p>
+
+<p><code>sudo agt-get install pandoc nbibtex texlive-latex-base texlive-latex-recommended texlive-latex-extra preview-latex-style dvipng texlive-fonts-recommended</code></p>
+
+<p>安装ruby的gem gimli</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo agt-get install wkhtmltopdf
+</span><span class='line'>gem install gimli
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后运行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>gimli -f ./README.md
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可得到类似GitHub风格的pdf文档。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1184,81 +1243,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/26/book-for-a-pmp/">Xd推荐的项目管理书单</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-26T09:30:00+08:00" pubdate data-updated="true">Mar 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>专案，也就是我们日常所说的项目，台湾xd推荐的书单。</p>
-
-<p><a href="http://www.flickr.com/photos/xdite/7014948309/sizes/o/in/photostream/">书单</a></p>
-
-<ul>
-<li>团队之美 机工 Stellman &amp; Greene</li>
-<li>项目管理之美  Scott Berkun (文科馆二楼文科书库 F224.5 /B911 英文版) 文科馆学生阅览室    F224.5 /B911A</li>
-<li>Planning extreme Programming Kent Beck(已下载)</li>
-<li>用户故事与敏捷方法 清华大学出版社(√)</li>
-<li>ship it Richardson / Gwaltney (√)</li>
-<li>项目管理修炼之道 人民邮电出版社 Johanna Rothman(√)</li>
-<li>软体快速开发(√)</li>
-</ul>
-
-
-<p>ship it增加的书单：</p>
-
-<ul>
-<li>领导力21法则</li>
-<li>高效能人士的七个习惯 文科馆二楼文科书库    B848.4 /K372(9)</li>
-<li>人性的弱点 文科馆二楼文科书库   C912.1 /K12T</li>
-<li>Extreme Programming Applied: Playing to Win</li>
-<li>Extreme Programming Explained: Embrace Change 张江馆张江书库   TP311.52 /B452A</li>
-<li>项目自动化之道 Java, Mike Clark 理科馆应用学科借阅室 TP312JA /K422</li>
-<li>程序员修炼之道 (已预约)</li>
-<li>计算机程序设计艺术</li>
-</ul>
-
-
-<p>杂书:</p>
-
-<ul>
-<li>自慢1~4</li>
-<li>打不破的人生30个定律</li>
-<li>苹果滋味</li>
-<li>师父</li>
-<li>学徒模式(DAVE HOOVER；ADEWALE OSHINEYE)</li>
-<li>与时间做朋友</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -1276,6 +1260,10 @@ Hadoop(java), Skynet(ruby)等。<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/">java新的兼容性挑战者Kotlin</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/21/thymeleafgan-xiang/">thymeleaf感想</a>
       </li>
     
@@ -1291,15 +1279,11 @@ Hadoop(java), Skynet(ruby)等。<br/>
         <a href="/blog/2017/02/28/icechu-tan/">ICE初探</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (70)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (71)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>
