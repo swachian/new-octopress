@@ -4,7 +4,7 @@
   <title><![CDATA[分类: redis | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-21T22:17:46+08:00</updated>
+  <updated>2017-05-30T16:11:34+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[独一无二者计数问题（ count-distinct）]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-%5B%3F%5D-wu-er-zhe-ji-shu-wen-ti-%28-count-distinct%29/"/>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-wu-er-zhe-ji-shu-wen-ti/"/>
     <updated>2014-12-17T16:14:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-[?]-wu-er-zhe-ji-shu-wen-ti-(-count-distinct)</id>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2014/12/17/du-wu-er-zhe-ji-shu-wen-ti</id>
     <content type="html"><![CDATA[<p>最近分析一个大日志文件，9亿条记录近300GB的数据。终于体会到一点大数据处理的意思。</p>
 
 <p>之前根据日志，统计出里面各个域名的pv还算简单。为了开发方便，利用了Redis，开10个java线程，分别扫描不同的行，并把domain做关键字写入redis并不断计数，最后从中读出全部的值并排序。
