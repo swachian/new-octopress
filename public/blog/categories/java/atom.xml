@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-30T16:11:34+08:00</updated>
+  <updated>2017-10-05T23:01:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -402,51 +402,53 @@ public, /templates.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[禁用http的一些方法]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/06/03/jin-yong-httpde-xie-fang-fa/"/>
-    <updated>2016-06-03T14:24:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/06/03/jin-yong-httpde-xie-fang-fa</id>
-    <content type="html"><![CDATA[<p>本来是挺正常的HTTP方法，现在变成了安全隐患。当然，也不能说不合理，毕竟基于能关的都关掉的思路，不使用的东西是可以禁掉。</p>
+    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
+    <updated>2016-05-19T17:22:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
+    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
+其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
 
-<p>Nginx的配法</p>
+<p>要解决可以在xml的配置中设置</p>
 
-<p>```
-if ($request_method !~* GET|HEAD|POST) {</p>
+<p>```xml</p>
 
-<pre><code>        return 403;
+<p>  &lt;mvc:annotation-driven></p>
+
+<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
+  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
+  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+    &lt;constructor-arg value="UTF-8" /&gt;
+    &lt;property name="writeAcceptCharset" value="false" /&gt;
+  &lt;/bean&gt;
+&lt;/mvc:message-converters&gt;
 </code></pre>
 
-<p>}
-```
-对于请求方法不是GET HEAD和POST的都返回403.</p>
-
-<p>Tomcat的配法</p>
-
-<p>```
-&lt;security-constraint></p>
-
-<pre><code>    &lt;web-resource-collection&gt;
-            &lt;web-resource-name&gt;fortune&lt;/web-resource-name&gt;
-            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-            &lt;http-method&gt;PUT&lt;/http-method&gt;
-            &lt;http-method&gt;DELETE&lt;/http-method&gt;
-            &lt;http-method&gt;OPTIONS&lt;/http-method&gt;
-            &lt;http-method&gt;TRACE&lt;/http-method&gt;
-    &lt;/web-resource-collection&gt;
-    &lt;auth-constraint&gt;&lt;/auth-constraint&gt;
-</code></pre>
-
-<p>&lt;/security-constraint>
-&lt;login-config></p>
-
-<pre><code>    &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
-</code></pre>
-
-<p>&lt;/login-config>
+<p>  &lt;/mvc:annotation-driven>
 ```</p>
 
-<p>这里面login-config可以不配，也不会影响效果。auth-constraint一定要配，如果不出现（即值为null），则全部的限制将不起作用。
-元素出现而值不填，则所有的这种请求都会被拒绝。</p>
+<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+
+<p>---- update on 2016.10.17</p>
+
+<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
+
+<p>```java
+static RestTemplate restTemplate = new RestTemplate();
+  static {</p>
+
+<pre><code>List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
+for (HttpMessageConverter&lt;?&gt; convert : converts) {
+  if (convert.getClass() == StringHttpMessageConverter.class) {
+    ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
+  }
+}
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   

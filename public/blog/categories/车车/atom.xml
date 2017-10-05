@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 车车 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/车车/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-05-30T16:11:34+08:00</updated>
+  <updated>2017-10-05T23:01:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -115,20 +115,32 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[车位问题该不该找政府？]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu/"/>
-    <updated>2016-06-12T12:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/06/12/che-wei-wen-ti-gai-bu-gai-zhao-zheng-fu</id>
-    <content type="html"><![CDATA[<p>关于小区车位问题该不该找政府，我是这么看的：</p>
+    <title type="html"><![CDATA[车险]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/"/>
+    <updated>2016-05-31T22:49:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian</id>
+    <content type="html"><![CDATA[<p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
+只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
 
-<p>拿某些人生很多个孩子来讲，如果是政府鼓励的，那政府就该负责，就像以前的光荣妈妈。如果政府是反对的，而且做了措施，那么就是自己承担。</p>
+<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
 
-<p>而以用车来讲，住宅、道路是政府规划的，道路更是只有政府才能建设，住宅区域的停车位配套比例也是政府定的，那么有了问题不找政府找谁？难道小区没水没电也来一句不应该怪政府配套不到位吗？车位的配套和水电的配套并无差异，这本来就应该是基本的配套需求。就像小区周边要配绿地、学校、医院等，这本来就是很起码的要求。</p>
+<ul>
+<li>车损：现2109.58，原3514.15</li>
+<li>三责：现1176，   原1689.48</li>
+<li>盗抢：现取消，    原977.02</li>
+<li>划痕：现339.5,   原486.35</li>
+<li>各项不计免赔：现543.77，原1049.04</li>
+</ul>
 
-<p>何况在中国，大部分汽车都是这些国企以及国企的合资企业造的，他们造了那么多，卖了那么多，收获了那么多，买车的有了问题不找获益的政府又找谁呢？就像上火车的话，如果没那么多车皮，卖那么多票干嘛。
-总不见得大家钱付了，票买了，然后上不了车，再对大家讲一句“有没有车厢有没有座位”你们这些买票的应该事先考察清楚了再决定是不是要买票。</p>
 
-<p>再说一个上海特色的问题。既然问沪牌收了钱了，就该办事啊。现在市区是沪牌一半，外牌一半，严打起来又一点不区分的。虽然也不指望警察能改，但大家谈谈总是可以的吧。</p>
+<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
+保险公司是活雷锋？</p>
+
+<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
+差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
+甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
+
+<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
 ]]></content>
   </entry>
   

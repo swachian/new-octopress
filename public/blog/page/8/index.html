@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
-但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。 &hellip;">
+  <meta name="description" content="书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
+就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
+牵涉到城市，难免会有更敏感的话题出现。
+本书的时间也要稍早，描述的是2000年前后的中国。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,622 +70,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/14/nginx-chu-li-spring-jing-tai-zi-yuan-de-pei-zhi/">Nginx 处理Spring 静态资源的配置</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-14T13:19:00+08:00" pubdate data-updated="true">Oct 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>用Nginx处理静态资源是挺常见的一个事情，自从使用了Spring，也经常直接利用Spring的处理静态文件的功能，也能打上Etag。避免流量传输。
-但是近来发现，Spring处理静态资源后，对静态文件获取的请求浏览器还是会发起，只是每次都是返回304。所以想继续借助Nginx给Spring的静态资源打上expire的标记。</p>
-
-<p>需求也算简单：</p>
-
-<ol>
-<li>基于app toolbar的动态请求转发给java</li>
-<li>gif,png，js等nginx直接处理，并加expire 3h；</li>
-<li>部分.js请求如t.js还是转给java，有效期为0；</li>
-<li>敏感文件不会被nginx处理，如web.xml无法被nginx转走</li>
-</ol>
-
-
-<p>因为目前Spring的静态资源单独存放在和WEB-INF并排的目录下，所以利用Nginx配置就大为简单了，只要限制路径名称即可。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>        location /toolbar {
-</span><span class='line'>            root   html;
-</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
-</span><span class='line'>        }
-</span><span class='line'>        location ~ /toolbar/static {
-</span><span class='line'>            root   html;
-</span><span class='line'>            if (-f $request_filename) {
-</span><span class='line'>                expires 1d;
-</span><span class='line'>                break;
-</span><span class='line'>            }
-</span><span class='line'>        }
-</span><span class='line'>        location = /toolbar/enter/t.js {
-</span><span class='line'>            root   html;
-</span><span class='line'>            proxy_pass http://192.168.202.72:8080;
-</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后在nginx的html目录下建立目录<code>toolbar</code>，并在其增加一个符号连接<code>ln -s /home/web/apache-tomcat-7.0.56/webapps/toolbar/static static</code>，就可以实现上述要求了。</p>
-
-<p>这里面用到了几种Nginx的配置。</p>
-
-<ol>
-<li><code>location /toolbar</code>，这是最基本的匹配字符串的表达方式，优先级一般情况下也最低，然而<code>^~</code>是一个例外，它的优先级比下面的正则要高。</li>
-<li><code>location ~ /toolbar/static</code>，这个是用到了正则表达式的匹配，优先级要高于基础的只比较字符。</li>
-<li><code>location = /toolbar/enter/t.js</code>，这是优先级最高的匹配符，要求uri完全相等。</li>
-</ol>
-
-
-<p>如果需要使用正则表达式匹配，则必须使用<code>~</code>或者<code>~*</code>，其中后者和前者的区别是不区分大小写。</p>
-
-<p>整个匹配顺序是：</p>
-
-<ol>
-<li>对<code>=</code>进行匹配，有相符的就停止；</li>
-<li>对所有的非正则表达式（为使用~ 和 ~*）进行匹配，如果遇到<code>^~</code>则也停止，否则全部比对完毕后，最接近的匹配将被选用作为候选，随后进入3匹配正则表达式；</li>
-<li>正则表达式按定义的顺序进行匹配，有匹配的则停止，即可选用刚刚匹配的正则表达式，如没有匹配的正则，则选用2中得到的结果。</li>
-</ol>
-
-
-<p>因此对静态资源的选择，可以加上<code>~</code>，也可以不加。但为了避免今后配置的冲突，还是让静态资源的优先级高一些来的好。</p>
-
-<p>随后，可以使用下面的链接进行测试，看看是否满足需求：</p>
-
-<p>http://192.168.203.198/toolbar/enter/t.js,<br/>
-http://192.168.203.198/toolbar/static/images/logo1.png,<br/>
-http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
-
-<p>前面两个应该得到返回内容，最后一个应该获得报错。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/06/dao-che-jiu-shi-kan-pi-gu/">倒车就是看后轮和摆车尾</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-06T13:37:00+08:00" pubdate data-updated="true">Oct 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开了几个月的车，终于开始练习倒车了。离自己直接上路又近了些。
-两天下来，感觉倒车主要是三点：</p>
-
-<ol>
-<li>设计路线和找准起点</li>
-<li>看后车轮和车尾</li>
-<li>注意车头一角</li>
-</ol>
-
-
-<p>对新手而言，尤其要把握住后车轮，可以把反光镜调低进行观察。倒入的关键是让车屁股彻底绕开障碍物，
-然后就可以死打方向直到后侧车轮靠边，随后回个方向到另一头继续倒出。在此过程中注意对角的前后轮。</p>
-
-<p>不过只在行进中转动方向盘目前我还做不到，仍然需要努力。另外就是发现，家里小区的停车难度远比马路上大。
-如果家里停好了，基本上外面也就可以随便停了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-30T22:27:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开天籁已经几个月了，总体感觉还不错，尽管最近右后侧轮胎扎了个钉子，这当然怪不了小天，只能说中国的路面
-实在是路况不好。</p>
-
-<p>这些日子下来，对这部车还是很满意的。车内空间够大，开起来很舒服。尤其是喜欢前雷达，
-对新手而言在碰见人来人往的地方以及需要挤过去的路况下，可以增强很多信心。
-各种配置也基本够用了，座椅内饰都很舒服，CVT在市区启停确实够平顺。但作为B级中，总是不可避免地有下面
-两个问题：</p>
-
-<ol>
-<li>空间大的同时意味着尺寸大，在上海停车什么的都不是很轻松，尽管是可以习惯的；</li>
-<li>油耗依然偏高，毕竟车大，天籁的高速的确省油，但上海的市区开开基本上在13个左右了，夏天开空调的话就更高了。</li>
-</ol>
-
-
-<p>而且，因为接送人的关系，我平时上下班开车往往像「保姆车」，需要怠速等待很长的时间。这种情况下，
-动力并不重要，而怠速油耗很重要，能有一台小排量的车就比较好了。2.5L的怠速油耗确实还是高了些。
-<a href="/blog/2013/11/03/kan-che-da-nuo-yi-ji/">去年看车</a>原本想选ES+逍客的。
-最后因为我们先出手，所以<a href="/blog/2014/01/17/teana/">买了天籁</a>。但是看看当时的组合依然是适用的。
-只是10来个月过去了，现在市场上又多了一些和逍客旗鼓相当的产品。例如本田新推出的缤智-Vezel。</p>
-
-<p>看尺寸、价格和定位，这一款车是明显冲着逍客去的。这个级别里还有一款吸引我的是昂科拉。
-都是4米2到4米3的车长，都是跨界型的suv。缤智的操控，估计还是比不上逍客的，因为逍客的悬挂是独立的，
-而且由欧洲设计。缤智只是一个飞度的地盘，那个悬挂其实有点拿不出手。但逍客毕竟是一台老款车了，
-缤智有后发制人的优势。逍客可能一年左右也会出换代逍客，但考虑到国产化以及日产现在捉急的产能，
-能否在明年买到逍客依然很难说。</p>
-
-<p>缤智的优点么，在我看来主要还是尺寸的优势。车身是很短的，但由于高度的增加，在主观感受上比A0级别的车大多了，
-也可以稍微拉开一点层次。看见飞度可爱是挺可爱的，但在派头和气势上实在欠缺。其次，就是缤智漂亮的外形了。
-后门和尾部都有点讴歌SUV的味道。隐藏式的门把手很有特色。<br/>
-同逍客相比，他的储物空间有优势，操控和过弯当然是不如的，毕竟悬挂和底盘都差的太多。同时内饰也稍好一些。
-多了电子驻车、电动天窗、后车雷达，但是又少了主驾驶电动调节和自动大灯。</p>
-
-<p>在我比较喜欢的配置方面，倒车影像是有的，没有前雷达只有后雷达是一个缺陷，但逍客的话有影像的车前后雷达
-就都没有了。自动大灯和电动座椅的缺失比较让人遗憾。不过逍客的主流配置也没有电动座椅。
-后视镜电动调节和加热是有的，但自动折叠是一律没有，更别提记忆了，不过这方面逍客也一样。
-其他高级的配置就更没指望了。可以说在配置方面还是缤智胜出，后雷达还是比自动大灯有用。</p>
-
-<p>不过目前已推出的缤智我不可能买，必须得是地球梦的动力组成才值得出手。
-另一点对本田的遗憾是变速箱也是CVT的。日系现在小动力的自动挡全面从4AT换成了CVT，
-要是能装配6AT的变速箱就好了。只是目前看来日系三个品牌的趋势是倾向于CVT，尤其是小排量的。
-甚至得知明年上市的新款CRV也要改成CVT了。这方面日本厂商也挺无聊的，幸亏这个世界的汽车没有全部变成日系车。</p>
-
-<p>跟逍客对比后，可以发现本田其实并不是新定义了一个细分市场，而是比较明显地对标逍客。
-所以有些普通的、应该有的配置反而没有出现在缤智上。本田对缤智的配置、动力的定义并
-不是主要从自己的实际和客户的需求出发，而是很大程度上和逍客度长协大的产物。所以个别之处
-显得有那么一点脑残。真的以后换用地球梦系列动力组成，其配置会怎么样变化也是一个很大的未知数。
-只能到明年推出后再看了。确实是值得继续关注的一款车型。然而，换代逍客在这方面又都补齐了，看来这个级别的王者还是逍客。</p>
-
-<p>另外可以考虑的就是本田的CRV和丰田的RAV4了。缤智和CRV的差价倒是很接近，尤其是现款的CRV打折幅度
-很大的情况下。不过CRV的2.0版本总体而言优于其2.4的版本，只是2.0群系列都没有倒车影像，需要自己加装。
-RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版本的了，搭载的6AT也能比2.0版本的CVT
-带来的体验更丰富些。2.5版本优惠后的价格比缤智的顶配也贵不了多少。但RAV4在一汽丰田的做工实在难以恭维，
-保险点还是CRV了。
-然而，问题在于这样一来，对天籁两个劣势的弥补就不好了。CRV的停车不比天籁方便，油耗也不遑多让。
-所以，这几个选择里面和天籁最搭的还是紧凑级的SUV，即1.5L的缤智和换代逍客。</p>
-
-<p>东日明年就要换代了又出一个所谓2015逍客确实很恶心，尤其是个别地区的换代产品都还已经上市了。
-但是，新逍客只在英国工厂生产，而中国注定又只能买到国产逍客。所以我们只能等待。国产生产线组建起来慢半年甚至一年都很平常。
-拿缤智来讲，日本本土去年年底就上市了，中国到今年都10月份了，还没正式上市呢。新逍客等到明年下半年才能在东风生产也不奇怪。</p>
-
-<p>除了短小型的缤智和逍客，体型和CRV/RAV4类似的昂科威也是未来的一项选择。目前已知的2.0T的版本确实配置很丰富、
-内饰很豪华，外观么除了太像GL8其他都还不错。最大的劣势就是这个2.0T的发动机本来是按在凯迪拉克身上的，
-凯迪拉克上每月正常使用四五千元的油耗实在不是买别克的人可以承受的。而从陈震的视频来看，在37公里时速下，依然
-油耗超过12升每公里，真的赶上市区行车，恐怕25升以上真的一点不夸张。但是，据说除了2.0T，还有1.5T的两驱版本。
-这么说的话，这个版本就很吸引人了。如果油耗能降到一个和rav4类似的程度，配置比2.0T不要减的太离谱，
-那么昂科威确实是很值得期待的另一款车。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/19/java-he-javascriptde-rsa/">Java 和 Javascript的RSA</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-19T13:57:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近来安全问题日益被重视，通过HTTP传输的部分数据也有了加密的需求。虽然最到位的办法肯定是HTTPS，但证书的申请是比较麻烦的。所以，还是决定
-通过diy的方式，将浏览器中的部分敏感数据加密后再传给服务器。</p>
-
-<p>说到加密算法，主要是对称或不对称，可逆或不可逆。最保险的当然是不可逆的密文传输，但是部分业务获得不可逆的密文后无法处理，只能选择可逆的形式。
-而在浏览器中加密，显然用对称加密方式就不合适了。所以最后选择了RSA。既是不对称的也是可解密的。</p>
-
-<p>这件事情里面，最麻烦的就是rsa的算法是java和javascript分别实现的。客户端的加密别无选择，只有js胜任。服务端主要提供给现有服务使用，因此主要就是Java。
-而让两者配合，则是需要花费些功夫的。网上尽管资料不少，但讲清楚之间配合的很少。</p>
-
-<h2>Javascript中的RSA</h2>
-
-<p>Java的加密算法之前已经用过多次，了解了一下js的rsa算法，还真的有不少，最后选了一个大家提到的比较多的<a href="http://www.ohdave.com/rsa/">ras in javascript</a>。
-在html中使用的代码如下:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;title&gt;</span>JavaScript RSA<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/BigInt.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/RSA.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.ohdave.com/rsa/Barrett.js&quot;</span><span class="nt">&gt;&lt;/script&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="c1">//公钥加密明文</span>
-</span><span class='line'>        <span class="nx">setMaxDigits</span><span class="p">(</span><span class="mi">231</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">modulu</span> <span class="o">=</span> <span class="s2">&quot;00aad04454bda226e1&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">key1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">&quot;jack1234张三&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">encryPssword</span> <span class="o">=</span> <span class="nx">encryptedString</span><span class="p">(</span><span class="nx">key1</span><span class="p">,</span> <span class="nx">password</span><span class="p">);</span>
-</span><span class='line'>        <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span><span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//私钥解密</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">priExp</span> <span class="o">=</span> <span class="s2">&quot;078c4c789faca941&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">key2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="nx">priExp</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">decryptedPssword</span> <span class="o">=</span> <span class="nx">decryptedString</span><span class="p">(</span><span class="nx">key2</span><span class="p">,</span> <span class="nx">encryPssword</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">alert</span><span class="p">(</span><span class="nx">decryptedPssword</span><span class="p">);</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>setMaxDigits</code>我理解下来是给计算留下足够多的空间的，一般选择秘钥位数(key_size)*2/16，每个digit可以放16个bit.<br/>
-<code>RSAKeyPair(encryptionExponent, decryptionExponent, modulus)</code>是构造钥匙的方法，实际上构造公钥（加密）只需要第一个参数和第三个参数，构造私钥（解密）只需要第二个参数和第三个参数。
-第三个参数是类似模的一个东西，另外两个参数则是指数，根据模和各自的指数，就能生成相应的公钥和私钥的数字。而这个js的版本，都是返回的hex，即16进制的内容，且不支持中文，如果需要支持中文的话，需要自己先转成某种编码。不过，还剩下一个问题，就是模和指数从哪里获取呢？</p>
-
-<h2>Java中的RSA</h2>
-
-<p>Java的RSA代码有很多，可以参考<a href="http://blog.csdn.net/songxiaobing/article/details/17505237">链接</a>。关键在于如何使用这些API。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argvs</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">KeyPair</span> <span class="n">keyPair</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateKeyPair</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">RSAPublicKey</span> <span class="n">pubKey</span> <span class="o">=</span> <span class="o">(</span><span class="n">RSAPublicKey</span><span class="o">)</span> <span class="n">keyPair</span><span class="o">.</span><span class="na">getPublic</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">RSAPrivateKey</span> <span class="n">priKey</span> <span class="o">=</span> <span class="o">(</span><span class="n">RSAPrivateKey</span><span class="o">)</span> <span class="n">keyPair</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">pubModBytes</span> <span class="o">=</span> <span class="n">pubKey</span><span class="o">.</span><span class="na">getModulus</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">pubPubExpBytes</span> <span class="o">=</span> <span class="n">pubKey</span><span class="o">.</span><span class="na">getPublicExponent</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">priModBytes</span> <span class="o">=</span> <span class="n">priKey</span><span class="o">.</span><span class="na">getModulus</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="kt">byte</span><span class="o">[]</span> <span class="n">priPriExpBytes</span> <span class="o">=</span> <span class="n">priKey</span><span class="o">.</span><span class="na">getPrivateExponent</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">RSAPublicKey</span> <span class="n">recoveryPubKey</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateRSAPublicKey</span><span class="o">(</span><span class="n">pubModBytes</span><span class="o">,</span>
-</span><span class='line'>        <span class="n">pubPubExpBytes</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">RSAPrivateKey</span> <span class="n">recoveryPriKey</span> <span class="o">=</span> <span class="n">RSAUtil</span><span class="o">.</span><span class="na">generateRSAPrivateKey</span><span class="o">(</span>
-</span><span class='line'>        <span class="n">priModBytes</span><span class="o">,</span> <span class="n">priPriExpBytes</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;加密指数: &quot;</span>
-</span><span class='line'>        <span class="o">+</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">pubPubExpBytes</span><span class="o">));</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;解密指数： &quot;</span>
-</span><span class='line'>        <span class="o">+</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">priPriExpBytes</span><span class="o">));</span>
-</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;公钥modulus: &quot;</span><span class="o">+</span><span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">pubModBytes</span><span class="o">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>生成密钥对可以用<code>generateKeyPair</code>，并且会生成一个RSA文件。随后的重点是要把里面的公钥私钥转换成有<code>RSA</code>前缀的相应类，只有这样才能调出获得Exp和Mod的方法。
-两个ModBytes得到的结果是一样的。所以在js里面，modulu就变成只有一个参数了。</p>
-
-<h2>二者的异同</h2>
-
-<p>如同之前预料的一样，两个语言写出来的加密解密在一些细节上是不一样的。</p>
-
-<ul>
-<li><p>java</p>
-
-<ul>
-<li>默认密文是二进制的，自己主动转成16进制的话是连续的</li>
-<li>原生支持中文</li>
-</ul>
-</li>
-<li><p>javascript</p>
-
-<ul>
-<li>默认密文就是16进制的，且每个分组之间使用一个空格进行分隔</li>
-<li>分组内部的排列是倒序的</li>
-<li>不支持中文</li>
-</ul>
-</li>
-</ul>
-
-
-<p>下面的输出比较说明问题</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">byte2hex</span><span class="o">(</span><span class="n">rsa</span><span class="o">.</span><span class="na">encrypt</span><span class="o">(</span><span class="n">pubKey</span><span class="o">,</span><span class="n">str</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
-</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;加密后==&quot;</span> <span class="o">+</span> <span class="n">s1</span><span class="o">);</span> <span class="c1">//加密后==0c983a3d17e57037456582ce61bc1276</span>
-</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;解密后==&quot;</span> <span class="o">+</span> <span class="n">Javanew</span> <span class="n">String</span><span class="o">(</span><span class="n">rsa</span><span class="o">.</span><span class="na">decrypt</span><span class="o">(</span><span class="n">priKey</span><span class="o">,</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">hexStringToByte</span><span class="o">(</span><span class="n">s1</span><span class="o">))));</span> <span class="c1">//解密后==abcdefghijklmn</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">js</span><span class="err">相同内容的输出为：</span>
-</span><span class='line'><span class="mi">4831</span><span class="n">c7394dc3623c</span> <span class="mi">5429366</span><span class="n">c63908d05</span> <span class="mi">16</span><span class="n">d4229e4631084a</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>差异还是比较显而易见，具体的实现如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm">   * 解析js的rsa处理过来的密文</span>
-</span><span class='line'><span class="cm">   * @param jsHex 的特点是每16个字符中间有空格分割，而且block还原的顺序需要颠倒过来</span>
-</span><span class='line'><span class="cm">   * </span>
-</span><span class='line'><span class="cm">   * @throws Exception </span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">decryptFromJsRSA</span><span class="o">(</span><span class="n">String</span> <span class="n">jsHex</span><span class="o">,</span> <span class="n">RSAPrivateKey</span> <span class="n">priKey</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">String</span><span class="o">[]</span> <span class="n">blocks</span> <span class="o">=</span> <span class="n">jsHex</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">String</span> <span class="n">block</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">blocks</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
-</span><span class='line'>      <span class="c1">//byte[] en_result = new BigInteger(block, 16).toByteArray();</span>
-</span><span class='line'>      <span class="kt">byte</span><span class="o">[]</span> <span class="n">en_result</span> <span class="o">=</span> <span class="n">SSOEncrypter</span><span class="o">.</span><span class="na">hexStringToByte</span><span class="o">(</span><span class="n">block</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="kt">byte</span><span class="o">[]</span> <span class="n">de_result</span> <span class="o">=</span> <span class="n">decrypt</span><span class="o">(</span><span class="n">priKey</span><span class="o">,</span> <span class="n">en_result</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">de_result</span><span class="o">));</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>      <span class="c1">//返回解密的字符串</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">reverse</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>中文编码的问题</h2>
-
-<p>上面用到的js的rsa库，写的很小巧，运行速度也很快。唯一的缺点就是不支持中文。好在按上面的算法，试了几千条数据后，确保非中文的情况下java和js之间的明文-密文转换是没有问题的。
-所以只要给js加上Base64的编码，就可以解决问题了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">genRandomNum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pwdLen</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 生成的密码的长度</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;\&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;我&#39;</span><span class="p">,</span> <span class="s1">&#39;爱&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">,</span> <span class="s1">&#39;京&#39;</span><span class="p">,</span> <span class="s1">&#39;天&#39;</span><span class="p">,</span><span class="s1">&#39;安&#39;</span><span class="p">,</span> <span class="s1">&#39;门&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;日&#39;</span><span class="p">,</span> <span class="s1">&#39;产&#39;</span><span class="p">,</span> <span class="s1">&#39;别&#39;</span><span class="p">,</span> <span class="s1">&#39;克&#39;</span><span class="p">,</span> <span class="s1">&#39;大&#39;</span><span class="p">,</span> <span class="s1">&#39;众&#39;</span><span class="p">,</span> <span class="s1">&#39;丰&#39;</span><span class="p">,</span> <span class="s1">&#39;田&#39;</span><span class="p">];</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">maxNum</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">pwd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&lt;</span> <span class="nx">pwdLen</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// 生成随机数，取绝对值，防止生成负数，</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="nx">maxNum</span><span class="p">);</span> <span class="c1">// 生成的数最大为36-1</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">maxNum</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">pwd</span> <span class="o">+=</span> <span class="nx">str</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-</span><span class='line'>    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">//console.log(pwd);</span>
-</span><span class='line'><span class="k">return</span> <span class="nx">pwd</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">pwds</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="kd">var</span> <span class="nx">pwd</span> <span class="o">=</span> <span class="nx">genRandomNum</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40</span><span class="p">));</span>
-</span><span class='line'>   <span class="nx">pwds</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pwd</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>    <span class="c1">//公钥加密明文</span>
-</span><span class='line'>    <span class="nx">setMaxDigits</span><span class="p">(</span><span class="mi">231</span><span class="p">);</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">modulu</span> <span class="o">=</span> <span class="s2">&quot;0085cf15ef6336cb3f&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">key1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RSAKeyPair</span><span class="p">(</span><span class="s2">&quot;010001&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">modulu</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pwd</span> <span class="nx">of</span> <span class="nx">pwds</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">pwd</span><span class="o">+</span><span class="s2">&quot;[ &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pwd</span> <span class="nx">of</span> <span class="nx">pwds</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pwd</span><span class="p">);</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">encryPssword</span> <span class="o">=</span> <span class="nx">encryptedString</span><span class="p">(</span><span class="nx">key1</span><span class="p">,</span> <span class="nx">Base64</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">pwd</span><span class="p">));</span>
-</span><span class='line'>      <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">encryPssword</span><span class="o">+</span><span class="s2">&quot;, &quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过上面的程序，可以产生长度不等的多个随机密码，把明文进行base64转码后交给rsa加密成16进制的字符，然后就可以把得到的明文和密文交给java进行比对了。
-另外Base64的编码是url不安全的。因为+ = /都是base64的适用字符，而这些在url传输中都会被转义，所以js的base64编码一般还有一个对url-safe的版本。
-而在此处，rsa会最终转成16进制，因此并不需要使用url-safe的特性。考虑到Java的base64还是标准版的，所以使用标准版的base64更合适。</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1427,6 +813,878 @@ HBase CouchDB和Rails社区还是不搭。</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/01/xin-che-ping-de-sui-xiang/">新车评网的随想</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-01T22:09:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近几周，挺痴迷<a href="http://www.xincheping.com/">新车评网</a>。原因主要是他们有一个和我同一年高考同一年
+工作的创始人和总编颜宇鹏（俗称yyp），他们的编辑队伍相对稳定，阿聪、阿庆、阿文、稀饭、hh等确实都特性很鲜明。
+从他们的文章、观点中可以学到不少东西，增长不少的见识。而他们的长测节目则尤其精彩，从买车、用车、二手保值等，
+可以阅读到很多用车的细节。这些东西，在汽车之家上是感觉不到的。</p>
+
+<p>比较起来，汽车之家更像一个带产品属性的汽车媒体网站，而新车评则更接近于传统的汽车杂志。以编辑为核心竞争力，
+主要的产品就是文章，当然也有视频。但是视频只是为了更方便一部分懒得看文章的人。这可能和颜宇鹏是从传统杂志走出来的背景有关。</p>
+
+<p>而从新车评上，发现从事汽车报道的媒体人还真的挺多的。既有传统的杂志社，也有爱卡、汽车之家这样的新媒体巨头，
+还有新车评这样极有特色的规模相对小的媒体，更有大量的在大报业汽车版面中的记者和编辑。摆在一汽看的话，数量
+就相当可观了。还给我映像深刻的是，深圳或者说南方系的媒体业确实很兴盛。可以说各路人马很多，虽然有点乱，但确实
+活力十足。长期在上海文广统治之下的上海生活，还是很赞叹南方系媒体的活力。</p>
+
+<p>说回新车评本身，他们其实也有一定的偏向性。给我的感受是，他们和上海通用、广州本田、北京现代的关系尚佳，
+和东日、丰田、大众的关系相对一般。和自主品牌走的更近，和BBA的关系也只能说一般。</p>
+
+<p>那么晚才接触新车评网，还是有点遗憾的。好在还是接触到了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/kao-pu-de-you-hao-shu-ju-ku/">靠谱的油耗数据库</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T22:55:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>油耗一直以来是买车的一个重要考量，之前一直查看汽车之家上的工信部综合油耗数据。
+然而，工信部实际上有更细化的数据，区分了市区工况和市郊工况。这显然更对实践有指导意义。</p>
+
+<p>而且，工信部的信用和客观性也是最有保证的。至少，通过天籁的数据来看，完全符合我遇到的实际情况。
+下面这个<a href="http://chinaafc.miit.gov.cn/n2257/n2280/index.html">链接</a> http://chinaafc.miit.gov.cn/n2257/n2280/index.html
+可供参考。</p>
+
+<p>在高级查询中，通用名称处填写车子的常用称呼即可。访问的速度可能有点慢，但数据真的有效。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/le-fu-de-de-guo-dui-zhong-yu-you-guan-liao/">勒夫的德国队终于有冠了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T17:37:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>距离德国队夺冠已经有10天了。这10天中我依旧处于一种球迷的兴奋中。确实，很不容易。</p>
+
+<p>在<a href="/blog/2014/07/11/de-guo-jue-sai-a-gen-ting/">德国决赛阿根廷</a>中，我已经说过，阿根廷和德国并不是一个档次的球队，能阻止德国夺冠的只有这是在南美举办的。但现在看来，勒夫破除了这个魔咒。</p>
+
+<p>虽然决赛打了加时，但德国队的机会其实很多。而且更要考虑到，这是赛前热身赫迪拉意外受伤，而勒夫又用了没什么经验的克拉默打比赛，德国队上半场的发挥是不正常的。如果脸哥能上场，或许90分钟就可拿下比赛。不过，最终终于收获了圆满的结局。</p>
+
+<p>距离德国上次夺取世界杯还是在90年，那时候我才刚从小学毕业进入预备班，而更近一点的96年，我还是一个高二的学生。等到这次见到德国队夺冠，已经是30好几的人了。看球早已理性很多，也明白这主要也是一个游戏，但是依然可以带来很多的快乐。</p>
+
+<p>对于勒夫、对于德国队，我是一直喜爱和支持。要说看不惯绵绵的，仅有一点，他太不爱定位球了。无论守和攻，勒夫执教下的定位球都很差。而这次大赛显然做了很大的改观。恭喜勒夫突破了自己，取得了成就。</p>
+
+<p>而至于德国队，以04年克林斯曼、勒夫执教以来，大致可以分为两个阶段：</p>
+
+<ol>
+<li>04-08，攻击的核心是巴拉克弗林斯和施耐德，尤其是施耐德的传球配合K神或者其他中锋，堪称一绝。这也是06-07德国队表现好的保障。等到08年的时候，弗林斯巴拉克不可避免的老化了，施耐德又因伤无法参加欧锦赛，所以08年的德国队是不如07甚至06的。</li>
+<li>08年之后，勒夫重建了德国队，可以认为勒夫二期基本成型。在08之后，留下来的老将就只有K神和弗里德里希了，以及猪波拉这些当时只有24岁的中坚力量。
+直到2010年，巴拉克因伤退出，而国家队引入了越来越多的09欧青赛冠军的年轻人，从诺伊尔 272，到脸哥 博阿滕，以及稍后才出任主力的狐媚、赫韦德斯，德国队的年纪和实力都让人对他们充满了期待。</li>
+</ol>
+
+
+<p>实际上，这支队伍在2012年就已经应该是全球最强大的国家队，只是因为勒夫用兵失误，才失去了登顶的机会。好在勒夫这次做出了很好的弥补。不过说句实话，即使在2012年，经过论坛讨论的结果也是勒夫是目前最合适的教练。因为其他人也不一定肯来干国家队的差事。而勒夫对这支队伍拥有绝对的控制力。同时，他的专业素养在国家队教练层面也是出色的，除了定位球实在是个外行。</p>
+
+<h2>未来的展望</h2>
+
+<p>德国队依然会是一支强队，尽管拉姆已经决定现在就退出了。但看看平均25的年纪，以及90后球员，德国队的未来还是光明的。运气够好的话，这波人绝对有机会拿下法国欧洲杯和俄罗斯世界杯。</p>
+
+<p>至于拉姆的退出，短期内肯定有影响。但德国队这几年就不是靠队长的领导，巴拉克的时候队长就不怎么起作用了。只是，边后卫这个短板倒是更加突出了。要看勒夫的建设能力还能不能再发挥作用。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/pro-javascript-techniques/">被低估的JS： 「Pro JavaScript Techniques」读后感</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T16:13:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>作为一个Web开发者，无法绕开的一个点就是JavaScript。而对于经过C/Java训练出来的计算机专业人员而言，是很容易轻视JS，从而使得在这方面往往要经过很长的时间和经历，才能体会到
+JS的与众不同及其能力。C或者Java同JS的不同已经不用多言，而同为脚本语言的Ruby Php Perl Python 同 JS的差别也是巨大的。有一定编程基础的人，学习其他大众性的语言，比如最常用的10种语言，
+一般都是比较快的。但是，JS是如此的和其他语言不一样，以至于学习起来真的费一番功夫。</p>
+
+<p>不过，直到读了John Resig的「Pro JavaScript Techniques」，终于令我豁然开朗。Resig是大名鼎鼎的JQuery的创始人，这本书中很多主要的API可以说就是介绍了JQuery是怎么实现的。包括Id的选择，
+ajax方法等。最重要的，如他所说，就是第二章面向对象的JavaScript，或者说如何从其他编程语言来理解JavaScript。</p>
+
+<p>笔记的流水账：</p>
+
+<h1>第一章 现代化的JS</h1>
+
+<p>JS和它的队友：</p>
+
+<ul>
+<li>Core Javascript 1.5</li>
+<li>XML2（DOM）</li>
+<li>XMLHttpRequest</li>
+<li>CSS（style）</li>
+<li>事件</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="err">注意通过</span><span class="nx">prototype</span><span class="err">定义公共函数的模式</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">Lecture</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">teacher</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">teacher</span> <span class="o">=</span> <span class="nx">teacher</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 实例method</span>
+</span><span class='line'><span class="nx">Lecture</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">teacher</span>  <span class="o">+</span> <span class="s2">&quot; is teaching &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">Schedule</span><span class="p">(</span><span class="nx">lectures</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span> <span class="o">=</span> <span class="nx">lectures</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Schedule</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">str</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">lectures</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">display</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">mySchedule</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schedule</span><span class="p">([</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;Gym&quot;</span><span class="p">,</span> <span class="s2">&quot;Mr. Smith&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="s2">&quot;Mrs. Jones&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">Lecture</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">,</span> <span class="s2">&quot;TBD&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">mySchedule</span><span class="p">.</span><span class="nx">display</span><span class="p">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第二章 面向对象的JS( javascript的精髓)</h1>
+
+<h3>引用</h3>
+
+<p>引用指向的是具体的对象，引用是一个变量。
+JS中的引用不会指向引用，<code>var b = a;</code>的作用永远是让b指向a表示的实际对象</p>
+
+<h3>参数类型检查和函数重载</h3>
+
+<p><code>if (typeof msg == 'undefined') {}</code></p>
+
+<p>以及js对象都有的属性：构造子</p>
+
+<p><code>if (str.constructor == String) {}</code></p>
+
+<p>后者能够找出具体的构造对象的函数，前者对通过函数构造的对象返回的也是&#8217;object&#8217;。</p>
+
+<p>js在每个函数里面，有一个隐含属性 <code>arguments</code> ，这是一个伪数组，可以遍历、有.length属性，但不能被修改。可以通过复制遍历变成标准数组。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>          <span class="nx">ojb</span><span class="p">.</span><span class="nx">handleMsg</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>         <span class="nx">alert</span><span class="p">(</span> <span class="nx">msg</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>作用域(Scope)</h3>
+
+<p>js通过函数来划分作用域，而不是通过代码块</p>
+
+<p>没有var声明的，则变成全局变量</p>
+
+<h3>闭包</h3>
+
+<p>闭包允许内层函数引用外围函数内的变量，即便外层函数已经终止。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">delayedAlert</span><span class="p">(</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">time</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">setTimeoute</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>         <span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// msg就是外围函数中的变量</span>
+</span><span class='line'>    <span class="p">},</span> <span class="nx">time</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>curry化： 利用函数生成函数</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">addGenerator</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>     <span class="k">return</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">toAdd</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">num</span> <span class="o">+</span> <span class="nx">toAdd</span><span class="p">;</span>
+</span><span class='line'>     <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">addFive</span> <span class="o">=</span> <span class="nx">addGenerator</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">addFive</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">==</span><span class="mi">9</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>上下文对象</h3>
+
+<p>通过<code>this</code>表示，永远指向当前代码所处的对象中。
+是调用时确定的对象。</p>
+
+<p>function都有call和apply两个方法，可以用于指定this是什么</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">changeColor</span><span class="p">(</span> <span class="nx">color</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">changeColor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">setBodyColor</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">changeColor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span> <span class="c1">//传入隐含的全部参数</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">setBodyColor</span><span class="p">(</span> <span class="s2">&quot;black&quot;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>原型式继承</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其效果是每次 new User()时同时执行了new Person，且user对象就这样拥有了person的全部方法</p>
+
+<h2>类似继承</h2>
+
+<p>Douglas Crockford创造的<code>method</code>, <code>inherits</code>, <code>swiss</code> 三个方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">inherits</span><span class="p">(</span><span class="nx">Person</span><span class="p">);</span>
+</span><span class='line'><span class="nx">User</span><span class="p">.</span><span class="nx">method</span><span class="p">(</span> <span class="s1">&#39;getName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;My name is: &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">uber</span><span class="p">(</span><span class="s1">&#39;getName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Base 库</h2>
+
+<h2>Prototype库</h2>
+
+<p>就是rails原先自带的库</p>
+
+<h2>命名空间</h2>
+
+<p><code>$.</code>其实就是命名空间。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">YAHOO</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">addEventListner</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">YAHOO</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(...);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>清理代码</h2>
+
+<p><code>!=</code> 和<code>==</code> 会对变量进行求值，即把对象变成false或true后进行比较，
+js中， null false 0 undefined 求值后都是false</p>
+
+<p>js一行一行地写可以不用分号，但是一旦被压缩后，换行符号都将取消，此时没有分号就不行了。鉴于js的使用场景，还行建议每行都加上分号。</p>
+
+<p>压缩代码的三种方式:
+1. 只取出空白和注释
+2. 压缩变量
+3. both</p>
+
+<p>IE 是不灵的，在调试方面</p>
+
+<p>Firefox的调试是最好的，尤其搭配firebug和 View Rendered Source，Venkman也是一个ff的扩展</p>
+
+<p>Safari还在迅速变化发展中，Chrome与之类似</p>
+
+<h2>测试套件</h2>
+
+<ul>
+<li>JSUnit: 老牌的</li>
+<li>J3Unit: 稍新的，通Java集成的更好</li>
+<li>Test.Simple , Test.More</li>
+</ul>
+
+
+<h1>第三章 分离式的JavaScript</h1>
+
+<p>DOM(Document Object Model)是表达XML文档的标准，并不是唯一的方式，但确实是应用最广泛的方式。这一点和js能统一浏览器的原因一致，就是因为被广泛使用了。</p>
+
+<p>DOM的模型：
+DOM是一个树结构，根节点是html，
+下属节点分为元素和文本两种类型。
+每个节点包括5个指针:
+1. 父节点parentNode
+2. 兄节点(previousSibling)
+3. 弟节点(nextSibling)
+4. 第一个子节点(firstChild)
+5. 最后一个子节点(lastChild）</p>
+
+<p>整个的遍历和渲染其实都是基于DOM模型的。</p>
+
+<h2>DOM的加载</h2>
+
+<ul>
+<li>html解析完毕</li>
+<li>src中的脚本和css加载完毕</li>
+<li>脚本在文档内解析并执行（此时dom并未构造起来）</li>
+<li>Html DOM完全构造起来</li>
+<li><p>图片和外部内容加载</p></li>
+<li><p>等待整个页面的加载，基于window对象的load事件，速度最慢，因为是在图片下载之后</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">addEvent</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span>
+</span><span class='line'>  <span class="nx">net</span><span class="p">(</span> <span class="nx">id</span><span class="p">(</span><span class="s2">&quot;everywhere&quot;</span><span class="p">)</span> <span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>把script标签放置在页面的最后，这样确保执行的时候dom已建立</p></li>
+<li><p>监听DOM的加载状态，实现复杂。
+jquery实现的方法，$或者说domReady，其主要原理是检查document是否已存在，document.getElementsByTagName和document.getElementById两个函数是否已存在，以及document.body是否已存在。搭配setInterval不停地检查，检查到位后就清楚timer</p></li>
+</ol>
+
+
+<h2>在HTML中寻找元素</h2>
+
+<p>cssQuery， jQuery
+主要是css选择器和xpath选择器</p>
+
+<h2>获取元素的内容</h2>
+
+<ol>
+<li>获取文本 text</li>
+<li>获取 html</li>
+</ol>
+
+
+<h2>操作元素的属性(attribute)</h2>
+
+<p>一旦元素加载到DOM中，元素会有一个管理数组，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">formElem</span><span class="p">.</span><span class="nx">attributes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">action</span><span class="o">:</span> <span class="s2">&quot;/test.cgi&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s2">&quot;POST&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实际提供了attr方法</p>
+
+<h2>修改DOM</h2>
+
+<ol>
+<li><p>创建节点
+createElement</p></li>
+<li><p>插入到DOM中<br/>
+insertBefore： 在子元素前插入
+<code>parentOfNode.insertBefore(nodeToInsert, beforeNode)
+appendChild: 插入一个父节点中最后一个子节点，</code>parenElem.appendChild(nodeToInsert);`</p></li>
+</ol>
+
+
+<h2>异步与事件处理</h2>
+
+<h3>异步事件与线程</h3>
+
+<h3>事件阶段</h3>
+
+<p>捕获和冒泡，捕获是由外向内，冒泡是由内向外</p>
+
+<p>是否能停止冒泡？</p>
+
+<p>通过对按键事件的处理，停止textarea的正常响应</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;textarea</span> <span class="na">rows=</span><span class="s">&quot;4&quot;</span> <span class="na">cols=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>At w3schools.com you will learn how to
+</span><span class='line'>
+</span><span class='line'>make a website. We offer free tutorials
+</span><span class='line'>
+</span><span class='line'>in all web development technologies.
+</span><span class='line'><span class="nt">&lt;/textarea&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="s2">&quot;textarea&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">onkeypress</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
+</span><span class='line'><span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的e是事件对象</p>
+
+<p><code>this</code>作为一种指代，可以泛化成各类元素，使得js的编写变得简单</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">li</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElemensByTagName</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">li</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">li</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">handleClik</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">handleClick</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">;</span>
+</span><span class='line'>   <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>取消冒泡（重载浏览器的事件处理）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">stopBubble</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//如果传入了事件对象，那么就是非IE浏览器</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span> <span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span> <span class="err">）</span>
+</span><span class='line'>     <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">else</span> <span class="c1">// 否则使用IE的方式来取消事件冒泡</span>
+</span><span class='line'>     <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">cancelBubble</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>取消浏览器的默认行为（重载）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">stopDefault</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span> <span class="o">&amp;&amp;</span> <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">else</span> <span class="c1">//windows 特供</span>
+</span><span class='line'>    <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">returnValue</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">li</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">iframe</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">href</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">stopDefault</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>绑定事件的3中方法</h2>
+
+<ol>
+<li>传统方法</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">windo</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>好处在于简单稳定，处理事件时可以使用this关键字；
+坏处是事件只在冒泡时运行，捕获时不运行。且一个元素一次只能绑定一个处理函数，即onload=func2会替换前面已经注册过的函数。同时ie中，还不能得到事件对象e。</p>
+
+<ol>
+<li>W3C</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>相对于第一种，好处是第三个参数指明了哪个阶段处理事件：false（冒泡）或true(捕获)；事件对象可以通过处理函数的第一个参数获取；不会覆盖之前已绑定的事件。缺点就是老的ie不支持。</p>
+
+<ol>
+<li>IE绑定</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;onload&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>粗看起来和w3c的类似，但细节有很多不同：
+* 仅支持冒泡阶段
+* this关键字指向了window对象
+* 事件对象存在于window.event中
+* 事件必须以ontype的形式命名，如onload而非load</p>
+
+<ol>
+<li>facade的addEvent和removeEvent</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">addEvent</span><span class="p">(</span> <span class="nb">window</span><span class="p">,</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>唯一的缺点是仅能工作在冒泡阶段</p>
+
+<h2>事件类型</h2>
+
+<ul>
+<li>鼠标</li>
+<li>键盘</li>
+<li>UI，focus，blur</li>
+<li>表单事件</li>
+<li>加载和错误</li>
+</ul>
+
+
+<h2>分离式的javascript</h2>
+
+<p>就是不在html里绑定怎么处理js，是的href可以是有意义的，使得js禁用时系统依然可以使用</p>
+
+<h2>访问CSS属性</h2>
+
+<h2>位置 尺寸和可见性</h2>
+
+<h3>位置</h3>
+
+<p>4种定位</p>
+
+<p>position: static; //top和left不起作用，顺序排版
+position: relative; //top和left相对于static进行偏移
+position: absolute; //相对于它的第一个非静态定位的祖先元素而展示，如没有这样的祖先元素，就是相对于整个文档
+position: fixed; //相对于浏览器窗口
+top: 0px;
+left: 0px;
+right: ;
+bottom: ;</p>
+
+<h3>元素的可见性</h3>
+
+<ul>
+<li>visibility: hidden, visible</li>
+<li>diplay: none, block, inline, &#8221;</li>
+<li>opacity:
+
+<ul>
+<li>filter: &#8216;alpah(opacity=&#8217;50)</li>
+<li>opacity: 50/100</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>动画效果</h2>
+
+<p>1秒执行20帧动画</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">for</span> <span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">5</span> <span class="err">）</span> <span class="p">{</span>
+</span><span class='line'>     <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>         <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+</span><span class='line'>         <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">elem</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="p">(</span><span class="nx">pos</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="nx">h</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+</span><span class='line'>         <span class="p">},</span> <span class="p">(</span><span class="nx">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="p">})();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>viewport是视口，就是浏览器滚动条内的一切东西</h2>
+
+<p><code>window.scrollTo(0, 0)</code>可以移动浏览器窗口位置</p>
+
+<h2>拖放功能</h2>
+
+<p>使用拖放库可以</p>
+
+<p>P145的悬停真是写的漂亮</p>
+
+<h1>第四章 Ajax</h1>
+
+<p>这部分其实主要就是举例ajax的例子，来做了综合的应用。</p>
+
+<p>responseXML和responseText是xhttprequest的主要返回对象
+其中，xml是响应头的content-type为xml时有效</p>
+
+<p>一个$.ajax的实现，代码真精妙</p>
+
+<p>返回响应的种类：</p>
+
+<ul>
+<li>xml</li>
+<li>json</li>
+<li>html ，可以直接注入html</li>
+<li>script</li>
+</ul>
+
+
+<p>pageHeight(判断整个页面又多高)，scrollY(获知当前视口的顶部滚动到了哪里)，
+windowHeight(获知视口有多高)</p>
+
+<p>四步法：</p>
+
+<ol>
+<li>DOM操作</li>
+<li>获取数据</li>
+<li>事件监测</li>
+<li>发起ajax请求</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1444,6 +1702,10 @@ HBase CouchDB和Rails社区还是不搭。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/07/31/xin-de-tiao-zhan/">新的挑战</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/">java新的兼容性挑战者Kotlin</a>
       </li>
     
@@ -1459,15 +1721,11 @@ HBase CouchDB和Rails社区还是不搭。</p>
         <a href="/blog/2017/03/01/cazheng-shu-lue-ji/">CA证书略记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/02/28/icechu-tan/">ICE初探</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (71)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/时评'>时评 (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/redis'>Redis (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (69)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (34)</a></li><li><a href='/blog/categories/java'>Java (25)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li></ul>
 </section>
   
 </aside>
