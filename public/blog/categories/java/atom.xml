@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-10-05T23:01:28+08:00</updated>
+  <updated>2017-10-08T23:37:09+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[spring cloud 服务治理]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/"/>
+    <updated>2017-10-07T13:54:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li</id>
+    <content type="html"><![CDATA[<p>服务治理是近年来架构中的热点部分，尽管比照ICE这些内容其实十几年前就已经有了，
+只是五六年前伴随着系统越做越庞大，才变得必要起来。</p>
+
+<p>简单理解一下，其主要内容基本是：</p>
+
+<ul>
+<li>要有一个服务中心，服务中心最好是集群的</li>
+<li>要能向中心注册服务，服务的地址用名称而不是ip硬绑</li>
+<li>要能发现一个服务，其实就是用名称通过服务中心找到服务的ip和端口</li>
+<li>要一个可以轮流访问服务集群的客户端</li>
+<li>此外再配合上消息总线等内容</li>
+</ul>
+
+
+<p>有了这些，基本一个服务治理的框架就基本形成了。</p>
+
+<p>《Spring Cloud 微服务实战》是一本很不错的书，有动手的介绍，有源码的分析，写的也算精炼。</p>
+
+<h3>Eureka 服务治理中心</h3>
+
+<p>启动服务中心后，配置客户端主要包含两部分：</p>
+
+<ul>
+<li>服务注册相关信息： 包括服务中心地址、服务获取间隔时间、可用区域，以<code>eureka.client</code>为前缀</li>
+<li>服务实例相关的配置信息： 包括实例的名称、IP地址、端口号、健康检查路径等，以<code>eureka.instance</code>为前缀</li>
+</ul>
+
+
+<h3>Ribbon</h3>
+
+<p>Spring Cloud的负载均衡是在客户端实现的。
+<code>WeightedResponseTimeRule</code>是个比较复杂的实现。</p>
+
+<h3>Hystrix</h3>
+
+<p>这是一个容错断路器，当出现超时等状况时直接调用指定的回掉函数。使用了RxJava库的异步操作模式，
+实现了发送+观察的效果，所以可以中断请求。</p>
+
+<h3>Feign</h3>
+
+<p>在RestTemplate上进一步抽象，实现和Spring MVC对等的method封装。因为要组client，所以<code>@RequestParam</code>
+中的value不能少。</p>
+
+<p>```java
+@FeignClient("Hello-Service")
+public interface HelloService {
+  @RequestMapping(value="/hello1", method=RequestMethod.GET) //指明要访问的路径和方法
+  User hello(@RequestParam("name") String name, @RequestHeader("age") Integer age); //指明构造请求是的参数名称
+}</p>
+
+<p>//调用方式
+helloService.hello("DiDi", 30);
+```</p>
+
+<h3>Zuul Api 网关</h3>
+
+<p>网关的事情就两条：<br/>
+1. 路由
+2. 过滤</p>
+
+<p>Zuul的路由结合了治理服务，下面就把一个路径全部转发去了一个服务</p>
+
+<p><code>
+zuul.routes.service-a.path=/aaa/**
+zuul.routes.service-a.serviceId=Hello-Service
+</code>
+过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
+
+<p>```java
+public class AccessFilter extends ZuulFilter {
+  ....
+}</p>
+
+<p>@EnableZuulProxy
+@SpringCloudApplication
+public class Application {
+  public static void main(String[] args) {</p>
+
+<pre><code>new SpringApplicationBuilder(Application.class).web(true).run(args);
+</code></pre>
+
+<p>  }</p>
+
+<p>  @Bean
+  public AccessFilter accessFilter() {</p>
+
+<pre><code>return new AccessFilter();
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>Spring Cloud Config</h3>
+
+<p>基于git（也可以是svn或本地目录）的配置中心，其实就是一个可以保存各种配置信息，然后由其他微服务读取后拉起应用。</p>
+
+<h3>Bus 和 Stream 消息总线和消息流</h3>
+
+<p>目前只支持RabbitMQ和kafka两种队列，kafka更多的好像和实时日志处理流相关</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[java新的兼容性挑战者Kotlin]]></title>
@@ -398,57 +506,6 @@ libraries:<br/>
 
 <p>开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
 public, /templates.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
-    <updated>2016-05-19T17:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
-    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
-其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
-
-<p>要解决可以在xml的配置中设置</p>
-
-<p>```xml</p>
-
-<p>  &lt;mvc:annotation-driven></p>
-
-<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
-  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
-  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
-    &lt;constructor-arg value="UTF-8" /&gt;
-    &lt;property name="writeAcceptCharset" value="false" /&gt;
-  &lt;/bean&gt;
-&lt;/mvc:message-converters&gt;
-</code></pre>
-
-<p>  &lt;/mvc:annotation-driven>
-```</p>
-
-<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
-
-<p>---- update on 2016.10.17</p>
-
-<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
-
-<p>```java
-static RestTemplate restTemplate = new RestTemplate();
-  static {</p>
-
-<pre><code>List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
-for (HttpMessageConverter&lt;?&gt; convert : converts) {
-  if (convert.getClass() == StringHttpMessageConverter.class) {
-    ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
-  }
-}
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   

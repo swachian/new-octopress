@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-10-05T23:01:28+08:00</updated>
+  <updated>2017-10-08T23:37:09+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,163 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[微服务笔记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/08/wei-fu-wu-bi-ji/"/>
+    <updated>2017-10-08T23:02:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/08/wei-fu-wu-bi-ji</id>
+    <content type="html"><![CDATA[<p>微服务是Martin Fowler定义的一个术语，出自 https://martinfowler.com/articles/microservices.html</p>
+
+<p>是伴随着敏捷开发和云服务部署流行而兴起的一种架构。微服务架构风格[1]是一种将一个单一应用程序开发为一组小型服务的方法，每个服务运行在自己的进程中，服务间通信采用轻量级通信机制(通常用HTTP资源API)。这些服务围绕业务能力构建并且可通过全自动部署机制独立部署。这些服务共用一个最小型的集中式的管理，服务可用不同的语言开发，使用不同的数据存储技术。</p>
+
+<p>具备的特征包括：</p>
+
+<ul>
+<li>水平扩展服务能力时，可以扩展只需要扩展的模块而不是全部</li>
+<li>组件多以服务的形式提供</li>
+<li>团队多按业务能力/功能组建</li>
+<li>团队始终围着产品，而不是做完了就丢给运维</li>
+<li>smart endpoints and dumb pipes，其实就是管道扁平化，针对SOA中部分总线太过只能而言</li>
+<li>去中心化的管理，微服务意味着可以自治化，而不是谈标准化</li>
+<li>可以多个编程语言同时使用，只要保持彼此间通信简单（http+lightweight messaging）</li>
+<li>数据存储也是去中心化的，Polyglot Persistence，存储/数据库也是每个服务自己定</li>
+<li>基础设施自动化程度高，实现持续提交和持续集成</li>
+<li>开发者和用户间会更容易建立更多的联系，要持续关注软件如何帮助用户提升业务能力，而不是把软件看成是将要完成的一组功能</li>
+<li>针对失效的设计，使用服务作为组件的一个结果是，应用程序需要被设计成能够容忍服务失效，如断路器模式</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[spring cloud 服务治理]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/"/>
+    <updated>2017-10-07T13:54:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li</id>
+    <content type="html"><![CDATA[<p>服务治理是近年来架构中的热点部分，尽管比照ICE这些内容其实十几年前就已经有了，
+只是五六年前伴随着系统越做越庞大，才变得必要起来。</p>
+
+<p>简单理解一下，其主要内容基本是：</p>
+
+<ul>
+<li>要有一个服务中心，服务中心最好是集群的</li>
+<li>要能向中心注册服务，服务的地址用名称而不是ip硬绑</li>
+<li>要能发现一个服务，其实就是用名称通过服务中心找到服务的ip和端口</li>
+<li>要一个可以轮流访问服务集群的客户端</li>
+<li>此外再配合上消息总线等内容</li>
+</ul>
+
+
+<p>有了这些，基本一个服务治理的框架就基本形成了。</p>
+
+<p>《Spring Cloud 微服务实战》是一本很不错的书，有动手的介绍，有源码的分析，写的也算精炼。</p>
+
+<h3>Eureka 服务治理中心</h3>
+
+<p>启动服务中心后，配置客户端主要包含两部分：</p>
+
+<ul>
+<li>服务注册相关信息： 包括服务中心地址、服务获取间隔时间、可用区域，以<code>eureka.client</code>为前缀</li>
+<li>服务实例相关的配置信息： 包括实例的名称、IP地址、端口号、健康检查路径等，以<code>eureka.instance</code>为前缀</li>
+</ul>
+
+
+<h3>Ribbon</h3>
+
+<p>Spring Cloud的负载均衡是在客户端实现的。
+<code>WeightedResponseTimeRule</code>是个比较复杂的实现。</p>
+
+<h3>Hystrix</h3>
+
+<p>这是一个容错断路器，当出现超时等状况时直接调用指定的回掉函数。使用了RxJava库的异步操作模式，
+实现了发送+观察的效果，所以可以中断请求。</p>
+
+<h3>Feign</h3>
+
+<p>在RestTemplate上进一步抽象，实现和Spring MVC对等的method封装。因为要组client，所以<code>@RequestParam</code>
+中的value不能少。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@FeignClient</span><span class="o">(</span><span class="s">&quot;Hello-Service&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/hello1&quot;</span><span class="o">,</span> <span class="n">method</span><span class="o">=</span><span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span> <span class="c1">//指明要访问的路径和方法</span>
+</span><span class='line'>  <span class="n">User</span> <span class="nf">hello</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="nd">@RequestHeader</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">);</span> <span class="c1">//指明构造请求是的参数名称</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//调用方式</span>
+</span><span class='line'><span class="n">helloService</span><span class="o">.</span><span class="na">hello</span><span class="o">(</span><span class="s">&quot;DiDi&quot;</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Zuul Api 网关</h3>
+
+<p>网关的事情就两条：<br/>
+1. 路由
+2. 过滤</p>
+
+<p>Zuul的路由结合了治理服务，下面就把一个路径全部转发去了一个服务</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">aaa</span><span class="o">/**</span>
+</span><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">serviceId</span><span class="o">=</span><span class="n">Hello</span><span class="o">-</span><span class="n">Service</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
+</span><span class='line'>  <span class="o">....</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@EnableZuulProxy</span>
+</span><span class='line'><span class="nd">@SpringCloudApplication</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Bean</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Spring Cloud Config</h3>
+
+<p>基于git（也可以是svn或本地目录）的配置中心，其实就是一个可以保存各种配置信息，然后由其他微服务读取后拉起应用。</p>
+
+<h3>Bus 和 Stream 消息总线和消息流</h3>
+
+<p>目前只支持RabbitMQ和kafka两种队列，kafka更多的好像和实时日志处理流相关</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[新的挑战]]></title>
@@ -1130,115 +1287,6 @@ public, /templates.</p>
 
 
 <p>获得converts，然后对String的Convert进行设置</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[换证流程]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/10/zzhuan-zheng-liu-cheng/"/>
-    <updated>2016-05-10T21:57:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/10/zzhuan-zheng-liu-cheng</id>
-    <content type="html"><![CDATA[<p><strong>地点</strong>： 杨高中路1500号， 浦东交警支队<br/>
-<strong>时间</strong>: 2016年5月10日下午3点半</p>
-
-<p>三点多从公司出发，20分钟左右抵达。到门口发现说停车场不对外接待，其实也不是不对外，只是确实很容易就满了然后就不放了。
-建议停蓝天路等社会停车场。于是转到蓝天路，停车费<u>10</u>块。收费的师傅还问我来的挺晚啊，不过这个点到人应该少了。
-看来附近也是肥缺。</p>
-
-<p>3点半到大厅，看上去人也不是很多。</p>
-
-<ol>
-<li><p>先问左手边的老爷苏领了表格，他看了看我的身份证和驾照，确定是在90天之内后，
-表格给我并告诉我拍照、复印、体检都在左面一排。</p></li>
-<li><p>复印件已经有了，只要正面就可以，最后在窗口工作人员会剪下正面并贴在申报的材料上。</p></li>
-<li><p>牌照<u>25</u>元，需要提供身份证和驾照，付完钱当场拍，还是会让你尽量衣服整理好并摆好姿势。</p></li>
-<li><p>等照片的过程中，可以去体检的地方填表，提交要交<u>60</u>元。填完个人信息后，一般照片也就打印好了，
-体检工作人员会帮忙剪下来并贴到刚填的体检表上。今天碰到的医生挺认真负责，视力检查每个眼睛要看3个标识，
-色盲色弱也要看很多图形，而且她那个色盲检查本还是挺混淆的，属于比较吃力的一类。而前面其他两个人则被她要求重测和找眼镜废了
-不少时间。至于握力、蹲下等动作倒是没有测试。最后给的发票是杨思医院出具的，看来也是合作医院。</p></li>
-<li><p>弄好之后，拿上照片、体检表、登记表就可以再找老爷叔去了，会给一个排队的号，到手的时候提示前面还有9人。
-当天有4个换证窗口开放，所以等待的时间并不多。</p></li>
-<li><p>在窗口递上材料，然后就是等工作人员干活，就没我什么事情了。她输入各种信息结束后，给一张牌子，告知在旁边的窗口凭牌子领证。
-问了下大概要多少时间，直接答复一刻钟左右。</p></li>
-<li><p>实际上很快，去趟厕所的时间然后再等了1分钟，就叫到号了。付<u>10</u>元，给你驾照的正页、副页、封皮。</p></li>
-</ol>
-
-
-<p>整个过程还是很快的，40分钟左右基本就办完了。</p>
-
-<p>查了下现行的规定，如果在过去的6年内有过一年满12分的记录，那这次的有效期
-就只有6年而不是10年了。我的新证件的有效期是10年，正页上开始和结束结束的月、日和过去的一样，副页上会写上从当天开始生效。
-所以对记分周期没有任何影响。</p>
-
-<p>总体而言，还是挺愉快的一次和政府打交道的体验。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iptables 的一些解释]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi/"/>
-    <updated>2016-04-29T09:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi</id>
-    <content type="html"><![CDATA[<p>在<strong>物理机</strong>部署的年代里，组网通常是分层而建。例如所有的服务器都接到二层交换机组成<strong>内网</strong>，随后交换机上联三层交换机及防火墙。彼时，防火墙通常由专用
-的设备承担。所有的路由规则、端口开放等也均在网络设备上进行配置。对于服务器而言，通常最简单的做法就是关闭iptables，在内部实现完全互通，而把防护任务交给专用设备。</p>
-
-<p>然而转到<strong>云部署</strong>的年代，专用的网络设备大都收归云所有，此时虽然还有内网的概念，但已经模糊，从而要求把防火墙建在主机上。做到几个域的隔离。</p>
-
-<p>iptables的配法有命令行和配置文件，此处以配置文件<code>/etc/sysconfig/iptables</code>为例，说明一些概念。</p>
-
-<p>对于安全类的防护,集中在<code>*filter</code>上，nat 等是管映射和路由的</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*filter
-</span><span class='line'>:INPUT ACCEPT [1194191:146127015]
-</span><span class='line'>:FORWARD ACCEPT [159938:8304428]
-</span><span class='line'>:OUTPUT ACCEPT [1044829:126818322]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面这段代码表示对三种包的处理状态及已处理的包和字节数量。
-<code>INPUT</code>就是输入的包，<code>ACCEPT</code>表示默认都可以进入，如果设置成<code>DROP</code>就是都废弃输入包了。如果主要以开白名单的方式，<code>INPUT后</code>可以接<code>DROP</code>。中括号里面的数字，冒号前是包数量统计，冒号后是字节数统计。<br/>
-<code>FORWARD</code>表示转发，<code>OUTPUT</code>表示输出访问，通常这两个可以设置成<code>ACCEPT</code>即表示允许。<br/>
-这3个表示的是基础的规则，类似默认路由，优先级是最低的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span></code></pre></td></tr></table></div></figure>
-
-
-<p>随后就是很重要的这一段。这段的含义表示对连接状态是<code>ESTABLISHED</code>, <code>RELATED</code>的链接全部放行。iptables中的链接共有4种，<code>established</code>表示链接已建立，<code>related</code>的含义是由已建立的链接产生的链接，此外还有<code>new</code>和<code>invalid</code>两种链接状态，
-其实这段话的含义也可以理解成<code>invalid</code>链接放弃，<code>new</code>状态之外的连接则允许通过。
-这个指示关键的原因在于，比如本机设置了禁止外网访问本机的各个端口，同时本机作为客户端访问了另一个外网服务，那么外网服务的响应信息允许被接收。否则，就会面临只有一个单工链路的情况。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 80 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8080 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 8081 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 22 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 21 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -p tcp -m tcp --dport 20 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -s 10.3.1.0/24 -j ACCEPT
-</span><span class='line'>-A INPUT -d 192.168.1.202 -j DROP
-</span><span class='line'>
-</span><span class='line'>-A INPUT -d 10.10.10.222 -j DROP</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个机器有两块网卡，分别有两个地址<code>192.168.1.202</code>和<code>10.10.10.222</code>,对于后者，只允许从这个口子发出包以及收入已建立连接的包（通过上面的 <code>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code>)。<br/>
-而对于前一个地址，则打开了http相关的80 8080 8081端口，开放了ssh和ftp端口，并对来自10.3.1.0网段的全部IP开放访问权限。</p>
-
-<p>对于包的动作有ACCEPT DROP 和REJECT，后两个都表示拒绝，只是REJECT是明确拒绝，DROP只是沉默不答。</p>
-
-<p>对于iptables，简单的用用，安全防护做到这样也就够了。</p>
 ]]></content>
   </entry>
   

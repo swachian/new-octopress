@@ -1163,15 +1163,25 @@
         <lastmod>2017-10-05T23:01:10+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/
+        </loc>
+        <lastmod>2017-10-08T22:59:45+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2017/10/08/wei-fu-wu-bi-ji/</loc>
+        <lastmod>2017-10-08T23:36:27+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2017-10-05T22:32:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2017-10-05T23:01:10+08:00</lastmod>
+        <lastmod>2017-10-08T23:36:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2017-10-05T23:01:10+08:00</lastmod>
+        <lastmod>2017-10-08T23:36:27+08:00</lastmod>
     </url>
 </urlset>
