@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-10-08T23:37:09+08:00</updated>
+  <updated>2018-01-14T20:52:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[实用软件需求]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/"/>
+    <updated>2017-10-30T00:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu</id>
+    <content type="html"><![CDATA[<p>Kovitz的这本书大概是七八年前看DHH的博客时得知的，发现有中文版就买了回来。但一直没有读完。原因在于本书还是按比较正统的方法讲解如何写好明确的软件需求与规格。按作者的理解，软件开发细化的模式有二：</p>
+
+<p>一. 所有内容都是渐进式细化的，先原型然后几轮迭代后深入到细节；
+二. 每个开始的需求数量很少，但都很到位，每轮迭代就是新增几个需求并实现。</p>
+
+<p>而在我大部分的工作都是采用的策略一，所以这本书对我的吸引力就不大。毕竟在老单位分工没有那么细，沟通相对简单，并不需要那么细节丰富的需求文档。<strong>但是</strong>，新单位就都不一样了。</p>
+
+<p>现在的单位是一个公司人数不多，但规模建制很丰富的公司，即使我个人带的团队也大了许多，需求不单是项目负责人和客户之间沟通的东西，同时也是产品、ue、ui和研发、测试之间沟通甚至绝对对错的基础。这种情况下，如何书写需求（其实是要求产品如何书写），就变得相当重要了。</p>
+
+<p>Kovitz 这本书的<strong>精华是第九第十章</strong>，讲的是如何描述领域中的集合（模型）和类之间的关系，以及这些模型对应的事件和发生序列。</p>
+
+<p><code>集合</code>包含两种类型：</p>
+
+<ol>
+<li>实体类，或类。比如发票、客户</li>
+<li>实体类之间的关系。（客户1， 发票1），（客户1，发票2）。。。，关系其实是类的集合</li>
+</ol>
+
+
+<p>每个<code>实体类</code>要文档化的信息：<br/>
+1. 实体类的基本信息说明；<br/>
+2. 属性值列表，包括属性的定义，可能值的集合（取值范围、类型或者枚举集合）和含义<br/>
+3. 存在的标识成员的属性（主键）<br/>
+4. 与该类有关的实体类，这个主要用文字描述为主、画类图为辅，要在描述中说清楚一堆多，多对一的关系<br/>
+5. 影响成员的每个事件，以及影响那些属性和关系。</p>
+
+<p><code>基数</code>是指多对一的配套关系。连线的秘密是这样的：
+* 竖线表示1
+* 圈表示0
+* 三条线表示乌鸦脚，没有合并
+* 基数最靠近两端的表示最大值，次近两端的是最小值</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[微服务笔记]]></title>
@@ -185,66 +224,6 @@ public class Application {
 <p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
 这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
 花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Truffle And Solidity]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity/"/>
-    <updated>2017-05-01T10:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity</id>
-    <content type="html"><![CDATA[<p>区块链应用的开发，主要指用<code>Solidity</code>编写合约(Contract)，然后部署到区块链上去。
-注意，此处的区块链特指<code>以太坊</code>，而比特币的区块链是没有Solidity这种东西的。</p>
-
-<p>因为是把sol编写的合约部署到区块链上去，所以可以进一步分解为3个问题：</p>
-
-<ol>
-<li>区块链的安装(testrpc ethereum)</li>
-<li>sol合约编写(Solidity)</li>
-<li>对sol合约进行编译以及发布(truffle)</li>
-</ol>
-
-
-<p>目前来看，整个以太坊很喜欢借用node即javascript来构建他们的环境，尽管区块链和sol本身其实和javascript关系不大。
-关于ethereum可查相关的安装手册，这里主要记录一下Solidity和truffle。</p>
-
-<p>Sol的编辑器可以用atom vscode等等，submiline也没问题。
-这门语言其实还是比较原始的，合约间的调用甚至不能传递结构（struct），更可悲的是返回string也不行。基本上任何不定长的返回
-在sol的ethvm（以太坊虚拟机）中都不太好调用。
-功能上来讲，solidity可以理解成数据存放在一个类似levelDB的内存数据库，这是ethvm会做的事情。
-```javascript</p>
-
-<p>  mapping(uint=>LibDisSecPledgeApply.DisSecPledgeApply)  disSecPledgeApplyMap;</p>
-
-<pre><code>uint[] disSecPledgeApplyIds;
-</code></pre>
-
-<p>```</p>
-
-<p>上述代码定义了一个用于存放对象数据的mapping，因为mapping无循环遍历的功能，所以又增加了一个ids的数组保留所有对象的编号。</p>
-
-<p>整个合约的编写，其实对写惯后台程序的人来讲还是不难上手的（类似用java操作redis写业务逻辑），只是限制确实比较多。
-但solidity可以支持的变化太少，所以写起来是复杂不到哪里去。相当于成熟的脚本或编译型语言，solidity麻烦的地方在于其调试，
-可简单罗列的就有两点：</p>
-
-<ol>
-<li>编译速度慢。十几个文件的情况下，用 truffle编译就要3分钟以上</li>
-<li>发布调试困难。必须发布到某个链的环境才能测试，而这个就真的很不友好了，断点还不支持，日志也很麻烦。</li>
-</ol>
-
-
-<p>truffle是现在以太坊主要推荐的编写solidity的编译、测试运行和部署工具，能处理较复杂的sol文件关联引用，就是耗时很长，且
-程序版本很不稳定，变化发展都依然极快。truffle是基于node和npm的，所以要先装好node。</p>
-
-<p><code>javascript
-npm uninstall truffle
-npm install -g truffle@2.1.2
-truffle compile  //编译合约
-truffle migrate --reset //部署合约
-truffle exec xxxx.js //执行某个js文件
-</code></p>
-
-<p>和区块链一样，solidity，truffle都是刚刚涌现的东西，所以问题很多，用起来也不一定顺手。但，这个行业就是这样的。</p>
 ]]></content>
   </entry>
   

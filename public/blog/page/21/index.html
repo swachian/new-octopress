@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="很多次，一直问自己测试代码到底值不值？毕竟我写过几次，但最后发现写测试代码的工作量其实很大。特别是碰到需求变更，本来只要改一处的代码，变得
-必须改 2x 处。做了一段时间以后，我承认这是对保证质量有效的，但是往往确实不值得，因为得不偿失。另一个问题是先写
-测试还是先写程序？ 按TDD的要求， &hellip;">
+  <meta name="description" content="系列链接： mongodb基础
+尝试分布式及复制 （sharding and replication)
+部署和管理 部署环境要求 架构 64-bit , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间
+little-endian , 不适合SPARC, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,307 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">Learning Mongodb (3) 部署和管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-17T11:07:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>系列链接：</p>
+
+<ol>
+<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
+<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
+<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
+</ol>
+
+
+<h3>部署环境要求</h3>
+
+<ul>
+<li><p>架构</p>
+
+<ul>
+<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
+<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
+</ul>
+</li>
+<li><p>CPU</p>
+
+<ul>
+<li>非cpu密集型应用</li>
+<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
+<li>多客户端同时读时，多核会被利用</li>
+<li>写操作还是单核</li>
+</ul>
+</li>
+<li><p>RAM</p>
+
+<ul>
+<li>越多越好</li>
+<li>working set， index size， ram总数</li>
+</ul>
+</li>
+<li><p>Disk</p>
+
+<ul>
+<li>IOPS 优先</li>
+<li><em>background flush</em> 60s sync到磁盘一次</li>
+<li>ssd可以优化速度（solid state drive）</li>
+<li>RAID 10 组成 LVM</li>
+</ul>
+</li>
+<li><p>文件系统</p>
+
+<ul>
+<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
+<li>禁用access time(atime)更新</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 禁用 atime更新</span>
+</span><span class='line'>sudo mv /etc/fstab /etc/fstab.bak
+</span><span class='line'>sudo vim /etc/fstab
+</span><span class='line'><span class="c"># file-system mount type options dump pass</span>
+</span><span class='line'><span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
+</span><span class='line'>
+</span><span class='line'>改完文件后，可以不用重启
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文件描述符(FD)
+
+<ul>
+<li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
+<li>调大 <code>ulimit -Hn</code> 可以查看</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>vi /etc/security/limits.conf
+</span><span class='line'>mongodb hard nofile 10240
+</span><span class='line'>下次登录后生效
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>时钟</p>
+
+<ul>
+<li>ntp协议，在跑shard和replication时候必须启用的东西</li>
+</ul>
+</li>
+<li><p>ec2上使用mongodb</p>
+
+<ul>
+<li>ec2易用、地理范围广、价格有竞争力</li>
+<li>68GB RAM的限制</li>
+<li>使用  EBS 存储， 吞吐性能一般化</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>服务器配置</h3>
+
+<ul>
+<li><p>选择拓扑</p>
+
+<ul>
+<li>是否需要shard， 是否需要replica</li>
+<li>建议多机</li>
+</ul>
+</li>
+<li><p>打开journal标志</p></li>
+</ul>
+
+
+<h3>安全保障</h3>
+
+<ul>
+<li><p>环境安全</p>
+
+<ul>
+<li>防火墙</li>
+<li>数据的传输是不加密的</li>
+</ul>
+</li>
+<li><p>授权</p>
+
+<ul>
+<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
+<li>启动时带上选项 <code>mongod --auth</code></li>
+<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
+<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
+<li>查找用户 <code>db.system.users.find()</code></li>
+</ul>
+</li>
+<li><p>keyFile</p>
+
+<ul>
+<li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
+</ul>
+</li>
+<li><p>日志记录</p>
+
+<ul>
+<li>运行时&#8211;logpath指定</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>监控工具</h3>
+
+<ul>
+<li><p>serverStatus<br/>
+<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
+<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
+<strong>mem</strong> 段的单位是MB</p></li>
+<li><p>mongostat</p>
+
+<ul>
+<li>类似 iostat 运行的效果</li>
+</ul>
+</li>
+<li><p>web console</p>
+
+<ul>
+<li>&#8211;rest 标志打开的话，可以从web处得到更多的运行信息</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>备份与压缩</h3>
+
+<p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/15/lessons-from-a-training-on-pm/">PM培训课程小结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-15T13:42:00+08:00" pubdate data-updated="true">Apr 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>趁着这个集成项目经理培训的五天培训，把辅导材料基本过了一遍。结合一些自己的经验，以及看<a href="http://xdite-smalltalk.tumblr.com/post/18034694291">别人</a>的一些文章，谈谈
+自己的想法。</p>
+
+<p>整本培训洋洋洒洒地讲了很多东西，客观的说能全面解析出这样一套体系的人相当的不简单。但是，这套体系应该说还是基于瀑布模型的，只不过
+把大瀑布分拆成了n个小瀑布。实际上对软件开发并不太适用。不过因为整套体系认为<strong>光有集成</strong>是没有自己的竞争力的，要求有<strong>30%</strong>的软件开发内容，
+于是又把软件开发放在里面。这也让我终于明白了工作的第一个部门成立的<strong>指导思想来源</strong>。因为我曾经相当一段时间纳闷为什么非要把系统集成
+和研发凑合成一个部门。而且整个软件组还受集成一侧领导。这样能做出什么好东西来。但现在终于了解了这样组织的来源，而且以集成为主导也是因为这里面
+要求软件比例不低于30%。</p>
+
+<p>读了这本材料，终于明白公司是抄自国家认证考试的体系。也可能是其他人这么建议的，而也受了这个认证体系理论的影响。</p>
+
+<p>软件开发有其自身的特点和重点。集成体系用其无所不包、范围够广的方式（9大范围）强行把软件包裹了进去。尽管看上去纳入了，但重点很不突出。
+毕竟即使有软件工程也和系统工程是两码事情。所以，这次培训最大的结果是了解集成到底是什么思路，然后就通过这个考试，剩下的也只有自己继续摸索。</p>
+
+<p>先说说集成这套体系。</p>
+
+<p>首先，体系强调章程和计划。章程只有一个，而计划各个领域可以有很多。实际上，<strong>计划也是章程</strong>。只不过灵活度比章程强，可以按照需要进行
+变更、更新，而章程定下了就不怎么更新了。计划或者章程规定了要做哪些事情，什么时候做，相关人员是什么，什么情况下需要变更。
+随后就是一堆输入输出的交付物。</p>
+
+<p>接下去的东西就好理解了，反正整个东西追求的结果都是文档。当然，文档确实有很多种，有些方法对保证系统也确实有帮助。
+比如需求管理中的use case，每个case其实还是要用文字说明的，case图可以让需求方和系统分析师把东西交流清楚。但本质上就是
+一个list，只是说明参与对象是什么。WBS分解，可以用于进一步细化和确认需求，分写出要做的工作。这些都是和软件开发业密切相关的，
+但是在此之外，其他的东西实质上和软件的关联就不怎么大了。</p>
+
+<p>最后，就是强调一切东西都要有确认，变更等都要走流程。这些东西如果乙方有能力实施，当然是很好的。</p>
+
+<p>此外，还有一些东西就是骗来骗去的了。比如进度估计、成本估计，实际上即使传统的工程，能准确估算出来的都是很少的。</p>
+
+<p>经典的启动、计划、执行、监控和收尾，又叫做PDCA（Plan Doing Check Action), 典型的普遍模型，自上而下。只是又可以分解成n个小瀑布。
+但是，这个真的是软件开发里面最重要的事情嘛？</p>
+
+<p>恐怕不是。</p>
+
+<p>就我看来，软件或者互联网应用更多的强调对自身功能和模块的拆分，启动时往往很难明确细化东西。即使建筑工程本身，也就是这套体系产生的原型，
+也有众多管理失败的案例，巴拿马运河等，那么软件对这套系统的适应性恐怕更难。而且这套体系显然没考虑很多项目管理工具的使用，如redmine、如版本控制系统，
+而不同的工具或进步的工具是可以颠覆整个开发行为的。条条框框和优秀的软件结合起来会完全改变制造方式。与此相比，管理体系本身就显得僵化。当然，值得吸取的部分还是有的。
+比如我们需要一个章程，需要需求的确认。</p>
+
+<p>最最重要的，就是list要做的事情，给出最终时间。WBS后，确认细节，排好顺序，随后和用户确认。</p>
+
+<p>而在这中间，系统的调整能力和团队和用户沟通的软实力才是起决定作用的东西。</p>
+
+<p>Update(2012-05-15): 读了<a href="http://blog.xdite.net/posts/2012/05/13/the-startup-owners-manual-02/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+xxddite+%28Blog.XDite.net%29">New product Introduction Model的九宗罪</a>
+进一步明确了PM这套东西不适合的原因。确实，这套东西适合的是“在有確定用戶，確定市場，確定 bussiness model 的情況下才能使用。也只有在這樣的情況下才有機會成功。”
+“這很大程度了解釋了為什麼：個人、大公司要『新創』一個事業很容易失敗。而一些『大公司』要『山寨』一個服務也有機會取得成功。” <br/>
+那么反过来，对于不够明确的、大家都还没谱的、都需要摸索的项目就不合适。<br/>
+所谓<strong>执行</strong>是针对有成熟套路的东西，考察的是系统的熟练程度和配合程度。而创新、新业务是需要<strong>试错的</strong>，其中的核心能力是<strong>学习</strong>、<strong>摸索</strong>、<strong>观察</strong>和<strong>勇气</strong>。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -957,360 +1259,6 @@ Hadoop(java), Skynet(ruby)等。<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/21/braces-and-do-end/">Braces 和 Do End</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-21T10:12:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Braces and do/end are completely swappable—almost all the time. They have different precedence. It’s not often that anyone comes across what this means in practice.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="p">{</span><span class="o">|</span><span class="n">where</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;inner called me&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">outer</span> <span class="n">inner</span> <span class="k">do</span> <span class="o">|</span><span class="n">where</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">where</span><span class="si">}</span><span class="s2"> called me&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># &quot;outer called me&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>区别在于block属于谁，是前一个（outer）还是后一个（inner）。</p>
-
-<p>类似的例子还有高见龙的：
-http://blog.eddie.com.tw/2011/06/03/do-end-vs-braces/</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[2, 4, 6, 8, 10]</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">p</span> <span class="n">my_array</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># 得到[1, 2, 3, 4, 5]</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>用braces的，因为block属于my_array.map，所以得到的是double的数据。<br/>
-但是，下一个里面block却属于p了，于是只是输出了my_array的内容。<br/>
-总结起来，就是braces的顺序性更高，拥有更领先的结合能力。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/20/no-sql-databases-notes/">NoSql Databases Notes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-20T21:35:00+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个：</p>
-
-<ul>
-<li>大数据量写入，一小时10G</li>
-<li>数据量极大的查询</li>
-<li>并发数不大，即写入和读取都不是高并发的</li>
-</ul>
-
-
-<p>发现此类数据库普遍从3年前开始流行，主要实现这些数据库的编程语言是下面这些，其实从中也可以看出各种库所擅长的内容，有些强项在存储，有些在路由，即分布式。</p>
-
-<ul>
-<li>C
-
-<ul>
-<li>MongoDB　 (文档存储)</li>
-<li>Redis (key-value)</li>
-</ul>
-</li>
-<li>Erlang &amp; C （erlang管路由，c管数据存储的结构）
-
-<ul>
-<li>Riak (key-value)</li>
-<li>CouchDB (文档存储)</li>
-<li>Membase</li>
-</ul>
-</li>
-<li>java (分布式为主，路由功能和存储均不错)
-
-<ul>
-<li>Cassandra [kə&#8217;sændrə]</li>
-<li>HBase</li>
-<li>Neo4j</li>
-<li>SenseiDB (from <a href="http://www.infoq.com/cn/news/2012/03/senseidb-1-0-0?utm_source=bshare&amp;utm_campaign=bshare&amp;utm_medium=sinaminiblog&amp;bsh_bid=85617203">LinkedIn</a>)</li>
-</ul>
-</li>
-</ul>
-
-
-<p>参考资料:<br/>
-<a href="http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra">http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra</a><br/>
-<a href="http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis">http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis</a><br/>
-<a href="http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra">http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra</a>    <br/>
-<a href="http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2">http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2</a></p>
-
-<h1><a href="http://www.mongodb.org/">Mongodb</a></h1>
-
-<p>保证海量数据存储的同时，具有良好的查询性能。<br/>
-Schema Free</p>
-
-<p>Mongodb总体介绍</p>
-
-<div style="width:425px" id="__ss_9209804"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ChrisEdwards357/introduction-to-mongodb-9209804" title="Introduction to MongoDB - Austin Code Camp 2011" target="_blank">Introduction to MongoDB - Austin Code Camp 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9209804" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ChrisEdwards357" target="_blank">Chris Edwards</a> </div> </div>
-
-
-<h3>安装、建库、索引与备份</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 下载解压</span>
-</span><span class='line'>wget http://downloads.mongodb.org/src/mongodb-linux-x86_64-2.0.4.tgz
-</span><span class='line'>tar xzf mongodb-src-r2.0.4.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c"># 创建数据目录</span>
-</span><span class='line'>mkdir -p /data/db
-</span><span class='line'>
-</span><span class='line'><span class="c">#启动</span>
-</span><span class='line'>./mongodb-xxxxxxx/bin/mongod
-</span><span class='line'>
-</span><span class='line'><span class="c">#shell访问</span>
-</span><span class='line'>./mongodb-xxxxxxx/bin/mongo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>mongodb可以不事先建schema和表，会在第一次插入数据时自动创建</p>
-
-<p>mongodump 用于备份</p>
-
-<h3>开发工具及使用方式</h3>
-
-<p>mongodb shell是基于js的语法</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; use mydb
-</span><span class='line'>&gt; show dbs
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><a href="http://www.mongodb.org/display/DOCS/Java+Tutorial">Java</a><br/>
-<div style="width:425px" id="__ss_3924691"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ecspike/java-development-with-mongodb" title="Java development with MongoDB" target="_blank">Java development with MongoDB</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/3924691" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> Mophia( a lightweight type-safe library for mapping Java objects to/from MongoDB)值得使用</div> </div></li>
-<li><a href="http://www.mongodb.org/display/DOCS/Ruby+Language+Center">Ruby</a></li>
-<li><a href="http://www.mongodb.org/display/DOCS/C+Language+Center">C</a></li>
-</ul>
-
-
-<h3>数据模型</h3>
-
-<ul>
-<li>database</li>
-<li>collection = table</li>
-<li>document = row</li>
-<li>field = column</li>
-<li>index</li>
-</ul>
-
-
-<h3>生产环境配置要点(部署)</h3>
-
-<ul>
-<li>Linux File Systems</li>
-</ul>
-
-
-<p>MongoDB uses large files for storing data, and preallocates these. These filesystems seem to work well:</p>
-
-<p>ext4 ( kernel version >= 2.6.23 )
-xfs ( kernel version >= 2.6.25 )</p>
-
-<ul>
-<li>NUMA (一种多核cpu的内存绑定结构，同mongodb和mysql的兼容都不好)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>numactl --interleave<span class="o">=</span>all /home/mongodb/mongodb-linux-x86_64-2.0.4/bin/mongod --fork --logpath<span class="o">=</span>/data/log/log
-</span><span class='line'><span class="nb">echo </span>0 &gt; /proc/sys/vm/zone_reclaim_mode
-</span><span class='line'>
-</span><span class='line'><span class="nb">kill</span> -2 <span class="o">{</span>proccess_id<span class="o">}</span> <span class="c"># kill -2 = ^C</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>监控</h3>
-
-<h1><a href="http://cassandra.apache.org/">Cassandra</a></h1>
-
-<h3>开发工具的支持</h3>
-
-<p>使用<a href="http://thrift.apache.org/">Thrift</a>作为支持多语言的开发工具。它本身也是facebook开源出来的东西。</p>
-
-<h3>安装与教程</h3>
-
-<ol>
-<li><a href="http://wiki.apache.org/cassandra/GettingStarted">安装GettingStarted</a>，是安装、配置、启动的上手指南，类似启动一个tomcat；</li>
-<li><a href="http://wiki.apache.org/cassandra/CassandraCli">command line 基础</a>, 包含了基本的建表、索引等实例；</li>
-<li><a href="http://pablete.org/2009/11/cassandra-and-ruby/">Cassandra for Rails的ppt</a><br/>
-<div style="width:480px;text-align:left" id="__ss_2834738">
- <a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/pablete/cassandra-for-rails" title="Cassandra for Rails">Cassandra for Rails</a>
- <object style="margin:0px" width="480" height="355">
-   <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" />
-   <param name="allowFullScreen" value="true"/>
-   <param name="allowScriptAccess" value="always"/>
-   <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>
- </object>
-</div></li>
-</ol>
-
-
-<h3>其他优秀特性：</h3>
-
-<ul>
-<li>比key-value多，比Mongodb做的少。</li>
-<li>Range queries</li>
-<li>List datastructures , for per-user indexex</li>
-<li>Distributed writes</li>
-<li>cluster里可以指定写的node的数量W，和读的node数量R，以此来实现整个node</li>
-</ul>
-
-
-<h3>生产cluster搭配要点:</h3>
-
-<ul>
-<li>硬件
-
-<ul>
-<li>不需要raid，可以多个节点，即便在同一台机器上，同时运行。</li>
-<li>16GB的内存</li>
-</ul>
-</li>
-<li>配置
-
-<ul>
-<li>16GB的内存下，配3个节点，Jvm heap使用4GB</li>
-</ul>
-</li>
-</ul>
-
-
-<p>在/var/lib 下存放data， log， 和  saved_caches</p>
-
-<h3>数据模型的概念</h3>
-
-<ul>
-<li>keyspace = schema;<br/>
-keyspace仅仅是用来决定replication的次数，而不要求所有的内容都关联在一个schema中。</li>
-<li>column family = table<br/>
-  由row key +　Columns组成，key可以是自然key也可以是uuid之类的key<br/>
-column 由name, value 和timstamp组成，其中value可以为空
-key默认就有primary index</li>
-<li>特殊的column<br/>
-Expiring 可以写入过期时间，用于消息失效之类的应用<br/>
-Count 技术的事务性有Cassandra自己保持<br/>
-Super  其value是(super) columns的集合，但是该value的全部内容要序列化</li>
-<li>对value索引<br/>
-   即二级索引，主要起类似位图索引的作用</li>
-</ul>
-
-
-<p><a href="http://www.datastax.com/docs/0.7/data_model/twissandra">一个Twissandra 使用cassandra的例子</a></p>
-
-<h3>Cassandra 小结</h3>
-
-<p>目前分析下来，倾向于使用Cassandra. 理由是，极致的可扩展性，是可以水平扩展的数据库；Java编写，利于改造利用；开发者在去facebook前，也是Amazon Dynamo的开发者；
-已知的已经有300TB使用400台服务器的案例。<br/>
-twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra/<br/>
-但其缺点是过于虚拟化以及理想化，所以实际应用中并不是很稳定，digg和twitter都面临骑虎难下的局面。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -1328,6 +1276,14 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/">2017 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/">实用软件需求</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/08/wei-fu-wu-bi-ji/">微服务笔记</a>
       </li>
     
@@ -1339,19 +1295,11 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
         <a href="/blog/2017/07/31/xin-de-tiao-zhan/">新的挑战</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/">java新的兼容性挑战者Kotlin</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/05/21/thymeleafgan-xiang/">thymeleaf感想</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (71)</a></li><li><a href='/blog/categories/生活'>生活 (46)</a></li><li><a href='/blog/categories/车车'>车车 (34)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (72)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1359,7 +1307,7 @@ twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-run
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2017 - Hegel 2011 -
+  Copyright &copy; 2018 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2017-10-08T23:37:09+08:00</updated>
+  <updated>2018-01-14T20:52:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2017 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/"/>
+    <updated>2018-01-14T20:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong</id>
+    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/yangche2017.png" alt="image" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[实用软件需求]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/"/>
+    <updated>2017-10-30T00:23:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu</id>
+    <content type="html"><![CDATA[<p>Kovitz的这本书大概是七八年前看DHH的博客时得知的，发现有中文版就买了回来。但一直没有读完。原因在于本书还是按比较正统的方法讲解如何写好明确的软件需求与规格。按作者的理解，软件开发细化的模式有二：</p>
+
+<p>一. 所有内容都是渐进式细化的，先原型然后几轮迭代后深入到细节；
+二. 每个开始的需求数量很少，但都很到位，每轮迭代就是新增几个需求并实现。</p>
+
+<p>而在我大部分的工作都是采用的策略一，所以这本书对我的吸引力就不大。毕竟在老单位分工没有那么细，沟通相对简单，并不需要那么细节丰富的需求文档。<strong>但是</strong>，新单位就都不一样了。</p>
+
+<p>现在的单位是一个公司人数不多，但规模建制很丰富的公司，即使我个人带的团队也大了许多，需求不单是项目负责人和客户之间沟通的东西，同时也是产品、ue、ui和研发、测试之间沟通甚至绝对对错的基础。这种情况下，如何书写需求（其实是要求产品如何书写），就变得相当重要了。</p>
+
+<p>Kovitz 这本书的<strong>精华是第九第十章</strong>，讲的是如何描述领域中的集合（模型）和类之间的关系，以及这些模型对应的事件和发生序列。</p>
+
+<p><code>集合</code>包含两种类型：</p>
+
+<ol>
+<li>实体类，或类。比如发票、客户</li>
+<li>实体类之间的关系。（客户1， 发票1），（客户1，发票2）。。。，关系其实是类的集合</li>
+</ol>
+
+
+<p>每个<code>实体类</code>要文档化的信息：<br/>
+1. 实体类的基本信息说明；<br/>
+2. 属性值列表，包括属性的定义，可能值的集合（取值范围、类型或者枚举集合）和含义<br/>
+3. 存在的标识成员的属性（主键）<br/>
+4. 与该类有关的实体类，这个主要用文字描述为主、画类图为辅，要在描述中说清楚一堆多，多对一的关系<br/>
+5. 影响成员的每个事件，以及影响那些属性和关系。</p>
+
+<p><code>基数</code>是指多对一的配套关系。连线的秘密是这样的：
+* 竖线表示1
+* 圈表示0
+* 三条线表示乌鸦脚，没有合并
+* 基数最靠近两端的表示最大值，次近两端的是最小值</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[微服务笔记]]></title>
@@ -1195,98 +1243,6 @@ public, /templates.</p>
 
 
 <p>为避免response溢出整个日志，可选择在特定的location中使用输出response body。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[车险]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian/"/>
-    <updated>2016-05-31T22:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/31/che-xian</id>
-    <content type="html"><![CDATA[<p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
-只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
-
-<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
-
-<ul>
-<li>车损：现2109.58，原3514.15</li>
-<li>三责：现1176，   原1689.48</li>
-<li>盗抢：现取消，    原977.02</li>
-<li>划痕：现339.5,   原486.35</li>
-<li>各项不计免赔：现543.77，原1049.04</li>
-</ul>
-
-
-<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
-保险公司是活雷锋？</p>
-
-<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
-差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
-甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
-
-<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[StringHttpMessageConverter的头属性]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/"/>
-    <updated>2016-05-19T17:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing</id>
-    <content type="html"><![CDATA[<p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
-其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
-
-<p>要解决可以在xml的配置中设置</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;mvc:annotation-driven&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;mvc:message-converters</span> <span class="na">register-defaults=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="c">&lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&quot;UTF-8&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;writeAcceptCharset&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/bean&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/mvc:message-converters&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/mvc:annotation-driven&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
-
-<p>&#8212;- update on 2016.10.17</p>
-
-<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
-</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">converts</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getMessageConverters</span><span class="o">();</span>
-</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;</span> <span class="n">convert</span> <span class="o">:</span> <span class="n">converts</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">convert</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">StringHttpMessageConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="o">((</span><span class="n">StringHttpMessageConverter</span><span class="o">)</span> <span class="n">convert</span><span class="o">).</span><span class="na">setWriteAcceptCharset</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-</span><span class='line'>      <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
   </entry>
   

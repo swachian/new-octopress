@@ -1126,7 +1126,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv/</loc>
-        <lastmod>2017-10-05T22:32:10+08:00</lastmod>
+        <lastmod>2018-01-14T20:48:34+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2017/01/15/zookeeper/</loc>
@@ -1173,15 +1173,27 @@
         <lastmod>2017-10-08T23:36:27+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/
+        </loc>
+        <lastmod>2017-10-30T00:47:47+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/
+        </loc>
+        <lastmod>2018-01-14T20:51:59+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2017-10-05T22:32:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2017-10-08T23:36:27+08:00</lastmod>
+        <lastmod>2018-01-14T20:51:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2017-10-08T23:36:27+08:00</lastmod>
+        <lastmod>2018-01-14T20:51:59+08:00</lastmod>
     </url>
 </urlset>
