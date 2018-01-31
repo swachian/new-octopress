@@ -1185,15 +1185,25 @@
         <lastmod>2018-01-14T20:51:59+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/</loc>
+        <lastmod>2018-01-31T14:01:52+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/
+        </loc>
+        <lastmod>2018-01-31T15:30:39+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
         <lastmod>2017-10-05T22:32:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2018-01-14T20:51:59+08:00</lastmod>
+        <lastmod>2018-01-31T15:30:39+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2018-01-14T20:51:59+08:00</lastmod>
+        <lastmod>2018-01-31T15:30:39+08:00</lastmod>
     </url>
 </urlset>

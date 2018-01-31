@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[分类: 管理 | Hegel2011的博客]]></title>
+  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/管理/atom.xml" rel="self"/>
+  <link href="http://octopresszhangyu.herokuapp.com/"/>
+  <updated>2018-01-31T15:31:41+08:00</updated>
+  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <author>
+    <name><![CDATA[Hegel 2011]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Joel 谈软件- 软件随想录]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/"/>
+    <updated>2018-01-31T14:12:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu</id>
+    <content type="html"><![CDATA[<p>《Joel谈软件》，我一直是这么称呼《软件随想录》的。
+倒是才注意到，原来黑客与画家、软件随想录都是阮一峰老师翻译的，而且翻译的真不错。与此同时，阮老师也很好地推销了一下自己。本书与《我编程我快乐》不同，是很有深度的书，所以决定边读边记笔记。尤其要说一句，阮老师的注解是很显功力的。</p>
+
+<p>在2004年之前，Joel的网站文集就被按blook集合由Apress出版，而阮老师翻译的是集成了2004年之后发布的文章。英文名称《More Joel on Software》。但国内的出版顺序则是先引入了阮老师翻译的《More》，后来又有另一个译者翻译了04年的那本书作为了卷1. 所以，在中国很长时间只有《More》而没有第一本。考虑到时效性以及译者的知名度，04-09这本更值得关注就是必然的了。</p>
+
+<h2>人员管理</h2>
+
+<h3>第一次Bill Gates 审查</h3>
+
+<p>微软程序经理（Program Manager）：技术水平是程序员队伍里最高级别，能做最多且最难的工作，有人格魅力，程序员队伍中最聪明的那个家伙。</p>
+
+<p>比尔盖茨通过不断问问题来确认对方是否有实现任务的把握。</p>
+
+<h3>怎么寻找优秀的程序员</h3>
+
+<ol>
+<li>优秀的程序员很少找工作</li>
+<li>简历投的多的大部分是不怎么样的程序员</li>
+<li>从应届生中招募是个发现美材的办法</li>
+</ol>
+
+
+<h3>从工作环境开始招募程序员</h3>
+
+<ol>
+<li>私人办公室：作者的公司在纽约，但程序员都有独立办公室，当然，这个在国外也是凤毛麟角。</li>
+<li>Aeron出品的名牌电脑椅</li>
+<li>大显示器</li>
+<li>好的办公环境和园区</li>
+<li>同事要好，管理层要有程序员出身的人，物以类聚</li>
+<li>像代码一样公正、有序，严格的能者上庸者下的地方，对的就能赢得任何争论的地方</li>
+<li>有趣的活，或者简单的或者流行的活</li>
+<li>一定自由地使用新技术</li>
+<li>编程框架体现美、幸福和激励</li>
+</ol>
+
+
+<h3>三种管理方法</h3>
+
+<p>团队、公司、军队、国家，问题：“使得人们去做你要他们做的事”，或者说如何使得所有人都向同一个方向前进。</p>
+
+<h4>军事化管理法</h4>
+
+<p>每个人做的事情都不同的情况下，军事化管理方法很难奏效，因为没有那么多经理实现微观管理。但对军队则是必须的。</p>
+
+<h4>经济利益驱动法</h4>
+
+<p>经济驱动把内部激励变成了外部激励。内部激励是发自内心想做好这件事情，内部激励通常比外部激励强。</p>
+
+<p>经济驱动也容易陷入kpi骗局，鼓励大家和制度博弈。不能把铜板丢给鸡，让鸡自己去买吃的。创造一种制度的时候，不能放弃自己的职责。</p>
+
+<h4>认同法</h4>
+
+<p>一起干活的人要一起吃饭。团建，以及营造一致的目标，爱上这个城市和工作内容。第二部分是提供必要的信息，让下属感觉被尊重。</p>
+
+<p>结论：hybrid根据时间和对象灵活运用各种方式。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我编程我快乐]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/"/>
+    <updated>2018-01-31T13:45:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le</id>
+    <content type="html"><![CDATA[<p>在图灵买了本《我编程我快乐》的电子书。其实原版名字就是著名的《My job went to India》的第二版，
+原书名的意思也是如何成为一个卓越的程序员。</p>
+
+<p>由于作者出身rails背景，所以大部分的思维我之前已经了解，真的大有收获的东西并不多。摘要一下有以下几点：</p>
+
+<h2>市场</h2>
+
+<ol>
+<li>技术是有时间差的，在成熟或者说供需平衡间可以赚到相对多的价钱。</li>
+<li>不要担心做团队中最差的，反而要追求这种和高手过招的机会，这样才能走出舒适区。</li>
+<li>不要听从父母的，即使西方也是一样的。父母只是希望你平安，但大部分父母的境界注定无法帮助你卓越。</li>
+<li>热爱你做的事情和市场。</li>
+</ol>
+
+
+<h2>产品</h2>
+
+<ol>
+<li>了解行业如何运转</li>
+<li>跟踪技术的原理</li>
+<li>寻找良师益友，自己也要做良师</li>
+</ol>
+
+
+<h2>执行</h2>
+
+<ol>
+<li>8小时激情燃烧</li>
+<li>公司离开哪个员工都照样转</li>
+<li>说“不”</li>
+</ol>
+
+
+<h2>推销</h2>
+
+<ol>
+<li>推销包含了一定的迎合</li>
+<li>感觉是最重要，脑力劳动的评价主要靠感觉</li>
+<li>建立关系混圈子</li>
+</ol>
+
+
+<h2>保持技术领先</h2>
+
+<ol>
+<li>研究尖端技术</li>
+<li>没有终点</li>
+<li>留意市场变化，主要跟踪技术达人</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
-只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。 因为没有出险，所以商业险给打了七折，下面是对比 车损：现2109.58，原3514.15
-三责： &hellip;">
+  <meta name="description" content="本田的冠道近日宣传的比较多，虽然价格还没最后公布，但车还是造成了足够的话题。
+因为这车既是本田目前的旗舰suv，也是首次使用了2.0T发动机的中国产本田车型。 其实这个车挺像昂科威的，只是更高级也更大些。CRV相对这类车，最大的优势还是在于尺寸、操控，尤其是尺寸相对冠道的优势更大。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,198 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/27/guan-yu-guan-dao/">关于冠道</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-27T15:37:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本田的冠道近日宣传的比较多，虽然价格还没最后公布，但车还是造成了足够的话题。
+因为这车既是本田目前的旗舰suv，也是首次使用了2.0T发动机的中国产本田车型。</p>
+
+<p>其实这个车挺像昂科威的，只是更高级也更大些。CRV相对这类车，最大的优势还是在于尺寸、操控，尤其是尺寸相对冠道的优势更大。毕竟CRV这种4米6以下的长度，1米8左右的宽度，在城市开还是挺舒服的，再搭配一个装载能力很大的尾箱，是各方面都很均衡的车型。
+而冠道，对拥挤的中国城市来讲，它的尺寸还是大了些。而尺寸大的车，操控必然是要打折扣的。
+而从空间看，尾箱部分因为溜背造型，并不如crv的尾箱实惠。
+油耗、可靠性方面可能也是crv更有优势些。
+当然，同昂科威一样，冠道内饰的高级感、拥有税金更省的涡轮、拥有at变速箱、静音等方面都是对crv碾压了。</p>
+
+<p>不过问我会不会买冠道？只要这个车不是比crv便宜，那肯定还是crv，毕竟crv开着更舒服。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/25/nginx-tong-guo-luashu-chu-response-body/">Nginx 通过Lua输出response Body</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-25T23:03:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nginx默认是不只支持<code>$request_body</code> 而不支持response的body输出的。这个设定是合理的，因为大量的html响应或者静态文件的内容输出将使得整个日志毫无意义。
+然而，response body输出对api的请求来讲，则很多时候、尤其是在调试的时候是很有必要的。取代了抓包的作用，且简单直观许多。
+搜寻之下，发现使用lua的话，可以达到此目的。</p>
+
+<ol>
+<li>下载并安装lua语言的安装包</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz
+</span><span class='line'>tar -zxvf LuaJIT-2.0.3.tar.gz
+</span><span class='line'>cd LuaJIT-2.0.3.tar.gz
+</span><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意，可能你的服务器的wget会实际下载一个html到本地导致tar解压失败，此时可以用浏览器下载完毕后再次上传到服务器上。</p>
+
+<ol>
+<li>下载并解压ngx_devel_kit套件</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
+</span><span class='line'>tar v0.2.19</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>下载并解压lua-nginx-module模块</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://github.com/chaoslawful/lua-nginx-module/archive/v0.9.6.tar.gz
+</span><span class='line'>tar v0.9.6</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>下载并解压nginx后，使用下面的命令重新编译nginx</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-pcre --sbin-path=/usr/sbin/nginx --add-module=/root/lua-nginx-module-0.9.6 --add-module=/root/ngx_devel_kit-0.2.19 
+</span><span class='line'>make && make install
+</span><span class='line'>cp /usr/sbin/nginx /usr/local/nginx/sbin/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，在nginx的conf文件中的<code>server{}</code>上下文里加入下面代码</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>log_format  main_with_response  '$remote_addr - $remote_user [$time_local] "$request" '
+</span><span class='line'>                      '$status $body_bytes_sent "$http_referer" '
+</span><span class='line'>                      '"$http_user_agent" "$http_x_forwarded_for"'
+</span><span class='line'>                      'request: "$request_body"' 'response: $resp_body';
+</span><span class='line'>
+</span><span class='line'>server {
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'>   lua_need_request_body on;
+</span><span class='line'>    set $resp_body "";
+</span><span class='line'>    body_filter_by_lua '
+</span><span class='line'>        local resp_body = string.sub(ngx.arg[1], 1, 1000)
+</span><span class='line'>        ngx.ctx.buffered = (ngx.ctx.buffered or "") .. resp_body
+</span><span class='line'>        if ngx.arg[2] then
+</span><span class='line'>             ngx.var.resp_body = ngx.ctx.buffered
+</span><span class='line'>        end
+</span><span class='line'>    ';
+</span><span class='line'>
+</span><span class='line'>       location /xxxx {
+</span><span class='line'>            root   html;
+</span><span class='line'>            access_log  logs/access.log  main_with_response;
+</span><span class='line'>            proxy_pass http://192.168.203.198:8080;
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为避免response溢出整个日志，可选择在特定的location中使用输出response body。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -786,757 +977,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/02/15/shi-yong-cap3/">试用Cap3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-02-15T16:42:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-<span class='line-number'>156</span>
-<span class='line-number'>157</span>
-<span class='line-number'>158</span>
-<span class='line-number'>159</span>
-<span class='line-number'>160</span>
-<span class='line-number'>161</span>
-<span class='line-number'>162</span>
-<span class='line-number'>163</span>
-<span class='line-number'>164</span>
-<span class='line-number'>165</span>
-<span class='line-number'>166</span>
-<span class='line-number'>167</span>
-<span class='line-number'>168</span>
-<span class='line-number'>169</span>
-<span class='line-number'>170</span>
-<span class='line-number'>171</span>
-<span class='line-number'>172</span>
-<span class='line-number'>173</span>
-<span class='line-number'>174</span>
-<span class='line-number'>175</span>
-<span class='line-number'>176</span>
-<span class='line-number'>177</span>
-<span class='line-number'>178</span>
-<span class='line-number'>179</span>
-<span class='line-number'>180</span>
-<span class='line-number'>181</span>
-<span class='line-number'>182</span>
-<span class='line-number'>183</span>
-<span class='line-number'>184</span>
-<span class='line-number'>185</span>
-<span class='line-number'>186</span>
-<span class='line-number'>187</span>
-<span class='line-number'>188</span>
-<span class='line-number'>189</span>
-<span class='line-number'>190</span>
-<span class='line-number'>191</span>
-<span class='line-number'>192</span>
-<span class='line-number'>193</span>
-<span class='line-number'>194</span>
-<span class='line-number'>195</span>
-<span class='line-number'>196</span>
-<span class='line-number'>197</span>
-<span class='line-number'>198</span>
-<span class='line-number'>199</span>
-<span class='line-number'>200</span>
-<span class='line-number'>201</span>
-<span class='line-number'>202</span>
-<span class='line-number'>203</span>
-<span class='line-number'>204</span>
-<span class='line-number'>205</span>
-<span class='line-number'>206</span>
-<span class='line-number'>207</span>
-<span class='line-number'>208</span>
-<span class='line-number'>209</span>
-<span class='line-number'>210</span>
-<span class='line-number'>211</span>
-<span class='line-number'>212</span>
-<span class='line-number'>213</span>
-<span class='line-number'>214</span>
-<span class='line-number'>215</span>
-<span class='line-number'>216</span>
-<span class='line-number'>217</span>
-<span class='line-number'>218</span>
-<span class='line-number'>219</span>
-<span class='line-number'>220</span>
-<span class='line-number'>221</span>
-<span class='line-number'>222</span>
-<span class='line-number'>223</span>
-<span class='line-number'>224</span>
-<span class='line-number'>225</span>
-<span class='line-number'>226</span>
-<span class='line-number'>227</span>
-<span class='line-number'>228</span>
-<span class='line-number'>229</span>
-<span class='line-number'>230</span>
-<span class='line-number'>231</span>
-<span class='line-number'>232</span>
-<span class='line-number'>233</span>
-<span class='line-number'>234</span>
-<span class='line-number'>235</span>
-<span class='line-number'>236</span>
-<span class='line-number'>237</span>
-<span class='line-number'>238</span>
-<span class='line-number'>239</span>
-<span class='line-number'>240</span>
-<span class='line-number'>241</span>
-<span class='line-number'>242</span>
-<span class='line-number'>243</span>
-<span class='line-number'>244</span>
-<span class='line-number'>245</span>
-<span class='line-number'>246</span>
-<span class='line-number'>247</span>
-<span class='line-number'>248</span>
-<span class='line-number'>249</span>
-<span class='line-number'>250</span>
-<span class='line-number'>251</span>
-<span class='line-number'>252</span>
-<span class='line-number'>253</span>
-<span class='line-number'>254</span>
-<span class='line-number'>255</span>
-<span class='line-number'>256</span>
-<span class='line-number'>257</span>
-<span class='line-number'>258</span>
-<span class='line-number'>259</span>
-<span class='line-number'>260</span>
-<span class='line-number'>261</span>
-<span class='line-number'>262</span>
-<span class='line-number'>263</span>
-<span class='line-number'>264</span>
-<span class='line-number'>265</span>
-<span class='line-number'>266</span>
-<span class='line-number'>267</span>
-<span class='line-number'>268</span>
-<span class='line-number'>269</span>
-<span class='line-number'>270</span>
-<span class='line-number'>271</span>
-<span class='line-number'>272</span>
-<span class='line-number'>273</span>
-<span class='line-number'>274</span>
-<span class='line-number'>275</span>
-<span class='line-number'>276</span>
-<span class='line-number'>277</span>
-<span class='line-number'>278</span>
-<span class='line-number'>279</span>
-<span class='line-number'>280</span>
-<span class='line-number'>281</span>
-<span class='line-number'>282</span>
-<span class='line-number'>283</span>
-<span class='line-number'>284</span>
-<span class='line-number'>285</span>
-<span class='line-number'>286</span>
-<span class='line-number'>287</span>
-<span class='line-number'>288</span>
-<span class='line-number'>289</span>
-<span class='line-number'>290</span>
-<span class='line-number'>291</span>
-<span class='line-number'>292</span>
-<span class='line-number'>293</span>
-<span class='line-number'>294</span>
-<span class='line-number'>295</span>
-<span class='line-number'>296</span>
-<span class='line-number'>297</span>
-<span class='line-number'>298</span>
-<span class='line-number'>299</span>
-<span class='line-number'>300</span>
-<span class='line-number'>301</span>
-<span class='line-number'>302</span>
-<span class='line-number'>303</span>
-<span class='line-number'>304</span>
-<span class='line-number'>305</span>
-<span class='line-number'>306</span>
-<span class='line-number'>307</span>
-<span class='line-number'>308</span>
-<span class='line-number'>309</span>
-<span class='line-number'>310</span>
-<span class='line-number'>311</span>
-<span class='line-number'>312</span>
-<span class='line-number'>313</span>
-<span class='line-number'>314</span>
-<span class='line-number'>315</span>
-<span class='line-number'>316</span>
-<span class='line-number'>317</span>
-<span class='line-number'>318</span>
-<span class='line-number'>319</span>
-<span class='line-number'>320</span>
-<span class='line-number'>321</span>
-<span class='line-number'>322</span>
-<span class='line-number'>323</span>
-<span class='line-number'>324</span>
-<span class='line-number'>325</span>
-<span class='line-number'>326</span>
-<span class='line-number'>327</span>
-<span class='line-number'>328</span>
-<span class='line-number'>329</span>
-<span class='line-number'>330</span>
-<span class='line-number'>331</span>
-<span class='line-number'>332</span>
-<span class='line-number'>333</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>diff --git a/Capfile b/Capfile
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..51c3955
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/Capfile
-</span><span class='line'>@@ -0,0 +1,29 @@
-</span><span class='line'>+# Load DSL and set up stages
-</span><span class='line'>+require 'capistrano/setup'
-</span><span class='line'>+
-</span><span class='line'>+# Include default deployment tasks
-</span><span class='line'>+require 'capistrano/deploy'
-</span><span class='line'>+
-</span><span class='line'>+require 'capistrano/rails'
-</span><span class='line'>+
-</span><span class='line'>+# Include tasks from other gems included in your Gemfile
-</span><span class='line'>+#
-</span><span class='line'>+# For documentation on these, see for example:
-</span><span class='line'>+#
-</span><span class='line'>+#   https://github.com/capistrano/rvm
-</span><span class='line'>+#   https://github.com/capistrano/rbenv
-</span><span class='line'>+#   https://github.com/capistrano/chruby
-</span><span class='line'>+#   https://github.com/capistrano/bundler
-</span><span class='line'>+#   https://github.com/capistrano/rails
-</span><span class='line'>+#   https://github.com/capistrano/passenger
-</span><span class='line'>+#
-</span><span class='line'>+# require 'capistrano/rvm'
-</span><span class='line'>+# require 'capistrano/rbenv'
-</span><span class='line'>+# require 'capistrano/chruby'
-</span><span class='line'>+# require 'capistrano/bundler'
-</span><span class='line'>+# require 'capistrano/rails/assets'
-</span><span class='line'>+# require 'capistrano/rails/migrations'
-</span><span class='line'>+# require 'capistrano/passenger'
-</span><span class='line'>+
-</span><span class='line'>+# Load custom tasks from `lib/capistrano/tasks` if you have any defined
-</span><span class='line'>+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
-</span><span class='line'>diff --git a/Gemfile b/Gemfile
-</span><span class='line'>index 9786bc1..60dd07d 100644
-</span><span class='line'>--- a/Gemfile
-</span><span class='line'>+++ b/Gemfile
-</span><span class='line'>@@ -10,11 +10,11 @@ gem 'mysql2'
-</span><span class='line'> # Use SCSS for stylesheets
-</span><span class='line'> gem 'sass-rails', '~&gt; 5.0.0.beta1'
-</span><span class='line'> # Use Uglifier as compressor for JavaScript assets
-</span><span class='line'>-gem 'uglifier', '&gt;= 1.3.0'
-</span><span class='line'>+#gem 'uglifier', '&gt;= 1.3.0'
-</span><span class='line'> # Use CoffeeScript for .js.coffee assets and views
-</span><span class='line'> gem 'coffee-rails', '~&gt; 4.1.0'
-</span><span class='line'> # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-</span><span class='line'>-# gem 'therubyracer',  platforms: :ruby
-</span><span class='line'>+gem 'therubyracer',  platforms: :ruby
-</span><span class='line'> 
-</span><span class='line'> # Use jquery as the JavaScript library
-</span><span class='line'> gem 'jquery-rails'
-</span><span class='line'>@@ -46,7 +46,10 @@ gem 'unicorn'
-</span><span class='line'> gem 'thin'
-</span><span class='line'> # Use Capistrano for deployment
-</span><span class='line'> # gem 'capistrano-rails', group: :development
-</span><span class='line'>-
-</span><span class='line'>+group :development do
-</span><span class='line'>+    gem 'capistrano', '~&gt; 3.1'
-</span><span class='line'>+    gem 'capistrano-rails', '~&gt; 1.1'
-</span><span class='line'>+end
-</span><span class='line'> 
-</span><span class='line'> gem 'kaminari', github: 'amatsuda/kaminari', branch: 'master'
-</span><span class='line'> gem 'nokogiri'
-</span><span class='line'>diff --git a/config/deploy.rb b/config/deploy.rb
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..7af9419
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/config/deploy.rb
-</span><span class='line'>@@ -0,0 +1,60 @@
-</span><span class='line'>+# config valid only for current version of Capistrano
-</span><span class='line'>+lock '3.4.0'
-</span><span class='line'>+
-</span><span class='line'>+set :application, 'xincheping'
-</span><span class='line'>+set :repo_url, 'git@github.com:swachian/xincheping.git'
-</span><span class='line'>+
-</span><span class='line'>+# Default branch is :master
-</span><span class='line'>+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-</span><span class='line'>+
-</span><span class='line'>+# Default deploy_to directory is /var/www/my_app_name
-</span><span class='line'>+set :deploy_to, '/opt/deploy/xincheping'
-</span><span class='line'>+
-</span><span class='line'>+# Default value for :scm is :git
-</span><span class='line'>+# set :scm, :git
-</span><span class='line'>+
-</span><span class='line'>+# Default value for :format is :pretty
-</span><span class='line'>+# set :format, :pretty
-</span><span class='line'>+
-</span><span class='line'>+# Default value for :log_level is :debug
-</span><span class='line'>+# set :log_level, :debug
-</span><span class='line'>+
-</span><span class='line'>+# Default value for :pty is false
-</span><span class='line'>+# set :pty, true
-</span><span class='line'>+
-</span><span class='line'>+# Default value for :linked_files is []
-</span><span class='line'>+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-</span><span class='line'>+
-</span><span class='line'>+# Default value for linked_dirs is []
-</span><span class='line'>+# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-</span><span class='line'>+ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets')
-</span><span class='line'>+
-</span><span class='line'>+# Default value for default_env is {}
-</span><span class='line'>+set :default_env, { path: "/home/zhangyu/.rbenv/versions/ruby-2.3/bin:$PATH" }
-</span><span class='line'>+
-</span><span class='line'>+# Default value for keep_releases is 5
-</span><span class='line'>+# set :keep_releases, 5
-</span><span class='line'>+
-</span><span class='line'>+namespace :deploy do
-</span><span class='line'>+
-</span><span class='line'>+  after :restart, :clear_cache do
-</span><span class='line'>+    on roles(:web), in: :groups, limit: 3, wait: 10 do
-</span><span class='line'>+      # Here we can do anything such as:
-</span><span class='line'>+      # within release_path do
-</span><span class='line'>+      #   execute :rake, 'cache:clear'
-</span><span class='line'>+      # end
-</span><span class='line'>+    end
-</span><span class='line'>+  end
-</span><span class='line'>+
-</span><span class='line'>+  task :restart_server do
-</span><span class='line'>+    on roles(:web) do
-</span><span class='line'>+      within current_path do
-</span><span class='line'>+        with rails_env: fetch(:rails_env), rails_relative_url_root: '/xincheping' do
-</span><span class='line'>+          execute :rake, 'thin:restart', env: {rails_env: fetch(:rails_env) }
-</span><span class='line'>+        end
-</span><span class='line'>+      end
-</span><span class='line'>+    end
-</span><span class='line'>+  end
-</span><span class='line'>+  after "deploy:published", "restart_server"
-</span><span class='line'>+
-</span><span class='line'>+end
-</span><span class='line'>diff --git a/config/deploy/production.rb b/config/deploy/production.rb
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..a396f40
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/config/deploy/production.rb
-</span><span class='line'>@@ -0,0 +1,61 @@
-</span><span class='line'>+# server-based syntax
-</span><span class='line'>+# ======================
-</span><span class='line'>+# Defines a single server with a list of roles and multiple properties.
-</span><span class='line'>+# You can define all roles on a single server, or split them:
-</span><span class='line'>+
-</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
-</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
-</span><span class='line'>+# server 'db.example.com', user: 'deploy', roles: %w{db}
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# role-based syntax
-</span><span class='line'>+# ==================
-</span><span class='line'>+
-</span><span class='line'>+# Defines a role with one or multiple servers. The primary server in each
-</span><span class='line'>+# group is considered to be the first unless any  hosts have the primary
-</span><span class='line'>+# property set. Specify the username and a domain or IP for the server.
-</span><span class='line'>+# Don't use `:all`, it's a meta role.
-</span><span class='line'>+
-</span><span class='line'>+role :app, %w{zhangyu@192.168.203.198}, my_property: :my_value
-</span><span class='line'>+role :web, %w{zhangyu@192.168.203.198}, other_property: :other_value
-</span><span class='line'>+role :db,  %w{zhangyu@192.168.203.198}
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# Configuration
-</span><span class='line'>+# =============
-</span><span class='line'>+# You can set any configuration variable like in config/deploy.rb
-</span><span class='line'>+# These variables are then only loaded and set in this stage.
-</span><span class='line'>+# For available Capistrano configuration variables see the documentation page.
-</span><span class='line'>+# http://capistranorb.com/documentation/getting-started/configuration/
-</span><span class='line'>+# Feel free to add new variables to customise your setup.
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# Custom SSH Options
-</span><span class='line'>+# ==================
-</span><span class='line'>+# You may pass any option but keep in mind that net/ssh understands a
-</span><span class='line'>+# limited set of options, consult the Net::SSH documentation.
-</span><span class='line'>+# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
-</span><span class='line'>+#
-</span><span class='line'>+# Global options
-</span><span class='line'>+# --------------
-</span><span class='line'>+#  set :ssh_options, {
-</span><span class='line'>+#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-</span><span class='line'>+#    forward_agent: false,
-</span><span class='line'>+#    auth_methods: %w(password)
-</span><span class='line'>+#  }
-</span><span class='line'>+#
-</span><span class='line'>+# The server-based syntax can be used to override options:
-</span><span class='line'>+# ------------------------------------
-</span><span class='line'>+# server 'example.com',
-</span><span class='line'>+#   user: 'user_name',
-</span><span class='line'>+#   roles: %w{web app},
-</span><span class='line'>+#   ssh_options: {
-</span><span class='line'>+#     user: 'user_name', # overrides user setting above
-</span><span class='line'>+#     keys: %w(/home/user_name/.ssh/id_rsa),
-</span><span class='line'>+#     forward_agent: false,
-</span><span class='line'>+#     auth_methods: %w(publickey password)
-</span><span class='line'>+#     # password: 'please use keys'
-</span><span class='line'>+#   }
-</span><span class='line'>diff --git a/config/deploy/staging.rb b/config/deploy/staging.rb
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..4fc06fa
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/config/deploy/staging.rb
-</span><span class='line'>@@ -0,0 +1,61 @@
-</span><span class='line'>+# server-based syntax
-</span><span class='line'>+# ======================
-</span><span class='line'>+# Defines a single server with a list of roles and multiple properties.
-</span><span class='line'>+# You can define all roles on a single server, or split them:
-</span><span class='line'>+
-</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
-</span><span class='line'>+# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
-</span><span class='line'>+# server 'db.example.com', user: 'deploy', roles: %w{db}
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# role-based syntax
-</span><span class='line'>+# ==================
-</span><span class='line'>+
-</span><span class='line'>+# Defines a role with one or multiple servers. The primary server in each
-</span><span class='line'>+# group is considered to be the first unless any  hosts have the primary
-</span><span class='line'>+# property set. Specify the username and a domain or IP for the server.
-</span><span class='line'>+# Don't use `:all`, it's a meta role.
-</span><span class='line'>+
-</span><span class='line'>+# role :app, %w{deploy@example.com}, my_property: :my_value
-</span><span class='line'>+# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
-</span><span class='line'>+# role :db,  %w{deploy@example.com}
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# Configuration
-</span><span class='line'>+# =============
-</span><span class='line'>+# You can set any configuration variable like in config/deploy.rb
-</span><span class='line'>+# These variables are then only loaded and set in this stage.
-</span><span class='line'>+# For available Capistrano configuration variables see the documentation page.
-</span><span class='line'>+# http://capistranorb.com/documentation/getting-started/configuration/
-</span><span class='line'>+# Feel free to add new variables to customise your setup.
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+
-</span><span class='line'>+# Custom SSH Options
-</span><span class='line'>+# ==================
-</span><span class='line'>+# You may pass any option but keep in mind that net/ssh understands a
-</span><span class='line'>+# limited set of options, consult the Net::SSH documentation.
-</span><span class='line'>+# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
-</span><span class='line'>+#
-</span><span class='line'>+# Global options
-</span><span class='line'>+# --------------
-</span><span class='line'>+#  set :ssh_options, {
-</span><span class='line'>+#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-</span><span class='line'>+#    forward_agent: false,
-</span><span class='line'>+#    auth_methods: %w(password)
-</span><span class='line'>+#  }
-</span><span class='line'>+#
-</span><span class='line'>+# The server-based syntax can be used to override options:
-</span><span class='line'>+# ------------------------------------
-</span><span class='line'>+# server 'example.com',
-</span><span class='line'>+#   user: 'user_name',
-</span><span class='line'>+#   roles: %w{web app},
-</span><span class='line'>+#   ssh_options: {
-</span><span class='line'>+#     user: 'user_name', # overrides user setting above
-</span><span class='line'>+#     keys: %w(/home/user_name/.ssh/id_rsa),
-</span><span class='line'>+#     forward_agent: false,
-</span><span class='line'>+#     auth_methods: %w(publickey password)
-</span><span class='line'>+#     # password: 'please use keys'
-</span><span class='line'>+#   }
-</span><span class='line'>diff --git a/config/environments/production.rb b/config/environments/production.rb
-</span><span class='line'>index f572341..cd0d766 100644
-</span><span class='line'>--- a/config/environments/production.rb
-</span><span class='line'>+++ b/config/environments/production.rb
-</span><span class='line'>@@ -19,7 +19,7 @@ Rails.application.configure do
-</span><span class='line'>   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-</span><span class='line'> 
-</span><span class='line'>   # Compress JavaScripts and CSS.
-</span><span class='line'>-  config.assets.js_compressor = :uglifier
-</span><span class='line'>+  #config.assets.js_compressor = :uglifier
-</span><span class='line'>   # config.assets.css_compressor = :sass
-</span><span class='line'> 
-</span><span class='line'>   # Do not fallback to assets pipeline if a precompiled asset is missed.
-</span><span class='line'> 
-</span><span class='line'>diff --git a/lib/tasks/sync.rake b/lib/tasks/sync.rake
-</span><span class='line'>index 6d371d6..bd87ca3 100644
-</span><span class='line'>--- a/lib/tasks/sync.rake
-</span><span class='line'>+++ b/lib/tasks/sync.rake
-</span><span class='line'>@@ -1,10 +1,10 @@
-</span><span class='line'> namespace :sync do
-</span><span class='line'>-  desc "TODO"
-</span><span class='line'>+  desc "长测新车评同步"
-</span><span class='line'>   task changce: :environment do
-</span><span class='line'>     Changce.fetch
-</span><span class='line'>   end
-</span><span class='line'> 
-</span><span class='line'>-  desc "TODO"
-</span><span class='line'>+  desc "新车评内容全部同步"
-</span><span class='line'>   task all: :environment do
-</span><span class='line'>     Daogoulist.all.each {|dgl| dgl.sync_daogous(2)}
-</span><span class='line'>     Guandian.fetch
-</span><span class='line'>@@ -12,4 +12,8 @@ namespace :sync do
-</span><span class='line'>     Changce.fetch_changceing
-</span><span class='line'>   end
-</span><span class='line'> 
-</span><span class='line'>+  desc "同sh.122.gov.cn同步电子警察信息"
-</span><span class='line'>+  task police2: :environment do
-</span><span class='line'>+    ElectronicPoloce2.test_fetch_one_page
-</span><span class='line'>+  end
-</span><span class='line'> end
-</span><span class='line'>diff --git a/lib/tasks/thin.rake b/lib/tasks/thin.rake
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..9fa35cd
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/lib/tasks/thin.rake
-</span><span class='line'>@@ -0,0 +1,8 @@
-</span><span class='line'>+namespace :thin do
-</span><span class='line'>+  desc "重启thin"
-</span><span class='line'>+  task restart: :environment do
-</span><span class='line'>+    system " if [ -f tmp/pids/thin.pid ]; then kill `cat tmp/pids/thin.pid` && rm tmp/pids/thin.pid; fi"
-</span><span class='line'>+    system  "./bin/thin start --prefix=/xincheping  -p 3001 -P tmp/pids/thin.pid -d"
-</span><span class='line'>+  end
-</span><span class='line'>+
-</span><span class='line'>+end
-</span><span class='line'>diff --git a/lib/tasks/unicorn.rake b/lib/tasks/unicorn.rake
-</span><span class='line'>new file mode 100644
-</span><span class='line'>index 0000000..7df54be
-</span><span class='line'>--- /dev/null
-</span><span class='line'>+++ b/lib/tasks/unicorn.rake
-</span><span class='line'>@@ -0,0 +1,8 @@
-</span><span class='line'>+namespace :unicorn do
-</span><span class='line'>+  desc "重启unicorn"
-</span><span class='line'>+  task restart: :environment do
-</span><span class='line'>+    system " if [ -f tmp/pids/unicorn.pid ]; then kill `cat tmp/pids/unicorn.pid`; fi"
-</span><span class='line'>+    system  "./bin/unicorn -c unicorn.conf.rb -D"
-</span><span class='line'>+  end
-</span><span class='line'>+
-</span><span class='line'>+end</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/">时间长了发现还是挺喜欢本田的</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-02-11T09:42:00+08:00" pubdate data-updated="true">Feb 11<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开CRV有半年多了，近来发现越发喜欢这个车甚至本田这个品牌。喜欢的原因首先是来源于和日产两个细节的比较。<br/>
-东本CRV的<strong>说明书</strong>是写的比日产好许多的，读起来很易读，不像日产是标准的非面向人类的说明书。而且这个说明书
-里面还会教用户如何自己拆换空调滤芯，而日产翻遍了也是没有的。在说明书的信息化方面，东本的app有详细的pdf说明书可供参考检索，
-而日产在这一部分是完全空白。对于和用户实际沟通上，本田要好出许多。</p>
-
-<p>另一个细节则来自<strong>智能钥匙</strong>。根据同事八代雅阁的经历，五六年前本田的智能钥匙是一块很简陋的电路板，更换电池时是直接
-以电路板示人的。但经过几年发展后，我的CRV上这个细节得到了很大的改善，电路板不再是粗糙地打开即见，然而仍然可以换电池。
-轮到日产的话，则所有的钥匙还是本田五六年前的水准，一块电路板大大裸露在外面。</p>
-
-<p>这个车之所以越开越喜欢，主要原因就是确实很对技术男的味。实际上美版的前雷达什么更对我的胃口，只是被东本改乱了。</p>
-
-<p>而之前一直不满的手机连接导航，用的多了感觉还是可以的。尽管连线比较麻烦，系统也还不够稳定，发展方向却是极其正确的。
-目前的水平也足以一用，虽然希望可以更方便些更快捷些更稳定些。对本田的倒车无力和杂音遍地有各种不满，至今依然不满，但鉴于CRV和本田实际各种良好的体验，
-这车确实越来越让人喜欢了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1554,6 +994,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/">我编程我快乐</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/">2017 CRV养车成本汇总</a>
       </li>
     
@@ -1565,19 +1013,11 @@
         <a href="/blog/2017/10/08/wei-fu-wu-bi-ji/">微服务笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/">spring cloud 服务治理</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/07/31/xin-de-tiao-zhan/">新的挑战</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (72)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (74)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/管理'>管理 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
 </section>
   
 </aside>
