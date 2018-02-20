@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="《Joel谈软件》，我一直是这么称呼《软件随想录》的。
-倒是才注意到，原来黑客与画家、软件随想录都是阮一峰老师翻译的，而且翻译的真不错。与此同时，阮老师也很好地推销了一下自己。本书与《我编程我快乐》不同，是很有深度的书，所以决定边读边记笔记。尤其要说一句，阮老师的注解是很显功力的。 &hellip;">
+  <meta name="description" content="读完软件随想录，自然而然被吸引去了另一本这个领域的名著《人件》 质量 只有愿为质量倾其所有的人，质量才是免费的。一个组织如果为了质量一毛不拔，那么收获的质量也将一文不值。
+制造者本身对质量会有更高的要求，良心循环下更高的质量会有更高的产出，但如果组织不愿意为此付出代价，比如高工资、项目延期等， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-02-16T14:20:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>读完软件随想录，自然而然被吸引去了另一本这个领域的名著《人件》</p>
+
+<h3>质量</h3>
+
+<p>只有愿为质量倾其所有的人，质量才是免费的。一个组织如果为了质量一毛不拔，那么收获的质量也将一文不值。
+制造者本身对质量会有更高的要求，良心循环下更高的质量会有更高的产出，但如果组织不愿意为此付出代价，比如高工资、项目延期等，那么就得不到这种质量</p>
+
+<h3>帕金森定律</h3>
+
+<p>工作会自动膨胀并占满一个人所有的工作时间。进度压力是一种惩罚，不能滥用。</p>
+
+<h3>苦杏素</h3>
+
+<p>李彦宏眼中的AI，就指望这个翻本了。</p>
+
+<p>读到后面感觉有点泛泛而谈，只是本书确实强调工作环境要好，要相信people，减少鼓励，减少加班等等，Joel的思想确实来源于此。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -892,97 +943,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/05/01/truffle-and-solidity/">Truffle and Solidity</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-05-01T10:11:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>区块链应用的开发，主要指用<code>Solidity</code>编写合约(Contract)，然后部署到区块链上去。
-注意，此处的区块链特指<code>以太坊</code>，而比特币的区块链是没有Solidity这种东西的。</p>
-
-<p>因为是把sol编写的合约部署到区块链上去，所以可以进一步分解为3个问题：</p>
-
-<ol>
-<li>区块链的安装(testrpc ethereum)</li>
-<li>sol合约编写(Solidity)</li>
-<li>对sol合约进行编译以及发布(truffle)</li>
-</ol>
-
-
-<p>目前来看，整个以太坊很喜欢借用node即javascript来构建他们的环境，尽管区块链和sol本身其实和javascript关系不大。
-关于ethereum可查相关的安装手册，这里主要记录一下Solidity和truffle。</p>
-
-<p>Sol的编辑器可以用atom vscode等等，submiline也没问题。
-这门语言其实还是比较原始的，合约间的调用甚至不能传递结构（struct），更可悲的是返回string也不行。基本上任何不定长的返回
-在sol的ethvm（以太坊虚拟机）中都不太好调用。
-功能上来讲，solidity可以理解成数据存放在一个类似levelDB的内存数据库，这是ethvm会做的事情。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">mapping</span><span class="p">(</span><span class="nx">uint</span><span class="o">=&gt;</span><span class="nx">LibDisSecPledgeApply</span><span class="p">.</span><span class="nx">DisSecPledgeApply</span><span class="p">)</span>  <span class="nx">disSecPledgeApplyMap</span><span class="p">;</span>
-</span><span class='line'>  <span class="nx">uint</span><span class="p">[]</span> <span class="nx">disSecPledgeApplyIds</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上述代码定义了一个用于存放对象数据的mapping，因为mapping无循环遍历的功能，所以又增加了一个ids的数组保留所有对象的编号。</p>
-
-<p>整个合约的编写，其实对写惯后台程序的人来讲还是不难上手的（类似用java操作redis写业务逻辑），只是限制确实比较多。
-但solidity可以支持的变化太少，所以写起来是复杂不到哪里去。相当于成熟的脚本或编译型语言，solidity麻烦的地方在于其调试，
-可简单罗列的就有两点：</p>
-
-<ol>
-<li>编译速度慢。十几个文件的情况下，用 truffle编译就要3分钟以上</li>
-<li>发布调试困难。必须发布到某个链的环境才能测试，而这个就真的很不友好了，断点还不支持，日志也很麻烦。</li>
-</ol>
-
-
-<p>truffle是现在以太坊主要推荐的编写solidity的编译、测试运行和部署工具，能处理较复杂的sol文件关联引用，就是耗时很长，且
-程序版本很不稳定，变化发展都依然极快。truffle是基于node和npm的，所以要先装好node。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">npm</span> <span class="nx">uninstall</span> <span class="nx">truffle</span>
-</span><span class='line'><span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">truffle</span><span class="err">@</span><span class="mf">2.1</span><span class="p">.</span><span class="mi">2</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">compile</span>  <span class="c1">//编译合约</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">migrate</span> <span class="o">--</span><span class="nx">reset</span> <span class="c1">//部署合约</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">exec</span> <span class="nx">xxxx</span><span class="p">.</span><span class="nx">js</span> <span class="c1">//执行某个js文件</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>和区块链一样，solidity，truffle都是刚刚涌现的东西，所以问题很多，用起来也不一定顺手。但，这个行业就是这样的。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -996,6 +956,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
@@ -1013,15 +977,11 @@
         <a href="/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/">实用软件需求</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/10/08/wei-fu-wu-bi-ji/">微服务笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (74)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/管理'>管理 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (74)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
