@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在Tomcat7 采用 Redis作为session Store中，使用了redis作为tomcat的session共享。
-在打过几个补丁后，基本也算运作正常。只是偶尔总是有些null的session需要定期清理。而当时的作者已经近2年没再处理相关的pull request， &hellip;">
+  <meta name="description" content="某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
+但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。 限制的过程是这样的： 取出session中的校验码并与请求中的参数进行比较，通过的进入第2步， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,172 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/11/bing-fa-de-abce-shi-he-xiao-yan-ma-dui-bing-fa-zhuang-kuang-chu-li-de-mang-qu/">并发的ab测试和校验码对并发状况处理的盲区</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-11T21:55:00+08:00" pubdate data-updated="true">Dec 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>某个报障称我们的短信轰炸拦截无效，听到后感觉比较奇怪，因为此限制已经加上并且经过测试验证。
+但提供的素材上，单个用户确实同时收到了多条短信。于是又检查了一遍代码，发现问题可能出在并发上。</p>
+
+<p>限制的过程是这样的：</p>
+
+<ol>
+<li>取出session中的校验码并与请求中的参数进行比较，通过的进入第2步，如失败则直接进入第3步；</li>
+<li>发送短信；</li>
+<li>刷新校验码。</li>
+</ol>
+
+
+<p>而如果扫描软件获取验证码后，同时交给多个线程并发发起请求，因为第一步执行的速度较快，而下发短信的请求处理较慢，
+极其可能在执行第3步之前，另外几个请求也都通过了第一步的检查，从而可以进行第二步。</p>
+
+<p>然后就是要验证这种猜测是否成立。由于扫描软件并不是我的，所以需要自己模拟这个请求，而又由于一些陷阱，导致整个验证也
+颇费了一番周折。</p>
+
+<h3>第一个坑： ! 和 &amp;都是shell的特殊字符</h3>
+
+<p>最简单的模拟无非就是ab测试（ApacheBench），</p>
+
+<p><code>ab -c 5 -n 10  http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
+
+<p>但是，一开始并没有在!和&amp;前面加上转移符号，所以运行失败</p>
+
+<h3>第二个坑： 需要提前放入session</h3>
+
+<p>一开始并没有搞清楚shell执行ab失败只是因为缺乏转义符号，于是尝试使用编写客户端代码解决。首先使用了Java的Jersey，
+因为手头一个项目最近使用这个也比较顺手。运行之后发现每次都是返回404的错误。而在浏览器中，即使验证码不对，也会显示
+正确的jsp。换了一台机器后，发现自己犯了个低级错误，因为验证码是存放在session里面的，而Jersey的普通请求不会
+带cookie上去，因此就得到了错误的响应。</p>
+
+<p>于是想着给Jersey的请求加上cookie消息头。一番考察后，被告知Jersey原生态并不支持直接加cookie，于是决定还是换用
+ruby的rest-client。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rest-client&#39;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">jsp</span> <span class="o">=</span> <span class="s2">&quot;http://xxx.com/portal/&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">passportUrl</span> <span class="o">=</span> <span class="s1">&#39;http://xxx.com\!validate.action?user_id=1xxxxxx\&amp;verfiyCode=9813&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">s</span>
+</span><span class='line'>  <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsp</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@cookies</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">cookies</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="vi">@cookies</span><span class="o">[</span><span class="s1">&#39;JSESSIONID&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;74113695C0FB915393AE69DD63EAE088&#39;</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="vi">@cookies</span>
+</span><span class='line'>  <span class="c1">#puts response.body</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="mi">5</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+</span><span class='line'>     <span class="n">response</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">passportUrl</span><span class="p">,</span> <span class="ss">cookies</span><span class="p">:</span> <span class="vi">@cookies</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">s</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手工填入浏览器中的校验码，运行正常。但ruby的单线程运行方式下，
+模拟不出并发的效果，所以还是需要回到ab测试上。</p>
+
+<p>最后的结果倒是很简单，给路径加上转义并添加cookie头即可：</p>
+
+<p><code>ab -c 5 -n 10 -H "Cookie: JSESSIONID=74113695C0FB915393AE69DD63EAE088;" http://xxx.com/portal/get\!validate.action?user_id=1xxxx\&amp;verfiyCode=5614</code></p>
+
+<p>这条命令基本上可收到5条短信，因为并发是5个。</p>
+
+<h3>解决的办法</h3>
+
+<p>最偷懒且管用的办法是使用<code>synchronized</code>关键字。需要注意的是两点：</p>
+
+<p>第一， synchronized锁住的只是对象对应的代码段，所以适用于单例对象或者是static method。也可以通过
+下面的方式，让锁住类对象来实现static的效果。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'>   <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Controller</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>第二， 因为是只有一个线程可以执行代码，这个锁的影响还是很大的，所以要确保锁住的代码快足够小，操作足够快，
+才不至于影响业务的性能。在此采用这么粗的锁，也是因为从session中验证校验码并删除是足够短的处理逻辑。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">synchronized</span> <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">validCode</span><span class="o">(</span><span class="n">HttpSession</span> <span class="n">sesson</span><span class="o">,</span> <span class="n">String</span> <span class="n">code</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">equal</span><span class="o">(</span><span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">),</span> <span class="n">code</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">session</span><span class="o">.</span><span class="na">removeAttribute</span><span class="o">(</span><span class="s">&quot;rand1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>得到的教训</h3>
+
+<p>部分业务逻辑在设计和实现时必须考虑并发的情况，尽管这个确实有点难度。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1291,57 +1457,6 @@ Spring中使用例行更新。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/10/you-dian-wu-liao-de-qi-che-fa-bu-hui/">有点无聊的汽车发布会</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-10T22:12:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>以成都车展为主，陆陆续续看了一些汽车新品的发布会，感觉这些厂家也真够无聊和没谱的。
-以今天刚刚结束的广本缤智为例，整了个发布会最后出来说1.8L的低配低于14w，1.5L的低配低于13w，但先期
-上市的只有1.8，1.5的要到明年一季度。这里面就有很多问题。</p>
-
-<p>第一，最低配的车型通常不是销售的主力。说一个不是主力的入门车型上限并无多少实际意义。<br/>
-第二，如果非要说上限，那也应该是顶配的。顶配小于多少才是真的立了一个价格上限。<br/>
-第三，对广本而言，乞丐版一般是手动的，和自动挡本身就存在较大的定价差异，
-所以以最低版的上限来作为发布价格，参考意义就更小了。
-第四，明确地给出每一档的多少价钱有那么难吗？中国市场目录价格和销售价格可以差好几万，
-卖的好就加价卖不好就减价，即使公布出来以后其实回旋空间依然很大。</p>
-
-<p>现在这种模模糊糊的定价发布会，<strong>只能说明厂家自己心里也没底</strong>。
-作为一个成熟的消费品，这种举动只能显得企业相当不成熟。</p>
-
-<p>再联想起前不久的昂科威发布会，扯了半天，公布了4款车型，但最后连个价钱都没有。
-对比起来的话，广本倒是还比通用强一些。当然也只是五十步笑百步。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1359,6 +1474,10 @@ Spring中使用例行更新。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
       </li>
     
@@ -1374,15 +1493,11 @@ Spring中使用例行更新。</p>
         <a href="/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/">2017 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/">实用软件需求</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (74)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (26)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (75)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (18)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

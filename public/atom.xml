@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-02-20T21:01:07+08:00</updated>
+  <updated>2018-02-20T23:20:21+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Effective Java 3rd Edition]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition/"/>
+    <updated>2018-02-20T23:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition</id>
+    <content type="html"><![CDATA[<p>「Effective Java」第三版在过年期间出版了，对比第二版主要补充了<code>lambda</code>和<code>stream</code>的内容，序列化方面
+则希望大家不要再使用java原生的内容，其他变化不大。但是，和第一版比较起来，变化就很大了。除上述内容外，
+第二版较第一版增加了<code>autoboxing/autounboxing</code>，<code>enum</code>, <code>annotation</code>,<code>generic programming</code>, 整个的编程建议也从57条增长到78条再到第三版的90条。</p>
+
+<p>借用作者在第三版的前言，在1997年，Java的创始者Gosling描述java是一种“蓝领语言”（blue collar language），意味着当时的java相当简单（pretty simple）。与此同时，C++的创始人Stroustrup则警告所谓java的简单和其他很多新语言一样，只是误解以及功能上的不完善，随着时间的流逝，Java在尺寸和复杂性上都将大规模成长。不得不说，三者都是大师，而Java虽然依旧还是工业级的语言，但复杂度和规模已经较我十几年前初学时多了许多。或许，也因此大学里正在寻求一门其他语言来取代Java的教学地位吧。</p>
+
+<p>此书非常经典，虽然作者说不用从头到尾通读，但是，建议还是全部都读一遍，甚至可能需要反复阅读并加以实践。比如其中的primitives和boxed primitives，即<code>int</code>和<code>Integer</code>，其间的坑在新项目中就踩过，而之前阅读后只是尽量不去用Integer这些boxed的类型，而这个新项目中由于前后交互的需要必须使用了Integer，于是就把<code>==</code>, 内容为<code>null</code>的坑都踩到了。</p>
+
+<p>开卷有益，何况经典！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Peopleware读书笔记]]></title>
@@ -1018,83 +1035,6 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
 <p>以上3者都是我认为不可缺少的现代汽车的配置。那么就只能上27.98万元这个版本，
 而这个价位下，A4 三系在品牌上的优势就大了。所以混雅的前途大概只是投石问路。
 希望这套系统早日用在CRV上。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[装机i5-6500]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500/"/>
-    <updated>2016-09-19T22:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500</id>
-    <content type="html"><![CDATA[<p>许久没有装机了，入了如下的配置:</p>
-
-<ul>
-<li>intel i5-6500 1150元，</li>
-<li>散热器采融B48 99元，</li>
-<li>技嘉 B150M-D3H 599元，</li>
-<li>芝奇 DDR4 2400 395元,<br/>
-<strong>合计2243元</strong></li>
-</ul>
-
-
-<p>1.货物来源</p>
-
-<p>某宝买散片和散热器，某东买入主板和内存。原因在于散片确实比盒装的便宜很多，差价在300的样子，而京东等电商基本不做散片的生意。主板的价格相对统一的多，内存差价也不大，所以就还是京东买了。</p>
-
-<p>2.cpu插座保护盖及安装注意事项</p>
-
-<p>自己diy还是有一定的风险。而且自己装cpu还是第一次，一开始搞主板的cpu保护插座还费了点事情。好在有惊无险。<strong>这个保护盖一定不要先揭走</strong>，而是要等到安装完cpu后自己会弹出来。主要是保护插座上的针脚。iU现在本身只有垫片了，针脚全在主板上，所以主板容易弄坏。</p>
-
-<p>3.散热器的安装，包括硅胶涂在cpu上</p>
-
-<p>cpu安装好，压好架子后就可以涂硅胶装散热器了。硅胶可以用九点法后直接压上去，也可以涂在中间，然后用散热器磨开来。我用的是后面这个法子。一般都应该行得通，反正只是为了保证散热器和cpu的接触面积。
-分散和散热器采融48采用的是搭扣，其实就是靠线扣的弹力自己箍上去的。</p>
-
-<p>4.UEFI与GPT和win10</p>
-
-<p>技嘉这个新板子默认就是UEFI的界面，比bios启动快一些吧。win10装好，10秒内可以启动成功。2年前买的ssd终于找到了相得益彰的平台。</p>
-
-<p>5.网卡驱动，win10默认也没有</p>
-
-<p>即使装了win10，网卡驱动也要另外装的，默认并不提供。</p>
-
-<p>6.vpn拨号</p>
-
-<p>如果拨号成功还不行，可以尝试一下禁用IPv6.</p>
-
-<p>附最近12年的配过的自己的机器，应该还漏了一台</p>
-
-<h3>2004年4月买的，花了38xx</h3>
-
-<p>AMD barton 2500+<br/>
-KST 512M ddr400<br/>
-日立硬盘 7k250 120g/2m<br/>
-华硕 a7v600-x 主板<br/>
-迪兰横进 9600pro 显卡</p>
-
-<h3>2011年买入，花了2615元</h3>
-
-<p>AMD Athlon II X4 640 699元,<br/>
-4GB KST DDR1333，300元<br/>
-技嘉 MA770T-UD3P 主板，<br/>
-华硕EAH5750显卡，<br/>
-安钛克BP430plus电源 300元，<br/>
-机箱，<br/>
-无硬盘</p>
-
-<p>老婆的：</p>
-
-<h3>2010年11月购入，合计花了4249.00元</h3>
-
-<p>Intel 英特尔 奔腾双核 E6500 (2.93GHz/LGA775/2M/1066MHz/45纳米）盒装 519元，<br/>
-威刚 DDR3 1333 2G 内存 178元，<br/>
-华硕 P5P54TD主板 569元，<br/>
-华硕 ENGT40/512M 显卡 539元，<br/>
-希捷 1TB硬盘 408元，<br/>
-酷冷至尊 破坏者塔式机箱 229元，<br/>
-ACBEL 康舒 IP-430台式机电源(额定功率380w/ATX2.3版) 电源 229元，<br/>
-Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
-微软多媒体键盘 79元</p>
 ]]></content>
   </entry>
   

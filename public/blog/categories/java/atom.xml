@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-02-20T21:01:07+08:00</updated>
+  <updated>2018-02-20T23:20:21+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Effective Java 3rd Edition]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition/"/>
+    <updated>2018-02-20T23:01:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition</id>
+    <content type="html"><![CDATA[<p>「Effective Java」第三版在过年期间出版了，对比第二版主要补充了<code>lambda</code>和<code>stream</code>的内容，序列化方面
+则希望大家不要再使用java原生的内容，其他变化不大。但是，和第一版比较起来，变化就很大了。除上述内容外，
+第二版较第一版增加了<code>autoboxing/autounboxing</code>，<code>enum</code>, <code>annotation</code>,<code>generic programming</code>, 整个的编程建议也从57条增长到78条再到第三版的90条。</p>
+
+<p>借用作者在第三版的前言，在1997年，Java的创始者Gosling描述java是一种“蓝领语言”（blue collar language），意味着当时的java相当简单（pretty simple）。与此同时，C++的创始人Stroustrup则警告所谓java的简单和其他很多新语言一样，只是误解以及功能上的不完善，随着时间的流逝，Java在尺寸和复杂性上都将大规模成长。不得不说，三者都是大师，而Java虽然依旧还是工业级的语言，但复杂度和规模已经较我十几年前初学时多了许多。或许，也因此大学里正在寻求一门其他语言来取代Java的教学地位吧。</p>
+
+<p>此书非常经典，虽然作者说不用从头到尾通读，但是，建议还是全部都读一遍，甚至可能需要反复阅读并加以实践。比如其中的primitives和boxed primitives，即<code>int</code>和<code>Integer</code>，其间的坑在新项目中就踩过，而之前阅读后只是尽量不去用Integer这些boxed的类型，而这个新项目中由于前后交互的需要必须使用了Integer，于是就把<code>==</code>, 内容为<code>null</code>的坑都踩到了。</p>
+
+<p>开卷有益，何况经典！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[spring cloud 服务治理]]></title>
@@ -264,248 +281,6 @@ public static void main(String[] args) {
 
 <p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
 如lock、semaphore、确认leader等，可以直接使用。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[spring boot in action]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action/"/>
-    <updated>2016-09-19T14:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/spring-boot-in-action</id>
-    <content type="html"><![CDATA[<ul>
-<li>Auto-Config</li>
-<li>用starter处理依赖</li>
-<li>CLI 命令行处理启动等</li>
-<li>Actuator 监控组件 , 通过web或者shell</li>
-</ul>
-
-
-<p><code>
-spring version
-spring --version
-spring shell # windows下打开可以自动补全的功能
-</code></p>
-
-<h3>工程初始化</h3>
-
-<p><code>
-spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
-spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录
-</code></p>
-
-<p>```
-@SpringBootApplication
-public class DemoddfApplication {</p>
-
-<p>public static void main(String[] args) {
-SpringApplication.run(DemoddfApplication.class, args);
-}
-}
-```</p>
-
-<p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
-
-<p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
-starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
-
-<h3>自动配置定制化的举例</h3>
-
-<p>安全是最好的需要自己自行设置的例子，not one--size-fits-all。
-这是yml方式
-<code>
-server:
-port: 8443
-ssl:
-key-store: file:///path/to/mykeys.jks
-key-store-password: letmein
-key-password: letmein
-</code></p>
-
-<p>配置数据源</p>
-
-<p><code>
-spring:
-datasource:
-url: jdbc:mysql://localhost/readinglist
-username: dbuser
-password: dbpass
-driver-class-name: com.mysql.jdbc.Driver
-</code></p>
-
-<h3>属性信息的几种来源</h3>
-
-<ol>
-<li>Command-line arguments</li>
-<li>JNDI attributes from java:comp/env</li>
-<li>JVM system properties</li>
-<li>Operating system environment variables</li>
-<li>Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})</li>
-<li>An application.properties or application.yml file outside of the application</li>
-<li>An application.properties or application.yml file packaged inside of the application</li>
-<li>Property sources specified by @PropertySource</li>
-<li>Default properties</li>
-</ol>
-
-
-<p>在application.properties中指定<code>spring.profiles.active</code>的值后，boot就会读取application-{active}.properties的值</p>
-
-<h3>自动化测试</h3>
-
-<p>@WebIntegrationTest Test class有这个标注就会让spring启动一个测试的tomcat或jetty进程</p>
-
-<p>```
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(
-classes=ReadingListApplication.class)
-@WebIntegrationTest</p>
-
-<p>public class SimpleWebTest {
-@Test(expected=HttpClientErrorException.class)
-public void pageNotFound() {
-try {
-RestTemplate rest = new RestTemplate();
-rest.getForObject(
-"http://localhost:8080/bogusPage", String.class);
-fail("Should result in HTTP 404");
-} catch (HttpClientErrorException e) {
-assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
-throw e;
-}
-}
-}
-```</p>
-
-<p>代入参数
-<code>@WebIntegrationTest(value={"server.port=0"})</code> 和 <code>@WebIntegrationTest("server.port=0")</code></p>
-
-<p>selenium的用ie模拟访问自己的服务很有意思，值得制作一个。</p>
-
-<p>```java</p>
-
-<pre><code>            FirefoxDriver browser = new FirefoxDriver();
-browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-String baseUrl = "http://www.baidu.com/";
-browser.get(baseUrl);
-String currentUrl = browser.getCurrentUrl();
-assertEquals(baseUrl +"/readingList", currentUrl);
-
-assertEquals("You have no books in your book list", 
-             browser.findElementByTagName("div").getText());
-
-browser.findElementByName("title").sendKeys("BOOK TITLE");
-browser.findElementByName("author").sendKeys("BOOK AUTHOR");
-browser.findElementByName("isbn").sendKeys("1234567890");
-browser.findElementByName("description").sendKeys("DESCRIPTION");
-browser.findElementByTagName("form").submit();
-
-WebElement dl = 
-    browser.findElementByCssSelector("dt.bookHeadline");
-assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", 
-             dl.getText());
-WebElement dt = 
-    browser.findElementByCssSelector("dd.bookDescription");
-assertEquals("DESCRIPTION", dt.getText());
-</code></pre>
-
-<p>```</p>
-
-<p>《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版</p>
-
-<p>/beans 列出创建的全部bean<br/>
-/autoconfig 列出自动配置生效和未生效的内容<br/>
-/env 列出设置的环境<br/>
-/configprops 列出所有的参数<br/>
-/metrics 列出访问的指标<br/>
-/trace 给出近100个http请求的处理信息<br/>
-/dump 给出所有线程的情况<br/>
-/health 表明是否UP<br/>
-/info 列出属性文件中info.开头的信息，但似乎有乱码</p>
-
-<p>actuator的remote shell
-默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问</p>
-
-<p><code>
-ssh user@localhost -p 2000
-Password authentication
-Password:
-</code></p>
-
-<p>自己定义metrics：</p>
-
-<p>actuator有CounterService服务，可以用于增加值。
-```
-public interface CounterService {
-void increment(String metricName);
-void decrement(String metricName);
-void reset(String metricName);
-}</p>
-
-<p>```</p>
-
-<p>GaugeService是记录值</p>
-
-<p><code>
-public interface GaugeService {
-void submit(String metricName, double value);
-}
-</code></p>
-
-<p>自定义Health</p>
-
-<p>```
-@Component
-public class AmazonHealth implements HealthIndicator {
-@Override
-public Health health() {
-try {
-RestTemplate rest = new RestTemplate();
-rest.getForObject("http://www.amazon.com", String.class);
-return Health.up().build();
-} catch (Exception e) {
-return Health.down().build();
-}
-}
-}</p>
-
-<p>//还可以加入更多的细节内容，使用withDetail</p>
-
-<p>return Health.down().withDetail("reason", e.getMessage()).build();</p>
-
-<p>```</p>
-
-<p>上述endPoint的保护需采用所有spring暴露的链接一致的方式</p>
-
-<p><code>management.context-path=/mgmt</code>，其中的<code>management.context-path</code>可以给spring actuator定义全部的前缀</p>
-
-<p>这样可便于统一控制
-<code>.antMatchers("/mgmt/**").access("hasRole('ADMIN')")</code></p>
-
-<h3>部署时调整production环境变量</h3>
-
-<p><code>@Profile("production")</code></p>
-
-<p><code>export SPRING_PROFILES_ACTIVE=production</code></p>
-
-<p>最简单的是export active的环境变量为<code>production</code></p>
-
-<h3>spring的db migrate，不算很实用吧</h3>
-
-<p>Spring Boot includes auto-configuration support for two popular database migration
-libraries:<br/>
-■ Flyway (http://flywaydb.org)  --- 直接采用SQL编写ddl<br/>
-■ Liquibase (www.liquibase.org) --- 使用yaml json等</p>
-
-<h3>附录</h3>
-
-<p><code>
-&lt;dependency&gt;
-&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></p>
-
-<p>开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
-public, /templates.</p>
 ]]></content>
   </entry>
   
