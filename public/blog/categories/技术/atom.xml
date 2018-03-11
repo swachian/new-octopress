@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-02-20T23:20:21+08:00</updated>
+  <updated>2018-03-12T00:03:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,165 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[为你自己学Git笔记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/"/>
+    <updated>2018-03-04T14:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping</id>
+    <content type="html"><![CDATA[<p>从Rails把代码库迁至GitHub起，接触Git已经很长时间了。但限于svn的惯性思维，其实我始终没有真的理解Git。
+毕竟，上班一直是用的svn，去年12月后才开始迁移到git，而之前一个人用用GitHub的话，也确实是当一个svn在使用，主要就是实现通过中心节点实现多个终端的内容和代码共享。</p>
+
+<p>没有真正弄懂git的另一个原因，则是没有好的简明的说明教材，毕竟只是一个scm工具，自己舍不得在这上面花太多时间也是事实。而高见龙的这本《为你自己学Git》，目前只有繁体版，则写的够简洁也够深入，并且配合了很多例子，让人对git的原理、应用场景、使用方法都可以做到很清楚。</p>
+
+<h2>git基本操作</h2>
+
+<p>从Git设计之初来讲，它是去中心化的。所以本书的大部分运行环境和讲解例子都是基于本地目录。
+<img src="https://gitbook.tw/images/using-git/working-staging-and-repository/all-states.png" alt="git存储结构" /></p>
+
+<p><code>git add index.html</code>只是把文件从工作目录加入到了暂存区（staging area），<code>git commit</code>才能把内容放到存储库(repository)中。</p>
+
+<p>不想让git管控可以给<code>git rm</code>加上<code>--cached</code>参数。 <code>git rm welcome.html --cached</code>,在git目录里的状态就从<code>tracked</code>变成<code>Untracked</code>。</p>
+
+<p><code>git commit --amend</code> 可以修改最近的一次commit的内容和备注。如果要修改其他更久远的，则可以<code>git rebase</code>, <code>git reset</code>，极端情况删除<code>.git</code>目录重来。<br/>
+同时, <code>--amend</code>还能往前一次commit中加入新文件。</p>
+
+<p><code>.keep</code>往往用于新增目录时，为了目录进入仓库而作的占位文件。</p>
+
+<p><code>.gitignore</code>搭配<code>git clean -fX</code>可清除已经被忽略的档案。</p>
+
+<p><code>git log</code>增加<code>-p</code>参数可打印输出文件的变化内容。</p>
+
+<p><code>git blame index.html</code> 可以看见每行是谁写的。
+```
+86145428 (swachian 2018-02-20 21:05:05 +0800  1) ---
+86145428 (swachian 2018-02-20 21:05:05 +0800  2) layout: post
+86145428 (swachian 2018-02-20 21:05:05 +0800  3) title: "Peopleware读书笔记"
+86145428 (swachian 2018-02-20 21:05:05 +0800  4) date: 2018-02-16 14:20
+86145428 (swachian 2018-02-20 21:05:05 +0800  5) comments: true
+86145428 (swachian 2018-02-20 21:05:05 +0800  6) categories:
+86145428 (swachian 2018-02-20 21:05:05 +0800  7) - 管理
+86145428 (swachian 2018-02-20 21:05:05 +0800  8) ---
+86145428 (swachian 2018-02-20 21:05:05 +0800  9)
+86145428 (swachian 2018-02-20 21:05:05 +0800 10) 读完软件随想录，自然而然被吸引
+去了另一本这个领域的名著《人件》</p>
+
+<p>```</p>
+
+<p><code>git checkout index.html</code>可以把误删除的文件恢复出来，如果有多个文件可以使用<code>git checkout .</code>一下子切出。<br/>
+上面是从staging区域切出到工作目录，如果使用<code>git checkout HEAD~2 welcome.html</code>则是把上两个版本的文件切出到working目录和staging目录。</p>
+
+<p><code>checkout</code>主要是动staging和working 区域，<code>git reset</code> 则会涉及版本库区域:</p>
+
+<p><code>
+git reset master^
+git reset HEAD^
+git reset 85e7e30
+git reset e12d8ef^
+git reset HEAD~5
+</code>
+<code>^</code>的作用是表示“前一次”。</p>
+
+<p><code>git reset</code> 可配合模式使用，<code>--mixed</code>,<code>--soft</code>, <code>--hard</code>,默认是<code>--mixed</code>，它们对staging和working区域的反应是不一样的。因为<code>reset</code>的本意只是重新设置<code>HEAD</code>指向，顺便解决了staging和working的内容。</p>
+
+<ul>
+<li>soft: 只改HEAD指向，其他都不改</li>
+<li>mixed: 只动staging的内容</li>
+<li>hard: 改HEAD指向，改staging，改working</li>
+</ul>
+
+
+<p><code>git reflog</code> 可以调出每次HEAD移动的记录日志，找回相应的commit标识。命令等于<code>git log -g</code>，加上<code>-g</code>参数也有类似效果。</p>
+
+<p><code>HEAD</code>指向的是某个分支，内容是具体文件<code>ref: refs/heads/master</code>，而这个文件里的内容则是某个commit形成的hash: <code>ef5dcf2ab28d2ec47252703815ab97bd4108f937</code></p>
+
+<p><code>git add -p index.html</code> 可以选择编辑要加入暂存区的行。</p>
+
+<h2>git本地分支操作</h2>
+
+<p>设置分支最大的目的是保证主干不受影响。</p>
+
+<p><code>git branch cat</code> 增加分支，<code>git branch -m cat dog</code>分支改名,
+<code>git branch -d cat</code>删除分支，<code>git checkout cat</code>切换分支，
+<code>git checkout -b cat</code>增加并切换分支，<code>git merge dog</code>合并分支</p>
+
+<p><code>Fast Forward</code>在一个分支相对于另一个分支只有新增的commit内容时可以使用，
+这是没有<strong>小耳朵</strong>的。
+否则，git会再造一个commit来合并两个分支，并把一个分支向前推到新增的这个commit。
+commit信息里面，<code>Parents</code>字段中被合并的分支名位于后面。
+<img src="https://gitbook.tw/images/branch/merge-branch/dog_to_cat.png" alt="commit合并信息" /><br/>
+使用<code>--no-ff</code>可以强制产生小耳朵的效果：<code>git merge cat --no-ff</code><br/>
+<strong>分支只是一個指向某個 Commit 的指標。</strong></p>
+
+<p><code>git rebase dog</code>是重新嫁接分支，原理是将当前分支的全部提交一个一个提取出来，
+重新计算后作为新的提交加到基准分支<code>dog</code>当前commit的后面，最后把当前分支的Head
+指向重新apply的最新提交。所以rebase之后，之前分支commit的日期就延后了。</p>
+
+<p>要回退<code>rebase</code>，可以使用<code>git reflog</code>找到<code>rebase</code>前的最新的commit号。<br/>
+简化版本是<code>git reset ORIG_HEAD --hard</code>，使用<code>ORIG_HEAD</code>指针。</p>
+
+<p>有冲突的话，先编辑，然后<code>git add</code>加回暂存区，再<code>commit</code>。<br/>
+如果是<code>rebase</code>的，则<code>git rebase --continue</code></p>
+
+<p>二进制的内容: <code>git checkout --ours cute_animal.jpg</code>, <code>git checkout --theirs cute_animal.jpg</code></p>
+
+<p><code>git rebase -i bb0c9c2</code> 可以整理提交历史, <code>squash</code>： 合并commit</p>
+
+<p><code>revert</code>和<code>reset</code>的作用基本相同，但<code>revert</code>是再增加一个commit来实现取消前一次提交的效果，
+一般用于多人合作时取消某些提交。</p>
+
+<p><code>git tag</code>，善用tag，<strong>标签和分支最大的区别是标签打好之后这个指针不会再变化，分支则会继续前进</strong></p>
+
+<p><code>git stash</code>，配合<code>git stash list</code>, <code>git stash pop/apply</code>使用, 存放手头工作，也可以先<code>commit</code>再<code>reset</code> .</p>
+
+<p>要从<code>.git</code>中完全删除文件有很多步骤要做，要先解除，在gc，最后才能删除掉。当然，不如直接删除.git算了。</p>
+
+<p>产生<strong>detached HEAD</strong>的原因：</p>
+
+<ol>
+<li>使用checkout到了一个没有分支指向的commit</li>
+<li>rebase过程中，其实都是处于detached HEAD状态，所以一旦rebase有coflct，分支状态必然不对</li>
+<li>切换到某个远端分支的时候</li>
+</ol>
+
+
+<p><code>git branch tiger b6d204e &amp;&amp; git checkout tiger</code> 该命令可以把当前的commit纳入到一个分支中，从而摆脱断头分支的状态</p>
+
+<h2>git远端分支</h2>
+
+<p>GitHub是最有名的远端版本库，可以用<code>git clone</code>获得远端repo库。</p>
+
+<p>upstream意在设置上游分支，也就是下面这个命令中<code>-u</code>选项的作用。
+<code>git push -u origin master</code>，会把<code>origin/master</code>设置为本地<code>master</code>分支的upstream。然后就
+不必每次<code>git push origin master</code>, 直接使用<code>git push</code>即可。<br/>
+<code>-u</code> = <code>--set-upstream</code></p>
+
+<p><code>git push origin master:cat</code> 会把本地的<code>master</code>分支推向远端的<code>cat</code>分支。<br/>
+<code>git push origin :cat</code> 可以删除远端的cat分支</p>
+
+<p><code>git pull</code> = <code>git fetch</code> + <code>git merge</code>, <code>fetch</code>同步了<code>origin/master</code>中的内容，
+而此时<code>orgin/master</code>比本地<code>master</code>领先，那意味着原本是一个分支分出去的且京都更新，其实就是<code>merge</code>了，
+有时候甚至还是Fast Forward方式进行，有时候可能会再造一个commit以完成任务。<br/>
+但是，<code>pull</code>也可以是<code>rebase</code>方式的，例如<code>git pull --rebase</code>, 这就是用<code>rebase</code>替换上个等式右面的<code>merge</code><br/>
+如果push有问题，则只能先拉再推</p>
+
+<h3>Pull Request（PR）</h3>
+
+<p>简而言之，把项目fork到自己的帐号即建立一个新的远端仓库，然后修改先push到这个新仓库，
+然后比对自己和origin库的异同拉出一系列commit集合，这个集合就是Pull Request。
+意思是请求原作者拉回去（Pull）的请求（Request）。
+原作的叫<code>base fork</code>，自己的叫<code>head fork</code> 。</p>
+
+<p>公司内部PR的用法：每个人fork到自己的帐号下，待完成后PR回公司的项目。负责管理这个项目的人受到PR后，
+进行Code Review并确认这个提交无误后进行合并，从而保证这个分支处于随时可上线的状态。</p>
+
+<p><code>git format-patch fd7cd38..6e6ed76</code> 会产生补丁文件。<code>git am /tmp/patches/*</code> 则是更新补丁</p>
+
+<h2>Git Flow</h2>
+
+<p>git的工作流。主要定义了5中分支组织的方式。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Effective Java 3rd Edition]]></title>
@@ -365,34 +524,6 @@
 * 圈表示0
 * 三条线表示乌鸦脚，没有合并
 * 基数最靠近两端的表示最大值，次近两端的是最小值</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[微服务笔记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/08/wei-fu-wu-bi-ji/"/>
-    <updated>2017-10-08T23:02:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/08/wei-fu-wu-bi-ji</id>
-    <content type="html"><![CDATA[<p>微服务是Martin Fowler定义的一个术语，出自 https://martinfowler.com/articles/microservices.html</p>
-
-<p>是伴随着敏捷开发和云服务部署流行而兴起的一种架构。微服务架构风格[1]是一种将一个单一应用程序开发为一组小型服务的方法，每个服务运行在自己的进程中，服务间通信采用轻量级通信机制(通常用HTTP资源API)。这些服务围绕业务能力构建并且可通过全自动部署机制独立部署。这些服务共用一个最小型的集中式的管理，服务可用不同的语言开发，使用不同的数据存储技术。</p>
-
-<p>具备的特征包括：</p>
-
-<ul>
-<li>水平扩展服务能力时，可以扩展只需要扩展的模块而不是全部</li>
-<li>组件多以服务的形式提供</li>
-<li>团队多按业务能力/功能组建</li>
-<li>团队始终围着产品，而不是做完了就丢给运维</li>
-<li>smart endpoints and dumb pipes，其实就是管道扁平化，针对SOA中部分总线太过只能而言</li>
-<li>去中心化的管理，微服务意味着可以自治化，而不是谈标准化</li>
-<li>可以多个编程语言同时使用，只要保持彼此间通信简单（http+lightweight messaging）</li>
-<li>数据存储也是去中心化的，Polyglot Persistence，存储/数据库也是每个服务自己定</li>
-<li>基础设施自动化程度高，实现持续提交和持续集成</li>
-<li>开发者和用户间会更容易建立更多的联系，要持续关注软件如何帮助用户提升业务能力，而不是把软件看成是将要完成的一组功能</li>
-<li>针对失效的设计，使用服务作为组件的一个结果是，应用程序需要被设计成能够容忍服务失效，如断路器模式</li>
-</ul>
-
 ]]></content>
   </entry>
   

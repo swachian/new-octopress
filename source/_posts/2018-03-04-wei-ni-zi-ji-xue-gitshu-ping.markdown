@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "为你自己学Git书评"
+title: "为你自己学Git笔记"
 date: 2018-03-04 14:55
 comments: true
 categories:
@@ -110,7 +110,48 @@ commit信息里面，`Parents`字段中被合并的分支名位于后面。
 
 `git stash`，配合`git stash list`, `git stash pop/apply`使用, 存放手头工作，也可以先`commit`再`reset` .
 
+要从`.git`中完全删除文件有很多步骤要做，要先解除，在gc，最后才能删除掉。当然，不如直接删除.git算了。
 
+产生**detached HEAD**的原因：
 
+1. 使用checkout到了一个没有分支指向的commit  
+2. rebase过程中，其实都是处于detached HEAD状态，所以一旦rebase有coflct，分支状态必然不对  
+3. 切换到某个远端分支的时候  
+
+`git branch tiger b6d204e && git checkout tiger` 该命令可以把当前的commit纳入到一个分支中，从而摆脱断头分支的状态  
+
+## git远端分支
+
+GitHub是最有名的远端版本库，可以用`git clone`获得远端repo库。   
+
+upstream意在设置上游分支，也就是下面这个命令中`-u`选项的作用。
+`git push -u origin master`，会把`origin/master`设置为本地`master`分支的upstream。然后就
+不必每次`git push origin master`, 直接使用`git push`即可。  
+`-u` = `--set-upstream`
+
+`git push origin master:cat` 会把本地的`master`分支推向远端的`cat`分支。  
+`git push origin :cat` 可以删除远端的cat分支  
+
+`git pull` = `git fetch` + `git merge`, `fetch`同步了`origin/master`中的内容，
+而此时`orgin/master`比本地`master`领先，那意味着原本是一个分支分出去的且京都更新，其实就是`merge`了，
+有时候甚至还是Fast Forward方式进行，有时候可能会再造一个commit以完成任务。  
+但是，`pull`也可以是`rebase`方式的，例如`git pull --rebase`, 这就是用`rebase`替换上个等式右面的`merge`  
+如果push有问题，则只能先拉再推  
+
+### Pull Request（PR）
+
+简而言之，把项目fork到自己的帐号即建立一个新的远端仓库，然后修改先push到这个新仓库，
+然后比对自己和origin库的异同拉出一系列commit集合，这个集合就是Pull Request。
+意思是请求原作者拉回去（Pull）的请求（Request）。
+原作的叫`base fork`，自己的叫`head fork` 。
+
+公司内部PR的用法：每个人fork到自己的帐号下，待完成后PR回公司的项目。负责管理这个项目的人受到PR后，
+进行Code Review并确认这个提交无误后进行合并，从而保证这个分支处于随时可上线的状态。
+
+`git format-patch fd7cd38..6e6ed76` 会产生补丁文件。`git am /tmp/patches/*` 则是更新补丁
+
+## Git Flow
+
+git的工作流。主要定义了5中分支组织的方式。
 
 
