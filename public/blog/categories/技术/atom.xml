@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-04-07T22:58:25+08:00</updated>
+  <updated>2018-04-28T22:04:44+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[青轴的蓝牙键盘]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/"/>
+    <updated>2018-04-28T21:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan</id>
+    <content type="html"><![CDATA[<p>去年听同事介绍买了一个Filco的红轴蓝牙键盘。一千多的东西虽然用着也不错，但始终谈不上喜欢。
+而且在用了一年之后，其键帽毕竟是ABS材质，打油、磨损等接踵而至。加上2月底摸了下老同事的Filco青轴键盘，
+于是对青轴开始长草。</p>
+
+<p>但是，依然对Filco的ABS键帽心有余悸，于是做了一番研究。发现相对于ABS， PBT/POM的键帽相对不容易打油的多，
+于是开始在PBT+Cherry青轴+蓝牙之间寻找。找来找去，发现要么只能满足PBT+Cherry轴的那些Cherry原厂键盘或者Leopold这样的韩国品牌，要么就是键帽是ABS的大F，唯有IKBC在去年下半年推出了完全符合我要求的键盘，正好京东又搞活动价格只要499，于是入了一款。</p>
+
+<p>使用之后，确实爱上了这款键盘。清脆高级的手感，漂亮的颜值，无线的简洁，一下子让敲击多了很多很多的乐趣。真有相见恨晚之感！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为你自己学Git笔记]]></title>
@@ -485,45 +501,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 <li>留意市场变化，主要跟踪技术达人</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[实用软件需求]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu/"/>
-    <updated>2017-10-30T00:23:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/30/shi-yong-ruan-jian-xu-qiu</id>
-    <content type="html"><![CDATA[<p>Kovitz的这本书大概是七八年前看DHH的博客时得知的，发现有中文版就买了回来。但一直没有读完。原因在于本书还是按比较正统的方法讲解如何写好明确的软件需求与规格。按作者的理解，软件开发细化的模式有二：</p>
-
-<p>一. 所有内容都是渐进式细化的，先原型然后几轮迭代后深入到细节；
-二. 每个开始的需求数量很少，但都很到位，每轮迭代就是新增几个需求并实现。</p>
-
-<p>而在我大部分的工作都是采用的策略一，所以这本书对我的吸引力就不大。毕竟在老单位分工没有那么细，沟通相对简单，并不需要那么细节丰富的需求文档。<strong>但是</strong>，新单位就都不一样了。</p>
-
-<p>现在的单位是一个公司人数不多，但规模建制很丰富的公司，即使我个人带的团队也大了许多，需求不单是项目负责人和客户之间沟通的东西，同时也是产品、ue、ui和研发、测试之间沟通甚至绝对对错的基础。这种情况下，如何书写需求（其实是要求产品如何书写），就变得相当重要了。</p>
-
-<p>Kovitz 这本书的<strong>精华是第九第十章</strong>，讲的是如何描述领域中的集合（模型）和类之间的关系，以及这些模型对应的事件和发生序列。</p>
-
-<p><code>集合</code>包含两种类型：</p>
-
-<ol>
-<li>实体类，或类。比如发票、客户</li>
-<li>实体类之间的关系。（客户1， 发票1），（客户1，发票2）。。。，关系其实是类的集合</li>
-</ol>
-
-
-<p>每个<code>实体类</code>要文档化的信息：<br/>
-1. 实体类的基本信息说明；<br/>
-2. 属性值列表，包括属性的定义，可能值的集合（取值范围、类型或者枚举集合）和含义<br/>
-3. 存在的标识成员的属性（主键）<br/>
-4. 与该类有关的实体类，这个主要用文字描述为主、画类图为辅，要在描述中说清楚一堆多，多对一的关系<br/>
-5. 影响成员的每个事件，以及影响那些属性和关系。</p>
-
-<p><code>基数</code>是指多对一的配套关系。连线的秘密是这样的：
-* 竖线表示1
-* 圈表示0
-* 三条线表示乌鸦脚，没有合并
-* 基数最靠近两端的表示最大值，次近两端的是最小值</p>
 ]]></content>
   </entry>
   

@@ -9,9 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="实际投入使用的Web站点总有很多例行任务要做，习惯的做法是利用操作系统的crontab定期执行脚本或者Java程序。
-在更早的时候，曾经试过quartz，但后来因为quartz创建的线程属于JVM而不是Web容器，导致停止或
-重新部署应用时线程并未终止，因此后来跑java程序例行任务的话，主要就 &hellip;">
+  <meta name="description" content="书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
+就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
+牵涉到城市，难免会有更敏感的话题出现。
+本书的时间也要稍早，描述的是2000年前后的中国。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +70,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">何伟的甲骨文</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-14T11:49:00+08:00" pubdate data-updated="true">Sep 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
+就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
+牵涉到城市，难免会有更敏感的话题出现。
+本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</p>
+
+<p>本书主要描写了在三四个大陆城市：北京、深圳、温州、南京。
+北京主要作者自己、一个维吾尔人以及一些老知识分子。深圳和温州的
+主线是作者在涪陵任外教时的学生在那里闯荡情况的反应。南京等则只是一笔带过。
+而所谓甲骨文的发现地&#8211;安阳，书中尽管多次提到，但并未加以详细描述。安阳只是作为介绍甲骨文专家
+<strong>陈梦家</strong>（甲骨文专家、留美学者、右派、66年自杀）的引子。
+简单地说，甲骨文其实是在讲文革中一些知识分子的命运，和作者的几个学生的人身经历并没有直接的关系。
+而维吾尔的故事，则是在北京和华盛顿两个地方展开。这里面敏感内容较多，作者的描述并没有很明显的倾向性，
+尽管作者和维吾尔人是朋友。</p>
+
+<p>阅读2000年前后中国故事，从中可以反映出彼时的一些政策制定有其合理之处。但在2003之后
+还是坚持某些策略，则产生很多问题。例如，当时的汇率是固定，后来的汇率也是固定的。
+但是，当时的黑市价格美元更值钱，所以政府坚持汇率对人民有益。而后来人民币早就该升值，
+美元已不如过去那么有价，还坚守汇率就是对使用人民币的人不负责任了。
+即便是同样的措施，在不同的条件下实施其后果是完全不同的。</p>
+
+<p>所以，尽管这本书谈了很多政治的东西，但却完全没有读上本书
+时常常会发出的未尝不痛恨于桓灵也的感觉。很多选择对政府来讲也是别无选择，
+完全不像后10年那样政府其实可以有多种选择。</p>
+
+<p>作者也在新疆采访了当时正在拍摄天地英雄的姜文，也提到了他因为鬼子来了而受到封杀。
+姜文故事的系统性并不强，可能只是作者曾经写过的一篇报道也放了进来。</p>
+
+<p>总体而言，作者的视角很独特，借助甲骨文也介绍了中国的近代文字变革历史，确实是调查研究后的优秀记者的水平。
+整本书读完后，会对中国的文字变化、政策导向、年轻人在城市的奋斗生活有更深入或更新鲜的认识。是一本开卷有益的好书。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1620,79 +1685,6 @@ windowHeight(获知视口有多高)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/14/tomcat7-cai-yong-rediszuo-wei-session-store/">Tomcat7 采用 Redis作为session Store</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-14T15:57:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>有个项目部署了几套Tomcat，而前置分发又不是按ip映射的，所以无法象往常一样继续使用内存作为session存放的介质。
-同时，业务主要由使用移动互联网的手机来访问，ip也存在随时切换的可能，所以按ip进行映射在此场景下并不是一个好的办法。因此，最终决定使用redis来作为公共的session存储空间，实现session的共享。</p>
-
-<p>主要用到的工具包:</p>
-
-<ul>
-<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager#readme">tomcat-redis-session-manager</a></li>
-<li>jedis</li>
-<li>commons-pool</li>
-</ul>
-
-
-<p>需要注意的是，这个session manager已经有挺长时间停止开发了，从issues来看，表现还算基本稳定。目前也已经支持tomcat6和tomcat7，jdk也是6和7均支持。但是，上述几个包却存在着特定的版本依赖。必须为：</p>
-
-<ol>
-<li>tomcat-redis-session-manager-1.2-tomcat-7.jar</li>
-<li>jedis-2.0.0.jar</li>
-<li>commons-pool-1.3.jar<br/>
-尤其是最后一个，千万马虎不得。上述三个包必须放入tomcat的lib目录下。</li>
-</ol>
-
-
-<p>然后，再在应用的context.xml,可以是应用的该文件也可以是tomcat/conf目录下的该文件，加入下列配置即可：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">&quot;com.radiadesign.catalina.session.RedisSessionHandlerValve&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;Manager</span> <span class="na">className=</span><span class="s">&quot;com.radiadesign.catalina.session.RedisSessionManager&quot;</span>
-</span><span class='line'>         <span class="na">host=</span><span class="s">&quot;192.168.203.198&quot;</span>
-</span><span class='line'>         <span class="na">port=</span><span class="s">&quot;6379&quot;</span>
-</span><span class='line'>         <span class="na">database=</span><span class="s">&quot;1&quot;</span>
-</span><span class='line'>         <span class="na">maxInactiveInterval=</span><span class="s">&quot;600&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -1710,6 +1702,10 @@ windowHeight(获知视口有多高)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
       </li>
     
@@ -1725,15 +1721,11 @@ windowHeight(获知视口有多高)</p>
         <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/">我编程我快乐</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (76)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (77)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
 </section>
   
 </aside>

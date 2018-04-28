@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-04-07T22:58:25+08:00</updated>
+  <updated>2018-04-28T22:04:44+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[青轴的蓝牙键盘]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/"/>
+    <updated>2018-04-28T21:52:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan</id>
+    <content type="html"><![CDATA[<p>去年听同事介绍买了一个Filco的红轴蓝牙键盘。一千多的东西虽然用着也不错，但始终谈不上喜欢。
+而且在用了一年之后，其键帽毕竟是ABS材质，打油、磨损等接踵而至。加上2月底摸了下老同事的Filco青轴键盘，
+于是对青轴开始长草。</p>
+
+<p>但是，依然对Filco的ABS键帽心有余悸，于是做了一番研究。发现相对于ABS， PBT/POM的键帽相对不容易打油的多，
+于是开始在PBT+Cherry青轴+蓝牙之间寻找。找来找去，发现要么只能满足PBT+Cherry轴的那些Cherry原厂键盘或者Leopold这样的韩国品牌，要么就是键帽是ABS的大F，唯有IKBC在去年下半年推出了完全符合我要求的键盘，正好京东又搞活动价格只要499，于是入了一款。</p>
+
+<p>使用之后，确实爱上了这款键盘。清脆高级的手感，漂亮的颜值，无线的简洁，一下子让敲击多了很多很多的乐趣。真有相见恨晚之感！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[为你自己学Git笔记]]></title>
@@ -1136,44 +1152,6 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
     <updated>2016-12-17T21:25:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2016/12/17/di-shi-ni-he-zui-jin-de-ji-ci-xiao-chang-tu</id>
     <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[DIY的好处以及雨刮和滤芯]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/10/07/ji-chong-kong-diao-lu-xin/"/>
-    <updated>2016-10-07T15:24:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/10/07/ji-chong-kong-diao-lu-xin</id>
-    <content type="html"><![CDATA[<p>用车两年多，有两个地方始终不太让人满意：1.雨刮器 2.空调滤芯。</p>
-
-<p>个人还是比较喜欢开雨刮的，所以雨刮用的比较费，原厂的也就半年就会变花了需要更换。
-之前用国产品牌carall直接替换，第一次效果还是不错的，用了4个月才花的比较厉害。
-于是又去买了一对。但第二次的体验就很差，突然感觉噪音变得很大。可能小厂的品控比较差，质量高高低低的。同时，carall的价钱倒是涨的快。弄来弄去又回到了换胶条的路子上。</p>
-
-<p>很早搜索论坛就得知换胶条是最经济实惠的，无奈需要diy，感觉这么个东西也没多少钱，所以最早选择
-直接买了。但随着直接替换不令人满意，而且考虑到只换胶条的话，等于还能保留并继续使用原厂的雨刮臂。更重要的，本田确实是个很有意思的公司，在手册上竟然也是推荐换胶条的，并给出了怎么换的图例和说明。实际上本田的4s只卖胶条，雨刮臂很难买。于是决定自己换胶条。</p>
-
-<p>自己DIY雨刮胶条之后，感觉还是很不错的。首先是成本低了很多，因为这是替换方式上形成的成本优势。只换胶条而不换雨刮臂当然比换整支雨刮臂成本低，而老化和变花的只是胶条，雨刮臂的寿命其实很长。
-一对胶条的成本只在12-18元之间，一对雨刮的国产也要30-40。其次，效果方面毕竟是原厂的钢条支撑，声音就正常许多了，清晰度其实起初用用都还行。这东西关键还是在于要勤换。终于找到了一个效果、成本、难易程度都让自己满意的方案。而这一切的关键就是要DIY。</p>
-
-<p>然后，最近买了几款车用空调滤芯。</p>
-
-<ol>
-<li>韦斯特带炭</li>
-<li>高仿本田原厂</li>
-<li>博世不带炭</li>
-<li>博世带炭</li>
-<li>马勒带炭</li>
-</ol>
-
-
-<p>用下来么基本还是先看滤芯结构，结构相同的情况下一分价钱一分货。
-不带炭的博世是最差的，生产日期超过一年半的韦斯特也是大幅衰减的。
-然而，如果给它们都盖上HEPA滤纸，可能效果就会都好很多。而这也是diy在
-架构方面的胜利。</p>
-
-<p>虽然购买服务是商业社会的主流选择，但DIY永远有其使用的空间。
-一来社会化生产的服务归根结底也要来源于diy，二来总有社会服务提供不到位的地方也需要diy，三来补锅法锯箭法也需要diy来进行对冲。</p>
 ]]></content>
   </entry>
   

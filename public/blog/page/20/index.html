@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="http://www.designsor.com/
-原本一个标准的屌丝,本科都没念,但因为走前端路线+淘宝+创业小公司+新浪,也达到了相当高的高度.下面的文章是转载如何西厢记. 可能你目前点了图片链接会访问不到，不过没关系，我顺便把我的西厢记经过也写出来，分享下。（2010年5月2日可用，亲测） &hellip;">
+  <meta name="description" content="近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。 参照[1]，并在[2]
+下载配置好后，算是跑了起来 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,128 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/30/vi-for-aptana/">Vi for Aptana</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-30T10:38:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近日学习vi，但我又习惯windows下的输入法。后来一想我看中的vi也是它的编辑性能，目录树等能力还真的不如
+IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse是通用的，而eclipse下安装vi应该是存在这种需求的。</p>
+
+<p>参照[<a href="http://blog.csdn.net/dadoneo/article/details/6077435">1</a>]，并在<a href="http://duduhehe.iteye.com/blog/473999">[2]</a>
+下载配置好后，算是跑了起来。</p>
+
+<p>用用的感觉还不错。至少有了<code>CommandMode</code> <code>InsertMode</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>                          Lesson 1 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. The cursor is moved using either the arrow keys or the hjkl keys.
+</span><span class='line'>     h (left)       j (down)       k (up)       l (right)
+</span><span class='line'>
+</span><span class='line'>  2. To start Vim from the shell prompt type:  vim FILENAME &lt;ENTER&gt;
+</span><span class='line'>
+</span><span class='line'>  3. To exit Vim type:     &lt;ESC&gt;   :q!   &lt;ENTER&gt;  to trash all changes.
+</span><span class='line'>         OR type:      &lt;ESC&gt;   :wq   &lt;ENTER&gt;  to save the changes.
+</span><span class='line'>
+</span><span class='line'>  4. To delete the character at the cursor type:  x
+</span><span class='line'>
+</span><span class='line'>  5. To insert or append text type:
+</span><span class='line'>     i   type inserted text   &lt;ESC&gt;         insert before the cursor
+</span><span class='line'>     A   type appended text   &lt;ESC&gt;         append after the line
+</span><span class='line'>
+</span><span class='line'>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span><span class='line'>                           Lesson 2 SUMMARY
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  1. To delete from the cursor up to the next word type:    dw
+</span><span class='line'>  2. To delete from the cursor to the end of a line type:    d$
+</span><span class='line'>  3. To delete a whole line type:    dd
+</span><span class='line'>
+</span><span class='line'>  4. To repeat a motion prepend it with a number:   2w
+</span><span class='line'>  5. The format for a change command is:
+</span><span class='line'>           operator   [number]   motion
+</span><span class='line'> where:
+</span><span class='line'>   operator - is what to do, such as  d  for delete
+</span><span class='line'>   [number] - is an optional count to repeat the motion
+</span><span class='line'>   motion   - moves over the text to operate on, such as  w (word),
+</span><span class='line'>              $ (to the end of line), etc.
+</span><span class='line'>
+</span><span class='line'>  6. To move to the start of the line use a zero:  0
+</span><span class='line'>
+</span><span class='line'>  7. To undo previous actions, type:           u  (lowercase u)
+</span><span class='line'> To undo all the changes on a line, type:  U  (capital U)
+</span><span class='line'> To undo the undo's, type:                 CTRL-R</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -749,46 +872,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/24/the-rails-view/">The Rails View</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-24T12:11:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pragprog.com/book/warv/the-rails-view">The Rails View</a>有pdf版。
-是对View层实践的描述，可以认为是对rails的扩展。rails做的最好的还是model、controller这样用ruby写的，是靠强大的mc来
-提高v的易写性。而在view层，还是可以有很多工作要做，很多实践经验可以总结。本书正是针对这个领域的作品。</p>
-
-<p>(待续)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/21/">&larr; Older</a>
@@ -806,6 +889,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
       </li>
     
@@ -821,15 +908,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/">我编程我快乐</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (76)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (77)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
 </section>
   
 </aside>

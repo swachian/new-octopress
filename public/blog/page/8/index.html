@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="中文翻译是《我编程，我快乐&#8211;程序员职业规划之道》。在陪老婆做头发的过程中，看完了这本书。
-本书还有一个更大名鼎鼎的名字：My Job Went to India。整本书其实更确切地说是如何
-追求成为卓越的软件开发者。中文名字起的其实有点文不对题。 &hellip;">
+  <meta name="description" content="在Web容器中通过Spring添加Job任务一文中，
+已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
+period 和 delay两个参数就够了。 这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,161 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/28/springzhong-de-cron/">Spring中的CRON</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-28T15:12:00+08:00" pubdate data-updated="true">Dec 28<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在<a href="/blog/2014/09/11/webrong-qi-zhong-tong-guo-springtian-jia-jobren-wu/">Web容器中通过Spring添加Job任务</a>一文中，
+已经提过在spring中增加例行任务。只是当时提交的任务仅限于间隔一段时间后执行，比如每分钟执行一次，因此使用
+<code>period</code> 和 <code>delay</code>两个参数就够了。</p>
+
+<p>这次新遇到的需求是要求定点执行，比如固定在夜间23:30启动，这时候就需要cron了。好在Spring 4.0版
+开始已经支持cron，配置起来也很简洁。</p>
+
+<p>首先，在<code>spring-mvc.xml</code>中增加要定期执行的类作为bean，作用是把要定期执行的类交给spring扫描</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span> <span class="na">class=</span><span class="s">&quot;com.sanss.toolbar.job.LastDayDevicePackorderlogRefreshTaskExecutor&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/bean&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其次，在这个类上使用标注<code>@EnableScheduling</code>，让spring意识到这是一个定期调度启动的任务。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@EnableScheduling</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LastDayDevicePackorderlogRefreshTaskExecutor</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，是在具体要启动的method上标注<code>@Scheduled(cron = "0 * * * * *")</code>，以此给出具体的执行安排。<br/>
+标注中cron的具体含义可以见下面的注释。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * 一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 按顺序依次为 秒（0~59）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 分钟（0~59）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 小时（0~23）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 天（月）（0~31，但是你需要考虑你月的天数）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 月（0~11）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * 7.年份（1970－2099）</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">&quot;0 * * * * *&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// TODO Auto-generated method stub</span>
+</span><span class='line'>  <span class="c1">// doit();</span>
+</span><span class='line'>  <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;定期触发&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="n">o</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>补充</h2>
+
+<p>在<code>applicationContext.xml</code>中可加入<code>layoutxmlns:task="http://www.springframework.org/schema/task"</code>,使得可以用task标注。</p>
+
+<p>同时在xsi:schemaLocation中加入<code>http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd</code></p>
+
+<p>随后就可以启用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;!--</span> <span class="err">定时任务相关启动</span> <span class="o">--&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">executor</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;mvcyExecutor&quot;</span> <span class="n">pool</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">scheduler</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;myScheduler&quot;</span> <span class="n">pool</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="n">layout</span><span class="s">&quot;10&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nl">task:</span><span class="n">annotation</span><span class="o">-</span><span class="n">driven</span> <span class="n">executor</span><span class="o">=</span><span class="s">&quot;myExecutor&quot;</span> <span class="n">scheduler</span><span class="o">=</span><span class="s">&quot;mySchedulerduler&quot;</span><span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其作用类似于java配置的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Configuration</span>
+</span><span class='line'><span class="nd">@EnableAsync</span>
+</span><span class='line'><span class="nd">@EnableScheduling</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="o">{</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中executor用于异步，scheduler用于同步执行。</p>
+
+<p>另外，对Bean做注解的时候一般使用@Component或其子注解（如：@Service）但是一定要注意使用@Lazy(false)（一般我们会在applicationContext.xml里根级标签，一般为beans里面设置default-lazy-init=&#8221;true&#8221;，所以要想spring启动后定时任务就运行，必须用@Lazy(false）。)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1124,70 +1279,6 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/14/he-wei-de-jia-gu-wen/">何伟的甲骨文</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-14T11:49:00+08:00" pubdate data-updated="true">Sep 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
-就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
-牵涉到城市，难免会有更敏感的话题出现。
-本书的时间也要稍早，描述的是2000年前后的中国。当时的国家已经有了寻路中国里的一些倾向，只是还没那么严重。</p>
-
-<p>本书主要描写了在三四个大陆城市：北京、深圳、温州、南京。
-北京主要作者自己、一个维吾尔人以及一些老知识分子。深圳和温州的
-主线是作者在涪陵任外教时的学生在那里闯荡情况的反应。南京等则只是一笔带过。
-而所谓甲骨文的发现地&#8211;安阳，书中尽管多次提到，但并未加以详细描述。安阳只是作为介绍甲骨文专家
-<strong>陈梦家</strong>（甲骨文专家、留美学者、右派、66年自杀）的引子。
-简单地说，甲骨文其实是在讲文革中一些知识分子的命运，和作者的几个学生的人身经历并没有直接的关系。
-而维吾尔的故事，则是在北京和华盛顿两个地方展开。这里面敏感内容较多，作者的描述并没有很明显的倾向性，
-尽管作者和维吾尔人是朋友。</p>
-
-<p>阅读2000年前后中国故事，从中可以反映出彼时的一些政策制定有其合理之处。但在2003之后
-还是坚持某些策略，则产生很多问题。例如，当时的汇率是固定，后来的汇率也是固定的。
-但是，当时的黑市价格美元更值钱，所以政府坚持汇率对人民有益。而后来人民币早就该升值，
-美元已不如过去那么有价，还坚守汇率就是对使用人民币的人不负责任了。
-即便是同样的措施，在不同的条件下实施其后果是完全不同的。</p>
-
-<p>所以，尽管这本书谈了很多政治的东西，但却完全没有读上本书
-时常常会发出的未尝不痛恨于桓灵也的感觉。很多选择对政府来讲也是别无选择，
-完全不像后10年那样政府其实可以有多种选择。</p>
-
-<p>作者也在新疆采访了当时正在拍摄天地英雄的姜文，也提到了他因为鬼子来了而受到封杀。
-姜文故事的系统性并不强，可能只是作者曾经写过的一篇报道也放了进来。</p>
-
-<p>总体而言，作者的视角很独特，借助甲骨文也介绍了中国的近代文字变革历史，确实是调查研究后的优秀记者的水平。
-整本书读完后，会对中国的文字变化、政策导向、年轻人在城市的奋斗生活有更深入或更新鲜的认识。是一本开卷有益的好书。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1205,6 +1296,10 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
       </li>
     
@@ -1220,15 +1315,11 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
         <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/">我编程我快乐</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (76)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (77)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
 </section>
   
 </aside>
