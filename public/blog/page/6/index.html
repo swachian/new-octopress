@@ -9,8 +9,10 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="唉，云梯是越来越不给力了。之前的新加坡1站点还能用用，最近这个月来基本是没法用了。
-绝对令人失望。 Update on 2015.07.22: 据说是因为517电信网通大提速后国内开展了大量50M 100M的带宽，导致骨干网资源严重不足造成的。 &hellip;">
+  <meta name="description" content="NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。 服务的安装很简单， 1
+2
+yum install nscd &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +70,135 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/19/nscd/">Nscd</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-19T13:56:00+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
+默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。</p>
+
+<p>服务的安装很简单，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>yum install nscd
+</span><span class='line'>service nscd start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样就可以开启nscd的服务了。
+如果本身就面临性能问题，可以直接测试一下看看性能有没有提高。除此之外可以通过下列命令检查一下效果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nscd -g | grep <span class="s1">&#39;hosts cache&#39;</span> -A 22
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以得到如下的信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>hosts cache:
+</span><span class='line'>
+</span><span class='line'>            yes  cache is enabled
+</span><span class='line'>            yes  cache is persistent
+</span><span class='line'>             no  cache is shared
+</span><span class='line'>            211  suggested size
+</span><span class='line'>         216064  total data pool size
+</span><span class='line'>            336  used data pool size
+</span><span class='line'>           3600  seconds <span class="nb">time </span>to live <span class="k">for </span>positive entries
+</span><span class='line'>             20  seconds <span class="nb">time </span>to live <span class="k">for </span>negative entries
+</span><span class='line'>            139  cache hits on positive entries
+</span><span class='line'>              4  cache hits on negative entries
+</span><span class='line'>              8  cache misses on positive entries
+</span><span class='line'>              6  cache misses on negative entries
+</span><span class='line'>             91% cache hit rate
+</span><span class='line'>              2  current number of cached values
+</span><span class='line'>              4  maximum number of cached values
+</span><span class='line'>              1  maximum chain length searched
+</span><span class='line'>              0  number of delays on rdlock
+</span><span class='line'>              0  number of delays on wrlock
+</span><span class='line'>              0  memory allocations failed
+</span><span class='line'>            yes  check /etc/hosts <span class="k">for </span>changes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中有命中率，cache命中的次数等信息。positive是指查询成功，negative是指查询失败。</p>
+
+<p>但是，很多情况下，可能开启nscd之后，会发现命中率一直为0。原因在于很多linux服务会采用直接访问的模式来读取缓存，
+直读的模式性能更好，但因为不经过daemon，所以无法进行统计。解决办法是把<code>shared</code>的属性关闭。</p>
+
+<p>修改<code>/etc/nscd.conf</code>，</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>   <span class="nb">enable</span>-cache            hosts           yes
+</span><span class='line'>    positive-time-to-live   hosts           3600
+</span><span class='line'>    negative-time-to-live   hosts           20
+</span><span class='line'>    suggested-size          hosts           211
+</span><span class='line'>    check-files             hosts           yes
+</span><span class='line'>    persistent              hosts           yes
+</span><span class='line'>    shared                  hosts           no
+</span><span class='line'>    max-db-size             hosts           3355443
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -688,59 +819,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/09/zi-ji-sheng-chan-sdoc/">自己生产sdoc</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-09T12:26:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
-原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。</p>
-
-<ol>
-<li><p>先安装sdoc， <code>gem install sdoc</code>, 安装完成后会新增两个可执行文件<code>sdoc</code>和<code>sdoc-merge</code></p></li>
-<li><p>进入自己下载的ruby源代码的父目录，执行
-<code>sdoc --main ruby-2.2.1/README.md  -x test -x example -x bin -N -x lib/rdoc  --title "Ruby 2.2" --op ~/sdocruby-2.2 ruby-2.2.1 ruby-2.2.1/README</code></p></li>
-</ol>
-
-
-<p>其中，ruby-2.2.1是当前rails的版本，&#8211;op指示生成的sdoc所在的目录，-x是不要去解析这些内容，运行几分钟后，文件就生成了。</p>
-
-<p>然后把生成的目录放到自己方便的地方即可。</p>
-
-<p>参考链接：</p>
-
-<p><a href="http://pjkh.com/articles/building-your-own-rails-and-ruby-searchable-api-docs/">1</a>
-<a href="http://pan.baidu.com/s/1i3vgC09">2 懒人下载</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -758,6 +836,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
       </li>
     
@@ -773,15 +855,11 @@
         <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (77)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (27)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
 </section>
   
 </aside>
