@@ -9,7 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在京东买的六本书都到了.这次的书普遍不是很厚.当然,3本项目管理的书加起来还是很厚的.也要有600多页. 分了2本给同事,自己抱起&lt;数学之美>先看了起来. 花了一周的时间, 这本书基本看完了. 先说说篇幅. 正文是256页,但是排版是很松的, 有点像经管类书籍的排版, 所以这本书的篇幅并不大 &hellip;">
+  <meta name="description" content="惊讶地发现我原来一直是按scrum在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
+比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
+一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/11/user-stories-applied-for-agile-software-development/">User Stories Applied: For Agile Software Development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T09:43:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>惊讶地发现我原来一直是按<em>scrum</em>在做项目啊。除了自动化的测试案例写的不是很多，其他的特点倒是相当符合。
+比如需求是条目化的随后通过交谈细化的，最终的交付物代码和软件才是最重要的。团队里面的角色很平行化，
+一个team Leader+程序员，每个团队成员都要完成设计、数据库管理和测试工作，这样可以提高开发效率。
+功能也是随着开发的进展而逐步加入。
+Backlog就是一张功能list，只是没有引入Sprint Backlog进行分阶段的todo处理。
+最大的缺失是没有客户驻场，另外就是Sprint的周期不够明确。但总体来说，从团队组织到任务完成的方式上，都是很接近Scrum的。
+而且依据我的经验来说，对于3-8人的团队，中等规模，需求又易变化的项目来说，这么做是相当有效的。
+至于测试，根据新的实践总结，有些东西值得写测试有些就不值得，衡量性价比永远是王道。</p>
+
+<p>下面是一些笔记。个人认为本书最地道的地方就是将用故事与需求规格、用例、用户场景进行了比较。从实际开发中看，
+我们日常使用最多的其实确实是用户故事。以后可以明确自己到底在用啥方法，而不必总是愧疚开发方式不够正规。<br/>
+写故事的技巧可以进一步加强，比如尽量写封闭的，让人感觉完成某个任务的故事，而不是永远做不完的故事。<br/>
+估算的数字可以跨度大一些，预估不到的东西不如估的多一些。<br/>
+燃尽图和累计故事图是很好的进度跟踪与计划工具。</p>
+
+<ul>
+<li>用户故事：
+
+<ul>
+<li>用来讨论的主题汇总   card</li>
+<li>交谈重于一切        conversation</li>
+<li>确认，写在背面的测试 confirmation</li>
+</ul>
+</li>
+</ul>
+
+
+<p>拖网式的捕捞，从粗到细，从大到小；深度遍历用户故事</p>
+
+<ul>
+<li>识别用户<strong>角色</strong>，其实就是对用户进行分类。
+
+<ul>
+<li>对角色的合并归类剔除，以及实例化特殊角色的用户</li>
+</ul>
+</li>
+</ul>
+
+
+<p>把用户故事分成一个一个周期进行迭代开发；对不确定的事情在故事上拆成两个，分到两个阶段中去完成</p>
+
+<p>最好是与用户直接联系，有些是有只能通过<strong>用户代理</strong>来沟通，<strong>开发经理</strong>不是好的用户代理，因为最终不是他来使用；销售人员、市场团队、领域专家、客户都是还算不错的用户代理。</p>
+
+<p>让客户编写测试案例</p>
+
+<p>用切蛋糕的方式来切用户故事，而不要用切奶油、切面粉的分层次的方式来切，对应用编程来说，这点并不占便宜。</p>
+
+<p>编写封闭的故事。就是编写可以完成的故事，构成一个闭合故事的集合。
+使用户有成就感。随着一个有意义的目标的实现而结束的故事，能让用户感觉使用后完成了某个任务。所以，登录并不是闭合性的故事。</p>
+
+<p>故事点的估算：预定值可以拉得很开，比如<br/>
+1/2, 1, 2, 3, 5, 8, 13, 20, 40, 80<br/>
+这个类似于wbs的估算，实质是一回事情。所谓的点数是团队内部相对的度量单位</p>
+
+<p>迭代指每次选择一组用户故事，安排好每一轮实现的故事。1-4周是一个迭代周期，5-10次的迭代都是很正常的。<br/>
+迭代计划中需要对故事继续分解。如可以查看酒店的相关信息可以分解成：</p>
+
+<ul>
+<li>设计展示html</li>
+<li>酒店的图片显示和介绍</li>
+<li>酒店的地图位置编写</li>
+<li>酒店设施和服务清单编写</li>
+<li>后台数据库建表与查询</li>
+<li>研究显示地图</li>
+<li>帮助手册</li>
+</ul>
+
+
+<p>测量就是记录。<br/>
+<strong>燃尽图</strong>横轴是时间纵轴是剩余任务故事点。<br/>
+<strong>累计故事点图</strong>， 用于比较计划与实际完成的曲线图。<br/>
+ #故事 #故事点 #状态   &#8211; 在迭代中完成的故事表格
+ 迭代开始的故事点，在迭代中完成的， 改变的估算， 新加故事的故事点， 迭代结束时故事点， 然后就是迭代1，迭代2的进行记录</p>
+
+<p>用户故事与用例的区别在于前者更类似于后者的成功场景和扩展，但是前者只是一个开始，用例则是文章写完就完毕了。
+故事只是用来提示进一步和用户商谈的。很可能过一阵子就被撕掉了。用例极其容易过早陷入界面的细节中。</p>
+
+<p>卡片也可以用软件记录，也可以用wiki记录。<br/>
+用户界面以减少用户学习成本为本。<br/>
+故事可以保留也可以销毁。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -715,791 +832,6 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/04/nodejs/">NodeJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-04T17:12:00+08:00" pubdate data-updated="true">Jun 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
-特别是搭配CS的语法后, 相当的让人感觉良好.</p>
-
-<p>而越看NodeJS越有UNIX系统编程和网络编程的味道, 仿佛Stevens的C的Lib库再生一般.这种感觉很难描述清楚,基本模式就是原来使用现在变得那么简单了.
-而且NodeJS依我看来够精简,功能又够强大,但从语言和基本的平台来讲,搭配上CoffeeScript后,已经是主流语言中最强悍的一种了吧.</p>
-
-<p>http://howtonode.org/understanding-process-next-tick</p>
-
-<p>tick其实就是计算机系统的时隙.</p>
-
-<h2>util</h2>
-
-<p>util.format() 等于printf, 但是末尾跟随的参数如果过少或过多都会做处理, 过多则inspect,过少则打placeholder.
-两点是多了<code>%j</code>支持json格式的输出.</p>
-
-<p>util.debug() 用于调试的,输出到<code>stderr</code><br/>
-util.log() <code>stdout</code><br/>
-util.inspect(object) 展开对象信息<br/>
-util.isArray, isRegExp, isDate</p>
-
-<h2>Events</h2>
-
-<p>All objects which emit events are instances of <code>require('events').EventEmitter</code><br/>
-All EventEmitters emit the event <code>newListener</code> when new listeners are added</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="err">#</span> <span class="err">前一个参数是</span><span class="nx">camel</span><span class="o">-</span><span class="nx">cased</span> <span class="nx">string</span><span class="p">,</span> <span class="err">后一个是是函数</span><span class="p">,</span><span class="err">也就做</span><span class="nx">listener</span>
-</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;someone connected!&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">#</span> <span class="err">一次性事件</span><span class="p">,</span><span class="err">发生后自动消失</span>
-</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ah, we have our first user!&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">removeAllListeners</span><span class="p">([</span><span class="nx">event</span><span class="p">])</span>
-</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">setMaxListeners</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">#</span> <span class="err">返回一系列函数</span>
-</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">listeners</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">#</span> <span class="err">触发事件</span>
-</span><span class='line'><span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">],</span> <span class="p">[</span><span class="nx">arg2</span><span class="p">],</span> <span class="p">[...])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Buffer</h2>
-
-<p>这个东西和C里面的 <code>bytes c[8192];</code> 很类似. 是在V8 heap之外对基础memory的分配,因而效率很高.但是也不能
-自动增长. 是一个全局变量, 通常不需要require. 纯js对二进制支持的效率不好.对Unicode支持尚可.</p>
-
-<ul>
-<li>encodings:
-
-<ul>
-<li>ascii</li>
-<li>utf8</li>
-<li>ucs2</li>
-<li>base64</li>
-<li>binary 通常不用,而是直接用Buffer</li>
-<li>hex 十六进制</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">size</span><span class="p">)</span>
-</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
-</span><span class='line'><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">length</span><span class="p">],</span> <span class="p">[</span><span class="nx">encoding</span><span class="p">])</span> <span class="err">#</span> <span class="err">把</span><span class="nx">string</span><span class="err">的内容写到</span><span class="nx">buffer</span><span class="err">里</span><span class="p">,</span><span class="err">和</span><span class="nx">c</span><span class="err">很像</span><span class="p">,</span><span class="err">但是</span><span class="nx">offset</span><span class="err">默认是</span><span class="mi">0</span><span class="p">,</span><span class="nx">length</span><span class="err">默认是</span><span class="nx">buffer</span><span class="err">的长度</span> <span class="o">-</span> <span class="nx">offset</span>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">toString</span><span class="p">([</span><span class="nx">encoding</span><span class="p">],</span> <span class="p">[</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
-</span><span class='line'><span class="nx">buf</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">slice</span><span class="p">([</span><span class="nx">start</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
-</span><span class='line'><span class="nx">Buffer</span><span class="p">.</span><span class="nx">byteLength</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">length</span> <span class="err">返回的是整个</span><span class="nx">buffer</span><span class="err">的</span><span class="nx">size</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">copy</span><span class="p">(</span><span class="nx">targetBuffer</span><span class="p">,</span> <span class="p">[</span><span class="nx">targetStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceStart</span><span class="p">],</span> <span class="p">[</span><span class="nx">sourceEnd</span><span class="p">])</span>
-</span><span class='line'><span class="nx">buf</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="p">[</span><span class="nx">offset</span><span class="p">],</span> <span class="p">[</span><span class="nx">end</span><span class="p">])</span>
-</span><span class='line'><span class="err">此外还有一堆读写各种类型的函数</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Stream</h2>
-
-<p>stream是一个抽象接口, HTTP stdout都是对stream的实现.<br/>
-所有的stream, 都是<code>EventEmitter</code>的实现.</p>
-
-<h3>Readable Stream</h3>
-
-<ul>
-<li><p>Event</p>
-
-<ul>
-<li>data</li>
-<li>end 可能可以继续写</li>
-<li>error</li>
-<li>close 不是所有的流都有关闭,比如进来的http request</li>
-</ul>
-</li>
-<li><p>method</p>
-
-<ul>
-<li>readable</li>
-<li>setEncoding(encoding) , 设置后,data返回的就不是buffer而是string</li>
-<li>pause 停止<code>data</code>事件</li>
-<li>resume 恢复<code>data</code>事件</li>
-<li>destroy</li>
-<li>pipe</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">,</span> <span class="p">{</span> <span class="nx">end</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span> <span class="err">#截断</span><span class="nx">source</span> <span class="err">的</span> <span class="nx">end</span><span class="err">事件发给</span><span class="nx">destination</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Goodbye\n&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Writable Stream</h3>
-
-<ul>
-<li><p>Event</p>
-
-<ul>
-<li>drain 表明可以再写了</li>
-<li>error</li>
-<li>close</li>
-<li>pipe</li>
-</ul>
-</li>
-<li><p>method</p>
-
-<ul>
-<li>writable</li>
-<li>write(string, [encoding], [fd])</li>
-<li>write(buffer)</li>
-<li>end()</li>
-<li>end(string, encoding)</li>
-<li>end(buffer)</li>
-<li>destroy()</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>Crypto</h2>
-
-<p>加密解密的系类</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">shasum</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">ReadStream</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span>
-</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">shasum</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">s</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">shasum</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>File System</h2>
-
-<p>异步同步并举，异步时不保证执行顺序，高压环境下使用异步接口可提高效率。因为异步的本质是non-block</p>
-
-<ul>
-<li>fs.watch
-
-<ul>
-<li>Linux下用 <code>inotify</code>实现</li>
-<li>返回&#8217;rename&#8217; or &#8216;change&#8217; 事件</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">fs</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s1">&#39;somedir&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;event is: &#39;</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename provided: &#39;</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;filename not provided&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>fs.ReadStream</li>
-<li>fs.WriteStream</li>
-<li>fs.open(path, flags, [mode], [callback])
-<code>(err, fd)</code></li>
-</ul>
-
-
-<h2>Path</h2>
-
-<h2>Net</h2>
-
-<ul>
-<li>net.createServer([options], [connectionListener])</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">net</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;net&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">net</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//&#39;connection&#39; listener</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server connected&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server disconnected&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;hello\r\n&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">c</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8124</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//&#39;listening&#39; listener</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server bound&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>net.connect,net.createConnection
-
-<ul>
-<li>也是一样触发<code>connect</code>事件</li>
-<li>net.connect(port, [host], [connectListener])</li>
-<li>net.connect(path, [connectListener])</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>net.Server</h3>
-
-<ul>
-<li>server.listen(port, [host], [listeningListener])
-
-<ul>
-<li><code>listening</code> event</li>
-</ul>
-</li>
-<li>server.close()
-
-<ul>
-<li>也是异步关闭，最终 emit <code>close</code>事件</li>
-</ul>
-</li>
-<li>server.address() <code>{"port":43239,"family":2,"address":"0.0.0.0"}</code></li>
-<li>server.maxConnections</li>
-<li><p>server.connections</p></li>
-<li><p>Event</p>
-
-<ul>
-<li>listening</li>
-<li>connection</li>
-<li>close</li>
-<li>error</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>net.Socket</h3>
-
-<ul>
-<li>new net.Socket([options])
-
-<ul>
-<li>fd, type, allowHalfOpen</li>
-</ul>
-</li>
-<li>socket.connect 一般用net.connect来新建</li>
-<li>bufferSize() 当前准备发的缓存长度</li>
-<li>setEncoding() 指定接收data的编码</li>
-<li>write(data, [encoding], [callback])</li>
-<li>end([data]) half-close</li>
-<li>destroy() 仅在处理error是需要使用</li>
-<li>pause(), resume() 和<code>data</code>事件相关</li>
-<li>setTimeout(timeout, [callback])
-
-<ul>
-<li>超时，通常没有超时</li>
-<li>0则表示同步操作，而且要求即刻发掉</li>
-</ul>
-</li>
-<li>setNoDelay() 默认就是true</li>
-<li>keepAlive()</li>
-<li>address(), remoteAddress(), remotePort()</li>
-<li><p>bytesRead() 已收到的bytes数量， bytesWritten()</p></li>
-<li><p>Event</p>
-
-<ul>
-<li>connect</li>
-<li>data</li>
-<li>end</li>
-<li>timeout</li>
-<li>drain</li>
-<li>error</li>
-<li>close</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>UDP / Datagram Sockets</h2>
-
-<p>  <code>require 'dgram'</code></p>
-
-<h2>DNS</h2>
-
-<ul>
-<li>lookup()</li>
-<li>resolve()</li>
-</ul>
-
-
-<h2>HTTP</h2>
-
-<p>核心思想： The user is able to <strong>stream data</strong>.</p>
-
-<h3>http</h3>
-
-<ul>
-<li>http.createServer([requestListener])</li>
-</ul>
-
-
-<h4>Event</h4>
-
-<ul>
-<li>&#8216;request&#8217;
-
-<ul>
-<li>(request, response) -></li>
-<li>一个connection可能有多个request</li>
-</ul>
-</li>
-<li>&#8216;connection&#8217;
-
-<ul>
-<li>(socket) -></li>
-<li>一般不会直接处理，也可以通过<code>request.connection</code>获得<code>socket</code></li>
-</ul>
-</li>
-<li>&#8216;close&#8217;</li>
-<li>&#8216;checkContinue&#8217;
-
-<ul>
-<li>(request, response) -></li>
-<li><a href="http://benramsey.com/blog/2009/02/http-status-100-continue-corrections/">关于100-continue</a>  ,用处就是试探，在发起实际的body前把条件等发给server预审</li>
-<li><code>request</code> event will <strong>not</strong> be emitted.</li>
-</ul>
-</li>
-<li>&#8216;upgrade&#8217;
-
-<ul>
-<li>不知何意</li>
-<li>(request, socket, head) -></li>
-</ul>
-</li>
-<li>&#8216;clientError&#8217;
-
-<ul>
-<li>(exception) -></li>
-</ul>
-</li>
-</ul>
-
-
-<h4>method</h4>
-
-<ul>
-<li>listen(port, [hostname], [callback])</li>
-<li>close() = net.Server.close()</li>
-</ul>
-
-
-<h3>http.ServerRequest</h3>
-
-<h4>Event</h4>
-
-<ul>
-<li>data</li>
-<li>(chunk) -></li>
-<li>end</li>
-<li>close</li>
-</ul>
-
-
-<h4>method</h4>
-
-<ul>
-<li>method &#8216;GET&#8217;, &#8216;DELETE&#8217;</li>
-<li>url
-
-<ul>
-<li><code>require('url').parse(request.url, true)</code></li>
-<li><code>require('querystring').parse</code></li>
-</ul>
-</li>
-<li>request.headers</li>
-<li>request.trailers
-
-<ul>
-<li>Only populated after the &#8216;end&#8217; event.</li>
-</ul>
-</li>
-<li>request.setEncoding([encoding])</li>
-<li>pause()</li>
-<li>resume()</li>
-<li>connection</li>
-</ul>
-
-
-<h3>http.ServerResponse</h3>
-
-<p>实现了<code>Writable Stream</code></p>
-
-<h4>Event</h4>
-
-<ul>
-<li>&#8216;close&#8217;</li>
-</ul>
-
-
-<h4>Method</h4>
-
-<ul>
-<li>writeContinue()</li>
-<li>writeHead(statusCode, [reasonPhrase], [headers])
-
-<ul>
-<li>必须在<code>response.end()</code>被调用之前</li>
-<li><code>response.writeHead(200, {Content-Type: 'text/plain'})</code></li>
-</ul>
-</li>
-<li>statusCode</li>
-<li>setHeader(name, value)
-
-<ul>
-<li><code>response.setHeader("Content-Type", "text/html")</code></li>
-</ul>
-</li>
-<li>getHeader(name)</li>
-<li>removeHeader(name)</li>
-<li>write(chunk, [encoding])
-
-<ul>
-<li>stream式的写法</li>
-<li>raw</li>
-<li>implicit header mode</li>
-</ul>
-</li>
-<li>addTrailers(headers)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
-</span><span class='line'>                          <span class="s1">&#39;Trailer&#39;</span><span class="o">:</span> <span class="s1">&#39;Content-MD5&#39;</span> <span class="p">});</span>
-</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">fileData</span><span class="p">);</span>
-</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">addTrailers</span><span class="p">({</span><span class="s1">&#39;Content-MD5&#39;</span><span class="o">:</span> <span class="s2">&quot;7895bf4b8828b55ceaf47747b4bca667&quot;</span><span class="p">});</span>
-</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>end([data], [encoding])</li>
-</ul>
-
-
-<h3>http.request</h3>
-
-<p>Node保持有几个可以发起http请求的连接</p>
-
-<ul>
-<li>http.request(options, callback)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/upload&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;STATUS: &#39;</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;HEADERS: &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">headers</span><span class="p">));</span>
-</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;problem with request: &#39;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// write data to request body</span>
-</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;data\n&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nx">req</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>http.get(options, callback)</li>
-</ul>
-
-
-<h4>http.Agent</h4>
-
-<p>node里面客户端的socket是存放在一个pool里面的，这个pool就叫做Agent</p>
-
-<h3>http.ClientRequest</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">request</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;BODY: &#39;</span> <span class="o">+</span> <span class="nx">chunk</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Event</h4>
-
-<ul>
-<li>response
-
-<ul>
-<li>(response) -></li>
-</ul>
-</li>
-<li>socket
-
-<ul>
-<li>(socket) -></li>
-<li>给该request分配socket后触发</li>
-</ul>
-</li>
-<li>upgrade
-
-<ul>
-<li>(response, socket, head) -></li>
-<li>似乎是用来升级到websocket的</li>
-</ul>
-</li>
-<li>continue</li>
-</ul>
-
-
-<h4>Method</h4>
-
-<ul>
-<li>write(chunk, [encoding])</li>
-<li>end()</li>
-<li>abort()</li>
-<li>setTimeout(timeout, [callback])</li>
-<li>setNoDelay(true/false)</li>
-<li>setSocketKeepAlive([enable], [initialDelay])</li>
-</ul>
-
-
-<h3>http.ClientResponse</h3>
-
-<p>a <code>Readable Stream</code></p>
-
-<ul>
-<li>data</li>
-<li>end</li>
-<li><p>close</p></li>
-<li><p>statusCode</p></li>
-<li>headers</li>
-<li>trailers</li>
-<li>setEncoding([encoding])</li>
-<li>pause()</li>
-<li>resume()</li>
-</ul>
-
-
-<h2>HTTPS</h2>
-
-<h2>URL</h2>
-
-<ul>
-<li>href - <code>http://user:pass@host.com:8080/p/a/t/h?query=string#hash</code></li>
-<li>protocol</li>
-<li>host</li>
-<li>auth</li>
-<li>hostname</li>
-<li>port</li>
-<li>pathname</li>
-<li>search</li>
-<li>path</li>
-<li>query</li>
-<li><p>hash</p></li>
-<li><p>url.parse(urlStr)</p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">coffee</span><span class="o">&gt;</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s2">&quot;http://192.168.2.2/?q=1&amp;q=2#sss&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span> <span class="nx">protocol</span><span class="o">:</span> <span class="s1">&#39;http:&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">slashes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;192.168.2.2&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">href</span><span class="o">:</span> <span class="s1">&#39;http://192.168.2.2/?q=1&amp;q=2#sss&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;#sss&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">search</span><span class="o">:</span> <span class="s1">&#39;?q=1&amp;q=2&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">q</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span> <span class="p">]</span> <span class="p">},</span>
-</span><span class='line'>  <span class="nx">pathname</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/?q=1&amp;q=2&#39;</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Readline</h2>
-
-<p>加入这个模块后，创建interface之后（书上仅仅说调用这个模块，没说创建）程序不会退出直至你关闭这个interface。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -1517,6 +849,10 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
       </li>
     
@@ -1532,15 +868,11 @@ All EventEmitters emit the event <code>newListener</code> when new listeners are
         <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

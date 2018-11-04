@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-05-01T21:48:49+08:00</updated>
+  <updated>2018-11-04T23:21:40+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[洗滚筒洗衣机]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji/"/>
+    <updated>2018-11-04T21:09:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji</id>
+    <content type="html"><![CDATA[<p>家中一滚筒洗衣机购买多年，夏天的时候清洗过一下，但不得要领成效不大。原因在于清洗剂和其他很多说明其实都是针对波轮洗衣机，而波轮这方面的经验对滚筒并不适用。原因则在于水位。</p>
+
+<p>清洗剂本身要求溶解后在高水位浸泡2小时才有效果，网上甚至有人建议浸泡一夜。然而对于滚筒洗衣机来讲，水位普遍偏低，很难泡满。直到看见网上针对滚筒的建议，才明白解决的办法。关键在于适度<strong>轮转</strong>。</p>
+
+<p>具体方法为：</p>
+
+<ol>
+<li>放入清晰剂/粉直接到滚筒</li>
+<li>按漂洗模式放满水</li>
+<li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
+<li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
+<li>如果操作几回后，就一切顺手了。</li>
+</ol>
+
+
+<p>最终从效果来看，还真的洗出不少东西来。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clean Code]]></title>
@@ -1161,15 +1185,6 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
 
 <p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
 如lock、semaphore、确认leader等，可以直接使用。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2016 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv/"/>
-    <updated>2016-12-31T21:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv</id>
-    <content type="html"><![CDATA[<p><img src="http://octopresszhangyu.herokuapp.com/images/yangche2016.jpg" alt="image" /></p>
 ]]></content>
   </entry>
   

@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
-原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。 先安装sdoc， gem &hellip;">
+  <meta name="description" content="上礼拜4月8日入了一个小米拖线板，使用近一周后来评价评价。 小米的这款拖线板吸引我的地方是3个做在板上的USB插口，可以提供最大每口2A的输出，3个同时工作时可以提供各1A的输出。对于现在家中主要以苹果设备为主的情况，这种配置还是很有针对性的。
+买回来之后，确实可以把给pad iphone &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/xiao-mi-tuo-xian-ban/">小米拖线板</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-14T16:59:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>上礼拜4月8日入了一个<a href="http://www.mi.com/powerstrip/#init">小米拖线板</a>，使用近一周后来评价评价。</p>
+
+<p>小米的这款拖线板吸引我的地方是3个做在板上的USB插口，可以提供最大每口2A的输出，3个同时工作时可以提供各1A的输出。对于现在家中主要以苹果设备为主的情况，这种配置还是很有针对性的。
+买回来之后，确实可以把给pad iphone min等的充电器都收起来了。而且据说其待机的功率只有0.22w，可谓很节能环保。也确实能自动识别是何种设备，并提供相应的电流进行充电。</p>
+
+<p>在做工和售价方面也算和目前市场主流的拖线板匹配，尽管实际拿到手里的东西感觉和小米的宣传图片还是有很大的差距。但比起公牛等，也不算差。整个还算比较小，携带还算方便。</p>
+
+<p>说完好的，再说点不足的。
+最主要的，插口数量还是有点少，毕竟算上3个usb口子，也至多算是六口的拖线板，家用的话还是有点不太够的。</p>
+
+<p>其次，儿童安全门虽然安全了，但也过重了些，插拔相对费劲些。如果这个东西是放在单位里的，那基本没多大意义了。因为单位笔记本上的usb插口还是很多的。</p>
+
+<p>这个产品亮点突出，但真的用起来发现还是有点不太够。考虑到49元的售价，也算值得回来。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -701,73 +749,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/">Mac 上折腾Ruby 2.2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-31T21:23:00+08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
-为此又开始了折腾。</p>
-
-<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
-
-<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
-SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew update <span class="c"># 更新brew</span>
-</span><span class='line'>brew install openssl <span class="c"># 安装最新的ssl</span>
-</span><span class='line'>brew link openssl --force <span class="c">#建立关联</span>
-</span><span class='line'>brew install curl-ca-bundle <span class="c"># 这个执行是失败的，原因似乎是在2014年去除了</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
-下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
-解决办法是建立link或者索性在configure时指定</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure --with-openssl-dir<span class="o">=</span><span class="sb">`</span>brew --prefix openssl<span class="sb">`</span> --disable-install-doc --prefix<span class="o">=</span>/Users/me/.rbenv/versions/ruby-2.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
-
-<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
-很多都是被挡在配置环境这第一道关口。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -785,6 +766,10 @@ SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
       </li>
     
@@ -800,15 +785,11 @@ SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code
         <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

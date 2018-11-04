@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Uncle Bob的这本书也是一本名著了，书籍本身其实就是讲编程风格的，可以把编码技能磨砺的
-更锋利些。 全书的要旨在于每一次重构都要让代码更加整洁，同时测试代码和业务代码一样对待。具体开始做起来，则是从很小之处开始着手。 命名是很重要的一个东西，好的命名可以省下很多注释， &hellip;">
+  <meta name="description" content="家中一滚筒洗衣机购买多年，夏天的时候清洗过一下，但不得要领成效不大。原因在于清洗剂和其他很多说明其实都是针对波轮洗衣机，而波轮这方面的经验对滚筒并不适用。原因则在于水位。 清洗剂本身要求溶解后在高水位浸泡2小时才有效果，网上甚至有人建议浸泡一夜。然而对于滚筒洗衣机来讲，水位普遍偏低，很难泡满。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-11-04T21:09:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>家中一滚筒洗衣机购买多年，夏天的时候清洗过一下，但不得要领成效不大。原因在于清洗剂和其他很多说明其实都是针对波轮洗衣机，而波轮这方面的经验对滚筒并不适用。原因则在于水位。</p>
+
+<p>清洗剂本身要求溶解后在高水位浸泡2小时才有效果，网上甚至有人建议浸泡一夜。然而对于滚筒洗衣机来讲，水位普遍偏低，很难泡满。直到看见网上针对滚筒的建议，才明白解决的办法。关键在于适度<strong>轮转</strong>。</p>
+
+<p>具体方法为：</p>
+
+<ol>
+<li>放入清晰剂/粉直接到滚筒</li>
+<li>按漂洗模式放满水</li>
+<li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
+<li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
+<li>如果操作几回后，就一切顺手了。</li>
+</ol>
+
+
+<p>最终从效果来看，还真的洗出不少东西来。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -918,61 +968,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/10/08/wei-fu-wu-bi-ji/">微服务笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-10-08T23:02:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>微服务是Martin Fowler定义的一个术语，出自 https://martinfowler.com/articles/microservices.html</p>
-
-<p>是伴随着敏捷开发和云服务部署流行而兴起的一种架构。微服务架构风格[1]是一种将一个单一应用程序开发为一组小型服务的方法，每个服务运行在自己的进程中，服务间通信采用轻量级通信机制(通常用HTTP资源API)。这些服务围绕业务能力构建并且可通过全自动部署机制独立部署。这些服务共用一个最小型的集中式的管理，服务可用不同的语言开发，使用不同的数据存储技术。</p>
-
-<p>具备的特征包括：</p>
-
-<ul>
-<li>水平扩展服务能力时，可以扩展只需要扩展的模块而不是全部</li>
-<li>组件多以服务的形式提供</li>
-<li>团队多按业务能力/功能组建</li>
-<li>团队始终围着产品，而不是做完了就丢给运维</li>
-<li>smart endpoints and dumb pipes，其实就是管道扁平化，针对SOA中部分总线太过只能而言</li>
-<li>去中心化的管理，微服务意味着可以自治化，而不是谈标准化</li>
-<li>可以多个编程语言同时使用，只要保持彼此间通信简单（http+lightweight messaging）</li>
-<li>数据存储也是去中心化的，Polyglot Persistence，存储/数据库也是每个服务自己定</li>
-<li>基础设施自动化程度高，实现持续提交和持续集成</li>
-<li>开发者和用户间会更容易建立更多的联系，要持续关注软件如何帮助用户提升业务能力，而不是把软件看成是将要完成的一组功能</li>
-<li>针对失效的设计，使用服务作为组件的一个结果是，应用程序需要被设计成能够容忍服务失效，如断路器模式</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -986,6 +981,10 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
@@ -1003,15 +1002,11 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
         <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

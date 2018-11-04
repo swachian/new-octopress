@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-05-01T21:48:49+08:00</updated>
+  <updated>2018-11-04T23:21:40+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[洗滚筒洗衣机]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji/"/>
+    <updated>2018-11-04T21:09:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji</id>
+    <content type="html"><![CDATA[<p>家中一滚筒洗衣机购买多年，夏天的时候清洗过一下，但不得要领成效不大。原因在于清洗剂和其他很多说明其实都是针对波轮洗衣机，而波轮这方面的经验对滚筒并不适用。原因则在于水位。</p>
+
+<p>清洗剂本身要求溶解后在高水位浸泡2小时才有效果，网上甚至有人建议浸泡一夜。然而对于滚筒洗衣机来讲，水位普遍偏低，很难泡满。直到看见网上针对滚筒的建议，才明白解决的办法。关键在于适度<strong>轮转</strong>。</p>
+
+<p>具体方法为：</p>
+
+<ol>
+<li>放入清晰剂/粉直接到滚筒</li>
+<li>按漂洗模式放满水</li>
+<li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
+<li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
+<li>如果操作几回后，就一切顺手了。</li>
+</ol>
+
+
+<p>最终从效果来看，还真的洗出不少东西来。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2017 CRV养车成本汇总]]></title>
@@ -222,28 +246,6 @@ config switch</p>
 
 <p>dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[时间长了发现还是挺喜欢本田的]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de/"/>
-    <updated>2016-02-11T09:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/02/11/shi-jian-chang-liao-fa-xian-huan-shi-ting-xi-huan-ben-tian-de</id>
-    <content type="html"><![CDATA[<p>开CRV有半年多了，近来发现越发喜欢这个车甚至本田这个品牌。喜欢的原因首先是来源于和日产两个细节的比较。<br/>
-东本CRV的<strong>说明书</strong>是写的比日产好许多的，读起来很易读，不像日产是标准的非面向人类的说明书。而且这个说明书
-里面还会教用户如何自己拆换空调滤芯，而日产翻遍了也是没有的。在说明书的信息化方面，东本的app有详细的pdf说明书可供参考检索，
-而日产在这一部分是完全空白。对于和用户实际沟通上，本田要好出许多。</p>
-
-<p>另一个细节则来自<strong>智能钥匙</strong>。根据同事八代雅阁的经历，五六年前本田的智能钥匙是一块很简陋的电路板，更换电池时是直接
-以电路板示人的。但经过几年发展后，我的CRV上这个细节得到了很大的改善，电路板不再是粗糙地打开即见，然而仍然可以换电池。
-轮到日产的话，则所有的钥匙还是本田五六年前的水准，一块电路板大大裸露在外面。</p>
-
-<p>这个车之所以越开越喜欢，主要原因就是确实很对技术男的味。实际上美版的前雷达什么更对我的胃口，只是被东本改乱了。</p>
-
-<p>而之前一直不满的手机连接导航，用的多了感觉还是可以的。尽管连线比较麻烦，系统也还不够稳定，发展方向却是极其正确的。
-目前的水平也足以一用，虽然希望可以更方便些更快捷些更稳定些。对本田的倒车无力和杂音遍地有各种不满，至今依然不满，但鉴于CRV和本田实际各种良好的体验，
-这车确实越来越让人喜欢了。</p>
 ]]></content>
   </entry>
   

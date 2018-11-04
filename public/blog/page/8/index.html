@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="算起来今年买的千元左右的台湾制造也不少，夏天时候买过一个浦科特的256GB SSD，然后就是去年年底买的这个Papago gosafe520行车记录仪。 Updated at 2016.05.28： 新购入的宝宝的可调节座椅stella冈村也是台湾制造，尽管品牌是日本的。 从去年5月份开车之初开始 &hellip;">
+  <meta name="description" content="节日驱动开发再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
+为此又开始了折腾。 先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/">Mac 上折腾Ruby 2.2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-31T21:23:00+08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>节日驱动开发</strong>再次发生作用，圣诞前夕，Rails和Ruby分布发布了新版本，4.2.0和2.2.0.
+为此又开始了折腾。</p>
+
+<p>先是在Ubuntu上安装了Ruby 2.2.0，一切都很顺利。Rails因为之前已升级到rc3的版本，所以再升上去就很容易了。</p>
+
+<p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
+SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew update <span class="c"># 更新brew</span>
+</span><span class='line'>brew install openssl <span class="c"># 安装最新的ssl</span>
+</span><span class='line'>brew link openssl --force <span class="c">#建立关联</span>
+</span><span class='line'>brew install curl-ca-bundle <span class="c"># 这个执行是失败的，原因似乎是在2014年去除了</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
+下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
+解决办法是建立link或者索性在configure时指定</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure --with-openssl-dir<span class="o">=</span><span class="sb">`</span>brew --prefix openssl<span class="sb">`</span> --disable-install-doc --prefix<span class="o">=</span>/Users/me/.rbenv/versions/ruby-2.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
+
+<p>虽然不是什么高深的东西，但折腾起来还是挺麻烦的。也难怪现在Ruby on Rails的入门门槛越来越高，而且
+很多都是被挡在配置环境这第一道关口。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -897,107 +965,6 @@ http://192.168.203.198/toolbar/WEB-INF/web.xml</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vezel-昂科威-换代逍客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-30T22:27:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开天籁已经几个月了，总体感觉还不错，尽管最近右后侧轮胎扎了个钉子，这当然怪不了小天，只能说中国的路面
-实在是路况不好。</p>
-
-<p>这些日子下来，对这部车还是很满意的。车内空间够大，开起来很舒服。尤其是喜欢前雷达，
-对新手而言在碰见人来人往的地方以及需要挤过去的路况下，可以增强很多信心。
-各种配置也基本够用了，座椅内饰都很舒服，CVT在市区启停确实够平顺。但作为B级中，总是不可避免地有下面
-两个问题：</p>
-
-<ol>
-<li>空间大的同时意味着尺寸大，在上海停车什么的都不是很轻松，尽管是可以习惯的；</li>
-<li>油耗依然偏高，毕竟车大，天籁的高速的确省油，但上海的市区开开基本上在13个左右了，夏天开空调的话就更高了。</li>
-</ol>
-
-
-<p>而且，因为接送人的关系，我平时上下班开车往往像「保姆车」，需要怠速等待很长的时间。这种情况下，
-动力并不重要，而怠速油耗很重要，能有一台小排量的车就比较好了。2.5L的怠速油耗确实还是高了些。
-<a href="/blog/2013/11/03/kan-che-da-nuo-yi-ji/">去年看车</a>原本想选ES+逍客的。
-最后因为我们先出手，所以<a href="/blog/2014/01/17/teana/">买了天籁</a>。但是看看当时的组合依然是适用的。
-只是10来个月过去了，现在市场上又多了一些和逍客旗鼓相当的产品。例如本田新推出的缤智-Vezel。</p>
-
-<p>看尺寸、价格和定位，这一款车是明显冲着逍客去的。这个级别里还有一款吸引我的是昂科拉。
-都是4米2到4米3的车长，都是跨界型的suv。缤智的操控，估计还是比不上逍客的，因为逍客的悬挂是独立的，
-而且由欧洲设计。缤智只是一个飞度的地盘，那个悬挂其实有点拿不出手。但逍客毕竟是一台老款车了，
-缤智有后发制人的优势。逍客可能一年左右也会出换代逍客，但考虑到国产化以及日产现在捉急的产能，
-能否在明年买到逍客依然很难说。</p>
-
-<p>缤智的优点么，在我看来主要还是尺寸的优势。车身是很短的，但由于高度的增加，在主观感受上比A0级别的车大多了，
-也可以稍微拉开一点层次。看见飞度可爱是挺可爱的，但在派头和气势上实在欠缺。其次，就是缤智漂亮的外形了。
-后门和尾部都有点讴歌SUV的味道。隐藏式的门把手很有特色。<br/>
-同逍客相比，他的储物空间有优势，操控和过弯当然是不如的，毕竟悬挂和底盘都差的太多。同时内饰也稍好一些。
-多了电子驻车、电动天窗、后车雷达，但是又少了主驾驶电动调节和自动大灯。</p>
-
-<p>在我比较喜欢的配置方面，倒车影像是有的，没有前雷达只有后雷达是一个缺陷，但逍客的话有影像的车前后雷达
-就都没有了。自动大灯和电动座椅的缺失比较让人遗憾。不过逍客的主流配置也没有电动座椅。
-后视镜电动调节和加热是有的，但自动折叠是一律没有，更别提记忆了，不过这方面逍客也一样。
-其他高级的配置就更没指望了。可以说在配置方面还是缤智胜出，后雷达还是比自动大灯有用。</p>
-
-<p>不过目前已推出的缤智我不可能买，必须得是地球梦的动力组成才值得出手。
-另一点对本田的遗憾是变速箱也是CVT的。日系现在小动力的自动挡全面从4AT换成了CVT，
-要是能装配6AT的变速箱就好了。只是目前看来日系三个品牌的趋势是倾向于CVT，尤其是小排量的。
-甚至得知明年上市的新款CRV也要改成CVT了。这方面日本厂商也挺无聊的，幸亏这个世界的汽车没有全部变成日系车。</p>
-
-<p>跟逍客对比后，可以发现本田其实并不是新定义了一个细分市场，而是比较明显地对标逍客。
-所以有些普通的、应该有的配置反而没有出现在缤智上。本田对缤智的配置、动力的定义并
-不是主要从自己的实际和客户的需求出发，而是很大程度上和逍客度长协大的产物。所以个别之处
-显得有那么一点脑残。真的以后换用地球梦系列动力组成，其配置会怎么样变化也是一个很大的未知数。
-只能到明年推出后再看了。确实是值得继续关注的一款车型。然而，换代逍客在这方面又都补齐了，看来这个级别的王者还是逍客。</p>
-
-<p>另外可以考虑的就是本田的CRV和丰田的RAV4了。缤智和CRV的差价倒是很接近，尤其是现款的CRV打折幅度
-很大的情况下。不过CRV的2.0版本总体而言优于其2.4的版本，只是2.0群系列都没有倒车影像，需要自己加装。
-RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版本的了，搭载的6AT也能比2.0版本的CVT
-带来的体验更丰富些。2.5版本优惠后的价格比缤智的顶配也贵不了多少。但RAV4在一汽丰田的做工实在难以恭维，
-保险点还是CRV了。
-然而，问题在于这样一来，对天籁两个劣势的弥补就不好了。CRV的停车不比天籁方便，油耗也不遑多让。
-所以，这几个选择里面和天籁最搭的还是紧凑级的SUV，即1.5L的缤智和换代逍客。</p>
-
-<p>东日明年就要换代了又出一个所谓2015逍客确实很恶心，尤其是个别地区的换代产品都还已经上市了。
-但是，新逍客只在英国工厂生产，而中国注定又只能买到国产逍客。所以我们只能等待。国产生产线组建起来慢半年甚至一年都很平常。
-拿缤智来讲，日本本土去年年底就上市了，中国到今年都10月份了，还没正式上市呢。新逍客等到明年下半年才能在东风生产也不奇怪。</p>
-
-<p>除了短小型的缤智和逍客，体型和CRV/RAV4类似的昂科威也是未来的一项选择。目前已知的2.0T的版本确实配置很丰富、
-内饰很豪华，外观么除了太像GL8其他都还不错。最大的劣势就是这个2.0T的发动机本来是按在凯迪拉克身上的，
-凯迪拉克上每月正常使用四五千元的油耗实在不是买别克的人可以承受的。而从陈震的视频来看，在37公里时速下，依然
-油耗超过12升每公里，真的赶上市区行车，恐怕25升以上真的一点不夸张。但是，据说除了2.0T，还有1.5T的两驱版本。
-这么说的话，这个版本就很吸引人了。如果油耗能降到一个和rav4类似的程度，配置比2.0T不要减的太离谱，
-那么昂科威确实是很值得期待的另一款车。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -1015,6 +982,10 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
       </li>
     
@@ -1030,15 +1001,11 @@ RAV4就厚道一些，还带胎压监测的。而且买RAV4就是直接上2.5版
         <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

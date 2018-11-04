@@ -9,17 +9,14 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="@ModelAttribute 在Spring中有两个地方可以填写： Controller的Action method的参数前标注，提示需要设置该值 1
+  <meta name="description" content="多年以来，受制于java没有初始设置hash对-值的方法，例如js有： 1
 2
 3
-4
-5
-6
-7
-8
-9
-@ModelAttribute
-public void getUser(HttpServletRequest &hellip;">
+var obj = { a: 1, b: 2
+}; ruby在借鉴js的文法之前，有著名的rocket标注 1
+obj = {:a=&gt;1, :b=:2} 而java则只能继续使用过程定义来描述 1
+2
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +74,113 @@ public void getUser(HttpServletRequest &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/11/23/wen-yi-de-hashmapchu-shi-hua/">文艺的HashMap初始化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-23T20:33:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>多年以来，受制于java没有初始设置<code>hash</code>对-值的方法，例如js有：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ruby在借鉴js的文法之前，有著名的rocket标注</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">obj</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:a</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:b</span><span class="o">=</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而java则只能继续使用过程定义来描述</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;();</span>
+</span><span class='line'><span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class='line'><span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而最近发现了一种文艺一些的写法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">integer</span><span class="o">&gt;(){</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="n">put</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">put</span><span class="o">(</span><span class="s">&quot;b&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此种写法是利用了创建一个匿名类的文法，该匿名类直接继承自HashMap，而第二套花括弧则是实例初始化。</p>
+
+<p>实例初始化是对应于静态初始化，后者属于整个类，而前者属于某个对象初始化时进行。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">demo</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">do</span> <span class="n">sth</span> <span class="n">of</span> <span class="kd">class</span>
+</span><span class='line'>  <span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>    <span class="k">do</span> <span class="n">sth</span> <span class="n">of</span> <span class="n">instance</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其实这种写法的代码行数并不少，但是语意，主要是段落的分割清楚了许多。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -813,61 +917,6 @@ public void getUser(HttpServletRequest &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/20/shi-jia-crv/">试驾CR-V</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-06-20T14:29:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>大约1个月前，去邯郸路上的东本4s店看了CR-V，无奈当时的4s还没试驾车，于是只能静态考察。
-今天再去4s，终于有了新的试驾车，可以试驾了。</p>
-
-<p>既然再去试驾了，意味着静态考察的结果是令人满意的。这车本身的空间是最让人满意的，后备箱十分平整，
-尾门开关的感觉很爽。车子内部的空间也不小，前后排的距离都很宽裕，座椅高低也很适合中国人，无论男女。
-对大块头来讲，上上下下进进出出车门也比轿车方便。后排的地台也很平整，中间几乎没有突起，后排也有空调出风口。
-这些都是CR-V有优势的地方。</p>
-
-<p>静态不满的地方，还是这个中控和内饰显得确实太廉价了。低廉的气息扑面而来。虽然用了些软性材质，但塑料感依然很强。
-2.0的内饰是比较差的。对比同样是日系的天籁，皮革、中控的高级感都是明显不如的。</p>
-
-<p>今天试驾的是2.4顶配，加速很轻巧，本田的CVT看来挺强悍。方向盘也是轻的，不过比rav4重一点。
-A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较粗陋，
-到了2.4全皮的座椅，坐在里面依然掩饰不了铺面而来的廉价感，车厢感觉真的比天籁这类车差很多。
-虽然是皮质的座椅和搁手的，但这个皮质手感不佳。
-不过想要的是suv，也只能这样了。
-后视镜的视野很好，看的很清楚。加速方面和凯越不比了，比天籁也还是快，看来直喷真有直喷的好处。开起来后方向盘会加重，
-原地挪车的话方向盘可是足够轻的，适合单手揉轮。</p>
-
-<p>总的来讲，此次试驾的结果让我相当满意，原本打算立刻下单的，不过因为家长的原因还要再等几天。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -885,6 +934,10 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
       </li>
     
@@ -900,15 +953,11 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
         <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (47)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
