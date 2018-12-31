@@ -1,6 +1,6 @@
 source "https://gems.ruby-china.com/"
 
-ruby "2.3.4"
+ruby "2.4.5"
 
 group :development do
   gem 'rake', '~> 0.9'
