@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
-特别是搭配CS的语法后, 相当的让人感觉良好. 而越看NodeJS越有UNIX系统编程和网络编程的味道, &hellip;">
+  <meta name="description" content="早前读过adam的Logs Are Stream, Not Files, 但当时是阅读
+整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。 日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入）， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/05/replace-log-files-with-streams/">Replace Log Files With Streams</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-05T12:16:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
+整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
+
+<p>日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入），而文件相对就困难一些。
+总之，流更适合对分布式系统的集中处理。</p>
+
+<h3>站在开发的角度</h3>
+
+<p>以开发的角度来看，输出的内容无非就是stdout stderr，以及日志文件。但实际上文件和std很容易引起混淆。个人一直认为最直接最有用的
+莫过于<code>puts</code> <code>cout</code> <code>System.out</code> <code>printf</code> ，logger.info logger.debug我并没有发现到底有多少作用。对于运行在服务端的程序，这
+实在显得不是很有必要。stderr和stdout就足够用来区分了。</p>
+
+<h3>站在部署的角度</h3>
+
+<p>以部署的角度来看，全部当做stream自然好处很多。可以统一的重定向到文件或者syslog，或者其他更现代化的日志系统。只要这个系统能接受
+一个input stream。</p>
+
+<p>结论就是，能用流就用流吧，日志文件实在是很靠后的选择。</p>
+
+<h3>几种技巧和工具</h3>
+
+<ol>
+<li><p><a href="http://www.cyberciti.biz/tips/howto-linux-unix-write-to-syslog.html">syslog</a> <br/>
+syslog是要搭配bash的命令<code>logger</code>使用的。
+<code>sh
+ mydaemon | tee /var/log/mydaemon.log | logger
+</code>
+tee是让流再复制一份，logger则是linux自带的网syslog发消息的程序。发的目的地可以是远端的也可以是本地的，基于UDP协议。</p></li>
+<li><p><a href="https://github.com/facebook/scribe/wiki">Scribe</a><br/>
+则是facebook开源的日志工具，用法类似syslog，只是可以更多的组装，而且也提供了可以写日志的HTTP接口。</p></li>
+<li><p><a href="https://github.com/heroku/logplex">Logplex</a><br/>
+这是heroku的日志系统。基于erlang编写。顺便说一句，erlang和js都是很好的在语言级别实现了对Event-Driven I/O的深度整合。
+存放库是Redis这个NoSQL数据库。根据heroku的架构，个人猜测是在启动dyno时，将日志信息重定向了给Logplex的客户端，客户端
+再将内容加上app_id等信息后发给Logplex的服务。这是使用这项服务一个<a href="https://devcenter.heroku.com/articles/scaling#process_formation">帮助</a>.</p></li>
+<li><p>Upstart launchd  Systemd
+这是Ubuntu OSX 下替换传统的linux的init.d，负责启动服务的后台库。</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1851,53 +1924,6 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/10/oracle-partition-split-issues/">Oracle Partition Split Issues</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-10T13:41:00+08:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Split 一个分区有最多10次的限制。这跟实现的机制有关。当split发生时，是这么操作的：</p>
-
-<ol>
-<li>将现有的PART# + 1， 名字保留为被拆分的partition</li>
-<li>PART# - 1， 作为另一个partition的名字</li>
-<li>再继续拆分的话，依照上面的分法持续划分。</li>
-</ol>
-
-
-<p>所以10次以后，就会出现这种错误<code>ORA-00001: unique constraint (SYS.I_TABPART_BOPART$) violated</code></p>
-
-<p>自己值选的好一些，可以最多分成20个区。不过从实际情况来看，RAC似乎已经会自己relocate PART#。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/21/">&larr; Older</a>
@@ -1915,6 +1941,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/01/01/crv-2018/">2018 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
       </li>
     
@@ -1930,15 +1960,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/02/20/effective-java-3rd-edition/">Effective Java 3rd Edition</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (48)</a></li><li><a href='/blog/categories/车车'>车车 (35)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/crv'>Crv (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1946,7 +1972,7 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2018 - Hegel 2011 -
+  Copyright &copy; 2019 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

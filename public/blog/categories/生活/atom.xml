@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2018-12-31T21:41:48+08:00</updated>
+  <updated>2019-01-01T11:57:39+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2018 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018/"/>
+    <updated>2019-01-01T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018</id>
+    <content type="html"><![CDATA[<p>2018年的养车成本和2017年的竟然差不多。</p>
+
+<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> 条目     </th>
+<th align="left"> 2017     </th>
+<th align="left">2018     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left">   停车费     </td>
+<td align="left">   10123     </td>
+<td align="left"> 11029+2000</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保险费     </td>
+<td align="left">   4945     </td>
+<td align="left">  3637  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   油费     </td>
+<td align="left">     6444   </td>
+<td align="left">   7006</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   高速     </td>
+<td align="left">     368   </td>
+<td align="left">   510</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保养     </td>
+<td align="left">     1756   </td>
+<td align="left">  1568  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   洗车     </td>
+<td align="left">     275   </td>
+<td align="left">   355</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   上述合计     </td>
+<td align="left">  23911  </td>
+<td align="left">      24105+2000  </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>单位停车比之前每月贵了100，所以合计就是贵了1200.好在保险费用有较大的降幅，最终差别不大。</p>
+
+<p>比较神奇的是油费/公里竟然和去年差不多，都是0.77元/KM。平均油耗去年11.30L/100KM，今年11.49L/100KM，不过去年以95号油为主，今年全部是92号油，因此这一年油费确实涨的相当厉害了。<br/>
+行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
+
+<p>保险费用没有，不过违章其实有一笔200的开支。<br/>
+保养费用因为今年有大保，所以费用依然很高。不过不像去年那样有节气门故障的额外开支。洗车则是中规中矩。</p>
+
+<p>CRV也陪伴三年半多一点了，明年应该会把轮胎换一下，又是一笔开支啊。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[洗滚筒洗衣机]]></title>
@@ -147,105 +224,6 @@
 <p>在庙里吃完一碗素面之后，就开车回家了。</p>
 
 <p>三四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[openwrt n56u 和iptv]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/05/openwrt-n56u-he-iptv/"/>
-    <updated>2016-04-05T12:14:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/05/openwrt-n56u-he-iptv</id>
-    <content type="html"><![CDATA[<p>四年以前写的<a href="/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/">上海电信IPTV的VLAN ID和通过交换机连接两路IPTV</a>，而由于4k高清IPTV机顶盒的推广，
-当时的内容已经有些不合时宜。尽管，用一个交换机还是可以实现连接两路iptv。</p>
-
-<p>区别主要在于新的4k高清机顶盒同小红等盒子一样，需要双平面才能跑得起来。所谓双平面就是在专网之外机顶盒也要能够连接公网。
-这个变化其实是带来一大好处的，即通过一个路由设备接光猫的一个口子，也可以让iptv和公网业务同时跑起来。下面记录一下操作过程。</p>
-
-<h3>openwrt</h3>
-
-<p>首先，这么灵活的配法，当前asus netgear等原厂的固件是不支持此种功能的，所以需要第三方固件，如openwrt dd-wrt。我选择了openwrt，是因为其官网支持asus-n56u路由器。
-<a href="https://wiki.openwrt.org/toh/asus/rt-n56u">官方链接</a> ，可以从前面这个链接获得操作过程和固件。注意下载<code>squashfs-factory.bin</code>，不要下载chaos版。我就误下了chaos版，导致只能采用reset的办法重新装回了华硕的固件。openwrt很贴心的一点就是在网页里提供了恢复固件的操作步骤</p>
-
-<p><code>sh
-Download &amp; Install the asus "Firmware Restoration" from asus website
-Download the factory image from asus
-Enter Recovery Mode
-Unplug Router
-Hold Reset Button and Plug in Router
-Release button when front LED flashes slowly
-Use the following to set up your TCP/IP settings:IP address: 192.168.1.x Subnet mask: 255.255.255.0
-Select firmware *.trx and upload
-</code></p>
-
-<p>要点是把本机的ip设置成192.168.1.2,而且如果本机有多块网卡（包括虚拟网卡）则只保留一个连接路由器lan口的网口活跃。这样华硕的固件才
-明确会打开这个网口并同已进入恢复模式的路由器相连。有了这个恢复模式存在，意味着asus的这款路由器基本是刷不死的。</p>
-
-<p>安装完openwrt，设置好基本的wan口，我是采用的dhcp方式获取wan地址，就可以进入配置iptv vlan的过程了。</p>
-
-<h3>关于4k高清机顶盒获取公网和专网IP的流程</h3>
-
-<p>参考<a href="https://www.ydkfblog.com/?m=201602">上海电信光猫一体机配合Openwrt拨号正常使用OTT 4K IPTV</a>，
-找到了iptv dhcp的流程
-<img src="/images/openwrt/4kiptvdhcp.png" alt="image" /></p>
-
-<p>看清流程后，就可以知道：
-1. 要先让4k iptv机顶盒接入公网<br/>
-2. 路由器要支持DHCP-Option：125<br/>
-3. 路由器要支持vlan 85的进出</p>
-
-<p>公网配置是基础，剩余两点的配置可以归纳为</p>
-
-<blockquote><ol>
-<li><p>接在自备路由器上时，将路由器WAN口、CPU口、接IPTV的口 一起新建一个VLAN 85，3个端口全部为tagged</p></li>
-<li><p><code>/etc/dnsmasq.conf</code>中要加入<code>dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e</code> ,即对Option 125的支持</p></li>
-</ol>
-</blockquote>
-
-<p>做完这些之后，至少目前中兴的机顶盒是全面支持了。</p>
-
-<p>配置附录</p>
-
-<p>/etc/config/network
-```
-config switch</p>
-
-<pre><code>    option name 'switch0'                                                                                                                                                        
-    option reset '1'                                                                                                                                                             
-    option enable_vlan '1'                                                                                                                                                       
-    option enable_vlan4k '1'                                                                                                                                                     
-</code></pre>
-
-<p>config switch_vlan</p>
-
-<pre><code>    option device 'switch0'                                                                                                                                                      
-    option vlan '1'                                                                                                                                                              
-    option ports '0 1 2 3 8t'                                                                                                                                                    
-</code></pre>
-
-<p>config switch_vlan</p>
-
-<pre><code>    option device 'switch0'                                                                                                                                                      
-    option vlan '2'                                                                                                                                                              
-    option ports '4 8t'                                                                                                                                                          
-</code></pre>
-
-<p>config switch_vlan</p>
-
-<pre><code>    option device 'switch0'                                                                                                                                                      
-    option vlan '85'                                                                                                                                                             
-    option vid '85'                                                                                                                                                              
-    option ports '1t 2t 4t 8t'    
-</code></pre>
-
-<p>```</p>
-
-<p>/etc/dnsmasq.conf
-```</p>
-
-<h1>cname=bertand,bert</h1>
-
-<p>dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e
-```</p>
 ]]></content>
   </entry>
   

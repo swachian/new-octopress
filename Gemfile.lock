@@ -79,8 +79,5 @@ DEPENDENCIES
   stringex (~> 1.4.0)
   thin
 
-RUBY VERSION
-   ruby 2.4.5p335
-
 BUNDLED WITH
    1.15.0
