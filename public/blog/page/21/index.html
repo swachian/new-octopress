@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Split 一个分区有最多10次的限制。这跟实现的机制有关。当split发生时，是这么操作的： 将现有的PART# + 1， 名字保留为被拆分的partition
-PART# - 1， 作为另一个partition的名字
-再继续拆分的话，依照上面的分法持续划分。 所以10次以后， &hellip;">
+  <meta name="description" content="近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。
+今天又读到一篇讲为什么从NodeJS迁移到RoR。
+作者列举的主要理由如下： NodeJS适合 short lived requests。 并不是很明确这里的request是指什么，似乎就是异步先返回的意思， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,85 @@ PART# - 1， 作为另一个partition的名字
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/22/where-to-use-nodejs/">Where to Use NODEJS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-22T09:27:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。<br/>
+今天又读到一篇讲<a href="http://blog.targeterapp.com/post/22984987832/why-we-moved-from-nodejs-to-ror">为什么从NodeJS迁移到RoR</a>。
+作者列举的主要理由如下：</p>
+
+<ol>
+<li>NodeJS适合 <strong>short lived requests</strong>。 并不是很明确这里的request是指什么，似乎就是异步先返回的意思，但这样的体验应该不会好。</li>
+<li>框架很年轻，变动很大。这个经历过Rails的人都明白，估计NodeJS的变动更大，因为js本身就很bt。</li>
+<li>Testing的表现一般，比Django RoR的测试平台还是差距很大。</li>
+<li>他需要Cache所有的东西。Node的强项是每秒千万次点击承受力，对cache似乎并不擅长。1000 RPS的访问压力，对Rails+Nginx已经是小菜一碟。</li>
+</ol>
+
+
+<p>然后作者又推荐了一篇<a href="http://nodeguide.com/convincing_the_boss.html">Guide</a>
+里面提到的了node.js适合与不适合的。</p>
+
+<p>Bad Use Cases:</p>
+
+<ul>
+<li>CPU重度使用<br/>
+js适合高I/O的，而不适合重CPU的。视频编码解码、人工智能等CPU hungry的软件还是用C吧。有提到js写C的addons是挺方便的</li>
+<li>简单的CRUD / HTML apps<br/>
+js下的是不如Rails，CakePHP或者Django那样强有力的</li>
+<li>再搭配其他新技术<br/>
+比如NoSQL，这样会让技术风险做乘法，毕竟两样都不熟的东西组合在一起，会提出更多的挑战。而这些可能对你做出吸引人的业务没有magically的提高</li>
+</ul>
+
+
+<p>Good Use Cases:</p>
+
+<ul>
+<li>JSON APIs<br/>
+对包装数据资源，比如数据库和web services，然后将他们转换成JSON接口暴露给外部使用</li>
+<li>Sigle page apps<br/>
+指那些富客户端的页面应用，如Gmail。好处是可以在客户端和服务端共享很多代码，比如验证确认类的。同时，也给处理多请求的能力有了用武之地</li>
+<li>利用现有软件<br/>
+可以fork多个子进程并对这些进程的输出当做一个stream来处理，使得node成为一个很好的杠杆现存软件的选择。</li>
+<li>Streaming data<br/>
+http实质上是streams，只是多年来都被当成atomic events来处理了。但js可以利用这一点。在诸如实时分析文件上传、多数据层间的proxy搭建等一显身手</li>
+<li>Soft Realtime Applications<br/>
+但有gc的存在，所以不适合作为hard realtime的实现，对允许不要求始终如一的响应时间的系统还是合适的。Hard方面的更好的选择是Erlang。</li>
+</ul>
+
+
+<p>我打算做的东西不在bad case之类，和good case 基本沾边。目前的结论是值得一试。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -795,224 +874,6 @@ PART# - 1， 作为另一个partition的名字
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">Learning Mongodb (3) 部署和管理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-17T11:07:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>系列链接：</p>
-
-<ol>
-<li><a href="/blog/2012/03/29/learning-mongodb-1/">mongodb基础</a></li>
-<li><a href="/blog/2012/03/30/learning-mongodb-2/">尝试分布式及复制  （sharding and replication)</a></li>
-<li><a href="/blog/2012/04/17/deployment-and-administration-for-mongod/">部署和管理</a></li>
-</ol>
-
-
-<h3>部署环境要求</h3>
-
-<ul>
-<li><p>架构</p>
-
-<ul>
-<li><strong>64-bit</strong> , mongo会把所有的文件都map成虚拟地址空间，32位至多只能利用2GB内存空间</li>
-<li>little-endian , 不适合SPARC, PowerPC, PA-RISC，客户端（驱动）无所谓运行环境</li>
-</ul>
-</li>
-<li><p>CPU</p>
-
-<ul>
-<li>非cpu密集型应用</li>
-<li>I/O瓶颈远比CPU瓶颈出现的可能性多</li>
-<li>多客户端同时读时，多核会被利用</li>
-<li>写操作还是单核</li>
-</ul>
-</li>
-<li><p>RAM</p>
-
-<ul>
-<li>越多越好</li>
-<li>working set， index size， ram总数</li>
-</ul>
-</li>
-<li><p>Disk</p>
-
-<ul>
-<li>IOPS 优先</li>
-<li><em>background flush</em> 60s sync到磁盘一次</li>
-<li>ssd可以优化速度（solid state drive）</li>
-<li>RAID 10 组成 LVM</li>
-</ul>
-</li>
-<li><p>文件系统</p>
-
-<ul>
-<li>ext4 或者 xfs，快速、连续的磁盘分配</li>
-<li>禁用access time(atime)更新</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># 禁用 atime更新</span>
-</span><span class='line'>sudo mv /etc/fstab /etc/fstab.bak
-</span><span class='line'>sudo vim /etc/fstab
-</span><span class='line'><span class="c"># file-system mount type options dump pass</span>
-</span><span class='line'><span class="nv">UUID</span><span class="o">=</span>8309beda-bf62-43 /ssd ext4 noatime 0 2
-</span><span class='line'>
-</span><span class='line'>改完文件后，可以不用重启
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>文件描述符(FD)
-
-<ul>
-<li>默认的1024不够用  <code>lsof | grep mongo | wc -l</code> 可以查看当前mongod打开了多少个文件和连接</li>
-<li>调大 <code>ulimit -Hn</code> 可以查看</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>vi /etc/security/limits.conf
-</span><span class='line'>mongodb hard nofile 10240
-</span><span class='line'>下次登录后生效
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>时钟</p>
-
-<ul>
-<li>ntp协议，在跑shard和replication时候必须启用的东西</li>
-</ul>
-</li>
-<li><p>ec2上使用mongodb</p>
-
-<ul>
-<li>ec2易用、地理范围广、价格有竞争力</li>
-<li>68GB RAM的限制</li>
-<li>使用  EBS 存储， 吞吐性能一般化</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>服务器配置</h3>
-
-<ul>
-<li><p>选择拓扑</p>
-
-<ul>
-<li>是否需要shard， 是否需要replica</li>
-<li>建议多机</li>
-</ul>
-</li>
-<li><p>打开journal标志</p></li>
-</ul>
-
-
-<h3>安全保障</h3>
-
-<ul>
-<li><p>环境安全</p>
-
-<ul>
-<li>防火墙</li>
-<li>数据的传输是不加密的</li>
-</ul>
-</li>
-<li><p>授权</p>
-
-<ul>
-<li>给admin区增加用户<code>use admin; db.addUser("boss", "supersecret")</code></li>
-<li>启动时带上选项 <code>mongod --auth</code></li>
-<li>使用admin然后再授权 <code>use admin; db.auth("boss", "supersecret")</code></li>
-<li>给其他库，如stock，创建用户 <code>use stocks; db.addUser("trader", "moneyfornuthin")</code></li>
-<li>查找用户 <code>db.system.users.find()</code></li>
-</ul>
-</li>
-<li><p>keyFile</p>
-
-<ul>
-<li>cluster 和 sharding 的时候需要制定keyFile，mongos实例也要具备这个密钥文件</li>
-</ul>
-</li>
-<li><p>日志记录</p>
-
-<ul>
-<li>运行时&#8211;logpath指定</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>监控工具</h3>
-
-<ul>
-<li><p>serverStatus<br/>
-<code>use admin; db.runCommand({serverStatus: 1})</code><br/>
-<strong>globalLock</strong> 表示等待写锁的时间。ratio过高意味着需要优化调整<br/>
-<strong>mem</strong> 段的单位是MB</p></li>
-<li><p>mongostat</p>
-
-<ul>
-<li>类似 iostat 运行的效果</li>
-</ul>
-</li>
-<li><p>web console</p>
-
-<ul>
-<li>&#8211;rest 标志打开的话，可以从web处得到更多的运行信息</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>备份与压缩</h3>
-
-<p>mongodump 和 mongorestroe两个组合，也可以直接拷贝文件。不过后者要求lock数据库，即要求mongod停止往磁盘同步。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -1030,6 +891,10 @@ PART# - 1， 作为另一个partition的名字
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/02/03/jian-chi-de-cheng-guo/">坚持的成果</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/01/01/crv-2018/">2018 CRV养车成本汇总</a>
       </li>
     
@@ -1045,15 +910,11 @@ PART# - 1， 作为另一个partition的名字
         <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (79)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (29)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

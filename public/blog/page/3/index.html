@@ -9,11 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="用于协作的服务，提供目录树的结构。基本可以认为是Yahoo出品。 data registers - called znodes, file
-parlance - directory 数据全部保存在内存中。 优势：
-1. 性能好，可在大规模的分布式系统里使用
-2. 可靠性高，可防止单点故障
-3. &hellip;">
+  <meta name="description" content="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/ Google的工程师讲解的P2P去中心化现金交易的底层技术&#8212;区块链（Block Chain），然后发现区块链的一大基石
+是公钥私钥的加密技术， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +68,91 @@ parlance - directory 数据全部保存在内存中。 优势：
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/02/qu-kuai-lian-gong-ke/">区块链功课</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-02-02T13:55:00+08:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>https://www.igvita.com/2014/05/05/minimum-viable-block-chain/</p>
+
+<p>Google的工程师讲解的P2P去中心化现金交易的底层技术&#8212;区块链（Block Chain），然后发现区块链的一大基石
+是公钥私钥的加密技术，所以作者拿出了经典的Alice Bob来作为举例。</p>
+
+<h2>中心化的支付技术</h2>
+
+<p>目前的支付系统流行的是triple-entry 记账方式。三联为Alice Bob 和Chuck（中心节点，比如银行）都记录着交易记录，
+以保证交易的可靠性和非重复性。
+这套系统运作的前提是大家都信任Chuck。</p>
+
+<h2>去中心化的难点</h2>
+
+<h3>1. 一致性问题</h3>
+
+<p>去中心化后，系统变成了分布式的，而分布式在一致性方面先天弱于中心化的。处理<strong>Double-spending</strong>的问题是一个难点。
+因为一个交易发生后，系统中的其他参与者往往并不知道已经发生，可能还认为Bob拥有大量的钱财。在一个小的系统里，
+可以通过全部完成通知后才认可交易成功，而这对一个大规模系统基本不可行。CAP理论表明P2P系统很难支持强一致性，但是，区块链技术
+的亮点在于实现了weak(er) consistency。</p>
+
+<h3>2. Sybil attacks （西比尔攻击）</h3>
+
+<p>该攻击的特色在于虚拟出许多虚假的交易者，让真实的交易者误以为消费已经坐实。解决办法是增加造假的成本，同时保持验证的
+成本够低，通过经济杠杆来从结构上阻止有人愿意造假，因为得不偿失就是傻事了。</p>
+
+<p>但这带来的一个问题就是单个交易成本会很高，如果交易的手续费高于交易本身，那么这套系统也是没法运行的。</p>
+
+<h3>Block的概念</h3>
+
+<p>Block就是一组交易的集合，不单如此每个Block还记录了前一个Block，从而构成了Block Chain区块链。
+每个交易者都可以将有效的交易集合生成一个block，生成block需要耗费大量的计算资源。
+而将验证成本集中成Block的好处就是降低了每笔交易的成本，或者说交易集合共同承担了手续成本。而对交易有效性的、一致性、Sybil attacks的
+防范都基于Block来进行。</p>
+
+<h3>Block Chain的冲突</h3>
+
+<p>因为所有的参与者都可以生成Block，所以一笔交易可能会加入在多个Block里。此时就构成了冲突，出现了chain fork。Block Chain对此的解决方式很简单粗暴，
+永远选择最长的那个chain fork作为“真实的”交易链，并丢弃之前的交易分支。</p>
+
+<p>使用的技术都是现成的：</p>
+
+<ul>
+<li>accounting</li>
+<li>cryptography</li>
+<li>networking</li>
+<li>proof-of-work</li>
+</ul>
+
+
+<p>然而集合起来就又构成了一个新的精巧的方案。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1103,63 +1185,6 @@ public, /templates.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/31/che-xian/">车险</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-31T22:49:00+08:00" pubdate data-updated="true">May 31<span>st</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>时间很快，CRV买了快要一年了，又到了车险续保的日子。过去的11个月还算基本顺利，车子没遇到大的损害，
-只有一些小的刮蹭。本来想用划痕险统一处理一下，但又担心来年保费政策大变化，所以还是没用。</p>
-
-<p>因为没有出险，所以商业险给打了七折，下面是对比</p>
-
-<ul>
-<li>车损：现2109.58，原3514.15</li>
-<li>三责：现1176，   原1689.48</li>
-<li>盗抢：现取消，    原977.02</li>
-<li>划痕：现339.5,   原486.35</li>
-<li>各项不计免赔：现543.77，原1049.04</li>
-</ul>
-
-
-<p>总体折扣尤其是车损的折扣比7折还是要低不少的。那么问题来了，明明是7折，怎么反而会更低呢？难道政府控制的
-保险公司是活雷锋？</p>
-
-<p>非也。差的多的主要是车损，而对比两份保单，可以发现原先的保额是249441元，然而新的是224475元，这就
-差了近10%。经过一番搜索，发现其实保额的计算是这么来的：车厂的出厂原价+10%的购置税。所以从天籁到crv，
-甚至是跑在中国马路上的其他私家车，金额都会稍大。CRV今年比去年车损保额降了10%，应该是总理新政的功劳。</p>
-
-<p>与去年不同，盗抢险这次取消掉了，毕竟生活在上海，发生车辆被盗又不被找回的概率是很低很低的，还是不买了吧。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1177,6 +1202,10 @@ public, /templates.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/02/03/jian-chi-de-cheng-guo/">坚持的成果</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/01/01/crv-2018/">2018 CRV养车成本汇总</a>
       </li>
     
@@ -1192,15 +1221,11 @@ public, /templates.</p>
         <a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/">为你自己学Git笔记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (28)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (79)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (29)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (9)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/sass'>Sass (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/安装'>安装 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/ice'>Ice (1)</a></li><li><a href='/blog/categories/管理者'>管理者 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/sdoc'>Sdoc (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/svn'>Svn (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/网络编程'>网络编程 (1)</a></li></ul>
 </section>
   
 </aside>

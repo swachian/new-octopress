@@ -1229,8 +1229,12 @@
         <lastmod>2019-01-01T11:57:00+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2019/02/03/jian-chi-de-cheng-guo/</loc>
+        <lastmod>2019-02-04T00:04:13+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2019-01-01T12:48:28+08:00</lastmod>
+        <lastmod>2019-02-04T00:04:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1238,7 +1242,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2019-01-01T12:48:28+08:00</lastmod>
+        <lastmod>2019-02-04T00:04:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

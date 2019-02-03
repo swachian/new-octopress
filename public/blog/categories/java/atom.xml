@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-01-01T12:50:14+08:00</updated>
+  <updated>2019-02-04T00:10:52+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[坚持的成果]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/02/03/jian-chi-de-cheng-guo/"/>
+    <updated>2019-02-03T23:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/02/03/jian-chi-de-cheng-guo</id>
+    <content type="html"><![CDATA[<p>坚持，始终是一种美德。
+在软件开发的世界里，Java坚持了很多年，Mybatis也坚持了很多年。
+尽管动态语言是那么的适合web开发，以至于Java在他们面前有好几年十分的被动。但通过Spring的IOC等特性，
+生生造出来了一个具备很多动态语言特性的框架，从而具备了很多原本只有动态语言才具备的特性。</p>
+
+<p>另外，Mybatis从一个起初土的掉渣的东西，经过十几年持续有人使用的努力，现在竟然在mybatis-plus的帮助下形成了
+Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了JPA的优势，但在查询和支持SQL上又要远较JPA灵活许多。
+因为坚持，实现了巨大的超越。</p>
+
+<p>所以，有时候我们需要有点耐心，坚持一下。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clean Code]]></title>
@@ -180,27 +198,6 @@ public class Application {
 头等安卓开发语言。查了一下，此前获得此定位的仅有java，这就可能有很大的不同了。kotlin有了google的支持，而其他所谓挑战者可没这个干爹。并且，Kotlin的创建者又是目前最流行的java ide的公司贡献的，可以保证在<strong>开发工具上的体验和支持</strong>，这么看来它的优势就比scala等强多了。</p>
 
 <p>希望还是能帮助java改进吧，当然这个有点难，即使java8好几年下来了，也不知道有没有普及率超过java程序员的50%</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[thymeleaf感想]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang/"/>
-    <updated>2017-05-21T00:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang</id>
-    <content type="html"><![CDATA[<p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
-然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
-服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
-
-<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
-可以认为这块已经处于冷淡的状态。</p>
-
-<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
-新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
-
-<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
-这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
-花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
 ]]></content>
   </entry>
   
