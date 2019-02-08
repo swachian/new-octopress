@@ -1137,6 +1137,10 @@
         <lastmod>2018-04-07T22:35:20+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2017/03/01/cazheng-shu-lue-ji/</loc>
+        <lastmod>2019-02-08T23:10:13+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity/</loc>
         <lastmod>2018-04-07T22:35:20+08:00</lastmod>
     </url>
@@ -1230,7 +1234,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2019-02-08T23:06:24+08:00</lastmod>
+        <lastmod>2019-02-08T23:10:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1238,7 +1242,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2019-02-08T23:06:24+08:00</lastmod>
+        <lastmod>2019-02-08T23:10:13+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CA证书略记 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="CA是Certificate Authority的缩写，就是一个证书颁发机构的意思。
+它的作用是给某些公钥证书进行背书，以让调用者相信所获得的公钥证书确实的某个组织给予的。 具体做法可抽象为：
+1. 某个组织自己生成一个公钥/私钥对
+2. 该组织向某CA申请证书，需要把自己的身份信息、公钥交给ca &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2017/03/01/cazheng-shu-lue-ji/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2015/02/20/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">CA证书略记</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-01T19:08:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>CA是Certificate Authority的缩写，就是一个证书颁发机构的意思。
+它的作用是给某些公钥证书进行背书，以让调用者相信所获得的公钥证书确实的某个组织给予的。</p>
+
+<p>具体做法可抽象为：<br/>
+1. 某个组织自己生成一个公钥/私钥对<br/>
+2. 该组织向某CA申请证书，需要把自己的身份信息、公钥交给ca，同时用自己的私钥给以上信息签名形成一个CSR，格式可以说pkcs10等<br/>
+3. CA生成证书，比如P7b格式的证书。</p>
+
+<p>此后，该申请的组织就可以把获得的证书交给客户，客户会去CA处验证证书的有效性等。</p>
+
+<p>在现实中，浏览器、手机等默认内建很多知名CA，可能有几百个，对于这些CA颁发的证书均认为是安全的。</p>
+
+<p>上述只是颁发完毕，之后进入使用阶段。</p>
+
+<p>公钥与私钥的理解：
+　(1)私钥用来进行解密和签名，是给自己用的。<br/>
+　(2)公钥由本人公开，用于加密和验证签名，是给别人用的。<br/>
+  (3)当该用户发送文件时，用私钥签名，别人用他给的公钥验证签名，可以保证该信息是由他发送的。当该用户接受文件时，别人用他的公钥加密，他用私钥解密，可以保证该信息只能由他接收到。</p>
+
+<h3>数字签名的基本用法</h3>
+
+<p>由于私钥加密东西长度是有限制的，所以一般私钥只用于对内容散列后的签名。
+比如<code>SHA1withRSA</code>，顾名思义就是SHA1散列后用rsa加密散列值。</p>
+
+<p>公钥端收到后，可对散列值进行解密，解密后再和收到的数据进行散列操作后的结果进行比对，如果散列值一致，那么该签名就是有效的。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-01T19:08:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/技术/'>技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2017/03/01/cazheng-shu-lue-ji/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2017/03/01/cazheng-shu-lue-ji/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/02/02/qu-kuai-lian-gong-ke/" title="Previous Post: 区块链功课">&laquo; 区块链功课</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2017/05/01/truffle-and-solidity/" title="Next Post: Truffle And Solidity">Truffle And Solidity &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/02/03/jian-chi-de-cheng-guo/">坚持的成果</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/01/01/crv-2018/">2018 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/11/04/xi-gun-tong-xi-yi-ji/">洗滚筒洗衣机</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/01/clean-code/">Clean Code</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (79)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (10)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+<script type="text/javascript">
+    (function() {
+        var twitterWidgets = document.createElement('script');
+        twitterWidgets.type = 'text/javascript';
+        twitterWidgets.async = true;
+        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+</script>
+
+
+
+
+</body>
+</html>

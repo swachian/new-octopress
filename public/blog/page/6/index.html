@@ -9,9 +9,15 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="这次买车和一年多前买天籁已经完全不一样了。那时候对驾车用车并没有多少了解，总以为车是越大越舒服，
-而实际当上司机之后，开始明白大车其实在上海开顾忌的东西多，停车也不方便，尽管车子本身的品质还是很好的。
-对自己需要什么，什么开起来方便不再是懵懵懂懂的，有了较明确的想法。 &hellip;">
+  <meta name="description" content="基本思路是对方要先注册一下，注册的时候提供回调地址，服务平台生成一个id给该用户。 然后，用户用这个id来访问平台公开的认证链接，平台生成code并通过注册时提供的回调地址发送给对方。 对方最后根据code到token获取地址拿到实际的token内容： 1
+2
+3
+4
+5
+6
+7
+8
+{ " &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +75,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/22/ji-yu-oauthde-api-tokensheng-cheng/">基于OAuth的API Token生成</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-22T16:00:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>基本思路是对方要先注册一下，<strong>注册的时候提供回调地址</strong>，服务平台生成一个<strong>id</strong>给该用户。</p>
+
+<p>然后，用户用这个id来访问平台公开的认证链接，平台生成<strong>code</strong>并通过注册时提供的<strong>回调地址</strong>发送给对方。</p>
+
+<p>对方最后根据code到<strong>token</strong>获取地址拿到实际的token内容：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  "access_token":"01234567-89ab-cdef-0123-456789abcdef",
+</span><span class='line'>  "expires_in":28799,
+</span><span class='line'>  "refresh_token":"01234567-89ab-cdef-0123-456789abcdef",
+</span><span class='line'>  "token_type":"Bearer",
+</span><span class='line'>  "user_id":"01234567-89ab-cdef-0123-456789abcdef",
+</span><span class='line'>  "session_nonce":"2bf3ec81701ec291"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -866,66 +930,6 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/20/crv/">CR-V</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-20T23:22:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>改款CR-V终于在今天，4月20号公布售价了。东本这次还是很务实的，
-发布会没有整很多没用的，简洁明了直接到位。</p>
-
-<p>和对比配置预料的差不多，果然是2.0官降两万，2.4变化不大。不过2.4的顶配也降了1万多。</p>
-
-<p>2.4的主力目录价没优惠肯定让一部分人失望，2.0的官降2万，基本也差不多了。</p>
-
-<p>2.0是必须降的，这次也确实没增加什么东西。</p>
-
-<ul>
-<li>日行灯看过照片，很残废的。</li>
-<li>ESP本来本田就算厚道，老款CR-V上没装的版本并不多。</li>
-<li>坡道辅助是搭配CVT才需要的，如果是AT压根不需要这东西，当然不用认为是新增的。</li>
-<li>这套胎压监测是纯软件实现的，当然软件也是要研发成本的，只是配给2.0也不会增加成本。</li>
-</ul>
-
-
-<p>所以，真真切切提高的也就只有发动机启停这一项了。再看看2.0的配置，很明显就是用来跑量的，官降2万我是觉得也差不多了。</p>
-
-<p>其实对2.0来讲，原厂弄个雷达，再配个低分辨率的影像，就会好很多。不过这个4s估计都会加装的。
-只是要原厂服务的话，就让消费者必须去选高配。
-但CRV在一些不能自己改的部分，车身稳定、气囊什么的，低配也都配的很到位了。</p>
-
-<p>我是觉得这个定价还是挺合理的。毕竟老款2.4，da屏只有顶配导航版才有，那个定价是26.28万，优惠完了也要23万以上。本来就是按23.28万左右来估计的。
-不过不是每个人都像我这样不去横向比较的。因为途观和翼虎这两款坚决不要，有了天籁又不太想再考虑奇骏，毕竟还想有点新鲜感。RAV4的鼓起的后备箱地台实在不喜欢。对我来讲，现在这样的带DA屏的CRV是完全可以接受的了。不出意外，下半年的车应该就是CR-V, 2.4两驱豪华版。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -966,7 +970,7 @@ A柱和rav4也差不多，有点档视线。当初2.0的内饰让人感觉比较
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (10)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (79)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (10)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>

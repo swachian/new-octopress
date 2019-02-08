@@ -9,7 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用git diff对一个一个目录或者文件进行比对与合并。 &hellip;">
+  <meta name="description" content="补记，原始记录与gist上。 用SSH进行开发已经五六年了，这个架构这些年一直没动过。随着Spring的日益兴盛，而Struts2相对停滞沉闷且安全漏洞始终没有很好地解决。
+因此决定全面转换到Spring，即采用Spring MVC。下面是一些自己的体会。 总体感觉 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,111 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/24/spring3-de-xue-xi-ji-tong-railsde-dui-bi/">Spring3 的学习及同Rails的对比</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T23:53:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>补记，原始记录与<a href="https://gist.github.com/swachian/6070011">gist</a>上。</p>
+
+<p>用SSH进行开发已经五六年了，这个架构这些年一直没动过。随着Spring的日益兴盛，而Struts2相对停滞沉闷且安全漏洞始终没有很好地解决。
+因此决定全面转换到Spring，即采用Spring MVC。下面是一些自己的体会。</p>
+
+<h2>总体感觉</h2>
+
+<p>Spring引以为豪的是依赖注入，其目的是方便组装，更现实的意义应该是方便测试。放在main或者test文件里，就可以调用。这一点确实对
+web开发很重要，避免了对容器的过度依赖。</p>
+
+<p>而它的MVC凑合着也能用用。比起Struts2几乎已经不分伯仲了，比Rails那就差的远了。</p>
+
+<h2>静态资源</h2>
+
+<p>静态资源的处理是最大的进入。终于全部放到某个目录下了，这样偏于集中管理和存放规范。配置也比较简单。</p>
+
+<h2>控制器</h2>
+
+<p>MVC中的C，由Mapping选择和交付处理两个模块组成。Mapping基本不需要写什么xml的内容了，改成了在controller的class文件里写annotation。<code>@RequestMapping</code>, <code>@Controller</code> 虽然还是有点啰嗦，还是可以接受的。引入Restful可以说是一大进步，Java的框架页终于开始支持 <strong>PathParameter</strong> 。这些都是明显受到了Rails的影响，而且也学的相当到位。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  @Autowired
+</span><span class='line'>  HttpServletRequest request = null;
+</span><span class='line'>
+</span><span class='line'>  @Autowired
+</span><span class='line'>    HttpSession session = null;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样写，request和session就可以被注入了，甚至连setter的方法也不用设置，应该是直接类型注入的。查了一下<code>@Autowired</code>也确实优先按类的类型注入。</p>
+
+<h3>参数填写</h3>
+
+<p>尤其是依靠 <strong>依赖注入</strong> 在设置参数、设置request等方面有着突出的表现。较之struts2的 <code>user.name</code>式命名方式， <code>name</code>直接赋值给User类型的参数是更合理些的。这方面做得真的很棒。</p>
+
+<h3>参数验证</h3>
+
+<p>这个就比较差了。写在model里的annotation会一场臃肿，表现力远远还不如直接写java。</p>
+
+<h3>C和V之间的信息传递</h3>
+
+<p>Controller和View之间传递主要包含两个部分，一个是渲染的view的类型，另一个就是controller里面参数的数据。这部分也已经做的很不错了。<code>model.addAttribution()</code> <code>return "sss/home</code> 都已经很简洁。对HTML和JSON的支持也都不错。</p>
+
+<h2>视图</h2>
+
+<h3>视图的代码</h3>
+
+<p>视图层方面又多了很多标签。个人不喜欢标签，标签就是code，表达力还不如java的code制造方式。每个框架还企图再造一套标签，这有什么用的意义呢？</p>
+
+<h3>布局</h3>
+
+<p>视图方面是用的tiles，伴随着struts1出来的东西了，凑合着也能用用，比Rails是差远了。</p>
+
+<h3>分页</h3>
+
+<p><del>这个可能不单单是视图层面的问题，而是属于整个栈的。没有特别简单的整合办法。</del></p>
+
+<p>JpaRepositories, PageRepositories都支持分页和排序了，再加一个绘制的标签或helper，基本也相当凑合了可以。</p>
+
+<h2>模型</h2>
+
+<p>之前认为spring没有自己的模型。但仔细看下来，spring data jpa正是spring的模型层。借用hibernate做provider，可以提供相当优秀的存储层和Pojo模型。加之java spring擅长的事务处理，这部分已经很强悍了。</p>
+
+<p>并且，居然还增加了对动态find方法的支持，进步相当明显。</p>
+
+<p>Spring3已经具备了一个可以独立运作的MVC库，去除Struts2已经水到渠成。模型层和控制层已经很强了。当然，视图层还是比较弱的。
+所以，对于没有视图的web应用，比如作为接口机或者配合json的应用，spring已经很不错。性能、事务方面java还是很强悍的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -561,50 +667,6 @@ Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/08/ruankao-qian-jiming/">软考的名次</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-08T20:36:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>不知为何, 这次软考名次出来的特别晚. 往年2月底3月中旬就都出来了, 这次却直到今天, <a href="http://www.rkb.gov.cn/jsj/cms/s_contents/download/s_dt2013040802.html">4月8日才将将公布</a>. 可能是好事多磨吧.</p>
-
-<p>尽管知道自己的成绩有望排进前50, 甚至前十前五都很正常, 不过最后的名次还是让我激动了一小把.</p>
-
-<p><img src="/images/screen_print/ruankaopaimin.png" alt="image" /></p>
-
-<p>必须得说, 这个名次还真的是挺高的.</p>
-
-<p>这个好名次献给我亲爱的外婆.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -645,7 +707,7 @@ Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方�
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (78)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (10)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (79)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (10)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>
