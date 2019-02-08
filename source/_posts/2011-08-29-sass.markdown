@@ -5,7 +5,7 @@ date: 2011-08-29 18:48
 comments: true
 categories: 
 - 技术
-- sass
+- ruby
 ---
 
 * [sass](http://sass-lang.com/tutorial.html)

@@ -4,7 +4,7 @@ title: "新的挑战"
 date: 2017-07-31 00:21
 comments: true
 categories:
-- 管理者
+- 管理
 ---
 
 

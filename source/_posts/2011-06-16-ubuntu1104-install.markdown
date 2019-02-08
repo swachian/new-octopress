@@ -5,7 +5,7 @@ date: 2011-06-16 14:52
 comments: true
 categories:
 - 技术
-- 安装
+- ruby
 ---
 
 

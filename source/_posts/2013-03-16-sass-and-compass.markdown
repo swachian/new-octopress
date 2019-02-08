@@ -5,7 +5,7 @@ date: 2013-03-16 21:29
 comments: true
 categories:
 - 技术
-- sass
+- ruby
 ---
 
 Sass 和　Compass闻名已久，也接触过一些，不过始终没有仔细学过。这次因为要做移动互联页面的东西，又开始接触这部分内容。

@@ -6,7 +6,6 @@ comments: true
 categories: 
 - rails
 - ruby
-- sdoc
 ---
 
 很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。

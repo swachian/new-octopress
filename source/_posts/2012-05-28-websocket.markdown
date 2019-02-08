@@ -4,7 +4,7 @@ title: "WebSocket"
 date: 2012-05-28 14:00
 comments: true
 categories: 
-- 网络编程
+- java
 ---
 
 [**WebSocket**](http://www.websocket.org/quantum.html) defines a full-duplex communication channel that operates through a single socket over the Web

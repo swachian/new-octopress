@@ -10,7 +10,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/06/16/ubuntu1104-install/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:53:55+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/06/17/rubygems-cache/</loc>
@@ -66,7 +66,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/08/29/sass/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:55:14+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2011/09/07/read-market/</loc>
@@ -128,7 +128,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2012/03/01/svnlook/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:42:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2012/03/05/ukgov-notes/</loc>
@@ -254,7 +254,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2012/05/28/websocket/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:41:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2012/05/29/inside-github/</loc>
@@ -502,7 +502,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2013/03/16/sass-and-compass/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:55:33+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -916,7 +916,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:40:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2015/04/14/xiao-mi-tuo-xian-ban/</loc>
@@ -1137,14 +1137,6 @@
         <lastmod>2018-04-07T22:35:20+08:00</lastmod>
     </url>
     <url>
-        <loc>http://octopresszhangyu.herokuapp.com/blog/2017/02/28/icechu-tan/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://octopresszhangyu.herokuapp.com/blog/2017/03/01/cazheng-shu-lue-ji/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
-    </url>
-    <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity/</loc>
         <lastmod>2018-04-07T22:35:20+08:00</lastmod>
     </url>
@@ -1160,7 +1152,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2017/07/31/xin-de-tiao-zhan/</loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:29:17+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -1208,7 +1200,7 @@
         <loc>
             http://octopresszhangyu.herokuapp.com/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/
         </loc>
-        <lastmod>2018-04-07T22:35:20+08:00</lastmod>
+        <lastmod>2019-02-08T22:43:43+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -1233,8 +1225,12 @@
         <lastmod>2019-02-04T00:04:13+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2019/02/08/learning-agile/</loc>
+        <lastmod>2019-02-08T23:06:24+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2019-02-04T00:04:13+08:00</lastmod>
+        <lastmod>2019-02-08T23:06:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1242,7 +1238,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2019-02-04T00:04:13+08:00</lastmod>
+        <lastmod>2019-02-08T23:06:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

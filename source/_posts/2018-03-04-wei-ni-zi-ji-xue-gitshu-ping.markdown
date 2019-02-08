@@ -6,6 +6,7 @@ comments: true
 categories:
 - 技术
 - 笔记
+- git
 ---
 
 从Rails把代码库迁至GitHub起，接触Git已经很长时间了。但限于svn的惯性思维，其实我始终没有真的理解Git。
