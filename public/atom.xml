@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-10-04T17:32:14+08:00</updated>
+  <updated>2019-10-06T12:46:05+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[日式高效团队开发]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/"/>
+    <updated>2019-10-05T16:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team</id>
+    <content type="html"><![CDATA[<p>日式《高效团队开发》</p>
+
+<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
+
+<p>死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲</p>
+
+<p>问题1：邮件内容多 &#8211; 引入缺陷管理<br/>
+问题2：没有仿真环境  &#8211; 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
+问题3：没有分支和tag管理  &#8211; 利用分支和标签<br/>
+问题4：重新制作数据库的困难  &#8211; 数据库变更管理</p>
+
+<p>问题5: 不运行就就无法察觉问题  &#8211; CI<br/>
+问题6：代码合并后产生了degrade  &#8211; CI+merge<br/>
+问题7：重构代码没信心  &#8211; CI+测试代码<br/>
+问题9：环境依赖</p>
+
+<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
+
+<p>分布式版本控制系统的缺点：<br/>
+1. 没有真正的版本号<br/>
+2. 没有最新的版本<br/>
+3. 过于灵活，容易混乱<br/>
+4. 思维方式</p>
+
+<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
+
+<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
+反之，都使用一个master为好。</p>
+
+<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
+
+<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
+
+<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
+
+<p>因成本收益和市场变化，才使得CI流行起来。
+Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
+
+<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
+
+<p>CI集成的测试对象：</p>
+
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>用户验收测试UAT</li>
+<li>回归测试</li>
+</ul>
+
+
+<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
+
+<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
+
+<p>A 要全部采用版本管理<br/>
+B 所有的环境都要用同样的方式来构建<br/>
+C 要实现发布工作的自动化，并事先进行验证<br/>
+D 要反复多次进行测试</p>
+
+<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
+
+<p>Infrastructure as Code</p>
+
+<p>编配（Orchestration）：<br/>
+即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
+Jenkins的buidl periodically可以从多台机器上收集日志
+如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
+
+<p>测试四象限：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>                业务层面
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>团队的支持------- | -------产品的评价    
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>                技术层面</span></code></pre></td></tr></table></div></figure>
+
+
+<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
+
+<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rancher and k8s]]></title>
@@ -1251,70 +1350,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 <p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
 这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
 花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Truffle And Solidity]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity/"/>
-    <updated>2017-05-01T10:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity</id>
-    <content type="html"><![CDATA[<p>区块链应用的开发，主要指用<code>Solidity</code>编写合约(Contract)，然后部署到区块链上去。
-注意，此处的区块链特指<code>以太坊</code>，而比特币的区块链是没有Solidity这种东西的。</p>
-
-<p>因为是把sol编写的合约部署到区块链上去，所以可以进一步分解为3个问题：</p>
-
-<ol>
-<li>区块链的安装(testrpc ethereum)</li>
-<li>sol合约编写(Solidity)</li>
-<li>对sol合约进行编译以及发布(truffle)</li>
-</ol>
-
-
-<p>目前来看，整个以太坊很喜欢借用node即javascript来构建他们的环境，尽管区块链和sol本身其实和javascript关系不大。
-关于ethereum可查相关的安装手册，这里主要记录一下Solidity和truffle。</p>
-
-<p>Sol的编辑器可以用atom vscode等等，submiline也没问题。
-这门语言其实还是比较原始的，合约间的调用甚至不能传递结构（struct），更可悲的是返回string也不行。基本上任何不定长的返回
-在sol的ethvm（以太坊虚拟机）中都不太好调用。
-功能上来讲，solidity可以理解成数据存放在一个类似levelDB的内存数据库，这是ethvm会做的事情。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">mapping</span><span class="p">(</span><span class="nx">uint</span><span class="o">=&gt;</span><span class="nx">LibDisSecPledgeApply</span><span class="p">.</span><span class="nx">DisSecPledgeApply</span><span class="p">)</span>  <span class="nx">disSecPledgeApplyMap</span><span class="p">;</span>
-</span><span class='line'>  <span class="nx">uint</span><span class="p">[]</span> <span class="nx">disSecPledgeApplyIds</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上述代码定义了一个用于存放对象数据的mapping，因为mapping无循环遍历的功能，所以又增加了一个ids的数组保留所有对象的编号。</p>
-
-<p>整个合约的编写，其实对写惯后台程序的人来讲还是不难上手的（类似用java操作redis写业务逻辑），只是限制确实比较多。
-但solidity可以支持的变化太少，所以写起来是复杂不到哪里去。相当于成熟的脚本或编译型语言，solidity麻烦的地方在于其调试，
-可简单罗列的就有两点：</p>
-
-<ol>
-<li>编译速度慢。十几个文件的情况下，用 truffle编译就要3分钟以上</li>
-<li>发布调试困难。必须发布到某个链的环境才能测试，而这个就真的很不友好了，断点还不支持，日志也很麻烦。</li>
-</ol>
-
-
-<p>truffle是现在以太坊主要推荐的编写solidity的编译、测试运行和部署工具，能处理较复杂的sol文件关联引用，就是耗时很长，且
-程序版本很不稳定，变化发展都依然极快。truffle是基于node和npm的，所以要先装好node。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">npm</span> <span class="nx">uninstall</span> <span class="nx">truffle</span>
-</span><span class='line'><span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">truffle</span><span class="err">@</span><span class="mf">2.1</span><span class="p">.</span><span class="mi">2</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">compile</span>  <span class="c1">//编译合约</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">migrate</span> <span class="o">--</span><span class="nx">reset</span> <span class="c1">//部署合约</span>
-</span><span class='line'><span class="nx">truffle</span> <span class="nx">exec</span> <span class="nx">xxxx</span><span class="p">.</span><span class="nx">js</span> <span class="c1">//执行某个js文件</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>和区块链一样，solidity，truffle都是刚刚涌现的东西，所以问题很多，用起来也不一定顺手。但，这个行业就是这样的。</p>
 ]]></content>
   </entry>
   

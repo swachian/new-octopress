@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 项目管理 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/项目管理/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-10-04T17:32:14+08:00</updated>
+  <updated>2019-10-06T12:46:05+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[日式高效团队开发]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/"/>
+    <updated>2019-10-05T16:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team</id>
+    <content type="html"><![CDATA[<p>日式《高效团队开发》</p>
+
+<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
+
+<p>死亡行军状态的项目---项目岌岌可危，人员身心俱疲</p>
+
+<p>问题1：邮件内容多 -- 引入缺陷管理<br/>
+问题2：没有仿真环境  -- 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
+问题3：没有分支和tag管理  -- 利用分支和标签<br/>
+问题4：重新制作数据库的困难  -- 数据库变更管理</p>
+
+<p>问题5: 不运行就就无法察觉问题  -- CI<br/>
+问题6：代码合并后产生了degrade  -- CI+merge<br/>
+问题7：重构代码没信心  -- CI+测试代码<br/>
+问题9：环境依赖</p>
+
+<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
+
+<p>分布式版本控制系统的缺点：<br/>
+1. 没有真正的版本号<br/>
+2. 没有最新的版本<br/>
+3. 过于灵活，容易混乱<br/>
+4. 思维方式</p>
+
+<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
+
+<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
+反之，都使用一个master为好。</p>
+
+<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
+
+<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
+
+<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
+
+<p>因成本收益和市场变化，才使得CI流行起来。
+Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
+
+<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
+
+<p>CI集成的测试对象：</p>
+
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>用户验收测试UAT</li>
+<li>回归测试</li>
+</ul>
+
+
+<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
+
+<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
+
+<p>A 要全部采用版本管理<br/>
+B 所有的环境都要用同样的方式来构建<br/>
+C 要实现发布工作的自动化，并事先进行验证<br/>
+D 要反复多次进行测试</p>
+
+<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
+
+<p>Infrastructure as Code</p>
+
+<p>编配（Orchestration）：<br/>
+即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
+Jenkins的buidl periodically可以从多台机器上收集日志
+如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
+
+<p>测试四象限：</p>
+
+<p>```</p>
+
+<pre><code>            业务层面
+            |
+            |
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>团队的支持------- </th>
+<th> -------产品的评价    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>                </td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<pre><code>            技术层面
+</code></pre>
+
+<p>```</p>
+
+<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
+
+<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learning Agile： 理解Scrum, XP, Lean and Kanban]]></title>
@@ -287,31 +396,6 @@ Web/HTTP的方方面面，也进一步熟悉了Linux。开始接触了Nginx、My
 实现可以随意变化。这样替换模块也就比较方便。而且各个模块也比较容易水平扩展，哪里有瓶颈只要增加相应的处理资源即可。
 所谓曳光弹，就是先把各组成部分串联起来，让系统可以动起来，类似于提供出一个原型，可以让用户触摸、点击、反馈，这几块
 当然是软件开发尤其是应用软件开发应该的样子。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mange It! Your Guide to Progmatic Project Management]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management/"/>
-    <updated>2012-07-31T09:04:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/31/mange-it-your-guide-to-progmatic-project-management</id>
-    <content type="html"><![CDATA[<p>忙着写投稿的论文，这两个礼拜都没怎么打理自己的博客。买的6本书倒是看完了3本。</p>
-
-<p>数学之美给打开了思路，用户故事则和我平时做的事情很接近。而现在这本《项目管理修炼之道》则给我的收获相对少一些。
-如果只是一个死记硬背各种开发模型的人，看到这本书可能会有恍然大悟的感觉。但于我而言，一直坚持独立思考，所以很早
-以前就看明白了所谓迭代、敏捷、增量和瀑布模型都是有关的，核心的一点都是把顺序模型的大瀑布打破变成小瀑布，只是
-打破的方法各有差异耳。但是，能把话说得这么明确的项目管理书籍可能也就只有这一本。这只能说作者的诚实和自信造就
-了这本书，也对不自己动脑子的pm们提供了参考。从这点上说，其意义还是很明确的。</p>
-
-<p>作者的另外一个特色就是她确实<strong>是</strong>一个项目经理。因为她其他事情基本不参与，比如开发比如测试。所以她偏重管理以及
-软技能谈的更多些，如何与老板交涉也谈的很多，其实和客户交谈反而不如用户故事里讲的多。</p>
-
-<p>项目仪表盘那张，同燃尽图累计故事图很类似，其实还是七武士里面那种画圈的方式最简单明了。书中还提到了多用贴纸，不过
-我对即时贴总有种混乱不堪的感觉。试试看吧，反正即时贴的成本确实很低。总之，本书适合给不怎么爱思考的背书派项目
-经理使用，其精华部分在于对各种开发模型的比较与剖析。是我读过的关于开发生命周期模型介绍中最诚实、最坦露本质内容
-的一本书。</p>
-
-<p>ps. heroku把默认的域名改成herokuapp,明显域名变难看了许多。</p>
 ]]></content>
   </entry>
   

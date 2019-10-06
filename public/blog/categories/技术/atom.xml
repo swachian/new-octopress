@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-10-04T17:32:14+08:00</updated>
+  <updated>2019-10-06T12:46:05+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[日式高效团队开发]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/"/>
+    <updated>2019-10-05T16:48:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team</id>
+    <content type="html"><![CDATA[<p>日式《高效团队开发》</p>
+
+<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
+
+<p>死亡行军状态的项目---项目岌岌可危，人员身心俱疲</p>
+
+<p>问题1：邮件内容多 -- 引入缺陷管理<br/>
+问题2：没有仿真环境  -- 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
+问题3：没有分支和tag管理  -- 利用分支和标签<br/>
+问题4：重新制作数据库的困难  -- 数据库变更管理</p>
+
+<p>问题5: 不运行就就无法察觉问题  -- CI<br/>
+问题6：代码合并后产生了degrade  -- CI+merge<br/>
+问题7：重构代码没信心  -- CI+测试代码<br/>
+问题9：环境依赖</p>
+
+<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
+
+<p>分布式版本控制系统的缺点：<br/>
+1. 没有真正的版本号<br/>
+2. 没有最新的版本<br/>
+3. 过于灵活，容易混乱<br/>
+4. 思维方式</p>
+
+<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
+
+<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
+反之，都使用一个master为好。</p>
+
+<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
+
+<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
+
+<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
+
+<p>因成本收益和市场变化，才使得CI流行起来。
+Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
+
+<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
+
+<p>CI集成的测试对象：</p>
+
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>用户验收测试UAT</li>
+<li>回归测试</li>
+</ul>
+
+
+<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
+
+<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
+
+<p>A 要全部采用版本管理<br/>
+B 所有的环境都要用同样的方式来构建<br/>
+C 要实现发布工作的自动化，并事先进行验证<br/>
+D 要反复多次进行测试</p>
+
+<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
+
+<p>Infrastructure as Code</p>
+
+<p>编配（Orchestration）：<br/>
+即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
+Jenkins的buidl periodically可以从多台机器上收集日志
+如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
+
+<p>测试四象限：</p>
+
+<p>```</p>
+
+<pre><code>            业务层面
+            |
+            |
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>团队的支持------- </th>
+<th> -------产品的评价    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>                </td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<pre><code>            技术层面
+</code></pre>
+
+<p>```</p>
+
+<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
+
+<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rancher and k8s]]></title>
@@ -300,26 +409,6 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
 
 <p>多用<code>Enum</code>，少用<code>const</code><br/>
 多用<code>strategy</code>, <code>template</code>，少用<code>if</code>, <code>switch</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[青轴的蓝牙键盘]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/"/>
-    <updated>2018-04-28T21:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan</id>
-    <content type="html"><![CDATA[<p>去年听同事介绍买了一个Filco的红轴蓝牙键盘。一千多的东西虽然用着也不错，但始终谈不上喜欢。
-而且在用了一年之后，其键帽毕竟是ABS材质，打油、磨损等接踵而至。加上2月底摸了下老同事的Filco青轴键盘，
-于是对青轴开始长草。</p>
-
-<p>但是，依然对Filco的ABS键帽心有余悸，于是做了一番研究。发现相对于ABS， PBT/POM的键帽相对不容易打油的多，
-于是开始在PBT+Cherry青轴+蓝牙之间寻找。找来找去，发现要么只能满足PBT+Cherry轴的那些Cherry原厂键盘或者Leopold这样的韩国品牌，要么就是键帽是ABS的大F，唯有IKBC在去年下半年推出了完全符合我要求的键盘，正好京东又搞活动价格只要499，于是入了一款。</p>
-
-<p>使用之后，确实爱上了这款键盘。清脆高级的手感，漂亮的颜值，无线的简洁，一下子让敲击多了很多很多的乐趣。真有相见恨晚之感！</p>
-
-<p>-- Update On 2019.01.01<br/>
-随后在12月初又购入Ganss的茶轴键盘。也是PBT+原厂Cherry轴，键帽是PBT双色印刷，较IKBC的更为细腻。
-购入原因有二： 1.想体验一把茶轴的感觉；2.想要一把全尺寸键盘。</p>
 ]]></content>
   </entry>
   
