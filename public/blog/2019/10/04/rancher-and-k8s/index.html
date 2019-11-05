@@ -173,7 +173,11 @@ k8s是对docker的编排，其实就是把docker作为基本的单元，让各�
 命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
+</span><span class='line'>
+</span><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -240,6 +244,36 @@ https://docs.docker.com/registry/insecure/</p>
 <p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
 
 <p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
+
+<h2>k8s的dns服务变迁</h2>
+
+<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
+
+<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
+dnsmasq: 为客户端容器提供dns服务<br/>
+sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
+
+<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
+
+<h2>ingress-nginx</h2>
+
+<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
+通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
+
+<h2>核心组件</h2>
+
+<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
+
+<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
+* RC Controller<br/>
+* Node Controller<br/>
+* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
+* Namespace Controller<br/>
+* Service Controller &amp; Endpoints Controller</p>
+
+<p>  Kubelet是每个Node上k8s的代理，</p>
+
+<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
 </div>
 
 
@@ -303,6 +337,14 @@ https://docs.docker.com/registry/insecure/</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/10/08/kafkaquan-wei-zhi-nan/">Kafka权威指南</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a>
       </li>
     
@@ -314,19 +356,11 @@ https://docs.docker.com/registry/insecure/</p>
         <a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/02/03/jian-chi-de-cheng-guo/">坚持的成果</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/01/01/crv-2018/">2018 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (81)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (19)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (11)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (83)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

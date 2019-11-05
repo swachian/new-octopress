@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-10-06T12:46:05+08:00</updated>
+  <updated>2019-11-05T14:42:51+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[凤凰项目读后记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/"/>
+    <updated>2019-11-05T12:16:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji</id>
+    <content type="html"><![CDATA[<p>在人邮图灵1024半价优惠日买的一本书，主要以小说的形式，描述了一个资深运维经理比尔接手内部的凤凰项目部署，并在世外高人埃瑞克的指导下，如何通过看板、精益、敏捷能方法打通任督二脉，满足业务部门的<strong>真实</strong>需求，从而使整个系统（集团公司）业绩达标的故事。形式相当引人入胜，也很有收获，关键是提供了和人沟通的场景和范本。</p>
+
+<p>上手，讲述了主角被选中的原因：他过去几年组建的大型机团队，是最有组织、最值得信赖的团队，比尔本人也是一个可靠、务实，而且愿意表达真实想法的人。不过，作为运维主管，比尔对开发的印象不是很好，比如开发人员经常粗心大意弄坏东西，然后就丢给运维了；而开发人员和信息安全部门的人联手，更容易给运维添乱。而主人公的冷静坦率的做法，甚至让他在第一部分丢了工作。</p>
+
+<p>然而，这个公司其实并不真正重视IT。比如在总体评估指标中，一个IT经理都没资格参与，即IT引起的运营风险并未被重视，也未得到管理，然而IT风险实质上是业务风险。</p>
+
+<p>下面是一些主要的知识点：</p>
+
+<p>倒逼项目 == 日期驱动项目，开发用完了全部的时间。这种玩法，基本后续就是起飞。大家即使都是为了公司好，关键仍然在于有限的时间里能够做什么。对工作需求、优先等级、工作进度、可用资源都了如指掌。真正令人沮丧的是无法把精力集中在对公司最为重要的事情上。</p>
+
+<p>约束点=瓶颈，在瓶颈之外的任何地方做出改进都是假象。作为IT部副总裁，你的工作要确保形成一条迅速、可预测、持续不断的计划内工作流，从而交付价值，同时尽可能降低计划外工作的影响和破坏。</p>
+
+<p>三步工作发：第一步，帮助我们理解在工作从开发部向运维部移动时简历快速工作流，第二部缩短及放大整个系统的反馈回路，第三步形成勇于探索且吸取教训的先进文化。（勇于冒险以及从失败中汲取教训的价值观，并强调通过反复实践以致炉火纯青的必要性）</p>
+
+<p>四种主要的工作类型：<br/>
+1. 业务项目<br/>
+2. 内部IT项目<br/>
+3. 变更类工作<br/>
+4. 计划外（救火）工作，堪比反物质</p>
+
+<p>在发射当口，还往太空飞船安装零件，可不是好兆头。</p>
+
+<p>缺乏能力才是成事的大敌。</p>
+
+<p>你的开发，把所有工作周期都用在了功能，而忽略了稳定性、安全性、可扩展性、可维护性、可操作性、持续性等。</p>
+
+<p>相比向系统中投入更多的工作，将无用的工作剔出系统更为重要。重要的是结果，而非过程、管理或者我们完成了什么。</p>
+
+<p>冷静、坦率应对愤怒。但上级还是会认为工程师们懒骨头。然而团队内需要信任感。</p>
+
+<p>技术债务必将导致公司唯一能够完成的工作就是计划外工作。</p>
+
+<p>工作中心：机器、人员、方法、测评</p>
+
+<p>对安全中心负责人的评价：可以不对IT系统做过多无用功就保护公司，这才是你的胜利。这句话很适用于之前单位的BA。即要做过滤器，而不是放大器，要把无用的东西拒之门外。</p>
+
+<p>和高层打交道，告诉他们坏消息要找适当的时机、适当的场合。</p>
+
+<p>不断降低周期时间的需求是第一工作法的内容，增强回收成本的能力，是第二工作法的内容。要向高层表明‘IT导致的业务风险’。</p>
+
+<p>之后的devops环节，将IT和运维整合在一起，通过降低发布规模，提高发版频次，比如一天10次，来实现快速交付。然而并没有提到相应的验证开销过大怎么办？</p>
+
+<p>未来十年，每一个称职的COO都会是从IT部门出来的。否则，只能是金玉其外的傀儡，需要依靠别人来开展工作。</p>
+
+<p>尾声当然是美好的，比尔获得了同事和上司的信任，他们业务部门的死对头莎拉也离开了公司，他和业务部门的其他人建立了良好的合作关系。公司上下更懂IT，IT也更懂公司的业务。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kafka权威指南]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan/"/>
+    <updated>2019-10-08T11:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan</id>
+    <content type="html"><![CDATA[<p><code>default.replication.factor</code> : 分区的复制系数<br/>
+<code>unclean.leader.election</code> :
+简而言之，如果我们允许不同步的副本成为首领，那么就要承担丢失数据和出现数据不一
+致的风险。如果不允许它们成为首领，那么就要接受较低的可用性，因为我们必须等待原
+先的首领恢复到可用状态。
+如果把 unclean.leader.election.enable 设为 true，就是允许不同步的副本成为首领（也
+就是“不完全的选举”），那么我们将面临丢失消息的风险。如果把这个参数设为 false，
+就要等待原先的首领重新上线，从而降低了可用性。<br/>
+<code>min.insync.replicas</code> : 最少同步副本</p>
+
+<p>上述对broker的配置以外，生产者也要注意配置好<code>acks</code>的值，以及在代码里正确处理错误。</p>
+
+<p>ETL 表示提取—转换—加载（ Extract-Transform-Load）</p>
+
+<p>kafka的消息是可以在客户端进行压缩的</p>
+
+<p>事件流是可重播的，借助kafka，可以重播几个月甚至几年前的原始事件流</p>
+
+<p>时间窗口是否对齐？</p>
+
+<p>中间结果可以作为流写入kafka中</p>
+
+<p>flink手工启动命令
+/opt/flink-1.8.1/bin/flink run /opt/flink-1.8.1/jars/ssss-1.0.0-SNAPSHOT-TEST2-cron-4d8e317-all.jar
+启动命令：/opt/flink-1.8.1/bin/flink run -d /opt/flink-1.8.1/jars/Hastur-*.jar</p>
+
+<p>罗列任务的命令：
+/opt/flink-1.8.1/bin/flink list -r | grep ssss | cut -d &#8221; &#8221; -f 4</p>
+
+<p>停止任务的命令：
+/opt/flink-1.8.1/bin/flink cancel 6b338726460bcb8fe95bad883ca9f5b2</p>
+
+<p>taskmanager.heap.size跟着yarn的container size走
+taskmanager.numberOfTaskSlots 可设置多条</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[日式高效团队开发]]></title>
@@ -196,7 +291,11 @@ k8s是对docker的编排，其实就是把docker作为基本的单元，让各�
 命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
+</span><span class='line'>
+</span><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -263,6 +362,36 @@ https://docs.docker.com/registry/insecure/</p>
 <p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
 
 <p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
+
+<h2>k8s的dns服务变迁</h2>
+
+<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
+
+<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
+dnsmasq: 为客户端容器提供dns服务<br/>
+sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
+
+<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
+
+<h2>ingress-nginx</h2>
+
+<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
+通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
+
+<h2>核心组件</h2>
+
+<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
+
+<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
+* RC Controller<br/>
+* Node Controller<br/>
+* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
+* Namespace Controller<br/>
+* Service Controller &amp; Endpoints Controller</p>
+
+<p>  Kubelet是每个Node上k8s的代理，</p>
+
+<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
 ]]></content>
   </entry>
   
@@ -1311,45 +1440,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 验证软件是不是正确，才不至于把问题留到最后。</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[java新的兼容性挑战者Kotlin]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin/"/>
-    <updated>2017-05-21T16:39:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/javaxin-de-jian-rong-xing-tiao-zhan-zhe-kotlin</id>
-    <content type="html"><![CDATA[<p>520期间被刷屏的除了show 恩爱，就是Kotlin了。
-原本只是在一个做安卓的小朋友发的pdf里看见了Kotlin，想想应该又是一个和scala groovy或者closure类似的东西&#8212;
-可以跑在jvm上，能利用jdk的库，语言表达力又强于java。</p>
-
-<p>Java尽管有点啰嗦，语言表达力确实一般，但企业级的支持很强，jvm的性能更是出色，所以在类库、ide、甚至大型开发框架方面是无与伦比的。在jvm上跑的语言很多，甚至想部分替代的如scala closure groovy等等都火过一阵子，但是java继续维持着自己的优势地位。</p>
-
-<p>然而这次真正被刷屏的，是因为Google认了Kotlin为<strong>干儿子</strong>，甚至以后可能是亲儿子，将kotlin变成了
-头等安卓开发语言。查了一下，此前获得此定位的仅有java，这就可能有很大的不同了。kotlin有了google的支持，而其他所谓挑战者可没这个干爹。并且，Kotlin的创建者又是目前最流行的java ide的公司贡献的，可以保证在<strong>开发工具上的体验和支持</strong>，这么看来它的优势就比scala等强多了。</p>
-
-<p>希望还是能帮助java改进吧，当然这个有点难，即使java8好几年下来了，也不知道有没有普及率超过java程序员的50%</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[thymeleaf感想]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang/"/>
-    <updated>2017-05-21T00:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/21/thymeleafgan-xiang</id>
-    <content type="html"><![CDATA[<p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
-然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
-服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
-
-<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
-可以认为这块已经处于冷淡的状态。</p>
-
-<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
-新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
-
-<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
-这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
-花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
 ]]></content>
   </entry>
   

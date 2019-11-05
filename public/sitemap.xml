@@ -1234,15 +1234,25 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2019/10/04/rancher-and-k8s/</loc>
-        <lastmod>2019-10-04T17:31:36+08:00</lastmod>
+        <lastmod>2019-10-08T10:59:45+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/</loc>
         <lastmod>2019-10-06T12:45:46+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan/</loc>
+        <lastmod>2019-11-05T12:17:59+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/
+        </loc>
+        <lastmod>2019-11-05T14:42:20+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2019-10-06T12:45:46+08:00</lastmod>
+        <lastmod>2019-11-05T14:42:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1250,7 +1260,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2019-10-06T12:45:46+08:00</lastmod>
+        <lastmod>2019-11-05T14:42:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

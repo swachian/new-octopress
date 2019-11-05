@@ -61,6 +61,8 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:lates
 
 ```bash
 sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
+
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
 ```
 --etcd和--controlpanel可部署在同一台机器上。然后需要耐心等待一段时间，因为会起很多个docker的服务。
 
@@ -110,3 +112,38 @@ docker run -d \
 上面的命令中，`--restart=always`表示每次重启docker都会重启该服务，`-v`是挂载了卷，并将生成的ca证书指给了这个服务，3个`-e`设置了容器里运行的变量值，`-p 443:443`把主机和容器的443端口对应起来，`registry:2`表示第二个版本的registry
 
 四. 再次deploy服务的时候，直接在镜像地址中带出`mydocker.co`开头的镜像链接即可，比如`mydocker.co/my-ubuntu` 。
+
+## k8s的dns服务变迁
+
+SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）  
+
+kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中  
+dnsmasq: 为客户端容器提供dns服务  
+sidecar: 对kubedns和dnsmasq提供健康检查服务  
+
+
+CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。
+
+
+## ingress-nginx
+
+ingress-nginx 默认是每个node 1个容器服务，`1 per node`  
+通过rancher配置规则可以在`workloads->load balancing`中进行。里面的域名指向实际的worker主机地址。
+
+## 核心组件
+
+kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。
+
+K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：  
+* RC Controller  
+* Node Controller  
+* ResourceQutoa Controller(cpu和memory限制的配置)  
+* Namespace Controller  
+* Service Controller & Endpoints Controller  
+  
+
+  Kubelet是每个Node上k8s的代理，
+
+kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动  
+  
+

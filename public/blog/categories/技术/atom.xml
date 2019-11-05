@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-10-06T12:46:05+08:00</updated>
+  <updated>2019-11-05T14:42:51+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[凤凰项目读后记]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/"/>
+    <updated>2019-11-05T12:16:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji</id>
+    <content type="html"><![CDATA[<p>在人邮图灵1024半价优惠日买的一本书，主要以小说的形式，描述了一个资深运维经理比尔接手内部的凤凰项目部署，并在世外高人埃瑞克的指导下，如何通过看板、精益、敏捷能方法打通任督二脉，满足业务部门的<strong>真实</strong>需求，从而使整个系统（集团公司）业绩达标的故事。形式相当引人入胜，也很有收获，关键是提供了和人沟通的场景和范本。</p>
+
+<p>上手，讲述了主角被选中的原因：他过去几年组建的大型机团队，是最有组织、最值得信赖的团队，比尔本人也是一个可靠、务实，而且愿意表达真实想法的人。不过，作为运维主管，比尔对开发的印象不是很好，比如开发人员经常粗心大意弄坏东西，然后就丢给运维了；而开发人员和信息安全部门的人联手，更容易给运维添乱。而主人公的冷静坦率的做法，甚至让他在第一部分丢了工作。</p>
+
+<p>然而，这个公司其实并不真正重视IT。比如在总体评估指标中，一个IT经理都没资格参与，即IT引起的运营风险并未被重视，也未得到管理，然而IT风险实质上是业务风险。</p>
+
+<p>下面是一些主要的知识点：</p>
+
+<p>倒逼项目 == 日期驱动项目，开发用完了全部的时间。这种玩法，基本后续就是起飞。大家即使都是为了公司好，关键仍然在于有限的时间里能够做什么。对工作需求、优先等级、工作进度、可用资源都了如指掌。真正令人沮丧的是无法把精力集中在对公司最为重要的事情上。</p>
+
+<p>约束点=瓶颈，在瓶颈之外的任何地方做出改进都是假象。作为IT部副总裁，你的工作要确保形成一条迅速、可预测、持续不断的计划内工作流，从而交付价值，同时尽可能降低计划外工作的影响和破坏。</p>
+
+<p>三步工作发：第一步，帮助我们理解在工作从开发部向运维部移动时简历快速工作流，第二部缩短及放大整个系统的反馈回路，第三步形成勇于探索且吸取教训的先进文化。（勇于冒险以及从失败中汲取教训的价值观，并强调通过反复实践以致炉火纯青的必要性）</p>
+
+<p>四种主要的工作类型：<br/>
+1. 业务项目<br/>
+2. 内部IT项目<br/>
+3. 变更类工作<br/>
+4. 计划外（救火）工作，堪比反物质</p>
+
+<p>在发射当口，还往太空飞船安装零件，可不是好兆头。</p>
+
+<p>缺乏能力才是成事的大敌。</p>
+
+<p>你的开发，把所有工作周期都用在了功能，而忽略了稳定性、安全性、可扩展性、可维护性、可操作性、持续性等。</p>
+
+<p>相比向系统中投入更多的工作，将无用的工作剔出系统更为重要。重要的是结果，而非过程、管理或者我们完成了什么。</p>
+
+<p>冷静、坦率应对愤怒。但上级还是会认为工程师们懒骨头。然而团队内需要信任感。</p>
+
+<p>技术债务必将导致公司唯一能够完成的工作就是计划外工作。</p>
+
+<p>工作中心：机器、人员、方法、测评</p>
+
+<p>对安全中心负责人的评价：可以不对IT系统做过多无用功就保护公司，这才是你的胜利。这句话很适用于之前单位的BA。即要做过滤器，而不是放大器，要把无用的东西拒之门外。</p>
+
+<p>和高层打交道，告诉他们坏消息要找适当的时机、适当的场合。</p>
+
+<p>不断降低周期时间的需求是第一工作法的内容，增强回收成本的能力，是第二工作法的内容。要向高层表明‘IT导致的业务风险’。</p>
+
+<p>之后的devops环节，将IT和运维整合在一起，通过降低发布规模，提高发版频次，比如一天10次，来实现快速交付。然而并没有提到相应的验证开销过大怎么办？</p>
+
+<p>未来十年，每一个称职的COO都会是从IT部门出来的。否则，只能是金玉其外的傀儡，需要依靠别人来开展工作。</p>
+
+<p>尾声当然是美好的，比尔获得了同事和上司的信任，他们业务部门的死对头莎拉也离开了公司，他和业务部门的其他人建立了良好的合作关系。公司上下更懂IT，IT也更懂公司的业务。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kafka权威指南]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan/"/>
+    <updated>2019-10-08T11:07:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan</id>
+    <content type="html"><![CDATA[<p><code>default.replication.factor</code> : 分区的复制系数<br/>
+<code>unclean.leader.election</code> :
+简而言之，如果我们允许不同步的副本成为首领，那么就要承担丢失数据和出现数据不一
+致的风险。如果不允许它们成为首领，那么就要接受较低的可用性，因为我们必须等待原
+先的首领恢复到可用状态。
+如果把 unclean.leader.election.enable 设为 true，就是允许不同步的副本成为首领（也
+就是“不完全的选举”），那么我们将面临丢失消息的风险。如果把这个参数设为 false，
+就要等待原先的首领重新上线，从而降低了可用性。<br/>
+<code>min.insync.replicas</code> : 最少同步副本</p>
+
+<p>上述对broker的配置以外，生产者也要注意配置好<code>acks</code>的值，以及在代码里正确处理错误。</p>
+
+<p>ETL 表示提取—转换—加载（ Extract-Transform-Load）</p>
+
+<p>kafka的消息是可以在客户端进行压缩的</p>
+
+<p>事件流是可重播的，借助kafka，可以重播几个月甚至几年前的原始事件流</p>
+
+<p>时间窗口是否对齐？</p>
+
+<p>中间结果可以作为流写入kafka中</p>
+
+<p>flink手工启动命令
+/opt/flink-1.8.1/bin/flink run /opt/flink-1.8.1/jars/ssss-1.0.0-SNAPSHOT-TEST2-cron-4d8e317-all.jar
+启动命令：/opt/flink-1.8.1/bin/flink run -d /opt/flink-1.8.1/jars/Hastur-*.jar</p>
+
+<p>罗列任务的命令：
+/opt/flink-1.8.1/bin/flink list -r | grep ssss | cut -d " " -f 4</p>
+
+<p>停止任务的命令：
+/opt/flink-1.8.1/bin/flink cancel 6b338726460bcb8fe95bad883ca9f5b2</p>
+
+<p>taskmanager.heap.size跟着yarn的container size走
+taskmanager.numberOfTaskSlots 可设置多条</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[日式高效团队开发]]></title>
@@ -188,9 +283,11 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:lates
 首先需要增加的是etcd和controlpanel节点，这两个属于rancher的幕后服务。<br/>
 命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
 
-<p><code>bash
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
-</code>
+<p>```bash
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel</p>
+
+<p>sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
+```
 --etcd和--controlpanel可部署在同一台机器上。然后需要耐心等待一段时间，因为会起很多个docker的服务。</p>
 
 <p>光有控制资源是不够的，还需要加入worker资源，这个就比较方便了，可以随时扩容。</p>
@@ -239,6 +336,36 @@ docker run -d \
 <p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
 
 <p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
+
+<h2>k8s的dns服务变迁</h2>
+
+<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
+
+<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
+dnsmasq: 为客户端容器提供dns服务<br/>
+sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
+
+<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
+
+<h2>ingress-nginx</h2>
+
+<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
+通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
+
+<h2>核心组件</h2>
+
+<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
+
+<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
+* RC Controller<br/>
+* Node Controller<br/>
+* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
+* Namespace Controller<br/>
+* Service Controller &amp; Endpoints Controller</p>
+
+<p>  Kubelet是每个Node上k8s的代理，</p>
+
+<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
 ]]></content>
   </entry>
   
@@ -364,51 +491,6 @@ docker run -d \
 
 
 <p>小结： 确实如一个十分能干的小朋友曾经跟我交流的，中国的企业没有真正实行敏捷开发的。其实敏捷本身和中国大部分软件企业的文化并不兼容，因此大部分只是具备了敏捷的一些实践，而没有敏捷真正的灵魂。至于我司到底是否能敏捷起来，也只能把决策留到最后再说了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[坚持的成果]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/02/03/jian-chi-de-cheng-guo/"/>
-    <updated>2019-02-03T23:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/02/03/jian-chi-de-cheng-guo</id>
-    <content type="html"><![CDATA[<p>坚持，始终是一种美德。
-在软件开发的世界里，Java坚持了很多年，Mybatis也坚持了很多年。
-尽管动态语言是那么的适合web开发，以至于Java在他们面前有好几年十分的被动。但通过Spring的IOC等特性，
-生生造出来了一个具备很多动态语言特性的框架，从而具备了很多原本只有动态语言才具备的特性。</p>
-
-<p>另外，Mybatis从一个起初土的掉渣的东西，经过十几年持续有人使用的努力，现在竟然在mybatis-plus的帮助下形成了
-Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了JPA的优势，但在查询和支持SQL上又要远较JPA灵活许多。
-因为坚持，实现了巨大的超越。</p>
-
-<p>所以，有时候我们需要有点耐心，坚持一下。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clean Code]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/05/01/clean-code/"/>
-    <updated>2018-05-01T14:23:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/05/01/clean-code</id>
-    <content type="html"><![CDATA[<p>Uncle Bob的这本书也是一本名著了，书籍本身其实就是讲编程风格的，可以把编码技能磨砺的
-更锋利些。</p>
-
-<p>全书的要旨在于每一次重构都要让代码更加整洁，同时测试代码和业务代码一样对待。具体开始做起来，则是从很小之处开始着手。</p>
-
-<ol>
-<li><p><strong>命名</strong>是很重要的一个东西，好的命名可以省下很多注释，因为好的命名本身就帮助理解程序。命名包括了方法名和变量名。</p></li>
-<li><p><strong>函数</strong>要尽可能的短，比如20行，可以在一屏里面显示，如果一个方法太长，那么肯定是命名没有弄好，可以继续拆分。此外，<strong>参数</strong>要尽可能的少，能不要参数就不要参数，一个参数好于二个参数，二个参数好于三个参数，三个参数是大部分方法的极限。</p></li>
-<li><p><strong>注释</strong>以阐述为主，不要使用太多的废话，如果确定要写注释，也要认真编写。</p></li>
-<li><p><strong>格式</strong>是多个代码之间的关联和布局规则。Bob推荐类似报纸的编写方式，大标题后面跟随小标题，比如大的<code>public</code>方法后面跟随小的<code>private</code>方法。和函数的规则一样，垂直相关的内容尽量放在一起。</p></li>
-<li><p><strong>数据和对象</strong>牵涉偏向过程还是偏向面向对象。对于面向对象来讲，一般不增加method而是增加类型，对面向过程来讲，一般增加方法而不动数据结构，现实中肯定是二者皆有。</p></li>
-<li><p><strong>错误处理</strong>错误处理粗返回码外，也可以考虑使用异常来进行封装。</p></li>
-<li><p><strong>边界</strong>划分好后，对第三方的库和方法要单独测试和封装，以减少对本系统的影响。</p></li>
-<li><p><strong>类</strong>也要单一权责，内聚，可以用许多短小的类来构建程序。</p></li>
-</ol>
-
-
-<p>多用<code>Enum</code>，少用<code>const</code><br/>
-多用<code>strategy</code>, <code>template</code>，少用<code>if</code>, <code>switch</code></p>
 ]]></content>
   </entry>
   

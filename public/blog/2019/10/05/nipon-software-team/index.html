@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>日式高效团队开发 - Hegel2011的博客</title>
+  <meta name="author" content="Hegel 2011">
+
+  
+  <meta name="description" content="日式《高效团队开发》 成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。 死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Hegel2011的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+-->
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Hegel2011的博客</a></h1>
+  
+    <h2>读书 - 工作 - 生活 - 笔记</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octopresszhangyu.herokuapp.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">关于自己</a></li>
+  <li><a href="/blog/2015/02/20/to-read-list/">To-Read</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">日式高效团队开发</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-05T16:48:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>日式《高效团队开发》</p>
+
+<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
+
+<p>死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲</p>
+
+<p>问题1：邮件内容多 &#8211; 引入缺陷管理<br/>
+问题2：没有仿真环境  &#8211; 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
+问题3：没有分支和tag管理  &#8211; 利用分支和标签<br/>
+问题4：重新制作数据库的困难  &#8211; 数据库变更管理</p>
+
+<p>问题5: 不运行就就无法察觉问题  &#8211; CI<br/>
+问题6：代码合并后产生了degrade  &#8211; CI+merge<br/>
+问题7：重构代码没信心  &#8211; CI+测试代码<br/>
+问题9：环境依赖</p>
+
+<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
+
+<p>分布式版本控制系统的缺点：<br/>
+1. 没有真正的版本号<br/>
+2. 没有最新的版本<br/>
+3. 过于灵活，容易混乱<br/>
+4. 思维方式</p>
+
+<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
+
+<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
+反之，都使用一个master为好。</p>
+
+<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
+
+<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
+
+<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
+
+<p>因成本收益和市场变化，才使得CI流行起来。
+Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
+
+<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
+
+<p>CI集成的测试对象：</p>
+
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>用户验收测试UAT</li>
+<li>回归测试</li>
+</ul>
+
+
+<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
+
+<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
+
+<p>A 要全部采用版本管理<br/>
+B 所有的环境都要用同样的方式来构建<br/>
+C 要实现发布工作的自动化，并事先进行验证<br/>
+D 要反复多次进行测试</p>
+
+<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
+
+<p>Infrastructure as Code</p>
+
+<p>编配（Orchestration）：<br/>
+即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
+Jenkins的buidl periodically可以从多台机器上收集日志
+如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
+
+<p>测试四象限：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>                业务层面
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>团队的支持------- | -------产品的评价    
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>                技术层面</span></code></pre></td></tr></table></div></figure>
+
+
+<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
+
+<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Hegel 2011</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-05T16:48:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2019</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/技术/'>技术</a>, <a class='category' href='/blog/categories/项目管理/'>项目管理</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/" data-via="" data-counturl="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2019/10/04/rancher-and-k8s/" title="Previous Post: rancher and k8s">&laquo; rancher and k8s</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2019/10/08/kafkaquan-wei-zhi-nan/" title="Next Post: Kafka权威指南">Kafka权威指南 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/10/08/kafkaquan-wei-zhi-nan/">Kafka权威指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/10/04/rancher-and-k8s/">rancher and k8s</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (83)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - Hegel 2011 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+  <script src="//static.getclicky.com/js" type="text/javascript"></script>
+  <script type="text/javascript">try{ clicky.init(66623321); }catch(e){}</script>
+  <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66623321ns.gif" /></p></noscript>
+
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+<script type="text/javascript">
+    (function() {
+        var twitterWidgets = document.createElement('script');
+        twitterWidgets.type = 'text/javascript';
+        twitterWidgets.async = true;
+        twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+        document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+</script>
+
+
+
+
+</body>
+</html>
