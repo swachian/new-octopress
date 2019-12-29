@@ -9,8 +9,11 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Atom是Github投入开发的一个新编辑器。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
-比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大， &hellip;">
+  <meta name="description" content="蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
+也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
+主要已经是看老板的rp以及骨干成员和老板的关系了。 只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
+比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
+当然 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +71,229 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/17/lao-ban-he-ji-zhu-gu-gan/">老板和技术骨干</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-17T09:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>蔡文胜和caoz的事情是这一阵网上讨论的比较多的一个话题。原本
+也不想多说什么，毕竟这种事情也挺司空见惯的。到了这个层面，
+主要已经是看老板的rp以及骨干成员和老板的关系了。</p>
+
+<p>只是看了寻路中国乡村，发现农村和城市的老板也真的挺类似的。
+比如说，说好的该给的待遇不兑现，说的和做的完全可以分离。
+当然，城市的老板一般不给钱只是不给钱了，而乡村企业家拖欠
+工资可能还是想留住员工。</p>
+
+<p>如果真要总结，只有一条最重要：<strong>跟对老板</strong>。其他确实都是其次的。
+至于说保持自己的竞争力，保持自己的核心地位，这些是做任何事情的
+本分。毕竟公司不是家庭，个人的存在是必须有价值才行的。</p>
+
+<p>说回caoz本身，他的博客也是我比较喜欢的一类，尽管更新频率确实很低。
+当然，他所判断的也不全对，比如在房价、在历史方面就挺离谱的。
+但他的文章确实有干货，更重要的打鸡血的效果确实很棒。
+<strong>保持乐观可能比<del>跟对老板</del>更加重要</strong>。</p>
+
+<p>如果完全翻版寻路中国里面的大师傅，也就是IT业界所谓的CTO吧，最把握的
+了的可能还是自己直接创业。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/">Rails2.3老版本的迁移安装手记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-08T22:08:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
+下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
+
+<h3>下载ruby 1.8.7</h3>
+
+<p>减少麻烦，还是保持一致的版本迁移。新机器暂时没有安装其他ruby版本的需求，所以暂不考虑rbenv。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://ruby.taobao.org/mirrors/ruby/ruby-1.8.7-p358.tar.gz
+</span><span class='line'>tar -zxvf ruby-1.8.7-p358.tar.gz
+</span><span class='line'><span class="nb">cd </span>ruby-1.8.7-p358
+</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/ruby187
+</span><span class='line'>make
+</span><span class='line'>make install
+</span><span class='line'>/usr/local/ruby187/bin/ruby -ropenssl -rzlib -rreadline -e <span class="s2">&quot;puts :success&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看到输出<code>success</code>后，证明ruby各安装库已全部编译进去。主机是一台CentOS 6.4，所以安装1.8.7相当之顺利。
+安装完毕后，把ruby的运行路径加到环境变量PATH的最前面。</p>
+
+<h3>安装rubygems</h3>
+
+<p>这个已经很久没有手动安装了，ree和ruby1.9之后rubygems都集成到ruby里面去了，1.8.7还是需要手工安装的。为了减少麻烦，比如能安装thin、能使用bundle、又尽量满足五年前的gem环境，选择了1.4.0.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget http://rubyforge.org/frs/download.php/73763/rubygems-1.4.0.tgz
+</span><span class='line'>tar -zxvf rubygems-1.4.0.tgz
+</span><span class='line'><span class="nb">cd </span>rubygems-1.4.0
+</span><span class='line'>ruby setup.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装Oracle即时客户端和ruby-oci8</h3>
+
+<p>这个东西现在安装倒比以前简单些了。具体可以参考ruby-oci8的官方帮助，关键是要下载3个instant相关的客户端。其实sdk等两个包是很小的，最后都解压到一个目录下。随后，就是设置<code>LD_LIBRARY_PATH</code>的值。关键一点是注意不要配错这个环境变量指向的路径。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/opt/instantclient_10_2:/usr/local/lib:/usr/lib
+</span><span class='line'>wget http://dl.bintray.com/kubo/generic/ruby-oci8-2.0.6.tar.gz
+</span><span class='line'>tar -zxvf ruby-oci8-2.0.6.tar.gz
+</span><span class='line'><span class="nb">cd </span>ruby-oci8-2.0.6
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Gemfile和bundle</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;http://ruby.taobao.org&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activeresource&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activesupport&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.5&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;capistrano&#39;</span><span class="p">,</span> <span class="s1">&#39;2.5.17&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;fastthread&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;highline&#39;</span><span class="p">,</span> <span class="s1">&#39;1.5.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;json_pure&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.3&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="s1">&#39;1.4.1&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rack&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.1&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rake&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8.7&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;RedCloth&#39;</span><span class="p">,</span> <span class="s1">&#39;4.2.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rubyforge&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0.4&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;haml&quot;</span><span class="p">,</span>  <span class="s1">&#39;3.0.12&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;will_paginate&#39;</span><span class="p">,</span> <span class="s1">&#39;2.2.2&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;paperclip&#39;</span><span class="p">,</span> <span class="s1">&#39;2.3.1&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;formtastic&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9.8&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;jintastic&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;ruby-mp3info&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6.13&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;mime-types&#39;</span><span class="p">,</span> <span class="s1">&#39;1.16&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;authlogic&quot;</span><span class="p">,</span> <span class="s1">&#39;2.1.5&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;acl9&quot;</span><span class="p">,</span> <span class="s1">&#39;0.12.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;paginator&quot;</span><span class="p">,</span> <span class="s1">&#39;1.1.1&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;spreadsheet&quot;</span><span class="p">,</span> <span class="s1">&#39;0.6.4.1&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;thin&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5.2&quot;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;activerecord-oracle_enhanced-adapter&#39;</span><span class="p">,</span> <span class="s1">&#39;1.2.4&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3-ruby&#39;</span>
+</span><span class='line'><span class="n">gem</span>  <span class="s1">&#39;rest-client&#39;</span><span class="p">,</span>  <span class="s1">&#39;1.6.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后执行<code>bundle install</code> , 相关的Gem就可以安装到位了。 <code>thin start -e production</code> ， 通过这个命令应用就能在生产环境下启动了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -728,110 +954,6 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/16/dang-dai-zhong-guo-he-wei-lian-de-guo-de-ge-xiang-si-dian/">当代中国和威廉德国的一个相似点</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-16T15:15:00+08:00" pubdate data-updated="true">Mar 16<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前一阵子有些媒体把崛起的中国比作同样是100多年前崛起的威廉德国。起初听到这种比喻，只觉得有点好笑。别的不说，如今风靡中国的BBA（奔驰 宝马 奥迪）都是威廉德国时代诞生的，就这几个跨世纪的杰出企业就是中国目前根本连门都摸不着的。至于发明家、工程师、企业家、科学家方面，那差距就不是一般的大了。中国可没有那么领先和尖端的人物和组织啊。而在军队方面，威廉拥有的德意志基石，普鲁士军队，恐怕我国能有一个营那样的队伍都很难。</p>
-
-<p>但是，在看完了哈夫纳对俾斯麦德国和威廉德国的对比后，发现现在的中国有一点还真的和那时候的德国很类似。即国民的心态。</p>
-
-<p>俾斯麦时期的德国人，并不认为自己的国家有多么先进。反而是崇拜法国人的东西。然而随着威廉时代的技术发展，尤其是内燃机取代蒸汽机时代的到来，诸如BBA、博世、西门子、克虏伯这些企业，他们在科学、技术、经济上都成为当时的领先者。而此时，整个国民的心态就一直水涨船高。民族的自信心由此加强。在这一点上，如今的中国和中国人确实走在相同的道路上。当然，我们相对于德国并非是有多么先进，而是在多上面做文章。虽然各方面均算不上最先进的，也无法领导潮流，但依靠体量和低成本的优势，在经济总量上确实实现了崛起。加之08年以来的欧美金融危机，使得中国式的东西一下子找回了曾经失去的信心。</p>
-
-<p>就因为这种心态的变化，我们不再否认自己固有的一些东西，不管是好的还是坏的。也意识到老外的一套其实也并不那么先进，更不一定就是对我们的发展是好的。究竟是好是坏还很难讲，不过自信心的提高肯定是好事情。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/10/nubia-z5s/">Nubia Z5S</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-10T18:03:00+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>作为多年电信号码的手机用户，现在用的手机也有一年半了，实在等不起LTE上市，所以决定还是继续买3G的手机。</p>
-
-<p>电信版手机的选择限制还是比较多的。目标最后定在2k以内的国产手机，这样的选择无非是小米3 华为p6 努比亚等几种。一开始，想买小米3.正好过完年，米3的电信版也出来了。无奈抢了两次都没抢到，于是最后还是选到中兴华为的机型里面。</p>
-
-<p>尽管p6的样子更好一些，但海思的芯片实在不讨人喜欢；而努比亚z5s的芯片倒是高通的旗舰，品质绝对有保障。最终，还是重视内在胜过了外观，选择买了z5s。</p>
-
-<p>包装红白配，手机红黑配，设计倒是挺简洁的。
-配件很节约，只有一个充电电源和一根充电线。但安卓好歹这么些年来，usb的接口都是一致的，所有的线都可以通用。比起水果一两年换个接口，明显更符合我的口味。
-这个取卡针，不得不说和苹果真的很像。
-单手持机的话，手感还是很轻巧的，整个重心控制的感觉很好。当然，5寸的屏幕还是大了些，操作起来就要双手了。响应等确实很快，顶配的CPU和大内存确实使得系统很流畅。</p>
-
-<p>手机的背面。摄像头确实突起来一些，我个人倒不是很敏感这一点。贴纸有点山寨，过一阵打算揭掉。顺便提一下，这个贴纸写的cdma2000和wcdma手机，但手机本身又是所谓支持td-scdma的，所以显然写的有问题。</p>
-
-<p>不想买micro-sim就是不想剪卡，但买了之后，发现其实剪卡只要掌握一定的门道就很简单。尤其是我这张3对6接触点的sim卡，那是相当的好剪。上面这个是要剪的卡，芯片所占面积本身就极小。</p>
-
-<p>只要判断准自己的卡是3对6触点还是4对8触点，然后找相应的尺寸攻略，打好样后照着剪就万无一失了。
-用铅笔打好样，直接剪好放进插槽即可。</p>
-
-<p>之所以最早看中小米，是由于这3个里面，小米和努比亚都是支持全模，在国外也能用w的数据网络；华为的电信版在国外只能用语音。而华为的特色是双待，这一点和红米类似，但我只有一个号,双待对我而言意义不大。小米支持标准的sim卡（其实是mini-sim）而努比亚和p6都只能是小一点的micro-sim，外加电池好不少，这才让我起初倾向于小米3. 但一直买不到的感觉就不太好了，毕竟一个手机都买的这么累有点被厂商牵着鼻子走了。然而手机的选择还是很多的，所以试了2次之后决定转型，现在发觉nubia确实很不错。</p>
-
-<p>鲁大师的跑分结果很高。高通的CPU果然不让人失望。</p>
-
-<p>自从Google发布了安卓，中国手机厂商的春天就来了。虽然整个模式讲穿了只是之前HTC做过的那种：系统依靠移植，芯片主要也是依赖外部的，国产厂商主要做的还是一个集成加制造的活。但玩的比HTC有声有色的多。中国制造的性价比优势尽情展现。</p>
-
-<p>尽管整体相当满意，但电池确实有点不太经用。这个2000ma出头的电池，如果整个下午都用qq聊天的话，基本上半天电就要用光了。所以，买这个机器移动电源最好是要配一个的。z5s的电池是不能随便更换的。自从用上智能手机后，我以前的手机上两块电板轮流用的机会也不太多了。目前比较方便的还是配个移动电源。</p>
-
-<p>自从改用了C网，或者说自从智能手机开始普及，更换手机的频率一下子提高了。C网之前，老式的手机通常可以稳稳地用2年以上。而用上智能手机尤其是C网的智能手机后，更换频率基本在一年以内了。上一个华为8812还算是使用时间比较长的。不知道Nubia Z5S可以保鲜几年？</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -849,6 +971,14 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/12/29/crv-2019/">2019 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/12/01/manage-it/">Manage It</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
       </li>
     
@@ -860,19 +990,11 @@ IBM借助Linux，抵挡的目标是M$，使得Windows难以在低端的PC服务�
         <a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/10/04/rancher-and-k8s/">rancher and k8s</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (83)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (84)</a></li><li><a href='/blog/categories/生活'>生活 (50)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

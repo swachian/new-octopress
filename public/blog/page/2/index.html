@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="从Rails把代码库迁至GitHub起，接触Git已经很长时间了。但限于svn的惯性思维，其实我始终没有真的理解Git。
-毕竟，上班一直是用的svn，去年12月后才开始迁移到git，而之前一个人用用GitHub的话，也确实是当一个svn在使用，主要就是实现通过中心节点实现多个终端的内容和代码共享 &hellip;">
+  <meta name="description" content="Uncle Bob的这本书也是一本名著了，书籍本身其实就是讲编程风格的，可以把编码技能磨砺的
+更锋利些。 全书的要旨在于每一次重构都要让代码更加整洁，同时测试代码和业务代码一样对待。具体开始做起来，则是从很小之处开始着手。 命名是很重要的一个东西，好的命名可以省下很多注释， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,107 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/05/01/clean-code/">Clean Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-01T14:23:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Uncle Bob的这本书也是一本名著了，书籍本身其实就是讲编程风格的，可以把编码技能磨砺的
+更锋利些。</p>
+
+<p>全书的要旨在于每一次重构都要让代码更加整洁，同时测试代码和业务代码一样对待。具体开始做起来，则是从很小之处开始着手。</p>
+
+<ol>
+<li><p><strong>命名</strong>是很重要的一个东西，好的命名可以省下很多注释，因为好的命名本身就帮助理解程序。命名包括了方法名和变量名。</p></li>
+<li><p><strong>函数</strong>要尽可能的短，比如20行，可以在一屏里面显示，如果一个方法太长，那么肯定是命名没有弄好，可以继续拆分。此外，<strong>参数</strong>要尽可能的少，能不要参数就不要参数，一个参数好于二个参数，二个参数好于三个参数，三个参数是大部分方法的极限。</p></li>
+<li><p><strong>注释</strong>以阐述为主，不要使用太多的废话，如果确定要写注释，也要认真编写。</p></li>
+<li><p><strong>格式</strong>是多个代码之间的关联和布局规则。Bob推荐类似报纸的编写方式，大标题后面跟随小标题，比如大的<code>public</code>方法后面跟随小的<code>private</code>方法。和函数的规则一样，垂直相关的内容尽量放在一起。</p></li>
+<li><p><strong>数据和对象</strong>牵涉偏向过程还是偏向面向对象。对于面向对象来讲，一般不增加method而是增加类型，对面向过程来讲，一般增加方法而不动数据结构，现实中肯定是二者皆有。</p></li>
+<li><p><strong>错误处理</strong>错误处理粗返回码外，也可以考虑使用异常来进行封装。</p></li>
+<li><p><strong>边界</strong>划分好后，对第三方的库和方法要单独测试和封装，以减少对本系统的影响。</p></li>
+<li><p><strong>类</strong>也要单一权责，内聚，可以用许多短小的类来构建程序。</p></li>
+</ol>
+
+
+<p>多用<code>Enum</code>，少用<code>const</code><br/>
+多用<code>strategy</code>, <code>template</code>，少用<code>if</code>, <code>switch</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/">青轴的蓝牙键盘</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-04-28T21:52:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>去年听同事介绍买了一个Filco的红轴蓝牙键盘。一千多的东西虽然用着也不错，但始终谈不上喜欢。
+而且在用了一年之后，其键帽毕竟是ABS材质，打油、磨损等接踵而至。加上2月底摸了下老同事的Filco青轴键盘，
+于是对青轴开始长草。</p>
+
+<p>但是，依然对Filco的ABS键帽心有余悸，于是做了一番研究。发现相对于ABS， PBT/POM的键帽相对不容易打油的多，
+于是开始在PBT+Cherry青轴+蓝牙之间寻找。找来找去，发现要么只能满足PBT+Cherry轴的那些Cherry原厂键盘或者Leopold这样的韩国品牌，要么就是键帽是ABS的大F，唯有IKBC在去年下半年推出了完全符合我要求的键盘，正好京东又搞活动价格只要499，于是入了一款。</p>
+
+<p>使用之后，确实爱上了这款键盘。清脆高级的手感，漂亮的颜值，无线的简洁，一下子让敲击多了很多很多的乐趣。真有相见恨晚之感！</p>
+
+<p>&#8211; Update On 2019.01.01<br/>
+随后在12月初又购入Ganss的茶轴键盘。也是PBT+原厂Cherry轴，键帽是PBT双色印刷，较IKBC的更为细腻。
+购入原因有二： 1.想体验一把茶轴的感觉；2.想要一把全尺寸键盘。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -876,226 +977,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/">Spring Cloud 服务治理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-10-07T13:54:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>服务治理是近年来架构中的热点部分，尽管比照ICE这些内容其实十几年前就已经有了，
-只是五六年前伴随着系统越做越庞大，才变得必要起来。</p>
-
-<p>简单理解一下，其主要内容基本是：</p>
-
-<ul>
-<li>要有一个服务中心，服务中心最好是集群的</li>
-<li>要能向中心注册服务，服务的地址用名称而不是ip硬绑</li>
-<li>要能发现一个服务，其实就是用名称通过服务中心找到服务的ip和端口</li>
-<li>要一个可以轮流访问服务集群的客户端</li>
-<li>此外再配合上消息总线等内容</li>
-</ul>
-
-
-<p>有了这些，基本一个服务治理的框架就基本形成了。</p>
-
-<p>《Spring Cloud 微服务实战》是一本很不错的书，有动手的介绍，有源码的分析，写的也算精炼。</p>
-
-<h3>Eureka 服务治理中心</h3>
-
-<p>启动服务中心后，配置客户端主要包含两部分：</p>
-
-<ul>
-<li>服务注册相关信息： 包括服务中心地址、服务获取间隔时间、可用区域，以<code>eureka.client</code>为前缀</li>
-<li>服务实例相关的配置信息： 包括实例的名称、IP地址、端口号、健康检查路径等，以<code>eureka.instance</code>为前缀</li>
-</ul>
-
-
-<h3>Ribbon</h3>
-
-<p>Spring Cloud的负载均衡是在客户端实现的。
-<code>WeightedResponseTimeRule</code>是个比较复杂的实现。</p>
-
-<h3>Hystrix</h3>
-
-<p>这是一个容错断路器，当出现超时等状况时直接调用指定的回掉函数。使用了RxJava库的异步操作模式，
-实现了发送+观察的效果，所以可以中断请求。</p>
-
-<h3>Feign</h3>
-
-<p>在RestTemplate上进一步抽象，实现和Spring MVC对等的method封装。因为要组client，所以<code>@RequestParam</code>
-中的value不能少。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@FeignClient</span><span class="o">(</span><span class="s">&quot;Hello-Service&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span> <span class="o">{</span>
-</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/hello1&quot;</span><span class="o">,</span> <span class="n">method</span><span class="o">=</span><span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span> <span class="c1">//指明要访问的路径和方法</span>
-</span><span class='line'>  <span class="n">User</span> <span class="nf">hello</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="nd">@RequestHeader</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">);</span> <span class="c1">//指明构造请求是的参数名称</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//调用方式</span>
-</span><span class='line'><span class="n">helloService</span><span class="o">.</span><span class="na">hello</span><span class="o">(</span><span class="s">&quot;DiDi&quot;</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Zuul Api 网关</h3>
-
-<p>网关的事情就两条：<br/>
-1. 路由
-2. 过滤</p>
-
-<p>Zuul的路由结合了治理服务，下面就把一个路径全部转发去了一个服务</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">aaa</span><span class="o">/**</span>
-</span><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">serviceId</span><span class="o">=</span><span class="n">Hello</span><span class="o">-</span><span class="n">Service</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
-</span><span class='line'>  <span class="o">....</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@EnableZuulProxy</span>
-</span><span class='line'><span class="nd">@SpringCloudApplication</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Bean</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Spring Cloud Config</h3>
-
-<p>基于git（也可以是svn或本地目录）的配置中心，其实就是一个可以保存各种配置信息，然后由其他微服务读取后拉起应用。</p>
-
-<h3>Bus 和 Stream 消息总线和消息流</h3>
-
-<p>目前只支持RabbitMQ和kafka两种队列，kafka更多的好像和实时日志处理流相关</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/07/31/xin-de-tiao-zhan/">新的挑战</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-07-31T00:21:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>去新公司已经快半年了，大约一个半月前副总找谈话，打算提拔我当部门经理，负责起部门的管理工作。
-并且，跟我讲了他的经历。他原本也一直不想做管理，主要顾忌有两点：<br/>
-1. 怕自己干不好；
-2. 怕自己荒废。直到老板请他出山帮忙，也就不得不开始从事管理工作。<br/>
-副总这番话还是挺让我有共鸣的，因为对我而言，所顾忌的也是类似的情况。但既然副总和其他领导举荐我，那也不好推辞，只能赶鸭子上架尽量干了。</p>
-
-<p>但一方面接了下来，另一方面却又很忐忑。因为这个部门从原先的项目组升级而来，而之前我作为架构师是配合项目组经理工作的，我当部门主管之后，和原先的经理之间存在一个换位的过程。而我们合作的四个月其实配合的还不错，尽管我感觉加班多了些，其他方面大家还都能顺畅沟通。<br/>
-难点之二，本司的产品很强势，往往会有莫名其妙的需求和时间安排，而研发的地位则属于较低并且相当被动，这都不太像如今的技术性公司了，但确实是我司的现状。做架构师的时候，还可以不直接面对强势的产品和大姐头，而做部门主管则必须为兄弟姐妹们争取合理的工作安排。<br/>
-难点之三，下属以农村娃娃居多，吃苦耐劳者多之，聪明干活的则很稀少，这样的团队带起来管理难度还好，但干活水平不容易高。<br/>
-难点之四，真的对我能不能买账也只有天晓得，尤其是在产品如此强势的情况下，并不是每个下属都觉得应该跟着我干的。</p>
-
-<p>但是，当大姐头明确地告诉我部门连我在内已经有18个人的时候，我还是挺震惊的，打那一刻起我突然对这个工作有了兴趣。</p>
-
-<p>然而，毕竟没管过那么大的团队，所以要学习的地方还有很多。就我个人的特点而言，至少具备了分析问题和解决问题的基本能力，
-所以满足当好一个管理者的基本条件，但必须承认在一些管理者的日常方面做的并不好。解法也只有看书、看别人的经验加自己的实践了。</p>
-
-<h3>看书</h3>
-
-<ol>
-<li>《轻流程：IT团队的积分式绩效管理》，蔡为东，开始学习的第一本，虽然基本的道理很对，但这套积分制度实施起来还是有点难。</li>
-<li>《行之有效：IT技术团队管理之道》，蔡为东，此书较前一本稍早出版，相当管用，可以直接使用的办法很多，最典型的如明确了研发部门的管理讲到底就是管人和项目，团队的日常管理就是谈话、考勤、请假、报销，比较好的一本书。</li>
-<li>《从技术走向管理&#8212;李元芳履职记》，王树文，小说形式的IT管理书籍，基本上就是把前面一本管理理论书籍用小说形式
-举例了一遍。</li>
-<li>《技术管理之巅》，一号店的经历，写的比较泛。</li>
-<li>《软件开发本质论》，Ron Jeffries，王凌云，基于敏捷模式的软件开发论，很薄但观点很犀利，对于
-尽早测试的原因讲解的很清楚，这本书对我而言最大的触动是下了要大量编写自动化测试案例的决心。只有快速地
-验证软件是不是正确，才不至于把问题留到最后。</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1113,6 +994,14 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/12/29/crv-2019/">2019 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/12/01/manage-it/">Manage It</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
       </li>
     
@@ -1124,19 +1013,11 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
         <a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/10/04/rancher-and-k8s/">rancher and k8s</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (83)</a></li><li><a href='/blog/categories/生活'>生活 (49)</a></li><li><a href='/blog/categories/车车'>车车 (36)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (12)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (84)</a></li><li><a href='/blog/categories/生活'>生活 (50)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (20)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

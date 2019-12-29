@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-11-05T14:42:51+08:00</updated>
+  <updated>2019-12-29T11:25:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019/"/>
+    <updated>2019-12-29T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019</id>
+    <content type="html"><![CDATA[<!-- 2018年的养车成本和2017年的竟然差不多。 -->
+
+
+<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> 条目     </th>
+<th align="left"> 2019     </th>
+<th align="left">2018     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left">   停车费     </td>
+<td align="left">   10810+12000     </td>
+<td align="left"> 11029+2000</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保险费     </td>
+<td align="left">   3932     </td>
+<td align="left">  3637  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   油费     </td>
+<td align="left">     5682   </td>
+<td align="left">   7006</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   高速     </td>
+<td align="left">     365   </td>
+<td align="left">   510</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保养     </td>
+<td align="left">     1369+2500   </td>
+<td align="left">  1568  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   洗车     </td>
+<td align="left">     479   </td>
+<td align="left">   355</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   上述合计     </td>
+<td align="left">  25297+12000  </td>
+<td align="left">      24105+2000  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   里程     </td>
+<td align="left">      7538       </td>
+<td align="left">    8856</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>今年总体开销低于去年，主要是因为今年少开了1200公里。
+停车费的开销总体也差不多，除了在大花园租了新车位是全年的，但还是物有所值的。</p>
+
+<p>油费/公里依然很神奇的差不多，去年0.77元/KM，今年0.76元/KM，但因为高速跑的少，油耗从11.49L/100KM上升到11.93L/100KM。这也意味着今年的油价总体略低于去年。
+行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
+
+<p>保险费用因为有扣分的违章，有10%的涨幅。。<br/>
+保养费用方面今年没大保，不过因为换了轮胎，这笔开销就是有2500元。然后还有一次补胎，其他就没什么了。
+洗车比去年勤快了，另外也是因为洗车涨价了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2018 CRV养车成本汇总]]></title>
@@ -102,7 +186,7 @@
 <p>具体方法为：</p>
 
 <ol>
-<li>放入清晰剂/粉直接到滚筒</li>
+<li>放入清洗剂/粉直接到滚筒</li>
 <li>按漂洗模式放满水</li>
 <li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
 <li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
@@ -129,101 +213,6 @@
     <updated>2016-12-31T21:33:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv</id>
     <content type="html"><![CDATA[<p><img src="/images/yangche2016.jpg" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[两次苏州游]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/21/liang-ci-su-zhou-you/"/>
-    <updated>2016-04-21T15:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/21/liang-ci-su-zhou-you</id>
-    <content type="html"><![CDATA[<p>阳春三月，正是江南好风景，3月初和4月中旬分别去了苏州的阳澄湖和金鸡湖。出行的方式选择了自驾。
-两次自驾类似的地方很多，都是从家里出发，经内环走武宁路到G2京沪高速，高速上开50KM左右后从苏州工业园区出口下去，再开10公里左右即可抵达目的地。车程基本在一个半小时到两小时之间。</p>
-
-<p>比较让人费解的是，明明都是度假区，但整个新区的正式名字却叫苏州工业园区，可能早年间这个区就叫这个名字，产业也以传统工业为主，
-近来度假旅游经济兴起，才搞出了度假村，建了很多四五星级的酒店吧。</p>
-
-<h2>4月金鸡湖</h2>
-
-<p>入驻的是苏州凯宾斯基酒店，一路很顺，只开了1小时40分钟不到就到了酒店。车直接停在酒店大堂门口。
-由于是周日12点之前到的，正直退房高峰且房间都在打扫中，check in需要等待，于是带孩子去后面的后花园转了一下。</p>
-
-<p>花园在酒店的南面，所对的湖面是独墅湖。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wtal9vkj20zk0qo0y9.jpg" alt="image" />
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wta7rq4j20zk0qon30.jpg" alt="image" /></p>
-
-<p>花园转了一圈后去酒店的中餐厅吃饭，吃完后继续去办理check in，这回终于有房了。
-前台等待期间拿了一粒糖给小家伙吃。最近懂事很多，反问我这个不用付（钱）就能吃啦？
-我只能简单地告诉他这个东西是免费的，可以拿了就吃。</p>
-
-<p>入住房间对应的就是金鸡湖了。其实整个凯宾斯基就是位于南北两个湖中间。
-从房间正中望出去可以看见金鸡湖大致的样子。
-<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wtb7ohvj20zk0qoajf.jpg" alt="image" /></p>
-
-<p>摩天轮在右面，左面则是苏州的新地标<strong>东方之门</strong>，俗称秋裤。</p>
-
-<p>从酒店出发，开七八公里就可以到这个摩天轮公园。
-<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35wtc364wj20qo0zk7fy.jpg" alt="image" /></p>
-
-<p>要去需要趁早，5点就不让客人进去了。整个新区的停车倒还很友好，大部分停车场是不要钱的。
-商场下面的停车场也有3小时免费的政策。整个新区开车的节奏很慢，红绿灯起步比上海还要慢一倍。</p>
-
-<p>夜景也还不错，关键是这个地方的人口密度确实比上海低很多了，后来百科一下，整个新区其实只有100万人，其中本地户籍的40万，还有60万外来人口。所以感觉密度低是正常的。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wui7haij20qo0zktga.jpg" alt="image" /></p>
-
-<p>这个金融中心还有诚品书店，不过似乎都是光看不买的，很可能会步百思买的后尘。
-而比较后悔的是没去逛逛附近的Flexa专卖。
-<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35wuhlud6j20qo0zkqbj.jpg" alt="image" />
-<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35wuiz3jfj20qo0zktk0.jpg" alt="image" /></p>
-
-<p>然后在苏浙汇吃完饭就开车回酒店了。正好赶上当地人在酒店办婚礼，二楼大堂门前的车位客满，
-只能停到一楼的车库里面去了。</p>
-
-<p>第二天酒店用完早餐，和小家伙在后面的草坪打了会儿童羽毛球，随后就出发去拙政园了。</p>
-
-<p>原本也没打算去苏州市中心，老婆提了一下我又研究了一下路线，发现其实新区离市中心很近，
-所以决定开过去了还是。顺道去看了看东方之门。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wujey06j20qo0zk487.jpg" alt="image" />
-其实对比名字，倒也不算刮三。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35wulbws7j20zk0qodku.jpg" alt="iamge" />
-整个广场其实还行。秋裤其实也还在建设中，并未完工。可惜湖面的喷泉没开。</p>
-
-<p>拙政园倒是不错的去处，尤其是这个游览时间特别好。门票也是够贵的了，现在是旺季，单人就要90元了。淡季稍便宜20。</p>
-
-<p>拙政园的南北其实都有较大的停车场，但南面的路不好走，最后我还是停到北面去了。两三个小时下来最后付了12块停车费。这也是此次苏州之行唯一付停车费的地方。
-从北停车场过去有450米的距离，走走其实也还可以。</p>
-
-<p>对园林的欣赏一方面是因为年纪渐长，另一方面也是因为如今的园林确实修补的比小时候要号许多。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf7kahaj20zk0qoari.jpg" alt="image" />
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f35xf0v25mj20qo0zkask.jpg" alt="image" />
-<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f35xf3uszmj20qo0zkqgi.jpg" alt="image" />
-<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f35xf2hsc0j20qo0zk7lq.jpg" alt="image" />
-<img src="http://ww3.sinaimg.cn/mw1024/726f24e7gw1f35xewwwo8j20qo0zktrn.jpg" alt="image" /></p>
-
-<p>逛完拙政园，在旁边马路的朱鸿兴吃完中饭，就开车返程了。一路还算顺利，就上内环高架堵了一下，最后用了
-2个小时回到家中。</p>
-
-<h2>3月阳澄湖</h2>
-
-<p>阳澄湖去的是苏州阳澄湖澜廷度假酒店，在阳澄湖半岛上，半岛上还有一个重元寺。</p>
-
-<p><img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4suo43j20zk0qodp4.jpg" alt="image" />
-酒店是泰式风格的，没有金鸡湖的酒店大，整个半岛其实还在大规模地建设中。
-工地比较多。但封闭性好，更适合在岛上骑自行车游玩。</p>
-
-<p>停车场的充电桩很多。
-<img src="http://ww4.sinaimg.cn/mw1024/726f24e7gw1f36n4s1udnj20zk0qowth.jpg" alt="image" />
-苏州度假区的酒店此类东西其实都不少。不过最喜欢的还是直接走坡道上去停在大堂门口。
-<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4xeq3dj20zk0qotiu.jpg" alt="image" />
-<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4u5b7uj20qo0zktg7.jpg" alt="image" /></p>
-
-<p>第二天就去了重元寺。跟灵隐寺的布局有很多类似的地方，但依水而建是其一大特色，环境非常不错，寺庙也很整洁。
-<img src="http://ww2.sinaimg.cn/mw1024/726f24e7gw1f36n4yid1pj20zk0qowtw.jpg" alt="image" />
-<img src="http://ww1.sinaimg.cn/mw1024/726f24e7gw1f36n4z3tg3j20qo0zk7an.jpg" alt="image" /></p>
-
-<p>在庙里吃完一碗素面之后，就开车回家了。</p>
-
-<p>三四月确实是出行的好时节，这个季节去周边玩玩还是挺心旷神怡的。</p>
 ]]></content>
   </entry>
   

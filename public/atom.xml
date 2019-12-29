@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-11-05T14:42:51+08:00</updated>
+  <updated>2019-12-29T11:25:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019/"/>
+    <updated>2019-12-29T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019</id>
+    <content type="html"><![CDATA[<!-- 2018年的养车成本和2017年的竟然差不多。 -->
+
+
+<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> 条目     </th>
+<th align="left"> 2019     </th>
+<th align="left">2018     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left">   停车费     </td>
+<td align="left">   10810+12000     </td>
+<td align="left"> 11029+2000</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保险费     </td>
+<td align="left">   3932     </td>
+<td align="left">  3637  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   油费     </td>
+<td align="left">     5682   </td>
+<td align="left">   7006</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   高速     </td>
+<td align="left">     365   </td>
+<td align="left">   510</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保养     </td>
+<td align="left">     1369+2500   </td>
+<td align="left">  1568  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   洗车     </td>
+<td align="left">     479   </td>
+<td align="left">   355</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   上述合计     </td>
+<td align="left">  25297+12000  </td>
+<td align="left">      24105+2000  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   里程     </td>
+<td align="left">      7538       </td>
+<td align="left">    8856</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>今年总体开销低于去年，主要是因为今年少开了1200公里。
+停车费的开销总体也差不多，除了在大花园租了新车位是全年的，但还是物有所值的。</p>
+
+<p>油费/公里依然很神奇的差不多，去年0.77元/KM，今年0.76元/KM，但因为高速跑的少，油耗从11.49L/100KM上升到11.93L/100KM。这也意味着今年的油价总体略低于去年。
+行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
+
+<p>保险费用因为有扣分的违章，有10%的涨幅。。<br/>
+保养费用方面今年没大保，不过因为换了轮胎，这笔开销就是有2500元。然后还有一次补胎，其他就没什么了。
+洗车比去年勤快了，另外也是因为洗车涨价了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Manage It]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it/"/>
+    <updated>2019-12-01T10:49:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it</id>
+    <content type="html"><![CDATA[<p>项目的驱动因素、约束以及活动余地。少问“为什么”，少问“怎么做”</p>
+
+<p>镀金类需求和核心需求。</p>
+
+<h3>项目章程模板：</h3>
+
+<ul>
+<li>远景：项目的意义，远景式的话语</li>
+<li>需求：项目的驱动因素</li>
+<li>目标：解决技术债务、添加更多的自动化测试、设计冒烟测试，这些都可能是项目目标</li>
+<li>成功标准：包括功能1、2、3，提升产品性能，测出相关数值，项目经理要确保成功标准中不会包含非项目人员才能完成的任务，比如卖出50000套软件，要确保成功标准在项目经理的掌控之中。</li>
+<li>ROI估算：投资回报率</li>
+</ul>
+
+
+<p>质量在产品的不同市场应用阶段，可以的需求有很大区别。到大众市场之间有着摩尔鸿沟。越进入成熟阶段，对质量的要求更高，即缺陷的容忍度越低。</p>
+
+<h3>开发项目规划模板</h3>
+
+<ul>
+<li>产品意图：（类似远景，但远景可能不够用），与远景大方向一致，但又不安全相同</li>
+<li>历史记录：知道的越少，越容易惊讶</li>
+<li>发布条件</li>
+<li>目标：同章程中的目标，但章程编写时可能目标还不明确</li>
+<li>项目组织：明确团队在项目中的职责分配，指明如何使用周期以及哪些关键实践</li>
+<li>日程总览：让我的领导知道项目的实际进展</li>
+<li>人员配备（人员曲线）</li>
+<li>建议日程</li>
+<li>风险列表：识别和管理风险</li>
+</ul>
+
+
+<h3>制定发布计划</h3>
+
+<p>通过制定发布计划，和各个职能部门的人共同商讨“成功”的含义，可以意识到自己不仅只是完成分内的工作，也为项目经理指明了成功的方向。</p>
+
+<ol>
+<li>确定当前项目最重要的因素：时间、功能、低缺陷率</li>
+<li>草拟发布条件，加入测试经理等人</li>
+<li>SMART原则，确定的、可测量的、可达成的、相关的、可跟踪的指标和条件</li>
+<li>发布条件上达成多方共识：揭示众人对于产品和项目的假定和忧虑的过程</li>
+</ol>
+
+
+<p>很多软件开发人员都是很乐观的。在学校时接受的训练就是要让他们变得乐观，因为那
+时每个项目都会在一个学期内完成（还要花费许多个通宵）。这些训练会一直停留在他们
+脑海中，直到学会估算小的功能，并接收对于估算的反馈</p>
+
+<p>如果项目经理必须遵循某个截止日期，那就干脆什么都别估算了。把所有的功能进行排
+序，并按优先级进行开发。这种状况下，我强力推荐使用敏捷生命周期，这样就可以快
+速地实现功能，并马上得到反馈</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[凤凰项目读后记]]></title>
@@ -30,7 +173,7 @@
 
 <p>约束点=瓶颈，在瓶颈之外的任何地方做出改进都是假象。作为IT部副总裁，你的工作要确保形成一条迅速、可预测、持续不断的计划内工作流，从而交付价值，同时尽可能降低计划外工作的影响和破坏。</p>
 
-<p>三步工作发：第一步，帮助我们理解在工作从开发部向运维部移动时简历快速工作流，第二部缩短及放大整个系统的反馈回路，第三步形成勇于探索且吸取教训的先进文化。（勇于冒险以及从失败中汲取教训的价值观，并强调通过反复实践以致炉火纯青的必要性）</p>
+<p>三步工作法：第一步，帮助我们理解在工作从开发部向运维部移动时建立快速工作流，第二步缩短及放大整个系统的反馈回路，第三步形成勇于探索且吸取教训的先进文化。（勇于冒险以及从失败中汲取教训的价值观，并强调通过反复实践以致炉火纯青的必要性）</p>
 
 <p>四种主要的工作类型：<br/>
 1. 业务项目<br/>
@@ -627,7 +770,7 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
 <p>具体方法为：</p>
 
 <ol>
-<li>放入清晰剂/粉直接到滚筒</li>
+<li>放入清洗剂/粉直接到滚筒</li>
 <li>按漂洗模式放满水</li>
 <li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
 <li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
@@ -1273,172 +1416,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 <li>开发者和用户间会更容易建立更多的联系，要持续关注软件如何帮助用户提升业务能力，而不是把软件看成是将要完成的一组功能</li>
 <li>针对失效的设计，使用服务作为组件的一个结果是，应用程序需要被设计成能够容忍服务失效，如断路器模式</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[spring cloud 服务治理]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li/"/>
-    <updated>2017-10-07T13:54:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/10/07/spring-cloud-fu-wu-zhi-li</id>
-    <content type="html"><![CDATA[<p>服务治理是近年来架构中的热点部分，尽管比照ICE这些内容其实十几年前就已经有了，
-只是五六年前伴随着系统越做越庞大，才变得必要起来。</p>
-
-<p>简单理解一下，其主要内容基本是：</p>
-
-<ul>
-<li>要有一个服务中心，服务中心最好是集群的</li>
-<li>要能向中心注册服务，服务的地址用名称而不是ip硬绑</li>
-<li>要能发现一个服务，其实就是用名称通过服务中心找到服务的ip和端口</li>
-<li>要一个可以轮流访问服务集群的客户端</li>
-<li>此外再配合上消息总线等内容</li>
-</ul>
-
-
-<p>有了这些，基本一个服务治理的框架就基本形成了。</p>
-
-<p>《Spring Cloud 微服务实战》是一本很不错的书，有动手的介绍，有源码的分析，写的也算精炼。</p>
-
-<h3>Eureka 服务治理中心</h3>
-
-<p>启动服务中心后，配置客户端主要包含两部分：</p>
-
-<ul>
-<li>服务注册相关信息： 包括服务中心地址、服务获取间隔时间、可用区域，以<code>eureka.client</code>为前缀</li>
-<li>服务实例相关的配置信息： 包括实例的名称、IP地址、端口号、健康检查路径等，以<code>eureka.instance</code>为前缀</li>
-</ul>
-
-
-<h3>Ribbon</h3>
-
-<p>Spring Cloud的负载均衡是在客户端实现的。
-<code>WeightedResponseTimeRule</code>是个比较复杂的实现。</p>
-
-<h3>Hystrix</h3>
-
-<p>这是一个容错断路器，当出现超时等状况时直接调用指定的回掉函数。使用了RxJava库的异步操作模式，
-实现了发送+观察的效果，所以可以中断请求。</p>
-
-<h3>Feign</h3>
-
-<p>在RestTemplate上进一步抽象，实现和Spring MVC对等的method封装。因为要组client，所以<code>@RequestParam</code>
-中的value不能少。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@FeignClient</span><span class="o">(</span><span class="s">&quot;Hello-Service&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span> <span class="o">{</span>
-</span><span class='line'>  <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/hello1&quot;</span><span class="o">,</span> <span class="n">method</span><span class="o">=</span><span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span> <span class="c1">//指明要访问的路径和方法</span>
-</span><span class='line'>  <span class="n">User</span> <span class="nf">hello</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="nd">@RequestHeader</span><span class="o">(</span><span class="s">&quot;age&quot;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">);</span> <span class="c1">//指明构造请求是的参数名称</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//调用方式</span>
-</span><span class='line'><span class="n">helloService</span><span class="o">.</span><span class="na">hello</span><span class="o">(</span><span class="s">&quot;DiDi&quot;</span><span class="o">,</span> <span class="mi">30</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Zuul Api 网关</h3>
-
-<p>网关的事情就两条：<br/>
-1. 路由
-2. 过滤</p>
-
-<p>Zuul的路由结合了治理服务，下面就把一个路径全部转发去了一个服务</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">aaa</span><span class="o">/**</span>
-</span><span class='line'><span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">service</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">serviceId</span><span class="o">=</span><span class="n">Hello</span><span class="o">-</span><span class="n">Service</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
-</span><span class='line'>  <span class="o">....</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@EnableZuulProxy</span>
-</span><span class='line'><span class="nd">@SpringCloudApplication</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="n">Application</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="kc">true</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nd">@Bean</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Spring Cloud Config</h3>
-
-<p>基于git（也可以是svn或本地目录）的配置中心，其实就是一个可以保存各种配置信息，然后由其他微服务读取后拉起应用。</p>
-
-<h3>Bus 和 Stream 消息总线和消息流</h3>
-
-<p>目前只支持RabbitMQ和kafka两种队列，kafka更多的好像和实时日志处理流相关</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[新的挑战]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/07/31/xin-de-tiao-zhan/"/>
-    <updated>2017-07-31T00:21:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/07/31/xin-de-tiao-zhan</id>
-    <content type="html"><![CDATA[<p>去新公司已经快半年了，大约一个半月前副总找谈话，打算提拔我当部门经理，负责起部门的管理工作。
-并且，跟我讲了他的经历。他原本也一直不想做管理，主要顾忌有两点：<br/>
-1. 怕自己干不好；
-2. 怕自己荒废。直到老板请他出山帮忙，也就不得不开始从事管理工作。<br/>
-副总这番话还是挺让我有共鸣的，因为对我而言，所顾忌的也是类似的情况。但既然副总和其他领导举荐我，那也不好推辞，只能赶鸭子上架尽量干了。</p>
-
-<p>但一方面接了下来，另一方面却又很忐忑。因为这个部门从原先的项目组升级而来，而之前我作为架构师是配合项目组经理工作的，我当部门主管之后，和原先的经理之间存在一个换位的过程。而我们合作的四个月其实配合的还不错，尽管我感觉加班多了些，其他方面大家还都能顺畅沟通。<br/>
-难点之二，本司的产品很强势，往往会有莫名其妙的需求和时间安排，而研发的地位则属于较低并且相当被动，这都不太像如今的技术性公司了，但确实是我司的现状。做架构师的时候，还可以不直接面对强势的产品和大姐头，而做部门主管则必须为兄弟姐妹们争取合理的工作安排。<br/>
-难点之三，下属以农村娃娃居多，吃苦耐劳者多之，聪明干活的则很稀少，这样的团队带起来管理难度还好，但干活水平不容易高。<br/>
-难点之四，真的对我能不能买账也只有天晓得，尤其是在产品如此强势的情况下，并不是每个下属都觉得应该跟着我干的。</p>
-
-<p>但是，当大姐头明确地告诉我部门连我在内已经有18个人的时候，我还是挺震惊的，打那一刻起我突然对这个工作有了兴趣。</p>
-
-<p>然而，毕竟没管过那么大的团队，所以要学习的地方还有很多。就我个人的特点而言，至少具备了分析问题和解决问题的基本能力，
-所以满足当好一个管理者的基本条件，但必须承认在一些管理者的日常方面做的并不好。解法也只有看书、看别人的经验加自己的实践了。</p>
-
-<h3>看书</h3>
-
-<ol>
-<li>《轻流程：IT团队的积分式绩效管理》，蔡为东，开始学习的第一本，虽然基本的道理很对，但这套积分制度实施起来还是有点难。</li>
-<li>《行之有效：IT技术团队管理之道》，蔡为东，此书较前一本稍早出版，相当管用，可以直接使用的办法很多，最典型的如明确了研发部门的管理讲到底就是管人和项目，团队的日常管理就是谈话、考勤、请假、报销，比较好的一本书。</li>
-<li>《从技术走向管理&#8212;李元芳履职记》，王树文，小说形式的IT管理书籍，基本上就是把前面一本管理理论书籍用小说形式
-举例了一遍。</li>
-<li>《技术管理之巅》，一号店的经历，写的比较泛。</li>
-<li>《软件开发本质论》，Ron Jeffries，王凌云，基于敏捷模式的软件开发论，很薄但观点很犀利，对于
-尽早测试的原因讲解的很清楚，这本书对我而言最大的触动是下了要大量编写自动化测试案例的决心。只有快速地
-验证软件是不是正确，才不至于把问题留到最后。</li>
-</ol>
 
 ]]></content>
   </entry>

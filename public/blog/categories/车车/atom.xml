@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 车车 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/车车/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-11-05T14:42:51+08:00</updated>
+  <updated>2019-12-29T11:25:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019/"/>
+    <updated>2019-12-29T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019</id>
+    <content type="html"><![CDATA[<!-- 2018年的养车成本和2017年的竟然差不多。 -->
+
+
+<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left"> 条目     </th>
+<th align="left"> 2019     </th>
+<th align="left">2018     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left">   停车费     </td>
+<td align="left">   10810+12000     </td>
+<td align="left"> 11029+2000</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保险费     </td>
+<td align="left">   3932     </td>
+<td align="left">  3637  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   油费     </td>
+<td align="left">     5682   </td>
+<td align="left">   7006</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   高速     </td>
+<td align="left">     365   </td>
+<td align="left">   510</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   保养     </td>
+<td align="left">     1369+2500   </td>
+<td align="left">  1568  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   洗车     </td>
+<td align="left">     479   </td>
+<td align="left">   355</td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   上述合计     </td>
+<td align="left">  25297+12000  </td>
+<td align="left">      24105+2000  </td>
+</tr>
+<tr>
+<td></td>
+<td align="left">   里程     </td>
+<td align="left">      7538       </td>
+<td align="left">    8856</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>今年总体开销低于去年，主要是因为今年少开了1200公里。
+停车费的开销总体也差不多，除了在大花园租了新车位是全年的，但还是物有所值的。</p>
+
+<p>油费/公里依然很神奇的差不多，去年0.77元/KM，今年0.76元/KM，但因为高速跑的少，油耗从11.49L/100KM上升到11.93L/100KM。这也意味着今年的油价总体略低于去年。
+行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
+
+<p>保险费用因为有扣分的违章，有10%的涨幅。。<br/>
+保养费用方面今年没大保，不过因为换了轮胎，这笔开销就是有2500元。然后还有一次补胎，其他就没什么了。
+洗车比去年勤快了，另外也是因为洗车涨价了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2018 CRV养车成本汇总]]></title>
@@ -143,42 +227,6 @@
 
 <p>虽然购买服务是商业社会的主流选择，但DIY永远有其使用的空间。
 一来社会化生产的服务归根结底也要来源于diy，二来总有社会服务提供不到位的地方也需要diy，三来补锅法锯箭法也需要diy来进行对冲。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[混动雅阁]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/28/hun-dong-ya-ge/"/>
-    <updated>2016-09-28T23:17:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/28/hun-dong-ya-ge</id>
-    <content type="html"><![CDATA[<p>混动雅阁千呼万唤历经两年时间终于摆在了中国消费者的面前。而其定价也可谓
-相当合理：</p>
-
-<ul>
-<li>酷版： 23.98万元</li>
-<li>领版： 25.98万元</li>
-<li>尊版： 27.98万元</li>
-</ul>
-
-
-<p>价格基本和2.4版本的衔接，并且顶配也没超过原来3.0的次顶配。
-<strong>因此，这个价钱是定的相当有诚意。</strong></p>
-
-<p>本田在日系里还是有点运动基因，所以那种混动也走向sporty的道路，
-发挥了电机启动快扭矩大的优势。电池给了10年保也算负责了。</p>
-
-<p>但是，仔细看看混雅的配置，尤其是丐版的，还是过于寒酸了。</p>
-
-<ol>
-<li>2款低配没有后雷达，而顶配有前后雷达</li>
-<li>最低配没有驾驶座电动调节</li>
-<li>最低配没有车载蓝牙</li>
-</ol>
-
-
-<p>以上3者都是我认为不可缺少的现代汽车的配置。那么就只能上27.98万元这个版本，
-而这个价位下，A4 三系在品牌上的优势就大了。所以混雅的前途大概只是投石问路。
-希望这套系统早日用在CRV上。</p>
 ]]></content>
   </entry>
   
