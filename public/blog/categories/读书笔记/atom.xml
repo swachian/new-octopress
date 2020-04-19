@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 读书笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-12-29T11:25:00+08:00</updated>
+  <updated>2020-04-19T16:20:53+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -69,6 +69,10 @@
 <p>如果项目经理必须遵循某个截止日期，那就干脆什么都别估算了。把所有的功能进行排
 序，并按优先级进行开发。这种状况下，我强力推荐使用敏捷生命周期，这样就可以快
 速地实现功能，并马上得到反馈</p>
+
+<p>管理项目：管理风险，留意测试的进度，产生仪表盘上的数据，评估版本发布条件，要帮助大家看清目标、移除障碍，监控他们的进度，是没有时间做技术工作的。</p>
+
+<p>保持合理的工作时间。</p>
 ]]></content>
   </entry>
   

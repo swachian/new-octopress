@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-12-29T11:25:00+08:00</updated>
+  <updated>2020-04-19T16:20:53+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[入手本精装书]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
+    <updated>2020-04-13T11:20:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
+    <content type="html"><![CDATA[<p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
+另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
+
+<p>原版四五百页精装书，放在桌上看的体验真的普通版的给不了。封面和纸张的手感是很不一样的就不说了，关键是精装的书里面有线，书是可以翻平的。这个胶板书真给不了。</p>
+
+<p>不过计算机书籍国内精装版的基本很少，老外的也不多，估计还是大部分计算机图书的生命周期太短了吧。</p>
+
+<p>顺手翻了一下图灵和异步的精装图书。技术类的是不多的，图灵除了著名的计算机编程艺术，也就黑客与画家、阮一峰文集、番茄工作法、写给大家看的设计书等寥寥几本。异步稍微好一点。像重构第二版、深度学习的两本，还有持续交付和一本也是国内人编写的广告计算，合计也就5本。但国内编写的两本，怎么看都更像是方便作者自己送人的。所以在国内还真的享受不了什么看精装技术图书的乐趣。当然，即使国外，如Effective Java都没有出过精装版，那么实际上拥有硬封皮的计算机书籍也是不多的。</p>
+
+<p>顺便在天珑看了一下台湾图书的价格，同时发现现在台湾引入的简体版还真的不少，价格就比较有意思了。举《重构》和《领域驱动设计》两本书为例，价格如下（均为天珑实际售价)</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> 图书版本               </th>
+<th> 台币                       </th>
+<th> 人民币 </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 重构台湾 </td>
+<td> 632 </td>
+<td> 148 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 英文版hard cover </td>
+<td> 1995 </td>
+<td> 467 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 精装简体版</td>
+<td> 699 </td>
+<td> 163 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 简体平装 </td>
+<td> 469 </td>
+<td> 107 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 重构第一版简体 </td>
+<td> 327 </td>
+<td> 76 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td>  </td>
+<td>  </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计简体平装 </td>
+<td> 393 </td>
+<td> 92 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计繁体平装 </td>
+<td> 530 </td>
+<td> 124 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计英文版  </td>
+<td> 2470 </td>
+<td> 578 </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>英版的价钱确实还是很贵的。而在台湾销售的大陆书籍，大约比国内网店普通售价贵了一倍。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Manage It]]></title>
@@ -69,6 +167,10 @@
 <p>如果项目经理必须遵循某个截止日期，那就干脆什么都别估算了。把所有的功能进行排
 序，并按优先级进行开发。这种状况下，我强力推荐使用敏捷生命周期，这样就可以快
 速地实现功能，并马上得到反馈</p>
+
+<p>管理项目：管理风险，留意测试的进度，产生仪表盘上的数据，评估版本发布条件，要帮助大家看清目标、移除障碍，监控他们的进度，是没有时间做技术工作的。</p>
+
+<p>保持合理的工作时间。</p>
 ]]></content>
   </entry>
   
@@ -273,158 +375,6 @@ Jenkins的buidl periodically可以从多台机器上收集日志
 <p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
 
 <p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rancher and k8s]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/04/rancher-and-k8s/"/>
-    <updated>2019-10-04T16:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/04/rancher-and-k8s</id>
-    <content type="html"><![CDATA[<p>今年不期而遇而使用的技术很多，除了大数据flink，就是rancher/k8s/docker了。</p>
-
-<p>docker的话，几年前已经有过接触，总体感觉有价值，但对java来讲，帮助就比较有限了。<br/>
-k8s是对docker的编排，其实就是把docker作为基本的单元，让各种服务可以在一个抽象的层面跑起来，在服务监控、伸缩等方面都提供了很好的抽象和封装，易于运维人员操作。<br/>
-而Rancher，个人理解是k8s的编排，可能没那么复杂，但站在使用的角度，就便于安装、编辑、使用k8s的UI界面，当然，除了界面，幕后还有很多组件用于搭建一套k8s，启动相应的服务。</p>
-
-<h2>安装</h2>
-
-<p>因为他们都是基于docker的，所以前提需要安装好docker。然而，docker又是离不开OS的，所以前提是要装好OS。至于是物理主机还是虚机，倒是无所谓的。我选择使用Ubuntu 18.04 + Docker 19.03.2的组合，官方是到18.09.x。[https://rancher.com/docs/rancher/v2.x/en/installation/requirements/]</p>
-
-<h3>安装docker</h3>
-
-<p>```bash</p>
-
-<h1>1. 移除旧版本</h1>
-
-<p>sudo apt-get remove docker docker-engine docker.io</p>
-
-<h1>2. 更新apt包索引</h1>
-
-<p>sudo apt update</p>
-
-<h1>3. 安装https支持包</h1>
-
-<p>sudo apt-get install apt-transport-https ca-certificates curl software-properties-common</p>
-
-<h1>4. 添加Docker官方GPG key</h1>
-
-<p>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</p>
-
-<h1>5. 添加稳定版的仓库源(按架构选择)</h1>
-
-<p>sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"</p>
-
-<h1>6. 更新apt包索引</h1>
-
-<p>sudo apt update</p>
-
-<h1>7. 安装</h1>
-
-<p>sudo apt-get install docker-ce
-```</p>
-
-<h3>安装rancher</h3>
-
-<p>执行下面命令即可</p>
-
-<p><code>
-docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest
-</code>
-直接用docker启动rancher镜像，并映射80和443端口给rancher的UI界面。随后用浏览器即可访问到rancher服务，用admin账号登录进去后，就可以进行后续的操作。</p>
-
-<h3>增加集群</h3>
-
-<p>在rancher的浏览器界面里，通过<code>Add Cluster</code>即可以增加节点。<br/>
-首先需要增加的是etcd和controlpanel节点，这两个属于rancher的幕后服务。<br/>
-命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
-
-<p>```bash
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel</p>
-
-<p>sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
-```
---etcd和--controlpanel可部署在同一台机器上。然后需要耐心等待一段时间，因为会起很多个docker的服务。</p>
-
-<p>光有控制资源是不够的，还需要加入worker资源，这个就比较方便了，可以随时扩容。</p>
-
-<h3>新建服务</h3>
-
-<p>上述弄完以后，就可以发布新的服务了。</p>
-
-<p>到新建的集群中选择<code>Deploy</code>，拉取对应的镜像，设置好pod数量，就可以拉起服务。不过，这个对应的镜像主要是公共的镜像，如果私有镜像，则需要另外进行配置。</p>
-
-<h2>新建私有docker仓库</h2>
-
-<p>本身构造仓库并不复杂，逻辑上只要找一台虚机启动一个docker的registry服务，然后在rancher浏览器的<code>Resources-&gt;Registries</code>中注册一下这个地址即可。<br/>
-但事实上永远不会那么简单。主要原因在于docker默认是需要https才能对外提供服务，这就需要进行很多额外的配置。当然，主要是私有仓库的配置。可以参考下面几个链接：
-https://rancher.com/docs/rancher/v2.x/en/k8s-in-rancher/registries/
-https://docs.docker.com/registry/deploying/
-https://docs.docker.com/registry/insecure/</p>
-
-<p>最后形成的做法如下。</p>
-
-<p>一. 选择一台虚机作为registry主机，最好不要和rancher是一台机器，这样避免争抢443端口。在这台机器上先生成一下证书：
-<code>bash
-mkdir certs
-openssl req \
-  -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key \
-  -x509 -days 365 -out certs/domain.crt
-</code></p>
-
-<p>这里面要注意cn需要输入自己定义的域名，比如mydocker.co</p>
-
-<p>二. 将生成的<code>domain.crt</code>改名为<code>ca.crt</code>, 上传或复制为其他docker主机的<code>/etc/docker/certs.d/mydocker.co/ca.crt</code>，绑定这些主机的<code>hosts</code>文件中该域名的指向到上一步的ip中，或者也可以修改域名服务器里该域名</p>
-
-<p>三. 在第一台机器上运行docker的registry服务。
-<code>bash
-docker run -d \
-  --restart=always \
-  --name registry \
-  -v "/opt/registry/certs":/certs \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
-  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
-  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
-  -p 443:443 \
-  registry:2
-</code></p>
-
-<p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
-
-<p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
-
-<h2>k8s的dns服务变迁</h2>
-
-<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
-
-<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
-dnsmasq: 为客户端容器提供dns服务<br/>
-sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
-
-<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
-
-<h2>ingress-nginx</h2>
-
-<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
-通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
-
-<h2>核心组件</h2>
-
-<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
-
-<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
-* RC Controller<br/>
-* Node Controller<br/>
-* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
-* Namespace Controller<br/>
-* Service Controller &amp; Endpoints Controller</p>
-
-<p>  Kubelet是每个Node上k8s的代理，</p>
-
-<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
 ]]></content>
   </entry>
   

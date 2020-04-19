@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-12-29T11:25:00+08:00</updated>
+  <updated>2020-04-19T16:20:53+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[俞军的产品经理方法论]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun/"/>
+    <updated>2019-12-29T20:05:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun</id>
+    <content type="html"><![CDATA[<p>先是在caoz的微信上拜读了俞军产品方法论中关于产品经理的选拔方式，同样是从事脑力劳动，依赖主观能动性，发现招聘一个好的产品和一个好的程序员，很大程度上是相通的或者类似的。于是在书籍上市后就火速订购了一本。花了四五天时间看完，对产品和俞军的产品观都有了新的认识。</p>
+
+<p>俞军的经历主要是00年-09年在百度，以及16年被滴滴请出山（加拿大）之后到19年离开滴滴。而滴滴的架构下，俞军是向他们的CTO汇报的。这个以他的段位而言，似乎有点委屈。</p>
+
+<p>从已有的报道看，俞军在滴滴的成绩和他在百度的成就有很大的差距，当然这个主要是说产品结果，然而在团队培养和传道授业解惑上则较百度时又提高了档次。</p>
+
+<h1>1. 什么是产品经理？</h1>
+
+<p>最早的产品经理就是营销经理，后来是项目经理，在后来是需求经理。分别对应产品从产生、生产、销售的不同环节。其实，本身老板才是公司最主要的产品经理，决定了业务的方向和重要细节。</p>
+
+<p>产品经理需要学习心理学，需要明白产品效用、边际、成本和供需关系。产品需要明白用户模型和交易模型，明白产品的价值和成本。</p>
+
+<h1>2. 企业、用户、产品的关系</h1>
+
+<p>企业以产品为媒介，与用户进行价值交换，达成创造商业价值的目的。用户价值是那些被企业选择过的“用户价值”，即媒介是产品经理选择出来的。</p>
+
+<p>用户不是自然人，而是需求的集合。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kafka权威指南]]></title>
@@ -817,38 +842,6 @@ windowHeight(获知视口有多高)</p>
 <li><p>运营，2，应该就是管理员和推销员</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[7dbs in 7wks]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/06/06/7dbs-in-7wks/"/>
-    <updated>2013-06-06T05:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/06/06/7dbs-in-7wks</id>
-    <content type="html"><![CDATA[<p>花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。</p>
-
-<p>书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。Neo4J对我而言还属新生事物。</p>
-
-<p>这本书区别于其他数据库图书的价值就在于比较与分析，呵呵，话说这个和我的撰文风格挺类似的。</p>
-
-<p>首先，从RDBMS(PostgreSQL)开始，描述了SQL设计时的世界是查询的弹性要求远大于结构的弹性。回想一下，彼时的数据库查询都是由开发人员或者公司信息科的人来完成的，也就是直接使用SQL。而在如今，操作人员全部通过界面，可能是Web也可能是client，SQL都是后台自己拼接而成，于是SQL最强悍的地方其实已经打了折扣。而业务上，甚至统计方面，经常会对schema参数剧烈变化的要求。还有很重要的一点，就是关系型数据库是大家思想统一的东西，沟通方便。<br/>
-关系型数据库最大的优势在于acid的操作支持，以及运行多年而证明的稳定可靠。但在大规模访问和灵活性方面确实存在缺陷。</p>
-
-<p>然后，介绍了面向列的数据库。其实面向列就是存放是按照一列一列内容来存放的，有版本和时间戳的自动功能，适合于存放大数据。甚至还有压缩的功能。作者把HBase比喻为钉子气枪（nail gun)。他的每个查询都不快，但最强大之处在于<strong>遍历巨量数据集合</strong>。<br/>
-所以常常被大公司用了作为日志和搜索系统。<br/>
-column里面存放的是map。<br/>
-journaling = write-ahead logging.</p>
-
-<p>Riak是一个key-value数据库，不过更适合存放S3D那样的存放二进制的内容。基于Erlang编写。
-N, W, R, N是最终数据需要分发到的节点数量，W是写入多少就可以认为写入成功，R则是读取多少就认为读取成功。</p>
-
-<p>也谈到了这些数据库中实现Map-Reduce的哲学是把算法分发给各个节点，而不是把数据集中起来送给算法。毕竟传输算法肯定比传输数据的开销要少。</p>
-
-<p>MongoDB则是在关系型和扩展性强的数据库中取到了一个黄金百分点。可以存放复杂的对象是文档数据库最大的优势。CouchDB不如MongoDB灵活，采用视图查询法（事先定义map-reduce），</p>
-
-<p>最后，则主要还是介绍redis，及混合的多数据库应用开发。内建的可以让key失效，以及丰富的数据结构数据库，是redis脱颖而出的法宝。使得极其适合作为缓存使用。</p>
-
-<p>小结，过去人们依赖一个数据库来实现多个应用的整合。现在整合的能力更多地交给了中间层模式，往往多种语言都是基于HTTP实现服务层之间的通信的。这样就使得服务程序从db的限制中解脱了出来，变得可以根据需要选用多种数据库组合。</p>
 ]]></content>
   </entry>
   

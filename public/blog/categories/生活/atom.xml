@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2019-12-29T11:25:00+08:00</updated>
+  <updated>2020-04-19T16:20:53+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[入手本精装书]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
+    <updated>2020-04-13T11:20:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
+    <content type="html"><![CDATA[<p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
+另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
+
+<p>原版四五百页精装书，放在桌上看的体验真的普通版的给不了。封面和纸张的手感是很不一样的就不说了，关键是精装的书里面有线，书是可以翻平的。这个胶板书真给不了。</p>
+
+<p>不过计算机书籍国内精装版的基本很少，老外的也不多，估计还是大部分计算机图书的生命周期太短了吧。</p>
+
+<p>顺手翻了一下图灵和异步的精装图书。技术类的是不多的，图灵除了著名的计算机编程艺术，也就黑客与画家、阮一峰文集、番茄工作法、写给大家看的设计书等寥寥几本。异步稍微好一点。像重构第二版、深度学习的两本，还有持续交付和一本也是国内人编写的广告计算，合计也就5本。但国内编写的两本，怎么看都更像是方便作者自己送人的。所以在国内还真的享受不了什么看精装技术图书的乐趣。当然，即使国外，如Effective Java都没有出过精装版，那么实际上拥有硬封皮的计算机书籍也是不多的。</p>
+
+<p>顺便在天珑看了一下台湾图书的价格，同时发现现在台湾引入的简体版还真的不少，价格就比较有意思了。举《重构》和《领域驱动设计》两本书为例，价格如下（均为天珑实际售价)</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> 图书版本               </th>
+<th> 台币                       </th>
+<th> 人民币 </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 重构台湾 </td>
+<td> 632 </td>
+<td> 148 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 英文版hard cover </td>
+<td> 1995 </td>
+<td> 467 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 精装简体版</td>
+<td> 699 </td>
+<td> 163 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 简体平装 </td>
+<td> 469 </td>
+<td> 107 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 重构第一版简体 </td>
+<td> 327 </td>
+<td> 76 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+<td>  </td>
+<td>  </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计简体平装 </td>
+<td> 393 </td>
+<td> 92 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计繁体平装 </td>
+<td> 530 </td>
+<td> 124 </td>
+<td> </td>
+</tr>
+<tr>
+<td></td>
+<td> 领域驱动设计英文版  </td>
+<td> 2470 </td>
+<td> 578 </td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>英版的价钱确实还是很贵的。而在台湾销售的大陆书籍，大约比国内网店普通售价贵了一倍。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
@@ -204,15 +302,6 @@
     <updated>2018-01-14T20:48:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong</id>
     <content type="html"><![CDATA[<p><img src="/images/yangche2017.png" alt="image" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2016 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv/"/>
-    <updated>2016-12-31T21:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/12/31/2016-crv</id>
-    <content type="html"><![CDATA[<p><img src="/images/yangche2016.jpg" alt="image" /></p>
 ]]></content>
   </entry>
   
