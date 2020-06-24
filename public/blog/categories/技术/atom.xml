@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2020-04-19T16:20:53+08:00</updated>
+  <updated>2020-06-24T22:56:27+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[查看java的线程cpu使用情况]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/"/>
+    <updated>2020-06-24T22:36:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang</id>
+    <content type="html"><![CDATA[<p>说来惭愧，那么些年写java，至今也没碰到需要对jvm内部线程cpu使用情况的研究。
+今天碰到一例，因为用了flink，出现了一个处理瓶颈，不得不深入一探究竟。</p>
+
+<p>就Linux的操作系统原理而言，jvm的线程是类似进程的东西，通过<code>top -Hn 14142</code> 可以查看到
+14142这个进程内所有线程的cpu使用情况</p>
+
+<p><code>
+ PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+14321 hadoop    20   0   17.7g   8.6g  27756 S 43.2 27.4   8:29.33 java
+14275 hadoop    20   0   17.7g   8.6g  27756 S 15.9 27.4   2:45.05 java
+14408 hadoop    20   0   17.7g   8.6g  27756 S  3.7 27.4   0:33.23 java
+14274 hadoop    20   0   17.7g   8.6g  27756 S  2.3 27.4   0:37.25 java
+14226 hadoop    20   0   17.7g   8.6g  27756 S  2.0 27.4   0:20.27 java
+14222 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:12.78 java
+14414 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:11.12 java
+14254 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.05 java
+14288 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.97 java
+14415 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.99 java
+15072 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.04 java
+</code></p>
+
+<p>可以发现，14321 14275 这两个线程使用的cpu最多，那么这两个线程对应的算子是什么呢？这里就需要使用到jstack</p>
+
+<p><code>jstack 14142 &gt; flink.dump</code></p>
+
+<p>就可以得到jstack的信息。注意，需要以java进程运行用户的身份来运行上面的命令。</p>
+
+<p>可以得到下面这些东西：</p>
+
+<p>```
+Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.131-b11 mixed mode):</p>
+
+<p>"Attach Listener" #3673 daemon prio=9 os_prio=0 tid=0x00007f76403d6000 nid=0x676d waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE</p>
+
+<p>"flink-metrics-22" #3672 prio=1 os_prio=0 tid=0x0000000002ef6000 nid=0x674f waiting on condition [0x00007f75bd85d000]
+   java.lang.Thread.State: TIMED_WAITING (parking)</p>
+
+<pre><code>    at sun.misc.Unsafe.park(Native Method)
+    - parking to wait for  &lt;0x00000004406d94d8&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+    at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+    at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+    at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+    at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1066)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1127)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+    at java.lang.Thread.run(Thread.java:748)
+</code></pre>
+
+<p>"flink-akka.actor.default-dispatcher-33" #3668 prio=5 os_prio=0 tid=0x00007f765db5f800 nid=0x66d8 waiting on condition [0x00007f75bf67d000]
+```</p>
+
+<p>jstack输出的hex也就是16进制的，所以我们需要把pid再做一下转换。使用python可以调用hex方法.</p>
+
+<p>```
+Python 3.6.8 (default, Aug  7 2019, 17:28:10)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux
+Type "help", "copyright", "credits" or "license" for more information.</p>
+
+<blockquote><blockquote><blockquote><p>hex(14321)
+'0x37f1'
+hex(14275)
+'0x37c3'
+```</p></blockquote></blockquote></blockquote>
+
+<p>然后在dump文件中搜索<code>0x37f1</code>，可以得到</p>
+
+<p>```
+"at35__process -> (at35_e -> Sink: at35_sink, at35_current_parameter, at35_current_state) (1/1)" #142 prio=5 os_prio=0 tid=0x00007f7648a78800 nid=0x37f1 in Object.wait() [0x00007f75d53d6000]
+   java.lang.Thread.State: WAITING (on object monitor)</p>
+
+<pre><code>    at java.lang.Object.wait(Native Method)
+    at java.lang.Object.wait(Object.java:502)
+    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
+    - locked &lt;0x0000000441ab5ae8&gt; (a java.util.ArrayDeque)
+    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
+    at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
+    at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
+    at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
+    at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
+    at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
+    at java.lang.Thread.run(Thread.java:748)
+</code></pre>
+
+<p>```</p>
+
+<p>```
+"at20_window -> (at20__message, at20_current_parameter, at20_current_state) (1/1)" #112 prio=5 os_prio=0 tid=0x00007f76485f1800 nid=0x37c3 in Object.wait() [0x00007f75d7af9000]
+   java.lang.Thread.State: WAITING (on object monitor)</p>
+
+<pre><code>    at java.lang.Object.wait(Native Method)
+    at java.lang.Object.wait(Object.java:502)
+    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
+    - locked &lt;0x0000000441a00cc8&gt; (a java.util.ArrayDeque)
+    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
+    at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
+    at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
+    at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
+    at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
+    at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
+    at java.lang.Thread.run(Thread.java:748)
+</code></pre>
+
+<p>```</p>
+
+<p>然后就可以看见线程的名字，就可以去代码里进一步对症下药了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[入手本精装书]]></title>
@@ -266,115 +380,6 @@
 
 <p>taskmanager.heap.size跟着yarn的container size走
 taskmanager.numberOfTaskSlots 可设置多条</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[日式高效团队开发]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team/"/>
-    <updated>2019-10-05T16:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/05/nipon-software-team</id>
-    <content type="html"><![CDATA[<p>日式《高效团队开发》</p>
-
-<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
-
-<p>死亡行军状态的项目---项目岌岌可危，人员身心俱疲</p>
-
-<p>问题1：邮件内容多 -- 引入缺陷管理<br/>
-问题2：没有仿真环境  -- 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
-问题3：没有分支和tag管理  -- 利用分支和标签<br/>
-问题4：重新制作数据库的困难  -- 数据库变更管理</p>
-
-<p>问题5: 不运行就就无法察觉问题  -- CI<br/>
-问题6：代码合并后产生了degrade  -- CI+merge<br/>
-问题7：重构代码没信心  -- CI+测试代码<br/>
-问题9：环境依赖</p>
-
-<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
-
-<p>分布式版本控制系统的缺点：<br/>
-1. 没有真正的版本号<br/>
-2. 没有最新的版本<br/>
-3. 过于灵活，容易混乱<br/>
-4. 思维方式</p>
-
-<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
-
-<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
-反之，都使用一个master为好。</p>
-
-<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
-
-<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
-
-<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
-
-<p>因成本收益和市场变化，才使得CI流行起来。
-Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
-
-<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
-
-<p>CI集成的测试对象：</p>
-
-<ul>
-<li>单元测试</li>
-<li>集成测试</li>
-<li>用户验收测试UAT</li>
-<li>回归测试</li>
-</ul>
-
-
-<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
-
-<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
-
-<p>A 要全部采用版本管理<br/>
-B 所有的环境都要用同样的方式来构建<br/>
-C 要实现发布工作的自动化，并事先进行验证<br/>
-D 要反复多次进行测试</p>
-
-<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
-
-<p>Infrastructure as Code</p>
-
-<p>编配（Orchestration）：<br/>
-即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
-Jenkins的buidl periodically可以从多台机器上收集日志
-如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
-
-<p>测试四象限：</p>
-
-<p>```</p>
-
-<pre><code>            业务层面
-            |
-            |
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>团队的支持------- </th>
-<th> -------产品的评价    </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>                </td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<pre><code>            技术层面
-</code></pre>
-
-<p>```</p>
-
-<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
-
-<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
 ]]></content>
   </entry>
   

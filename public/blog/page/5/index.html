@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="地点： 杨高中路1500号， 浦东交警支队
-时间: 2016年5月10日下午3点半 三点多从公司出发，20分钟左右抵达。到门口发现说停车场不对外接待，其实也不是不对外，只是确实很容易就满了然后就不放了。
-建议停蓝天路等社会停车场。于是转到蓝天路，停车费10块。收费的师傅还问我来的挺晚啊， &hellip;">
+  <meta name="description" content="使用Spring MVC中的@ResponseBody或者@RestController产生的json消息格式会产生一个很大的响应头。
+其主要内容就是Accept-Charset会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/19/stringhttpmessageconverterde-tou-shu-xing/">StringHttpMessageConverter的头属性</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-19T17:22:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用Spring MVC中的<code>@ResponseBody</code>或者<code>@RestController</code>产生的json消息格式会产生一个很大的响应头。
+其主要内容就是<code>Accept-Charset</code>会罗列几乎所有的charset变量，从utf到gbk再到iso等等。而这很大程度上是无谓的开销。</p>
+
+<p>要解决可以在xml的配置中设置</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;mvc:annotation-driven&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;mvc:message-converters</span> <span class="na">register-defaults=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&quot;UTF-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;writeAcceptCharset&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/mvc:message-converters&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/mvc:annotation-driven&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
+
+<p>&#8212;- update on 2016.10.17</p>
+
+<p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">static</span> <span class="n">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">converts</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getMessageConverters</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">for</span> <span class="o">(</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;</span> <span class="n">convert</span> <span class="o">:</span> <span class="n">converts</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">convert</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">==</span> <span class="n">StringHttpMessageConverter</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="o">((</span><span class="n">StringHttpMessageConverter</span><span class="o">)</span> <span class="n">convert</span><span class="o">).</span><span class="na">setWriteAcceptCharset</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>获得converts，然后对String的Convert进行设置</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1451,65 +1539,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/12/22/deutschland-holiday/">Deutschland Holiday</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-12-22T15:14:00+08:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>8月底9月初的德国之旅，不过拖了很久才发上来。</p>
-
-<p>D0: 浦东机场12小时航班直飞法兰克福，难得一见公务舱登机也要排长队。</p>
-
-<p>D1：飞行12小时后，当地时间凌晨5点抵达法兰克福机场，出关取行李因为是凌晨都很迅速。随后买从法兰克福去斯图加特的高铁票，单人单程63欧/张，一个半小时后抵达斯图加特。德国的火车站都没检票口，导致我们寻找车站入口还费了点脑筋。
-到斯图加特火车站旁的旅馆checkin，由于太早只能寄存行李，随后坐地铁S线前往奔驰博物馆。中午游览完毕后回酒店休息。</p>
-
-<p>D2： 德国的礼拜天，商场全部关门，于是前往路德维希堡，距离斯图加特坐火车20分钟。王宫在广场的参观都是不要门票的，德国大部分王宫都是这个样子的，只有内饰参观才要买门票，而且习惯是让一个导游带着10来个人一起走。内部参观要持续一个半小时，不过一圈下来基本各个房间都了解了，之后几天参观其他王宫也差不多是一样的格局。</p>
-
-<p>D3： 麦琴根购物村购物。斯图加特出发火车半个多小时可达。这其实是一个outlets，东西还是比较多的，当然本身都是打折货品。</p>
-
-<p>D4： 海德堡。海德堡和斯图加特一样都位于德国巴符州，所以可以买巴符州的州票，州票比较便宜28欧两个人可以当天在州内随意坐火车和各类公交。就是海德堡在巴符州的西北角，州票只能坐慢车，将近两个小时才到。古堡本身是破损的，不过这个山区小镇倒是让人想起中国的庐山。回程走了一下商业街，长一公里多，里面东西还是蛮多的，也是很适合购物的商业街。</p>
-
-<p>D5: 斯图加特的游程基本结束，坐高铁前往慕尼黑，2个小时不到即可到达,不过慕尼黑开始下雨了。提前一天买票，优惠还是很大的，这次的距离比第一天坐的还要长，但两人票单程只要48欧，相当于原价的40%。中午抵达慕尼黑后，这次倒是可以直接入住酒店了。随后坐公共电车前往宁芬堡宫。宁芬堡很棒，绝对值得一去。里面的马车展览让我很感叹，德国人会造车绝非偶然。</p>
-
-<p>D6： 天鹅堡。去传说中的天鹅堡。买巴伐利亚州的州票即可，天鹅堡实际位于小镇福森境内，坐两个小时的火车可以抵达，随后坐公交10分钟即可。这个地方很商业化了，城堡外墙也是在不断翻新的。其实德国的景区都是不用买票的，爬爬山拍拍照其实已经足够了。如果要进去参观城堡内饰，就需要买票，买完票还要在门口等待排队入场。堪比世博会，等了将近两个小时才进去草草参观了15分钟。但由此才终于明白德国的景区本身确实都是不收费的，我们的排队纯粹是按中国旅游思维导致的自找麻烦。</p>
-
-<p>D7：雨中的天鹅堡并不太好玩，本来我们想隔天再去国王湖的，但一看天气预报隔天国王湖那边下雨，而D7倒是一个好天气，于是临时调整行程前往国王湖。国王湖实际上位于贝希特斯加登小镇上，离奥地利的萨尔茨堡很近只要40分钟车程。慕尼黑和萨尔茨堡之间的交通很密集，M线几乎每小时就有一班，只要一小时多一些即可到达萨尔茨堡。但从慕尼黑只坐火车周转需要2个半小时才能到贝希斯特加登。国王湖本身不错，但整个小镇更有意思。可惜我们安排的不好，这地方应该住个两晚，这样就能把耶拿峰和著名的鹰巢都玩到。国王湖游船中的小号回声表演，本来以为是很无聊的一个项目，但实际参加下来却感觉很有意思，也是开开心心付给了表演导游小费。当天下午4点折回慕尼黑，一天总计坐了5个小时火车，也是坐的累了。当天是周五而当晚正好是德国国家足球队对阵波兰的欧洲杯预选赛，火车开过基姆湖后，一车子上很多球迷，大部分是年轻的德国男女，普遍穿着巴伐利亚传统服装外加一人一瓶啤酒，一路上吵吵闹闹，老外确实能吵。</p>
-
-<p>D8: 宝马博物馆和慕尼黑奥林匹克体育场。宝马博物馆比奔驰差了许多。奥林匹克公园倒是鸟巢+世纪公园，当天是周六，老外周六不少也是在公园遛娃遛狗的。下午可以趁着周日商店关门前继续购物。慕尼黑是个商业发达的城市，买东西还是很方便的。</p>
-
-<p>D9： 上午慕尼黑市中心参观。到了周日人就很少了，马路上基本只有游客，所以一早很空，顺便还去了王宫博物馆，也看见了玛利亚广场是钟人表演。下午则是去安联足球场和拜仁慕尼黑足球纪念馆参观，对中国人来讲也就是看一个水立方的体育场版本。</p>
-
-<p>D10： 上午又在市中心逛了一下，随后就直接出发去慕尼黑机场，地铁40分钟可达，距离类似上海从市中心去虹桥机场。早早checkin，随后等登机，又经过10小时的飞行我们终于回到了上海。回程的飞机经济舱没卖光，商务舱却都售罄了。不过这种直飞的长途，经济舱和公务舱的差异确实类似以前火车硬座和软卧的差异。也难怪公务舱的比例会那么高。慕尼黑后3天都碰到了难民问题。我们住在火车站旁边，所以看见很多难民和警察，秩序虽不乱但总让我感到紧张。回来后，还是发现上海更好。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -1527,6 +1556,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a>
       </li>
     
@@ -1542,15 +1575,11 @@
         <a href="/blog/2019/12/01/manage-it/">Manage It</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (85)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (86)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

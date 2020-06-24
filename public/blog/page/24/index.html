@@ -9,9 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="以中国人实际的概念而言，所谓封建社会 就是 地富 社会。
-知识分子也开始装老粗，因为农民思维农民习气受到推崇。因为彼时是战斗阶段，农民是地位最高的一个阶层。
-阶级出身论是中共革命最重要的组织原则，也是思想原则。在革命年代有过重要贡献。这和员工治理有很多相通的地方。但是公司怎么折腾明显是私人的事情。 &hellip;">
+  <meta name="description" content="部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个： 大数据量写入，一小时10G
+数据量极大的查询
+并发数不大，即写入和读取都不是高并发的 发现此类数据库普遍从3年前开始流行，主要实现这些数据库的编程语言是下面这些， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,271 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/20/no-sql-databases-notes/">NoSql Databases Notes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-20T21:35:00+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个：</p>
+
+<ul>
+<li>大数据量写入，一小时10G</li>
+<li>数据量极大的查询</li>
+<li>并发数不大，即写入和读取都不是高并发的</li>
+</ul>
+
+
+<p>发现此类数据库普遍从3年前开始流行，主要实现这些数据库的编程语言是下面这些，其实从中也可以看出各种库所擅长的内容，有些强项在存储，有些在路由，即分布式。</p>
+
+<ul>
+<li>C
+
+<ul>
+<li>MongoDB　 (文档存储)</li>
+<li>Redis (key-value)</li>
+</ul>
+</li>
+<li>Erlang &amp; C （erlang管路由，c管数据存储的结构）
+
+<ul>
+<li>Riak (key-value)</li>
+<li>CouchDB (文档存储)</li>
+<li>Membase</li>
+</ul>
+</li>
+<li>java (分布式为主，路由功能和存储均不错)
+
+<ul>
+<li>Cassandra [kə&#8217;sændrə]</li>
+<li>HBase</li>
+<li>Neo4j</li>
+<li>SenseiDB (from <a href="http://www.infoq.com/cn/news/2012/03/senseidb-1-0-0?utm_source=bshare&amp;utm_campaign=bshare&amp;utm_medium=sinaminiblog&amp;bsh_bid=85617203">LinkedIn</a>)</li>
+</ul>
+</li>
+</ul>
+
+
+<p>参考资料:<br/>
+<a href="http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra">http://blog.serverdensity.com/2011/07/21/mongodb-vs-cassandra</a><br/>
+<a href="http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis">http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis</a><br/>
+<a href="http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra">http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra</a>    <br/>
+<a href="http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2">http://articles.businessinsider.com/2009-11-06/tech/30063107_1_database-stores-documents-hot-backup/2</a></p>
+
+<h1><a href="http://www.mongodb.org/">Mongodb</a></h1>
+
+<p>保证海量数据存储的同时，具有良好的查询性能。<br/>
+Schema Free</p>
+
+<p>Mongodb总体介绍</p>
+
+<div style="width:425px" id="__ss_9209804"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ChrisEdwards357/introduction-to-mongodb-9209804" title="Introduction to MongoDB - Austin Code Camp 2011" target="_blank">Introduction to MongoDB - Austin Code Camp 2011</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9209804" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/ChrisEdwards357" target="_blank">Chris Edwards</a> </div> </div>
+
+
+<h3>安装、建库、索引与备份</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 下载解压</span>
+</span><span class='line'>wget http://downloads.mongodb.org/src/mongodb-linux-x86_64-2.0.4.tgz
+</span><span class='line'>tar xzf mongodb-src-r2.0.4.tar.gz
+</span><span class='line'>
+</span><span class='line'><span class="c"># 创建数据目录</span>
+</span><span class='line'>mkdir -p /data/db
+</span><span class='line'>
+</span><span class='line'><span class="c">#启动</span>
+</span><span class='line'>./mongodb-xxxxxxx/bin/mongod
+</span><span class='line'>
+</span><span class='line'><span class="c">#shell访问</span>
+</span><span class='line'>./mongodb-xxxxxxx/bin/mongo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>mongodb可以不事先建schema和表，会在第一次插入数据时自动创建</p>
+
+<p>mongodump 用于备份</p>
+
+<h3>开发工具及使用方式</h3>
+
+<p>mongodb shell是基于js的语法</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; use mydb
+</span><span class='line'>&gt; show dbs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="http://www.mongodb.org/display/DOCS/Java+Tutorial">Java</a><br/>
+<div style="width:425px" id="__ss_3924691"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/ecspike/java-development-with-mongodb" title="Java development with MongoDB" target="_blank">Java development with MongoDB</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/3924691" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> <div style="padding:5px 0 12px"> Mophia( a lightweight type-safe library for mapping Java objects to/from MongoDB)值得使用</div> </div></li>
+<li><a href="http://www.mongodb.org/display/DOCS/Ruby+Language+Center">Ruby</a></li>
+<li><a href="http://www.mongodb.org/display/DOCS/C+Language+Center">C</a></li>
+</ul>
+
+
+<h3>数据模型</h3>
+
+<ul>
+<li>database</li>
+<li>collection = table</li>
+<li>document = row</li>
+<li>field = column</li>
+<li>index</li>
+</ul>
+
+
+<h3>生产环境配置要点(部署)</h3>
+
+<ul>
+<li>Linux File Systems</li>
+</ul>
+
+
+<p>MongoDB uses large files for storing data, and preallocates these. These filesystems seem to work well:</p>
+
+<p>ext4 ( kernel version >= 2.6.23 )
+xfs ( kernel version >= 2.6.25 )</p>
+
+<ul>
+<li>NUMA (一种多核cpu的内存绑定结构，同mongodb和mysql的兼容都不好)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>numactl --interleave<span class="o">=</span>all /home/mongodb/mongodb-linux-x86_64-2.0.4/bin/mongod --fork --logpath<span class="o">=</span>/data/log/log
+</span><span class='line'><span class="nb">echo </span>0 &gt; /proc/sys/vm/zone_reclaim_mode
+</span><span class='line'>
+</span><span class='line'><span class="nb">kill</span> -2 <span class="o">{</span>proccess_id<span class="o">}</span> <span class="c"># kill -2 = ^C</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>监控</h3>
+
+<h1><a href="http://cassandra.apache.org/">Cassandra</a></h1>
+
+<h3>开发工具的支持</h3>
+
+<p>使用<a href="http://thrift.apache.org/">Thrift</a>作为支持多语言的开发工具。它本身也是facebook开源出来的东西。</p>
+
+<h3>安装与教程</h3>
+
+<ol>
+<li><a href="http://wiki.apache.org/cassandra/GettingStarted">安装GettingStarted</a>，是安装、配置、启动的上手指南，类似启动一个tomcat；</li>
+<li><a href="http://wiki.apache.org/cassandra/CassandraCli">command line 基础</a>, 包含了基本的建表、索引等实例；</li>
+<li><a href="http://pablete.org/2009/11/cassandra-and-ruby/">Cassandra for Rails的ppt</a><br/>
+<div style="width:480px;text-align:left" id="__ss_2834738">
+ <a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/pablete/cassandra-for-rails" title="Cassandra for Rails">Cassandra for Rails</a>
+ <object style="margin:0px" width="480" height="355">
+   <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" />
+   <param name="allowFullScreen" value="true"/>
+   <param name="allowScriptAccess" value="always"/>
+   <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=cassandrarails2009-100105132552-phpapp01&stripped_title=cassandra-for-rails" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed>
+ </object>
+</div></li>
+</ol>
+
+
+<h3>其他优秀特性：</h3>
+
+<ul>
+<li>比key-value多，比Mongodb做的少。</li>
+<li>Range queries</li>
+<li>List datastructures , for per-user indexex</li>
+<li>Distributed writes</li>
+<li>cluster里可以指定写的node的数量W，和读的node数量R，以此来实现整个node</li>
+</ul>
+
+
+<h3>生产cluster搭配要点:</h3>
+
+<ul>
+<li>硬件
+
+<ul>
+<li>不需要raid，可以多个节点，即便在同一台机器上，同时运行。</li>
+<li>16GB的内存</li>
+</ul>
+</li>
+<li>配置
+
+<ul>
+<li>16GB的内存下，配3个节点，Jvm heap使用4GB</li>
+</ul>
+</li>
+</ul>
+
+
+<p>在/var/lib 下存放data， log， 和  saved_caches</p>
+
+<h3>数据模型的概念</h3>
+
+<ul>
+<li>keyspace = schema;<br/>
+keyspace仅仅是用来决定replication的次数，而不要求所有的内容都关联在一个schema中。</li>
+<li>column family = table<br/>
+  由row key +　Columns组成，key可以是自然key也可以是uuid之类的key<br/>
+column 由name, value 和timstamp组成，其中value可以为空
+key默认就有primary index</li>
+<li>特殊的column<br/>
+Expiring 可以写入过期时间，用于消息失效之类的应用<br/>
+Count 技术的事务性有Cassandra自己保持<br/>
+Super  其value是(super) columns的集合，但是该value的全部内容要序列化</li>
+<li>对value索引<br/>
+   即二级索引，主要起类似位图索引的作用</li>
+</ul>
+
+
+<p><a href="http://www.datastax.com/docs/0.7/data_model/twissandra">一个Twissandra 使用cassandra的例子</a></p>
+
+<h3>Cassandra 小结</h3>
+
+<p>目前分析下来，倾向于使用Cassandra. 理由是，极致的可扩展性，是可以水平扩展的数据库；Java编写，利于改造利用；开发者在去facebook前，也是Amazon Dynamo的开发者；
+已知的已经有300TB使用400台服务器的案例。<br/>
+twitter的人写的架设材料 http://blog.evanweaver.com/2009/07/06/up-and-running-with-cassandra/<br/>
+但其缺点是过于虚拟化以及理想化，所以实际应用中并不是很稳定，digg和twitter都面临骑虎难下的局面。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -545,104 +810,6 @@ CPU：美国博康BCM5357处理器   &#8221;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/20/X441-notes/">《中国人为什么创新不起来》札记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-20T14:00:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>世界经济论坛将国家发展分为<strong>要素驱动</strong>、<strong>效率驱动</strong>和<strong>创新驱动</strong>。<br/>
-于此对应的是<strong>成本最小</strong>、<strong>运营卓越</strong>和<strong>产品领先</strong>。</p>
-
-<p>胡林翼洋船惊吓事件、李约瑟难题、市场经济（capitalism）</p>
-
-<p>产权明确到个人。英国文化中根深蒂固私有产权观念。<br/>
-差学生是法国，法国有强大的皇帝和官僚组织。<br/>
-最差的是西班牙，但也比中国好。<br/>
-财富总是流向产权能够得到保护的地方。有长远的规划和眼光，才可能谈得上创新、革新、发明，否则大家都是过一天算一天。</p>
-
-<p>政治里面的教堂、市场和市政厅。<br/>
-大一统对创新是阻碍的。而中国是三统一的国家，领土统一、权利统一和思想统一。<br/>
-但是，分立未必分裂，统一未必专制。<br/>
-中国的城市是权利的附庸，是统治者消费、统治的中心。所以统治者在哪里，核心就在哪里。每座建筑总是要做土皇帝，要显示权利架构中的位置。即作威作福。<br/>
-官大学问大，钱多学问多，指标高学问高。权利是自由和创新的敌人。</p>
-
-<p>身份信任（血缘、地缘、同学）、过程信任（长期的合作、团队）、制度信任（合同、银行、律师、交易所）。<br/>
-信任圈==SNS<br/>
-经济型网络的美第奇效应。即不同风格背景的碰撞和混搭。</p>
-
-<p>文化和个人的影响。<br/>
-1. 对冲动的抑制（先交朋友再做生意，做生意讲感情）；<br/>
-2. 个体导向还是集体导向；<br/>
-3. 普遍主义还是特殊主义（是否局限在一个小圈子）；<br/>
-4. 赢得地位还是赋予地位（赢得地位的关键在于他做了什么，赋予地位则在于他是谁他爸是谁）；<br/>
-5. 封闭性和扩散性（朋友是朋友，生意是声音，分的清楚）。</p>
-
-<p>个体主义与集体主义的模型<br/>
-个体地位相对集体地位不断提高，是人类发展的过程和趋势。<br/>
-* 自我观念(独立的还是依赖的)<br/>
-* 目标关系(集体因个人需要而存在，还是个人的存在是为集体服务)<br/>
-* 内在价值还是外在规范(在乎的是别人的看法还是自己的看法，是慎独还是其他？)<br/>
-* 任务完成还是关系和谐(吾爱吾师但吾更爱真理）<br/>
-个体主义与利己主义的区别<br/>
-中国的集体主义是关系为基础的集体主义或者说以群体为基础的集体主义</p>
-
-<p>综合与分析<br/>
-精细化的是分析，笼统则是综合。前进困难，后退容易。所以从分析到综合简单，从综合到分析就不好继续了。</p>
-
-<p>思维方式<br/>
-* 自我观念（我是xxxx VS 我跟xxx）<br/>
-* 归因（一切归于内在，喜欢强调客观理由）<br/>
-* 决策（消费效用 vs 决策效用（为面子为合算而买））
-  也会为脓包而买单，因为脓包是自己的决策，称之为认同的强化。<br/>
-* 说服人的方式（因道理本身还是靠边缘（外貌）获胜）<br/>
-* 碰到冲突(是逃避，还是辩论共赢)<br/>
-* 预测(喜欢押宝在一个方面，而不是左一个可能性右一个可能性)<br/>
-* 激励(不重视自我满足，而关注外在的物质和非物质的回报)</p>
-
-<p>宗教<br/>
-信仰的力量</p>
-
-<p>地理环境的影响</p>
-
-<p>人民的独立精神<br/>
-日本维新的立国之本</p>
-
-<p>独生子女有利于个体主义精神的诞生。 互联网把中国彻底和世界相联。</p>
-
-<p>组织的知识吸收能力和知识重组能力。<br/>
-腾讯是这方面的楷模。</p>
-
-<p>商业模式的创新 产品技术的创新 组织架构的创新。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/25/">&larr; Older</a>
@@ -660,6 +827,10 @@ CPU：美国博康BCM5357处理器   &#8221;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a>
       </li>
     
@@ -675,15 +846,11 @@ CPU：美国博康BCM5357处理器   &#8221;
         <a href="/blog/2019/12/01/manage-it/">Manage It</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/">凤凰项目读后记</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (85)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (30)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (86)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>
