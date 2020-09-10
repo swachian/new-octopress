@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="读了王力雄写于90年代的《黄祸》，可以想象这本书在当时必然是取得了爆发性的效应。回过头来看，尽管有些东西已经过时了，但还有些东西真的是切实存在，
-而且直接导致了如今的房祸。 整篇小说其实写的很跳跃，基本是一段一段的。场景也在中国的北方南方、世界各国跳来跳去的。书中塑造的让人记得住的人物有 李克明， &hellip;">
+  <meta name="description" content="张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。 书到IP SAN之前都是很棒的。讲的很仔细，简直可以替换计算机组成的有关内容了。作者的实战经验很丰富，专业的知识面很广，如PCB盘片为什么要分层，对磁盘的解析，磁盘与CPU、OS的交互都很细致和形象，串行并行的优劣势， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,270 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/08/da-hua-cun-chu/">大话存储</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-08T17:01:00+08:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
+
+<p>书到IP SAN之前都是很棒的。讲的很仔细，简直可以替换计算机组成的有关内容了。作者的实战经验很丰富，专业的知识面很广，如PCB盘片为什么要分层，对磁盘的解析，磁盘与CPU、OS的交互都很细致和形象，串行并行的优劣势，对几种Raid之间的区别于联系、发展脉络讲解的十分到位，柜和阵的区别，FC究竟意味着什么。可以看出作者是一个勤于思考勤于提炼的人。</p>
+
+<p>不足之处就是书籍有点虎头蛇尾，在IP SAN讲解完之后的几章内容相对没有重点。当然，作为又出了第二版，我看了下主要补充的就是后半部分的内容。两本我都有，但是简单看了下第二版的后半部分，也还是不如前半部写的出色。</p>
+
+<script src="https://gist.github.com/7e951cbd394d22eeffa0.js"></script>
+
+
+<h2>存储的发展</h2>
+
+<p>封面很山寨，图片有很多。比较有利于增强感性认识，也符合我想认识设备的需求。</p>
+
+<p>纸带 磁存储 硬盘 磁阵 网络磁阵（几百个磁盘） 网络存储（硬盘从主机箱移到外面）</p>
+
+<h2>总线</h2>
+
+<p>总线就是一条或多条物理导线，导线可以有多条，比如8条、16条、128条。导线（总线）是可以印刷在电路板上，但密集的导线之间会产生<strong>高频振荡</strong>，所以会将这些导线分组印刷到不同的电路板上。然后再将多块板压合起来，形成了所谓的多层印刷电路板(多层PCB)。<br/>
+导线中，有些是<strong>交互数据</strong>用的数据总线，有些是<strong>传递控制信号</strong>的控制总线，包括处理<strong>中断与仲裁</strong>的,另有一些是用来确认目标设备的<strong>地址总线。</strong></p>
+
+<h3>连找发模型、CPU与硬盘的交互</h3>
+
+<p>主板上的电容电阻蛇形线都是为了保证导线的通畅。<br/>
+CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
+<strong>找</strong>即地址通过IO端口向内存中映射，由北桥芯片将这类地址的数据全部映射到总线上的实际设备；<br/>
+<strong>发</strong>即发送操作指令，对于磁盘CPU有如下三条指令：
+  1. 读还是写，外加其他选项如是否缓存、是否用中断来通知CPU处理
+  2. 知名应该读取的硬盘逻辑号[LBA]<br/>
+  3. 给出读取出来的内容放在内存中的哪个地址。<br/>
+上面这三个指令其实是发给南桥上的控制器，南桥再将指令翻译成磁盘认识的一系列指令，南桥和磁盘之间的协议接口形成了ATA和SCSI两个指令集。</p>
+
+<h2>磁盘结构</h2>
+
+<p>盘片有两个盘面，每个盘面对应一个磁头，所以盘面号就是磁头号，一般是0-5号；<br/>
+磁头和头发丝的大小差不多，磁头和盘面间的距离只有头发丝的千分之一；<br/>
+盘片上每个同心圆就一个磁道，磁道从0开始编号，磁道上的每段圆弧称作扇区，一个扇区有512字节通常，扇区是流式的，类似磁带，扇区是分块的；<br/>
+不同的盘之间相同磁道号的磁道共同组成柱面，圆柱面也从0开始编号，读写是首先在同一个柱面展开的，这样可以取得类似并行读写的效果，避免了不同磁道间的频繁切换；<br/>
+能划分的扇区数取决于磁头有多小以及磁头的步进距离有多小，即磁道和磁道间隔有多细</p>
+
+<p>扇区传统上采用CHS编码（Cylinder柱面、Header磁头、Sector扇区)，每个扇区包含扇区头信息和数据区两部分，头信息就有CHS信息以及是否为坏扇区这些内容；不过随着发展，目前已经抽象成了LBA寻址方式，但这只是在磁盘外部表现的逻辑</p>
+
+<p><strong>扇区交叉因子</strong>是为了满足磁头旋转时因速度原因跑过了头，从而把不连续的扇区编号成为第2扇区，其实是一种模的运算，核心还是为了迎合磁头的物理运转需求
+<strong>磁头扭斜</strong>则是为了满足切换磁道时也会产生的位移，因而磁道之间开始编号的起始扇区也有一个差</p>
+
+<p><strong>低级格式化</strong>就是利用磁头重新划分扇区</p>
+
+<p>总有个最小单位（芝诺悖论，龟兔赛跑悖论）</p>
+
+<h3>硬盘接口技术</h3>
+
+<ul>
+<li><p>ATA</p>
+
+<ul>
+<li>IDE（PIO,DMA两种主要模式，前者的数据通过CPU写入内存，后者磁盘直接写入内存，最高的是ATA133）</li>
+<li>SATA（较PATA的信号干扰小）</li>
+</ul>
+</li>
+<li><p>SCSI（带宽大，热插拔，较ATA多了SCSI控制卡，其实就是多了一个处理器）</p>
+
+<ul>
+<li>并行</li>
+<li>串行</li>
+<li>IBM SSA</li>
+<li>FC接口（FCP）</li>
+</ul>
+</li>
+</ul>
+
+
+<p>CPU &#8212;&#8211;> 磁盘控制器（南桥） &#8212;&#8211;> 磁盘驱动器控制电路（硬盘内）</p>
+
+<pre><code>`接口1：磁盘控制器驱动程序`   `接口2：ATA/SCSI接口`  
+</code></pre>
+
+<p>磁盘数据 &#8212;&#8211;> 驱动控制电路的缓存 &#8212;&#8211;> 磁盘控制器</p>
+
+<pre><code>  `内部传输速率`               `外部传输速率`  
+</code></pre>
+
+<h3>并行的劣势</h3>
+
+<p>并行是要求同步达到，这给并发信息之间的配合带来问题；它的传输频率不能太高，因为并行会增加干扰增加配合难度，而串行则无此问题，可以通过增加频率来提高速度。这里面的核心问题是<strong>传输距离</strong>，距离低的比如内存到cpu就不用担心干扰和配合带来的难题。而距离远的，如usb ata这是串行优势明显。</p>
+
+<h2>七种Raid</h2>
+
+<ul>
+<li>Raid 0 &#8212; 几块硬盘全部并发；</li>
+<li>Raid 1 &#8212; 1比1镜像；</li>
+<li>Raid 2 &#8212; 一部分盘用于校验，校验算法采用海明码；  校验盘数量很大，8位的数据就需要4块校验盘，所以已废弃</li>
+<li>Raid 3 &#8212; 较Raid 2 对校验进行了突破，采用了布尔运算中的抑或算法，可以用更少的<strong>校验盘</strong>，可以校验和找回，但不像R2那样可以纠错，条带也被弄成了4KB；
+每个读写都要所有盘全部一起动，所以文件系统的并发IO很差，因为每个IO都会让所有磁盘都在运作，从而无法可以同时执行多个文件系统IO</li>
+<li>Raid 4 &#8212; 较Raid 3 增加了条带的深度，使得磁阵的block更大，从而在写数据时可以只动用少数硬盘；但所有的操作都要写校验盘，从而形成了一个瓶颈；</li>
+<li><p>Raid 5 &#8212; 继续使用校验，突破点在于不再单独地使用一个硬盘做校验盘，而是在所有的磁盘中都产生了校验区；</p>
+
+<ul>
+<li>Raid 5E和Raid 5EE都是带热备盘的Raid5.</li>
+</ul>
+</li>
+<li><p>Raid 6 &#8212; 另外6种Raid基本只容忍可以损坏一种磁盘，Raid 6允许损坏2块磁盘。在XOR运算之外，又增加了一种校验运算，从而提高了磁阵的可靠性。</p></li>
+</ul>
+
+
+<p>Raid 0速度快所以可以和其他Raid杂交，组成Raid 50 、 Raid 10等等。</p>
+
+<h2>Raid 虚拟磁盘 卷 和文件系统实现</h2>
+
+<h3>软硬Raid</h3>
+
+<p>Raid程序位于OS底层。</p>
+
+<p>Raid 卡北连PCI南部包含了SCSI控制器。</p>
+
+<p>虚拟磁盘是Raid卡把多个磁盘组合出来的，在OS看来就是一个物理磁盘。windows中的动态磁盘。</p>
+
+<h3>卷管理层</h3>
+
+<p><strong>LV</strong> &#8211; 最后构成了LV<br/>
+LP &#8211; 往往就是PP，但也可以按Raid 0 和 Raid 1的方式由PP组成<br/>
+PP &#8211; 分成N个可以用于磁盘分配的块<br/>
+<strong>VG</strong> &#8211; 卷组，多个磁盘都可以放到一个卷组里面<br/>
+<strong>PV</strong> &#8211; 物理磁盘</p>
+
+<p>实际的I/O参与者（1个manager，3个drivers）</p>
+
+<ul>
+<li>I/O manager &#8212;> 寻求FS翻译</li>
+<li>File System driver &#8212;> 把偏移转换成LV相关的便宜, 通过I/O Manager</li>
+<li>LV manager driver &#8212;> 翻译成磁盘号和便宜，再次呼叫下一个driver，通过 Manager</li>
+<li>Disk driver &#8212;> 翻译成磁盘相关的磁盘上的物理便宜位置</li>
+</ul>
+
+
+<p>这个东西从架构风格上而言就是一个manager带着3个driver，采用过滤器式的链式传递。driver的顺序由manager管理，执行顺序由manager负责。
+具体的活则由driver完成。</p>
+
+<h2>阵列</h2>
+
+<p>起步，JBOD，Just a Bound Of Disks, 里面就做到电路板上的SCSI线缆，连接15块硬盘，机箱外露出一个SCSI接口，与主机通过SCSI线相连。</p>
+
+<p>之后，把RAID功能做进箱子里。因为JBOD时OS看见的和能操作的只有磁盘，反之，则能看见磁盘还能用OS工具把磁盘做成Raid。
+因此，约定俗成，JBOD叫做<strong>磁盘柜</strong>，后一个叫做<strong>磁盘阵列</strong>。</p>
+
+<p>独立后的磁阵可分为<strong>前端</strong>和<strong>后端</strong>，前端就是对外部提供的接口（<strong>外部接口</strong>)，
+后端就是面向内部管理的接口（<strong>内部接口</strong>），前端和后端的协议可以不一样。一个前端
+也可以有<strong>多外部接口</strong>，这样就可以连到多个主机。</p>
+
+<p>高级磁阵内部的芯片控制器都是<strong>双路</strong>的，这样避免了磁阵的单点故障。工作方式有
+Active-Standby和Dual-Active。</p>
+
+<p><strong>机头</strong>就是带有控制器的磁盘阵列，后面可以接多个磁盘柜。这样一个机头就可以拖n个磁盘柜，从而扩大容量。</p>
+
+<p>盘阵类型有 SCSI-FC、FC-FC、SATA-FC、SCSI-SCSI等等，前后表示后端，后者表示前端。
+例如，SCSI-FC表示后端为SCSI接口，前端连接主机的是FC接口。</p>
+
+<h2>FC协议的引入</h2>
+
+<h3>FC协议和以太网</h3>
+
+<p>FC协议其实是Fibre Channel（网状通道）的意思。其传输介质可以是光纤也可以是铜线。就像以太网的传输介质也可以是光纤是一样的。
+只不过用光纤连接的多，于是FC在中国就变成光纤通信了。FC协议的传输效率比以太网高，但实现更复杂。但都是可以适应各种传输介质的，
+比如无线信号、铜线、光纤。</p>
+
+<p>FC的适配器也有光纤和RJ45等。</p>
+
+<h3>前端从SCSI迁移到FC</h3>
+
+<p>SCSI指令集在SCSI-3中做了分割，从此应用层的指令语义部分独立出来，下层改造成了一个适配器。而FC只要实现了这个适配器的功能就能
+使用上层的指令语义部分。就这样，FC和SCSI的组合构成了新的SCSI前端。</p>
+
+<p>意义（好处）：</p>
+
+<ol>
+<li>扩展性提高，只要连接上FC交换机，磁阵就能和多台主机相连。</li>
+<li>增加了传输距离，铜线和光纤的区别。</li>
+<li>有了安全策略：
+
+<ul>
+<li>磁阵控制器上配置<strong>LUN映射表</strong>，规定只有某些主机能访问某些LUN，解决磁阵共享的问题</li>
+<li>在FC交换机上配置<strong>ZONE</strong>,类似VPN的做法</li>
+<li>磁阵共享的另一个解决办法是集群文件系统。是否磁阵独占由SCSI指令集协议定义</li>
+</ul>
+</li>
+<li>可实现冗余和均衡负载</li>
+</ol>
+
+
+<p>FC是<strong>面向无连接</strong>的基于包分发的连接形式，是<strong>串行</strong>的所以适合远距离。</p>
+
+<p>攻陷前端之后，FC又扩展到了SAN的后端。只是后端用的不是FC交换，而是FC中相对简单的另一个模式。协议的上层依然是SCSI。而且后端主要
+还是铜材料连接。</p>
+
+<p>配置LUN（划分磁盘），各个LUN参数（条带深度、数据宽度），配置LUN映射。类似PC上给磁盘分区后格式化。</p>
+
+<h2>DAS ， SAN 和NAS</h2>
+
+<p>NAS(Network Attached Storage)就是把文件系统的功能放置在存储设备中，暴露在外面的不再是一个裸设备。
+Windows使用CIFS协议，Linux使用NFS协议。</p>
+
+<p>NAS暴露出去的是一个文件系统，而SAN在惯例中只是暴露出去的一个形式上类似物理磁盘的设备。</p>
+
+<p>实际使用中，NAS后面可以接SAN作为存储。即混合使用。NAS也能作为SAN的一种特例。在我国，通常SAN就是指FC SAN。</p>
+
+<h2>以太网和TCP/IP概述</h2>
+
+<ul>
+<li>HUB &#8212; 无对应表</li>
+<li>网桥 &#8212; 总线-MAC</li>
+<li>交换机 &#8212; MAC-端口</li>
+</ul>
+
+
+<p>TCP/IP 和 以太网的关系是PoP，即Protocol over Protocol。它们的关系是一对组合。
+协议融合的方式有Tunnel和Map两个大类，PPPoE就是PPP协议 over Ethernet协议。</p>
+
+<h2>IP SAN</h2>
+
+<p>ISCSI, Internet Small Computer System Interface，SCSI协议走在以太网（通过ISCSI）上，以太网替换了FC，如同FC替换了SCSI链路，
+编号RFC3720,2004年通过。开销比例约6%。</p>
+
+<p>主机称作<strong>ISCSI Initiator</strong>，磁阵称作<strong>ISCSI Target</strong>设备。</p>
+
+<p>以太网的发展速度以10倍速为单位，10Mb/s，100Mb/s,1Gb/s,10Gb/s. 而FC是以2倍速为单位，1Gb/s,2Gb/s,4Gb/s,8Gb/s。</p>
+
+<p>IP SAN的成本低，卡和交换机都便宜的多，速度也还过得去，成本只有1/10以下。</p>
+
+<h3>IP 与 FC的融合</h3>
+
+<p>局部隔离（逻辑独立）、全局共享（连通）。不明所以，应该就是adapter，但实际上不太能行得通应该。还不如直接加入软件。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -683,66 +946,6 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/">软考之系统架构设计师</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-04T15:04:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>距上次考<a href="/blog/2012/05/27/take-the-exam/">软考的中级项目经理</a>已经有将近半年的时间。看了软考证书的性质一直想再去考一个高级的证书出来。
-毕竟这个证书既然上海居转户认可，那么就有其权威的性质。起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年
-论文等事宜，准备一门新的考试的时间并非很充足，所以最后换成了软件架构设计师。实际上下半年只有项目管理、网络规划、系统架构3门高级，项目管理
-上半年考了中级，没有继续主要是因为第一书已经借出去了，第二考出来后还要等3年才能去换高级项目的证书。看了看架构师的题目，基本不需要太多额外
-的准备工作。于是还是选了架构师。</p>
-
-<p>复习一直进行的有条不紊，自己也想试试能否通过低强度的复习就通过。因为这一门总体而言对我并不难。麻烦主要是下午的问答题，但这里面运气的成分还
-是蛮大的。下周就要考了，但愿过关吧。</p>
-
-<p>上周还去考了末代上海职称英语考试。卷子比较简单。同全国卷相比，词汇部门难一些，阅读部分没有很强的干扰项。大致上二者都不难，而且又都可以带
-字典。考试的地方在锦绣路浦建路那边的东辉职业学院，附近有香梅花园、上海绿地等大楼盘。整个区域的环境还是不错的，房子也大都造于04-06年间。
-有闲钱的话，可以考虑到那边置业，基本上4万/平。最大的特色是运动场地多，包括露天的带跑道的操场，健身会所等。这样的社区环境可能还是比较难找
-的。劣势么就是毕竟在浦东，学校、交通总是僧多粥少。</p>
-
-<p>Updated on 27/11/2012: 职称英语的成绩今天查到了。按理是昨天<a href="http://www.spta.gov.cn">spta</a>这个网站就公布查询界面了，但是网站后来瘫掉了，所以今天才查。分数还不错，
-92分高分通过。这几年的英语还是有所长进的。毕竟06年去考B级的也只有85。从这次分数的情况来看，应该是完形填空错的太多了。</p>
-
-<p>Updated on 27/11/2012: 写文章的时候，娘娘还在医院的看护病房里观察，病情尚算稳定。老婆午睡完毕后提醒我提过的要去看娘娘的事情，时间也正好赶上。
-但随后几天，娘娘的病情恶化，于周三11月7日去世。本来打算弃考软考，毕竟也不是什么很严重的考试。
-不过最后还是去考了软考的系统架构设计师，只是状态确实不好，冲刺复习也基本为0.之所以还去主要还是
-妈妈的支持以及做此类事情娘娘向来是全力支持的，我放弃去考反而不是家里希望看到的。过关与否，已经是次要的了。</p>
-
-<p>Updated on 11/01/2013: 成绩结果终于能够查了。rkb的网站依然不是很给力，响应和可靠性都比较差，基本到晚上六点以后才算恢复查询功能。还好论坛
-里有人给了信管网的链接才不至于等太久。最后的分数还不错，都过线了，上午表现正常偏好，下午一发挥尤其出色，下午二涉险过关。总体而言，确实是一门很经济实惠的考试，对我而言。
-领证当然还有一个过程，估计要4月份才能拿到证书，2月份的时候应该会先填合格人员登记表并把照片送到报名点。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -760,6 +963,10 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
       </li>
     
@@ -775,15 +982,11 @@ They are real slight for Rails. I guess this is due to DHH have just had a Colt 
         <a href="/blog/2019/12/29/crv-2019/">2019 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/12/01/manage-it/">Manage It</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (86)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (87)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="早前读过adam的Logs Are Stream, Not Files, 但当时是阅读
-整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。 日志是无穷无尽的流，而不是文件。文件只是流的某种最终形式。因为流是可以很容易的被其他程序继续利用（作为输入）， &hellip;">
+  <meta name="description" content="http://www.tudou.com/programs/view/pg-PTg9Hcfc/ Won&#8217;t write js again. 2004 Google Map ，build wonderful app with just html &amp; js
+improve the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/06/sam-stephensons-better-js-with-coffeescript/">Sam Stephenson&#8217;s Better JS With CoffeeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-06T17:02:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.tudou.com/programs/view/pg-PTg9Hcfc/">http://www.tudou.com/programs/view/pg-PTg9Hcfc/</a></p>
+
+<p>Won&#8217;t write js again.</p>
+
+<p>2004 Google Map ，build wonderful app with just html &amp; js<br/>
+improve the language , prototype</p>
+
+<p>1.function Syntax<br/>
+2.Significant Whitespace<br/>
+  not see braces<br/>
+3.Bare Objects, no braces needed<br/>
+4.Everything&#8217;s an Expression<br/>
+5.Comprehensions</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">names</span> <span class="o">=</span> <span class="k">for</span> <span class="nx">person</span> <span class="k">in</span> <span class="nx">people</span>
+</span><span class='line'>     <span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'>   <span class="err">返回</span><span class="p">[]</span><span class="err">，</span><span class="nx">borrow</span> <span class="nx">from</span> <span class="nx">python</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+6.Classes &amp;&amp; Inheritance<br/>
+  <code>extends, construct, @, $el=super</code></p>
+
+<p>7.Bound Functions<br/>
+  <code>=&gt;</code> 取代了bind(this)<br/>
+8.Conditionals<br/>
+ <code>?</code> <br/>
+9.Destructuring, Assignment<br/>
+ <code>{name, age} = person</code><br/>
+ <code>[first,seconde] = s.split(//)</code>
+  必须要是{}或者[]对象 <br/>
+10.String Syntax<br/>
+  <code>#{}</code></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1845,85 +1917,6 @@ Kaazing WebSocket Gateway 对这些实时东西可以做一个很好的转发。
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/22/where-to-use-nodejs/">Where to Use NODEJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-22T09:27:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近期打算用nodejs做个东西，个人感觉它承担这个任务是相当合适的。<br/>
-今天又读到一篇讲<a href="http://blog.targeterapp.com/post/22984987832/why-we-moved-from-nodejs-to-ror">为什么从NodeJS迁移到RoR</a>。
-作者列举的主要理由如下：</p>
-
-<ol>
-<li>NodeJS适合 <strong>short lived requests</strong>。 并不是很明确这里的request是指什么，似乎就是异步先返回的意思，但这样的体验应该不会好。</li>
-<li>框架很年轻，变动很大。这个经历过Rails的人都明白，估计NodeJS的变动更大，因为js本身就很bt。</li>
-<li>Testing的表现一般，比Django RoR的测试平台还是差距很大。</li>
-<li>他需要Cache所有的东西。Node的强项是每秒千万次点击承受力，对cache似乎并不擅长。1000 RPS的访问压力，对Rails+Nginx已经是小菜一碟。</li>
-</ol>
-
-
-<p>然后作者又推荐了一篇<a href="http://nodeguide.com/convincing_the_boss.html">Guide</a>
-里面提到的了node.js适合与不适合的。</p>
-
-<p>Bad Use Cases:</p>
-
-<ul>
-<li>CPU重度使用<br/>
-js适合高I/O的，而不适合重CPU的。视频编码解码、人工智能等CPU hungry的软件还是用C吧。有提到js写C的addons是挺方便的</li>
-<li>简单的CRUD / HTML apps<br/>
-js下的是不如Rails，CakePHP或者Django那样强有力的</li>
-<li>再搭配其他新技术<br/>
-比如NoSQL，这样会让技术风险做乘法，毕竟两样都不熟的东西组合在一起，会提出更多的挑战。而这些可能对你做出吸引人的业务没有magically的提高</li>
-</ul>
-
-
-<p>Good Use Cases:</p>
-
-<ul>
-<li>JSON APIs<br/>
-对包装数据资源，比如数据库和web services，然后将他们转换成JSON接口暴露给外部使用</li>
-<li>Sigle page apps<br/>
-指那些富客户端的页面应用，如Gmail。好处是可以在客户端和服务端共享很多代码，比如验证确认类的。同时，也给处理多请求的能力有了用武之地</li>
-<li>利用现有软件<br/>
-可以fork多个子进程并对这些进程的输出当做一个stream来处理，使得node成为一个很好的杠杆现存软件的选择。</li>
-<li>Streaming data<br/>
-http实质上是streams，只是多年来都被当成atomic events来处理了。但js可以利用这一点。在诸如实时分析文件上传、多数据层间的proxy搭建等一显身手</li>
-<li>Soft Realtime Applications<br/>
-但有gc的存在，所以不适合作为hard realtime的实现，对允许不要求始终如一的响应时间的系统还是合适的。Hard方面的更好的选择是Erlang。</li>
-</ul>
-
-
-<p>我打算做的东西不在bad case之类，和good case 基本沾边。目前的结论是值得一试。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -1941,6 +1934,10 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
       </li>
     
@@ -1956,15 +1953,11 @@ http实质上是streams，只是多年来都被当成atomic events来处理了�
         <a href="/blog/2019/12/29/crv-2019/">2019 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/12/01/manage-it/">Manage It</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (86)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (87)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

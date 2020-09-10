@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2020-06-24T22:56:27+08:00</updated>
+  <updated>2020-09-10T18:00:35+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git 删除已提交的文件]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
+    <updated>2020-09-10T17:41:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
+    <content type="html"><![CDATA[<p>按台湾人的说法，git属于一旦有东西加入，就像把方丈请到了庙里，是很难再请出去的。
+不过也不是完全不可能，但确实比较辛苦会。核心思想是通过<code>filter-branch</code>
+来强制删除有关的文件，过程中类似<code>rebase</code>。在全部的分支、tag、heads、replace的
+连接取消之后，再次gc，即可实际清除</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># 找出体积比较大的文件
+</span><span class='line'>git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}' )"
+</span><span class='line'>
+</span><span class='line'># 进行删除
+</span><span class='line'>git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch .gradle' --prune-empty --tag-name-filter cat -- --all
+</span><span class='line'>
+</span><span class='line'># 实际删除
+</span><span class='line'>rm -rf .git/refs/original
+</span><span class='line'>git reflog expire --expire=now --all
+</span><span class='line'>git gc --prune=now</span></code></pre></td></tr></table></div></figure>
+
+
+<p>不过上述只是完成了本地的内容清理，远端的gitlab还有其他工作要做：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin --force 'refs/heads/*'
+</span><span class='line'>git push origin --force 'refs/tags/*'
+</span><span class='line'>git push origin --force 'refs/replace/*'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，再去gitlab的settings里面手工执行一下Housekeeping，再次clone的话体积就小了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[查看java的线程cpu使用情况]]></title>
@@ -1573,64 +1619,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 <li>写的尽可能简单, 并擅用排版  </li>
 <li>重读并修改几遍  </li>
 <li>尽量不要套用模板</li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我编程我快乐]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/"/>
-    <updated>2018-01-31T13:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le</id>
-    <content type="html"><![CDATA[<p>在图灵买了本《我编程我快乐》的电子书。其实原版名字就是著名的《My job went to India》的第二版，
-原书名的意思也是如何成为一个卓越的程序员。</p>
-
-<p>由于作者出身rails背景，所以大部分的思维我之前已经了解，真的大有收获的东西并不多。摘要一下有以下几点：</p>
-
-<h2>市场</h2>
-
-<ol>
-<li>技术是有时间差的，在成熟或者说供需平衡间可以赚到相对多的价钱。</li>
-<li>不要担心做团队中最差的，反而要追求这种和高手过招的机会，这样才能走出舒适区。</li>
-<li>不要听从父母的，即使西方也是一样的。父母只是希望你平安，但大部分父母的境界注定无法帮助你卓越。</li>
-<li>热爱你做的事情和市场。</li>
-</ol>
-
-
-<h2>产品</h2>
-
-<ol>
-<li>了解行业如何运转</li>
-<li>跟踪技术的原理</li>
-<li>寻找良师益友，自己也要做良师</li>
-</ol>
-
-
-<h2>执行</h2>
-
-<ol>
-<li>8小时激情燃烧</li>
-<li>公司离开哪个员工都照样转</li>
-<li>说“不”</li>
-</ol>
-
-
-<h2>推销</h2>
-
-<ol>
-<li>推销包含了一定的迎合</li>
-<li>感觉是最重要，脑力劳动的评价主要靠感觉</li>
-<li>建立关系混圈子</li>
-</ol>
-
-
-<h2>保持技术领先</h2>
-
-<ol>
-<li>研究尖端技术</li>
-<li>没有终点</li>
-<li>留意市场变化，主要跟踪技术达人</li>
 </ol>
 
 ]]></content>

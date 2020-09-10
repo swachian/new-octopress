@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2020-06-24T22:56:27+08:00</updated>
+  <updated>2020-09-10T18:00:35+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git 删除已提交的文件]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
+    <updated>2020-09-10T17:41:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
+    <content type="html"><![CDATA[<p>按台湾人的说法，git属于一旦有东西加入，就像把方丈请到了庙里，是很难再请出去的。
+不过也不是完全不可能，但确实比较辛苦会。核心思想是通过<code>filter-branch</code>
+来强制删除有关的文件，过程中类似<code>rebase</code>。在全部的分支、tag、heads、replace的
+连接取消之后，再次gc，即可实际清除</p>
+
+<p>```</p>
+
+<h1>找出体积比较大的文件</h1>
+
+<p>git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}' )"</p>
+
+<h1>进行删除</h1>
+
+<p>git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch .gradle' --prune-empty --tag-name-filter cat -- --all</p>
+
+<h1>实际删除</h1>
+
+<p>rm -rf .git/refs/original
+git reflog expire --expire=now --all
+git gc --prune=now
+```</p>
+
+<p>不过上述只是完成了本地的内容清理，远端的gitlab还有其他工作要做：</p>
+
+<p><code>
+git push origin --force 'refs/heads/*'
+git push origin --force 'refs/tags/*'
+git push origin --force 'refs/replace/*'
+</code></p>
+
+<p>最后，再去gitlab的settings里面手工执行一下Housekeeping，再次clone的话体积就小了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[查看java的线程cpu使用情况]]></title>
@@ -338,48 +377,6 @@ hex(14275)
 <p>未来十年，每一个称职的COO都会是从IT部门出来的。否则，只能是金玉其外的傀儡，需要依靠别人来开展工作。</p>
 
 <p>尾声当然是美好的，比尔获得了同事和上司的信任，他们业务部门的死对头莎拉也离开了公司，他和业务部门的其他人建立了良好的合作关系。公司上下更懂IT，IT也更懂公司的业务。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kafka权威指南]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan/"/>
-    <updated>2019-10-08T11:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan</id>
-    <content type="html"><![CDATA[<p><code>default.replication.factor</code> : 分区的复制系数<br/>
-<code>unclean.leader.election</code> :
-简而言之，如果我们允许不同步的副本成为首领，那么就要承担丢失数据和出现数据不一
-致的风险。如果不允许它们成为首领，那么就要接受较低的可用性，因为我们必须等待原
-先的首领恢复到可用状态。
-如果把 unclean.leader.election.enable 设为 true，就是允许不同步的副本成为首领（也
-就是“不完全的选举”），那么我们将面临丢失消息的风险。如果把这个参数设为 false，
-就要等待原先的首领重新上线，从而降低了可用性。<br/>
-<code>min.insync.replicas</code> : 最少同步副本</p>
-
-<p>上述对broker的配置以外，生产者也要注意配置好<code>acks</code>的值，以及在代码里正确处理错误。</p>
-
-<p>ETL 表示提取—转换—加载（ Extract-Transform-Load）</p>
-
-<p>kafka的消息是可以在客户端进行压缩的</p>
-
-<p>事件流是可重播的，借助kafka，可以重播几个月甚至几年前的原始事件流</p>
-
-<p>时间窗口是否对齐？</p>
-
-<p>中间结果可以作为流写入kafka中</p>
-
-<p>flink手工启动命令
-/opt/flink-1.8.1/bin/flink run /opt/flink-1.8.1/jars/ssss-1.0.0-SNAPSHOT-TEST2-cron-4d8e317-all.jar
-启动命令：/opt/flink-1.8.1/bin/flink run -d /opt/flink-1.8.1/jars/Hastur-*.jar</p>
-
-<p>罗列任务的命令：
-/opt/flink-1.8.1/bin/flink list -r | grep ssss | cut -d " " -f 4</p>
-
-<p>停止任务的命令：
-/opt/flink-1.8.1/bin/flink cancel 6b338726460bcb8fe95bad883ca9f5b2</p>
-
-<p>taskmanager.heap.size跟着yarn的container size走
-taskmanager.numberOfTaskSlots 可设置多条</p>
 ]]></content>
   </entry>
   

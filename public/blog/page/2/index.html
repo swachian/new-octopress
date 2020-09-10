@@ -9,10 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="坚持，始终是一种美德。
-在软件开发的世界里，Java坚持了很多年，Mybatis也坚持了很多年。
-尽管动态语言是那么的适合web开发，以至于Java在他们面前有好几年十分的被动。但通过Spring的IOC等特性，
-生生造出来了一个具备很多动态语言特性的框架， &hellip;">
+  <meta name="description" content="初次接触敏捷的概念是很早的事情了，可能始自于Uncle Bob的那本ASD。
+其后，因为一直以来认为的软件开发很多事情在做之前其实很多是不确定的，因此日常的开发中虽然没有采用站会之类的形势，也没有单独的产品经理，
+但实际上是按照敏捷的精神在进行开发。这些精神包括： 个体和互动高于流程和工具（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,158 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/02/08/learning-agile/">Learning Agile： 理解Scrum, XP, Lean and Kanban</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-02-08T12:26:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>初次接触敏捷的概念是很早的事情了，可能始自于Uncle Bob的那本ASD。
+其后，因为一直以来认为的软件开发很多事情在做之前其实很多是不确定的，因此日常的开发中虽然没有采用站会之类的形势，也没有单独的产品经理，
+但实际上是按照敏捷的精神在进行开发。这些精神包括：</p>
+
+<ul>
+<li>个体和互动高于流程和工具（不过我认为工具十分重要）</li>
+<li>可工作的软件高于详尽的文档</li>
+<li>客户协作高于合同谈判</li>
+<li>响应变化高于遵循计划</li>
+</ul>
+
+
+<p>这些都是在多年开发实践中所坚持的原则。但是，一直以来忽略了其中最重要的一点：人。</p>
+
+<p>因为之前工作的单位，从客户、领导到同事、下属都是合作多年，彼此也知道对方的能力以及可以信赖的程度，所以敏捷的精神得以贯彻。
+然而在两年前去到新环境后，身边合作人员的水平较以往参差不齐的多，主要是上游的产品、BA等怎么合作都没有及时地确立或调整出新的办法，
+导致敏捷的原则压根没法贯彻。<br/>
+直到大约一年半以前，才发现敏捷的形式（实践）其实已较为普及。今年在新单位，有专职的敏捷教练和产品经理，在一年的实践中，体会了不少敏捷的好处，但也
+发现了不少问题，尤其是随着时间的流逝敏捷实施似乎越来越难了。而问题依然很类似：</p>
+
+<ol>
+<li>人员水平参差不齐，其实不是每个人都知道怎么配合</li>
+<li>上游虽然有产品经理，但公司还会安排其他人来提需求，但很可能完全不懂软件开发，导致沟通合作困难</li>
+</ol>
+
+
+<p>所以，下决心利用假期好好弄明白当前的敏捷到底指什么，然后再看看怎么结合现在面临的情况进行调整。</p>
+
+<p>简单的说，一般的敏捷方式和Scrum是同义词，而XP（极限编程）是软件开发中的一种敏捷模式，Scrum则更偏向项目管理以及集体协作方面。
+至于Lean，则只是一种思想，没有具体的形式，Kanban也是来自于日本汽车制造商，其核心作用是找出整个流程中的瓶颈。</p>
+
+<p>与Scrum对应的是上令下行的管理方法，这种方法下需要较完善的需求规格（极难），较强的PM规划设计（很可能是瞎计划）和计划重构能力，
+而Scrum则要求团队的主人翁精神（也很难）。但本质上，Scrum把决策和风险都放给了整个团队，基于软件开发很多只有事到临头对着代码
+才能明确什么方法最好，因此这种下放或者说要求一线成员能力更大、承担更多责任和决策的模式是有其道理的。整个团队中，开发、产品、PM都能拥有平等的发言权。</p>
+
+<h2>Scrum</h2>
+
+<p>在项目开始时，只是确定要做的任务（用户故事）有哪些，也会拆分任务，但不一定要完成所有任务的分配。即要有<strong>任务清单</strong>，但不全部确定计划完成者。
+细节在例会后讨论，每天例会可以由不同的人轮流讲3个问题：</p>
+
+<ol>
+<li>我昨天干了什么？</li>
+<li>我将要干什么？</li>
+<li>我遇到了什么困难？</li>
+</ol>
+
+
+<p>本质上是让团队成为项目的主人，齐心协力去寻找更有效的工作方式，找到了整个团队就一起成长了。而告诉团队工作成果的价值要好于告诉团度业务收入的价值，对团队而言，
+有价值的是软件能带来什么？让用户生活更美好是一种真实、真诚、鼓舞人心的目标。
+<strong>自我管理</strong>和<strong>集体承诺</strong>是Scrum的魂（精神），要求每个人都成为猪而不是鸡，每日例会和积压工作表是Scrum的形式（实践）。产品所有者是Scrum的产物，但实际上也
+很难区分和传统的业务分析人员的区别。</p>
+
+<p>Scrum用到的概念还包括用户故事，满意条件，故事点和速度<br/>
+燃尽图表示随着时间的流逝，还剩多少任务。</p>
+
+<p>Scrum的价值观：</p>
+
+<ul>
+<li>承诺</li>
+<li>尊重</li>
+<li>专注</li>
+<li>开放</li>
+<li>勇气</li>
+</ul>
+
+
+<h2>极限编程(XP)</h2>
+
+<p>极限编程强调结对以及测试驱动，一切的目的是为了方便自动化测试，比如避免过深的调用栈。着力于消灭代码异味。<br/>
+有时候过多的边界情况考虑和处理也是过度设计，是某种<strong>框架陷阱</strong>误区。</p>
+
+<p>作者还提到了<strong>反模式</strong>的概念。
+所谓反模式就是会给项目带来麻烦和问题的行为模式，比如解决某人只有95%的时间在干活，喜欢称人为资源。</p>
+
+<p>代码异味和反模式都是人制造出来的，又是人识别出来的，并且可以由人来防止或修正。所以解决方案一定是技术和团队两方面一起努力。</p>
+
+<p>然而，测量什么就会得到什么。瀑布式开发的目标也不是文档，但最终会得到很多文档，可运行的软件反而变成了副产品。TDD的目标也不是文档或测试，但最终得到了很多测试，可运行的软件本身反而也成了副产品。</p>
+
+<h2>精益</h2>
+
+<p>精益针对的反模式就是<strong>浪费</strong>，目标就是减少浪费。包括无用的功能和形式。同时提到了<strong>工作进度面积图</strong>，这种图的作用可以反应当前处于各个状态的任务数量及比例。其表示状态的词汇如下：</p>
+
+<ul>
+<li>Muda 徒劳无益</li>
+<li>Mura 不均衡</li>
+<li>Muri 不合理或不可能</li>
+</ul>
+
+
+<p>衡量是否精益的一大指标是从需求提出到上线发布的间隔时长，即<strong>交付时间</strong>，这里是借用了丰田生产汽车的概念。强调0或者低库存。</p>
+
+<p>日常项目中容易遇到两个反精益的模式：</p>
+
+<ul>
+<li>老板的神奇思维（Magic thinking）：只要我想要，只要我施压，团队就一定会做出来。</li>
+<li>英雄员工：十分肯加班加点的员工</li>
+</ul>
+
+
+<p>敏捷是无法同上面两个共存的。</p>
+
+<p>神奇思维和英雄员工制造的最大问题是会导致软件产品的质量和测试都很差，最终开发速度会变的慢上2倍以上。因为欠的债太多最终都会变成成本。</p>
+
+<h2>Kanban</h2>
+
+<p>看板可以让经理不再动不动就分配新功能。比任务处理的内容要更“大”一些。看板中的每个栏目表示工作流程中的容器，是一种分析问题出在哪个环节的可视化分析方法。</p>
+
+<p><strong>Shuhari</strong>，借用武学概念，守破离。</p>
+
+<ul>
+<li>守：按套路来</li>
+<li>破：打破套路</li>
+<li>离：自成一派</li>
+</ul>
+
+
+<p>小结： 确实如一个十分能干的小朋友曾经跟我交流的，中国的企业没有真正实行敏捷开发的。其实敏捷本身和中国大部分软件企业的文化并不兼容，因此大部分只是具备了敏捷的一些实践，而没有敏捷真正的灵魂。至于我司到底是否能敏捷起来，也只能把决策留到最后再说了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -937,91 +1088,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/">我编程我快乐</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-01-31T13:45:00+08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在图灵买了本《我编程我快乐》的电子书。其实原版名字就是著名的《My job went to India》的第二版，
-原书名的意思也是如何成为一个卓越的程序员。</p>
-
-<p>由于作者出身rails背景，所以大部分的思维我之前已经了解，真的大有收获的东西并不多。摘要一下有以下几点：</p>
-
-<h2>市场</h2>
-
-<ol>
-<li>技术是有时间差的，在成熟或者说供需平衡间可以赚到相对多的价钱。</li>
-<li>不要担心做团队中最差的，反而要追求这种和高手过招的机会，这样才能走出舒适区。</li>
-<li>不要听从父母的，即使西方也是一样的。父母只是希望你平安，但大部分父母的境界注定无法帮助你卓越。</li>
-<li>热爱你做的事情和市场。</li>
-</ol>
-
-
-<h2>产品</h2>
-
-<ol>
-<li>了解行业如何运转</li>
-<li>跟踪技术的原理</li>
-<li>寻找良师益友，自己也要做良师</li>
-</ol>
-
-
-<h2>执行</h2>
-
-<ol>
-<li>8小时激情燃烧</li>
-<li>公司离开哪个员工都照样转</li>
-<li>说“不”</li>
-</ol>
-
-
-<h2>推销</h2>
-
-<ol>
-<li>推销包含了一定的迎合</li>
-<li>感觉是最重要，脑力劳动的评价主要靠感觉</li>
-<li>建立关系混圈子</li>
-</ol>
-
-
-<h2>保持技术领先</h2>
-
-<ol>
-<li>研究尖端技术</li>
-<li>没有终点</li>
-<li>留意市场变化，主要跟踪技术达人</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1039,6 +1105,10 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
       </li>
     
@@ -1054,15 +1124,11 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
         <a href="/blog/2019/12/29/crv-2019/">2019 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/12/01/manage-it/">Manage It</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (86)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (87)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (37)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>
