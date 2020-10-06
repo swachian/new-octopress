@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="今年不期而遇而使用的技术很多，除了大数据flink，就是rancher/k8s/docker了。 docker的话，几年前已经有过接触，总体感觉有价值，但对java来讲，帮助就比较有限了。
-k8s是对docker的编排，其实就是把docker作为基本的单元，让各种服务可以在一个抽象的层面跑起来， &hellip;">
+  <meta name="description" content="日式《高效团队开发》 成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。 死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,132 @@ k8s是对docker的编排，其实就是把docker作为基本的单元，让各�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-05T16:48:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>日式《高效团队开发》</p>
+
+<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
+
+<p>死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲</p>
+
+<p>问题1：邮件内容多 &#8211; 引入缺陷管理<br/>
+问题2：没有仿真环境  &#8211; 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
+问题3：没有分支和tag管理  &#8211; 利用分支和标签<br/>
+问题4：重新制作数据库的困难  &#8211; 数据库变更管理</p>
+
+<p>问题5: 不运行就就无法察觉问题  &#8211; CI<br/>
+问题6：代码合并后产生了degrade  &#8211; CI+merge<br/>
+问题7：重构代码没信心  &#8211; CI+测试代码<br/>
+问题9：环境依赖</p>
+
+<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
+
+<p>分布式版本控制系统的缺点：<br/>
+1. 没有真正的版本号<br/>
+2. 没有最新的版本<br/>
+3. 过于灵活，容易混乱<br/>
+4. 思维方式</p>
+
+<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
+
+<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
+反之，都使用一个master为好。</p>
+
+<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
+
+<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
+
+<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
+
+<p>因成本收益和市场变化，才使得CI流行起来。
+Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
+
+<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
+
+<p>CI集成的测试对象：</p>
+
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>用户验收测试UAT</li>
+<li>回归测试</li>
+</ul>
+
+
+<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
+
+<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
+
+<p>A 要全部采用版本管理<br/>
+B 所有的环境都要用同样的方式来构建<br/>
+C 要实现发布工作的自动化，并事先进行验证<br/>
+D 要反复多次进行测试</p>
+
+<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
+
+<p>Infrastructure as Code</p>
+
+<p>编配（Orchestration）：<br/>
+即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
+Jenkins的buidl periodically可以从多台机器上收集日志
+如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
+
+<p>测试四象限：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>                业务层面
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>团队的支持------- | -------产品的评价    
+</span><span class='line'>                |
+</span><span class='line'>                |
+</span><span class='line'>                技术层面</span></code></pre></td></tr></table></div></figure>
+
+
+<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
+
+<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -983,57 +1108,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/02/16/peoplewaredu-shu-bi-ji/">Peopleware读书笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-02-16T14:20:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>读完软件随想录，自然而然被吸引去了另一本这个领域的名著《人件》</p>
-
-<h3>质量</h3>
-
-<p>只有愿为质量倾其所有的人，质量才是免费的。一个组织如果为了质量一毛不拔，那么收获的质量也将一文不值。
-制造者本身对质量会有更高的要求，良心循环下更高的质量会有更高的产出，但如果组织不愿意为此付出代价，比如高工资、项目延期等，那么就得不到这种质量</p>
-
-<h3>帕金森定律</h3>
-
-<p>工作会自动膨胀并占满一个人所有的工作时间。进度压力是一种惩罚，不能滥用。</p>
-
-<h3>苦杏素</h3>
-
-<p>李彦宏眼中的AI，就指望这个翻本了。</p>
-
-<p>读到后面感觉有点泛泛而谈，只是本书确实强调工作环境要好，要相信people，减少鼓励，减少加班等等，Joel的思想确实来源于此。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1051,6 +1125,10 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/10/06/clean-architecture/">Clean Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi/">凌度充气宝-A3更换空调滤芯-CRV的轮胎漏气</a>
       </li>
     
@@ -1066,15 +1144,11 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
         <a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun/">俞军的产品经理方法论</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (87)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (31)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
 </section>
   
 </aside>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2020-10-06T21:20:49+08:00</updated>
+  <updated>2020-10-06T23:42:56+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clean Architecture]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture/"/>
+    <updated>2020-10-06T22:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture</id>
+    <content type="html"><![CDATA[<p>Rober C. Martin的另一部Clean系列，总体来讲不如Clean Code，但书还值得一读。Bob大叔开发经验丰富，但仔细分析的话，他的主要经验还是基于C的通信软件的开发，之前有过很多的汇编经历。Java看起来真正做过的大的项目似乎并不多。因为按他90年代以前的经历，基本没有使用Java开发过什么，而之后，则转去了做咨询和主编，写的项目按常理应该不多。</p>
+
+<p>书中首先使用龟兔赛跑的隐喻，讽刺了程序员们的迷之自信，总以为自己是聪明的兔子能够有朝一日把一团乱的东西Clean干净，但实际上从来没有发生。以此告诫读者必须脚踏实地做好整洁架构和整洁代码：The only way to go fast is to go well. 随后，提出Software的精髓在于<strong>soft</strong>，也就是easy to change，这是软件设计和开发的根本。并且应用类软件的开发，一般是由urgent behavior驱动的，但维护好clean Architecture则是开发人员的责任。</p>
+
+<p>第二部分里，讲了3种基本的编程范式，强调的都是纪律的重要性。如结构化编程取消了goto，只保留了if/then/else,
+do/while/until; OO则是限制函数间的调用，抽象、封装、继承、多态，并且举了IO device的C接口的例子。同时提出了<strong>Plugin</strong>架构的思想。因为所有的Device其实都是作为一种附件，plugin到OS上面去的。接口是OS定义的，实现则是plugin的事情。</p>
+
+<p>第三第四部分则是作者提出过的SOLID设计原理以及组件的原理。<br/>
+SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor通常是source，是使用者。<br/>
+组件主要是耦合问题。REP、CCP、CRP，这其实是一个CAP的不可能三角。组件之间要削减循环依赖，被依赖多的Stable，不被依赖的Unstable，Stable的东西需要加入Abstract来实现弹性的增加。同时要减少对易变（volatile）组件的依赖，即在Stable的东西中加入Abstract以使软件变软。</p>
+
+<p>第五部分是全书的的主体，主讲架构。<br/>
+架构的目的是为了便于软件开发、部署、运行（非功能性要求）。维护，让细节开放，这样细节可以很晚才被决定。架构师的目标则是make software soft， 实现Policy和Detail之间的decouple，同时也负责设计Policy。</p>
+
+<p>所谓Policy指business rules and procedures，Detail则是和policy进行通信的东西。架构师的一大职责，就是在Details之间画下边界线（boundary line）。而Clean Architecture则是让Details依赖Policy的一种架构方式。也体现了Bob大叔的DIP原则，即反转依赖。低级的组件应该作为插件插入到高级组件中去，高级组件是Policy和Use cases。
+这个好处是减少核心内容的复杂性和对外部的依赖。
+同时，架构是关于系统的，不是关于框架的，提出了架构设计要和框架尽可能分离的概念。即Domain优先，能让人看了架构设计图就知道系统是干什么的，举了图书馆、住房的设计图例子。这样也容易形成Testable Architecture。但这种做法下，架构师就变成了传统的系统分析师。</p>
+
+<p>举了几种Clean Architecture，主要就是Ports and Adapters（Hexagonal Architecture）。也提到了Humble模式。架构即画边界以及决定用什么作边界，Humble Objects用于架构边界处。</p>
+
+<p>至于微服务，作者的意思是service并不是分界线，分界线在service内部，举了Kitty Finder和Ride Finder的例子。从这点来说，熔断可以作为某种服务的一种多态实现。所以K8S其实也可以实现熔断，比如在一个Login的service中部署两个不同的service，确定某一个在什么情况下生效。</p>
+
+<p>Test可以作为系统第一部分，而且是最外层的，因为所有的代码都不依赖测试代码，而测试代码却依赖其他代码（Domain+Infrastructure）。但对测试解耦，并没有提出什么实质性的建议。</p>
+
+<p>最后，DB、Web、Framework都是小把戏（Detail），应用本身才是大Boss，不要为了Detail而限制Boss。又举了一个作者自己卖网课的例子，但这个例子实在太短，看不出什么名堂来。</p>
+
+<p>结束后，其实还有两大部分，一个是Simon Brown写的一章，列举了4种常见的代码目录组织方式，并提出组织之间最大的区别在于包内方法的可见性差异。Simon创造了C4架构模型，这章列举的也不错，但例子还是太浅和理想化了，设计细节太少。  另外一部分就是Bob大叔的前半生开发生涯自传，写到了1990年代。里面补充到之后的经历会写成另一本书，应该就是今年出的Clean Agile了吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git 删除已提交的文件]]></title>
@@ -324,59 +359,6 @@ hex(14275)
 <p>管理项目：管理风险，留意测试的进度，产生仪表盘上的数据，评估版本发布条件，要帮助大家看清目标、移除障碍，监控他们的进度，是没有时间做技术工作的。</p>
 
 <p>保持合理的工作时间。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[凤凰项目读后记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/"/>
-    <updated>2019-11-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji</id>
-    <content type="html"><![CDATA[<p>在人邮图灵1024半价优惠日买的一本书，主要以小说的形式，描述了一个资深运维经理比尔接手内部的凤凰项目部署，并在世外高人埃瑞克的指导下，如何通过看板、精益、敏捷能方法打通任督二脉，满足业务部门的<strong>真实</strong>需求，从而使整个系统（集团公司）业绩达标的故事。形式相当引人入胜，也很有收获，关键是提供了和人沟通的场景和范本。</p>
-
-<p>上手，讲述了主角被选中的原因：他过去几年组建的大型机团队，是最有组织、最值得信赖的团队，比尔本人也是一个可靠、务实，而且愿意表达真实想法的人。不过，作为运维主管，比尔对开发的印象不是很好，比如开发人员经常粗心大意弄坏东西，然后就丢给运维了；而开发人员和信息安全部门的人联手，更容易给运维添乱。而主人公的冷静坦率的做法，甚至让他在第一部分丢了工作。</p>
-
-<p>然而，这个公司其实并不真正重视IT。比如在总体评估指标中，一个IT经理都没资格参与，即IT引起的运营风险并未被重视，也未得到管理，然而IT风险实质上是业务风险。</p>
-
-<p>下面是一些主要的知识点：</p>
-
-<p>倒逼项目 == 日期驱动项目，开发用完了全部的时间。这种玩法，基本后续就是起飞。大家即使都是为了公司好，关键仍然在于有限的时间里能够做什么。对工作需求、优先等级、工作进度、可用资源都了如指掌。真正令人沮丧的是无法把精力集中在对公司最为重要的事情上。</p>
-
-<p>约束点=瓶颈，在瓶颈之外的任何地方做出改进都是假象。作为IT部副总裁，你的工作要确保形成一条迅速、可预测、持续不断的计划内工作流，从而交付价值，同时尽可能降低计划外工作的影响和破坏。</p>
-
-<p>三步工作法：第一步，帮助我们理解在工作从开发部向运维部移动时建立快速工作流，第二步缩短及放大整个系统的反馈回路，第三步形成勇于探索且吸取教训的先进文化。（勇于冒险以及从失败中汲取教训的价值观，并强调通过反复实践以致炉火纯青的必要性）</p>
-
-<p>四种主要的工作类型：<br/>
-1. 业务项目<br/>
-2. 内部IT项目<br/>
-3. 变更类工作<br/>
-4. 计划外（救火）工作，堪比反物质</p>
-
-<p>在发射当口，还往太空飞船安装零件，可不是好兆头。</p>
-
-<p>缺乏能力才是成事的大敌。</p>
-
-<p>你的开发，把所有工作周期都用在了功能，而忽略了稳定性、安全性、可扩展性、可维护性、可操作性、持续性等。</p>
-
-<p>相比向系统中投入更多的工作，将无用的工作剔出系统更为重要。重要的是结果，而非过程、管理或者我们完成了什么。</p>
-
-<p>冷静、坦率应对愤怒。但上级还是会认为工程师们懒骨头。然而团队内需要信任感。</p>
-
-<p>技术债务必将导致公司唯一能够完成的工作就是计划外工作。</p>
-
-<p>工作中心：机器、人员、方法、测评</p>
-
-<p>对安全中心负责人的评价：可以不对IT系统做过多无用功就保护公司，这才是你的胜利。这句话很适用于之前单位的BA。即要做过滤器，而不是放大器，要把无用的东西拒之门外。</p>
-
-<p>和高层打交道，告诉他们坏消息要找适当的时机、适当的场合。</p>
-
-<p>不断降低周期时间的需求是第一工作法的内容，增强回收成本的能力，是第二工作法的内容。要向高层表明‘IT导致的业务风险’。</p>
-
-<p>之后的devops环节，将IT和运维整合在一起，通过降低发布规模，提高发版频次，比如一天10次，来实现快速交付。然而并没有提到相应的验证开销过大怎么办？</p>
-
-<p>未来十年，每一个称职的COO都会是从IT部门出来的。否则，只能是金玉其外的傀儡，需要依靠别人来开展工作。</p>
-
-<p>尾声当然是美好的，比尔获得了同事和上司的信任，他们业务部门的死对头莎拉也离开了公司，他和业务部门的其他人建立了良好的合作关系。公司上下更懂IT，IT也更懂公司的业务。</p>
 ]]></content>
   </entry>
   
