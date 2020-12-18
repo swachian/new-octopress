@@ -1106,7 +1106,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500/</loc>
-        <lastmod>2020-04-19T15:46:36+08:00</lastmod>
+        <lastmod>2020-12-18T23:24:33+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2016/09/28/hun-dong-ya-ge/</loc>
@@ -1293,8 +1293,12 @@
         <lastmod>2020-10-06T23:41:40+08:00</lastmod>
     </url>
     <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2020/12/18/zhuang-ji-i3-10100/</loc>
+        <lastmod>2020-12-18T23:41:59+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2020-10-06T23:41:40+08:00</lastmod>
+        <lastmod>2020-12-18T23:41:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1302,7 +1306,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2020-10-06T23:41:40+08:00</lastmod>
+        <lastmod>2020-12-18T23:41:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

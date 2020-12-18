@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="区块链应用的开发，主要指用Solidity编写合约(Contract)，然后部署到区块链上去。
-注意，此处的区块链特指以太坊，而比特币的区块链是没有Solidity这种东西的。 因为是把sol编写的合约部署到区块链上去，所以可以进一步分解为3个问题： 区块链的安装(testrpc ethereum &hellip;">
+  <meta name="description" content="刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
+然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
+服务成守候在服务器侧， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/21/thymeleafgan-xiang/">Thymeleaf感想</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-21T00:07:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>刚使用spring boot时得知thymeleaf取代了jsp的默认地位，我是有所抵触的，做法就是重新配置回了jsp。
+然而随着java web开发前后端业已分离的现实，逐步明白view层是thymeleaf还是jsp已经不再重要。因为java已变成
+服务成守候在服务器侧，而原先页面的工作已经完全交给了（不需要会java）的前端人员，且他们是完全可以胜任的。</p>
+
+<p>实际上截至目前，最新版的thymeleaf已经到了3.0以上的版本，而spring boot最新版集成的还是<strong>2.x</strong>的thymeleaf的版本，
+可以认为这块已经处于冷淡的状态。</p>
+
+<p>不过，凡是总有例外。这次又碰见了需要产生静态页面的业务场景，其中有不少的业务逻辑，所以还是需要一个view层，考虑到
+新团队的习惯，决定采用thymeleaf吧，这样以后维护可以交给前端来做。于是简易学习了一下leaf，感觉还是不错的。</p>
+
+<p>leaf最大的特色就是前端人员可以直接打开leaf所在的html页面，并做到完全的无异物感。脚本、链接完全动态静态可以分开。
+这样解决了jsp长期以来美工介入很困难的问题,同时做的又比freemaker等更加到位。内置标签支持的语言语法也很现代化和好用，一般有jsp经验的程序员，
+花个半天看一下一百来页的手册并动手实践一下，就完全可上手了。至于<code>jsp</code>，是可以退出历史舞台了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -714,7 +763,7 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
 <li>intel i5-6500 1150元，</li>
 <li>散热器采融B48 99元，</li>
 <li>技嘉 B150M-D3H 599元，</li>
-<li>芝奇 DDR4 2400 395元,<br/>
+<li>芝奇 DDR4 2400 16G 395元,<br/>
 <strong>合计2243元</strong></li>
 </ul>
 
@@ -764,8 +813,6 @@ KST 512M ddr400<br/>
 机箱，<br/>
 无硬盘</p>
 
-<p>老婆的：</p>
-
 <h3>2010年11月购入，合计花了4249.00元</h3>
 
 <p>Intel 英特尔 奔腾双核 E6500 (2.93GHz/LGA775/2M/1066MHz/45纳米）盒装 519元，<br/>
@@ -777,366 +824,6 @@ KST 512M ddr400<br/>
 ACBEL 康舒 IP-430台式机电源(额定功率380w/ATX2.3版) 电源 229元，<br/>
 Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
 微软多媒体键盘 79元</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/09/19/spring-boot-in-action/">Spring Boot in Action</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-09-19T14:47:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>Auto-Config</li>
-<li>用starter处理依赖</li>
-<li>CLI 命令行处理启动等</li>
-<li>Actuator 监控组件 , 通过web或者shell</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>spring version 
-</span><span class='line'>spring --version
-</span><span class='line'>spring shell # windows下打开可以自动补全的功能</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>工程初始化</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
-</span><span class='line'>spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@SpringBootApplication
-</span><span class='line'>public class DemoddfApplication {
-</span><span class='line'>
-</span><span class='line'>public static void main(String[] args) {
-</span><span class='line'>SpringApplication.run(DemoddfApplication.class, args);
-</span><span class='line'>}
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
-
-<p>用starter定义可实现更高度的抽象，也不必给出每个组件的版本号。通过<code>mvn dependency:tree</code>可查看实际的包依赖关系.
-starter就是普通的maven或gradle依赖，所以可以exclude也可以指定更直接的版本。</p>
-
-<h3>自动配置定制化的举例</h3>
-
-<p>安全是最好的需要自己自行设置的例子，not one&#8211;size-fits-all。
-这是yml方式</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>server:
-</span><span class='line'>port: 8443
-</span><span class='line'>ssl:
-</span><span class='line'>key-store: file:///path/to/mykeys.jks
-</span><span class='line'>key-store-password: letmein
-</span><span class='line'>key-password: letmein</span></code></pre></td></tr></table></div></figure>
-
-
-<p>配置数据源</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>spring:
-</span><span class='line'>datasource:
-</span><span class='line'>url: jdbc:mysql://localhost/readinglist
-</span><span class='line'>username: dbuser
-</span><span class='line'>password: dbpass
-</span><span class='line'>driver-class-name: com.mysql.jdbc.Driver</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>属性信息的几种来源</h3>
-
-<ol>
-<li>Command-line arguments</li>
-<li>JNDI attributes from java:comp/env</li>
-<li>JVM system properties</li>
-<li>Operating system environment variables</li>
-<li>Randomly generated values for properties prefixed with random.* (referenced when setting other properties, such as `${random.long})</li>
-<li>An application.properties or application.yml file outside of the application</li>
-<li>An application.properties or application.yml file packaged inside of the application</li>
-<li>Property sources specified by @PropertySource</li>
-<li>Default properties</li>
-</ol>
-
-
-<p>在application.properties中指定<code>spring.profiles.active</code>的值后，boot就会读取application-{active}.properties的值</p>
-
-<h3>自动化测试</h3>
-
-<p>@WebIntegrationTest Test class有这个标注就会让spring启动一个测试的tomcat或jetty进程</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@RunWith(SpringJUnit4ClassRunner.class)
-</span><span class='line'>@SpringApplicationConfiguration(
-</span><span class='line'>classes=ReadingListApplication.class)
-</span><span class='line'>@WebIntegrationTest
-</span><span class='line'>
-</span><span class='line'>public class SimpleWebTest {
-</span><span class='line'>@Test(expected=HttpClientErrorException.class)
-</span><span class='line'>public void pageNotFound() {
-</span><span class='line'>try {
-</span><span class='line'>RestTemplate rest = new RestTemplate();
-</span><span class='line'>rest.getForObject(
-</span><span class='line'>"http://localhost:8080/bogusPage", String.class);
-</span><span class='line'>fail("Should result in HTTP 404");
-</span><span class='line'>} catch (HttpClientErrorException e) {
-</span><span class='line'>assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
-</span><span class='line'>throw e;
-</span><span class='line'>}
-</span><span class='line'>}
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>代入参数
-<code>@WebIntegrationTest(value={"server.port=0"})</code> 和 <code>@WebIntegrationTest("server.port=0")</code></p>
-
-<p>selenium的用ie模拟访问自己的服务很有意思，值得制作一个。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'>            <span class="n">FirefoxDriver</span> <span class="n">browser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">();</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">manage</span><span class="o">().</span><span class="na">timeouts</span><span class="o">().</span><span class="na">implicitlyWait</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
-</span><span class='line'><span class="n">String</span> <span class="n">baseUrl</span> <span class="o">=</span> <span class="s">&quot;http://www.baidu.com/&quot;</span><span class="o">;</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">baseUrl</span><span class="o">);</span>
-</span><span class='line'><span class="n">String</span> <span class="n">currentUrl</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="na">getCurrentUrl</span><span class="o">();</span>
-</span><span class='line'><span class="n">assertEquals</span><span class="o">(</span><span class="n">baseUrl</span> <span class="o">+</span><span class="s">&quot;/readingList&quot;</span><span class="o">,</span> <span class="n">currentUrl</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;You have no books in your book list&quot;</span><span class="o">,</span>
-</span><span class='line'>             <span class="n">browser</span><span class="o">.</span><span class="na">findElementByTagName</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="na">getText</span><span class="o">());</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">findElementByName</span><span class="o">(</span><span class="s">&quot;title&quot;</span><span class="o">).</span><span class="na">sendKeys</span><span class="o">(</span><span class="s">&quot;BOOK TITLE&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">findElementByName</span><span class="o">(</span><span class="s">&quot;author&quot;</span><span class="o">).</span><span class="na">sendKeys</span><span class="o">(</span><span class="s">&quot;BOOK AUTHOR&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">findElementByName</span><span class="o">(</span><span class="s">&quot;isbn&quot;</span><span class="o">).</span><span class="na">sendKeys</span><span class="o">(</span><span class="s">&quot;1234567890&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">findElementByName</span><span class="o">(</span><span class="s">&quot;description&quot;</span><span class="o">).</span><span class="na">sendKeys</span><span class="o">(</span><span class="s">&quot;DESCRIPTION&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">browser</span><span class="o">.</span><span class="na">findElementByTagName</span><span class="o">(</span><span class="s">&quot;form&quot;</span><span class="o">).</span><span class="na">submit</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">WebElement</span> <span class="n">dl</span> <span class="o">=</span>
-</span><span class='line'>    <span class="n">browser</span><span class="o">.</span><span class="na">findElementByCssSelector</span><span class="o">(</span><span class="s">&quot;dt.bookHeadline&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)&quot;</span><span class="o">,</span>
-</span><span class='line'>             <span class="n">dl</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
-</span><span class='line'><span class="n">WebElement</span> <span class="n">dt</span> <span class="o">=</span>
-</span><span class='line'>    <span class="n">browser</span><span class="o">.</span><span class="na">findElementByCssSelector</span><span class="o">(</span><span class="s">&quot;dd.bookDescription&quot;</span><span class="o">);</span>
-</span><span class='line'><span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;DESCRIPTION&quot;</span><span class="o">,</span> <span class="n">dt</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版</p>
-
-<p>/beans 列出创建的全部bean<br/>
-/autoconfig 列出自动配置生效和未生效的内容<br/>
-/env 列出设置的环境<br/>
-/configprops 列出所有的参数<br/>
-/metrics 列出访问的指标<br/>
-/trace 给出近100个http请求的处理信息<br/>
-/dump 给出所有线程的情况<br/>
-/health 表明是否UP<br/>
-/info 列出属性文件中info.开头的信息，但似乎有乱码</p>
-
-<p>actuator的remote shell
-默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ssh</span> <span class="n">user</span><span class="nd">@localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">2000</span>
-</span><span class='line'><span class="n">Password</span> <span class="n">authentication</span>
-</span><span class='line'><span class="nl">Password:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>自己定义metrics：</p>
-
-<p>actuator有CounterService服务，可以用于增加值。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CounterService</span> <span class="o">{</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">increment</span><span class="o">(</span><span class="n">String</span> <span class="n">metricName</span><span class="o">);</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">decrement</span><span class="o">(</span><span class="n">String</span> <span class="n">metricName</span><span class="o">);</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">reset</span><span class="o">(</span><span class="n">String</span> <span class="n">metricName</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>GaugeService是记录值</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GaugeService</span> <span class="o">{</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">submit</span><span class="o">(</span><span class="n">String</span> <span class="n">metricName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">value</span><span class="o">);</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>自定义Health</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nd">@Component</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AmazonHealth</span> <span class="kd">implements</span> <span class="n">HealthIndicator</span> <span class="o">{</span>
-</span><span class='line'><span class="nd">@Override</span>
-</span><span class='line'><span class="kd">public</span> <span class="n">Health</span> <span class="nf">health</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'><span class="k">try</span> <span class="o">{</span>
-</span><span class='line'><span class="n">RestTemplate</span> <span class="n">rest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RestTemplate</span><span class="o">();</span>
-</span><span class='line'><span class="n">rest</span><span class="o">.</span><span class="na">getForObject</span><span class="o">(</span><span class="s">&quot;http://www.amazon.com&quot;</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'><span class="k">return</span> <span class="n">Health</span><span class="o">.</span><span class="na">up</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'><span class="k">return</span> <span class="n">Health</span><span class="o">.</span><span class="na">down</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//还可以加入更多的细节内容，使用withDetail</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">return</span> <span class="n">Health</span><span class="o">.</span><span class="na">down</span><span class="o">().</span><span class="na">withDetail</span><span class="o">(</span><span class="s">&quot;reason&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上述endPoint的保护需采用所有spring暴露的链接一致的方式</p>
-
-<p><code>management.context-path=/mgmt</code>，其中的<code>management.context-path</code>可以给spring actuator定义全部的前缀</p>
-
-<p>这样可便于统一控制
-<code>.antMatchers("/mgmt/**").access("hasRole('ADMIN')")</code></p>
-
-<h3>部署时调整production环境变量</h3>
-
-<p><code>@Profile("production")</code></p>
-
-<p><code>export SPRING_PROFILES_ACTIVE=production</code></p>
-
-<p>最简单的是export active的环境变量为<code>production</code></p>
-
-<h3>spring的db migrate，不算很实用吧</h3>
-
-<p>Spring Boot includes auto-configuration support for two popular database migration
-libraries:<br/>
-■ Flyway (http://flywaydb.org)  &#8212; 直接采用SQL编写ddl<br/>
-■ Liquibase (www.liquibase.org) &#8212; 使用yaml json等</p>
-
-<h3>附录</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">devtools</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
-public, /templates.</p>
 </div>
   
   
@@ -1161,6 +848,10 @@ public, /templates.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/18/zhuang-ji-i3-10100/">装机 i3-10100</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/06/clean-architecture/">Clean Architecture</a>
       </li>
     
@@ -1176,15 +867,11 @@ public, /templates.</p>
         <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>

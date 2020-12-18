@@ -9,8 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最近发现淘宝的前端大牛似乎想往后端发展，摆脱只做前端的印象；
-另一方面, teahour上的人却认为越来越多的工作从服务器往前端在靠，投入在javascript上面的工作量和时间越来越多。单用围城效应这个不是太能解释的通。 以我个人这段时间的开发经验来看，前端很多事情和很细小，消耗的时间确实很多。 &hellip;">
+  <meta name="description" content="不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。 有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。 说句实话，这半年过的还不错。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/05/cong-cong-ban-nian/">匆匆半年</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-05T23:10:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>不知不觉，宝宝出生和研究生毕业都已经快半年了。这半年里书是读了不少，事情也做了一些，突破性的的东西还是没有什么。也抽空去做了一个手术。总而言之，辛苦又忙碌的半年吧。</p>
+
+<p>有了宝宝以后，自己的时间少了，晚上好睡的日子也少了，不过看着宝宝健康成长，那么这一切还是很有意义的。</p>
+
+<p>说句实话，这半年过的还不错。只是飙升的体重真的要想办法调整才行了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -772,254 +811,6 @@ Anniversary-driven development</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/26/change-to-ruby-2-dot-0-0/">Change to Ruby 2 Dot 0 0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-26T00:00:00+08:00" pubdate data-updated="true">Feb 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>layout: post
-title: &#8220;Change to Ruby 2.0.0&#8221;
-date: 2013-02-26 11:30
-comments: true
-categories:
-- ruby
-- heroku</p>
-
-<hr />
-
-<p>借着Ruby 2.0.0发布的东风，又加之Rails 也发布了4.0.beta来给献礼，营造了RR24，我也把octopress升级到了ruby 2.0.0.</p>
-
-<p>步骤如下：</p>
-
-<ol>
-<li>在Gemfile中加入 <code>ruby "2.0.0"</code></li>
-<li>更新Gemfile中其他的一些gem，把octopress最新版的内容加进来即可，否则可能还是不能和2.0兼容的</li>
-<li><code>bundle intall</code>, <code>bundle install --binstubs</code></li>
-<li><code>git commit -a</code></li>
-<li><code>git push heroku</code></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 119, done.
-</span><span class='line'>Compressing objects: 100% (59/59), done.
-</span><span class='line'>Writing objects: 100% (60/60), 5.46 KiB, done.
-</span><span class='line'>Total 60 (delta 32), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Ruby version change detected. Clearing bundler cache.
-</span><span class='line'>       Old: ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
-</span><span class='line'>       New: ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Fetching gem metadata from http://ruby.taobao.org/.
-</span><span class='line'>       Fetching full source index from http://ruby.taobao.org/
-</span><span class='line'>       Installing daemons (1.1.8)
-</span><span class='line'>       Installing eventmachine (0.12.10)
-</span><span class='line'>       Installing rack (1.4.1)
-</span><span class='line'>       Installing rack-protection (1.3.2)
-</span><span class='line'>       Installing tilt (1.3.3)
-</span><span class='line'>       Installing sinatra (1.3.5)
-</span><span class='line'>       Installing thin (1.4.1)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; (none)
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 30.5MB
-</span><span class='line'>-----&gt; Launching... done, v48</span></code></pre></td></tr></table></div></figure>
-
-
-<p>但我不太理解slug size为啥变大了。</p>
-
-<p>而且和thin里面的eventmachine配合似乎有问题，可能是版本太老，也可能是别的什么，
-于是改用了unicorn，又折腾了Procfile</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec unicorn -p $PORT</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>       Would have removed thin (1.4.1)
-</span><span class='line'>       Would have removed daemons (1.1.9)
-</span><span class='line'>       Would have removed daemons (1.1.8)
-</span><span class='line'>       Would have removed thin (1.5.0)
-</span><span class='line'>       Would have removed rack (1.4.1)
-</span><span class='line'>       Would have removed eventmachine (1.0.0)
-</span><span class='line'>       Would have removed eventmachine (0.12.10)
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 35.9MB
-</span><span class='line'>-----&gt; Launching... done, v53</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后重新弄了一下，发现还是很大。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Writing objects: 100% (3/3), 281 bytes, done.
-</span><span class='line'>Total 3 (delta 2), reused 0 (delta 0)
-</span><span class='line'>-----&gt; Deleting 5 files matching .slugignore patterns.
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Using Ruby version: ruby-2.0.0
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.3.0.pre.5
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
-</span><span class='line'>       Using kgio (2.8.0)
-</span><span class='line'>       Using rack (1.4.5)
-</span><span class='line'>       Using rack-protection (1.3.2)
-</span><span class='line'>       Using raindrops (0.10.0)
-</span><span class='line'>       Using tilt (1.3.3)
-</span><span class='line'>       Using sinatra (1.3.5)
-</span><span class='line'>       Using unicorn (4.6.2)
-</span><span class='line'>       Using bundler (1.3.0.pre.5)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; web
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake
-</span><span class='line'>
-</span><span class='line'>-----&gt; Compiled slug size: 27.3MB
-</span><span class='line'>-----&gt; Launching... done, v5
-</span><span class='line'>       http://octopresszhangyu.herokuapp.com deployed to Heroku</span></code></pre></td></tr></table></div></figure>
-
-
-<p>感觉adam不再怎么发文之后，Heroku有点日趋堕落的趋势。另外，在Procfile里面运用unicorn绝对是个好主义。其效果类似一个dyno(ubuntu)上跑了几个unicorn的进程，
-明显处理能力会强于只有一个实例的thin。以上灵感来自<a href="http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html">unicorn的部署高人</a>。</p>
-
-<p>今日装某个系统，发现有掉到了libyaml这个沟里。试了几次，最后发现是 <code>LD_LIBRARY_PATH=</code>的缘故。
-编译好libyaml，在加入到上面这个环境变量中，ruby才能读的出来。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -1037,6 +828,10 @@ categories:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/18/zhuang-ji-i3-10100/">装机 i3-10100</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/06/clean-architecture/">Clean Architecture</a>
       </li>
     
@@ -1052,15 +847,11 @@ categories:
         <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/装机'>装机 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>
