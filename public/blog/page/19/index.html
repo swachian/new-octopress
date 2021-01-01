@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="周五终于忍不住买了一台Kindle，把玩不久之后就喜欢上了。到手没多久已经用她看完了《我的西域，你的东土》后半部分。
-比起在手机上，即便是4寸的手机，看书的感觉棒多了。甚至比在电脑上看还要好，比抱着实体书看的感觉更棒。为什么这么说？ 最简单的道理就是分量轻、字体可以很大。从体积和重量上来讲， &hellip;">
+  <meta name="description" content="12月7日周五下午通过了硕士论文的答辩。多亏了C，让我们可以在比较早的顺位得到答辩的机会，大大节省了时间和精力。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/09/dabian/">硕士答辩</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-09T21:22:00+08:00" pubdate data-updated="true">Dec 9<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>12月7日周五下午通过了硕士论文的答辩。多亏了C，让我们可以在比较早的顺位得到答辩的机会，大大节省了时间和精力。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -810,64 +846,6 @@ Zend Framework 本身的结构很大程度的模仿了 Ruby on Rails，但又做
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/">Hadoop集群安装手记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-06T16:43:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ssh的使用公钥登录配置</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ssh-keygen
-</span><span class='line'>ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>=======
-<strong>数据源的输入才是Hadoop方便地方</strong></p>
-
-<p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
-读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
-比如一个10000行的记录，如果有10个计算进程去做的话，hadoop会自动把数据切成1000行<br/>
-然后你写的代码就是读入一行数据后要做些什么操作。比如说算总值或者平均值的话，就把数字全加起来，这个过程叫Map<br/>
-然后10个计算进程都算出来了，需要汇总结果，汇总的进程就叫reduce<br/>
-map/reduce之间传输的内容就是map的输出，一般也是一个key value，但是这里面具体赛什么是随意的</p>
-
-<h1>文献</h1>
-
-<p><a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">创建一个节点</a><br/>
-<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-multi-node-cluster/">创建集群</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -885,6 +863,10 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/18/zhuang-ji-i3-10100/">装机 i3-10100</a>
       </li>
     
@@ -900,15 +882,11 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
         <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (51)</a></li><li><a href='/blog/categories/车车'>车车 (38)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -916,7 +894,7 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - Hegel 2011 -
+  Copyright &copy; 2021 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>
