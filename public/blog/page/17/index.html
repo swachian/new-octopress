@@ -9,9 +9,13 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近期从rvm切换到了rbenv, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。
-为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析User-Agent的应用，并确定发布到heroku上。
-在发布的过程中，发现还是有一些陷阱， &hellip;">
+  <meta name="description" content="Mats Ruby 2.0
+的笔记。 首先讲了Ruby的历史 Dec 1995 0.95
+Dec 1996 1.0
+Aug 1997 1.1
+Dec 1998 1.2
+Aug 1999 1.4
+Sep 2000 1.6 以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。 voccation- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +73,227 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/">Notes of Matz on Ruby 2.0 at Herokus Waza</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-08T11:15:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://speakerdeck.com/yukihiro_matz/ruby-2-dot-0-en">Mats Ruby 2.0</a>
+的笔记。</p>
+
+<p>首先讲了Ruby的历史</p>
+
+<ul>
+<li>Dec 1995 0.95</li>
+<li>Dec 1996 1.0</li>
+<li>Aug 1997 1.1</li>
+<li>Dec 1998 1.2</li>
+<li>Aug 1999 1.4</li>
+<li>Sep 2000 1.6</li>
+</ul>
+
+
+<p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
+
+<p>voccation-driven development<br/>
+Anniversary-driven development</p>
+
+<ul>
+<li>Aug 2003 1.8</li>
+<li>Dec 2007 1.9.0</li>
+<li>Aug 2010 1.9.2</li>
+<li>Oct 2011 1.9.3</li>
+<li>Feb 2013 2.0.0</li>
+</ul>
+
+
+<p>2.0版最早是在Ruby Conf 2001提出，包括</p>
+
+<ul>
+<li>new GC</li>
+<li>native Thread with GIL</li>
+<li>有些特性后来放弃了</li>
+</ul>
+
+
+<p>2.0的发布带来了：</p>
+
+<ul>
+<li>New Hash literals</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>keyword arguments</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  def log(msg, level: "ERROR", time: Time.now)
+</span><span class='line'>    puts "..."
+</span><span class='line'>  end
+</span><span class='line'>  
+</span><span class='line'>  # existing hash passing
+</span><span class='line'>  log("Hello!", **hash)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Module#prepend, alias method chain, from CommonLisp</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#prepend put them before to wrap methods
+</span><span class='line'>class Foo
+</span><span class='line'>  def foo; p :foo; end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>module Prepend
+</span><span class='line'>  def foo
+</span><span class='line'>    p :before
+</span><span class='line'>    super
+</span><span class='line'>    p :after
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Foo
+</span><span class='line'>  prepend Prepend # just as include Prepend
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Foo.new.foo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>refine，to constrain open class, scoped monkey patching</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module R
+</span><span class='line'>  refine String do
+</span><span class='line'>    def foo
+</span><span class='line'>      puts "aaa"
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>"".foo # =&gt; error!
+</span><span class='line'>
+</span><span class='line'>using R
+</span><span class='line'>"".foo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
+
+<ul>
+<li>Enumerable#lazy， 受函数式编程影响</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(1..Float::INFINITY).lazy.map {|i|
+</span><span class='line'>  i.to_s
+</span><span class='line'>}.select {|s|
+</span><span class='line'>  /3/ === s
+</span><span class='line'>}.first(500000)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Symbol array literals</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%i(foo bar baz) =&gt; [:foo, :bar, :baz]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>to_h, to_hash</p></li>
+<li><p>UTF-8 by default</p></li>
+<li><p>Performance Faster:</p>
+
+<ul>
+<li>VM(YARV)</li>
+<li>GC</li>
+<li>require</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Ruby 2.1 maybe 25.12.2013</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1020,52 +1245,6 @@ Token可以是一个，也可以是多个。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/16/whats-luokao-for-ruankao/">裸考在软考中意味着什么</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-16T10:30:00+08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>软考通过率大致在20-30%，你以为没过的70%-80%里面大部分是认真复习的么？
-软考里面裸考的比例肯定很高，出考率比四六级、考研都低，个别省份甚至设立了“参加全部考试的保证金”以此鼓励考生尽可能地参加完考试。
-仅从出考率就可以看出参加考试的人里面裸考的大有人在。有如此大的基数，那么没过的很多，有人过了也很正常。</p>
-
-<p>何况每个人基础不一样，运气也不一样。比如，准备过PMP的他的项目管理知识基本不用再准备，毕竟概念一样的；专业基础好的人，计算机基础知识就不用准备。
-有经验且基础不错的人，过软考所需要投入的精力本身就可以比较少。最低限度的，看看真题熟悉一下类型找一下感觉就有可能可以过。</p>
-
-<p>实际上，个人认为只要是看了几年真题的，就不可以算是裸考。毕竟大部分人的复习无非也就是看教材看辅导材料看真题。前两个是基础，后一项是得分的关键。
-有基础的直接跳到看真题是没障碍的。但既然看了真题，那就不能说是裸考了。</p>
-
-<p>就像有人说四六级裸考，我是不明白他们的英语是怎么裸掉的。这玩意如果学过了掌握了基本就抛不掉的。软考方面的很多知识也是类似的。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -1083,6 +1262,10 @@ Token可以是一个，也可以是多个。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
       </li>
     
@@ -1098,15 +1281,11 @@ Token可以是一个，也可以是多个。</p>
         <a href="/blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi/">凌度充气宝-A3更换空调滤芯-CRV的轮胎漏气</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (89)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>

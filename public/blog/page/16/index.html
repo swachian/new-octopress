@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="花了2个礼拜的时间，看完了七天七数据库。这是又一本在kindle上看完的epub格式的书籍。阅读体验的效果还是很不错的。 书籍受了七天七语言的启发，整本书的胶水语言主要是用了ruby，也伴随使用了一些javascript。作者对redis做了特别多的介绍，HBase等的描述也很精彩。 &hellip;">
+  <meta name="description" content="今天终于尝试做了第一个gem，其实挺简单的，至少在有了bundler之后。 先 bundle gem act_as_xxx，随后就可以编辑里面的内容，比如在*.gemspec里面加入描述。编辑好自己的gem后，运行gem build act_as_xxx.gemspec， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/12/my-first-gem/">My First Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-12T17:02:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天终于尝试做了第一个<code>gem</code>，其实挺简单的，至少在有了bundler之后。</p>
+
+<p>先 <code>bundle gem act_as_xxx</code>，随后就可以编辑里面的内容，比如在<code>*.gemspec</code>里面加入描述。编辑好自己的gem后，运行<code>gem build act_as_xxx.gemspec</code>，这样一个新的gem就会编译出来。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Successfully built RubyGem
+</span><span class='line'>  Name: act_as_xxx
+</span><span class='line'>  Version: 0.1.1
+</span><span class='line'>  File: act_as_xxx-0.1.1.gem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后<code>gem push act_as_xxx-0.1.1.gem</code> 就发布到rubygems.org上面了。</p>
+
+<p>基本的流程是走通了，不过怎么怎么测试怎么调试等还需要进一步摸索。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -551,227 +603,6 @@ Adobe的桌面技术编写的。如果要推荐美工使用sass，那么可以�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/08/notes-of-matz-on-ruby-2-dot-0-at-herokus-waza/">Notes of Matz on Ruby 2.0 at Herokus Waza</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-08T11:15:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://speakerdeck.com/yukihiro_matz/ruby-2-dot-0-en">Mats Ruby 2.0</a>
-的笔记。</p>
-
-<p>首先讲了Ruby的历史</p>
-
-<ul>
-<li>Dec 1995 0.95</li>
-<li>Dec 1996 1.0</li>
-<li>Aug 1997 1.1</li>
-<li>Dec 1998 1.2</li>
-<li>Aug 1999 1.4</li>
-<li>Sep 2000 1.6</li>
-</ul>
-
-
-<p>以上是节假日驱动开发，后来改成了周年纪念开发，呵呵。</p>
-
-<p>voccation-driven development<br/>
-Anniversary-driven development</p>
-
-<ul>
-<li>Aug 2003 1.8</li>
-<li>Dec 2007 1.9.0</li>
-<li>Aug 2010 1.9.2</li>
-<li>Oct 2011 1.9.3</li>
-<li>Feb 2013 2.0.0</li>
-</ul>
-
-
-<p>2.0版最早是在Ruby Conf 2001提出，包括</p>
-
-<ul>
-<li>new GC</li>
-<li>native Thread with GIL</li>
-<li>有些特性后来放弃了</li>
-</ul>
-
-
-<p>2.0的发布带来了：</p>
-
-<ul>
-<li>New Hash literals</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  {foo: 1, bar: 2} =&gt; {:foo=&gt;1, :bar=&gt;2}</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>keyword arguments</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  def log(msg, level: "ERROR", time: Time.now)
-</span><span class='line'>    puts "..."
-</span><span class='line'>  end
-</span><span class='line'>  
-</span><span class='line'>  # existing hash passing
-</span><span class='line'>  log("Hello!", **hash)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Module#prepend, alias method chain, from CommonLisp</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#prepend put them before to wrap methods
-</span><span class='line'>class Foo
-</span><span class='line'>  def foo; p :foo; end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>module Prepend
-</span><span class='line'>  def foo
-</span><span class='line'>    p :before
-</span><span class='line'>    super
-</span><span class='line'>    p :after
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>class Foo
-</span><span class='line'>  prepend Prepend # just as include Prepend
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Foo.new.foo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>refine，to constrain open class, scoped monkey patching</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module R
-</span><span class='line'>  refine String do
-</span><span class='line'>    def foo
-</span><span class='line'>      puts "aaa"
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>"".foo # =&gt; error!
-</span><span class='line'>
-</span><span class='line'>using R
-</span><span class='line'>"".foo</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Java 和 Smalltalk有classbox的概念，也与此类似</p>
-
-<ul>
-<li>Enumerable#lazy， 受函数式编程影响</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(1..Float::INFINITY).lazy.map {|i|
-</span><span class='line'>  i.to_s
-</span><span class='line'>}.select {|s|
-</span><span class='line'>  /3/ === s
-</span><span class='line'>}.first(500000)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Symbol array literals</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>%i(foo bar baz) =&gt; [:foo, :bar, :baz]</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>to_h, to_hash</p></li>
-<li><p>UTF-8 by default</p></li>
-<li><p>Performance Faster:</p>
-
-<ul>
-<li>VM(YARV)</li>
-<li>GC</li>
-<li>require</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Ruby 2.1 maybe 25.12.2013</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -789,6 +620,10 @@ Anniversary-driven development</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
       </li>
     
@@ -804,15 +639,11 @@ Anniversary-driven development</p>
         <a href="/blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi/">凌度充气宝-A3更换空调滤芯-CRV的轮胎漏气</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">git 删除已提交的文件</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (88)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (32)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (89)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (33)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (25)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li></ul>
 </section>
   
 </aside>

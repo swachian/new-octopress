@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-01-09T18:51:28+08:00</updated>
+  <updated>2021-01-14T21:33:15+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mybatis-plus的字段为复杂对象的读取和装载]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/"/>
+    <updated>2021-01-14T21:19:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai</id>
+    <content type="html"><![CDATA[<p>如果核心代码写的非常OO，那么Entity中自然会出现很多Value Object。一旦这些VO需要存入数据库，则会牵涉到一个数据库字段转换到Java类型的ORM问题。<br/>
+比如有下面的代码：</p>
+
+<p>```java
+@Data
+// @TableName(autoResultMap = true)
+public class Validator {</p>
+
+<pre><code>private Long id;
+
+// @TableField(typeHandler = CommissionTypeHandler.class)
+private Commission commission;
+</code></pre>
+
+<p>}</p>
+
+<p>public class Commission {</p>
+
+<pre><code>final private BigDecimal commission;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Commission作为一个VO，也需要保存到Validator的表格中。Mybatis通过typeHandler的方式来实现这种钩子，完成这种转换。具体做法为先定义相应的handler, 即<code>TypeHandler&lt;T&gt;</code>接口的实现类</p>
+
+<p>```java
+import com.walletguard.polkadotprx.entity.Commission;
+import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
+import org.apache.ibatis.type.TypeHandler;</p>
+
+<p>import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;</p>
+
+<p>@MappedJdbcTypes(JdbcType.DECIMAL)  //数据库类型
+@MappedTypes(Commission.class)
+public class CommissionTypeHandler implements TypeHandler<Commission> {</p>
+
+<pre><code>@Override
+public void setParameter(PreparedStatement ps, int i, Commission parameter, JdbcType jdbcType) throws SQLException {
+    ps.setBigDecimal(i, parameter.getCommission());
+}
+
+@Override
+public Commission getResult(ResultSet rs, String columnName) throws SQLException {
+    BigDecimal co = rs.getBigDecimal(columnName);
+    return new Commission(co);
+}
+
+@Override
+public Commission getResult(ResultSet rs, int columnIndex) throws SQLException {
+    BigDecimal co = rs.getBigDecimal(columnIndex);
+    return new Commission(co);
+}
+
+@Override
+public Commission getResult(CallableStatement cs, int columnIndex) throws SQLException {
+    BigDecimal co = cs.getBigDecimal(columnIndex);
+    return new Commission(co);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>该接口有4个需要实现的method，其中3个是读取，1个是写入，这里又用到了很传统的JdbcTemplate的方式类设置和读取相应的值，读出后转换成自己需要的对象。
+<code>MappedJdbcTypes</code>指明了Jdbc中的类型， <code>MappedTypes</code>指明了OO中的对象类型，也就是接口<code>TypeHandler&lt;T&gt;</code>中的T。</p>
+
+<p>然后，在上面类型的对象中，作<code>@TableField(typeHandler = CommissionTypeHandler.class)</code>声明，即意味着该字段用这个typeHandler来进行处理。<br/>
+但是，这只是确保可以写入，如果要支持读取，还需要在Class的开头，加上<code>@TableName(autoResultMap = true)</code>，这样这个ORM就实现了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clean Architecture]]></title>
@@ -204,23 +288,6 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
 
 <p>多用<code>Enum</code>，少用<code>const</code><br/>
 多用<code>strategy</code>, <code>template</code>，少用<code>if</code>, <code>switch</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Effective Java 3rd Edition]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition/"/>
-    <updated>2018-02-20T23:01:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/02/20/effective-java-3rd-edition</id>
-    <content type="html"><![CDATA[<p>「Effective Java」第三版在过年期间出版了，对比第二版主要补充了<code>lambda</code>和<code>stream</code>的内容，序列化方面
-则希望大家不要再使用java原生的内容，其他变化不大。但是，和第一版比较起来，变化就很大了。除上述内容外，
-第二版较第一版增加了<code>autoboxing/autounboxing</code>，<code>enum</code>, <code>annotation</code>,<code>generic programming</code>, 整个的编程建议也从57条增长到78条再到第三版的90条。</p>
-
-<p>借用作者在第三版的前言，在1997年，Java的创始者Gosling描述java是一种“蓝领语言”（blue collar language），意味着当时的java相当简单（pretty simple）。与此同时，C++的创始人Stroustrup则警告所谓java的简单和其他很多新语言一样，只是误解以及功能上的不完善，随着时间的流逝，Java在尺寸和复杂性上都将大规模成长。不得不说，三者都是大师，而Java虽然依旧还是工业级的语言，但复杂度和规模已经较我十几年前初学时多了许多。或许，也因此大学里正在寻求一门其他语言来取代Java的教学地位吧。</p>
-
-<p>此书非常经典，虽然作者说不用从头到尾通读，但是，建议还是全部都读一遍，甚至可能需要反复阅读并加以实践。比如其中的primitives和boxed primitives，即<code>int</code>和<code>Integer</code>，其间的坑在新项目中就踩过，而之前阅读后只是尽量不去用Integer这些boxed的类型，而这个新项目中由于前后交互的需要必须使用了Integer，于是就把<code>==</code>, 内容为<code>null</code>的坑都踩到了。</p>
-
-<p>开卷有益，何况经典！</p>
 ]]></content>
   </entry>
   
