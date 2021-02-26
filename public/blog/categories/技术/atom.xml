@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-01-14T21:33:15+08:00</updated>
+  <updated>2021-02-26T21:27:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
+    <updated>2021-02-16T21:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
+    <content type="html"><![CDATA[<p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
+一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
+首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
+
+<p>但这本书确实很不好读。中文版的购于去年3月份，反反复复并看不下去，7月份开始看英文版，废了半年的时间，才断断续续终于看完了。蓝皮书确实写的是不容易褪色和随着时间流逝而跌价的书籍，内里的原则和一些很细节的建议应该只要OO继续是编程的主要范式，那么蓝皮书的价值和地位就会持续存在。比如他评价OO把一切都看成对象，就是等于建筑师把一切都看成房间。过于抽象，其实反而失去了运用时的指导意义。为此，开发出了七种武器来分别描述不同的用于处理业务的OO。</p>
+
+<p>而统一语言，则是强调分析人员、设计人员和最终使用人员使用同一种语言来进行沟通，就像厨房、卫生间、客厅等并非只是建筑师的用语。这样可以用一套原则来进行指导和沟通。DDD本身强调独立性的目的，是通过解除对外部的依赖从而达到可以把核心问题暴露出来并予以解决。从而可以让运维逻辑丰富且清晰，将Domain作为软件的核心，而把APP层做薄。沿着这条路前进了多年之后，随着TDD等实践的进一步发展，获得了易测试等突破性的好处。因此，在国外甚至国内部分项目中，都取得了广泛的应用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mybatis-plus的字段为复杂对象的读取和装载]]></title>
@@ -282,104 +297,6 @@ hex(14275)
 <p>```</p>
 
 <p>然后就可以看见线程的名字，就可以去代码里进一步对症下药了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[入手本精装书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
-    <updated>2020-04-13T11:20:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
-    <content type="html"><![CDATA[<p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
-另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
-
-<p>原版四五百页精装书，放在桌上看的体验真的普通版的给不了。封面和纸张的手感是很不一样的就不说了，关键是精装的书里面有线，书是可以翻平的。这个胶板书真给不了。</p>
-
-<p>不过计算机书籍国内精装版的基本很少，老外的也不多，估计还是大部分计算机图书的生命周期太短了吧。</p>
-
-<p>顺手翻了一下图灵和异步的精装图书。技术类的是不多的，图灵除了著名的计算机编程艺术，也就黑客与画家、阮一峰文集、番茄工作法、写给大家看的设计书等寥寥几本。异步稍微好一点。像重构第二版、深度学习的两本，还有持续交付和一本也是国内人编写的广告计算，合计也就5本。但国内编写的两本，怎么看都更像是方便作者自己送人的。所以在国内还真的享受不了什么看精装技术图书的乐趣。当然，即使国外，如Effective Java都没有出过精装版，那么实际上拥有硬封皮的计算机书籍也是不多的。</p>
-
-<p>顺便在天珑看了一下台湾图书的价格，同时发现现在台湾引入的简体版还真的不少，价格就比较有意思了。举《重构》和《领域驱动设计》两本书为例，价格如下（均为天珑实际售价)</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> 图书版本               </th>
-<th> 台币                       </th>
-<th> 人民币 </th>
-<th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> 重构台湾 </td>
-<td> 632 </td>
-<td> 148 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 英文版hard cover </td>
-<td> 1995 </td>
-<td> 467 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 精装简体版</td>
-<td> 699 </td>
-<td> 163 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 简体平装 </td>
-<td> 469 </td>
-<td> 107 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 重构第一版简体 </td>
-<td> 327 </td>
-<td> 76 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> </td>
-<td>  </td>
-<td>  </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计简体平装 </td>
-<td> 393 </td>
-<td> 92 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计繁体平装 </td>
-<td> 530 </td>
-<td> 124 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计英文版  </td>
-<td> 2470 </td>
-<td> 578 </td>
-<td> </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>英版的价钱确实还是很贵的。而在台湾销售的大陆书籍，大约比国内网店普通售价贵了一倍。</p>
 ]]></content>
   </entry>
   

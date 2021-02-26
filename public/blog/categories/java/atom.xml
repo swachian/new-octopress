@@ -4,7 +4,7 @@
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-01-14T21:33:15+08:00</updated>
+  <updated>2021-02-26T21:27:00+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
+    <updated>2021-02-16T21:37:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
+    <content type="html"><![CDATA[<p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
+一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
+首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
+
+<p>但这本书确实很不好读。中文版的购于去年3月份，反反复复并看不下去，7月份开始看英文版，废了半年的时间，才断断续续终于看完了。蓝皮书确实写的是不容易褪色和随着时间流逝而跌价的书籍，内里的原则和一些很细节的建议应该只要OO继续是编程的主要范式，那么蓝皮书的价值和地位就会持续存在。比如他评价OO把一切都看成对象，就是等于建筑师把一切都看成房间。过于抽象，其实反而失去了运用时的指导意义。为此，开发出了七种武器来分别描述不同的用于处理业务的OO。</p>
+
+<p>而统一语言，则是强调分析人员、设计人员和最终使用人员使用同一种语言来进行沟通，就像厨房、卫生间、客厅等并非只是建筑师的用语。这样可以用一套原则来进行指导和沟通。DDD本身强调独立性的目的，是通过解除对外部的依赖从而达到可以把核心问题暴露出来并予以解决。从而可以让运维逻辑丰富且清晰，将Domain作为软件的核心，而把APP层做薄。沿着这条路前进了多年之后，随着TDD等实践的进一步发展，获得了易测试等突破性的好处。因此，在国外甚至国内部分项目中，都取得了广泛的应用。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mybatis-plus的字段为复杂对象的读取和装载]]></title>
@@ -261,33 +276,6 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
 因为坚持，实现了巨大的超越。</p>
 
 <p>所以，有时候我们需要有点耐心，坚持一下。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clean Code]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/05/01/clean-code/"/>
-    <updated>2018-05-01T14:23:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/05/01/clean-code</id>
-    <content type="html"><![CDATA[<p>Uncle Bob的这本书也是一本名著了，书籍本身其实就是讲编程风格的，可以把编码技能磨砺的
-更锋利些。</p>
-
-<p>全书的要旨在于每一次重构都要让代码更加整洁，同时测试代码和业务代码一样对待。具体开始做起来，则是从很小之处开始着手。</p>
-
-<ol>
-<li><p><strong>命名</strong>是很重要的一个东西，好的命名可以省下很多注释，因为好的命名本身就帮助理解程序。命名包括了方法名和变量名。</p></li>
-<li><p><strong>函数</strong>要尽可能的短，比如20行，可以在一屏里面显示，如果一个方法太长，那么肯定是命名没有弄好，可以继续拆分。此外，<strong>参数</strong>要尽可能的少，能不要参数就不要参数，一个参数好于二个参数，二个参数好于三个参数，三个参数是大部分方法的极限。</p></li>
-<li><p><strong>注释</strong>以阐述为主，不要使用太多的废话，如果确定要写注释，也要认真编写。</p></li>
-<li><p><strong>格式</strong>是多个代码之间的关联和布局规则。Bob推荐类似报纸的编写方式，大标题后面跟随小标题，比如大的<code>public</code>方法后面跟随小的<code>private</code>方法。和函数的规则一样，垂直相关的内容尽量放在一起。</p></li>
-<li><p><strong>数据和对象</strong>牵涉偏向过程还是偏向面向对象。对于面向对象来讲，一般不增加method而是增加类型，对面向过程来讲，一般增加方法而不动数据结构，现实中肯定是二者皆有。</p></li>
-<li><p><strong>错误处理</strong>错误处理粗返回码外，也可以考虑使用异常来进行封装。</p></li>
-<li><p><strong>边界</strong>划分好后，对第三方的库和方法要单独测试和封装，以减少对本系统的影响。</p></li>
-<li><p><strong>类</strong>也要单一权责，内聚，可以用许多短小的类来构建程序。</p></li>
-</ol>
-
-
-<p>多用<code>Enum</code>，少用<code>const</code><br/>
-多用<code>strategy</code>, <code>template</code>，少用<code>if</code>, <code>switch</code></p>
 ]]></content>
   </entry>
   
