@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-02-27T12:26:39+08:00</updated>
+  <updated>2021-03-18T17:46:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CORS问题]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti/"/>
+    <updated>2021-03-18T13:40:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti</id>
+    <content type="html"><![CDATA[<p>动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。</p>
+
+<p>CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。</p>
+
+<p>原理上，CORS工作时会先发出一个OPTIONS请求，并携带Origin消息头：</p>
+
+<p><code>
+OPTIONS /
+Host: service.example.com
+Origin: http://www.example.com
+Access-Control-Request-Method: PUT
+</code></p>
+
+<p>然后，服务器端如果支持跨域，则会返回Access-Control-Allow-Origin消息头，里面给出允许访问的Origin域名。如果用<code>*</code>，则表示没有任何限制。如果要允许多个域名，则可以使用Nginx中动态变量的方法，这种情况下每次还是只返回一个域名。</p>
+
+<p>```
+location / {</p>
+
+<pre><code>            root html;
+         if ($request_method = "OPTIONS") {
+</code></pre>
+
+<p>add_header Access-Control-Allow-Origin *;</p>
+
+<pre><code>            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With';
+            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
+            add_header 'Access-Control-Max-Age' 10;
+            return 204;
+         }
+
+            add_header 'Access-Control-Allow-Credentials' 'true' always;
+            add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With' always;
+            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS' always;
+            add_header 'Access-Control-Max-Age' 10 always;
+            proxy_set_header host $host;
+            proxy_set_header X-real-ip $remote_addr;
+            proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
+            proxy_pass http://127.0.0.1:8080;
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>Nginx的配置需要注意两点：</p>
+
+<ol>
+<li>add_header在proxy_pass时默认不会起作用，如果需要起作用，则要加上<code>always</code>参数。</li>
+<li>Access-Control-Allow-Origin 要严格的只有1条，不能有多条。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
@@ -183,120 +242,6 @@ git push origin --force 'refs/replace/*'
 </code></p>
 
 <p>最后，再去gitlab的settings里面手工执行一下Housekeeping，再次clone的话体积就小了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[查看java的线程cpu使用情况]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/"/>
-    <updated>2020-06-24T22:36:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang</id>
-    <content type="html"><![CDATA[<p>说来惭愧，那么些年写java，至今也没碰到需要对jvm内部线程cpu使用情况的研究。
-今天碰到一例，因为用了flink，出现了一个处理瓶颈，不得不深入一探究竟。</p>
-
-<p>就Linux的操作系统原理而言，jvm的线程是类似进程的东西，通过<code>top -Hn 14142</code> 可以查看到
-14142这个进程内所有线程的cpu使用情况</p>
-
-<p><code>
- PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
-14321 hadoop    20   0   17.7g   8.6g  27756 S 43.2 27.4   8:29.33 java
-14275 hadoop    20   0   17.7g   8.6g  27756 S 15.9 27.4   2:45.05 java
-14408 hadoop    20   0   17.7g   8.6g  27756 S  3.7 27.4   0:33.23 java
-14274 hadoop    20   0   17.7g   8.6g  27756 S  2.3 27.4   0:37.25 java
-14226 hadoop    20   0   17.7g   8.6g  27756 S  2.0 27.4   0:20.27 java
-14222 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:12.78 java
-14414 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:11.12 java
-14254 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.05 java
-14288 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.97 java
-14415 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.99 java
-15072 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.04 java
-</code></p>
-
-<p>可以发现，14321 14275 这两个线程使用的cpu最多，那么这两个线程对应的算子是什么呢？这里就需要使用到jstack</p>
-
-<p><code>jstack 14142 &gt; flink.dump</code></p>
-
-<p>就可以得到jstack的信息。注意，需要以java进程运行用户的身份来运行上面的命令。</p>
-
-<p>可以得到下面这些东西：</p>
-
-<p>```
-Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.131-b11 mixed mode):</p>
-
-<p>"Attach Listener" #3673 daemon prio=9 os_prio=0 tid=0x00007f76403d6000 nid=0x676d waiting on condition [0x0000000000000000]
-   java.lang.Thread.State: RUNNABLE</p>
-
-<p>"flink-metrics-22" #3672 prio=1 os_prio=0 tid=0x0000000002ef6000 nid=0x674f waiting on condition [0x00007f75bd85d000]
-   java.lang.Thread.State: TIMED_WAITING (parking)</p>
-
-<pre><code>    at sun.misc.Unsafe.park(Native Method)
-    - parking to wait for  &lt;0x00000004406d94d8&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
-    at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
-    at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
-    at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
-    at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1066)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1127)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-    at java.lang.Thread.run(Thread.java:748)
-</code></pre>
-
-<p>"flink-akka.actor.default-dispatcher-33" #3668 prio=5 os_prio=0 tid=0x00007f765db5f800 nid=0x66d8 waiting on condition [0x00007f75bf67d000]
-```</p>
-
-<p>jstack输出的hex也就是16进制的，所以我们需要把pid再做一下转换。使用python可以调用hex方法.</p>
-
-<p>```
-Python 3.6.8 (default, Aug  7 2019, 17:28:10)
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux
-Type "help", "copyright", "credits" or "license" for more information.</p>
-
-<blockquote><blockquote><blockquote><p>hex(14321)
-'0x37f1'
-hex(14275)
-'0x37c3'
-```</p></blockquote></blockquote></blockquote>
-
-<p>然后在dump文件中搜索<code>0x37f1</code>，可以得到</p>
-
-<p>```
-"at35__process -> (at35_e -> Sink: at35_sink, at35_current_parameter, at35_current_state) (1/1)" #142 prio=5 os_prio=0 tid=0x00007f7648a78800 nid=0x37f1 in Object.wait() [0x00007f75d53d6000]
-   java.lang.Thread.State: WAITING (on object monitor)</p>
-
-<pre><code>    at java.lang.Object.wait(Native Method)
-    at java.lang.Object.wait(Object.java:502)
-    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
-    - locked &lt;0x0000000441ab5ae8&gt; (a java.util.ArrayDeque)
-    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
-    at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
-    at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
-    at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
-    at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
-    at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
-    at java.lang.Thread.run(Thread.java:748)
-</code></pre>
-
-<p>```</p>
-
-<p>```
-"at20_window -> (at20__message, at20_current_parameter, at20_current_state) (1/1)" #112 prio=5 os_prio=0 tid=0x00007f76485f1800 nid=0x37c3 in Object.wait() [0x00007f75d7af9000]
-   java.lang.Thread.State: WAITING (on object monitor)</p>
-
-<pre><code>    at java.lang.Object.wait(Native Method)
-    at java.lang.Object.wait(Object.java:502)
-    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
-    - locked &lt;0x0000000441a00cc8&gt; (a java.util.ArrayDeque)
-    at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
-    at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
-    at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
-    at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
-    at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
-    at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
-    at java.lang.Thread.run(Thread.java:748)
-</code></pre>
-
-<p>```</p>
-
-<p>然后就可以看见线程的名字，就可以去代码里进一步对症下药了。</p>
 ]]></content>
   </entry>
   

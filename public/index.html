@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="图书馆可以采购新书，就买了熊节的『敏捷中国史话』来看了一下。看的过程中，发现作者七年前还写过一本自传类的书籍，也就是「不敢止步」，而史话中比较有意思的内容大都来自不敢止步，于是又去找来不敢止步看。也大致对作者的生平有了更多的了解。 从那本自传小说里，作者说他做性格测验和360调查时， &hellip;">
+  <meta name="description" content="动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。 CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。 原理上，CORS工作时会先发出一个OPTIONS请求， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,110 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2021/03/18/corswen-ti/">CORS问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-03-18T13:40:00+08:00" pubdate data-updated="true">Mar 18<span>th</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。</p>
+
+<p>CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。</p>
+
+<p>原理上，CORS工作时会先发出一个OPTIONS请求，并携带Origin消息头：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>OPTIONS /
+</span><span class='line'>Host: service.example.com
+</span><span class='line'>Origin: http://www.example.com
+</span><span class='line'>Access-Control-Request-Method: PUT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后，服务器端如果支持跨域，则会返回Access-Control-Allow-Origin消息头，里面给出允许访问的Origin域名。如果用<code>*</code>，则表示没有任何限制。如果要允许多个域名，则可以使用Nginx中动态变量的方法，这种情况下每次还是只返回一个域名。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>location / {
+</span><span class='line'>
+</span><span class='line'>                root html;
+</span><span class='line'>             if ($request_method = "OPTIONS") {
+</span><span class='line'>add_header Access-Control-Allow-Origin *;
+</span><span class='line'>                add_header 'Access-Control-Allow-Credentials' 'true';
+</span><span class='line'>                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With';
+</span><span class='line'>                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
+</span><span class='line'>                add_header 'Access-Control-Max-Age' 10;
+</span><span class='line'>                return 204;
+</span><span class='line'>             }
+</span><span class='line'>
+</span><span class='line'>                add_header 'Access-Control-Allow-Credentials' 'true' always;
+</span><span class='line'>                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With' always;
+</span><span class='line'>                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS' always;
+</span><span class='line'>                add_header 'Access-Control-Max-Age' 10 always;
+</span><span class='line'>                proxy_set_header host $host;
+</span><span class='line'>                proxy_set_header X-real-ip $remote_addr;
+</span><span class='line'>                proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
+</span><span class='line'>                proxy_pass http://127.0.0.1:8080;
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx的配置需要注意两点：</p>
+
+<ol>
+<li>add_header在proxy_pass时默认不会起作用，如果需要起作用，则要加上<code>always</code>参数。</li>
+<li>Access-Control-Allow-Origin 要严格的只有1条，不能有多条。</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -954,131 +1058,6 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-04-13T11:20:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
-另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
-
-<p>原版四五百页精装书，放在桌上看的体验真的普通版的给不了。封面和纸张的手感是很不一样的就不说了，关键是精装的书里面有线，书是可以翻平的。这个胶板书真给不了。</p>
-
-<p>不过计算机书籍国内精装版的基本很少，老外的也不多，估计还是大部分计算机图书的生命周期太短了吧。</p>
-
-<p>顺手翻了一下图灵和异步的精装图书。技术类的是不多的，图灵除了著名的计算机编程艺术，也就黑客与画家、阮一峰文集、番茄工作法、写给大家看的设计书等寥寥几本。异步稍微好一点。像重构第二版、深度学习的两本，还有持续交付和一本也是国内人编写的广告计算，合计也就5本。但国内编写的两本，怎么看都更像是方便作者自己送人的。所以在国内还真的享受不了什么看精装技术图书的乐趣。当然，即使国外，如Effective Java都没有出过精装版，那么实际上拥有硬封皮的计算机书籍也是不多的。</p>
-
-<p>顺便在天珑看了一下台湾图书的价格，同时发现现在台湾引入的简体版还真的不少，价格就比较有意思了。举《重构》和《领域驱动设计》两本书为例，价格如下（均为天珑实际售价)</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> 图书版本               </th>
-<th> 台币                       </th>
-<th> 人民币 </th>
-<th> </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> 重构台湾 </td>
-<td> 632 </td>
-<td> 148 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 英文版hard cover </td>
-<td> 1995 </td>
-<td> 467 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 精装简体版</td>
-<td> 699 </td>
-<td> 163 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 简体平装 </td>
-<td> 469 </td>
-<td> 107 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 重构第一版简体 </td>
-<td> 327 </td>
-<td> 76 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> </td>
-<td>  </td>
-<td>  </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计简体平装 </td>
-<td> 393 </td>
-<td> 92 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计繁体平装 </td>
-<td> 530 </td>
-<td> 124 </td>
-<td> </td>
-</tr>
-<tr>
-<td></td>
-<td> 领域驱动设计英文版  </td>
-<td> 2470 </td>
-<td> 578 </td>
-<td> </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>英版的价钱确实还是很贵的。而在台湾销售的大陆书籍，大约比国内网店普通售价贵了一倍。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1092,6 +1071,10 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
@@ -1109,15 +1092,11 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
         <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/18/zhuang-ji-i3-10100/">装机 i3-10100</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (90)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

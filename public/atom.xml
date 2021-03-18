@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-02-27T12:26:39+08:00</updated>
+  <updated>2021-03-18T17:46:28+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CORS问题]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti/"/>
+    <updated>2021-03-18T13:40:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti</id>
+    <content type="html"><![CDATA[<p>动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。</p>
+
+<p>CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。</p>
+
+<p>原理上，CORS工作时会先发出一个OPTIONS请求，并携带Origin消息头：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>OPTIONS /
+</span><span class='line'>Host: service.example.com
+</span><span class='line'>Origin: http://www.example.com
+</span><span class='line'>Access-Control-Request-Method: PUT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后，服务器端如果支持跨域，则会返回Access-Control-Allow-Origin消息头，里面给出允许访问的Origin域名。如果用<code>*</code>，则表示没有任何限制。如果要允许多个域名，则可以使用Nginx中动态变量的方法，这种情况下每次还是只返回一个域名。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>location / {
+</span><span class='line'>
+</span><span class='line'>                root html;
+</span><span class='line'>             if ($request_method = "OPTIONS") {
+</span><span class='line'>add_header Access-Control-Allow-Origin *;
+</span><span class='line'>                add_header 'Access-Control-Allow-Credentials' 'true';
+</span><span class='line'>                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With';
+</span><span class='line'>                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
+</span><span class='line'>                add_header 'Access-Control-Max-Age' 10;
+</span><span class='line'>                return 204;
+</span><span class='line'>             }
+</span><span class='line'>
+</span><span class='line'>                add_header 'Access-Control-Allow-Credentials' 'true' always;
+</span><span class='line'>                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With' always;
+</span><span class='line'>                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS' always;
+</span><span class='line'>                add_header 'Access-Control-Max-Age' 10 always;
+</span><span class='line'>                proxy_set_header host $host;
+</span><span class='line'>                proxy_set_header X-real-ip $remote_addr;
+</span><span class='line'>                proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
+</span><span class='line'>                proxy_pass http://127.0.0.1:8080;
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nginx的配置需要注意两点：</p>
+
+<ol>
+<li>add_header在proxy_pass时默认不会起作用，如果需要起作用，则要加上<code>always</code>参数。</li>
+<li>Access-Control-Allow-Origin 要严格的只有1条，不能有多条。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[某IT作家的两本小说]]></title>
@@ -1448,83 +1525,6 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
 因为坚持，实现了巨大的超越。</p>
 
 <p>所以，有时候我们需要有点耐心，坚持一下。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2018 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018/"/>
-    <updated>2019-01-01T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018</id>
-    <content type="html"><![CDATA[<p>2018年的养车成本和2017年的竟然差不多。</p>
-
-<p>具体比较：</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="left"> 条目     </th>
-<th align="left"> 2017     </th>
-<th align="left">2018     </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td align="left">   停车费     </td>
-<td align="left">   10123     </td>
-<td align="left"> 11029+2000</td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   保险费     </td>
-<td align="left">   4945     </td>
-<td align="left">  3637  </td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   油费     </td>
-<td align="left">     6444   </td>
-<td align="left">   7006</td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   高速     </td>
-<td align="left">     368   </td>
-<td align="left">   510</td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   保养     </td>
-<td align="left">     1756   </td>
-<td align="left">  1568  </td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   洗车     </td>
-<td align="left">     275   </td>
-<td align="left">   355</td>
-</tr>
-<tr>
-<td></td>
-<td align="left">   上述合计     </td>
-<td align="left">  23911  </td>
-<td align="left">      24105+2000  </td>
-</tr>
-</tbody>
-</table>
-
-
-<p>单位停车比之前每月贵了100，所以合计就是贵了1200.好在保险费用有较大的降幅，最终差别不大。</p>
-
-<p>比较神奇的是油费/公里竟然和去年差不多，都是0.77元/KM。平均油耗去年11.30L/100KM，今年11.49L/100KM，不过去年以95号油为主，今年全部是92号油，因此这一年油费确实涨的相当厉害了。<br/>
-行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
-
-<p>保险费用没有，不过违章其实有一笔200的开支。<br/>
-保养费用因为今年有大保，所以费用依然很高。不过不像去年那样有节气门故障的额外开支。洗车则是中规中矩。</p>
-
-<p>CRV也陪伴三年半多一点了，明年应该会把轮胎换一下，又是一笔开支啊。</p>
 ]]></content>
   </entry>
   

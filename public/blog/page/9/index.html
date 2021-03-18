@@ -9,11 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="众所周知，在我国想要自由地访问互联网是有很大阻碍的。目前来讲，突破这个阻碍的方式就是vpn。
-自己买vps后装vpn是最独立的方式，但成本较高，毕竟vps也不便宜。
-如果购买服务的话，云梯在这方面做的还是相当出色的。 购买链接，这是通过我介绍购买的云梯链接，
-有兴趣者建议可以从此入口进入。
-">
+  <meta name="description" content="很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
+原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。 先安装sdoc， gem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +68,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/09/zi-ji-sheng-chan-sdoc/">自己生产sdoc</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-09T12:26:00+08:00" pubdate data-updated="true">Apr 9<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
+原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。</p>
+
+<ol>
+<li><p>先安装sdoc， <code>gem install sdoc</code>, 安装完成后会新增两个可执行文件<code>sdoc</code>和<code>sdoc-merge</code></p></li>
+<li><p>进入自己下载的ruby源代码的父目录，执行
+<code>sdoc --main ruby-2.2.1/README.md  -x test -x example -x bin -N -x lib/rdoc  --title "Ruby 2.2" --op ~/sdocruby-2.2 ruby-2.2.1 ruby-2.2.1/README</code></p></li>
+</ol>
+
+
+<p>其中，ruby-2.2.1是当前rails的版本，&#8211;op指示生成的sdoc所在的目录，-x是不要去解析这些内容，运行几分钟后，文件就生成了。</p>
+
+<p>然后把生成的目录放到自己方便的地方即可。</p>
+
+<p>参考链接：</p>
+
+<p><a href="http://pjkh.com/articles/building-your-own-rails-and-ruby-searchable-api-docs/">1</a>
+<a href="http://pan.baidu.com/s/1i3vgC09">2 懒人下载</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -718,77 +768,6 @@ SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/28/papago-gosafe520-xing-che-ji-lu-yi/">Papago Gosafe520 行车记录仪</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-28T16:56:00+08:00" pubdate data-updated="true">Dec 28<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>算起来今年买的千元左右的台湾制造也不少，夏天时候买过一个浦科特的256GB SSD，然后就是去年年底买的这个Papago gosafe520行车记录仪。</p>
-
-<p>Updated at 2016.05.28： 新购入的宝宝的可调节座椅stella冈村也是台湾制造，尽管品牌是日本的。</p>
-
-<p>从去年5月份开车之初开始，要不要买一个记录仪就让我很纠结。一方面，有个视频可以方便复盘，方便在有问题的时候还原真相，可以降低行车风险。
-另一方面，很多人装了之后也确实长期没使用价值，而车上多装一个东西总是一件麻烦的事情。</p>
-
-<p>随着驾驶操作逐步熟练，自己对记录仪的必要性是一天比一天认为不重要的。
-开了几个月之后，觉得还是这样开吧，一般问题也不大。但是，在停车后发生的一些事情，最终促使我决定入一个行车记录仪，而且核心功能之一是可以支持停车监控。</p>
-
-<p>很多朋友都知道，上海很多小区的停车环境普遍是比较困难的。而我们小区更是这方面相当出名，每隔几年就能上一次上海本地一线报纸的普通版面。我实际停了之后发现，真正容易刮花车子的，反而是小区的垃圾工和垃圾车。在跟物业交涉的时候，有视频做证据会较有利些。
-所以就决定装一个记录仪，可以给自己多一份保障。</p>
-
-<p>在决定购买之后，又面买什么的问题。之前纠结的一部分原因，就是记录仪真的是一个让人眼花缭乱的市场。并没有众望所归的王者，各种标准也不规范，指标也比较混乱，整个市场其实还在飞速发展中，产品更新换代的节奏很快。
-具体表现在缺乏大牌与领导厂商，山寨横行。产品更新换代迅速，价格跳水事件常见。最后考虑了牌子和芯片，决定还是入了Papago搭载安霸A7芯片的Gosafe520. 选择的原因是安霸看各类报道相对头牌一些，Papago毕竟在这个市场做了挺多年，价钱也可以接受。</p>
-
-<p>Gosafe520主要有以下几点特性：</p>
-
-<ol>
-<li>安霸A7的芯片</li>
-<li>价格千元以内</li>
-<li>视角146°</li>
-<li>3寸屏幕</li>
-<li>最高支持2560x1080分辨率</li>
-<li>内置重力传感器，可记录紧急事件</li>
-<li>内置500ma电池，据称无电池爆裂风险，耐高温</li>
-<li>可用充电宝实现夜晚连续监控</li>
-<li>具备移动监测功能，这个对连续监控很有用，不然32GB的卡也存放不了一晚上的数据</li>
-</ol>
-
-
-<p>使用下来后，其实在动态前进的过程中，要拍清楚前车的号码还是一件不可能完成的任务。在等红灯停车和速度一致时才能拍的清楚。
-只能留待以后的技术发展和进步了。而配合10000ma的充电宝，基本可以支持20小时以上的的持续监控，也算达到购买的初衷。吸盘使用了十来天，也还算吸的牢靠，搭配usb线夹入右遮阳板，就算吸盘松了靠线材也不至于掉到地上。</p>
-
-<p>不好的方面则是夜里还不够清晰，动态前进的拍摄效果还是有待提高。最高目标是能拍清楚对向来车的车牌。（不知道现在有没有已经做到这一点的产品？）
-tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，而在这个记录仪的使用周期里，64G甚至128G卡的价格应该会下来也就能够普及，而520以后也是无法插这些卡的。送的usb线也有点短，而且非用mini usb口也有点蛋疼，和安卓的micro usb兼容应该不难的吧。另外就是自带电池的话，在夏天还是一个隐患，好在现在是冬天意味着我至少可以先用上半年。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -806,6 +785,10 @@ tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
       </li>
     
@@ -821,15 +804,11 @@ tf卡只支持32GB的还挺可惜的，毕竟现在32G的卡只要60元左右，
         <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/18/zhuang-ji-i3-10100/">装机 i3-10100</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (90)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>
