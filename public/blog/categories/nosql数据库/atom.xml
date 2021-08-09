@@ -4,7 +4,7 @@
   <title><![CDATA[分类: nosql数据库 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nosql数据库/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -72,19 +72,14 @@
 </ul>
 
 
-<p>```sh</p>
+<pre><code class="sh"># 禁用 atime更新
+sudo mv /etc/fstab /etc/fstab.bak
+sudo vim /etc/fstab
+# file-system mount type options dump pass
+UUID=8309beda-bf62-43 /ssd ext4 noatime 0 2
 
-<h1>禁用 atime更新</h1>
-
-<p>sudo mv /etc/fstab /etc/fstab.bak
-sudo vim /etc/fstab</p>
-
-<h1>file-system mount type options dump pass</h1>
-
-<p>UUID=8309beda-bf62-43 /ssd ext4 noatime 0 2</p>
-
-<p>改完文件后，可以不用重启
-```</p>
+改完文件后，可以不用重启
+</code></pre>
 
 <ul>
 <li>文件描述符(FD)
@@ -97,11 +92,10 @@ sudo vim /etc/fstab</p>
 </ul>
 
 
-<p><code>sh
-vi /etc/security/limits.conf
+<pre><code class="sh">vi /etc/security/limits.conf
 mongodb hard nofile 10240
 下次登录后生效
-</code></p>
+</code></pre>
 
 <ul>
 <li><p>时钟</p>
@@ -261,15 +255,12 @@ numactl --interleave=all mongod --replSet pcdm --dbpath /data/arbiter --port 400
 <p>./bin/mongo ngntest:40000</p>
 
 <blockquote><p>rs.initiate()
-config =  {_id: 'pcdm', members: [</p>
-
-<pre><code>                      {_id: 0, host: 'localhost:40000'},
-                      {_id: 1, host: 'localhost:40001'},
-                      {_id: 2, host: 'localhost:40002'}]
-       }
-</code></pre>
-
-<p>rs.initiate(config)
+config =  {<em>id: 'pcdm', members: [
+                          {</em>id: 0, host: 'localhost:40000'},
+                          {<em>id: 1, host: 'localhost:40001'},
+                          {</em>id: 2, host: 'localhost:40002'}]
+           }
+rs.initiate(config)
 ```</p></blockquote>
 
 <ul>
@@ -293,10 +284,9 @@ driver 和 replica set之间的通信是通过 <code>db.isMaster()</code> . 以�
 </ul>
 
 
-<p><code>ruby
-   Mongo::RepelSetConnection.new(['localhost', 40000], ['localhost', 40001], :read =&gt; :secondary)
-   # **secondary** 实现了对读的scale
-</code></p>
+<pre><code class="ruby">   Mongo::RepelSetConnection.new(['localhost', 40000], ['localhost', 40001], :read =&gt; :secondary)
+   # **secondary** 实现了对读的scale 
+</code></pre>
 
 <h3>Sharding</h3>
 
@@ -366,11 +356,11 @@ numactl --interleave=all mongod --configsvr --dbpath /data/config-3 --port 27021
 
 <p>mongos --configdb localhost:27019,localhost:27020,localhost:27021 --logpath /data/mongos.log --fork --port 40000</p>
 
-<p>```</p>
+<pre><code>
+使用js设置shard
+</code></pre>
 
-<p>使用js设置shard
-```js
-mongo localhost:40000
+<p>mongo localhost:40000
 mongos> sh.addShard("localhost:30000")
 mongos> sh.addShard("localhost:30100")
 mongos> db.getSiblingDB("config").shards.find()
@@ -420,12 +410,11 @@ column - field<br/>
 
 <h3>selector</h3>
 
-<p><code>js
-{filed, value}
+<pre><code class="js">{filed, value}
 $lt, $gt, $lte, $gte, $ne
 $or
   db.unicorns.find({gender: 'f', $or: [{loves: 'apple'}, {weight: {$lt: 500}}]})
-</code></p>
+</code></pre>
 
 <h3>replace 和$set及modifier</h3>
 
@@ -628,25 +617,19 @@ Schema Free</p>
 
 <h3>安装、建库、索引与备份</h3>
 
-<p>``` bash</p>
+<pre><code class="bash"># 下载解压
+wget http://downloads.mongodb.org/src/mongodb-linux-x86_64-2.0.4.tgz
+tar xzf mongodb-src-r2.0.4.tar.gz
 
-<h1>下载解压</h1>
+# 创建数据目录
+mkdir -p /data/db
 
-<p>wget http://downloads.mongodb.org/src/mongodb-linux-x86_64-2.0.4.tgz
-tar xzf mongodb-src-r2.0.4.tar.gz</p>
+#启动
+./mongodb-xxxxxxx/bin/mongod
 
-<h1>创建数据目录</h1>
-
-<p>mkdir -p /data/db</p>
-
-<h1>启动</h1>
-
-<p>./mongodb-xxxxxxx/bin/mongod</p>
-
-<h1>shell访问</h1>
-
-<p>./mongodb-xxxxxxx/bin/mongo
-```</p>
+#shell访问
+./mongodb-xxxxxxx/bin/mongo
+</code></pre>
 
 <p>mongodb可以不事先建schema和表，会在第一次插入数据时自动创建</p>
 

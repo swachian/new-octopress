@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -122,21 +122,20 @@ taskmanager.numberOfTaskSlots 可设置多条</p>
 86145428 (swachian 2018-02-20 21:05:05 +0800 10) 读完软件随想录，自然而然被吸引
 去了另一本这个领域的名著《人件》</p>
 
-<p>```</p>
+<pre><code>
+`git checkout index.html`可以把误删除的文件恢复出来，如果有多个文件可以使用`git checkout .`一下子切出。  
+上面是从staging区域切出到工作目录，如果使用`git checkout HEAD~2 welcome.html`则是把上两个版本的文件切出到working目录和staging目录。  
 
-<p><code>git checkout index.html</code>可以把误删除的文件恢复出来，如果有多个文件可以使用<code>git checkout .</code>一下子切出。<br/>
-上面是从staging区域切出到工作目录，如果使用<code>git checkout HEAD~2 welcome.html</code>则是把上两个版本的文件切出到working目录和staging目录。</p>
+`checkout`主要是动staging和working 区域，`git reset` 则会涉及版本库区域:
+</code></pre>
 
-<p><code>checkout</code>主要是动staging和working 区域，<code>git reset</code> 则会涉及版本库区域:</p>
-
-<p><code>
-git reset master^
+<p>git reset master^
 git reset HEAD^
 git reset 85e7e30
 git reset e12d8ef^
 git reset HEAD~5
-</code>
-<code>^</code>的作用是表示“前一次”。</p>
+<code>``
+</code>^`的作用是表示“前一次”。</p>
 
 <p><code>git reset</code> 可配合模式使用，<code>--mixed</code>,<code>--soft</code>, <code>--hard</code>,默认是<code>--mixed</code>，它们对staging和working区域的反应是不一样的。因为<code>reset</code>的本意只是重新设置<code>HEAD</code>指向，顺便解决了staging和working的内容。</p>
 
@@ -266,55 +265,39 @@ ajax方法等。最重要的，如他所说，就是第二章面向对象的Java
 </ul>
 
 
-<p>```javascript</p>
+<pre><code class="javascript"># 注意通过prototype定义公共函数的模式
 
-<h1>注意通过prototype定义公共函数的模式</h1>
+function Lecture(name, teacher) {
+    this.name = name;
+    this.teacher = teacher;
+}
 
-<p>function Lecture(name, teacher) {</p>
+// 实例method
+Lecture.prototype.display = function() {
+    return this.teacher  + " is teaching " + this.name;
+}
 
-<pre><code>this.name = name;
-this.teacher = teacher;
+function Schedule(lectures) {
+    this.lectures = lectures;
+}
+
+
+Schedule.prototype.display = function() {
+    var str = "";
+    for (var i = 0; i &lt; this.lectures.length; i++) {
+         str += this.lectures[i].display;
+    }       
+    return str;
+}
+
+var mySchedule = new Schedule([
+    new Lecture("Gym", "Mr. Smith");
+    new Lecture("Math", "Mrs. Jones");
+    new Lecture("English", "TBD");
+]);
+
+alert(mySchedule.display());
 </code></pre>
-
-<p>}</p>
-
-<p>// 实例method
-Lecture.prototype.display = function() {</p>
-
-<pre><code>return this.teacher  + " is teaching " + this.name;
-</code></pre>
-
-<p>}</p>
-
-<p>function Schedule(lectures) {</p>
-
-<pre><code>this.lectures = lectures;
-</code></pre>
-
-<p>}</p>
-
-<p>Schedule.prototype.display = function() {</p>
-
-<pre><code>var str = "";
-for (var i = 0; i &lt; this.lectures.length; i++) {
-     str += this.lectures[i].display;
-}       
-return str;
-</code></pre>
-
-<p>}</p>
-
-<p>var mySchedule = new Schedule([</p>
-
-<pre><code>new Lecture("Gym", "Mr. Smith");
-new Lecture("Math", "Mrs. Jones");
-new Lecture("English", "TBD");
-</code></pre>
-
-<p>]);</p>
-
-<p>alert(mySchedule.display());
-```</p>
 
 <h1>第二章 面向对象的JS( javascript的精髓)</h1>
 
@@ -335,17 +318,13 @@ JS中的引用不会指向引用，<code>var b = a;</code>的作用永远是让b
 
 <p>js在每个函数里面，有一个隐含属性 <code>arguments</code> ，这是一个伪数组，可以遍历、有.length属性，但不能被修改。可以通过复制遍历变成标准数组。</p>
 
-<p>```javascript
-function sendMessage(msg, obj) {</p>
-
-<pre><code>if ( arguments.length == 2) 
-      ojb.handleMsg(msg);
-else
-     alert( msg );
+<pre><code class="javascript">function sendMessage(msg, obj) {
+    if ( arguments.length == 2) 
+          ojb.handleMsg(msg);
+    else
+         alert( msg );
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <h3>作用域(Scope)</h3>
 
@@ -357,32 +336,24 @@ else
 
 <p>闭包允许内层函数引用外围函数内的变量，即便外层函数已经终止。</p>
 
-<p>```javascript
-function delayedAlert( msg, time ) {</p>
-
-<pre><code>setTimeoute( function() {
-     alert(msg); // msg就是外围函数中的变量
-}, time);
+<pre><code class="javascript">function delayedAlert( msg, time ) {
+    setTimeoute( function() {
+         alert(msg); // msg就是外围函数中的变量
+    }, time);
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>curry化： 利用函数生成函数</p>
 
-<p>```javascript
-function addGenerator(num) {</p>
+<pre><code class="javascript">function addGenerator(num) {
+     return function( toAdd) {
+        return num + toAdd;
+     };
+}
 
-<pre><code> return function( toAdd) {
-    return num + toAdd;
- };
-</code></pre>
-
-<p>}</p>
-
-<p>var addFive = addGenerator(5);
+var addFive = addGenerator(5);
 alert(addFive(4)==9);
-```</p>
+</code></pre>
 
 <h3>上下文对象</h3>
 
@@ -391,43 +362,34 @@ alert(addFive(4)==9);
 
 <p>function都有call和apply两个方法，可以用于指定this是什么</p>
 
-<p>```javascript
-function changeColor( color ) {</p>
+<pre><code class="javascript">function changeColor( color ) {
+    this.style.color = color;
+}
 
-<pre><code>this.style.color = color;
-</code></pre>
+changeColor.call(main, "black");
 
-<p>}</p>
-
-<p>changeColor.call(main, "black");</p>
-
-<p>function setBodyColor() {</p>
-
-<pre><code> changeColor.apply(main, arguments); //传入隐含的全部参数
-</code></pre>
-
-<p>}
+function setBodyColor() {
+     changeColor.apply(main, arguments); //传入隐含的全部参数
+}
 setBodyColor( "black" );
-```</p>
+</code></pre>
 
 <h2>原型式继承</h2>
 
-<p><code>javascript
-User.prototype = new Person();
-</code>
-其效果是每次 new User()时同时执行了new Person，且user对象就这样拥有了person的全部方法</p>
+<pre><code class="javascript">User.prototype = new Person();
+</code></pre>
+
+<p>其效果是每次 new User()时同时执行了new Person，且user对象就这样拥有了person的全部方法</p>
 
 <h2>类似继承</h2>
 
 <p>Douglas Crockford创造的<code>method</code>, <code>inherits</code>, <code>swiss</code> 三个方法。</p>
 
-<p>```javascript
-User.inherits(Person);
+<pre><code class="javascript">User.inherits(Person);
 User.method( 'getName', function(){
   return "My name is: " + this.uber('getName');
-});</p>
-
-<p>```</p>
+});
+</code></pre>
 
 <h2>Base 库</h2>
 
@@ -438,17 +400,14 @@ User.method( 'getName', function(){
 <h2>命名空间</h2>
 
 <p><code>$.</code>其实就是命名空间。
-```javascript
+<code>javascript
 var YAHOO = {};
 YAHOO.util = {};
-YAHOO.util.Event = {</p>
-
-<pre><code>addEventListner: function() {}
-</code></pre>
-
-<p>};
+YAHOO.util.Event = {
+    addEventListner: function() {}
+};
 YAHOO.util.Event.addEventListener(...);
-```</p>
+</code></p>
 
 <h2>清理代码</h2>
 
@@ -505,11 +464,10 @@ DOM是一个树结构，根节点是html，
 </ul>
 
 
-<p><code>javascript
-addEvent(window, "load", function (){
+<pre><code class="javascript">addEvent(window, "load", function (){
   net( id("everywhere") ).style.background = 'blue';
 });
-</code></p>
+</code></pre>
 
 <ol>
 <li><p>把script标签放置在页面的最后，这样确保执行的时候dom已建立</p></li>
@@ -535,13 +493,12 @@ jquery实现的方法，$或者说domReady，其主要原理是检查document是
 
 <p>一旦元素加载到DOM中，元素会有一个管理数组，</p>
 
-<p><code>javascript
-formElem.attributes = {
+<pre><code class="javascript">formElem.attributes = {
   name: "myForm",
   action: "/test.cgi",
   method: "POST"
 };
-</code></p>
+</code></pre>
 
 <p>实际提供了attr方法</p>
 
@@ -604,62 +561,44 @@ return true;
 
 <p><code>this</code>作为一种指代，可以泛化成各类元素，使得js的编写变得简单</p>
 
-<p>```javascript
-var li = document.getElemensByTagName("li");
+<pre><code class="javascript">var li = document.getElemensByTagName("li");
 for (var i = 0; i &lt; li.length; i++) {
   li[i].onclick = handleClik;
-}</p>
+}
 
-<p>function handleClick() {
+function handleClick() {
    this.style.backgroundColor = "blue";
    this.style.color = "white";
 }
-```</p>
+</code></pre>
 
 <h3>取消冒泡（重载浏览器的事件处理）</h3>
 
-<p>```javascript
-function stopBubble(e) {
+<pre><code class="javascript">function stopBubble(e) {
   //如果传入了事件对象，那么就是非IE浏览器
-  if ( e &amp;&amp; e.stopPropagation ）</p>
-
-<pre><code> e.stopPropagation();
+  if ( e &amp;&amp; e.stopPropagation ）
+     e.stopPropagation();
+  else // 否则使用IE的方式来取消事件冒泡
+     window.event.cancelBubble = true;
+}
 </code></pre>
-
-<p>  else // 否则使用IE的方式来取消事件冒泡</p>
-
-<pre><code> window.event.cancelBubble = true;
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
 
 <h3>取消浏览器的默认行为（重载）</h3>
 
-<p>```javascript
-function stopDefault(e) {
-  if (e &amp;&amp; e.preventDefault)</p>
+<pre><code class="javascript">function stopDefault(e) {
+  if (e &amp;&amp; e.preventDefault)
+    e.preventDefault();
+  else //windows 特供
+    window.event.returnValue = false;
 
-<pre><code>e.preventDefault();
+  return false;
+}
+
+li.onclick = function(e) {
+    iframe.src = this.href
+    return stopDefault(e);
+}
 </code></pre>
-
-<p>  else //windows 特供</p>
-
-<pre><code>window.event.returnValue = false;
-</code></pre>
-
-<p>  return false;
-}</p>
-
-<p>li.onclick = function(e) {</p>
-
-<pre><code>iframe.src = this.href
-return stopDefault(e);
-</code></pre>
-
-<p>}
-```</p>
 
 <h2>绑定事件的3中方法</h2>
 
@@ -668,9 +607,8 @@ return stopDefault(e);
 </ol>
 
 
-<p><code>javascript
-windo.onload = function() {};
-</code></p>
+<pre><code class="javascript">windo.onload = function() {};
+</code></pre>
 
 <p>好处在于简单稳定，处理事件时可以使用this关键字；
 坏处是事件只在冒泡时运行，捕获时不运行。且一个元素一次只能绑定一个处理函数，即onload=func2会替换前面已经注册过的函数。同时ie中，还不能得到事件对象e。</p>
@@ -680,20 +618,18 @@ windo.onload = function() {};
 </ol>
 
 
-<p>```javascript
-window.addEventListener('load', function(){}, false);</p>
+<pre><code class="javascript">window.addEventListener('load', function(){}, false);
+</code></pre>
 
-<p>```
-相对于第一种，好处是第三个参数指明了哪个阶段处理事件：false（冒泡）或true(捕获)；事件对象可以通过处理函数的第一个参数获取；不会覆盖之前已绑定的事件。缺点就是老的ie不支持。</p>
+<p>相对于第一种，好处是第三个参数指明了哪个阶段处理事件：false（冒泡）或true(捕获)；事件对象可以通过处理函数的第一个参数获取；不会覆盖之前已绑定的事件。缺点就是老的ie不支持。</p>
 
 <ol>
 <li>IE绑定</li>
 </ol>
 
 
-<p><code>javascript
-window.attachEvent('onload', function(){});
-</code></p>
+<pre><code class="javascript">window.attachEvent('onload', function(){});
+</code></pre>
 
 <p>粗看起来和w3c的类似，但细节有很多不同：
 * 仅支持冒泡阶段
@@ -706,11 +642,10 @@ window.attachEvent('onload', function(){});
 </ol>
 
 
-<p>```javascript
-addEvent( window, "load", function() {</p>
+<pre><code class="javascript">addEvent( window, "load", function() {
 
-<p>});
-```</p>
+});
+</code></pre>
 
 <p>唯一的缺点是仅能工作在冒泡阶段</p>
 
@@ -765,22 +700,17 @@ bottom: ;</p>
 
 <p>1秒执行20帧动画</p>
 
-<p>```javascript
-for ( var i = 0; i &lt;= 100; i += 5 ） {</p>
+<pre><code class="javascript">for ( var i = 0; i &lt;= 100; i += 5 ） {
+     (function(){
+         var pos = i;
+         setTimeout(function(){
 
-<pre><code> (function(){
-     var pos = i;
-     setTimeout(function(){
+            elem.style.height = (pos/100)*h + "px";
+         }, (pos+1)*10);
 
-        elem.style.height = (pos/100)*h + "px";
-     }, (pos+1)*10);
-
- })();
+     })();
+}
 </code></pre>
-
-<p>}</p>
-
-<p>```</p>
 
 <h2>viewport是视口，就是浏览器滚动条内的一切东西</h2>
 

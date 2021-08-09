@@ -141,19 +141,16 @@ ruby -rname 是引入指定的扩展，如ruby -rdebug -rprofile
 
 <p>Yaml.load
 to_yaml
-<code></p>
-
-<pre><code>def all
-  @order = params[:order] || "number"
-  sort_proc = case @order
-    when "author" then lambda {|r| [r.user.name.downcase, r.number]}
-    when "status",
-         "title" then lambda {|r| [r.send(@order).downcase, r.number]}
-    when "number" then lambda {|r| -r.name}
-end
-</code></pre>
-
-<p></code></p>
+<code>
+    def all
+      @order = params[:order] || "number"
+      sort_proc = case @order
+        when "author" then lambda {|r| [r.user.name.downcase, r.number]}
+        when "status",
+             "title" then lambda {|r| [r.send(@order).downcase, r.number]}
+        when "number" then lambda {|r| -r.name}
+    end
+</code></p>
 
 <p>上面代码中的亮点（feature）是case,lambda,send(最易status和title的处理方式）,sort_by传递一个lambda表达式</p>
 
@@ -201,13 +198,10 @@ end
 <h1>第5章 类</h1>
 
 <p>Ruby是以对象为中心的，而Java是以类为中心的。
-在Ruby中，类是组织对象的手段而已，以便不必给每个对象都添加方法。而类本身也是对象。 Ticket.new是一种用工厂方法产生对象的手法。但类通常用常量命名。</p>
-
-<pre><code>class Ticket
-end
-</code></pre>
-
-<p>可以认为用class定义了一个常量。
+在Ruby中，类是组织对象的手段而已，以便不必给每个对象都添加方法。而类本身也是对象。 Ticket.new是一种用工厂方法产生对象的手法。但类通常用常量命名。
+    class Ticket
+    end
+可以认为用class定义了一个常量。
 特点：
 1. 实例方法与单例方法
 2. 重新定义方法（后来者居上）
@@ -269,21 +263,18 @@ ModuleTester.new.say_hello
 <p>顶端的是Object, 它include了module Kernel.
 给定一个名字，类和模块中仅有一个对应的方法。找到第一个方法就返回，也是后来（定义）者居上的模式。</p>
 
-<p>super可以调用上一个同名匹配。</p>
-
-<pre><code>super 原封不动传参数
-super() 不传参数
-super(a,b,c) 传指定参数，其实二和三是一种形式。
-</code></pre>
+<p>super可以调用上一个同名匹配。
+    super 原封不动传参数
+    super() 不传参数
+    super(a,b,c) 传指定参数，其实二和三是一种形式。</p>
 
 <p>一般将实体定义为class，而实体的特性定义为module.如Stack  &amp; Stacklike</p>
 
-<p>模块和类可以互相嵌套，一反面提供了命名空间以隔离同名的类，另一方面给规划程序的设计和结构提供了另一维度。</p>
+<p>模块和类可以互相嵌套，一反面提供了命名空间以隔离同名的类，另一方面给规划程序的设计和结构提供了另一维度。
+    module Tools
+      class Hammer</p>
 
-<pre><code>module Tools
-  class Hammer
-
-h = Tools::Hammer.new
+<pre><code>h = Tools::Hammer.new
 </code></pre>
 
 <p>Rails中大量使用了模块化来组织代码，也大量使用了重新打开类。</p>
@@ -306,22 +297,16 @@ end
 obj.show_me</p>
 
 <p>class C
-  def C.x</p>
-
-<pre><code>p self
-</code></pre>
-
-<p>  end
+  def C.x
+    p self
+  end
 end
 C.x</p>
 
 <p>class C
-  def self.x</p>
-
-<pre><code>p self
-</code></pre>
-
-<p>  end
+  def self.x
+    p self
+  end
 end
 C.x
 </code></p>
@@ -383,10 +368,8 @@ end
 本质上因为迭代的需要，以实现<em>方法和代码块之间分工</em>。</p>
 
 <p>raise,
-这个是抛出RuntimeError的异常</p>
-
-<pre><code>raise ArgumentError, "I need a number under 10" unless x &lt; 10
-</code></pre>
+这个是抛出RuntimeError的异常
+    raise ArgumentError, &#8220;I need a number under 10&#8221; unless x &lt; 10</p>
 
 <p>resue语句有两种写法：
 1. 将想要保护的代码用begin/end包围起来；
@@ -435,18 +418,15 @@ Regexp 斜杠 /([a-z]+)/</p>
 class Bid
   include Comparable</p>
 
-<p>  def &lt;=>(other_bid)</p>
-
-<pre><code>if self.estimate &lt; other_bid.estimate
-  -1
-elsif self.estimate &gt; other_bid.estimate
-  1
-else
-  0
-end
-</code></pre>
-
-<p>  end
+<p>  def &lt;=>(other_bid)
+    if self.estimate &lt; other_bid.estimate
+      -1
+    elsif self.estimate > other_bid.estimate
+      1
+    else
+      0
+    end
+  end
 end
 </code>
 由层叠的if/elsif/else构成，总是返回-1,0,1，分别表示小于、等于、大于。</p>
@@ -544,11 +524,9 @@ class &lt;&lt; object 从而打开了object的单例类,object在此可以是任
 <p>使用class &lt;&lt; 可定义类方法.</p>
 
 <p>class Ticket
-  class &lt;&lt; self</p>
-
-<pre><code>def m....
- # etc
-</code></pre>
+  class &lt;&lt; self
+    def m....
+     # etc</p>
 
 <p>上面的例子中，等价于
 class &lt;&lt; Ticket
@@ -591,15 +569,12 @@ end</p>
 var = 'initial'
 c.class_eval do
   puts var
-  def some_method</p>
-
-<pre><code>  puts var
-</code></pre>
-
-<p>  end</p>
+  def some_method
+      puts var
+  end</p>
 
 <p>  #要想在实例方法中获得访问var的scope，可以使用define_method
-  define_method(&#8220;talk&#8221;) {puts var}
+  define_method("talk") {puts var}
 end
 </code></p>
 
@@ -650,13 +625,10 @@ end
 <p>最基本的用途是在include后给类或者模块增加类方法。原来叫做append_features
 <code>
 module M
-  def self.included(c1)</p>
-
-<pre><code>def c1.a_class_method
-end
-</code></pre>
-
-<p>  end</p>
+  def self.included(c1)
+    def c1.a_class_method
+    end
+  end</p>
 
 <p>  def an_inst_method
   end
@@ -752,6 +724,10 @@ alias :old_match :match，
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
@@ -767,15 +743,11 @@ alias :old_match :match，
         <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (92)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

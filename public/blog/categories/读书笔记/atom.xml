@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 读书笔记 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书笔记/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -177,10 +177,9 @@
 
 <p>通过<code>@Profile("dev")</code>来表明在什么情况下使用下面的标注或配置，即激活哪一种配置属性。有两个变量可以指定值</p>
 
-<p><code>
-spring.profiles.active
+<pre><code>spring.profiles.active
 spring.profiles.default
-</code></p>
+</code></pre>
 
 <p>其中，<code>default</code>可以在web.xml中定义，而<code>active</code>可以在系统属性、环境变量、JNDI或者@ActiveProfiles中定义，因为<code>active</code>的优先级更高。</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: heroku | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -43,16 +43,13 @@ Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方�
 ```
 heroku apps:create user-agent-show2</p>
 
-<p><code>
-这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
-</code>
-[remote "heroku"]</p>
-
-<pre><code>    url = git@heroku.com:user-agent-show.git
-    fetch = +refs/heads/*:refs/remotes/heroku/*
+<pre><code>这样会在heroku处创建一个stack，目前版本是`cedar`. 同时，在.git/config里面会增加一个heroku分支
 </code></pre>
 
-<p>```</p>
+<p>[remote "heroku"]
+        url = git@heroku.com:user-agent-show.git
+        fetch = +refs/heads/<em>:refs/remotes/heroku/</em>
+```</p>
 
 <h3>2 Git push</h3>
 
@@ -78,9 +75,8 @@ config.serve_static_assets = true
 
 <h3>3 数据库更新</h3>
 
-<p><code>
-heroku run rake db:migrate
-</code></p>
+<pre><code>heroku run rake db:migrate
+</code></pre>
 
 <p>push成功后，就可以执行迁移了。也能执行<code>heroku run bash</code> 等命令去查看云服务器的实际运行情况。</p>
 ]]></content>

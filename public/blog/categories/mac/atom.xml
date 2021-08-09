@@ -4,7 +4,7 @@
   <title><![CDATA[分类: mac | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -28,9 +28,8 @@
 
 <p>所以在前次的基础上，要进一步增加编译选项。</p>
 
-<p><code>bash
-./configure --with-openssl-dir=`brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.3  --with-readline-dir=`brew --prefix readline`
-</code></p>
+<pre><code class="bash">./configure --with-openssl-dir=`brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.3  --with-readline-dir=`brew --prefix readline`
+</code></pre>
 
 <p>其中
 <code>bash
@@ -55,21 +54,18 @@
 <p>然后在mac上从源码安装新版ruby到rbenv下面。一开始也比较顺利，但安装完毕后执行<code>gem install bundle</code>报了
 SSL的错误。Google一番，结论是OpenSSL需要升级，而<code>brew</code> 下面已经是最新的OpenSSL版本了，于是又说要更新brew。</p>
 
-<p><code>bash
-brew update # 更新brew
+<pre><code class="bash">brew update # 更新brew
 brew install openssl # 安装最新的ssl
 brew link openssl --force #建立关联
 brew install curl-ca-bundle # 这个执行是失败的，原因似乎是在2014年去除了
-</code></p>
+</code></pre>
 
 <p>然后再次运行，问题照旧。后来发现是因为brew安装的ssl位于<code>/usr/local/opt/openssl</code>
 下，而mac自带的有一个系统本身的ssl，ruby编译时会始终使用默认的ssl。
 解决办法是建立link或者索性在configure时指定</p>
 
-<p><code>``bash
-./configure --with-openssl-dir=</code>brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2</p>
-
-<p>```</p>
+<pre><code class="bash">./configure --with-openssl-dir=`brew --prefix openssl` --disable-install-doc --prefix=/Users/me/.rbenv/versions/ruby-2.2
+</code></pre>
 
 <p>其中，<code>brew --prefix openssl</code>可以得到通过brew安装的openssl的具体位置。</p>
 

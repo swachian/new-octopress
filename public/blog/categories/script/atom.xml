@@ -4,7 +4,7 @@
   <title><![CDATA[分类: script | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/script/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -49,12 +49,10 @@
 
 <p>就能打出成排的版本库中的文件和目录。</p>
 
-<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。</p>
-
-<pre><code>svnlook tree . --full-paths | grep java$ | grep -v tags
-svnlook tree . --full-paths | grep jsp$ | grep -v tags
-svnlook tree . --full-paths | grep xml$ | grep -v tags
-</code></pre>
+<p>比如为了获得java文件、jsp、xml的文件列表，可以分别执行下面的命令。
+    svnlook tree . --full-paths | grep java$ | grep -v tags
+    svnlook tree . --full-paths | grep jsp$ | grep -v tags
+    svnlook tree . --full-paths | grep xml$ | grep -v tags</p>
 ]]></content>
   </entry>
   
@@ -64,15 +62,14 @@ svnlook tree . --full-paths | grep xml$ | grep -v tags
     <updated>2011-06-28T18:48:00+08:00</updated>
     <id>http://octopresszhangyu.herokuapp.com/blog/2011/06/28/display-git-branch-in-shell</id>
     <content type="html"><![CDATA[<p><code>
-function find_git_branch {</p>
+function find_git_branch {
+    local dir=. head
+    until [ "$dir" -ef / ]; do
+        if [ -f "$dir/.git/HEAD" ]; then
+            head=$(&lt; "$dir/.git/HEAD")
+            if [[ $head == ref:\ refs/heads/* ]]; then</p>
 
-<pre><code>local dir=. head
-until [ "$dir" -ef / ]; do
-    if [ -f "$dir/.git/HEAD" ]; then
-        head=$(&lt; "$dir/.git/HEAD")
-        if [[ $head == ref:\ refs/heads/* ]]; then
-
-        head=$(&lt; "$dir/.git/HEAD")
+<pre><code>        head=$(&lt; "$dir/.git/HEAD")
         if [[ $head == ref:\ refs/heads/* ]]; then
             git_branch=" (${head#*/*/})"
         elif [[ $head != '' ]]; then

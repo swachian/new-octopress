@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -23,60 +23,51 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th align="left"> 条目     </th>
-<th align="left"> 2019     </th>
-<th align="left">2020     </th>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2019     </th>
+<th style="text-align:left;">2020     </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td align="left">   停车费     </td>
-<td align="left">   10810+12000     </td>
-<td align="left"> 9200+10000</td>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">   10810+12000     </td>
+<td style="text-align:left;"> 9200+10000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保险费     </td>
-<td align="left">   3932     </td>
-<td align="left">  3932  </td>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   3932     </td>
+<td style="text-align:left;">  3932</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   油费     </td>
-<td align="left">     5682   </td>
-<td align="left">   4600</td>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     5682   </td>
+<td style="text-align:left;">   4600</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   高速     </td>
-<td align="left">     365   </td>
-<td align="left">   135</td>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     365   </td>
+<td style="text-align:left;">   135</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保养     </td>
-<td align="left">     1369+2500   </td>
-<td align="left">  994+1000(电瓶)  </td>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     1369+2500   </td>
+<td style="text-align:left;">  994+1000(电瓶)</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   洗车     </td>
-<td align="left">     479   </td>
-<td align="left">   372</td>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     479   </td>
+<td style="text-align:left;">   372</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   上述合计     </td>
-<td align="left">  25297+12000  </td>
-<td align="left">      20233+10000  </td>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">  25297+12000  </td>
+<td style="text-align:left;">      20233+10000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   里程     </td>
-<td align="left">      7538       </td>
-<td align="left">    7222(其中A3 1200公里)</td>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      7538       </td>
+<td style="text-align:left;">    7222(其中A3 1200公里)</td>
 </tr>
 </tbody>
 </table>
@@ -113,76 +104,56 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th> 图书版本               </th>
 <th> 台币                       </th>
 <th> 人民币 </th>
-<th> </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td> 重构台湾 </td>
 <td> 632 </td>
 <td> 148 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 英文版hard cover </td>
 <td> 1995 </td>
 <td> 467 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 精装简体版</td>
 <td> 699 </td>
 <td> 163 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 简体平装 </td>
 <td> 469 </td>
 <td> 107 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 重构第一版简体 </td>
 <td> 327 </td>
 <td> 76 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> </td>
 <td>  </td>
 <td>  </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计简体平装 </td>
 <td> 393 </td>
 <td> 92 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计繁体平装 </td>
 <td> 530 </td>
 <td> 124 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计英文版  </td>
 <td> 2470 </td>
 <td> 578 </td>
-<td> </td>
 </tr>
 </tbody>
 </table>
@@ -205,60 +176,51 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th align="left"> 条目     </th>
-<th align="left"> 2019     </th>
-<th align="left">2018     </th>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2019     </th>
+<th style="text-align:left;">2018     </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td align="left">   停车费     </td>
-<td align="left">   10810+12000     </td>
-<td align="left"> 11029+2000</td>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">   10810+12000     </td>
+<td style="text-align:left;"> 11029+2000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保险费     </td>
-<td align="left">   3932     </td>
-<td align="left">  3637  </td>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   3932     </td>
+<td style="text-align:left;">  3637</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   油费     </td>
-<td align="left">     5682   </td>
-<td align="left">   7006</td>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     5682   </td>
+<td style="text-align:left;">   7006</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   高速     </td>
-<td align="left">     365   </td>
-<td align="left">   510</td>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     365   </td>
+<td style="text-align:left;">   510</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保养     </td>
-<td align="left">     1369+2500   </td>
-<td align="left">  1568  </td>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     1369+2500   </td>
+<td style="text-align:left;">  1568</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   洗车     </td>
-<td align="left">     479   </td>
-<td align="left">   355</td>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     479   </td>
+<td style="text-align:left;">   355</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   上述合计     </td>
-<td align="left">  25297+12000  </td>
-<td align="left">      24105+2000  </td>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">  25297+12000  </td>
+<td style="text-align:left;">      24105+2000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   里程     </td>
-<td align="left">      7538       </td>
-<td align="left">    8856</td>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      7538       </td>
+<td style="text-align:left;">    8856</td>
 </tr>
 </tbody>
 </table>
@@ -288,54 +250,46 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th align="left"> 条目     </th>
-<th align="left"> 2017     </th>
-<th align="left">2018     </th>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2017     </th>
+<th style="text-align:left;">2018     </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td align="left">   停车费     </td>
-<td align="left">   10123     </td>
-<td align="left"> 11029+2000</td>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">   10123     </td>
+<td style="text-align:left;"> 11029+2000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保险费     </td>
-<td align="left">   4945     </td>
-<td align="left">  3637  </td>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   4945     </td>
+<td style="text-align:left;">  3637</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   油费     </td>
-<td align="left">     6444   </td>
-<td align="left">   7006</td>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     6444   </td>
+<td style="text-align:left;">   7006</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   高速     </td>
-<td align="left">     368   </td>
-<td align="left">   510</td>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     368   </td>
+<td style="text-align:left;">   510</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保养     </td>
-<td align="left">     1756   </td>
-<td align="left">  1568  </td>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     1756   </td>
+<td style="text-align:left;">  1568</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   洗车     </td>
-<td align="left">     275   </td>
-<td align="left">   355</td>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     275   </td>
+<td style="text-align:left;">   355</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   上述合计     </td>
-<td align="left">  23911  </td>
-<td align="left">      24105+2000  </td>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">  23911  </td>
+<td style="text-align:left;">      24105+2000</td>
 </tr>
 </tbody>
 </table>

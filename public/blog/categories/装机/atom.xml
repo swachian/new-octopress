@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 装机 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/装机/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -227,9 +227,8 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 <table>
 <thead>
 <tr>
-<th></th>
-<th align="left"> 机器型号     </th>
-<th align="center"> CPU               </th>
+<th style="text-align:left;"> 机器型号     </th>
+<th style="text-align:center;"> CPU               </th>
 <th> 内存插槽 </th>
 <th>  操作系统      </th>
 <th> 价格</th>
@@ -237,36 +236,32 @@ dell其次，而联想无疑是比较少的。联想主推的是带显示器或�
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td align="left"> S520       </td>
-<td align="center"> 奔腾双核            </td>
+<td style="text-align:left;"> S520       </td>
+<td style="text-align:center;"> 奔腾双核            </td>
 <td>  2       </td>
 <td> DOS          </td>
-<td> 2149 |</td>
+<td> 2149 </td>
 </tr>
 <tr>
-<td></td>
-<td align="left"> S520       </td>
-<td align="center"> 同上               </td>
+<td style="text-align:left;"> S520       </td>
+<td style="text-align:center;"> 同上               </td>
 <td>   2       </td>
 <td> Win8         </td>
-<td> 2399 |</td>
+<td> 2399 </td>
 </tr>
 <tr>
-<td></td>
-<td align="left"> H520e      </td>
-<td align="center"> 酷睿三代i3-3240T    </td>
+<td style="text-align:left;"> H520e      </td>
+<td style="text-align:center;"> 酷睿三代i3-3240T    </td>
 <td>  1       </td>
 <td>DOS      </td>
-<td> 2799 |</td>
+<td> 2799 </td>
 </tr>
 <tr>
-<td></td>
-<td align="left"> S530       </td>
-<td align="center"> i3-4150 ，独显     </td>
+<td style="text-align:left;"> S530       </td>
+<td style="text-align:center;"> i3-4150 ，独显     </td>
 <td>   2       </td>
 <td>Win8        </td>
-<td>  3199  |</td>
+<td>  3199  </td>
 </tr>
 </tbody>
 </table>

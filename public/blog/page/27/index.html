@@ -9,10 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="HTML use syntax: true Rails 命令 rails s(erver) thin
-rails new app
-rails g(enerate) model/controller/resouce/migration
-rails dbconsole #打开数据库的console &hellip;">
+  <meta name="description" content="function find_git_branch { local dir=. head until [ "$dir" -ef / ]; do if [ -f "$dir/.git/HEAD" ]; then head=$(&lt; "$dir/.git/HEAD") if [[ $head &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +67,73 @@ rails dbconsole #打开数据库的console &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/28/display-git-branch-in-shell/">给shell加上显示git的分支</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-28T18:48:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>
+function find_git_branch {
+    local dir=. head
+    until [ "$dir" -ef / ]; do
+        if [ -f "$dir/.git/HEAD" ]; then
+            head=$(&lt; "$dir/.git/HEAD")
+            if [[ $head == ref:\ refs/heads/* ]]; then</p>
+
+<pre><code>        head=$(&lt; "$dir/.git/HEAD")
+        if [[ $head == ref:\ refs/heads/* ]]; then
+            git_branch=" (${head#*/*/})"
+        elif [[ $head != '' ]]; then
+            git_branch=' (detached)'
+        else
+            git_branch=' (unknown)'
+        fi
+        return
+    fi
+    dir="../$dir"
+done
+git_branch=''
+</code></pre>
+
+<p>}
+PROMPT_COMMAND=&#8221;find_git_branch; $PROMPT_COMMAND&#8221;
+green=$&#8217;\e[1;32m&#8217;
+magenta=$&#8217;\e[1;35m&#8217;
+normal_colours=$&#8217;\e[m&#8217;</p>
+
+<p>PS1=&#8221;[$green]\u@\h:\w[$magenta]\$git_branch[$green]\$[$normal_colours] &#8221;
+</code>
+秘密在于PROMPT_COMMAND，以保证每次都会执行以下find_git_branch函数</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -143,13 +207,10 @@ match '/events', :to =&gt; "events#create", :via =&gt; :post, :as =&gt; "events"
 * :layout 可以指定這個Action的Layout，設成false即關掉Layout
 </code></pre>
 
-<p>render_to_string :partial => &#8220;foobar&#8221;</p>
-
-<pre><code>* redirect_to :action =&gt; "show", :id =&gt; @event
-* redirect_to :back 回到上一頁。
-</code></pre>
-
-<p></pre></p>
+<p>render_to_string :partial => &#8220;foobar&#8221;
+    * redirect_to :action => &#8220;show&#8221;, :id => @event
+    * redirect_to :back 回到上一頁。
+</pre></p>
 
 <p>flash的新老写法</p>
 
@@ -423,19 +484,16 @@ ruby -rname 是引入指定的扩展，如ruby -rdebug -rprofile
 
 <p>Yaml.load
 to_yaml
-<code></p>
-
-<pre><code>def all
-  @order = params[:order] || "number"
-  sort_proc = case @order
-    when "author" then lambda {|r| [r.user.name.downcase, r.number]}
-    when "status",
-         "title" then lambda {|r| [r.send(@order).downcase, r.number]}
-    when "number" then lambda {|r| -r.name}
-end
-</code></pre>
-
-<p></code></p>
+<code>
+    def all
+      @order = params[:order] || "number"
+      sort_proc = case @order
+        when "author" then lambda {|r| [r.user.name.downcase, r.number]}
+        when "status",
+             "title" then lambda {|r| [r.send(@order).downcase, r.number]}
+        when "number" then lambda {|r| -r.name}
+    end
+</code></p>
 
 <p>上面代码中的亮点（feature）是case,lambda,send(最易status和title的处理方式）,sort_by传递一个lambda表达式</p>
 
@@ -483,13 +541,10 @@ end
 <h1>第5章 类</h1>
 
 <p>Ruby是以对象为中心的，而Java是以类为中心的。
-在Ruby中，类是组织对象的手段而已，以便不必给每个对象都添加方法。而类本身也是对象。 Ticket.new是一种用工厂方法产生对象的手法。但类通常用常量命名。</p>
-
-<pre><code>class Ticket
-end
-</code></pre>
-
-<p>可以认为用class定义了一个常量。
+在Ruby中，类是组织对象的手段而已，以便不必给每个对象都添加方法。而类本身也是对象。 Ticket.new是一种用工厂方法产生对象的手法。但类通常用常量命名。
+    class Ticket
+    end
+可以认为用class定义了一个常量。
 特点：
 1. 实例方法与单例方法
 2. 重新定义方法（后来者居上）
@@ -551,21 +606,18 @@ ModuleTester.new.say_hello
 <p>顶端的是Object, 它include了module Kernel.
 给定一个名字，类和模块中仅有一个对应的方法。找到第一个方法就返回，也是后来（定义）者居上的模式。</p>
 
-<p>super可以调用上一个同名匹配。</p>
-
-<pre><code>super 原封不动传参数
-super() 不传参数
-super(a,b,c) 传指定参数，其实二和三是一种形式。
-</code></pre>
+<p>super可以调用上一个同名匹配。
+    super 原封不动传参数
+    super() 不传参数
+    super(a,b,c) 传指定参数，其实二和三是一种形式。</p>
 
 <p>一般将实体定义为class，而实体的特性定义为module.如Stack  &amp; Stacklike</p>
 
-<p>模块和类可以互相嵌套，一反面提供了命名空间以隔离同名的类，另一方面给规划程序的设计和结构提供了另一维度。</p>
+<p>模块和类可以互相嵌套，一反面提供了命名空间以隔离同名的类，另一方面给规划程序的设计和结构提供了另一维度。
+    module Tools
+      class Hammer</p>
 
-<pre><code>module Tools
-  class Hammer
-
-h = Tools::Hammer.new
+<pre><code>h = Tools::Hammer.new
 </code></pre>
 
 <p>Rails中大量使用了模块化来组织代码，也大量使用了重新打开类。</p>
@@ -588,22 +640,16 @@ end
 obj.show_me</p>
 
 <p>class C
-  def C.x</p>
-
-<pre><code>p self
-</code></pre>
-
-<p>  end
+  def C.x
+    p self
+  end
 end
 C.x</p>
 
 <p>class C
-  def self.x</p>
-
-<pre><code>p self
-</code></pre>
-
-<p>  end
+  def self.x
+    p self
+  end
 end
 C.x
 </code></p>
@@ -665,10 +711,8 @@ end
 本质上因为迭代的需要，以实现<em>方法和代码块之间分工</em>。</p>
 
 <p>raise,
-这个是抛出RuntimeError的异常</p>
-
-<pre><code>raise ArgumentError, "I need a number under 10" unless x &lt; 10
-</code></pre>
+这个是抛出RuntimeError的异常
+    raise ArgumentError, &#8220;I need a number under 10&#8221; unless x &lt; 10</p>
 
 <p>resue语句有两种写法：
 1. 将想要保护的代码用begin/end包围起来；
@@ -717,18 +761,15 @@ Regexp 斜杠 /([a-z]+)/</p>
 class Bid
   include Comparable</p>
 
-<p>  def &lt;=>(other_bid)</p>
-
-<pre><code>if self.estimate &lt; other_bid.estimate
-  -1
-elsif self.estimate &gt; other_bid.estimate
-  1
-else
-  0
-end
-</code></pre>
-
-<p>  end
+<p>  def &lt;=>(other_bid)
+    if self.estimate &lt; other_bid.estimate
+      -1
+    elsif self.estimate > other_bid.estimate
+      1
+    else
+      0
+    end
+  end
 end
 </code>
 由层叠的if/elsif/else构成，总是返回-1,0,1，分别表示小于、等于、大于。</p>
@@ -826,11 +867,9 @@ class &lt;&lt; object 从而打开了object的单例类,object在此可以是任
 <p>使用class &lt;&lt; 可定义类方法.</p>
 
 <p>class Ticket
-  class &lt;&lt; self</p>
-
-<pre><code>def m....
- # etc
-</code></pre>
+  class &lt;&lt; self
+    def m....
+     # etc</p>
 
 <p>上面的例子中，等价于
 class &lt;&lt; Ticket
@@ -873,15 +912,12 @@ end</p>
 var = 'initial'
 c.class_eval do
   puts var
-  def some_method</p>
-
-<pre><code>  puts var
-</code></pre>
-
-<p>  end</p>
+  def some_method
+      puts var
+  end</p>
 
 <p>  #要想在实例方法中获得访问var的scope，可以使用define_method
-  define_method(&#8220;talk&#8221;) {puts var}
+  define_method("talk") {puts var}
 end
 </code></p>
 
@@ -932,13 +968,10 @@ end
 <p>最基本的用途是在include后给类或者模块增加类方法。原来叫做append_features
 <code>
 module M
-  def self.included(c1)</p>
-
-<pre><code>def c1.a_class_method
-end
-</code></pre>
-
-<p>  end</p>
+  def self.included(c1)
+    def c1.a_class_method
+    end
+  end</p>
 
 <p>  def an_inst_method
   end
@@ -1061,7 +1094,7 @@ alias :old_match :match，
 
 <p>剛剛有感而發，在公司開發的 microblog上寫了一段 Rails 與 Merb 合併的故事，以作為一些事情的借鏡。後來覺得寫太長了，所以就乾脆整理一下貼過來…</p>
 
-<p>====</p>
+<hr />
 
 <p>Merb 當初是為了要解決 Rails 沒辦法解決的問題，比如說上傳檔案會造成整個網站 hang 住才開始開發的。在 Yehuda 當初設計的哲學之中，他認為 Framework 內部要能夠 modularity 。同時要能實現 ORM Agnosticism，甚至不只 ORM ，包括 javascript library 之類的也都必須要可以這麼做。最後幹出了一套 merb。於是在 2008 年逐漸形成了 Rails 與 Merb 之爭。</p>
 
@@ -1079,7 +1112,7 @@ alias :old_match :match，
 
 <p>所以才造就現在看到的偉大 framework : Rails 3。</p>
 
-<p>====</p>
+<hr />
 
 <p>apply 到一些場景，真是感觸良多啊 /_\</p>
 </div>
@@ -1436,118 +1469,6 @@ gem install mysql2
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/16/rails3.1/">Rails3.1使用手记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-16T14:48:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>HTML use syntax: true</p>
-
-<p>bundle 执行的对象是Gemfile，而bundle install 后会在Gemfile.lock文件中产生gem及其版本的依赖，所以在Gemfile中不再需要声明版本号
-据说这是大胡子忙了1年左右的成果。确实是改善内部关系的好东西。</p>
-
-<p>therubyracer 是内建于ruby vm的js解释器，ree并没有自带，mri已自带
-有人谈论不好，有人认为挺好，个人认为不是问题</p>
-
-<p>js和css似乎会自动编译
-不过真是部署还是需要 rake assets:precompile来在public/assets目录下产生css文件
-Sprockets来自动集成js成一个文件，css成一个文件
-uglifier 生产环境下来压缩静态文件</p>
-
-<p>console里面的 <pre>reload!</pre> 可以重新加在修改过的文件</p>
-
-<p>view层也带继承了
-这是很大的一个进步，view终于获得了应有的地位</p>
-
-<pre><code>after_find #一个回调函数
-first last #不像find那样会报NoRecord的error
-find_each #批量查询方法，避免整个表拿出来
-find_in_batches #同find_each类似，就是取出的是一个集合
-</code></pre>
-
-<p>join</p>
-
-<pre><code>Post.joins(:category, :comments)
-Category.joins(:posts =&gt; [{:comments =&gt; :guest}, :tags])
-</code></pre>
-
-<p>clients = Client.includes(:address).limit(10)
-  使得原本11句查询，变成了2句，先查出client，然后通过client_id in（x,x &#8230;）查出address的结果</p>
-
-<pre><code>find_by_first_name, find_all_by_first_name, find_by_name!
-Client.find_or_initialize, Client.find_or_create
-
-
-Post.where(:published =&gt; true).any? 检查是否exist?
-
-
-&lt;%=form_for([@post, @post.comments.build]) do |f| %&gt;
-#新版的form_for前用&lt;%=，注意多了=号，挺无聊的追求，对new的要求可以放到view里面来写，一来这确实只是为了view的需要，另一方面今后其他action复用view的话不用再在controller里面new了
-</code></pre>
-
-<p>常用的操作</p>
-
-<pre><code>&lt;%= render :partial =&gt; "comments/comment",
-:collection =&gt; @post.comments %&gt;
-&lt;%= render "comments/form" %&gt;
-&lt;%= link_to 'Destroy Comment', [comment.post, comment],
-:confirm =&gt; 'Are you sure?',:method =&gt; :delete %&gt;
-</code></pre>
-
-<p>嵌套form</p>
-
-<pre><code>accepts_nested_attributes_for :tags, :allow_destroy =&gt; :true,
-    :reject_if =&gt; proc { |attrs| attrs.all? { |k, v| v.blank? } }
-&lt;%= form.fields_for :tags do |tag_form| %&gt;
-</code></pre>
-
-<p>rails的callback不能直接使用def after_safe,而需要用after_save :method的方式来定义一个执行链
-新版的规矩</p>
-
-<p>比较好的<a href="http://phoenixtoday.blogbus.com/logs/33458940.html">git教程</a></p>
-
-<p>ihow的template https://github.com/ihower/rails3-app-template/blob/master/Gemfile,可以发现不少实用的操作，以及一些常用的gem包</p>
-
-<p>simple_form 这个插件</p>
-
-<p>annotate 自动标注，这里面学到了新的配置Gemfile的方法和执行通过Gemfile安装的特定的gem的使用方法</p>
-
-<p>Gemfile</p>
-
-<pre><code>gem 'annotate', :git =&gt; 'https://github.com/ctran/annotate_models.git' #, :branch =&gt; 'rake_compatibility' #指定通过git来安装，也可再跟上一个branch
-</code></pre>
-
-<p>通过上述方法安装的可运行gem，需要通过    <code>bundle exec annotate</code>    来运行</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/28/">&larr; Older</a>
@@ -1565,6 +1486,10 @@ Post.where(:published =&gt; true).any? 检查是否exist?
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
@@ -1580,15 +1505,11 @@ Post.where(:published =&gt; true).any? 检查是否exist?
         <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (92)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

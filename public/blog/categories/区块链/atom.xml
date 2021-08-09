@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 区块链 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/区块链/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -39,12 +39,9 @@
 功能上来讲，solidity可以理解成数据存放在一个类似levelDB的内存数据库，这是ethvm会做的事情。
 ```javascript</p>
 
-<p>  mapping(uint=>LibDisSecPledgeApply.DisSecPledgeApply)  disSecPledgeApplyMap;</p>
-
-<pre><code>uint[] disSecPledgeApplyIds;
-</code></pre>
-
-<p>```</p>
+<p>  mapping(uint=>LibDisSecPledgeApply.DisSecPledgeApply)  disSecPledgeApplyMap;
+    uint[] disSecPledgeApplyIds;
+```</p>
 
 <p>上述代码定义了一个用于存放对象数据的mapping，因为mapping无循环遍历的功能，所以又增加了一个ids的数组保留所有对象的编号。</p>
 
@@ -61,13 +58,12 @@
 <p>truffle是现在以太坊主要推荐的编写solidity的编译、测试运行和部署工具，能处理较复杂的sol文件关联引用，就是耗时很长，且
 程序版本很不稳定，变化发展都依然极快。truffle是基于node和npm的，所以要先装好node。</p>
 
-<p><code>javascript
-npm uninstall truffle
+<pre><code class="javascript">npm uninstall truffle
 npm install -g truffle@2.1.2
 truffle compile  //编译合约
 truffle migrate --reset //部署合约
 truffle exec xxxx.js //执行某个js文件
-</code></p>
+</code></pre>
 
 <p>和区块链一样，solidity，truffle都是刚刚涌现的东西，所以问题很多，用起来也不一定顺手。但，这个行业就是这样的。</p>
 ]]></content>

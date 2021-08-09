@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
-另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。 原版四五百页精装书，放在桌上看的体验真的普通版的给不了。封面和纸张的手感是很不一样的就不说了， &hellip;">
+  <meta name="description" content="说来惭愧，那么些年写java，至今也没碰到需要对jvm内部线程cpu使用情况的研究。
+今天碰到一例，因为用了flink，出现了一个处理瓶颈，不得不深入一探究竟。 就Linux的操作系统原理而言，jvm的线程是类似进程的东西，通过top -Hn 14142 可以查看到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,198 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/">查看java的线程cpu使用情况</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2020-06-24T22:36:00+08:00" pubdate data-updated="true">Jun 24<span>th</span>, 2020</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>说来惭愧，那么些年写java，至今也没碰到需要对jvm内部线程cpu使用情况的研究。
+今天碰到一例，因为用了flink，出现了一个处理瓶颈，不得不深入一探究竟。</p>
+
+<p>就Linux的操作系统原理而言，jvm的线程是类似进程的东西，通过<code>top -Hn 14142</code> 可以查看到
+14142这个进程内所有线程的cpu使用情况</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+</span><span class='line'>14321 hadoop    20   0   17.7g   8.6g  27756 S 43.2 27.4   8:29.33 java
+</span><span class='line'>14275 hadoop    20   0   17.7g   8.6g  27756 S 15.9 27.4   2:45.05 java
+</span><span class='line'>14408 hadoop    20   0   17.7g   8.6g  27756 S  3.7 27.4   0:33.23 java
+</span><span class='line'>14274 hadoop    20   0   17.7g   8.6g  27756 S  2.3 27.4   0:37.25 java
+</span><span class='line'>14226 hadoop    20   0   17.7g   8.6g  27756 S  2.0 27.4   0:20.27 java
+</span><span class='line'>14222 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:12.78 java
+</span><span class='line'>14414 hadoop    20   0   17.7g   8.6g  27756 S  1.3 27.4   0:11.12 java
+</span><span class='line'>14254 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.05 java
+</span><span class='line'>14288 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.97 java
+</span><span class='line'>14415 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:10.99 java
+</span><span class='line'>15072 hadoop    20   0   17.7g   8.6g  27756 S  1.0 27.4   0:11.04 java</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以发现，14321 14275 这两个线程使用的cpu最多，那么这两个线程对应的算子是什么呢？这里就需要使用到jstack</p>
+
+<p><code>jstack 14142 &gt; flink.dump</code></p>
+
+<p>就可以得到jstack的信息。注意，需要以java进程运行用户的身份来运行上面的命令。</p>
+
+<p>可以得到下面这些东西：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.131-b11 mixed mode):
+</span><span class='line'>
+</span><span class='line'>"Attach Listener" #3673 daemon prio=9 os_prio=0 tid=0x00007f76403d6000 nid=0x676d waiting on condition [0x0000000000000000]
+</span><span class='line'>   java.lang.Thread.State: RUNNABLE
+</span><span class='line'>
+</span><span class='line'>"flink-metrics-22" #3672 prio=1 os_prio=0 tid=0x0000000002ef6000 nid=0x674f waiting on condition [0x00007f75bd85d000]
+</span><span class='line'>   java.lang.Thread.State: TIMED_WAITING (parking)
+</span><span class='line'>        at sun.misc.Unsafe.park(Native Method)
+</span><span class='line'>        - parking to wait for  &lt;0x00000004406d94d8&gt; (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+</span><span class='line'>        at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+</span><span class='line'>        at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+</span><span class='line'>        at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+</span><span class='line'>        at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1066)
+</span><span class='line'>        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1127)
+</span><span class='line'>        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+</span><span class='line'>        at java.lang.Thread.run(Thread.java:748)
+</span><span class='line'>
+</span><span class='line'>"flink-akka.actor.default-dispatcher-33" #3668 prio=5 os_prio=0 tid=0x00007f765db5f800 nid=0x66d8 waiting on condition [0x00007f75bf67d000]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>jstack输出的hex也就是16进制的，所以我们需要把pid再做一下转换。使用python可以调用hex方法.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Python 3.6.8 (default, Aug  7 2019, 17:28:10)
+</span><span class='line'>[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux
+</span><span class='line'>Type "help", "copyright", "credits" or "license" for more information.
+</span><span class='line'>&gt;&gt;&gt; hex(14321)
+</span><span class='line'>'0x37f1'
+</span><span class='line'>&gt;&gt;&gt; hex(14275)
+</span><span class='line'>'0x37c3'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后在dump文件中搜索<code>0x37f1</code>，可以得到</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"at35__process -&gt; (at35_e -&gt; Sink: at35_sink, at35_current_parameter, at35_current_state) (1/1)" #142 prio=5 os_prio=0 tid=0x00007f7648a78800 nid=0x37f1 in Object.wait() [0x00007f75d53d6000]
+</span><span class='line'>   java.lang.Thread.State: WAITING (on object monitor)
+</span><span class='line'>        at java.lang.Object.wait(Native Method)
+</span><span class='line'>        at java.lang.Object.wait(Object.java:502)
+</span><span class='line'>        at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
+</span><span class='line'>        - locked &lt;0x0000000441ab5ae8&gt; (a java.util.ArrayDeque)
+</span><span class='line'>        at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
+</span><span class='line'>        at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
+</span><span class='line'>        at java.lang.Thread.run(Thread.java:748)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"at20_window -&gt; (at20__message, at20_current_parameter, at20_current_state) (1/1)" #112 prio=5 os_prio=0 tid=0x00007f76485f1800 nid=0x37c3 in Object.wait() [0x00007f75d7af9000]
+</span><span class='line'>   java.lang.Thread.State: WAITING (on object monitor)
+</span><span class='line'>        at java.lang.Object.wait(Native Method)
+</span><span class='line'>        at java.lang.Object.wait(Object.java:502)
+</span><span class='line'>        at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.waitAndGetNextInputGate(UnionInputGate.java:211)
+</span><span class='line'>        - locked &lt;0x0000000441a00cc8&gt; (a java.util.ArrayDeque)
+</span><span class='line'>        at org.apache.flink.runtime.io.network.partition.consumer.UnionInputGate.getNextBufferOrEvent(UnionInputGate.java:169)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.io.BarrierBuffer.getNextNonBlocked(BarrierBuffer.java:165)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.io.StreamTwoInputProcessor.processInput(StreamTwoInputProcessor.java:273)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.tasks.TwoInputStreamTask.run(TwoInputStreamTask.java:117)
+</span><span class='line'>        at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:300)
+</span><span class='line'>        at org.apache.flink.runtime.taskmanager.Task.run(Task.java:711)
+</span><span class='line'>        at java.lang.Thread.run(Thread.java:748)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后就可以看见线程的名字，就可以去代码里进一步对症下药了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/">入手本精装书</a></h1>
     
     
@@ -111,76 +303,56 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th> 图书版本               </th>
 <th> 台币                       </th>
 <th> 人民币 </th>
-<th> </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td> 重构台湾 </td>
 <td> 632 </td>
 <td> 148 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 英文版hard cover </td>
 <td> 1995 </td>
 <td> 467 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 精装简体版</td>
 <td> 699 </td>
 <td> 163 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 简体平装 </td>
 <td> 469 </td>
 <td> 107 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 重构第一版简体 </td>
 <td> 327 </td>
 <td> 76 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> </td>
 <td>  </td>
 <td>  </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计简体平装 </td>
 <td> 393 </td>
 <td> 92 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计繁体平装 </td>
 <td> 530 </td>
 <td> 124 </td>
-<td> </td>
 </tr>
 <tr>
-<td></td>
 <td> 领域驱动设计英文版  </td>
 <td> 2470 </td>
 <td> 578 </td>
-<td> </td>
 </tr>
 </tbody>
 </table>
@@ -282,60 +454,51 @@
 <table>
 <thead>
 <tr>
-<th></th>
-<th align="left"> 条目     </th>
-<th align="left"> 2019     </th>
-<th align="left">2018     </th>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2019     </th>
+<th style="text-align:left;">2018     </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td align="left">   停车费     </td>
-<td align="left">   10810+12000     </td>
-<td align="left"> 11029+2000</td>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">   10810+12000     </td>
+<td style="text-align:left;"> 11029+2000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保险费     </td>
-<td align="left">   3932     </td>
-<td align="left">  3637  </td>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   3932     </td>
+<td style="text-align:left;">  3637</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   油费     </td>
-<td align="left">     5682   </td>
-<td align="left">   7006</td>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     5682   </td>
+<td style="text-align:left;">   7006</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   高速     </td>
-<td align="left">     365   </td>
-<td align="left">   510</td>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     365   </td>
+<td style="text-align:left;">   510</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   保养     </td>
-<td align="left">     1369+2500   </td>
-<td align="left">  1568  </td>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     1369+2500   </td>
+<td style="text-align:left;">  1568</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   洗车     </td>
-<td align="left">     479   </td>
-<td align="left">   355</td>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     479   </td>
+<td style="text-align:left;">   355</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   上述合计     </td>
-<td align="left">  25297+12000  </td>
-<td align="left">      24105+2000  </td>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">  25297+12000  </td>
+<td style="text-align:left;">      24105+2000</td>
 </tr>
 <tr>
-<td></td>
-<td align="left">   里程     </td>
-<td align="left">      7538       </td>
-<td align="left">    8856</td>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      7538       </td>
+<td style="text-align:left;">    8856</td>
 </tr>
 </tbody>
 </table>
@@ -1089,51 +1252,6 @@ sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/02/03/jian-chi-de-cheng-guo/">坚持的成果</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-02-03T23:47:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2019</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>坚持，始终是一种美德。
-在软件开发的世界里，Java坚持了很多年，Mybatis也坚持了很多年。
-尽管动态语言是那么的适合web开发，以至于Java在他们面前有好几年十分的被动。但通过Spring的IOC等特性，
-生生造出来了一个具备很多动态语言特性的框架，从而具备了很多原本只有动态语言才具备的特性。</p>
-
-<p>另外，Mybatis从一个起初土的掉渣的东西，经过十几年持续有人使用的努力，现在竟然在mybatis-plus的帮助下形成了
-Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了JPA的优势，但在查询和支持SQL上又要远较JPA灵活许多。
-因为坚持，实现了巨大的超越。</p>
-
-<p>所以，有时候我们需要有点耐心，坚持一下。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1151,6 +1269,10 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
@@ -1166,15 +1288,11 @@ Java持久层最出色的一员。在兼容Mybatis的基础上，完全具备了
         <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (92)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

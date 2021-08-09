@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="Kovitz的这本书大概是七八年前看DHH的博客时得知的，发现有中文版就买了回来。但一直没有读完。原因在于本书还是按比较正统的方法讲解如何写好明确的软件需求与规格。按作者的理解，软件开发细化的模式有二： 一. 所有内容都是渐进式细化的，先原型然后几轮迭代后深入到细节；
-二. 每个开始的需求数量很少 &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/">2017 CRV养车成本汇总</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-01-14T20:48:00+08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/yangche2017.png" alt="image" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -739,181 +775,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/01/15/zookeeper/">Zookeeper</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-01-15T10:27:00+08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>用于协作的服务，提供目录树的结构。基本可以认为是Yahoo出品。</p>
-
-<p>data registers - called znodes, file
-parlance - directory</p>
-
-<p>数据全部保存在内存中。</p>
-
-<p>优势：
-1. 性能好，可在大规模的分布式系统里使用
-2. 可靠性高，可防止单点故障
-3. 严格的顺序性，可满足复杂的、高精的客户端同步实现要求</p>
-
-<p>znode的读写有acl控制以及版本号</p>
-
-<p>leader nodes负责接受写的请求，follower nodes负责被同步和读取</p>
-
-<p>配置示例</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tickTime=2000
-</span><span class='line'>dataDir=/var/lib/zookeeper
-</span><span class='line'>clientPort=2181
-</span><span class='line'>initLimit=5
-</span><span class='line'>syncLimit=2
-</span><span class='line'>server.1=zoo1:2888:3888
-</span><span class='line'>server.2=zoo2:2888:3888
-</span><span class='line'>server.3=zoo3:2888:3888</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tickTime是一个即使单元，单位是毫秒，2000表示2秒。<br/>
-dataDir是存放数据文件的物理位置。<br/>
-initLimit表示n个tickTime，上面这个就是10秒的意思，表示连接上leader nodes需要的时间单元数量。<br/>
-syncLimit表示山离皇帝能有多远过期<br/>
-server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址，第二个port即2888用于follewer连接leader，
-第三更port 3888用于选举leader。</p>
-
-<p>基本上，zookeeper可以理解成一个分布式系统里，用于进程间通信的中间件，所以剩下的就是客户端调用了。
-项目本身提供了C和Java的binding，具体实现时每个客户端会分为IO线程和watch线程两个。而Netflix在此基础上，
-构造了wrapper: <code>curator</code>，以方便开发。</p>
-
-<p>首先，引入maven依赖:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;  
-</span><span class='line'>    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;  
-</span><span class='line'>    &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;  
-</span><span class='line'>    &lt;version&gt;3.2.1&lt;/version&gt;  
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后，在代码中可如下调用：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">zookeepertest</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.RetryPolicy</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.framework.CuratorFramework</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.framework.CuratorFrameworkFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.curator.retry.ExponentialBackoffRetry</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CuratorTest</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">String</span> <span class="n">zookeeperConnectionString</span><span class="o">=</span><span class="s">&quot;127.0.0.1:2181&quot;</span><span class="o">;</span>
-</span><span class='line'>      <span class="n">RetryPolicy</span> <span class="n">retryPolicy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExponentialBackoffRetry</span><span class="o">(</span><span class="mi">1000</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
-</span><span class='line'>              <span class="n">CuratorFramework</span> <span class="n">client</span> <span class="o">=</span> <span class="n">CuratorFrameworkFactory</span><span class="o">.</span><span class="na">newClient</span><span class="o">(</span><span class="n">zookeeperConnectionString</span><span class="o">,</span> <span class="n">retryPolicy</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>              <span class="n">client</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>              <span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">,</span> <span class="s">&quot;555&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-</span><span class='line'>
-</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">);</span>
-</span><span class='line'>                  <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>                  <span class="n">client</span><span class="o">.</span><span class="na">setData</span><span class="o">().</span><span class="na">forPath</span><span class="o">(</span><span class="s">&quot;/my&quot;</span><span class="o">,</span> <span class="s">&quot;666&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-</span><span class='line'>
-</span><span class='line'>              <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>                  <span class="c1">// TODO Auto-generated catch block</span>
-</span><span class='line'>                  <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-</span><span class='line'>              <span class="o">}</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">CuratorTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CuratorTest</span><span class="o">();</span>
-</span><span class='line'>      <span class="n">test</span><span class="o">.</span><span class="na">set</span><span class="o">();</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这种调用方式是比较原始的进程间通信，以此为基础，recipes已经实现了一系列通信的高级语意，
-如lock、semaphore、确认leader等，可以直接使用。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -931,6 +792,10 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
@@ -946,15 +811,11 @@ server.1中的1的服务器内部的<code>myid</code>，zoo1是服务器地址�
         <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/">2020 CRV养车成本汇总</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (91)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (92)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
 </section>
   
 </aside>

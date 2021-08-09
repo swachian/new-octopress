@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 期刊 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/期刊/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -96,8 +96,7 @@
 当然，每个地方会再扩展。从我了解下来的情况看，小微被纳入的比较多，计算机科学也有挤进去的案例。下面摘录一下复旦大学计算机的指导目录，
 确实是专家总结过的，对计算机系的学生还是很有指导意义的。</p>
 
-<p><code>
-国内期刊指导目录
+<pre><code>国内期刊指导目录
 计算机科学与技术
 K0812001    计算机学报 中国计算机学会、中科院计算研究所    A类
 K0812002    软件学报    中国计算机学会、中科院软件研究所    A类
@@ -122,7 +121,7 @@ K0812020    微型电脑应用  上海市微型电脑应用学会   B类
 K0812021    计算机工程与科学    国防科学技术大学计算机学院 B类
 K0812022    计算机系统应用   中科院软件所  B类
 K0812023    计算机集成制造系统—CIMK  国家863计划CIMS主题、中国兵器工业集团第210研究所 B类
-</code></p>
+</code></pre>
 
 <p>美中不足的是漏了一个《计算机应用》，这个期刊个人感觉还是很有特色的。从我个人感受而言，下述的几个还不错：</p>
 

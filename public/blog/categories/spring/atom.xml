@@ -4,7 +4,7 @@
   <title><![CDATA[分类: spring | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -61,16 +61,15 @@
 <p>在RestTemplate上进一步抽象，实现和Spring MVC对等的method封装。因为要组client，所以<code>@RequestParam</code>
 中的value不能少。</p>
 
-<p>```java
-@FeignClient("Hello-Service")
+<pre><code class="java">@FeignClient("Hello-Service")
 public interface HelloService {
   @RequestMapping(value="/hello1", method=RequestMethod.GET) //指明要访问的路径和方法
   User hello(@RequestParam("name") String name, @RequestHeader("age") Integer age); //指明构造请求是的参数名称
-}</p>
+}
 
-<p>//调用方式
+//调用方式
 helloService.hello("DiDi", 30);
-```</p>
+</code></pre>
 
 <h3>Zuul Api 网关</h3>
 
@@ -80,36 +79,29 @@ helloService.hello("DiDi", 30);
 
 <p>Zuul的路由结合了治理服务，下面就把一个路径全部转发去了一个服务</p>
 
-<p><code>
-zuul.routes.service-a.path=/aaa/**
+<pre><code>zuul.routes.service-a.path=/aaa/**
 zuul.routes.service-a.serviceId=Hello-Service
-</code>
-过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
+</code></pre>
 
-<p>```java
-public class AccessFilter extends ZuulFilter {
+<p>过滤器则可以通过继承一个抽象类<code>ZuulFilter</code>并实现4个方法来实现。</p>
+
+<pre><code class="java">public class AccessFilter extends ZuulFilter {
   ....
-}</p>
+}
 
-<p>@EnableZuulProxy
+@EnableZuulProxy
 @SpringCloudApplication
 public class Application {
-  public static void main(String[] args) {</p>
+  public static void main(String[] args) {
+    new SpringApplicationBuilder(Application.class).web(true).run(args);
+  }
 
-<pre><code>new SpringApplicationBuilder(Application.class).web(true).run(args);
-</code></pre>
-
-<p>  }</p>
-
-<p>  @Bean
-  public AccessFilter accessFilter() {</p>
-
-<pre><code>return new AccessFilter();
-</code></pre>
-
-<p>  }
+  @Bean
+  public AccessFilter accessFilter() {
+    return new AccessFilter();
+  }
 }
-```</p>
+</code></pre>
 
 <h3>Spring Cloud Config</h3>
 
@@ -155,28 +147,25 @@ public class Application {
 </ul>
 
 
-<p><code>
-spring version
+<pre><code>spring version 
 spring --version
 spring shell # windows下打开可以自动补全的功能
-</code></p>
+</code></pre>
 
 <h3>工程初始化</h3>
 
-<p><code>
-spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
+<pre><code>spring init -dweb,jpa,security --build gradle -p jar -x //-x表示生成到当前目录
 spring init -dweb,jpa,security --build gradle -p war myapp //表示生成工程到myapp目录
-</code></p>
+</code></pre>
 
-<p>```
-@SpringBootApplication
-public class DemoddfApplication {</p>
+<pre><code>@SpringBootApplication
+public class DemoddfApplication {
 
-<p>public static void main(String[] args) {
+public static void main(String[] args) {
 SpringApplication.run(DemoddfApplication.class, args);
 }
 }
-```</p>
+</code></pre>
 
 <p>@SpringBootApplication 起到了过去3个标注的作用，打开了自动配置和自动扫描。如果有新的配置要求，@Configuration用在其他配置类中进行配置的扩充。而主class可以不必修改</p>
 
@@ -198,14 +187,13 @@ key-password: letmein
 
 <p>配置数据源</p>
 
-<p><code>
-spring:
+<pre><code>spring:
 datasource:
 url: jdbc:mysql://localhost/readinglist
 username: dbuser
 password: dbpass
 driver-class-name: com.mysql.jdbc.Driver
-</code></p>
+</code></pre>
 
 <h3>属性信息的几种来源</h3>
 
@@ -228,13 +216,12 @@ driver-class-name: com.mysql.jdbc.Driver
 
 <p>@WebIntegrationTest Test class有这个标注就会让spring启动一个测试的tomcat或jetty进程</p>
 
-<p>```
-@RunWith(SpringJUnit4ClassRunner.class)
+<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(
 classes=ReadingListApplication.class)
-@WebIntegrationTest</p>
+@WebIntegrationTest
 
-<p>public class SimpleWebTest {
+public class SimpleWebTest {
 @Test(expected=HttpClientErrorException.class)
 public void pageNotFound() {
 try {
@@ -248,41 +235,37 @@ throw e;
 }
 }
 }
-```</p>
+</code></pre>
 
 <p>代入参数
 <code>@WebIntegrationTest(value={"server.port=0"})</code> 和 <code>@WebIntegrationTest("server.port=0")</code></p>
 
 <p>selenium的用ie模拟访问自己的服务很有意思，值得制作一个。</p>
 
-<p>```java</p>
+<pre><code class="java">                FirefoxDriver browser = new FirefoxDriver();
+    browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    String baseUrl = "http://www.baidu.com/";
+    browser.get(baseUrl);
+    String currentUrl = browser.getCurrentUrl();
+    assertEquals(baseUrl +"/readingList", currentUrl);
 
-<pre><code>            FirefoxDriver browser = new FirefoxDriver();
-browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-String baseUrl = "http://www.baidu.com/";
-browser.get(baseUrl);
-String currentUrl = browser.getCurrentUrl();
-assertEquals(baseUrl +"/readingList", currentUrl);
+    assertEquals("You have no books in your book list", 
+                 browser.findElementByTagName("div").getText());
 
-assertEquals("You have no books in your book list", 
-             browser.findElementByTagName("div").getText());
+    browser.findElementByName("title").sendKeys("BOOK TITLE");
+    browser.findElementByName("author").sendKeys("BOOK AUTHOR");
+    browser.findElementByName("isbn").sendKeys("1234567890");
+    browser.findElementByName("description").sendKeys("DESCRIPTION");
+    browser.findElementByTagName("form").submit();
 
-browser.findElementByName("title").sendKeys("BOOK TITLE");
-browser.findElementByName("author").sendKeys("BOOK AUTHOR");
-browser.findElementByName("isbn").sendKeys("1234567890");
-browser.findElementByName("description").sendKeys("DESCRIPTION");
-browser.findElementByTagName("form").submit();
-
-WebElement dl = 
-    browser.findElementByCssSelector("dt.bookHeadline");
-assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", 
-             dl.getText());
-WebElement dt = 
-    browser.findElementByCssSelector("dd.bookDescription");
-assertEquals("DESCRIPTION", dt.getText());
+    WebElement dl = 
+        browser.findElementByCssSelector("dt.bookHeadline");
+    assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", 
+                 dl.getText());
+    WebElement dt = 
+        browser.findElementByCssSelector("dd.bookDescription");
+    assertEquals("DESCRIPTION", dt.getText());
 </code></pre>
-
-<p>```</p>
 
 <p>《Selenium WebDriver in Practice》但还没完成，可能要到2016年10月份才能出版</p>
 
@@ -299,11 +282,10 @@ assertEquals("DESCRIPTION", dt.getText());
 <p>actuator的remote shell
 默认启动一个端口在2000，每次启动时会生成一个密码，可以用ssh访问</p>
 
-<p><code>
-ssh user@localhost -p 2000
+<pre><code>ssh user@localhost -p 2000
 Password authentication
 Password:
-</code></p>
+</code></pre>
 
 <p>自己定义metrics：</p>
 
@@ -315,20 +297,18 @@ void decrement(String metricName);
 void reset(String metricName);
 }</p>
 
-<p>```</p>
+<pre><code>
+GaugeService是记录值
+</code></pre>
 
-<p>GaugeService是记录值</p>
-
-<p><code>
-public interface GaugeService {
+<p>public interface GaugeService {
 void submit(String metricName, double value);
 }
-</code></p>
+```</p>
 
 <p>自定义Health</p>
 
-<p>```
-@Component
+<pre><code>@Component
 public class AmazonHealth implements HealthIndicator {
 @Override
 public Health health() {
@@ -340,13 +320,12 @@ return Health.up().build();
 return Health.down().build();
 }
 }
-}</p>
+}
 
-<p>//还可以加入更多的细节内容，使用withDetail</p>
+//还可以加入更多的细节内容，使用withDetail
 
-<p>return Health.down().withDetail("reason", e.getMessage()).build();</p>
-
-<p>```</p>
+return Health.down().withDetail("reason", e.getMessage()).build();
+</code></pre>
 
 <p>上述endPoint的保护需采用所有spring暴露的链接一致的方式</p>
 
@@ -372,12 +351,11 @@ libraries:<br/>
 
 <h3>附录</h3>
 
-<p><code>
-&lt;dependency&gt;
+<pre><code>&lt;dependency&gt;
 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
 &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
 &lt;/dependency&gt;
-</code></p>
+</code></pre>
 
 <p>开发工具具备自动重启的功能，但下面这些静态资源默认是exclude的: /META-INF/resources, /resources, /static, /
 public, /templates.</p>
@@ -394,21 +372,17 @@ public, /templates.</p>
 
 <p>要解决可以在xml的配置中设置</p>
 
-<p>```xml</p>
-
-<p>  &lt;mvc:annotation-driven></p>
-
-<pre><code>&lt;mvc:message-converters register-defaults="true"&gt;
-  &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
-  &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
-    &lt;constructor-arg value="UTF-8" /&gt;
-    &lt;property name="writeAcceptCharset" value="false" /&gt;
-  &lt;/bean&gt;
-&lt;/mvc:message-converters&gt;
+<pre><code class="xml">
+  &lt;mvc:annotation-driven&gt;
+    &lt;mvc:message-converters register-defaults="true"&gt;
+      &lt;!-- 将StringHttpMessageConverter的默认编码设为UTF-8 --&gt;
+      &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+        &lt;constructor-arg value="UTF-8" /&gt;
+        &lt;property name="writeAcceptCharset" value="false" /&gt;
+      &lt;/bean&gt;
+    &lt;/mvc:message-converters&gt;
+  &lt;/mvc:annotation-driven&gt;
 </code></pre>
-
-<p>  &lt;/mvc:annotation-driven>
-```</p>
 
 <p>注意给<code>StringHttpMessageConverter</code>的属性<code>writeAcceptCharset</code>设置成<code>false</code></p>
 
@@ -416,20 +390,16 @@ public, /templates.</p>
 
 <p><code>RestTemplate</code>作为客户端发送请求时也有类似的问题，会带出一串过长的Charset。解决办法如下:</p>
 
-<p>```java
-static RestTemplate restTemplate = new RestTemplate();
-  static {</p>
-
-<pre><code>List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
-for (HttpMessageConverter&lt;?&gt; convert : converts) {
-  if (convert.getClass() == StringHttpMessageConverter.class) {
-    ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
+<pre><code class="java">static RestTemplate restTemplate = new RestTemplate();
+  static {
+    List&lt;HttpMessageConverter&lt;?&gt;&gt; converts = restTemplate.getMessageConverters();
+    for (HttpMessageConverter&lt;?&gt; convert : converts) {
+      if (convert.getClass() == StringHttpMessageConverter.class) {
+        ((StringHttpMessageConverter) convert).setWriteAcceptCharset(false);
+      }
+    }
   }
-}
 </code></pre>
-
-<p>  }
-```</p>
 
 <p>获得converts，然后对String的Convert进行设置</p>
 ]]></content>
@@ -479,60 +449,55 @@ public ModelAndView addDiy(@ModelAttribute("operator") String operator) {
 </ol>
 
 
-<p>```java
-@Controller
+<pre><code class="java">@Controller
 @RequestMapping(value = "/home")
 @SessionAttributes({"operator" })
-public class HomeController {</p>
+public class HomeController {
+    ...
+    /*登陆验证，成功后转至home action，验证失败则继续显示login页面*/
+    @RequestMapping(value="login", method = RequestMethod.POST)
+    public String loginPost(HttpSession session, Model model, String username, String password, String yzm, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("username", username);
+        redirectAttributes.addFlashAttribute("password", password);
 
-<pre><code>...
-/*登陆验证，成功后转至home action，验证失败则继续显示login页面*/
-@RequestMapping(value="login", method = RequestMethod.POST)
-public String loginPost(HttpSession session, Model model, String username, String password, String yzm, RedirectAttributes redirectAttributes) {
-    redirectAttributes.addFlashAttribute("username", username);
-    redirectAttributes.addFlashAttribute("password", password);
-
-    /*检测验证码是否正确*/
-    if (!StringUtils.equals((String) session.getAttribute("rand"), yzm)) {
-        redirectAttributes.addFlashAttribute("errorMessage", "验证码不正确，请输入正确的验证码");
-        return "redirect:/home/login";
-    }
-
-    CInterfaceOper ciop = null;
-    String status = null;
-    try {
-        ciop = new CInterfaceOper(username, password);
-        status = ciop.getUserStatus();
-    } catch (Exception e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-
-    if (StringUtils.equals(status, ConstVar.Status.Normal)) { //用户业务状体正常
-
-
-        //由modelattribute获取operator时使用
-        // redirect的情况下，加在model里面不会被sessionAttributes处理到session中
-        //model.addAttribute("operator", operator);
-        redirectAttributes.addFlashAttribute("operator", username);
-
-        String lastUri = (String)session.getAttribute(ConstVar.REQUEST_URI);
-        if (StringUtils.isEmpty(lastUri)) {
-            return "redirect:/home";
-        } else {
-            return "redirect:"+lastUri;
+        /*检测验证码是否正确*/
+        if (!StringUtils.equals((String) session.getAttribute("rand"), yzm)) {
+            redirectAttributes.addFlashAttribute("errorMessage", "验证码不正确，请输入正确的验证码");
+            return "redirect:/home/login";
         }
 
-    } else {
-        redirectAttributes.addFlashAttribute("errorMessage", "登录失败，请检查用户名和密码");
-        return "redirect:/home/login";
+        CInterfaceOper ciop = null;
+        String status = null;
+        try {
+            ciop = new CInterfaceOper(username, password);
+            status = ciop.getUserStatus();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if (StringUtils.equals(status, ConstVar.Status.Normal)) { //用户业务状体正常
+
+
+            //由modelattribute获取operator时使用
+            // redirect的情况下，加在model里面不会被sessionAttributes处理到session中
+            //model.addAttribute("operator", operator);
+            redirectAttributes.addFlashAttribute("operator", username);
+
+            String lastUri = (String)session.getAttribute(ConstVar.REQUEST_URI);
+            if (StringUtils.isEmpty(lastUri)) {
+                return "redirect:/home";
+            } else {
+                return "redirect:"+lastUri;
+            }
+
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "登录失败，请检查用户名和密码");
+            return "redirect:/home/login";
+        }
     }
 }
 </code></pre>
-
-<p>}</p>
-
-<p>```</p>
 
 <p>在<code>Controller</code>类前标注的<code>@sessionAttributes</code>就可以把action中的model包含的同名属性固化在session中。
 但是，因为整个action的返回不是直接渲染jsp，而是使用了<code>redirect:/home</code>这样的重定向语句，所以起初并没有奏效。
@@ -541,23 +506,19 @@ public String loginPost(HttpSession session, Model model, String username, Strin
 
 <p>在需要使用该session的属性action处，直接使用下面代码即可。</p>
 
-<p>```java
-@RequestMapping(value = "/addDiy", method = RequestMethod.GET)
+<pre><code class="java">@RequestMapping(value = "/addDiy", method = RequestMethod.GET)
 public ModelAndView addDiy(@ModelAttribute("operator") String operator) {
-  ModelAndView mav = new ModelAndView();</p>
-
-<pre><code>List&lt;RingRequest&gt; ringrequest=ConstVar.DIV_LIST;
-RingRequest ringrequest1=null;
-if(ringrequest!=null&amp;&amp;ringrequest.size()&gt;0){
-   ringrequest1=lingyingdiyService.add(ringrequest.get(0), operator);
-}
-</code></pre>
-
-<p>  mav.setViewName("webapp/ringDiy/lingyindiy4");
+  ModelAndView mav = new ModelAndView();
+    List&lt;RingRequest&gt; ringrequest=ConstVar.DIV_LIST;
+    RingRequest ringrequest1=null;
+    if(ringrequest!=null&amp;&amp;ringrequest.size()&gt;0){
+       ringrequest1=lingyingdiyService.add(ringrequest.get(0), operator);
+    }
+  mav.setViewName("webapp/ringDiy/lingyindiy4");
   mav.addObject("ringrequest", ringrequest1);
   return mav;
 }
-```</p>
+</code></pre>
 
 <p>在Session范围内使用注入的逻辑还是很清晰的，只是需要注意一下redirect带来的坑。</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-03-18T17:46:28+08:00</updated>
+  <updated>2021-08-09T17:55:02+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -114,15 +114,11 @@ CPU和硬盘通过总线相 <strong>连</strong> ；<br/>
 </ul>
 
 
-<p>CPU -----> 磁盘控制器（南桥） -----> 磁盘驱动器控制电路（硬盘内）</p>
+<p>CPU -----> 磁盘控制器（南桥） -----> 磁盘驱动器控制电路（硬盘内）<br/>
+    <code>接口1：磁盘控制器驱动程序</code>   <code>接口2：ATA/SCSI接口</code></p>
 
-<pre><code>`接口1：磁盘控制器驱动程序`   `接口2：ATA/SCSI接口`  
-</code></pre>
-
-<p>磁盘数据 -----> 驱动控制电路的缓存 -----> 磁盘控制器</p>
-
-<pre><code>  `内部传输速率`               `外部传输速率`  
-</code></pre>
+<p>磁盘数据 -----> 驱动控制电路的缓存 -----> 磁盘控制器<br/>
+      <code>内部传输速率</code>               <code>外部传输速率</code></p>
 
 <h3>并行的劣势</h3>
 
@@ -283,13 +279,13 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
     <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
     <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
 
-<p><code>bash
-ssh-keygen
+<pre><code class="bash">ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.203.198
-</code></p>
+</code></pre>
 
-<p>=======
-<strong>数据源的输入才是Hadoop方便地方</strong></p>
+<hr />
+
+<p><strong>数据源的输入才是Hadoop方便地方</strong></p>
 
 <p>定义一个数据源，可以是数据库也可以是文件夹，当然最好是hadoop的分布式文件夹<br/>
 读取数据的划分是hadoop自动进行的，开发只需要定义要数据源就行<br/>
