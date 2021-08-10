@@ -18,7 +18,7 @@ group :development do
   gem 'liquid', '~> 2.3.0'
   gem 'directory_watcher', '1.4.1'
 #  gem 'thin'
-  gem 'redcarpet', '~> 2.1.1'
+  gem 'redcarpet', '~> 3.5.1'
   gem 'albino'
 end
 
