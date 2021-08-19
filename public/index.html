@@ -9,15 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-select table_schema as '数据库', table_name as '表名', table_rows as '记录数', truncate(data_length/1024/1024, 2) as '数据容量(MB)', truncate( &hellip;">
+  <meta name="description" content="配置项的管理始终是一个很头疼的问题。虽然磕磕绊绊总能凑合着过，但确实一直不太优雅，甚至容易出错。
+人多的情况下，优雅是很难的，还是考虑怎么能减少损耗吧。所以抽空看了看Apollo的东西。 Apollo（阿波罗）是携程框架部门研发的开源配置管理中心，能够集中化管理应用不同环境、不同集群的配置， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +68,122 @@ select table_schema as '数据库', table_name as '表名', table_rows as '记�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2021/08/19/apollo-config/">Apollo Config</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-08-19T17:30:00+08:00" pubdate data-updated="true">Aug 19<span>th</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>配置项的管理始终是一个很头疼的问题。虽然磕磕绊绊总能凑合着过，但确实一直不太优雅，甚至容易出错。
+人多的情况下，优雅是很难的，还是考虑怎么能减少损耗吧。所以抽空看了看Apollo的东西。</p>
+
+<blockquote><p>Apollo（阿波罗）是携程框架部门研发的开源配置管理中心，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性。</p></blockquote>
+
+<p>也支持热更新、版本控制、分组等比较实用的特性，据说还能适应复杂的流程治理要求。简单适用了一下，确实不负盛名。</p>
+
+<h3>一. 安装并启动Apollo</h3>
+
+<p>因为是试用，目前使用的是单机版的Apollo，后续可能会进一步调研一下高可用版的发布。</p>
+
+<p>下载 <code>https://github.com/apolloconfig/apollo-build-scripts.git</code> ,  修改<code>demo.sh</code>里面的数据库配置信息和config server信息:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> apollo_config_db_url="jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8&serverTimezone=Asia/Shanghai"
+</span><span class='line'>-apollo_config_db_username=root
+</span><span class='line'>-apollo_config_db_password=
+</span><span class='line'>
+</span><span class='line'> # apollo portal db info
+</span><span class='line'> apollo_portal_db_url="jdbc:mysql://localhost:3306/ApolloPortalDB?characterEncoding=utf8&serverTimezone=Asia/Shanghai"
+</span><span class='line'>-apollo_portal_db_username=root
+</span><span class='line'>-apollo_portal_db_password=
+</span><span class='line'>
+</span><span class='line'>-config_server_url=http://localhost:8080
+</span><span class='line'>-admin_server_url=http://localhost:8090
+</span><span class='line'> eureka_service_url=$config_server_url/eureka/
+</span><span class='line'>-portal_url=http://localhost:8070</span></code></pre></td></tr></table></div></figure>
+
+
+<p>config server就是未来的meta server，portal就是管理界面。</p>
+
+<h3>二. Java端的配置</h3>
+
+<p>对于基于Sprint Boot的应用而言，最简单和顺利的方式是在bootstrap.yml里面。操作步骤如下</p>
+
+<ol>
+<li>加入依赖 <code>   implementation group: 'com.ctrip.framework.apollo', name: 'apollo-client', version: '1.8.0'</code></li>
+<li>除去原先对config的依赖 <code>compile('org.springframework.cloud:spring-cloud-starter-config')</code>, 删除整个application.yml文件</li>
+<li>删除application.yml文件，并把内容转移到apollo里面</li>
+<li>在bootstart.yml里面替换下面的文件</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apollo:
+</span><span class='line'>  bootstrap:
+</span><span class='line'>    enabled: true
+</span><span class='line'>    namespaces: application,application.yml
+</span><span class='line'>  meta: http://xxxx:8080
+</span><span class='line'>app:
+</span><span class='line'>  id: xxxxxx-compare-monit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>enabled表示启用apollo读取配置，namespaces是给出了需要拉取的namespace，默认只有application一个，如果是自己添加的yml，则需要按上面的配置加一个。
+meta就是config server的地址。app.id表示了应用的身份，需要和apollo的对应起来。</p>
+
+<p>如果再portal侧重新发布配置项，可以看见下面的日志</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>INFO 69947 --- [Apollo-Config-1] c.f.a.s.p.AutoUpdateConfigChangeListener : Auto update apollo changed value successfully, new value: 222222, key: bcmonit.xxxxxKey, beanName: xxxxxxProperties, field: com.xxxxx.address.util.xxxxxProperties.xxxxxKey
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -846,79 +955,6 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/">Git 删除已提交的文件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-09-10T17:41:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>按台湾人的说法，git属于一旦有东西加入，就像把方丈请到了庙里，是很难再请出去的。
-不过也不是完全不可能，但确实比较辛苦会。核心思想是通过<code>filter-branch</code>
-来强制删除有关的文件，过程中类似<code>rebase</code>。在全部的分支、tag、heads、replace的
-连接取消之后，再次gc，即可实际清除</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># 找出体积比较大的文件
-</span><span class='line'>git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '{print$1}' )"
-</span><span class='line'>
-</span><span class='line'># 进行删除
-</span><span class='line'>git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch .gradle' --prune-empty --tag-name-filter cat -- --all
-</span><span class='line'>
-</span><span class='line'># 实际删除
-</span><span class='line'>rm -rf .git/refs/original
-</span><span class='line'>git reflog expire --expire=now --all
-</span><span class='line'>git gc --prune=now</span></code></pre></td></tr></table></div></figure>
-
-
-<p>不过上述只是完成了本地的内容清理，远端的gitlab还有其他工作要做：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin --force 'refs/heads/*'
-</span><span class='line'>git push origin --force 'refs/tags/*'
-</span><span class='line'>git push origin --force 'refs/replace/*'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后，再去gitlab的settings里面手工执行一下Housekeeping，再次clone的话体积就小了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -932,6 +968,10 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
@@ -949,15 +989,11 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
         <a href="/blog/2021/02/16/dddde-lan-shu-he-hong-shu/">DDD的蓝书和红书</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/">Mybatis-plus的字段为复杂对象的读取和装载</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (92)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (93)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
