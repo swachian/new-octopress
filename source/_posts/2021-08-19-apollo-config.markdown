@@ -69,3 +69,7 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
 INFO 69947 --- [Apollo-Config-1] c.f.a.s.p.AutoUpdateConfigChangeListener : Auto update apollo changed value successfully, new value: 222222, key: bcmonit.xxxxxKey, beanName: xxxxxxProperties, field: com.xxxxx.address.util.xxxxxProperties.xxxxxKey
 
 ```
+
+更多的内容可以参考51cto上面的这篇文章，对apollo架构的介绍非常到位。
+
+https://blog.51cto.com/u_14643435/2866187
