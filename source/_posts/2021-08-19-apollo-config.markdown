@@ -70,6 +70,70 @@ INFO 69947 --- [Apollo-Config-1] c.f.a.s.p.AutoUpdateConfigChangeListener : Auto
 
 ```
 
-更多的内容可以参考51cto上面的这篇文章，对apollo架构的介绍非常到位。
+更多的内容可以参考官网的设计文档，对apollo架构的介绍非常到位。
 
-https://blog.51cto.com/u_14643435/2866187
+[Apollo官网设计文档](https://www.apolloconfig.com/#/zh/design/apollo-design)
+
+### 三. K8S 部署
+
+首先，要有一个K8S集群，可以参考 https://phoenixnap.com/kb/install-kubernetes-on-ubuntu 
+来进行操作。但一般会需要trouble shotting，比较好的工具是通过`journalctl -xeu kubelet` 查看日志来定位问题，然后一一解决
+
+- 安装docker   
+- 安装kubeadm kubelet kubectl  
+  * 用apt-mark hold把上面几个组件的版本**定**住  
+- Master
+  * 用kubeadm init --pod-network-cidr=10.244.0.0/16创建带网络信息的初始化  
+  * 用kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml部署虚拟网络  
+  * 查看pods的情况 kubectl get pods --all-namespaces
+- Workder  
+  * 用kubeadm join --discovery-token abcdef.1234567890abcdef --discovery-token-ca-cert-hash sha256:1234..cdef 1.2.3.4:6443 加入k8s集群。  
+  * 其中的token可以通过kubeadmin token list查看，通过kubeadmin token create --ttl 0创建，sha256是证书，不会失效  
+  * 通过kubectl get nodes查看节点状态  
+- 安装服务或应用  
+  * 使用helm  
+  * 使用kubectl apply  
+
+其次，安装helm，这是一个k8s的包管理工具:
+
+```
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+```
+
+查看安装效果
+
+`kubectl get pods --all-namespaces -o wide` ，这个可以输出实际跑在各节点上的效果 
+
+```
+AMESPACE     NAME                                                       READY   STATUS              RESTARTS   AGE     IP             NODE                   NOMINATED NODE   READINESS GATES
+default       apollo-service-dev-apollo-adminservice-566996fd98-mkdgm    1/1     Running             0          5d19h   10.244.2.3     master-node            <none>           <none>
+default       apollo-service-dev-apollo-configservice-7f955f6f66-x2mjw   0/1     ContainerCreating   0          5d19h   <none>         master-node            <none>           <none>
+default       my-nginx-5b56ccd65f-4rngp                                  1/1     Running             0          3h8m    10.244.2.2     master-node            <none>           <none>
+kube-system   coredns-78fcd69978-kb5td                                   1/1     Running             0          5d20h   10.244.0.3     office-wallet-dev-17   <none>           <none>
+kube-system   coredns-78fcd69978-l6m5g                                   1/1     Running             0          5d20h   10.244.0.2     office-wallet-dev-17   <none>           <none>
+kube-system   etcd-office-wallet-dev-17                                  1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+kube-system   kube-apiserver-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+kube-system   kube-controller-manager-office-wallet-dev-17               1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+kube-system   kube-flannel-ds-mbvzp                                      1/1     Running             0          18m     172.17.3.186   master-node            <none>           <none>
+kube-system   kube-flannel-ds-x75sk                                      1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+kube-system   kube-proxy-n6q7x                                           1/1     Running             0          18m     172.17.3.186   master-node            <none>           <none>
+kube-system   kube-proxy-ph8s5                                           1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+kube-system   kube-scheduler-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   <none>           <none>
+```
+
+### Helm 和 kubectl apply的区别
+
+默认kube提供的安装服务方法是`kubectl apply -f ./run-my-nginx.yaml`，适用于应用比较少的情况。如果应用很多，那么helm就可以帮上忙了。
+
+
+https://www.apolloconfig.com/#/zh/deployment/distributed-deployment-guide?id=_24-kubernetes%e9%83%a8%e7%bd%b2
+
+groovy for gradle: 
+
+https://docs.gradle.org/current/dsl/org.gradle.api.Task.html
+
+https://docs.gradle.org/current/userguide/tutorial_using_tasks.html

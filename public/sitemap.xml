@@ -1326,11 +1326,15 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/2021/08/19/apollo-config/</loc>
-        <lastmod>2021-08-19T21:03:54+08:00</lastmod>
+        <lastmod>2021-08-26T16:27:53+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action/</loc>
+        <lastmod>2021-10-04T21:34:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2021-08-19T21:03:54+08:00</lastmod>
+        <lastmod>2021-10-04T21:34:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1338,7 +1342,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2021-08-19T21:03:54+08:00</lastmod>
+        <lastmod>2021-10-04T21:34:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

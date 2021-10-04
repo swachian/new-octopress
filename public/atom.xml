@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-08-19T21:04:01+08:00</updated>
+  <updated>2021-10-04T21:34:04+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,372 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java 8 9 10 in action]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action/"/>
+    <updated>2021-10-04T21:22:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action</id>
+    <content type="html"><![CDATA[<h1>第一章</h1>
+
+<p>第一作者写作时是剑桥的在读博士，同时第三作者是他的博士生导师。第二作者是Redhat的Java 8普及牛人。</p>
+
+<p>Brian Goetz 把函数式编程内容加入Java，他也是java的架构师或者说设计师。</p>
+
+<p>本书涉及了Stream, lambda, Optional, CompletableFuture, RxJava, Akka(Java 9)</p>
+
+<p>Function变成一等公民，可以在运行时被传来传去。<br/>
+method reference :: syntax<br/>
+lambdas</p>
+
+<p>原本<code>filter</code>等功能可以添加在Collections类中。但为了匹配多核时代，引入了streams，对并行(parallelStream)和单行stream进行了区分。</p>
+
+<p><code>Default Method</code>的加入是为了让已经存在的List的实现类可以不需要自己单独去实现stream()这种方法，但这让java具备了多继承的能力。因为default method的加入，等于接口可以变成抽象类。</p>
+
+<h1>第二章 行为参数化传递的方式</h1>
+
+<p>lambda也是一个对象，也可以用工厂方法来构造</p>
+
+<p>以前传行为（策略模式）是需要构造一系列的接口和类，实现共同的接口，因为只能传入对象。<br/>
+Java匿名类：允许你声明和初始化一个类在同一时刻。<br/>
+lambda和上面的特性一样，但更加精简</p>
+
+<p>4个实际经常使用的匿名类接口：<code>Comparator</code>，<code>Runnable</code>，<code>Callable</code>，<code>EventHandler</code></p>
+
+<h1>第三章 Lambda</h1>
+
+<p>lambda可在Functional Interface(例如Predicate<T>）处被传入</p>
+
+<p><strong>Functional Inteface就是有且只有一个抽象方法的接口。</strong><br/>
+lambda就是一个Functional Interface的抽象方法的实现实例<br/>
+<code>@FunctionalInterface</code> 对于Functional Interface的标注，表示有且仅有一个抽象接口。</p>
+
+<p>FunctionalInterface就是lambda的引用类型，此时func也就变成了一个对象。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&lt;---&gt;</span> <span class="n">T</span> <span class="o">--&gt;</span> <span class="kt">boolean</span>
+</span><span class='line'><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&lt;---&gt;</span> <span class="n">T</span><span class="o">-&gt;</span> <span class="kt">void</span>
+</span><span class='line'><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="o">&lt;---&gt;</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">R</span>
+</span><span class='line'><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&lt;---&gt;</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">T</span>
+</span><span class='line'><span class="n">Runnable</span> <span class="o">&lt;---&gt;</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>因为boxing的性能原因，上面还有一系列Int Long 之类的变种</p>
+
+<h2>Target typing</h2>
+
+<p>先根据被使用的FI类型，比如<code>filter</code>是<code>Predicate</code>，那么意味着需要一个输入为<code>T</code>返回为<code>boolean</code>的lambda。<br/>
+同时，因为这个接口里面的method名字lambda并不会涉及，实际上叫什么也无所谓，所以要求FI只能有一个抽象method。这样的话，method具体叫什么就无所谓了，只要方法签名对的上，实现中甚至可以单独生成一个匿名类。</p>
+
+<p>local variable 和instance variable在lambda中的异同，因为他们在JVM里面的位置不同，local var是在本地func的stack里，实例变量则在Heap中。所以local var必须加上final或者实际上只被赋值一次。</p>
+
+<h2>3种Method Reference</h2>
+
+<ol>
+<li>静态方法 <code>Integer::parseInt</code></li>
+<li>实例方法 <code>String::length</code></li>
+<li>已存在对象的实例方法 <code>expensiveTransaction::insert</code></li>
+</ol>
+
+
+<p>上面的方法都可以传入多个参数，但同时也不需要使用()，毕竟只是声明需要使用这个method</p>
+
+<p>构造方法作为一种特殊的method，也能成为method Reference</p>
+
+<h2>FI中的其他接口（组合lambda表达式）</h2>
+
+<p>适用组合模式，其他接口都是<code>default</code>类型的接口</p>
+
+<p><code>Comparator: reversed, thenComparing</code><br/>
+<code>Predicate: and, or, not</code>  <br/>
+<code>Function: andThen, compose</code>, 注意二者的区别，前者是管道，后者是被compose的内容先执行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="o">;</span>
+</span><span class='line'><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">andThen</span><span class="o">(</span><span class="n">g</span><span class="o">);</span>
+</span><span class='line'><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;h(1): &quot;</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第四章 Stream</h1>
+
+<p><code>Collection</code>的弱点：1. 不能像SQL那样组合查询（declarative way 声明式查询） 2. 集合太大可能无法处理</p>
+
+<p>民间自发的：<code>Guava</code>，<code>Apache</code>，<code>lambdaj</code>（本书第二作者的作品）</p>
+
+<p><strong>Stream</strong>: Declarative, Composable, Parallelizable</p>
+
+<p>Compute on demand, a lazily constructed collection</p>
+
+<p>中间的操作：<code>filter</code>，<code>map</code>，<code>limit</code>， <code>sorted</code>，<code>distinct</code><br/>
+Terminal操作：<code>collect</code>，<code>count</code>，<code>forEach</code></p>
+
+<h1>第五章 Streams 2</h1>
+
+<h2>操作</h2>
+
+<p><strong>Filtering</strong>：<code>filter</code>, <code>distinct</code>, <code>takeWhile</code>(java 9), <code>dropWhile</code>(Java 9), <code>limit</code>, <code>skip</code><br/>
+<strong>Mapping</strong>: <code>map</code>, <code>flatMap</code>(入参也是一个stream）<br/>
+<strong>Finding</strong>：<code>anyMatch</code>，<code>allMatch</code>，<code>noneMatch</code>，<br/>
+               <code>findAny</code>（返回的是Optional，后面接ifPresent），<code>findFirst</code>，<code>findAny</code>和<code>findFirst</code>的功能基本相同，区别在于并行的时候<code>findFirst</code>更加严格<br/>
+<strong>Reducing</strong>（Terminal）：<code>reduce(0, Integer::sum)</code>, <code>reduce(Integer::sum</code>）但这个是返回<code>Optional</code>，因为可能stream里面没有元素<br/>
+    <code>reduce</code>之前可map成其他数字或对象</p>
+
+<p>Stateful和Stateless的操作，reduce是stateful的操作，但影响并不大。但是sorted，reverse，distinct就是需要空间很大的stateful操作了。</p>
+
+<p>对于<code>IntStream</code>，需要使用boxed让其回到普通stream，或者使用mapToObj，而<code>rangeClose</code>可以构造一个整型int stream出来</p>
+
+<h2>创建streams</h2>
+
+<p><code>Stream.ofNullable(value)</code>，<code>File.lines</code>，<code>Arrays.stream(numbers)</code>，<code>Stream.iterate</code></p>
+
+<h1>第六章 Collectiong 操作（Terminal的一种）</h1>
+
+<p>返回一个值<br/>
+返回一群元素<br/>
+分区域的一群元素</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">count</span><span class="o">()</span> <span class="o">&lt;---&gt;</span> <span class="n">Collectors</span><span class="o">.</span><span class="na">counting</span><span class="o">()</span>
+</span><span class='line'><span class="n">summingInt</span><span class="o">,</span> <span class="n">summarizingInt</span><span class="o">,</span>
+</span><span class='line'><span class="n">joining</span><span class="o">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>reducing</code>  &#8211;> Collector的reduce，更专业且支持并行操作，reducin接受<T>操作以及&lt;T, T,  T>两种函数接口</p>
+
+<p><code>groupingBy</code>
+的第二个参数可以继续传入groupingBy，实际上所有的collector都可以作为第二个参数传入。
+默认的groupingBy其实是<code>groupingBy(f, toList())</code></p>
+
+<p><code>collectingAndThen</code>也能传给groupingBy，在有些情况下可以去除里面返回的<code>Optional</code>，<code>maxBy(comparingInt(Dish::getCalories)), Optional::get)));</code>
+<code>mapping</code>也经常搭配<code>groupingBy</code>使用，第一个参数是做转换，第二个参数是对转换后的元素做terminal操作。</p>
+
+<p><code>partitioningBy</code>是一种特殊的，只有两个值（true or false）的<code>groupingBy</code></p>
+
+<h2>Collector接口</h2>
+
+<p>接口由4个function+1个特性枚举构成</p>
+
+<p>Collector&lt;T, ?, List<T>> toList() {
+        return new CollectorImpl&lt;>(ArrayList::new, List::add,
+                                   (left, right) -> { left.addAll(right); return left; },
+                                   CH_ID);
+    }</p>
+
+<p> static class CollectorImpl&lt;T, A, R> implements Collector&lt;T, A, R> {}</p>
+
+<p>特性枚举：<br/>
+1. UNORDERED<br/>
+2. CONCURRENT<br/>
+3. IDENTITY_FINISH</p>
+
+<p>第2个必须在第1个的基础上才起作用，第三个表明finisher不需要做什么事情</p>
+
+<p>Collector本身也提供了蓝图或者说框架，让开发更简单</p>
+
+<h1>第七章 并行处理</h1>
+
+<p>sequential 和 parallel，但只有最后一个被声明的生效</p>
+
+<p>RecursiveTask<Long>，实现里面的compute() 方法, <code>new ForkJoinPool().invoke(task)</code></p>
+
+<p><code>Spliterator</code>, 并行版的Iterator</p>
+
+<h1>第八章 Collection API 加强</h1>
+
+<p>Java 8:  <code>Arrays.asList</code><br/>
+Java 9: <code>List.of</code></p>
+
+<h1>第九章 重构、测试与调试</h1>
+
+<p>lambda在很多情况下可以替换模板方法，以及相当一部分原先需要使用oo来实现的策略模式</p>
+
+<p>多阶函数可以很好的完成职责链的工作，例如<code>thenCombine</code>，<code>thenComparing</code>，<code>and</code>，<code>or</code>等等</p>
+
+<p><code>peek</code>可用于打印stream的内容，调试打印日志时比较有用</p>
+
+<h1>第十章 DSL和lambdas</h1>
+
+<p>用builder模式来实现复杂的构造！！！在builder中实现DSL。</p>
+
+<h1>第十一章 Optional</h1>
+
+<p><code>Optional</code>在定义domain的时候，明显表达了给属性可能为空的事实。<br/>
+对于不会为空的字段，则不需要加上Optional。<br/>
+用<code>map</code>可以得到里面的值，用<code>flatMap</code>可以脱去可能得到的返回也是<code>Optional</code>的情况</p>
+
+<p>unwrapping的几个方法：<br/>
+<code>get()</code>，不值得用，和null检查差不多。<br/>
+<code>orElseGet()</code>， lazy 版本，最值得推荐<br/>
+<code>orElseThrow()</code></p>
+
+<p><code>map</code>, <code>flatMap</code>其实都是<code>Optional</code>也有的方法，默认返回会携带<code>Optional</code>，用于处理值为空的情况。</p>
+
+<h1>第十二章 New Date and Time Api</h1>
+
+<p>Java老的Date API的问题：<br/>
+1. Date的命名不清，月份从0开始，年份从1900开始，没有什么时区的概念<br/>
+2. 第二版出了Calendar，年份问题解决，但月份还是从0开始，两个并行带来了困扰<br/>
+3. DateFormat不是线程安全的类<br/>
+4. Calendar和Date都不是Value Object</p>
+
+<p>新的API主要抄袭了Joda-Time的内容</p>
+
+<p><code>LocalDate</code>，<code>LocalTime</code>，<code>LocalDateTime</code>由前两个组成，甚至localDate和localTime的实例中有<code>createLocalDateTime</code>的工厂方法  <br/>
+<code>TemporaField</code>是接口，<code>ChronoField</code>是枚举的实现</p>
+
+<p><code>Instant.now</code></p>
+
+<p><code>Duration</code>用于表示纳秒/毫秒级别的差异，可以用<code>between</code>工厂方法创建<br/>
+<code>Period</code> 用于表示天数之间的，可以用于<code>localDate</code>之间的差异<br/>
+<code>TemporalAdjusters</code>的静态方法，提供了很多传给<code>with</code>方法以生成新日期对象的调节对象</p>
+
+<p>可以选择实现自己的<code>TemporalAdjuster</code>接口或lambda</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="n">LocalDate</span> <span class="n">date2</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">nextWorkDay</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>LocalDate.parse</code>可以输入<code>DateTimeFormatter</code>，打印时直接<code>date.format()</code>里面输入需要的formatter</p>
+
+<p><code>ZoneRules</code>，<code>ZoneId</code>，<code>ZoneId</code>混合<code>LocalDateTime</code>等可以新生成`ZonedDateTime</p>
+
+<p><code>ZoneOffset</code>是ZoneId的子类</p>
+
+<h1>第十三章 Default Methods</h1>
+
+<p>为了兼容性，为了可以让API不断演进。</p>
+
+<p>接口可以<code>extends</code>接口，实现多个默认default，会带来多继承的问题。<br/>
+解决规则：<strong>Ambiguous的情况下会提示报错</strong>，要求用户再次选择。其他情况下：
+1. class里实现的优先级总是高于Interface；
+2. 子interface的优先级高于被继承的interface</p>
+
+<p><code>X.super.m(..)</code>的新syntax用于解决Ambiguous的情况。</p>
+
+<p>在子interface中定义一个抽象接口，那么实现该子interface的类就必须实现此方法，尽管在父interface里面可能存在default的实现。</p>
+
+<h1>第十四章 Module</h1>
+
+<p>Java的代码组织层级：1. class 2. package 3. jar，只有class拥有可见性的控制颗粒度，package和jar没有控制</p>
+
+<p>多了require和export用于定义package的开放状态和依赖情况，这些信息位于<code>module-info.java</code>中</p>
+
+<p>java运行时增加了参数 <code>--module-path</code> 可以在后面指定模块对应的jar包</p>
+
+<h1>第十五章 并发（Concurrency）和并行（Parallelism）</h1>
+
+<p>并发是事件类，就是一事未必，再起一事，然后等待几件事情同时得到结果。<br/>
+并行是起多个任务同时交给多个core去做。<br/>
+GC里也有类似的概念，并发GC意味着GC和应用程序同时进行，并行意味着应用程序暂停但开启多个线程做GC。</p>
+
+<p><code>t1.join()</code>在主线程里面等待t1结束；<br/>
+<code>Future&lt;Integer&gt; x</code>, <code>x.get()</code>会blocking等待线程运行结束</p>
+
+<p>Java的新异步方案：<br/>
+1. Java 8 中引入的<code>CompletableFuture</code>
+2. Java 9 中引入的<code>Flow</code></p>
+
+<p><code>CompletableFutur</code>e同时实现了组合接口，从而拥有了<code>thenCombil</code>e的能力。<code>executorService.submit</code>直接返回的就是<code>Future</code>，但使用<code>CompletableFuture</code>并不用再<code>submit</code>后取得返回，而是自己<code>new</code>了<code>CompletableFuture</code>后使用<code>get</code>。提交时也变成<code>executorService.submit(() -&gt; a.complete(f(x)))</code>;实际往往可以使用工厂方法创建。</p>
+
+<p>订阅模式的pressure和<strong>backpressure</strong>，后者主要用于订阅者确保压力不会太大</p>
+
+<h1>第十六章 CompletableFuture：可组合的异步编程</h1>
+
+<p>主要是为了实现<code>future</code>的组合，其次也是因为Java 8提供了新的机制。Doug Lea大爷出品。</p>
+
+<p><code>CompletableFuture.supplyAsync</code> 工厂方法，入参为Supplier接口，提供一个Callable的返回内容<br/>
+所以一般不需要先new一个CompletableFuture再调用complete方法。<br/>
+<code>CompletableFuture::join</code>方法可以等待多个join方法执行完成</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">N</span><span class="o">(</span><span class="n">threads</span><span class="o">)</span> <span class="o">=</span> <span class="n">N</span><span class="o">(</span><span class="n">CPU</span><span class="o">)*</span><span class="n">U</span><span class="o">(</span><span class="n">CPU</span><span class="o">)*(</span><span class="mi">1</span><span class="o">+</span><span class="n">W</span><span class="o">/</span><span class="n">C</span><span class="o">),</span> <span class="n">waitTime</span><span class="o">/</span><span class="n">computeTime</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.thenApply</code>, <code>.thenCompose</code>，有些结尾如<code>thenComposeAsync</code>，意味着可以不在同一个线程里被执行.<br/>
+<code>.thenCombine</code>则是互相不依赖的</p>
+
+<p>Java 9 加入的timeOut特性：orTimeOut（报告异常），completeOnTimeout（添加默认的返回值）</p>
+
+<p>第十七章 Reactive Programming</p>
+
+<p><code>java.util.concurrent.Flow</code>，该接口被众多第三方库实现：<br/>
+1. Akka（Lightbend）<br/>
+2. Reactor(Pivotal)<br/>
+3. RxJava(Netflix)<br/>
+4. Vert.x(Red Hat)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">subscribe</span><span class="o">(</span><span class="n">Subscriber</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">S</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">onSubscribe</span><span class="o">(</span><span class="n">Subscription</span> <span class="n">s</span><span class="o">);</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">onNext</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">);</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">t</span><span class="o">);</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">();</span>   
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>onSubscribe onNext* (onError | onComplete)?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscription</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">request</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">cancel</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Processor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Subscriber</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;,</span> <span class="n">Publisher</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第十八章 函数式考虑</h1>
+
+<p>Tail-recursive的递归可以优化性能，不过java不支持。这种方法的特点是函数的最后就是自己调用自己。</p>
+
+<h1>第十九章 FP技巧</h1>
+
+<p>Higher-order functions：传递函数作为参数的函数<br/>
+Curring：可以分批应用参数的函数，其实就是把值先保存在函数体中<br/>
+数据结构存储：每次新建一个（批）对象</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Apollo Config]]></title>
@@ -100,9 +466,108 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>更多的内容可以参考51cto上面的这篇文章，对apollo架构的介绍非常到位。</p>
+<p>更多的内容可以参考官网的设计文档，对apollo架构的介绍非常到位。</p>
 
-<p>https://blog.51cto.com/u_14643435/2866187</p>
+<p><a href="https://www.apolloconfig.com/#/zh/design/apollo-design">Apollo官网设计文档</a></p>
+
+<h3>三. K8S 部署</h3>
+
+<p>首先，要有一个K8S集群，可以参考 https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
+来进行操作。但一般会需要trouble shotting，比较好的工具是通过<code>journalctl -xeu kubelet</code> 查看日志来定位问题，然后一一解决</p>
+
+<ul>
+<li>安装docker</li>
+<li>安装kubeadm kubelet kubectl
+
+<ul>
+<li>用apt-mark hold把上面几个组件的版本<strong>定</strong>住</li>
+</ul>
+</li>
+<li>Master
+
+<ul>
+<li>用kubeadm init &#8211;pod-network-cidr=10.244.0.0/16创建带网络信息的初始化</li>
+<li>用kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml部署虚拟网络</li>
+<li>查看pods的情况 kubectl get pods &#8211;all-namespaces</li>
+</ul>
+</li>
+<li>Workder
+
+<ul>
+<li>用kubeadm join &#8211;discovery-token abcdef.1234567890abcdef &#8211;discovery-token-ca-cert-hash sha256:1234..cdef 1.2.3.4:6443 加入k8s集群。</li>
+<li>其中的token可以通过kubeadmin token list查看，通过kubeadmin token create &#8211;ttl 0创建，sha256是证书，不会失效</li>
+<li>通过kubectl get nodes查看节点状态</li>
+</ul>
+</li>
+<li>安装服务或应用
+
+<ul>
+<li>使用helm</li>
+<li>使用kubectl apply</li>
+</ul>
+</li>
+</ul>
+
+
+<p>其次，安装helm，这是一个k8s的包管理工具:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+</span><span class='line'>sudo apt-get install apt-transport-https --yes
+</span><span class='line'>echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install helm</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看安装效果</p>
+
+<p><code>kubectl get pods --all-namespaces -o wide</code> ，这个可以输出实际跑在各节点上的效果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AMESPACE     NAME                                                       READY   STATUS              RESTARTS   AGE     IP             NODE                   NOMINATED NODE   READINESS GATES
+</span><span class='line'>default       apollo-service-dev-apollo-adminservice-566996fd98-mkdgm    1/1     Running             0          5d19h   10.244.2.3     master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>default       apollo-service-dev-apollo-configservice-7f955f6f66-x2mjw   0/1     ContainerCreating   0          5d19h   &lt;none&gt;         master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>default       my-nginx-5b56ccd65f-4rngp                                  1/1     Running             0          3h8m    10.244.2.2     master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   coredns-78fcd69978-kb5td                                   1/1     Running             0          5d20h   10.244.0.3     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   coredns-78fcd69978-l6m5g                                   1/1     Running             0          5d20h   10.244.0.2     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   etcd-office-wallet-dev-17                                  1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-apiserver-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-controller-manager-office-wallet-dev-17               1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-flannel-ds-mbvzp                                      1/1     Running             0          18m     172.17.3.186   master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-flannel-ds-x75sk                                      1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-proxy-n6q7x                                           1/1     Running             0          18m     172.17.3.186   master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-proxy-ph8s5                                           1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-scheduler-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Helm 和 kubectl apply的区别</h3>
+
+<p>默认kube提供的安装服务方法是<code>kubectl apply -f ./run-my-nginx.yaml</code>，适用于应用比较少的情况。如果应用很多，那么helm就可以帮上忙了。</p>
+
+<p>https://www.apolloconfig.com/#/zh/deployment/distributed-deployment-guide?id=_24-kubernetes%e9%83%a8%e7%bd%b2</p>
+
+<p>groovy for gradle:</p>
+
+<p>https://docs.gradle.org/current/dsl/org.gradle.api.Task.html</p>
+
+<p>https://docs.gradle.org/current/userguide/tutorial_using_tasks.html</p>
 ]]></content>
   </entry>
   
@@ -1276,194 +1741,6 @@ Jenkins的buidl periodically可以从多台机器上收集日志
 <p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
 
 <p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rancher and k8s]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/04/rancher-and-k8s/"/>
-    <updated>2019-10-04T16:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/04/rancher-and-k8s</id>
-    <content type="html"><![CDATA[<p>今年不期而遇而使用的技术很多，除了大数据flink，就是rancher/k8s/docker了。</p>
-
-<p>docker的话，几年前已经有过接触，总体感觉有价值，但对java来讲，帮助就比较有限了。<br/>
-k8s是对docker的编排，其实就是把docker作为基本的单元，让各种服务可以在一个抽象的层面跑起来，在服务监控、伸缩等方面都提供了很好的抽象和封装，易于运维人员操作。<br/>
-而Rancher，个人理解是k8s的编排，可能没那么复杂，但站在使用的角度，就便于安装、编辑、使用k8s的UI界面，当然，除了界面，幕后还有很多组件用于搭建一套k8s，启动相应的服务。</p>
-
-<h2>安装</h2>
-
-<p>因为他们都是基于docker的，所以前提需要安装好docker。然而，docker又是离不开OS的，所以前提是要装好OS。至于是物理主机还是虚机，倒是无所谓的。我选择使用Ubuntu 18.04 + Docker 19.03.2的组合，官方是到18.09.x。[https://rancher.com/docs/rancher/v2.x/en/installation/requirements/]</p>
-
-<h3>安装docker</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 1. 移除旧版本</span>
-</span><span class='line'>sudo apt-get remove docker docker-engine docker.io
-</span><span class='line'>
-</span><span class='line'><span class="c"># 2. 更新apt包索引</span>
-</span><span class='line'>sudo apt update
-</span><span class='line'>
-</span><span class='line'><span class="c"># 3. 安装https支持包</span>
-</span><span class='line'>sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-</span><span class='line'>
-</span><span class='line'><span class="c"># 4. 添加Docker官方GPG key</span>
-</span><span class='line'>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-</span><span class='line'>
-</span><span class='line'><span class="c"># 5. 添加稳定版的仓库源(按架构选择)</span>
-</span><span class='line'>sudo add-apt-repository <span class="se">\</span>
-</span><span class='line'>   <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span>
-</span><span class='line'><span class="s2">   $(lsb_release -cs) \</span>
-</span><span class='line'><span class="s2">   stable&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 6. 更新apt包索引 </span>
-</span><span class='line'>sudo apt update
-</span><span class='line'>
-</span><span class='line'><span class="c"># 7. 安装</span>
-</span><span class='line'>sudo apt-get install docker-ce
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>安装rancher</h3>
-
-<p>执行下面命令即可</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -d --restart<span class="o">=</span>unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>直接用docker启动rancher镜像，并映射80和443端口给rancher的UI界面。随后用浏览器即可访问到rancher服务，用admin账号登录进去后，就可以进行后续的操作。</p>
-
-<h3>增加集群</h3>
-
-<p>在rancher的浏览器界面里，通过<code>Add Cluster</code>即可以增加节点。<br/>
-首先需要增加的是etcd和controlpanel节点，这两个属于rancher的幕后服务。<br/>
-命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
-</span><span class='line'>
-</span><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&#8211;etcd和&#8211;controlpanel可部署在同一台机器上。然后需要耐心等待一段时间，因为会起很多个docker的服务。</p>
-
-<p>光有控制资源是不够的，还需要加入worker资源，这个就比较方便了，可以随时扩容。</p>
-
-<h3>新建服务</h3>
-
-<p>上述弄完以后，就可以发布新的服务了。</p>
-
-<p>到新建的集群中选择<code>Deploy</code>，拉取对应的镜像，设置好pod数量，就可以拉起服务。不过，这个对应的镜像主要是公共的镜像，如果私有镜像，则需要另外进行配置。</p>
-
-<h2>新建私有docker仓库</h2>
-
-<p>本身构造仓库并不复杂，逻辑上只要找一台虚机启动一个docker的registry服务，然后在rancher浏览器的<code>Resources-&gt;Registries</code>中注册一下这个地址即可。<br/>
-但事实上永远不会那么简单。主要原因在于docker默认是需要https才能对外提供服务，这就需要进行很多额外的配置。当然，主要是私有仓库的配置。可以参考下面几个链接：
-https://rancher.com/docs/rancher/v2.x/en/k8s-in-rancher/registries/
-https://docs.docker.com/registry/deploying/
-https://docs.docker.com/registry/insecure/</p>
-
-<p>最后形成的做法如下。</p>
-
-<p>一. 选择一台虚机作为registry主机，最好不要和rancher是一台机器，这样避免争抢443端口。在这台机器上先生成一下证书：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir certs
-</span><span class='line'>openssl req <span class="se">\</span>
-</span><span class='line'>  -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key <span class="se">\</span>
-</span><span class='line'>  -x509 -days 365 -out certs/domain.crt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这里面要注意cn需要输入自己定义的域名，比如mydocker.co</p>
-
-<p>二. 将生成的<code>domain.crt</code>改名为<code>ca.crt</code>, 上传或复制为其他docker主机的<code>/etc/docker/certs.d/mydocker.co/ca.crt</code>，绑定这些主机的<code>hosts</code>文件中该域名的指向到上一步的ip中，或者也可以修改域名服务器里该域名</p>
-
-<p>三. 在第一台机器上运行docker的registry服务。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -d <span class="se">\</span>
-</span><span class='line'>  --restart<span class="o">=</span>always <span class="se">\</span>
-</span><span class='line'>  --name registry <span class="se">\</span>
-</span><span class='line'>  -v <span class="s2">&quot;/opt/registry/certs&quot;</span>:/certs <span class="se">\</span>
-</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_ADDR</span><span class="o">=</span>0.0.0.0:443 <span class="se">\</span>
-</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="o">=</span>/certs/domain.crt <span class="se">\</span>
-</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_TLS_KEY</span><span class="o">=</span>/certs/domain.key <span class="se">\</span>
-</span><span class='line'>  -p 443:443 <span class="se">\</span>
-</span><span class='line'>  registry:2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
-
-<p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
-
-<h2>k8s的dns服务变迁</h2>
-
-<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
-
-<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
-dnsmasq: 为客户端容器提供dns服务<br/>
-sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
-
-<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
-
-<h2>ingress-nginx</h2>
-
-<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
-通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
-
-<h2>核心组件</h2>
-
-<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
-
-<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
-* RC Controller<br/>
-* Node Controller<br/>
-* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
-* Namespace Controller<br/>
-* Service Controller &amp; Endpoints Controller</p>
-
-<p>  Kubelet是每个Node上k8s的代理，</p>
-
-<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
 ]]></content>
   </entry>
   

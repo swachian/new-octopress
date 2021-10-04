@@ -176,9 +176,108 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>更多的内容可以参考51cto上面的这篇文章，对apollo架构的介绍非常到位。</p>
+<p>更多的内容可以参考官网的设计文档，对apollo架构的介绍非常到位。</p>
 
-<p>https://blog.51cto.com/u_14643435/2866187</p>
+<p><a href="https://www.apolloconfig.com/#/zh/design/apollo-design">Apollo官网设计文档</a></p>
+
+<h3>三. K8S 部署</h3>
+
+<p>首先，要有一个K8S集群，可以参考 https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
+来进行操作。但一般会需要trouble shotting，比较好的工具是通过<code>journalctl -xeu kubelet</code> 查看日志来定位问题，然后一一解决</p>
+
+<ul>
+<li>安装docker</li>
+<li>安装kubeadm kubelet kubectl
+
+<ul>
+<li>用apt-mark hold把上面几个组件的版本<strong>定</strong>住</li>
+</ul>
+</li>
+<li>Master
+
+<ul>
+<li>用kubeadm init &#8211;pod-network-cidr=10.244.0.0/16创建带网络信息的初始化</li>
+<li>用kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml部署虚拟网络</li>
+<li>查看pods的情况 kubectl get pods &#8211;all-namespaces</li>
+</ul>
+</li>
+<li>Workder
+
+<ul>
+<li>用kubeadm join &#8211;discovery-token abcdef.1234567890abcdef &#8211;discovery-token-ca-cert-hash sha256:1234..cdef 1.2.3.4:6443 加入k8s集群。</li>
+<li>其中的token可以通过kubeadmin token list查看，通过kubeadmin token create &#8211;ttl 0创建，sha256是证书，不会失效</li>
+<li>通过kubectl get nodes查看节点状态</li>
+</ul>
+</li>
+<li>安装服务或应用
+
+<ul>
+<li>使用helm</li>
+<li>使用kubectl apply</li>
+</ul>
+</li>
+</ul>
+
+
+<p>其次，安装helm，这是一个k8s的包管理工具:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+</span><span class='line'>sudo apt-get install apt-transport-https --yes
+</span><span class='line'>echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install helm</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看安装效果</p>
+
+<p><code>kubectl get pods --all-namespaces -o wide</code> ，这个可以输出实际跑在各节点上的效果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AMESPACE     NAME                                                       READY   STATUS              RESTARTS   AGE     IP             NODE                   NOMINATED NODE   READINESS GATES
+</span><span class='line'>default       apollo-service-dev-apollo-adminservice-566996fd98-mkdgm    1/1     Running             0          5d19h   10.244.2.3     master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>default       apollo-service-dev-apollo-configservice-7f955f6f66-x2mjw   0/1     ContainerCreating   0          5d19h   &lt;none&gt;         master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>default       my-nginx-5b56ccd65f-4rngp                                  1/1     Running             0          3h8m    10.244.2.2     master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   coredns-78fcd69978-kb5td                                   1/1     Running             0          5d20h   10.244.0.3     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   coredns-78fcd69978-l6m5g                                   1/1     Running             0          5d20h   10.244.0.2     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   etcd-office-wallet-dev-17                                  1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-apiserver-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-controller-manager-office-wallet-dev-17               1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-flannel-ds-mbvzp                                      1/1     Running             0          18m     172.17.3.186   master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-flannel-ds-x75sk                                      1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-proxy-n6q7x                                           1/1     Running             0          18m     172.17.3.186   master-node            &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-proxy-ph8s5                                           1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</span><span class='line'>kube-system   kube-scheduler-office-wallet-dev-17                        1/1     Running             0          5d20h   172.17.3.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Helm 和 kubectl apply的区别</h3>
+
+<p>默认kube提供的安装服务方法是<code>kubectl apply -f ./run-my-nginx.yaml</code>，适用于应用比较少的情况。如果应用很多，那么helm就可以帮上忙了。</p>
+
+<p>https://www.apolloconfig.com/#/zh/deployment/distributed-deployment-guide?id=_24-kubernetes%e9%83%a8%e7%bd%b2</p>
+
+<p>groovy for gradle:</p>
+
+<p>https://docs.gradle.org/current/dsl/org.gradle.api.Task.html</p>
+
+<p>https://docs.gradle.org/current/userguide/tutorial_using_tasks.html</p>
 </div>
 
 
@@ -227,6 +326,8 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
         <a class="basic-alignment left" href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/" title="Previous Post: mysql的库表容量查询">&laquo; mysql的库表容量查询</a>
       
       
+        <a class="basic-alignment right" href="/blog/2021/10/04/java-8-9-10-in-action/" title="Next Post: Java 8 9 10 in action">Java 8 9 10 in action &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -238,6 +339,10 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
@@ -255,15 +360,11 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
         <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/02/16/dddde-lan-shu-he-hong-shu/">DDD的蓝书和红书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (93)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (94)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>

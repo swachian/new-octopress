@@ -1,0 +1,343 @@
+---
+layout: post
+title: "Java 8 9 10 in action"
+date: 2021-10-04 21:22
+comments: true
+categories: 
+- 技术
+- java
+---
+
+
+# 第一章
+
+第一作者写作时是剑桥的在读博士，同时第三作者是他的博士生导师。第二作者是Redhat的Java 8普及牛人。
+
+Brian Goetz 把函数式编程内容加入Java，他也是java的架构师或者说设计师。
+
+本书涉及了Stream, lambda, Optional, CompletableFuture, RxJava, Akka(Java 9)
+
+Function变成一等公民，可以在运行时被传来传去。  
+method reference :: syntax  
+lambdas  
+
+原本`filter`等功能可以添加在Collections类中。但为了匹配多核时代，引入了streams，对并行(parallelStream)和单行stream进行了区分。
+
+`Default Method`的加入是为了让已经存在的List的实现类可以不需要自己单独去实现stream()这种方法，但这让java具备了多继承的能力。因为default method的加入，等于接口可以变成抽象类。
+
+
+
+# 第二章 行为参数化传递的方式
+
+lambda也是一个对象，也可以用工厂方法来构造
+
+以前传行为（策略模式）是需要构造一系列的接口和类，实现共同的接口，因为只能传入对象。  
+Java匿名类：允许你声明和初始化一个类在同一时刻。  
+lambda和上面的特性一样，但更加精简
+
+4个实际经常使用的匿名类接口：`Comparator`，`Runnable`，`Callable`，`EventHandler`
+
+# 第三章 Lambda
+
+lambda可在Functional Interface(例如Predicate<T>）处被传入
+
+**Functional Inteface就是有且只有一个抽象方法的接口。**  
+lambda就是一个Functional Interface的抽象方法的实现实例  
+`@FunctionalInterface` 对于Functional Interface的标注，表示有且仅有一个抽象接口。
+
+FunctionalInterface就是lambda的引用类型，此时func也就变成了一个对象。  
+``` java
+Predicate<T> <---> T --> boolean
+Consumer<T> <---> T-> void
+Function<T, R> <---> T -> R
+Supplier<T> <---> () -> T
+Runnable <---> () -> {}
+```
+
+因为boxing的性能原因，上面还有一系列Int Long 之类的变种
+
+## Target typing
+
+先根据被使用的FI类型，比如`filter`是`Predicate`，那么意味着需要一个输入为`T`返回为`boolean`的lambda。  
+同时，因为这个接口里面的method名字lambda并不会涉及，实际上叫什么也无所谓，所以要求FI只能有一个抽象method。这样的话，method具体叫什么就无所谓了，只要方法签名对的上，实现中甚至可以单独生成一个匿名类。
+
+local variable 和instance variable在lambda中的异同，因为他们在JVM里面的位置不同，local var是在本地func的stack里，实例变量则在Heap中。所以local var必须加上final或者实际上只被赋值一次。
+
+## 3种Method Reference
+
+1. 静态方法 `Integer::parseInt`  
+2. 实例方法 `String::length`  
+3. 已存在对象的实例方法 `expensiveTransaction::insert`
+
+上面的方法都可以传入多个参数，但同时也不需要使用()，毕竟只是声明需要使用这个method
+
+构造方法作为一种特殊的method，也能成为method Reference  
+
+## FI中的其他接口（组合lambda表达式）
+
+适用组合模式，其他接口都是`default`类型的接口
+
+`Comparator: reversed, thenComparing`  
+`Predicate: and, or, not`    
+`Function: andThen, compose`, 注意二者的区别，前者是管道，后者是被compose的内容先执行
+
+```java
+    Function<Integer, Integer> f = x -> x + 1;
+    Function<Integer, Integer> g = x -> x * 2;
+    Function<Integer, Integer> h = f.andThen(g);
+    System.out.println("h(1): " + h.apply(1));
+
+```
+
+# 第四章 Stream
+
+`Collection`的弱点：1. 不能像SQL那样组合查询（declarative way 声明式查询） 2. 集合太大可能无法处理
+
+民间自发的：`Guava`，`Apache`，`lambdaj`（本书第二作者的作品）
+
+**Stream**: Declarative, Composable, Parallelizable
+
+Compute on demand, a lazily constructed collection
+
+中间的操作：`filter`，`map`，`limit`， `sorted`，`distinct`  
+Terminal操作：`collect`，`count`，`forEach`
+
+# 第五章 Streams 2
+
+## 操作
+
+**Filtering**：`filter`, `distinct`, `takeWhile`(java 9), `dropWhile`(Java 9), `limit`, `skip`  
+**Mapping**: `map`, `flatMap`(入参也是一个stream）  
+**Finding**：`anyMatch`，`allMatch`，`noneMatch`，  
+               `findAny`（返回的是Optional，后面接ifPresent），`findFirst`，`findAny`和`findFirst`的功能基本相同，区别在于并行的时候`findFirst`更加严格  
+**Reducing**（Terminal）：`reduce(0, Integer::sum)`, `reduce(Integer::sum`）但这个是返回`Optional`，因为可能stream里面没有元素  
+    `reduce`之前可map成其他数字或对象  
+
+Stateful和Stateless的操作，reduce是stateful的操作，但影响并不大。但是sorted，reverse，distinct就是需要空间很大的stateful操作了。
+
+对于`IntStream`，需要使用boxed让其回到普通stream，或者使用mapToObj，而`rangeClose`可以构造一个整型int stream出来
+
+## 创建streams
+
+`Stream.ofNullable(value)`，`File.lines`，`Arrays.stream(numbers)`，`Stream.iterate`
+
+
+# 第六章 Collectiong 操作（Terminal的一种）
+
+返回一个值  
+返回一群元素  
+分区域的一群元素  
+
+```java
+count() <---> Collectors.counting()  
+summingInt, summarizingInt,  
+joining()
+```
+
+`reducing`  --> Collector的reduce，更专业且支持并行操作，reducin接受<T>操作以及<T, T,  T>两种函数接口
+
+`groupingBy` 
+的第二个参数可以继续传入groupingBy，实际上所有的collector都可以作为第二个参数传入。
+默认的groupingBy其实是`groupingBy(f, toList())`
+
+`collectingAndThen`也能传给groupingBy，在有些情况下可以去除里面返回的`Optional`，`maxBy(comparingInt(Dish::getCalories)), Optional::get)));`
+`mapping`也经常搭配`groupingBy`使用，第一个参数是做转换，第二个参数是对转换后的元素做terminal操作。
+
+`partitioningBy`是一种特殊的，只有两个值（true or false）的`groupingBy`
+
+
+## Collector接口
+
+接口由4个function+1个特性枚举构成
+
+Collector<T, ?, List<T>> toList() {
+        return new CollectorImpl<>(ArrayList::new, List::add,
+                                   (left, right) -> { left.addAll(right); return left; },
+                                   CH_ID);
+    }
+
+ static class CollectorImpl<T, A, R> implements Collector<T, A, R> {}
+
+特性枚举：  
+1. UNORDERED  
+2. CONCURRENT  
+3. IDENTITY_FINISH  
+
+第2个必须在第1个的基础上才起作用，第三个表明finisher不需要做什么事情
+
+Collector本身也提供了蓝图或者说框架，让开发更简单
+
+# 第七章 并行处理
+
+sequential 和 parallel，但只有最后一个被声明的生效
+
+RecursiveTask<Long>，实现里面的compute() 方法, `new ForkJoinPool().invoke(task)`
+
+`Spliterator`, 并行版的Iterator
+
+# 第八章 Collection API 加强
+
+
+Java 8:  `Arrays.asList`  
+Java 9: `List.of`
+
+
+# 第九章 重构、测试与调试
+
+lambda在很多情况下可以替换模板方法，以及相当一部分原先需要使用oo来实现的策略模式
+
+多阶函数可以很好的完成职责链的工作，例如`thenCombine`，`thenComparing`，`and`，`or`等等
+
+`peek`可用于打印stream的内容，调试打印日志时比较有用
+
+# 第十章 DSL和lambdas
+
+用builder模式来实现复杂的构造！！！在builder中实现DSL。
+
+# 第十一章 Optional
+
+`Optional`在定义domain的时候，明显表达了给属性可能为空的事实。  
+对于不会为空的字段，则不需要加上Optional。  
+用`map`可以得到里面的值，用`flatMap`可以脱去可能得到的返回也是`Optional`的情况
+
+unwrapping的几个方法：  
+`get()`，不值得用，和null检查差不多。  
+`orElseGet()`， lazy 版本，最值得推荐  
+`orElseThrow()`
+
+
+`map`, `flatMap`其实都是`Optional`也有的方法，默认返回会携带`Optional`，用于处理值为空的情况。
+
+
+# 第十二章 New Date and Time Api
+
+Java老的Date API的问题：  
+1. Date的命名不清，月份从0开始，年份从1900开始，没有什么时区的概念  
+2. 第二版出了Calendar，年份问题解决，但月份还是从0开始，两个并行带来了困扰  
+3. DateFormat不是线程安全的类  
+4. Calendar和Date都不是Value Object  
+
+新的API主要抄袭了Joda-Time的内容  
+
+`LocalDate`，`LocalTime`，`LocalDateTime`由前两个组成，甚至localDate和localTime的实例中有`createLocalDateTime`的工厂方法    
+`TemporaField`是接口，`ChronoField`是枚举的实现
+
+`Instant.now`
+
+`Duration`用于表示纳秒/毫秒级别的差异，可以用`between`工厂方法创建  
+`Period` 用于表示天数之间的，可以用于`localDate`之间的差异  
+`TemporalAdjusters`的静态方法，提供了很多传给`with`方法以生成新日期对象的调节对象
+
+可以选择实现自己的`TemporalAdjuster`接口或lambda  
+```java
+ LocalDate date2 = date.with(nextWorkDay());
+```
+
+`LocalDate.parse`可以输入`DateTimeFormatter`，打印时直接`date.format()`里面输入需要的formatter
+
+`ZoneRules`，`ZoneId`，`ZoneId`混合`LocalDateTime`等可以新生成`ZonedDateTime   
+
+`ZoneOffset`是ZoneId的子类
+
+# 第十三章 Default Methods
+
+为了兼容性，为了可以让API不断演进。  
+
+接口可以`extends`接口，实现多个默认default，会带来多继承的问题。  
+解决规则：**Ambiguous的情况下会提示报错**，要求用户再次选择。其他情况下：
+1. class里实现的优先级总是高于Interface；
+2. 子interface的优先级高于被继承的interface
+
+`X.super.m(..)`的新syntax用于解决Ambiguous的情况。
+
+在子interface中定义一个抽象接口，那么实现该子interface的类就必须实现此方法，尽管在父interface里面可能存在default的实现。
+
+# 第十四章 Module
+
+Java的代码组织层级：1. class 2. package 3. jar，只有class拥有可见性的控制颗粒度，package和jar没有控制
+
+多了require和export用于定义package的开放状态和依赖情况，这些信息位于`module-info.java`中
+
+java运行时增加了参数 `--module-path` 可以在后面指定模块对应的jar包  
+
+
+
+# 第十五章 并发（Concurrency）和并行（Parallelism）
+
+并发是事件类，就是一事未必，再起一事，然后等待几件事情同时得到结果。  
+并行是起多个任务同时交给多个core去做。  
+GC里也有类似的概念，并发GC意味着GC和应用程序同时进行，并行意味着应用程序暂停但开启多个线程做GC。  
+
+`t1.join()`在主线程里面等待t1结束；  
+`Future<Integer> x`, `x.get()`会blocking等待线程运行结束
+
+Java的新异步方案：  
+1. Java 8 中引入的`CompletableFuture ` 
+2. Java 9 中引入的`Flow ` 
+
+`CompletableFutur`e同时实现了组合接口，从而拥有了`thenCombil`e的能力。`executorService.submit`直接返回的就是`Future`，但使用`CompletableFuture`并不用再`submit`后取得返回，而是自己`new`了`CompletableFuture`后使用`get`。提交时也变成`executorService.submit(() -> a.complete(f(x)))`;实际往往可以使用工厂方法创建。
+
+订阅模式的pressure和**backpressure**，后者主要用于订阅者确保压力不会太大
+
+# 第十六章 CompletableFuture：可组合的异步编程
+
+主要是为了实现`future`的组合，其次也是因为Java 8提供了新的机制。Doug Lea大爷出品。
+
+`CompletableFuture.supplyAsync` 工厂方法，入参为Supplier接口，提供一个Callable的返回内容  
+所以一般不需要先new一个CompletableFuture再调用complete方法。  
+`CompletableFuture::join`方法可以等待多个join方法执行完成  
+
+```java
+N(threads) = N(CPU)*U(CPU)*(1+W/C), waitTime/computeTime
+```
+
+`.thenApply`, `.thenCompose`，有些结尾如`thenComposeAsync`，意味着可以不在同一个线程里被执行.  
+`.thenCombine`则是互相不依赖的
+
+Java 9 加入的timeOut特性：orTimeOut（报告异常），completeOnTimeout（添加默认的返回值）
+
+第十七章 Reactive Programming
+
+`java.util.concurrent.Flow`，该接口被众多第三方库实现：  
+1. Akka（Lightbend）  
+2. Reactor(Pivotal)  
+3. RxJava(Netflix)  
+4. Vert.x(Red Hat) 
+
+```java
+public interface Publisher<T> {
+	void subscribe(Subscriber<? super T> S);
+}
+```
+
+```java
+public interface Subscriber<T> {
+	void onSubscribe(Subscription s);
+	void onNext(T t);
+	void onError(Throwable t);
+	void onComplete();	
+} 
+```
+onSubscribe onNext* (onError | onComplete)?
+
+```java
+public interface Subscription {
+	void request(long n);
+	void cancel();
+}
+```
+
+```java
+public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {}
+```
+
+# 第十八章 函数式考虑
+
+Tail-recursive的递归可以优化性能，不过java不支持。这种方法的特点是函数的最后就是自己调用自己。
+
+# 第十九章 FP技巧
+
+Higher-order functions：传递函数作为参数的函数  
+Curring：可以分批应用参数的函数，其实就是把值先保存在函数体中  
+数据结构存储：每次新建一个（批）对象  
+

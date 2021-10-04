@@ -9,9 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="初次接触敏捷的概念是很早的事情了，可能始自于Uncle Bob的那本ASD。
-其后，因为一直以来认为的软件开发很多事情在做之前其实很多是不确定的，因此日常的开发中虽然没有采用站会之类的形势，也没有单独的产品经理，
-但实际上是按照敏捷的精神在进行开发。这些精神包括： 个体和互动高于流程和工具（ &hellip;">
+  <meta name="description" content="今年不期而遇而使用的技术很多，除了大数据flink，就是rancher/k8s/docker了。 docker的话，几年前已经有过接触，总体感觉有价值，但对java来讲，帮助就比较有限了。
+k8s是对docker的编排，其实就是把docker作为基本的单元，让各种服务可以在一个抽象的层面跑起来， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,221 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/10/04/rancher-and-k8s/">Rancher and K8s</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-04T16:48:00+08:00" pubdate data-updated="true">Oct 4<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今年不期而遇而使用的技术很多，除了大数据flink，就是rancher/k8s/docker了。</p>
+
+<p>docker的话，几年前已经有过接触，总体感觉有价值，但对java来讲，帮助就比较有限了。<br/>
+k8s是对docker的编排，其实就是把docker作为基本的单元，让各种服务可以在一个抽象的层面跑起来，在服务监控、伸缩等方面都提供了很好的抽象和封装，易于运维人员操作。<br/>
+而Rancher，个人理解是k8s的编排，可能没那么复杂，但站在使用的角度，就便于安装、编辑、使用k8s的UI界面，当然，除了界面，幕后还有很多组件用于搭建一套k8s，启动相应的服务。</p>
+
+<h2>安装</h2>
+
+<p>因为他们都是基于docker的，所以前提需要安装好docker。然而，docker又是离不开OS的，所以前提是要装好OS。至于是物理主机还是虚机，倒是无所谓的。我选择使用Ubuntu 18.04 + Docker 19.03.2的组合，官方是到18.09.x。[https://rancher.com/docs/rancher/v2.x/en/installation/requirements/]</p>
+
+<h3>安装docker</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 1. 移除旧版本</span>
+</span><span class='line'>sudo apt-get remove docker docker-engine docker.io
+</span><span class='line'>
+</span><span class='line'><span class="c"># 2. 更新apt包索引</span>
+</span><span class='line'>sudo apt update
+</span><span class='line'>
+</span><span class='line'><span class="c"># 3. 安装https支持包</span>
+</span><span class='line'>sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+</span><span class='line'>
+</span><span class='line'><span class="c"># 4. 添加Docker官方GPG key</span>
+</span><span class='line'>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</span><span class='line'>
+</span><span class='line'><span class="c"># 5. 添加稳定版的仓库源(按架构选择)</span>
+</span><span class='line'>sudo add-apt-repository <span class="se">\</span>
+</span><span class='line'>   <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span>
+</span><span class='line'><span class="s2">   $(lsb_release -cs) \</span>
+</span><span class='line'><span class="s2">   stable&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 6. 更新apt包索引 </span>
+</span><span class='line'>sudo apt update
+</span><span class='line'>
+</span><span class='line'><span class="c"># 7. 安装</span>
+</span><span class='line'>sudo apt-get install docker-ce
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装rancher</h3>
+
+<p>执行下面命令即可</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -d --restart<span class="o">=</span>unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>直接用docker启动rancher镜像，并映射80和443端口给rancher的UI界面。随后用浏览器即可访问到rancher服务，用admin账号登录进去后，就可以进行后续的操作。</p>
+
+<h3>增加集群</h3>
+
+<p>在rancher的浏览器界面里，通过<code>Add Cluster</code>即可以增加节点。<br/>
+首先需要增加的是etcd和controlpanel节点，这两个属于rancher的幕后服务。<br/>
+命令在浏览器里会有提示，得到命令后，到要加入集群并且已经安装好docker的虚机上执行即可。命令很简单，就一条：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --etcd --controlpanel
+</span><span class='line'>
+</span><span class='line'>sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.2.8 --server https://172.17.3.186 --token gjvvrqpf4sbkl2l48zmpcdpmcbcb68fntdj44vlb2784ttgct6s6wc --ca-checksum ae6f90ddff032e2d040015f70283c2e9ed5282ebdfafe0edf11e163b540dd2a7 --worker
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8211;etcd和&#8211;controlpanel可部署在同一台机器上。然后需要耐心等待一段时间，因为会起很多个docker的服务。</p>
+
+<p>光有控制资源是不够的，还需要加入worker资源，这个就比较方便了，可以随时扩容。</p>
+
+<h3>新建服务</h3>
+
+<p>上述弄完以后，就可以发布新的服务了。</p>
+
+<p>到新建的集群中选择<code>Deploy</code>，拉取对应的镜像，设置好pod数量，就可以拉起服务。不过，这个对应的镜像主要是公共的镜像，如果私有镜像，则需要另外进行配置。</p>
+
+<h2>新建私有docker仓库</h2>
+
+<p>本身构造仓库并不复杂，逻辑上只要找一台虚机启动一个docker的registry服务，然后在rancher浏览器的<code>Resources-&gt;Registries</code>中注册一下这个地址即可。<br/>
+但事实上永远不会那么简单。主要原因在于docker默认是需要https才能对外提供服务，这就需要进行很多额外的配置。当然，主要是私有仓库的配置。可以参考下面几个链接：
+https://rancher.com/docs/rancher/v2.x/en/k8s-in-rancher/registries/
+https://docs.docker.com/registry/deploying/
+https://docs.docker.com/registry/insecure/</p>
+
+<p>最后形成的做法如下。</p>
+
+<p>一. 选择一台虚机作为registry主机，最好不要和rancher是一台机器，这样避免争抢443端口。在这台机器上先生成一下证书：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir certs
+</span><span class='line'>openssl req <span class="se">\</span>
+</span><span class='line'>  -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key <span class="se">\</span>
+</span><span class='line'>  -x509 -days 365 -out certs/domain.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里面要注意cn需要输入自己定义的域名，比如mydocker.co</p>
+
+<p>二. 将生成的<code>domain.crt</code>改名为<code>ca.crt</code>, 上传或复制为其他docker主机的<code>/etc/docker/certs.d/mydocker.co/ca.crt</code>，绑定这些主机的<code>hosts</code>文件中该域名的指向到上一步的ip中，或者也可以修改域名服务器里该域名</p>
+
+<p>三. 在第一台机器上运行docker的registry服务。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -d <span class="se">\</span>
+</span><span class='line'>  --restart<span class="o">=</span>always <span class="se">\</span>
+</span><span class='line'>  --name registry <span class="se">\</span>
+</span><span class='line'>  -v <span class="s2">&quot;/opt/registry/certs&quot;</span>:/certs <span class="se">\</span>
+</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_ADDR</span><span class="o">=</span>0.0.0.0:443 <span class="se">\</span>
+</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="o">=</span>/certs/domain.crt <span class="se">\</span>
+</span><span class='line'>  -e <span class="nv">REGISTRY_HTTP_TLS_KEY</span><span class="o">=</span>/certs/domain.key <span class="se">\</span>
+</span><span class='line'>  -p 443:443 <span class="se">\</span>
+</span><span class='line'>  registry:2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的命令中，<code>--restart=always</code>表示每次重启docker都会重启该服务，<code>-v</code>是挂载了卷，并将生成的ca证书指给了这个服务，3个<code>-e</code>设置了容器里运行的变量值，<code>-p 443:443</code>把主机和容器的443端口对应起来，<code>registry:2</code>表示第二个版本的registry</p>
+
+<p>四. 再次deploy服务的时候，直接在镜像地址中带出<code>mydocker.co</code>开头的镜像链接即可，比如<code>mydocker.co/my-ubuntu</code> 。</p>
+
+<h2>k8s的dns服务变迁</h2>
+
+<p>SkyDNS（1.2） -> KubeDNS（1.4） -> CoreDNS（1.11）</p>
+
+<p>kubedns: 监控service资源变化，生成service名称和ip的记录，并保存在DNS中<br/>
+dnsmasq: 为客户端容器提供dns服务<br/>
+sidecar: 对kubedns和dnsmasq提供健康检查服务</p>
+
+<p>CoreDNS和KubeDNS均是Go语言编写，但用一个服务替换了3个服务。</p>
+
+<h2>ingress-nginx</h2>
+
+<p>ingress-nginx 默认是每个node 1个容器服务，<code>1 per node</code><br/>
+通过rancher配置规则可以在<code>workloads-&gt;load balancing</code>中进行。里面的域名指向实际的worker主机地址。</p>
+
+<h2>核心组件</h2>
+
+<p>kube-proxy进程，负责获取每个Service的Endpoints，Endpoints实现service到pod之间的关联。</p>
+
+<p>K8S的思路是每个对象都是一个资源，每个资源都有对应的controller：<br/>
+* RC Controller<br/>
+* Node Controller<br/>
+* ResourceQutoa Controller(cpu和memory限制的配置)<br/>
+* Namespace Controller<br/>
+* Service Controller &amp; Endpoints Controller</p>
+
+<p>  Kubelet是每个Node上k8s的代理，</p>
+
+<p>kube-proxy历经了从HA proxy -> iptables -> IPVS进化。核心诉求始终是性能驱动</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,274 +1026,6 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/">Joel 谈软件- 软件随想录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-01-31T14:12:00+08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>《Joel谈软件》，我一直是这么称呼《软件随想录》的。
-倒是才注意到，原来黑客与画家、软件随想录都是阮一峰老师翻译的，而且翻译的真不错。与此同时，阮老师也很好地推销了一下自己。本书与《我编程我快乐》不同，是很有深度的书，所以决定边读边记笔记。尤其要说一句，阮老师的注解是很显功力的。</p>
-
-<p>在2004年之前，Joel的网站文集就被按blook集合由Apress出版，而阮老师翻译的是集成了2004年之后发布的文章，英文名称《More Joel on Software》。但国内的出版顺序则是先引入了阮老师翻译的《More》，后来又有另一个译者翻译了04年的那本书作为了卷1. 所以，在中国很长时间只有《More》而没有第一本。考虑到时效性以及译者的知名度，04-09这本更值得关注就是必然的了。下面的笔记是两本合计的版本，并未区分来自哪里，毕竟原作者是一个人，所以基本是一脉相承。</p>
-
-<h2>人员管理</h2>
-
-<h3>第一次Bill Gates 审查</h3>
-
-<p>微软程序经理（Program Manager）：技术水平是程序员队伍里最高级别，能做最多且最难的工作，有人格魅力，程序员队伍中最聪明的那个家伙。</p>
-
-<p>比尔盖茨通过不断问问题来确认对方是否有实现任务的把握。</p>
-
-<h3>怎么寻找优秀的程序员</h3>
-
-<ol>
-<li>优秀的程序员很少找工作</li>
-<li>简历投的多的大部分是不怎么样的程序员</li>
-<li>从应届生中招募是个发现美材的办法</li>
-</ol>
-
-
-<h3>从工作环境开始招募程序员</h3>
-
-<ol>
-<li>私人办公室：作者的公司在纽约，但程序员都有独立办公室，当然，这个在国外也是凤毛麟角</li>
-<li>Aeron出品的名牌电脑椅</li>
-<li>大显示器</li>
-<li>好的办公环境和园区</li>
-<li>同事要好，管理层要有程序员出身的人，物以类聚</li>
-<li>像代码一样公正、有序，严格的能者上庸者下的地方，对的就能赢得任何争论的地方</li>
-<li>有趣的活，或者简单的或者流行的活</li>
-<li>一定自由地使用新技术</li>
-<li>编程框架体现美、幸福和激励</li>
-</ol>
-
-
-<h3>三种管理方法</h3>
-
-<p>团队、公司、军队、国家，问题：“使得人们去做你要他们做的事”，或者说如何使得所有人都向同一个方向前进。</p>
-
-<h4>军事化管理法</h4>
-
-<p>每个人做的事情都不同的情况下，军事化管理方法很难奏效，因为没有那么多经理实现微观管理。但对军队则是必须的。</p>
-
-<h4>经济利益驱动法</h4>
-
-<p>经济驱动把内部激励变成了外部激励。内部激励是发自内心想做好这件事情，内部激励通常比外部激励强。</p>
-
-<p>经济驱动也容易陷入kpi骗局，鼓励大家和制度博弈。不能把铜板丢给鸡，让鸡自己去买吃的。创造一种制度的时候，不能放弃自己的职责。</p>
-
-<h4>认同法</h4>
-
-<p>一起干活的人要一起吃饭。团建，以及营造一致的目标，爱上这个城市和工作内容。第二部分是提供必要的信息，让下属感觉被尊重。</p>
-
-<p>结论：hybrid根据时间和对象灵活运用各种方式。</p>
-
-<h3>面人指南</h3>
-
-<p>千万不要雇“可能”合适的人，招人标准：1，聪明 2，能干</p>
-
-<h3>测试人员</h3>
-
-<p>测试人员独立性的必要性</p>
-
-<h2>大学生技术学习建议</h2>
-
-<h3>大学只教java的危害</h3>
-
-<p>危害主要是两点：1. 基础知识不够扎实 2.会有很多不达标的人浑水摸鱼通过，导致招聘困难。  
-但是，国内国外都这样。</p>
-
-<h3>耶鲁大学的演讲</h3>
-
-<p>技术派（the geek）和务实派（the suit，穿西装的）  
-消灭bug的边际报酬是递减的，即随着错误越来越少，解决bug带来的收益也在变少，务实派的理论</p>
-
-<p>程序本身包含多少香农熵规格说明书也要包含同样的数量</p>
-
-<p>作者在微软纽约的咨询部门做过一段时间的客户顾问</p>
-
-<p>做外包软件开发不好之处：1.无法用正确的方法做事 2. 做不出优秀的产品，因为都是乙方外包，能用就行。</p>
-
-<p>管理只是一种不得不做、让人讨厌的杂物活，之所以公司需要管理，只是为了不影响聪明人工作，真正的天才才能做出优秀的成果。</p>
-
-<p>作者在大学里学会了写作，学会了从动态逻辑课里不要读研究生，进入了Unix这座宏伟的教堂，但其实作者也从微软身上获益良多，变得足够聪明，但还是没有学到怎么开发软件。</p>
-
-<h3>给计算机系的建议</h3>
-
-<ol>
-<li>写作</li>
-<li>C语言</li>
-<li>微观经济学：供给和需求，竞争优势，净现值（NPV），贴现，边际效用</li>
-<li>GPA反应4年的总体表现</li>
-</ol>
-
-
-<h2>设计的作用</h2>
-
-<p>艺术性和实用性 form follow function</p>
-
-<p>进入最后测试阶段就会变得特别挑剔</p>
-
-<p>你之所以会有好运气，那是因为你寸土必争</p>
-
-<p>设计不用太宏伟，但细节要跟上</p>
-
-<p>太多的选择会损坏内心的幸福感</p>
-
-<p>作者以自己软件论坛作为例子，说明了功能和倾向性方面取舍。</p>
-
-<h2>大型的项目管理</h2>
-
-<p>微软ie8.0的开发，雷克萨斯pk橄榄树，要不要向过去兼容的问题</p>
-
-<p>标准也会引发误解、困惑甚至争议</p>
-
-<p>一半是理想主义，一半是实用主义</p>
-
-<p>项目管理其实就是做抉择</p>
-
-<p>日程安排经验的主要依据是历史数据，但相应原则如下，不过这个前提是招的都是有能力和自我驱动程序员：</p>
-
-<ol>
-<li>只有一线程序员才能提出完成日期的估计值，管理层制定的通常效果不好</li>
-<li>发现错误就更新原来的计划</li>
-<li>防止管理层向程序员施压，这样的产量至多提高10%，但埋下的隐患不少</li>
-<li>一份日程规划就是一个装备积木的盒子，要么删功能要么拖延</li>
-</ol>
-
-
-<p>优秀的项目经理会让开发者觉得所有重要的设计工作都是开发者在做，而项目经理只负责打打酱油，和一些非常官僚主义的事情周旋，比如应付客户写写规范。</p>
-
-<p>软件开发-冰山之谜，你能看见的永远只是实现的一部分，如同冰山露出水面的部分，而水底的部分可能还有90%</p>
-
-<p>每日编译发展到现在就是持续集成</p>
-
-<h3>排计划</h3>
-
-<ol>
-<li>使用excel，不要用project，后者是为建造办公楼设计的  </li>
-<li>保持简单，7列：feature、task、优先级、预估、现在预估、已流逝、剩余工时，最终完成时剩余工时==0，现在预估==已流逝</li>
-<li>每个功能点要分解任务列表  </li>
-<li>只有负责些代码的程序员才能预估时间</li>
-<li>细分任务到小时单位，作者理解的设计就是决定要做什么  </li>
-<li>记录原始和当前的时间估计,实现不断练习估算时间  </li>
-<li>每天更新消耗时间栏  </li>
-<li>考虑假期  </li>
-<li>考虑调试代码的时间，考虑修复bug的时间  </li>
-<li>考虑集成时间，就是几个人的工作拼接起来  </li>
-<li>预留缓冲时间：第一预估可能有延时，第二可能有新任务，第三可能有冰山  </li>
-<li>永远不要让开发经理压缩程序员预估的开发时间  </li>
-<li>计划就像积木：通过强迫做减法（挑出不要的积木），你将开发出更强、更好、功能配比更优秀的产品，避免延期避免交付了还有很多鸡肋的功能  </li>
-</ol>
-
-
-<h3>软件世界的分类(5类）</h3>
-
-<p>作者把基于网络的web应用列为<strong>盒装软件</strong>，咨询软件（SAP德勤）这样的介于盒装和内部软件之间。<br/>
-如果只有一个企业使用其实就是<strong>内部软件</strong>，由于边际成本的原因，内部软件通常不用质量很好。<br/>
-<strong>嵌入式软件</strong><br/>
-<strong>游戏</strong>和嵌入式软件一样，对软件的质量要求高，因为一般来讲游戏和嵌入式软件很少升级，也很少会出2.0版。即往往只有一个版本。<br/>
-<strong>临时性软件</strong>，比如一段脚本。</p>
-
-<h2>编程建议</h2>
-
-<p>应用型匈牙利命名法 vs 系统型匈牙利命名法，后者臭名昭著，前者其实意图是表明变量的用途而不是type。</p>
-
-<h2>开软件公司</h2>
-
-<p>做生意就像看植物增长，是一种乐趣</p>
-
-<p>如果你想压低程序员的工资，那么你就会得到质量很垃圾的软件，而这实际上也不会为你省下很多的钱。举了耶鲁大学的例子说明程序员的生产率差距有5-10倍。</p>
-
-<p>此外，生产率不同的同事而是“普通”程序员根本做不到优秀程序员所做的事情，“飙不出高音”</p>
-
-<p>Seinfeld中Soup Nazi一集很看好</p>
-
-<p>作者的程序员价值论断是针对生产最终产品的公司，如果只是为了内部使用，配合运营而不是销售，那么只要够用就行了，不需要特别优秀</p>
-
-<p>Jonathan Ive， 苹果的设计师</p>
-
-<p>办公室的租金成本是2004年人均700美金/月，人均建筑面积40平米，所以每个人有自己的办公室，目的就是招募到优秀的程序员</p>
-
-<p>对你最重要最关键的部分，你一定要使用更原始的工具</p>
-
-<p>客服不外包有利于永久性地解决问题</p>
-
-<p>面向整个市场的软件（产品）和定制化软件</p>
-
-<p>一家软件公司要想成功，必须要有一名程序员执掌大权</p>
-
-<p>只有招聪明的人，才能充分授权。</p>
-
-<p>“麦当劳的”厨师 pk 真正的大厨，军事化标准化的流程只能产出麦当劳，大厨都是随意的。</p>
-
-<p>NIH（Nothing in Here）对于关键部分，要坚持自己的研发</p>
-
-<p>慢慢发展和烧钱发展的适用场合</p>
-
-<p>兼容性是先有鸡还是先有蛋问题的一大解法</p>
-
-<p>用户粘度和离开的门槛是要在你占据优势地位之后的，在此之前，最好的办法是降低用户使用门槛。</p>
-
-<p>开源软件的策略：是使得硬件标准化、商品化，02年就列举了sun公司的错误</p>
-
-<p>FUD战术，就是欺骗和恐吓的意思了。所谓雾件，就是对各种功能特性和产品作出口头许诺。但实际上根本拿不出可以卖的东西。把微软黑的厉害。
-因为含糊其辞，大家会产生微软与自己的观点不谋而合的错觉。</p>
-
-<p>.net缺少链接器（linker）。把编译后版本和程序中所有函数库的编译后版本合并起来，然后剔除掉所有不需要的库函数，生成一个二进制文件。</p>
-
-<p>发新股不分红是为了让报表的利润好看</p>
-
-<p>以最终用户为主和以程序员为主构成了windows和unix两类不同的文化，然而实际上以最终用户为主的文化来源于Apple</p>
-
-<h2>关于规格说明书</h2>
-
-<p>规格说明书体现的是写作能力，他的规格说明书写的让人很容易阅读。</p>
-
-<p>待解决的问题需要在说明书里确定，不要觉得可以先让程序员做简单的部分，之后再慢慢思考并解决剩下的难题，这不是好主意，因为在实现代码的过程中会冒出许多新问题。</p>
-
-<p>项目经理/产品经理没有权利让程序员听命，必须努力争取大家的认同才行，这种方式才能确保团队永远在做正确的事情。</p>
-
-<p>规格说明书古今中外其实都不太有人爱读，因此写好很难。所以要写出<strong>引人入胜</strong>的规格书可以遵循一下几点：</p>
-
-<ol>
-<li>要幽默  </li>
-<li>像编写用大脑执行的代码一样写规格书，仅仅做到正确不够还要易于理解  </li>
-<li>写的尽可能简单, 并擅用排版  </li>
-<li>重读并修改几遍  </li>
-<li>尽量不要套用模板</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1097,6 +1043,10 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
       </li>
     
@@ -1112,15 +1062,11 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
         <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/02/16/dddde-lan-shu-he-hong-shu/">DDD的蓝书和红书</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (93)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (34)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (94)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
