@@ -9,8 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在13年8月拿到工作用的Dell E6430时，就有自己加一块SSD硬盘的想法。只是当时拿到之后发现原装的win7-64bit pro
-也不错，使用了几个礼拜后也就不想再重装折腾了。另一个原因则是当时SSD的价格还略高，彼时我一心想的还是256GB的SSD。 半年多以前， &hellip;">
+  <meta name="description" content="近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
+问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +68,104 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/21/safaribu-zhi-chi-di-san-fang-cookieyin-qi-de-sessiongai-zao/">Safari不支持第三方cookie引起的session改造</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-21T13:48:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
+问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的，所以这个问题很让人困惑。
+反复查找，最后明白原因是：首先，对于第三方cookie，Safari升级后确实有禁止写入cookie的特性；其次，但是对于已存在cookie的情况，则尽管是第三方cookie依然还会写入。</p>
+
+<p>就是因为其次这个因素存在，所以之前进行测试的一些手机照样可以写入session了。</p>
+
+<p>问题是找到了，但怎么解决呢？Java中最简单就是让url中带入jsessionid，只是这个方式确实有好多年没有使用过了。虽然是第三方cookie，但因为测试时有过session了，所以还能继续写入。</p>
+
+<p><code>response.encodeURL(url)</code></p>
+
+<p>&#8211; 查文档，这个api的含义是对于如果是可以用cookie追踪sessionid的则不会在url后加入jsessionid，而对于不支持cookie追踪的则会在url中写入id。<br/>
+这引发了我的好奇心，只有response怎么能判断cookie是否能追踪呢？</p>
+
+<p>一看Tomcat的源码，实现倒也简单，就是根据当前session的id是否从cookie中获取的来决定的。如果首次访问网站，此时不会有sessionid，则自然不是从cookie追踪的，于是生成的url都有jsessionid。
+二次请求上来，如果是cookie中读取的，则不再写入了。如果不是从cookie中读取的，则继续写入jsessionid。也就是说，<strong>不管是不是支持cookie写入，第一笔encodeURL的调用都会加上jessionid</strong>。</p>
+
+<p>例如，第一次访问都会生成这样的链接 <code>http://192.168.202.72:8080/toolbar/home/nav;jsessionid=EFC1A53F48CC5BC9BE58F50830296FBB</code>, 如果再次访问就是<code>http://192.168.202.72:8080/toolbar/home/nav</code>.</p>
+
+<p>这个东西的缺点公开的说法有如下两点：</p>
+
+<ol>
+<li>sessionid暴露在url链接中并不安全；</li>
+<li>sessionid这样子会保存在地址栏中，容易引发保存后歧义，因为sessionid其实每一次都会是不一样的。</li>
+</ol>
+
+
+<p>简而言之就是这样的链接不好看外加安全性有一定的问题。</p>
+
+<p>不过这个安全性问题如果从网络的角度来看有点勉强。因为http头也是明文传输的，只是浏览器中不显示罢了。以机器的角度来看，jsessionid放在header还是uri中的区别并不大。鉴于业务需要，还是采用吧。于是引发这种写法最大的毛病，需要在jsp中每个自己的链接都加上<code>&lt;%=response.encodeURL(url)%&gt;</code> 。此时不免想起如果都像<code>link_to</code>那样生成链接的话，改起来就方便多了。</p>
+
+<p>Java Web的开发至今没有很方便的helper机制，能用用的还是tags的办法，于是写一个hrefto.tag放到tags下面。</p>
+
+<p>hrefto.tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span><span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;uri&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">&lt;%</span> <span class="n">String</span> <span class="n">ctx</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getContextPath</span><span class="o">();</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%=</span> <span class="n">response</span><span class="o">.</span><span class="na">encodeURL</span><span class="o">(</span><span class="n">ctx</span> <span class="o">+</span> <span class="n">uri</span><span class="o">)</span> <span class="k">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在jsp中的应用主要是两句话，第一是引入，第二是调用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;tags&quot;</span> <span class="n">tagdir</span><span class="o">=</span><span class="s">&quot;/WEB-INF/tags&quot;</span><span class="k">%&gt;</span> <span class="c">&lt;!--hrefto.tag存放的位置--&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&quot;help&quot;</span> <span class="na">href=</span><span class="s">&#39;&lt;tags:hrefto uri=&quot;/home&quot; /&gt;&#39;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>&lt;tags:hrefto uri="/home" /&gt;</code>就会调用hrefto.tag中的内容，生成链接。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -880,59 +978,6 @@ ruby的rest-client。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/18/ding-jie-huan-suan-he-li-de-lei-ke-sa-si-nx/">定价还算合理的雷克萨斯NX</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-18T22:29:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>丰田终于公布了雷克萨斯NX系列在中国的售价。以我比较关心的2.0和2.0T的配置来看，2.0入门款定在
-了33万，2.0T的标准款定在了41万。之前对比ES的售价，认为基本还算合理。以ES250为例，基础款35w，
-带倒车影像的40w。按国内合资厂商的紧凑型SUV普遍要比更大一级的同样动力的轿车贵几万的定价逻辑，
-例如RAV4比凯美瑞贵2-3万，奇骏比天籁贵2-3万，NX的定价只是和ES相当。尽管ES终端现在普遍有3-5w的优惠幅度，
-但NX的终端也是可以跌价的，所以比较还是在目录价格之间进行。得出的结论是NX的定价并不高。</p>
-
-<p>而在今天，丰田又公布了美国版的价格。美国版没有2.0的版本，入门级就是2.0t，
-34,480美金，相当于21.4万人民币。初看起来这个价格有点高，但稍微算一下：</p>
-
-<p>以2.0T入门版21.4万而言，排量税是5%，加上关税合计30%，21.4 * 1.3 =27.82万，而在中国的售价是41万，去除17%的增值税，41/1.17=35.04万。
-二者相减，4s的毛利在六七万间。
-所以nx在中国的售价倒也还算厚道。毕竟过个一年半载后可能还有几万的优惠，一辆车4s的毛利就在三五万以内了。
-对于在地区里都是独家经营的销售企业，赚这点钱倒也不算过分。
-以中国的税费和4S店实际可处于的优势位置，这个定价还是很有诚意的。
-而且北美版本的配置可能没有国内的高，这个定价还是很基于实际情况尽可能的低了。</p>
-
-<p>当然，这是豪车的suv了，尺寸也不算小，价格自然也还是高高在上的。所谓合理只是基于现实的实际情况，
-以及和其他同类进口车或合资国产车对比而言。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -950,6 +995,10 @@ ruby的rest-client。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/26/the-kubernetes-book/">The Kubernetes Book</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
       </li>
     
@@ -965,15 +1014,11 @@ ruby的rest-client。</p>
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (94)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>

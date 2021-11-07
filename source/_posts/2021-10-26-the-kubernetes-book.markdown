@@ -8,12 +8,12 @@ categories:
 - linux
 ---
 
-The Kubernetes book
+The Kubernetes book, 购于Leanpub  
 
 # 1&2 Kubernetes 基础和操作
 ## Control plane node (Masters, Heads)
 
-The API Server 
+The API Server  
    所有的入口
 
 The cluster store(etcd)  
@@ -71,7 +71,7 @@ A flock of birds 一群鸟 A pod of whales 一群鲸
 AWS: EKS, Azure: AKS, Google: GKE  
 腾讯: TKE, 阿里云: ACS（C是container）的缩写
 
-可以在自己的机器上部署K8S作为练习：如docker Desktop，k3d, 
+可以在自己的机器上部署K8S作为练习：如docker Desktop，k3d, 开发可以用单机版的尝试
 
 ## kubectl
 
@@ -132,7 +132,7 @@ Init: 在拉起主app之前，执行一些辅助工作，通常只执行一次
 
 # 6. Kubernetes部署
 
-workload apis: Deployments, DaemonSets, StatefulSets
+Workload apis: Deployments, DaemonSets, StatefulSets
 
 Deployments是aggregation root，内部其实还有ReplicaSet， 通过ReplicaSet来操作Pods
 
@@ -166,7 +166,7 @@ spec:
         - containerPort: 8080
 ```
 
-.spec.selector中的label选择了template中的app，注意label Selectors
+`.spec.selector`中的label选择了template中的app，注意label Selectors
 
 `ubectl get deploy hello-deploy`  
 `kubectl scale deploy hello-deploy --replicas 5`
@@ -233,9 +233,9 @@ IPVS是L4 load-balancer，扩展的性能更优越。
 
 服务发现和namespace
 
-<object-name>.<namespace>.svc.cluster.local
+`<object-name>.<namespace>.svc.cluster.local`
 
-kubectl get all -n dev 可以同时列出 svc pods
+`kubectl get all -n dev` 可以同时列出 svc pods
 
 # 10. Storage
 
@@ -245,10 +245,10 @@ SC - StorageClass 定义存储的硬件
 PVC - 变成PV的请求，也是Pod可以使用的存储    
 PV - SC检测到PVC后，会变成PV  
 
-PVC里的Access mode:  
-* ReadWriteOnce(RWO)传统的一块硬盘  
-* ReadWriteMany(RWM) NFS这种支持多个加载  
-* ReadOnlyMany(ROM)  可被多少只读  
+- PVC里的Access mode:  
+  * ReadWriteOnce(RWO)传统的一块硬盘  
+  * ReadWriteMany(RWM) NFS这种支持多个加载  
+  * ReadOnlyMany(ROM)  可被多少只读  
 
 PV只能按一种模式打开  
 
@@ -257,6 +257,7 @@ PV只能按一种模式打开
 解除后数据是否删除的策略：1. Delete 2. Retain  
 Sc中的VolumeBindingModo: 1. Immediate 2. WaitingForFirstConsumer(Pod)  
 
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -276,6 +277,7 @@ spec:
     volumeMounts:
     - mountPath: /data
       name: data
+```
 
 # 11. ConfigMaps and Secrets
 
@@ -365,12 +367,12 @@ Repudiation否认:
 Information Disclosure 信息泄露:  
   - KMS和HSM是实现key和数据在节点上分离  
 
-Dinail of Service(DOS):  
+Denial of Service(DOS):  
   - HA  
   - WAF
 
 Elevation of privilege:  
-  - 
+
 
 
 

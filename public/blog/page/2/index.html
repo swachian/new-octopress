@@ -9,7 +9,7 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="凌度充气宝 因CRV有一个轮胎总是漏气，之前的小米充气宝放在家里给皮球打气比较方便，那么车上最好再配一个充气宝，于是决定买一个新的充气宝放在车上。但不想再买相同的型号了，于是看了一下有没有其他选择。最终选择了凌度的一款充气宝CQB-100。 相对于小米的充气宝，价格方面， &hellip;">
+  <meta name="description" content="Rober C. Martin的另一部Clean系列，总体来讲不如Clean Code，但书还值得一读。Bob大叔开发经验丰富，但仔细分析的话，他的主要经验还是基于C的通信软件的开发，之前有过很多的汇编经历。Java看起来真正做过的大的项目似乎并不多。因为按他90年代以前的经历， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2020/10/06/clean-architecture/">Clean Architecture</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2020-10-06T22:47:00+08:00" pubdate data-updated="true">Oct 6<span>th</span>, 2020</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rober C. Martin的另一部Clean系列，总体来讲不如Clean Code，但书还值得一读。Bob大叔开发经验丰富，但仔细分析的话，他的主要经验还是基于C的通信软件的开发，之前有过很多的汇编经历。Java看起来真正做过的大的项目似乎并不多。因为按他90年代以前的经历，基本没有使用Java开发过什么，而之后，则转去了做咨询和主编，写的项目按常理应该不多。</p>
+
+<p>书中首先使用龟兔赛跑的隐喻，讽刺了程序员们的迷之自信，总以为自己是聪明的兔子能够有朝一日把一团乱的东西Clean干净，但实际上从来没有发生。以此告诫读者必须脚踏实地做好整洁架构和整洁代码：The only way to go fast is to go well. 随后，提出Software的精髓在于<strong>soft</strong>，也就是easy to change，这是软件设计和开发的根本。并且应用类软件的开发，一般是由urgent behavior驱动的，但维护好clean Architecture则是开发人员的责任。</p>
+
+<p>第二部分里，讲了3种基本的编程范式，强调的都是纪律的重要性。如结构化编程取消了goto，只保留了if/then/else,
+do/while/until; OO则是限制函数间的调用，抽象、封装、继承、多态，并且举了IO device的C接口的例子。同时提出了<strong>Plugin</strong>架构的思想。因为所有的Device其实都是作为一种附件，plugin到OS上面去的。接口是OS定义的，实现则是plugin的事情。</p>
+
+<p>第三第四部分则是作者提出过的SOLID设计原理以及组件的原理。<br/>
+SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor通常是source，是使用者。<br/>
+组件主要是耦合问题。REP、CCP、CRP，这其实是一个CAP的不可能三角。组件之间要削减循环依赖，被依赖多的Stable，不被依赖的Unstable，Stable的东西需要加入Abstract来实现弹性的增加。同时要减少对易变（volatile）组件的依赖，即在Stable的东西中加入Abstract以使软件变软。</p>
+
+<p>第五部分是全书的的主体，主讲架构。<br/>
+架构的目的是为了便于软件开发、部署、运行（非功能性要求）。维护，让细节开放，这样细节可以很晚才被决定。架构师的目标则是make software soft， 实现Policy和Detail之间的decouple，同时也负责设计Policy。</p>
+
+<p>所谓Policy指business rules and procedures，Detail则是和policy进行通信的东西。架构师的一大职责，就是在Details之间画下边界线（boundary line）。而Clean Architecture则是让Details依赖Policy的一种架构方式。也体现了Bob大叔的DIP原则，即反转依赖。低级的组件应该作为插件插入到高级组件中去，高级组件是Policy和Use cases。
+这个好处是减少核心内容的复杂性和对外部的依赖。
+同时，架构是关于系统的，不是关于框架的，提出了架构设计要和框架尽可能分离的概念。即Domain优先，能让人看了架构设计图就知道系统是干什么的，举了图书馆、住房的设计图例子。这样也容易形成Testable Architecture。但这种做法下，架构师就变成了传统的系统分析师。</p>
+
+<p>举了几种Clean Architecture，主要就是Ports and Adapters（Hexagonal Architecture）。也提到了Humble模式。架构即画边界以及决定用什么作边界，Humble Objects用于架构边界处。</p>
+
+<p>至于微服务，作者的意思是service并不是分界线，分界线在service内部，举了Kitty Finder和Ride Finder的例子。从这点来说，熔断可以作为某种服务的一种多态实现。所以K8S其实也可以实现熔断，比如在一个Login的service中部署两个不同的service，确定某一个在什么情况下生效。</p>
+
+<p>Test可以作为系统第一部分，而且是最外层的，因为所有的代码都不依赖测试代码，而测试代码却依赖其他代码（Domain+Infrastructure）。但对测试解耦，并没有提出什么实质性的建议。</p>
+
+<p>最后，DB、Web、Framework都是小把戏（Detail），应用本身才是大Boss，不要为了Detail而限制Boss。又举了一个作者自己卖网课的例子，但这个例子实在太短，看不出什么名堂来。</p>
+
+<p>结束后，其实还有两大部分，一个是Simon Brown写的一章，列举了4种常见的代码目录组织方式，并提出组织之间最大的区别在于包内方法的可见性差异。Simon创造了C4架构模型，这章列举的也不错，但例子还是太浅和理想化了，设计细节太少。  另外一部分就是Bob大叔的前半生开发生涯自传，写到了1990年代。里面补充到之后的经历会写成另一本书，应该就是今年出的Clean Agile了吧。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -902,132 +964,6 @@ taskmanager.numberOfTaskSlots 可设置多条</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/10/05/nipon-software-team/">日式高效团队开发</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-10-05T16:48:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2019</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>日式《高效团队开发》</p>
-
-<p>成书于2014年上半年，作者是日本人，参与了Play这个框架的开发。在日本，做到了书中提供的版本管理、缺陷管理、CI、CD公司的生产效率高很多，原因在于两点：1. 基础设施本身的效率 2. 对优秀工程师的吸引力。</p>
-
-<p>死亡行军状态的项目&#8212;项目岌岌可危，人员身心俱疲</p>
-
-<p>问题1：邮件内容多 &#8211; 引入缺陷管理<br/>
-问题2：没有仿真环境  &#8211; 搭建持续、自动地向验证环境、staging 环境以及正式环 境进行发布，并一直保持正常运行的环境<br/>
-问题3：没有分支和tag管理  &#8211; 利用分支和标签<br/>
-问题4：重新制作数据库的困难  &#8211; 数据库变更管理</p>
-
-<p>问题5: 不运行就就无法察觉问题  &#8211; CI<br/>
-问题6：代码合并后产生了degrade  &#8211; CI+merge<br/>
-问题7：重构代码没信心  &#8211; CI+测试代码<br/>
-问题9：环境依赖</p>
-
-<p>日本的信息技术传入比美国晚3-4年，貌似中国也差不多。</p>
-
-<p>分布式版本控制系统的缺点：<br/>
-1. 没有真正的版本号<br/>
-2. 没有最新的版本<br/>
-3. 过于灵活，容易混乱<br/>
-4. 思维方式</p>
-
-<p>git中，应该避免分支和标签使用相同的名字，可以大致类似但细节之处有所区别</p>
-
-<p>如果不经过长期的回归测试就不能发布，那么发布分支和开发分支应该分开来。
-反之，都使用一个master为好。</p>
-
-<p>使用Play框架的Evolution对数据库sql进行管理。类似ror的migrate，但直接使用sql。其对比语句文件是否已执行也比较巧妙。</p>
-
-<p>缺陷驱动开发(TiDD),即以Ticket驱动开发。怎么建立gitlab和ticket之间的关联？</p>
-
-<p>epic采用excel管理，story介于采用excel或ticket工具之间，task采用ticket工具管理</p>
-
-<p>因成本收益和市场变化，才使得CI流行起来。
-Jenkins是事实上CI工具的标准，其前身是Oracle收购Sun之前的Hudson。它的作者是一个日本人。</p>
-
-<p>Ant、Maven、Gradle三者的关系。Ant最灵活，Maven是基于CoC后的简化版的Ant，Gradle则介于二者之间，使用groovy来完成其中灵活的那部分。</p>
-
-<p>CI集成的测试对象：</p>
-
-<ul>
-<li>单元测试</li>
-<li>集成测试</li>
-<li>用户验收测试UAT</li>
-<li>回归测试</li>
-</ul>
-
-
-<p>.git/hooks/post-receive 用于触发向jenkins push构建请求</p>
-
-<p>CI -> CD，直接把代码库中的代码发布到产线环境</p>
-
-<p>A 要全部采用版本管理<br/>
-B 所有的环境都要用同样的方式来构建<br/>
-C 要实现发布工作的自动化，并事先进行验证<br/>
-D 要反复多次进行测试</p>
-
-<p>Chef是配置并启动虚机里面的服务的，例如nginx、apache等等</p>
-
-<p>Infrastructure as Code</p>
-
-<p>编配（Orchestration）：<br/>
-即让多个组件一起演奏起来。主要有Capistrano、Fabric（python编写）和Jenkins几种工具。
-Jenkins的buidl periodically可以从多台机器上收集日志
-如果采用K8S + Docker, 那么很多玩法又将大大的不同了。</p>
-
-<p>测试四象限：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>                业务层面
-</span><span class='line'>                |
-</span><span class='line'>                |
-</span><span class='line'>团队的支持------- | -------产品的评价    
-</span><span class='line'>                |
-</span><span class='line'>                |
-</span><span class='line'>                技术层面</span></code></pre></td></tr></table></div></figure>
-
-
-<p>单元测试属于技术和团队方面的支持，集成测试属于业务和团队方面的支持</p>
-
-<p>总体来讲，这本书讲的日式团队软件开发，和我目前接触的有很多类似的地方。作者提到的版本管理、CI、CD我们也做了一部分，可以提高和借鉴的地方确实不少。不过时代毕竟在前进，实现栈方面作者是不提及docker和k8s的，然而这些的存在确实可以让CI/CD更进一步。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1045,6 +981,10 @@ Jenkins的buidl periodically可以从多台机器上收集日志
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/26/the-kubernetes-book/">The Kubernetes Book</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
       </li>
     
@@ -1060,15 +1000,11 @@ Jenkins的buidl periodically可以从多台机器上收集日志
         <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/">某IT作家的两本小说</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (94)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (11)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>

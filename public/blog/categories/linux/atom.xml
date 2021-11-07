@@ -4,7 +4,7 @@
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-10-04T21:34:04+08:00</updated>
+  <updated>2021-11-07T13:10:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,386 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Kubernetes Book]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book/"/>
+    <updated>2021-10-26T09:47:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book</id>
+    <content type="html"><![CDATA[<p>The Kubernetes book, 购于Leanpub</p>
+
+<h1>1&amp;2 Kubernetes 基础和操作</h1>
+
+<h2>Control plane node (Masters, Heads)</h2>
+
+<p>The API Server<br/>
+   所有的入口</p>
+
+<p>The cluster store(etcd)<br/>
+    分布式数据库，3-5个拷贝，采用RAFT算法，由一个领袖说了算
+    C优先于A，一旦不一致，就不能再更新了</p>
+
+<p>The Controller manager<br/>
+    Deployment, StatefulSet, ReplicaSet</p>
+
+<p>The Scheduler<br/>
+    检查Node的状况，给Node评分，以挑选合适的可以执行任务的Node</p>
+
+<p>The cloud controller manager<br/>
+    提供公有云服务的load-balancer到app的连接等</p>
+
+<h2>Worker(Kubelet)</h2>
+
+<p>Kubelet<br/>
+    安装在主机上的代理，负责向heads汇报状态，并接受任务安排</p>
+
+<p>Containerd<br/>
+    从Docker抽象出来的接口，K8S已经不再直接支持Docker</p>
+
+<p>kube-proxy<br/>
+    运行在node上的网络组件，给每个node分配不同的docker内网，建立iptables表格完成路由功能</p>
+
+<p>Kubernetes DNS<br/>
+    每个Pod都有一个静态的Ip地址写了DNS服务，基于开源CoreDNS项目开发</p>
+
+<h2>声明模式和渴望的状态</h2>
+
+<ol>
+<li>在manifest文件里声明目标状态（image，replicas数量，网络端口，如何更新）</li>
+<li>Post给API服务（kubectl命令）</li>
+<li>Kubernetes存入集群store（解析并分解成操作步骤入库）</li>
+<li>Kubernetes实现目标状态(安排任务执行)</li>
+<li>一个controller确保观察到的状态不会和目标状态不同(reconcile循环)</li>
+</ol>
+
+
+<h2>Pods</h2>
+
+<p>A flock of birds 一群鸟 A pod of whales 一群鲸<br/>
+所以pod就是一群dockers/containers</p>
+
+<h2>Deployments</h2>
+
+<p>一般不会直接部署pods，而是通过Controllers进行部署</p>
+
+<h2>Service</h2>
+
+<p>提供TCP UDP层面稳定的网络抽象</p>
+
+<h1>3. 部署Kubernetes</h1>
+
+<p>AWS: EKS, Azure: AKS, Google: GKE<br/>
+腾讯: TKE, 阿里云: ACS（C是container）的缩写</p>
+
+<p>可以在自己的机器上部署K8S作为练习：如docker Desktop，k3d, 开发可以用单机版的尝试</p>
+
+<h2>kubectl</h2>
+
+<p>~/.kube/config，中存放了命令行的操作配置</p>
+
+<p>Clusters，Users和Contexts，前二者可以通过最后一个进行关联，表示用哪个用户的账号去操作哪个cluster</p>
+
+<p><code>kubectl config current-context</code>用于查看当前活跃的context<br/>
+<code>kubectl config use-context docker2</code> 用于调整当前活跃的context</p>
+
+<h1>4. 用Pods工作</h1>
+
+<ol>
+<li>让资源共享：文件系统、同一个IP、共享内存、共享存储</li>
+<li>一个pod中可以有多个containers，同一pod内的container可以通过localhost+不同的端口进行通信</li>
+<li>通过Controller部署的pods才有高可用等特性支持</li>
+<li>直接通过Pod manifest部署的pod，只有自生自灭</li>
+</ol>
+
+
+<p>Pod本身就是容器</p>
+
+<h2>The pod network</h2>
+
+<p>Pod的网络叫做pod network，是一种扁平的、各个pod可以彼此直接访问的组网。</p>
+
+<h2>生命周期有长有短的pod</h2>
+
+<p>long-lived: Deployments, StatefulSets, DaemonSets<br/>
+short-lived: CronJobs, Jobs</p>
+
+<p>长的多用于服务，短的多用于批量job。</p>
+
+<h2>多Containers的几种花样</h2>
+
+<p>Sidecar: 德国摩托车旁边的侧车；即一个container为主，一个为辅的模式。serice mesh里面常常用来对流量加密、暴露测量的数据<br/>
+Adapter: sidecar的变种，比如把nginx的日志转变成普罗米修斯能解析的格式<br/>
+Ambassador：也是变种，含义上讲更像是主container的使者<br/>
+Init: 在拉起主app之前，执行一些辅助工作，通常只执行一次</p>
+
+<p><code>kubectl apply -f pod.yml</code> 运行一个简单的pod，下面两个命令用于查询pod及其内容器的状态<br/>
+<code>kubectl describe pods hello-pod</code><br/>
+<code>kubectl get pods  hello-pod  -o wide</code></p>
+
+<p>普通的执行命令 <code>kubectl exec hello-pod -- ps aux</code><br/>
+获取pod内shell的命令 <code>kubectl exec -it hello-pod -- sh</code>, 注意需要加上<code>it</code></p>
+
+<h1>5. Namespace</h1>
+
+<p>查看命名空间 <code>kubectl get namespaces</code>  可以缩写为<code>ns</code></p>
+
+<p>用kubectl可以命令式创建ns，用yaml文档可以声明式创建<br/>
+<code>kubectl create ns hydra</code><br/>
+<code>kubectl apply -f shields-ns.yml</code></p>
+
+<p>切换默认的ns <code>kubectl config set-context --current --namespace ss</code></p>
+
+<p>声明式的清除 <code>kubectl delete -f shield-app.yml</code></p>
+
+<h1>6. Kubernetes部署</h1>
+
+<p>Workload apis: Deployments, DaemonSets, StatefulSets</p>
+
+<p>Deployments是aggregation root，内部其实还有ReplicaSet， 通过ReplicaSet来操作Pods</p>
+
+<p>Reconcile：补锅，补偿，使得现实变成目标</p>
+
+<pre><code class="yaml">piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: hello-world
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-pod
+        image: nigelpoulton/k8sbook:latest
+        ports:
+        - containerPort: 8080
+</code></pre>
+
+<p><code>.spec.selector</code>中的label选择了template中的app，注意label Selectors</p>
+
+<p><code>ubectl get deploy hello-deploy</code><br/>
+<code>kubectl scale deploy hello-deploy --replicas 5</code></p>
+
+<p>rollback， clean-up</p>
+
+<h1>7. Service</h1>
+
+<ol>
+<li>Service是一个K8S对象</li>
+<li>Service有稳定的ip地址(a cluster ip)、dns名字以及port口</li>
+<li>利用labels和selectors去动态地选择pods以传递流量</li>
+</ol>
+
+
+<p>从外部访问的方法：1. NodePort， 2. LoadBalancer</p>
+
+<p>使用DNS服务作为服务发现的核心。Service名称会自动注册到DNS集群中，每个pod及其container都预先配置了dns集群的配置，以解决Service Name 到 ClusterIP之间的映射</p>
+
+<h1>8. Ingress</h1>
+
+<p>Ingress属于七层交换的概念，可以通过域名或路径等组合来转发请求</p>
+
+<p>NodePorts的缺点： 使用的port偏大，30000-32767<br/>
+LoadBalancer缺点： 需要和云的load-balancer 1-to-1 对应，开销容易很大<br/>
+Ingress可以在只有一个云load-balancer的情况下完成多个服务的路由</p>
+
+<p>不过，如果使用一个service mesh，可能Ingress的作用就不大了。</p>
+
+<p>Ingress也是一种controller，只是大部分不是内建的。</p>
+
+<p>可以使用helm创建nginx-ingress</p>
+
+<pre><code>helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ss
+kubectl get pods -n ss -o wide
+
+ingress-nginx-controller-5c8d66c76d-2kq2f   1/1     Running   0          49m   10.244.2.34   master-node   &lt;none&gt;           &lt;none&gt;
+
+kubectl get svc
+NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller             LoadBalancer   10.108.112.4    &lt;pending&gt;     80:32003/TCP,443:30330/TCP   50m
+</code></pre>
+
+<p>但因为是自建的kubeadm，所以没有云原生的直接load-balance的支持，但可以通过32003端口对服务进行访问。</p>
+
+<h1>9. 服务发现详解</h1>
+
+<pre><code>kubectl get pods -n kube-system  -o wide
+NAME                                           READY   STATUS    RESTARTS      AGE   IP             NODE                   NOMINATED NODE   READINESS GATES
+coredns-78fcd69978-kb5td                       1/1     Running   1 (8d ago)    59d   10.244.0.4     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+coredns-78fcd69978-l6m5g                       1/1     Running   1 (8d ago)    59d   10.244.0.5     office-wallet-dev-17   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+
+<p>control plane上有dns集群</p>
+
+<p>svc部署后会分配一个vip，也就是clusterIp；因为svc name最终会进入dns服务，所以这也是svc的命名规则要求和dns域名一致的根本原因</p>
+
+<p>Kube-proxy会完成对Endpoints的监控和转发调整。现代版本的linux普遍使用IPVS，老的使用iptables。</p>
+
+<p>clusterIp是一个不存在的IP，所以container传给node，node传给它的gateway（node的kernel，IPVS或Iptables），由kube-proxy负责对ClusterIp的重定向。
+IPVS是L4 load-balancer，扩展的性能更优越。</p>
+
+<p>服务发现和namespace</p>
+
+<p><code>&lt;object-name&gt;.&lt;namespace&gt;.svc.cluster.local</code></p>
+
+<p><code>kubectl get all -n dev</code> 可以同时列出 svc pods</p>
+
+<h1>10. Storage</h1>
+
+<p>Storage采用的CSI plugin的机制。</p>
+
+<p>SC - StorageClass 定义存储的硬件<br/>
+PVC - 变成PV的请求，也是Pod可以使用的存储  <br/>
+PV - SC检测到PVC后，会变成PV</p>
+
+<ul>
+<li>PVC里的Access mode:
+
+<ul>
+<li>ReadWriteOnce(RWO)传统的一块硬盘</li>
+<li>ReadWriteMany(RWM) NFS这种支持多个加载</li>
+<li>ReadOnlyMany(ROM)  可被多少只读</li>
+</ul>
+</li>
+</ul>
+
+
+<p>PV只能按一种模式打开</p>
+
+<p><code>kubectl get sc</code></p>
+
+<p>解除后数据是否删除的策略：1. Delete 2. Retain<br/>
+Sc中的VolumeBindingModo: 1. Immediate 2. WaitingForFirstConsumer(Pod)</p>
+
+<pre><code class="yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: volpod
+spec:
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: pvc-prem
+  containers:
+  - name: ubuntu-ctr
+    image: ubuntu:latest
+    command:
+    - /bin/bash
+    - "-c"
+    - "sleep 60m"
+    volumeMounts:
+    - mountPath: /data
+      name: data
+</code></pre>
+
+<h1>11. ConfigMaps and Secrets</h1>
+
+<p>ConfigMaps是键值对，value可以是一个简单的值，也可以是一整个配置文件。<br/>
+注入container有几种方式：1. 环境变量 2. 启动的命令 3. volume中的文件<br/>
+env var； cmd； vol</p>
+
+<p><code>kubectl create configmap</code></p>
+
+<p>vol最大的优势是一旦修改了configMap，可以在container的mount位置立刻看见修改。而两位两个必须重启容器。即Vol的注入是动态的，env的注入是静态的。</p>
+
+<p>Secret只是以base64的形势存放起来</p>
+
+<h1>12. StatefulSets</h1>
+
+<p>与Deployment相比的差异：<br/>
+1. 可预知的持久的pod名字<br/>
+2. 可预知的持久的DNS主机名字<br/>
+3. 可预知的持久度vol绑定</p>
+
+<p>pod生成的规则：<StatefuleSetName>-<Integer>，而且是按顺序依次启动，完成前一个，才启动后一个。</p>
+
+<p>Stateful controllers自己直接处理治愈和扩容，而不是假手ReplicaSet</p>
+
+<h2>headless service and StatefulSet's governing service</h2>
+
+<p>headless service就是clusterIP为空的service，搭配StatuefulSet，就会产生独立的每个pod的dns名称。app的调用也会基于具体的pod 名称。</p>
+
+<p><code>volumeClaimTemplates</code>用于给每个stateful pod创建动态PVC。</p>
+
+<p>独立pod的dns命名规则为<object-name>.<service-name>.<namespace>.svc.cluster.local</p>
+
+<p>如果是pod退出，那么StatefulSet可以很容易地重新创建一个替代的pod。但如果是node不正常，则需要手工干预。</p>
+
+<h1>13. API 安全和RBAC</h1>
+
+<p>user,gourp, Service acct -> API server -> authN -> authZ -> Admission control</p>
+
+<p>Kubernetes没有自己的identity database，主要通过和其他auth模块集成（plug-in）的方式来实现authN。<br/>
+比如client certs，webhooks，IAM（Identity Access Management)</p>
+
+<p>K8S的authZ只有allow没有deny，因为默认全部都是deny。</p>
+
+<pre><code class="yaml">rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "watch", "list"]
+</code></pre>
+
+<p><code>*</code>意味着全部授权</p>
+
+<p>4个RBAC对象</p>
+
+<ul>
+<li>Roles</li>
+<li>ClusterRoles</li>
+<li>RoleBindings</li>
+<li>ClusterRoleBindings</li>
+</ul>
+
+
+<p>顾名思义，可以使用的namespace是不同的。需要注意的是，ClusterRoles经常和RoleBindings搭配使用。</p>
+
+<p>Admission controller有很多个，实际主要负责批准相应的请求。</p>
+
+<h1>14. The Kubernetes API</h1>
+
+<p>JSON + Protobuf支持，</p>
+
+<p>可以自己定义并扩展API</p>
+
+<h1>15. Threat和K8S</h1>
+
+<p>STRIDE 模型</p>
+
+<p>Spoofing欺骗:<br/>
+  - 通信层面的安全TLS<br/>
+  - 限制pod和API server的通信，token的失效期等等</p>
+
+<p>Tampering篡改:<br/>
+  - 组件的篡改：etcd，api server，controller，scheduler，kubelet，镜像运行时，镜像文件等<br/>
+  - 运行的pod修改</p>
+
+<p>Repudiation否认:<br/>
+  - 中央化的收集各个组件的审计日志</p>
+
+<p>Information Disclosure 信息泄露:<br/>
+  - KMS和HSM是实现key和数据在节点上分离</p>
+
+<p>Denial of Service(DOS):<br/>
+  - HA<br/>
+  - WAF</p>
+
+<p>Elevation of privilege:</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iptables 的一些解释]]></title>
@@ -215,46 +595,6 @@ CentOS是基于Redhat的，以稳定（老旧）为荣。而APP则是迅速发�
 <h3>题外话</h3>
 
 <p>从对OS的依赖少这点来看，Java确实做了件很漂亮的事情。一个编译好的jdk文件，可以在几乎全部的主流linux下解压，然后即可使用。部署时也不用担心底层OS是什么实现。所以，如果是Java的应用，继续用CentOS也是不会有很多坑的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vim and lampbrother]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/04/05/vim-and-lampbroter/"/>
-    <updated>2013-04-05T11:34:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/04/05/vim-and-lampbroter</id>
-    <content type="html"><![CDATA[<p>中了vim的毒之后, 开始学起了vim. 这东西在windows下也能用,而且扩展性极佳, 确实值得学学. 添加syntax和
-snippet都极其简单, 如果还要写代码的话, 确实值得掌握. 主要是发现这个工具就是给我这类人用的.</p>
-
-<p>台湾人的视频太简单, 很多基础的东西没有讲好, 好处就是他是按照git加载众多挂件之后演示并授课的, 所以
-比较吸引人. 但光那些显然也不够, 而且他本身也不算很熟练. 于是开始找其他视频. 找了一圈以后, 发现了
-<a href="http://www.lampbrother.net/">lamp兄弟连</a>的视频. 我个人比较喜欢里面李强强的linux课程. 另一位稍早录制
-的李阳的linux视频也很不错. 这家培训机构感觉还是很不错的, 培养的确实是业界最急需的一线工人.不过他的培训主要
-针对全脱产的、尤其是那些正要找工作的20岁出头的年轻人, 我是挺难报他们的班. 毕竟不太可能有什么时间和精力能够
-连续坐在实验机房里一整天. 而且这样的效率其实也不高.</p>
-
-<p>然后顺便看了一下RHCE和RHCA. 发现lampbrother的课程基本是按RHCE的脉络来的, 这门课其实可以直接改为通过RHCE.
-RHCE的范围基本如下:</p>
-
-<ul>
-<li>Hardware installation and configuration</li>
-<li>The boot process</li>
-<li>Linux filesystem administration</li>
-<li>Package management and Kickstart</li>
-<li>User and group administration</li>
-<li>System administration tools</li>
-<li>Kernel services and configuration</li>
-<li>Apache and Squid</li>
-<li>Network file sharing services (NFS, FTP, and Samba)</li>
-<li>Domain Name System (DNS)</li>
-<li>E-mail (servers and clients)</li>
-<li>Extended Internet Services Daemon (xinetd), the Secure package, and DHCP</li>
-<li>The X Window System</li>
-<li>Firewalls, SELinux, and troubleshooting</li>
-</ul>
-
-
-<p>只是这家机构的目的培训直接能工作的学生而不是考证为主的, 猜测因此没有开这门课吧. 课程的那些实验都会做的话,基本也就可以当一个称职的系统管理员了.</p>
 ]]></content>
   </entry>
   
