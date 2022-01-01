@@ -1,4 +1,5 @@
-source "https://gems.ruby-china.com/"
+source "https://gems.ruby-china.com"
+#source "https://gems.ruby-china.com/"
 
 #ruby "2.7.1"
 #ruby "2.3.4"

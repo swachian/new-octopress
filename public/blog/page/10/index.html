@@ -9,8 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="近日的一个项目中，经常出现部分浏览器的session无法写入的事情。观察一番后，发现这些浏览器大都属于iPhone的Safari浏览器，尤其以iOS7版本居多。
-问题本身并不难猜，应该就是cookie无法写入引起的。奇怪的是，部分同版本的Safari又是可以写入session的， &hellip;">
+  <meta name="description" content="长久以来，在jsp中引入css和JavaScript都是手工硬编的: 1
+2
+&lt;link href=&#39;/toolbar/static/orderFlow/css/reset.css&#39; rel=&quot;stylesheet&quot; type=&quot;text/css &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +69,142 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/22/jing-tai-wen-jian-de-urlhou-zhui-md5hua/">静态文件的url后缀md5化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-22T09:55:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>长久以来，在jsp中引入css和JavaScript都是手工硬编的:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;/toolbar/static/orderFlow/css/reset.css&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/jquery.min.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>好处很明显，最接近实际生成的html，很直观。坏处在于重复性高，而且无法控制后台生成的随机数，这样不太利于nginx等处理静态资源的缓存。终极方案莫过于在后缀上加上md5指纹信息，这样既可以让nginx等通知浏览器长期缓存，而一旦文件发生变化也必然可以让浏览器再次发起请求获得css和JavaScript。最终生成的页面信息达到下面的效果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;/toolbar/static/jquery/toolbar.js?2dc0cb76e7faa4c150fca76981cbcd20&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实现包含两部分，一方面需要可以计算出静态文件的md5值，另一方面则是可以在jsp中调用并生成上述html。多番比较后，发现jsp中还是使用标签比较合适，所以继续写tag文件：</p>
+
+<p>style.tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span> <span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> <span class="k">%&gt;</span>
+</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&#39;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>javascript.tag</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="k">&lt;%@</span><span class="n">tag</span> <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="n">import</span><span class="o">=</span><span class="s">&quot;com.sanss.toolbar.hepler.BaseHelper&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">attribute</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="n">required</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
+</span><span class='line'><span class="nt">&lt;c:set</span> <span class="na">var=</span><span class="s">&quot;ctx&quot;</span> <span class="na">value=</span><span class="s">&quot;${pageContext.request.contextPath}&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;${ctx}</span><span class="k">&lt;%=</span><span class="n">BaseHelper</span><span class="o">.</span><span class="na">rtg</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">%&gt;</span><span class="s">&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中使用到了BaseHelper里面的生成md5后缀级链接的方法<code>rtg(filepath)i</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/** 生成静态文件链接的公共方法，加上md5后缀或者时间戳。</span>
+</span><span class='line'><span class="cm">   * @param resource</span>
+</span><span class='line'><span class="cm">   * @return</span>
+</span><span class='line'><span class="cm">   */</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">rtg</span><span class="o">(</span><span class="n">String</span> <span class="n">resource</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">String</span> <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">fileMD5s</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;user.dir&quot;</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">getFileMD5</span><span class="o">(</span><span class="s">&quot;../webapps/toolbar/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">fileMd5</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">fileMd5</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">fileMD5s</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">resource</span><span class="o">,</span> <span class="n">fileMd5</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="s">&quot;/static/&quot;</span><span class="o">+</span><span class="n">resource</span><span class="o">+</span><span class="s">&quot;?&quot;</span><span class="o">+</span><span class="n">fileMd5</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最不济的情况下，也能给文件加上启动日期的时间戳。</p>
+
+<p>而在布局或者其他需要引入css和js的页面，直接使用这种代码即可:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='jsp'><span class='line'><span class="nt">&lt;tags:style</span> <span class="na">file=</span><span class="s">&quot;styles/css1.css&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/jquery.min.js&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;tags:javascript</span> <span class="na">file=</span><span class="s">&quot;jquery/tl.js&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -909,75 +1046,6 @@ ruby的rest-client。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/09/a-qing-dui-bin-zhi-bu-man-de-cai-xiang/">阿庆对缤智不满的猜想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-09T22:42:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在9月底写过一篇对<a href="/blog/2014/09/30/yi-kuan-jin-qi-bi-jiao-guan-zhu-de-che-bin-zhi-vezel/">缤智vs逍客的小结</a>，
-提到了缤智的尺寸和排量是对天籁一种很好的补充。而近期，缤智也终于公布了11月上市的车型。
-很遗憾，只有1.8L版本的，没有1.5L的。而这个1.8L的发动机已经是上一代的产物，实在和缤智这款新车不太搭。</p>
-
-<p>而在看车媒关于缤智信息的过程中，罕见地看见了车评人在自己的社交媒体上公开表达对某个车型的负面情感。
-新车评的阿庆有如下评论：</p>
-
-<blockquote><p>这又是一台我不是非常喜欢，但周围有很多人喜欢，而且会让市场上很多潜在买家的车[嘻嘻] http://t.cn/RPsESsp</p></blockquote>
-
-<p>新车评的编辑普遍还是很专业的，他们很少会在社交媒体上表达对具体车型的负面看法。
-所以在此，倒不妨说说我对阿庆不满的猜测。</p>
-
-<p>从行车品质方面来讲，阿庆对缤智最不满的有两点：
-1.行车的噪音；
-2. 1.8+CVT的动力有顿挫。</p>
-
-<p>而对悬架的硬度还是比较满意的，甚至对缤智跑高速还挺赞赏的。要知道，这东西的底盘和飞度是一套平台的，而
-飞度是极其不适合跑高速的。因此可以说缤智对底盘的调教很到位，缤智的价格虽然接近2辆飞度，但也还算物有所值。
-所以我首先怀疑阿庆是不满1.8L+CVT的这个组合。因为1.8L发动机是上一代本田很多车型使用的发动机，对比最新的
-地球梦系列，已经落后不少。而且那时候本田依然是主推自己独有的5AT，而CVT则是地球梦出来后，又再次
-加载到飞度雅阁等新车上。这个1.8的发动机和CVT的组合实在属于硬来。让车评人不满也就不奇怪了。</p>
-
-<p>其次，配了一个很华而不实的全景天窗，但是更加有用的电动座椅却消失了。这种配置方法实在有点脑残。</p>
-
-<p>第三，地球梦发动机的配备至少还有半年，需要等待很长时间。而广本的这种态度，也是很难让人满意的。</p>
-
-<p>阿庆主要的不满应该是其动力组成，从发动机到变速箱都不让人满意。但是缤智的设计的确是太出色了，
-本田虽然不舍得在中国直接上技术含量更高的动力组成，比如混合动力、双离合变速箱等，但尺寸和规格毕竟还是
-国产化了，于是缤智依然是一款很有吸引力的车。这么小的身段，却配了那么大的空间，在目前的市场上
-绝对是一个空白。CRV 奇骏 RAV4的空间确实更大，但尺寸也大了很多。而逍客等在空间实用性方面是差很多的，
-以三厢轿车为例，缤智至少不比轿车差，而逍客等就只是两厢车的空间水平了。</p>
-
-<p>于是问题来了，这么有吸引力的车，万一看中的配置只有1.8L才有，那即使等到1.5L上市了，是买1.5的还是1.8的呢？
-阿庆之所以会批评，根本原因还是缤智在某些方面确实抓住了用户痒点，而此时加入一些败笔则真的会让喜爱者扼腕叹息不已。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -995,6 +1063,10 @@ ruby的rest-client。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/">2021 CRV养车成本汇总</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/26/the-kubernetes-book/">The Kubernetes Book</a>
       </li>
     
@@ -1010,15 +1082,11 @@ ruby的rest-client。</p>
         <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/03/18/corswen-ti/">CORS问题</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (52)</a></li><li><a href='/blog/categories/车车'>车车 (39)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (53)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1026,7 +1094,7 @@ ruby的rest-client。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2021 - Hegel 2011 -
+  Copyright &copy; 2022 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

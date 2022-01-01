@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-11-07T13:10:36+08:00</updated>
+  <updated>2022-01-01T13:55:10+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
+    <updated>2021-12-30T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
+    <content type="html"><![CDATA[<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2021     </th>
+<th style="text-align:left;">2020     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">  18200      </td>
+<td style="text-align:left;"> 9200+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   2960     </td>
+<td style="text-align:left;">  3932</td>
+</tr>
+<tr>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     4214   </td>
+<td style="text-align:left;">   4600</td>
+</tr>
+<tr>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     200   </td>
+<td style="text-align:left;">   135</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     886   </td>
+<td style="text-align:left;">  994+1000(电瓶)</td>
+</tr>
+<tr>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     100   </td>
+<td style="text-align:left;">   372</td>
+</tr>
+<tr>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">    </td>
+<td style="text-align:left;">      20233+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      4616       </td>
+<td style="text-align:left;">    6022</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2020 CRV养车成本汇总]]></title>
@@ -304,30 +366,6 @@
 保养费用因为今年有大保，所以费用依然很高。不过不像去年那样有节气门故障的额外开支。洗车则是中规中矩。</p>
 
 <p>CRV也陪伴三年半多一点了，明年应该会把轮胎换一下，又是一笔开支啊。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[洗滚筒洗衣机]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji/"/>
-    <updated>2018-11-04T21:09:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/11/04/xi-gun-tong-xi-yi-ji</id>
-    <content type="html"><![CDATA[<p>家中一滚筒洗衣机购买多年，夏天的时候清洗过一下，但不得要领成效不大。原因在于清洗剂和其他很多说明其实都是针对波轮洗衣机，而波轮这方面的经验对滚筒并不适用。原因则在于水位。</p>
-
-<p>清洗剂本身要求溶解后在高水位浸泡2小时才有效果，网上甚至有人建议浸泡一夜。然而对于滚筒洗衣机来讲，水位普遍偏低，很难泡满。直到看见网上针对滚筒的建议，才明白解决的办法。关键在于适度<strong>轮转</strong>。</p>
-
-<p>具体方法为：</p>
-
-<ol>
-<li>放入清洗剂/粉直接到滚筒</li>
-<li>按漂洗模式放满水</li>
-<li>随后换筒清洁模式继续放水后暂停，并开始浸泡</li>
-<li>满2小时候，通过恢复铜滚动，类似于换个姿势（面），然后继续浸泡2小时</li>
-<li>如果操作几回后，就一切顺手了。</li>
-</ol>
-
-
-<p>最终从效果来看，还真的洗出不少东西来。</p>
 ]]></content>
   </entry>
   

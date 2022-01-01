@@ -15,7 +15,7 @@ GEM
       sass (~> 3.1)
     directory_watcher (1.4.1)
     fast-stemmer (1.0.2)
-    ffi (1.15.3)
+    ffi (1.15.4)
     fssm (0.2.10)
     haml (3.1.8)
     jekyll (0.12.1)
@@ -31,7 +31,7 @@ GEM
     mathn (0.1.0)
     nio4r (2.5.2)
     posix-spawn (0.3.15)
-    puma (5.4.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
     pygments.rb (0.3.7)
       posix-spawn (~> 0.3.6)
@@ -62,8 +62,7 @@ GEM
     yajl-ruby (1.1.0)
 
 PLATFORMS
-  x86_64-darwin-20
-  x86_64-linux
+  -darwin-21
 
 DEPENDENCIES
   RedCloth (~> 4.3.0)
@@ -86,4 +85,4 @@ DEPENDENCIES
   stringex (~> 1.4.0)
 
 BUNDLED WITH
-   2.2.25
+   2.3.4

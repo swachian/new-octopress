@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 车车 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/车车/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-11-07T13:10:36+08:00</updated>
+  <updated>2022-01-01T13:55:10+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
+    <updated>2021-12-30T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
+    <content type="html"><![CDATA[<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2021     </th>
+<th style="text-align:left;">2020     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">  18200      </td>
+<td style="text-align:left;"> 9200+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   2960     </td>
+<td style="text-align:left;">  3932</td>
+</tr>
+<tr>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     4214   </td>
+<td style="text-align:left;">   4600</td>
+</tr>
+<tr>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     200   </td>
+<td style="text-align:left;">   135</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     886   </td>
+<td style="text-align:left;">  994+1000(电瓶)</td>
+</tr>
+<tr>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     100   </td>
+<td style="text-align:left;">   372</td>
+</tr>
+<tr>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">    </td>
+<td style="text-align:left;">      20233+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      4616       </td>
+<td style="text-align:left;">    6022</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2020 CRV养车成本汇总]]></title>
@@ -270,15 +332,6 @@
 保养费用因为今年有大保，所以费用依然很高。不过不像去年那样有节气门故障的额外开支。洗车则是中规中矩。</p>
 
 <p>CRV也陪伴三年半多一点了，明年应该会把轮胎换一下，又是一笔开支啊。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2017 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong/"/>
-    <updated>2018-01-14T20:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/14/2017-crvyang-che-cheng-ben-hui-zong</id>
-    <content type="html"><![CDATA[<p><img src="/images/yangche2017.png" alt="image" /></p>
 ]]></content>
   </entry>
   

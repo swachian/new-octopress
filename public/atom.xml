@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2021-11-07T13:10:36+08:00</updated>
+  <updated>2022-01-01T13:55:10+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
+    <updated>2021-12-30T10:55:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
+    <content type="html"><![CDATA[<p>具体比较：</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"> 条目     </th>
+<th style="text-align:left;"> 2021     </th>
+<th style="text-align:left;">2020     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">   停车费     </td>
+<td style="text-align:left;">  18200      </td>
+<td style="text-align:left;"> 9200+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保险费     </td>
+<td style="text-align:left;">   2960     </td>
+<td style="text-align:left;">  3932</td>
+</tr>
+<tr>
+<td style="text-align:left;">   油费     </td>
+<td style="text-align:left;">     4214   </td>
+<td style="text-align:left;">   4600</td>
+</tr>
+<tr>
+<td style="text-align:left;">   高速     </td>
+<td style="text-align:left;">     200   </td>
+<td style="text-align:left;">   135</td>
+</tr>
+<tr>
+<td style="text-align:left;">   保养     </td>
+<td style="text-align:left;">     886   </td>
+<td style="text-align:left;">  994+1000(电瓶)</td>
+</tr>
+<tr>
+<td style="text-align:left;">   洗车     </td>
+<td style="text-align:left;">     100   </td>
+<td style="text-align:left;">   372</td>
+</tr>
+<tr>
+<td style="text-align:left;">   上述合计     </td>
+<td style="text-align:left;">    </td>
+<td style="text-align:left;">      20233+10000</td>
+</tr>
+<tr>
+<td style="text-align:left;">   里程     </td>
+<td style="text-align:left;">      4616       </td>
+<td style="text-align:left;">    6022</td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Kubernetes Book]]></title>
@@ -2047,48 +2109,6 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
 <p>未来十年，每一个称职的COO都会是从IT部门出来的。否则，只能是金玉其外的傀儡，需要依靠别人来开展工作。</p>
 
 <p>尾声当然是美好的，比尔获得了同事和上司的信任，他们业务部门的死对头莎拉也离开了公司，他和业务部门的其他人建立了良好的合作关系。公司上下更懂IT，IT也更懂公司的业务。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Kafka权威指南]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan/"/>
-    <updated>2019-10-08T11:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/10/08/kafkaquan-wei-zhi-nan</id>
-    <content type="html"><![CDATA[<p><code>default.replication.factor</code> : 分区的复制系数<br/>
-<code>unclean.leader.election</code> :
-简而言之，如果我们允许不同步的副本成为首领，那么就要承担丢失数据和出现数据不一
-致的风险。如果不允许它们成为首领，那么就要接受较低的可用性，因为我们必须等待原
-先的首领恢复到可用状态。
-如果把 unclean.leader.election.enable 设为 true，就是允许不同步的副本成为首领（也
-就是“不完全的选举”），那么我们将面临丢失消息的风险。如果把这个参数设为 false，
-就要等待原先的首领重新上线，从而降低了可用性。<br/>
-<code>min.insync.replicas</code> : 最少同步副本</p>
-
-<p>上述对broker的配置以外，生产者也要注意配置好<code>acks</code>的值，以及在代码里正确处理错误。</p>
-
-<p>ETL 表示提取—转换—加载（ Extract-Transform-Load）</p>
-
-<p>kafka的消息是可以在客户端进行压缩的</p>
-
-<p>事件流是可重播的，借助kafka，可以重播几个月甚至几年前的原始事件流</p>
-
-<p>时间窗口是否对齐？</p>
-
-<p>中间结果可以作为流写入kafka中</p>
-
-<p>flink手工启动命令
-/opt/flink-1.8.1/bin/flink run /opt/flink-1.8.1/jars/ssss-1.0.0-SNAPSHOT-TEST2-cron-4d8e317-all.jar
-启动命令：/opt/flink-1.8.1/bin/flink run -d /opt/flink-1.8.1/jars/Hastur-*.jar</p>
-
-<p>罗列任务的命令：
-/opt/flink-1.8.1/bin/flink list -r | grep ssss | cut -d &#8221; &#8221; -f 4</p>
-
-<p>停止任务的命令：
-/opt/flink-1.8.1/bin/flink cancel 6b338726460bcb8fe95bad883ca9f5b2</p>
-
-<p>taskmanager.heap.size跟着yarn的container size走
-taskmanager.numberOfTaskSlots 可设置多条</p>
 ]]></content>
   </entry>
   
