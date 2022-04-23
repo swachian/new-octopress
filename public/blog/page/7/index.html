@@ -9,59 +9,8 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53 &hellip;">
+  <meta name="description" content="四年以前写的上海电信IPTV的VLAN ID和通过交换机连接两路IPTV，而由于4k高清IPTV机顶盒的推广，
+当时的内容已经有些不合时宜。尽管，用一个交换机还是可以实现连接两路iptv。 区别主要在于新的4k高清机顶盒同小红等盒子一样，需要双平面才能跑得起来。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -119,6 +68,154 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/05/openwrt-n56u-he-iptv/">Openwrt N56u 和iptv</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-05T12:14:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>四年以前写的<a href="/blog/2012/02/20/the-way-to-link-to-iptv-in-shanghai-through-vlan/">上海电信IPTV的VLAN ID和通过交换机连接两路IPTV</a>，而由于4k高清IPTV机顶盒的推广，
+当时的内容已经有些不合时宜。尽管，用一个交换机还是可以实现连接两路iptv。</p>
+
+<p>区别主要在于新的4k高清机顶盒同小红等盒子一样，需要双平面才能跑得起来。所谓双平面就是在专网之外机顶盒也要能够连接公网。
+这个变化其实是带来一大好处的，即通过一个路由设备接光猫的一个口子，也可以让iptv和公网业务同时跑起来。下面记录一下操作过程。</p>
+
+<h3>openwrt</h3>
+
+<p>首先，这么灵活的配法，当前asus netgear等原厂的固件是不支持此种功能的，所以需要第三方固件，如openwrt dd-wrt。我选择了openwrt，是因为其官网支持asus-n56u路由器。
+<a href="https://wiki.openwrt.org/toh/asus/rt-n56u">官方链接</a> ，可以从前面这个链接获得操作过程和固件。注意下载<code>squashfs-factory.bin</code>，不要下载chaos版。我就误下了chaos版，导致只能采用reset的办法重新装回了华硕的固件。openwrt很贴心的一点就是在网页里提供了恢复固件的操作步骤</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Download &amp; Install the asus <span class="s2">&quot;Firmware Restoration&quot;</span> from asus website
+</span><span class='line'>Download the factory image from asus
+</span><span class='line'>Enter Recovery Mode
+</span><span class='line'>Unplug Router
+</span><span class='line'>Hold Reset Button and Plug in Router
+</span><span class='line'>Release button when front LED flashes slowly
+</span><span class='line'>Use the following to <span class="nb">set </span>up your TCP/IP settings:IP address: 192.168.1.x Subnet mask: 255.255.255.0
+</span><span class='line'>Select firmware *.trx and upload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要点是把本机的ip设置成192.168.1.2,而且如果本机有多块网卡（包括虚拟网卡）则只保留一个连接路由器lan口的网口活跃。这样华硕的固件才
+明确会打开这个网口并同已进入恢复模式的路由器相连。有了这个恢复模式存在，意味着asus的这款路由器基本是刷不死的。</p>
+
+<p>安装完openwrt，设置好基本的wan口，我是采用的dhcp方式获取wan地址，就可以进入配置iptv vlan的过程了。</p>
+
+<h3>关于4k高清机顶盒获取公网和专网IP的流程</h3>
+
+<p>参考<a href="https://www.ydkfblog.com/?m=201602">上海电信光猫一体机配合Openwrt拨号正常使用OTT 4K IPTV</a>，
+找到了iptv dhcp的流程
+<img src="/images/openwrt/4kiptvdhcp.png" alt="image" /></p>
+
+<p>看清流程后，就可以知道：
+1. 要先让4k iptv机顶盒接入公网<br/>
+2. 路由器要支持DHCP-Option：125<br/>
+3. 路由器要支持vlan 85的进出</p>
+
+<p>公网配置是基础，剩余两点的配置可以归纳为</p>
+
+<blockquote><ol>
+<li><p>接在自备路由器上时，将路由器WAN口、CPU口、接IPTV的口 一起新建一个VLAN 85，3个端口全部为tagged</p></li>
+<li><p><code>/etc/dnsmasq.conf</code>中要加入<code>dhcp-option-force=125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e</code> ,即对Option 125的支持</p></li>
+</ol>
+</blockquote>
+
+<p>做完这些之后，至少目前中兴的机顶盒是全面支持了。</p>
+
+<p>配置附录</p>
+
+<p>/etc/config/network</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>config switch
+</span><span class='line'>        option name <span class="s1">&#39;switch0&#39;</span>
+</span><span class='line'>        option reset <span class="s1">&#39;1&#39;</span>
+</span><span class='line'>        option enable_vlan <span class="s1">&#39;1&#39;</span>
+</span><span class='line'>        option enable_vlan4k <span class="s1">&#39;1&#39;</span>
+</span><span class='line'>
+</span><span class='line'>config switch_vlan
+</span><span class='line'>        option device <span class="s1">&#39;switch0&#39;</span>
+</span><span class='line'>        option vlan <span class="s1">&#39;1&#39;</span>
+</span><span class='line'>        option ports <span class="s1">&#39;0 1 2 3 8t&#39;</span>
+</span><span class='line'>
+</span><span class='line'>config switch_vlan
+</span><span class='line'>        option device <span class="s1">&#39;switch0&#39;</span>
+</span><span class='line'>        option vlan <span class="s1">&#39;2&#39;</span>
+</span><span class='line'>        option ports <span class="s1">&#39;4 8t&#39;</span>
+</span><span class='line'>
+</span><span class='line'>config switch_vlan
+</span><span class='line'>        option device <span class="s1">&#39;switch0&#39;</span>
+</span><span class='line'>        option vlan <span class="s1">&#39;85&#39;</span>
+</span><span class='line'>        option vid <span class="s1">&#39;85&#39;</span>
+</span><span class='line'>        option ports <span class="s1">&#39;1t 2t 4t 8t&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>/etc/dnsmasq.conf</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#cname=bertand,bert</span>
+</span><span class='line'>dhcp-option-force<span class="o">=</span>125,00:00:00:00:1b:02:06:48:47:57:2d:43:54:03:05:48:47:32:32:31:0a:02:20:00:0b:02:00:55:0d:02:00:2e
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1464,89 +1561,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/06/zz-ri-ben-de-fang-chan-shui/">Zz 日本的房产税</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-08-06T22:19:00+08:00" pubdate data-updated="true">Aug 6<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>转载自<a href="http://www.517japan.com/viewnews-8652.html">http://www.517japan.com/viewnews-8652.html</a></p>
-
-<p>日本的房产税叫做“不动产固定资产税”，跟“都市计画税”捆绑在一起。征收的条款很简单，下面就给大家介绍一下。这里需要说明的是，日本土地是私有制，买到手以后，就世世代代是自己的了，也是世世代代要缴纳资产税的了。</p>
-
-<p>一、不动产固定资产税</p>
-
-<p>1、不动产固定资产税是一种地方税，是以每年1月1日为时点，对在城市规划内的不动产（土地、房屋）的所有人征收的一个税种。</p>
-
-<p>2、税额的计算方法：税额=课税标准× 1.4%，课税标准是当地政府机关登录的不动产台帐的固定资产的评价额。</p>
-
-<p>3、住宅用地的减免政策：住宅用地200平方米以下的部分，称为“小规模住宅用地”，按课税标准额度的六分之一计算。200平方米以上的部分，称为“一般住宅用地”，按课税标准额度的三分之一计算。但是，土地上的建筑面积，不能超过土地面积的10倍。</p>
-
-<p>4、建筑物的减免政策：新建的建筑物到120平方米为止的部分，一般住宅的前三年，三层以上的耐火或者准耐火住宅的前5年，固定资产税减半。但必须住宅的居住部分是建筑物面积的1/2以上；或者：居住面积是100平方以上200平方以下，出租用住宅35平方以上200平方以下，而且，1平方的评价额有限制，木造不超过112000日元，准耐火构造不超过144000日元，耐火构造176000日元。</p>
-
-<p>5，纳税日期：每年4-5月收到纳税通知书，纳税者可以选择一次或者分季度缴纳。</p>
-
-<p>二、都市计画税</p>
-
-<p>1、都市计画税也是一种地方税，也是以每年1月1日为时点，对在城市规划内的不动产（土地、房屋）的所有人征收的一个税种。与固定资产税一起缴纳。</p>
-
-<p>2、税额的计算方法：税额=课税标准× 0.3%，课税标准是当地政府机关登录的不动产台帐的固定资产的评价额。</p>
-
-<p>3、住宅用地的减免政策：住宅用地200平方米以下的部分，称为“小规模住宅用地”，按课税标准额度的三分之一计算。200平方米以上的部分，称为“一般住宅用地”，按课税标准额度的三分之二计算。</p>
-
-<p>4，建筑物的减免政策：没有。</p>
-
-<p>三、举例计算</p>
-
-<p>有了上面的政策解释，所有人都可以比较轻松的计算出每年的应缴纳税额，下面举一个一般情况的例子来计算一下，看看日本人一年缴纳多少房产税。比如：一家人刚买了一套新建的别墅，土地面积是165，建筑面积是100，
-其中，土地的评价额为1800万，建筑物的评价额为1200万。计算方法如下：</p>
-
-<p>固定资产税为=土地部分+建筑物部分</p>
-
-<pre><code>               = 1800 × 1/6 × 1.4% + 1200 × 1.4% × 1/2
-               = 12.6万
-</code></pre>
-
-<p>都市计画税=土地部分+建筑物部分</p>
-
-<pre><code>             = 1800 × 1/3 × 0.3% + 1200 × 0.3%
-             = 5.4万
-</code></pre>
-
-<p>年度缴纳税额=固定资产税+都市计画税= 18万日元</p>
-
-<p>房产总评估价值为3000万日元，年度税率为：0.6%。实际上，固定资产的评价额是有些水分的，土地价格一般是按照当时土地价格的60%&#8211;70%、建筑物价格是按照建筑费的50%&#8211;70%进行评价的，所以，评价额度为3000万的别墅式住宅实际购置价格是4500万或者更多，这样看来，日本人房产税的年度实际税率为：0.4%。其中评价额尤其是土地的评价额是随着市场状况的变化而变化的。</p>
-
-<p>给出的是某块土地价格变化的曲线图，用的是日本年度，2年是平成2年，也就是1990年，3年是1991年，以此类推。可以看出，日本泡沫经济时代的土地价格以及泡沫破灭以后房地产价格的连年下降，需要注意的是，日本房产泡沫（1993年）破灭稍稍晚于日本经济泡沫破灭（1991年）。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1564,6 +1578,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2022/04/23/wfh-yi-ge-ban-yue/">WFH一个半月</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/">2021 CRV养车成本汇总</a>
       </li>
     
@@ -1579,15 +1597,11 @@
         <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/">mysql的库表容量查询</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (53)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (23)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>

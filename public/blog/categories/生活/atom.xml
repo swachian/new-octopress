@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2022-01-01T21:15:50+08:00</updated>
+  <updated>2022-04-23T15:27:36+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WFH一个半月]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue/"/>
+    <updated>2022-04-23T15:11:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue</id>
+    <content type="html"><![CDATA[<p>二月初六龙抬头那天正好是周五，那天就WFH。不曾想，自从那天开始WFH，后面疫情日益严重。起初一个礼拜还只是我一人居家办公，
+一周后中小学集体回家上网课，就变成我白天边上班边带娃。又过了一周，老婆单位也开始不能去办公大楼了。最后到了3月底，全上海都进入静态管理，也就是说大部分人是不能去写字楼上班了。
+截止到现在，已经超过了一个半月，也不知道后续还会持续多久。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
@@ -302,75 +313,6 @@
 <p>保险费用因为有扣分的违章，有10%的涨幅。。<br/>
 保养费用方面今年没大保，不过因为换了轮胎，这笔开销就是有2500元。然后还有一次补胎，其他就没什么了。
 洗车比去年勤快了，另外也是因为洗车涨价了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2018 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018/"/>
-    <updated>2019-01-01T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/01/01/crv-2018</id>
-    <content type="html"><![CDATA[<p>2018年的养车成本和2017年的竟然差不多。</p>
-
-<p>具体比较：</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;"> 条目     </th>
-<th style="text-align:left;"> 2017     </th>
-<th style="text-align:left;">2018     </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">   停车费     </td>
-<td style="text-align:left;">   10123     </td>
-<td style="text-align:left;"> 11029+2000</td>
-</tr>
-<tr>
-<td style="text-align:left;">   保险费     </td>
-<td style="text-align:left;">   4945     </td>
-<td style="text-align:left;">  3637</td>
-</tr>
-<tr>
-<td style="text-align:left;">   油费     </td>
-<td style="text-align:left;">     6444   </td>
-<td style="text-align:left;">   7006</td>
-</tr>
-<tr>
-<td style="text-align:left;">   高速     </td>
-<td style="text-align:left;">     368   </td>
-<td style="text-align:left;">   510</td>
-</tr>
-<tr>
-<td style="text-align:left;">   保养     </td>
-<td style="text-align:left;">     1756   </td>
-<td style="text-align:left;">  1568</td>
-</tr>
-<tr>
-<td style="text-align:left;">   洗车     </td>
-<td style="text-align:left;">     275   </td>
-<td style="text-align:left;">   355</td>
-</tr>
-<tr>
-<td style="text-align:left;">   上述合计     </td>
-<td style="text-align:left;">  23911  </td>
-<td style="text-align:left;">      24105+2000</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>单位停车比之前每月贵了100，所以合计就是贵了1200.好在保险费用有较大的降幅，最终差别不大。</p>
-
-<p>比较神奇的是油费/公里竟然和去年差不多，都是0.77元/KM。平均油耗去年11.30L/100KM，今年11.49L/100KM，不过去年以95号油为主，今年全部是92号油，因此这一年油费确实涨的相当厉害了。<br/>
-行使里程方面，去年8416KM，今年8856KM，差别倒不是很大。</p>
-
-<p>保险费用没有，不过违章其实有一笔200的开支。<br/>
-保养费用因为今年有大保，所以费用依然很高。不过不像去年那样有节气门故障的额外开支。洗车则是中规中矩。</p>
-
-<p>CRV也陪伴三年半多一点了，明年应该会把轮胎换一下，又是一笔开支啊。</p>
 ]]></content>
   </entry>
   
