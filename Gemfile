@@ -23,7 +23,7 @@ group :development do
   gem 'albino'
 end
 
-gem 'sinatra', '~> 1.4.2'
+gem 'sinatra', '~> 2.2.3'
 #gem 'unicorn'
 gem 'stringex', '~> 1.4.0'
 gem 'puma'
