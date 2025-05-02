@@ -9,8 +9,20 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="四年以前写的上海电信IPTV的VLAN ID和通过交换机连接两路IPTV，而由于4k高清IPTV机顶盒的推广，
-当时的内容已经有些不合时宜。尽管，用一个交换机还是可以实现连接两路iptv。 区别主要在于新的4k高清机顶盒同小红等盒子一样，需要双平面才能跑得起来。 &hellip;">
+  <meta name="description" content="JPA的配置通常如下即可： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14 &lt;!-- Jpa Entity Manager 配置 --&gt; &lt;bean id="entityManagerFactory" class="org.springframework.orm &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +80,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/08/jpade-naming-strate/">JPA的naming Strategy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-08T17:08:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JPA的配置通常如下即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &lt;!-- Jpa Entity Manager 配置 --&gt;
+</span><span class='line'>  &lt;bean id="entityManagerFactory"
+</span><span class='line'>    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"&gt;
+</span><span class='line'>    &lt;property name="dataSource" ref="dataSource" /&gt;
+</span><span class='line'>    &lt;property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" /&gt;
+</span><span class='line'>    &lt;property name="packagesToScan" value="com.sanss." /&gt;
+</span><span class='line'>    &lt;property name="jpaProperties"&gt;
+</span><span class='line'>      &lt;props&gt;
+</span><span class='line'>        &lt;!-- 命名规则 My_NAME-&gt;MyName --&gt;
+</span><span class='line'>        &lt;prop key="hibernate.ejb.naming_strategy"&gt;org.hibernate.cfg.DefaultComponentSafeNamingStrategy&lt;/prop&gt;
+</span><span class='line'>        &lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;
+</span><span class='line'>      &lt;/props&gt;
+</span><span class='line'>    &lt;/property&gt;
+</span><span class='line'>  &lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中值得注意的是Resposity的生成其实依赖于里面的<code>packagesToScan</code>，而表名、表字段和对象之间的映射转换则依赖于<code>hibernate.ejb.naming_strategy</code></p>
+
+<p>此属性共有四个选项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+</span><span class='line'>org.hibernate.cfg.DefaultNamingStrategy
+</span><span class='line'>org.hibernate.cfg.EJB3NamingStrategy
+</span><span class='line'>org.hibernate.cfg.ImprovedNamingStrategy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>首两个选项基本就是不做命名的转换，后面两个会把大小写的骆驼写法转换成带下划线的小写字符。同时，这个类可以自己继承并进行扩展定制，如果命名要求实在特殊，可以自行编写。
+甚至表名后带日期等均可以自行定制。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1021,6 +1116,12 @@
 <p> 就是针对readline增加的选项。</p>
 
 <p>加上之后，irb支持中文了，pry也支持历史记录浏览了。</p>
+
+<p>./configure &#8211;with-openssl-dir=<code>brew --prefix openssl@1.1</code> &#8211;disable-install-doc &#8211;prefix=/Users/yuzhang/.rbenv/versions/ruby-2.6.9  &#8211;with-readline-dir=<code>brew --prefix readline</code></p>
+
+<p>rbenv install 2.7.1</p>
+
+<p>brew install shared-mime-info</p>
 </div>
   
   
@@ -1511,56 +1612,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/08/26/lao-luo-he-chui-zi-899yuan-de-jian-guo-shou-ji/">老罗和锤子899元的坚果手机</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-08-26T23:08:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>老罗这次在梅赛德斯奔驰中心开了坚果手机的发布会。
-发布会一如老罗既往的表现一样好看，相较于一年多以前的3k元的锤子手机，这款定价
-899/999的坚果手机倒是可以一战的。原因么也很简单，就是够便宜也够有性价比。这个价位
-能买到5.5寸1080p的屏确实已经很不错了。</p>
-
-<p>工业设计方面推出了自己的设计师，整个造型确实很iphone，同时正面是用的白色边框，这点很不容易。
-因为13年的时候我就发现为啥那么多手机都是黑的，而白的往往要贵一些。按老罗的说法这是色差导致了良品率不同。</p>
-
-<p>软件的话，还是在一个红海里面做道场。但是，锤子确实开发出了一些很不错的应用。在一个竞争那么白热化的
-市场，能想出这些东西来必然是废了很多脑细胞的。</p>
-
-<p>硬件方面倒是用的高通的芯片，那配置基本就算过得去了。</p>
-
-<p>这款手机肯定能卖的比锤子好许多，至少会帮老罗在这个市场占的一席之地。
-定位确实低端了点，利润方面能不能维持锤子生存下去，还是比较难讲的。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1578,6 +1629,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/">从并发到Kotlin和模式的学习</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2022/04/23/wfh-yi-ge-ban-yue/">WFH一个半月</a>
       </li>
     
@@ -1593,15 +1648,11 @@
         <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (96)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/kotlin'>Kotlin (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1609,7 +1660,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2023 - Hegel 2011 -
+  Copyright &copy; 2025 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>

@@ -29,3 +29,9 @@ categories:
  就是针对readline增加的选项。
 
 加上之后，irb支持中文了，pry也支持历史记录浏览了。
+
+./configure --with-openssl-dir=`brew --prefix openssl@1.1` --disable-install-doc --prefix=/Users/yuzhang/.rbenv/versions/ruby-2.6.9  --with-readline-dir=`brew --prefix readline`
+
+rbenv install 2.7.1
+
+brew install shared-mime-info

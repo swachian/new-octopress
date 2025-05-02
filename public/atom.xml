@@ -4,7 +4,7 @@
   <title><![CDATA[Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2023-09-08T19:24:28+08:00</updated>
+  <updated>2025-05-02T17:47:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,237 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[从并发到Kotlin和模式的学习]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
+    <updated>2025-04-30T23:42:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
+    <content type="html"><![CDATA[<p>在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点，相对于Java本身的优势和劣势做一些评价，也会对Kotlin高度配套的Arrow、Ktor、Vert.x写一些体会，同时，因为Kotlin明显受到了Scala的启发，所以也会谈一点关于scala的内容。</p>
+
+<p>前4章讲了Kotlin的基础以及Gof的3类合计23个经典设计模式。Kotlin的语言风格和Java以及JS类似，实质上更像JS，因为她把函数作为一等公民，但很多语法又更像Java。</p>
+
+<p>回忆要点：</p>
+
+<h3>语法巡礼</h3>
+
+<ul>
+<li>打印语句是什么</li>
+<li>简化的main方法</li>
+<li>简化的分号semicolons</li>
+<li>val var的类型声明以及类型推断</li>
+<li>==和===的比较</li>
+<li><p>Null safety</p></li>
+<li><p>Lists, Sets, Maps的构造方式类似java，但有更明确的Mutable标识</p></li>
+<li>数组，从list到数组以及arrayOf</li>
+<li>if 和when控制语句</li>
+<li>String里变量的解析 ${}</li>
+<li><p>loop的写法</p></li>
+<li><p>class和继承，用<code>:</code> 来表明继承</p></li>
+<li>Properties及其method</li>
+<li>必要时可给Property定制set get</li>
+<li>interface和override</li>
+<li>abstract class</li>
+<li>只有open的class可以被继承，但通过编译糖实现了直接给现有类open一个method(Extension functions)</li>
+<li>Data 类，也就是value object</li>
+</ul>
+
+
+<h3>创建有关的模式</h3>
+
+<ul>
+<li>单例 object关键字</li>
+<li>Factory Method 是要抽象出被建对象的公共Interface</li>
+<li>Abstract Factory 可以理解成是Factory Method的集成</li>
+<li>Builder 目前很常用的方法，Kotlin里面增加了通过apply实现的Fluent setters，Default arguments等</li>
+<li>Prototype Kt里面这就是一个copy</li>
+</ul>
+
+
+<h3>结构有关的模式</h3>
+
+<ul>
+<li>Bridge 引入中间对象类实现行为的委托，让原对象行为的变化通过变换bridge的对象来实现</li>
+<li>Proxy 和Decorator一样，都包含一个传入的组合对象，只是更多的是做访问控制等工作，并且很可能执行路径和传入的参数很不一样</li>
+<li>Decorator  <code>by repository</code>的意思是继承这个接口的时候使用输入的参数的实现类</li>
+<li>Composite 把可能单个或者多个的同类参数组织起来，核心结构是包含一个集合，<code>varargs</code>关键字可以把输入的多个参数作为数组</li>
+<li>Facade 把复杂的操作封装起来，这里举的例子有点像后面的中间人</li>
+<li>Adapter asStream，asArray都是一种adapter的现实应用</li>
+<li>Flayweight 通过缓存+单例实现内存使用减小</li>
+</ul>
+
+
+<h3>行为相关的模式</h3>
+
+<p>责命解迭中记观，策状模访</p>
+
+<p>Java的惯例是都是对象，所以所有的行为模式和结构模式都长的差不多。但是，对应Function优先的语言而言，Function不像对象那样是有状态的，所以可以实现纯策略模式。</p>
+
+<ul>
+<li>Chain of Responsibility 常见的filter其实就是一种责任链模式，通过提取一个公共的handler(比如request in response 出)函数为入参，就可以把这串方法串行调用起来</li>
+<li>Command 把要执行的东西压入一个数组，然后提取出来分别执行，其实事件模型有点类似command，但command甚至可以执行回滚</li>
+<li>Interpreter 解析复杂的文本为对象</li>
+<li>Iterator  支持迭代模式的对象，就拥有了很多种和迭代器相关的能力，从遍历到map，reduce</li>
+<li>Mediator 按他的说法，controller在MVC里就是一个中间人</li>
+<li>Memento  顺便记录点东西</li>
+<li>Observer launch等的核心模式</li>
+<li>Strategy 这个其实是被使用的最多的一种模式，动态更换行为</li>
+<li>State 通过状态不同来更新成员的状态对象，从而有不同的策略</li>
+<li>Template Method 直接传入定制化的method，从而利用整个模板走完流程</li>
+<li>Visitor 这个模式的核心其实是把不同元素的处理情况放到一个类中，用when或者switch进行集中处理，而这个类就叫visitor。她可以处理集合，处理集合时意味着丢给集合的accept后续处理，如遇到叶子结点，则直接对元素进行访问后获取自己需要的东西。</li>
+</ul>
+
+
+<p>随后本书进入了第二部分，关注于有反应(Reactive)和并发的Pattern。主要就是涉及FP（函数式编程）的模式，以及协程(Coroutines)、Channel、Flow等用于并发的组件。后者更像是基础框架对编程的影响，也由基础组件决定了程序编写的基本套路，即模式。<br/>
+以协程为例，Java是17以后才引入的概念，之前只有线程。而Kotlin因为要为安卓服务，所以很早</p>
+
+<h3>FP</h3>
+
+<p>多核的兴起以及FP在意图性编程方面的优势，让FP翻红起来。</p>
+
+<ul>
+<li>function的几种写法，从最严格的到最简化的</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fun generateMultiply1(): (Int, Int) -&gt; Int {
+</span><span class='line'>    return fun(x: Int, y: Int): Int {
+</span><span class='line'>       return x * y 
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fun generateMultiply2(): (Int, Int) -&gt; Int {
+</span><span class='line'>    return { x: Int, y: Int -&gt;
+</span><span class='line'>        x* y 
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fun generateMultiply3() = {x : Int, y : Int -&gt;
+</span><span class='line'>    x + y
+</span><span class='line'>    y + 3
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fun subtract(x: Int) = fun(y: Int): Int {
+</span><span class='line'>    return x - y
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Trailing lambda  又称 call suffix，类似ruby的模板方法在尾部输入函数</li>
+<li>Higher-order functions，forEach里面有自动入参<code>it</code>，是item的缩写</li>
+<li>Clousures 由此支持了currying和Memoization记忆数组，本质就是让函数也可以有<strong>状态</strong></li>
+<li>fun或者lambda里更多地使用expressions而不是statements</li>
+<li>tailrec用于性能优化递归函数，限制是只能是最后一句包含递归，本质上这是compiler技术提升的一种表现</li>
+</ul>
+
+
+<h3>线程和协程</h3>
+
+<ul>
+<li>昂贵的Thread，因为消耗更多的内存，有Thread Stack，还有CPU间的Context Switch</li>
+<li>coroutines，kotlinx-coroutines-core提供了这种轻量级线程的实现，通过with+launch或者with+async的方式来实现</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>with(GlobalScope) {
+</span><span class='line'>    launch {
+</span><span class='line'>        delay(100)
+</span><span class='line'>    } 
+</span><span class='line'>}
+</span><span class='line'>// with 在kotlin里让{}里的this自动指向入参，上面例子中就是GlobalScope，这个思路有点类似于decorator模式中举例的by repository。launch只是一个普通的method，但需要一个scope才能跑起来launch代表的coroutine</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>runBlocking和suspend</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fun main() {
+</span><span class='line'>    runBlocking {
+</span><span class='line'>        val job: Deferred&lt;UUID&gt; = fastUuidAsync()
+</span><span class='line'>        println(job.await())
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>suspend fun main() {
+</span><span class='line'>    val job: Deferred&lt;UUID&gt; = fastUuidAsync()
+</span><span class='line'>    println(job.await())
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Dispatchers.Default和Dispatchers.IO等，协程实质依赖线程运行，dispatcher就是这些线程，可以作为入参提供给launch和async</li>
+<li>Structured concurrency，coroutines套coroutines，父协程要等待子协程们完成才结束。子协程的异常会导致父协程终止，supervisorScope可以防止这个异常繁殖传递，coroutineScope方法也能做此限制</li>
+</ul>
+
+
+<h3>控制数据流</h3>
+
+<p>FP+coroutines的设计原则：</p>
+
+<ul>
+<li>Responsive, Resilient(supple), Elastic, Message-driven</li>
+<li>collections上的高阶函数，reduce的话有一个fold和reduce类似，但可以提供initial value，flatMap和flatten，后者更简洁一点，类似toList()不用输入lambda</li>
+<li>sequences 同list最大的区别在于不像list被整个处理，而是会被一个一个送出去并行处理，一般而言效率优于List</li>
+<li>Channels kotlin版本的BlockingQueue，用于底层通信，属于热队列，既已经发出的消息不会重放, produce可以制造一个channel，搭配这个channel上的consumeEach</li>
+<li>Actor，封装了channel和coroutine，但在kotlin中处于临期的状态</li>
+<li>Flows，冷队列，会把消息从头到尾再发给新的监听者，用于数据流但实际上也能通过配置改变这种默认的行为，搭配为emit和collect，flow有点像tcp，有更高级的主题，例如shareIn，Conflate以及限流相关的debounce，sample，distinctUntilChanged等功能函数，spring的projectreactor也提供了类似的库，但没有协程助力，要采用事件驱动的写法</li>
+</ul>
+
+
+<h3>并发相关的设计模式</h3>
+
+<ul>
+<li>Deferred Value, java的Future，kotlin的Deferred，一般从async中返回</li>
+<li>Barrier, kotlin中是用几个await等待几个异步的事情都完成后再进行处理，java中的CountDown，CylicleBarrier也都是干这种事情的</li>
+<li>Scheduler，任务的调度（如何执行）和执行什么分离，再kotlin是Dispatcher，在java是executors</li>
+<li>Pipeline, 把一个复杂的任务拆成流水，这样可以多个线程或协程同时运行小任务，也是stream设计的要点</li>
+<li>Fan-Out, 把一个大任务分散后发出去，同Pipeline的区别在于可能只是批处理分发，而pipeline有更强的单个操作的协作性</li>
+<li>Fan-In，Out后的东西最终往往需要汇总后才有意义</li>
+<li>Racing，和Barrier类似，但只要有一个有效就可以忽略其他等待，kotlin在这里使用了select，即多路复用</li>
+<li>Mutex，类似java最经典的synchronize，通过lock unlock来同步竞态资源</li>
+<li>Sidekick，小外挂，把一部分工作包出去，目前AI计算和NVIDIA的关系就是N卡其实就是Sidekick</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[WFH一个半月]]></title>
@@ -2009,69 +2240,6 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
 <p>保险费用因为有扣分的违章，有10%的涨幅。。<br/>
 保养费用方面今年没大保，不过因为换了轮胎，这笔开销就是有2500元。然后还有一次补胎，其他就没什么了。
 洗车比去年勤快了，另外也是因为洗车涨价了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Manage It]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it/"/>
-    <updated>2019-12-01T10:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it</id>
-    <content type="html"><![CDATA[<p>项目的驱动因素、约束以及活动余地。少问“为什么”，少问“怎么做”</p>
-
-<p>镀金类需求和核心需求。</p>
-
-<h3>项目章程模板：</h3>
-
-<ul>
-<li>远景：项目的意义，远景式的话语</li>
-<li>需求：项目的驱动因素</li>
-<li>目标：解决技术债务、添加更多的自动化测试、设计冒烟测试，这些都可能是项目目标</li>
-<li>成功标准：包括功能1、2、3，提升产品性能，测出相关数值，项目经理要确保成功标准中不会包含非项目人员才能完成的任务，比如卖出50000套软件，要确保成功标准在项目经理的掌控之中。</li>
-<li>ROI估算：投资回报率</li>
-</ul>
-
-
-<p>质量在产品的不同市场应用阶段，可以的需求有很大区别。到大众市场之间有着摩尔鸿沟。越进入成熟阶段，对质量的要求更高，即缺陷的容忍度越低。</p>
-
-<h3>开发项目规划模板</h3>
-
-<ul>
-<li>产品意图：（类似远景，但远景可能不够用），与远景大方向一致，但又不安全相同</li>
-<li>历史记录：知道的越少，越容易惊讶</li>
-<li>发布条件</li>
-<li>目标：同章程中的目标，但章程编写时可能目标还不明确</li>
-<li>项目组织：明确团队在项目中的职责分配，指明如何使用周期以及哪些关键实践</li>
-<li>日程总览：让我的领导知道项目的实际进展</li>
-<li>人员配备（人员曲线）</li>
-<li>建议日程</li>
-<li>风险列表：识别和管理风险</li>
-</ul>
-
-
-<h3>制定发布计划</h3>
-
-<p>通过制定发布计划，和各个职能部门的人共同商讨“成功”的含义，可以意识到自己不仅只是完成分内的工作，也为项目经理指明了成功的方向。</p>
-
-<ol>
-<li>确定当前项目最重要的因素：时间、功能、低缺陷率</li>
-<li>草拟发布条件，加入测试经理等人</li>
-<li>SMART原则，确定的、可测量的、可达成的、相关的、可跟踪的指标和条件</li>
-<li>发布条件上达成多方共识：揭示众人对于产品和项目的假定和忧虑的过程</li>
-</ol>
-
-
-<p>很多软件开发人员都是很乐观的。在学校时接受的训练就是要让他们变得乐观，因为那
-时每个项目都会在一个学期内完成（还要花费许多个通宵）。这些训练会一直停留在他们
-脑海中，直到学会估算小的功能，并接收对于估算的反馈</p>
-
-<p>如果项目经理必须遵循某个截止日期，那就干脆什么都别估算了。把所有的功能进行排
-序，并按优先级进行开发。这种状况下，我强力推荐使用敏捷生命周期，这样就可以快
-速地实现功能，并马上得到反馈</p>
-
-<p>管理项目：管理风险，留意测试的进度，产生仪表盘上的数据，评估版本发布条件，要帮助大家看清目标、移除障碍，监控他们的进度，是没有时间做技术工作的。</p>
-
-<p>保持合理的工作时间。</p>
 ]]></content>
   </entry>
   

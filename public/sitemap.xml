@@ -1040,7 +1040,7 @@
         <loc>
             http://octopresszhangyu.herokuapp.com/blog/2015/12/24/mac-shang-zhe-teng-ruby-2-dot-2/
         </loc>
-        <lastmod>2022-01-01T21:07:26+08:00</lastmod>
+        <lastmod>2023-09-08T20:31:09+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -1347,8 +1347,14 @@
         <lastmod>2022-04-23T15:17:16+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/
+        </loc>
+        <lastmod>2025-05-02T17:47:48+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://octopresszhangyu.herokuapp.com/</loc>
-        <lastmod>2022-04-23T15:17:16+08:00</lastmod>
+        <lastmod>2025-05-02T17:47:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/about/</loc>
@@ -1356,7 +1362,7 @@
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/blog/archives/</loc>
-        <lastmod>2022-04-23T15:17:16+08:00</lastmod>
+        <lastmod>2025-05-02T17:47:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://octopresszhangyu.herokuapp.com/robots.txt</loc>

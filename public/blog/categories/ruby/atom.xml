@@ -4,7 +4,7 @@
   <title><![CDATA[分类: ruby | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2023-09-08T19:24:28+08:00</updated>
+  <updated>2025-05-02T17:47:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -38,6 +38,12 @@
  就是针对readline增加的选项。</p>
 
 <p>加上之后，irb支持中文了，pry也支持历史记录浏览了。</p>
+
+<p>./configure --with-openssl-dir=<code>brew --prefix openssl@1.1</code> --disable-install-doc --prefix=/Users/yuzhang/.rbenv/versions/ruby-2.6.9  --with-readline-dir=<code>brew --prefix readline</code></p>
+
+<p>rbenv install 2.7.1</p>
+
+<p>brew install shared-mime-info</p>
 ]]></content>
   </entry>
   

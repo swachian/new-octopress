@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
   <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
   <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2023-09-08T19:24:28+08:00</updated>
+  <updated>2025-05-02T17:47:49+08:00</updated>
   <id>http://octopresszhangyu.herokuapp.com/</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
@@ -12,6 +12,196 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[从并发到Kotlin和模式的学习]]></title>
+    <link href="http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
+    <updated>2025-04-30T23:42:00+08:00</updated>
+    <id>http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
+    <content type="html"><![CDATA[<p>在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点，相对于Java本身的优势和劣势做一些评价，也会对Kotlin高度配套的Arrow、Ktor、Vert.x写一些体会，同时，因为Kotlin明显受到了Scala的启发，所以也会谈一点关于scala的内容。</p>
+
+<p>前4章讲了Kotlin的基础以及Gof的3类合计23个经典设计模式。Kotlin的语言风格和Java以及JS类似，实质上更像JS，因为她把函数作为一等公民，但很多语法又更像Java。</p>
+
+<p>回忆要点：</p>
+
+<h3>语法巡礼</h3>
+
+<ul>
+<li>打印语句是什么</li>
+<li>简化的main方法</li>
+<li>简化的分号semicolons</li>
+<li>val var的类型声明以及类型推断</li>
+<li>==和===的比较</li>
+<li><p>Null safety</p></li>
+<li><p>Lists, Sets, Maps的构造方式类似java，但有更明确的Mutable标识</p></li>
+<li>数组，从list到数组以及arrayOf</li>
+<li>if 和when控制语句</li>
+<li>String里变量的解析 ${}</li>
+<li><p>loop的写法</p></li>
+<li><p>class和继承，用<code>:</code> 来表明继承</p></li>
+<li>Properties及其method</li>
+<li>必要时可给Property定制set get</li>
+<li>interface和override</li>
+<li>abstract class</li>
+<li>只有open的class可以被继承，但通过编译糖实现了直接给现有类open一个method(Extension functions)</li>
+<li>Data 类，也就是value object</li>
+</ul>
+
+
+<h3>创建有关的模式</h3>
+
+<ul>
+<li>单例 object关键字</li>
+<li>Factory Method 是要抽象出被建对象的公共Interface</li>
+<li>Abstract Factory 可以理解成是Factory Method的集成</li>
+<li>Builder 目前很常用的方法，Kotlin里面增加了通过apply实现的Fluent setters，Default arguments等</li>
+<li>Prototype Kt里面这就是一个copy</li>
+</ul>
+
+
+<h3>结构有关的模式</h3>
+
+<ul>
+<li>Bridge 引入中间对象类实现行为的委托，让原对象行为的变化通过变换bridge的对象来实现</li>
+<li>Proxy 和Decorator一样，都包含一个传入的组合对象，只是更多的是做访问控制等工作，并且很可能执行路径和传入的参数很不一样</li>
+<li>Decorator  <code>by repository</code>的意思是继承这个接口的时候使用输入的参数的实现类</li>
+<li>Composite 把可能单个或者多个的同类参数组织起来，核心结构是包含一个集合，<code>varargs</code>关键字可以把输入的多个参数作为数组</li>
+<li>Facade 把复杂的操作封装起来，这里举的例子有点像后面的中间人</li>
+<li>Adapter asStream，asArray都是一种adapter的现实应用</li>
+<li>Flayweight 通过缓存+单例实现内存使用减小</li>
+</ul>
+
+
+<h3>行为相关的模式</h3>
+
+<p>责命解迭中记观，策状模访</p>
+
+<p>Java的惯例是都是对象，所以所有的行为模式和结构模式都长的差不多。但是，对应Function优先的语言而言，Function不像对象那样是有状态的，所以可以实现纯策略模式。</p>
+
+<ul>
+<li>Chain of Responsibility 常见的filter其实就是一种责任链模式，通过提取一个公共的handler(比如request in response 出)函数为入参，就可以把这串方法串行调用起来</li>
+<li>Command 把要执行的东西压入一个数组，然后提取出来分别执行，其实事件模型有点类似command，但command甚至可以执行回滚</li>
+<li>Interpreter 解析复杂的文本为对象</li>
+<li>Iterator  支持迭代模式的对象，就拥有了很多种和迭代器相关的能力，从遍历到map，reduce</li>
+<li>Mediator 按他的说法，controller在MVC里就是一个中间人</li>
+<li>Memento  顺便记录点东西</li>
+<li>Observer launch等的核心模式</li>
+<li>Strategy 这个其实是被使用的最多的一种模式，动态更换行为</li>
+<li>State 通过状态不同来更新成员的状态对象，从而有不同的策略</li>
+<li>Template Method 直接传入定制化的method，从而利用整个模板走完流程</li>
+<li>Visitor 这个模式的核心其实是把不同元素的处理情况放到一个类中，用when或者switch进行集中处理，而这个类就叫visitor。她可以处理集合，处理集合时意味着丢给集合的accept后续处理，如遇到叶子结点，则直接对元素进行访问后获取自己需要的东西。</li>
+</ul>
+
+
+<p>随后本书进入了第二部分，关注于有反应(Reactive)和并发的Pattern。主要就是涉及FP（函数式编程）的模式，以及协程(Coroutines)、Channel、Flow等用于并发的组件。后者更像是基础框架对编程的影响，也由基础组件决定了程序编写的基本套路，即模式。<br/>
+以协程为例，Java是17以后才引入的概念，之前只有线程。而Kotlin因为要为安卓服务，所以很早</p>
+
+<h3>FP</h3>
+
+<p>多核的兴起以及FP在意图性编程方面的优势，让FP翻红起来。</p>
+
+<ul>
+<li>function的几种写法，从最严格的到最简化的</li>
+</ul>
+
+
+<pre><code>fun generateMultiply1(): (Int, Int) -&gt; Int {
+    return fun(x: Int, y: Int): Int {
+       return x * y 
+    }
+}
+
+fun generateMultiply2(): (Int, Int) -&gt; Int {
+    return { x: Int, y: Int -&gt;
+        x* y 
+    }
+}
+
+fun generateMultiply3() = {x : Int, y : Int -&gt;
+    x + y
+    y + 3
+}
+
+fun subtract(x: Int) = fun(y: Int): Int {
+    return x - y
+}
+</code></pre>
+
+<ul>
+<li>Trailing lambda  又称 call suffix，类似ruby的模板方法在尾部输入函数</li>
+<li>Higher-order functions，forEach里面有自动入参<code>it</code>，是item的缩写</li>
+<li>Clousures 由此支持了currying和Memoization记忆数组，本质就是让函数也可以有<strong>状态</strong></li>
+<li>fun或者lambda里更多地使用expressions而不是statements</li>
+<li>tailrec用于性能优化递归函数，限制是只能是最后一句包含递归，本质上这是compiler技术提升的一种表现</li>
+</ul>
+
+
+<h3>线程和协程</h3>
+
+<ul>
+<li>昂贵的Thread，因为消耗更多的内存，有Thread Stack，还有CPU间的Context Switch</li>
+<li><p>coroutines，kotlinx-coroutines-core提供了这种轻量级线程的实现，通过with+launch或者with+async的方式来实现<br/>
+<code>
+  with(GlobalScope) {
+      launch {
+          delay(100)
+      }
+  }
+  // with 在kotlin里让{}里的this自动指向入参，上面例子中就是GlobalScope，这个思路有点类似于decorator模式中举例的by repository。launch只是一个普通的method，但需要一个scope才能跑起来launch代表的coroutine
+</code></p></li>
+<li><p>runBlocking和suspend<br/>
+```
+fun main() {
+  runBlocking {
+      val job: Deferred<UUID> = fastUuidAsync()
+      println(job.await())
+  }
+}</p></li>
+</ul>
+
+
+<p>suspend fun main() {
+    val job: Deferred<UUID> = fastUuidAsync()
+    println(job.await())
+}
+```</p>
+
+<ul>
+<li>Dispatchers.Default和Dispatchers.IO等，协程实质依赖线程运行，dispatcher就是这些线程，可以作为入参提供给launch和async</li>
+<li>Structured concurrency，coroutines套coroutines，父协程要等待子协程们完成才结束。子协程的异常会导致父协程终止，supervisorScope可以防止这个异常繁殖传递，coroutineScope方法也能做此限制</li>
+</ul>
+
+
+<h3>控制数据流</h3>
+
+<p>FP+coroutines的设计原则：</p>
+
+<ul>
+<li>Responsive, Resilient(supple), Elastic, Message-driven</li>
+<li>collections上的高阶函数，reduce的话有一个fold和reduce类似，但可以提供initial value，flatMap和flatten，后者更简洁一点，类似toList()不用输入lambda</li>
+<li>sequences 同list最大的区别在于不像list被整个处理，而是会被一个一个送出去并行处理，一般而言效率优于List</li>
+<li>Channels kotlin版本的BlockingQueue，用于底层通信，属于热队列，既已经发出的消息不会重放, produce可以制造一个channel，搭配这个channel上的consumeEach</li>
+<li>Actor，封装了channel和coroutine，但在kotlin中处于临期的状态</li>
+<li>Flows，冷队列，会把消息从头到尾再发给新的监听者，用于数据流但实际上也能通过配置改变这种默认的行为，搭配为emit和collect，flow有点像tcp，有更高级的主题，例如shareIn，Conflate以及限流相关的debounce，sample，distinctUntilChanged等功能函数，spring的projectreactor也提供了类似的库，但没有协程助力，要采用事件驱动的写法</li>
+</ul>
+
+
+<h3>并发相关的设计模式</h3>
+
+<ul>
+<li>Deferred Value, java的Future，kotlin的Deferred，一般从async中返回</li>
+<li>Barrier, kotlin中是用几个await等待几个异步的事情都完成后再进行处理，java中的CountDown，CylicleBarrier也都是干这种事情的</li>
+<li>Scheduler，任务的调度（如何执行）和执行什么分离，再kotlin是Dispatcher，在java是executors</li>
+<li>Pipeline, 把一个复杂的任务拆成流水，这样可以多个线程或协程同时运行小任务，也是stream设计的要点</li>
+<li>Fan-Out, 把一个大任务分散后发出去，同Pipeline的区别在于可能只是批处理分发，而pipeline有更强的单个操作的协作性</li>
+<li>Fan-In，Out后的东西最终往往需要汇总后才有意义</li>
+<li>Racing，和Barrier类似，但只要有一个有效就可以忽略其他等待，kotlin在这里使用了select，即多路复用</li>
+<li>Mutex，类似java最经典的synchronize，通过lock unlock来同步竞态资源</li>
+<li>Sidekick，小外挂，把一部分工作包出去，目前AI计算和NVIDIA的关系就是N卡其实就是Sidekick</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Kubernetes Book]]></title>
@@ -884,58 +1074,6 @@ order by data_length desc, index_length desc;
 </code></pre>
 
 <p>可以查询库里的表名、数据容量和索引容量。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CORS问题]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti/"/>
-    <updated>2021-03-18T13:40:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti</id>
-    <content type="html"><![CDATA[<p>动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。</p>
-
-<p>CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。</p>
-
-<p>原理上，CORS工作时会先发出一个OPTIONS请求，并携带Origin消息头：</p>
-
-<pre><code>OPTIONS /
-Host: service.example.com
-Origin: http://www.example.com
-Access-Control-Request-Method: PUT
-</code></pre>
-
-<p>然后，服务器端如果支持跨域，则会返回Access-Control-Allow-Origin消息头，里面给出允许访问的Origin域名。如果用<code>*</code>，则表示没有任何限制。如果要允许多个域名，则可以使用Nginx中动态变量的方法，这种情况下每次还是只返回一个域名。</p>
-
-<pre><code>location / {
-
-                root html;
-             if ($request_method = "OPTIONS") {
-add_header Access-Control-Allow-Origin *;
-                add_header 'Access-Control-Allow-Credentials' 'true';
-                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With';
-                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS';
-                add_header 'Access-Control-Max-Age' 10;
-                return 204;
-             }
-
-                add_header 'Access-Control-Allow-Credentials' 'true' always;
-                add_header 'Access-Control-Allow-Headers' 'Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,X-Requested-With' always;
-                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS' always;
-                add_header 'Access-Control-Max-Age' 10 always;
-                proxy_set_header host $host;
-                proxy_set_header X-real-ip $remote_addr;
-                proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
-                proxy_pass http://127.0.0.1:8080;
-        }
-</code></pre>
-
-<p>Nginx的配置需要注意两点：</p>
-
-<ol>
-<li>add_header在proxy_pass时默认不会起作用，如果需要起作用，则要加上<code>always</code>参数。</li>
-<li>Access-Control-Allow-Origin 要严格的只有1条，不能有多条。</li>
-</ol>
-
 ]]></content>
   </entry>
   

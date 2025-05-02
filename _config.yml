@@ -109,3 +109,6 @@ disqus_show_comment_count: false
 
 # Facebook Like
 facebook_like: false
+
+keep_files: [stylesheets, images] 
+clean: false

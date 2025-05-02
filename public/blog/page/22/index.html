@@ -9,10 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="JavaScript是一个很大的亮点。V8的性能确实快。
-相对于Ruby Python的eveneted-driven编程库，JS的优势在于：
-1. 不单网络模型是事件型的，基本上所有的库都是事件型的API；
-2. 它的执行速度要比其他脚本语言快的多的多，比ruby &hellip;">
+  <meta name="description" content="这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
+最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
+也就来自其中. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +69,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/26/hubot-and-socket-dot-io/">Hubot and socket.io</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-26T22:05:00+08:00" pubdate data-updated="true">Jun 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
+最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
+也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>telnet xxx
+</span><span class='line'>coffee
+</span><span class='line'>&gt; 3+2<span class="o">=</span>?
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vs</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">eval </span>3+2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后者显然便捷许多.</p>
+
+<p>在研究redis的时候,顺手看了一个chat room的例子, 尽管例子本身有很大的问题,却也由此接触了<a href="http://socket.io">socket.io</a>.
+Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是通过浏览器进行监控、日志浏览的必备工具.相当有意义的技术.<br/>
+而且<code>socket.io-client</code>也很有意思.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1700,190 +1759,6 @@ IDE好用。于是想想可能aptana也能装vi的插件。毕竟这和eclipse�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/29/inside-github/">Inside Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-29T11:18:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>关于<a href="http://www.slideshare.net/rubymeetup/inside-github-with-chris-wanstrath">Inside Github</a>
-的笔记。讲了整个stack里用到的东西，以及‘胶水’。 @defunkt</p>
-
-<p>创设的初衷： A git hub - learning, code hosting, etc. 最早只是让代码和评论浏览器化。</p>
-
-<p>Kyle Neath ， 让页面漂亮的家伙，应该是视觉设计师。</p>
-
-<p>web站点实质上是一系列不同的组件。有些是产生和提交HTML，但更多的部分则不是。GitHub由
-4四大<strong>frameworks</strong>组成。</p>
-
-<ul>
-<li>rails
-Github.com, Gist, &#8230;</li>
-<li>resque
-Background processing, G大约有50个不同的类型</li>
-<li>chimney
-All git calls happen over the write</li>
-<li>utils
- 意外日志，统计，辅助应用等</li>
-</ul>
-
-
-<h3>rails</h3>
-
-<p>  他们使用Rails 2.2.2作为web框架，采用补丁的方式解决安全、乐意接受的新特性，但拒绝对站点做整体迁移。
-GitHub的Rails 代码量仅仅是20,000行，这个真的很短。用到了27个插件，50个gem。主要的插件包括：</p>
-
-<ul>
-<li><a href="https://github.com/Shopify/active_merchant">shopify/active_merchant</a><br/>
-支付的抽象库。有中国人给家里alipay的补丁</li>
-<li><a href="https://github.com/lgn21st/s3_swf_upload">lgn21st/s3_swf_upload</a>  a flash base upload component</li>
-<li><a href="https://github.com/technoweenie/serialized_attributes">technoweenie/serialized_attributes</a></li>
-<li><a href="https://github.com/ntalbott/query_trace">query_trace</a> 告诉你query究竟发生在哪里，比如哪个rhtml，哪个controller</li>
-<li><a href="https://github.com/jeberly/query-analyzer">query_analyzer</a><br/>
-除了第一个，后面4个都已经不怎么更新。实际上后面3个是已经纳入到Rails 3.2里面了。</li>
-</ul>
-
-
-<p>Gems:</p>
-
-<ul>
-<li><a href="https://github.com/github/albino">albino</a> 标记高亮</li>
-<li><a href="">ar-extensions</a> 主要是用于提高使用ar导入的效率，而且又一些增强的特性，主要还是效率。Rails3的已经改成<a href="https://github.com/zdennis/activerecord-import/wiki">activerecord-import</a></li>
-<li><a href="">aws-s3</a></li>
-<li><a href="https://github.com/EmmanuelOga/ffaker">faker</a> 造数据的</li>
-<li><a href="https://github.com/technoweenie/faraday">faraday</a> HTTP的客户端，依旧<strong>活跃</strong>，值得细细研究</li>
-<li><a href="https://github.com/github/markup">github/markup</a></li>
-<li>[jekyll]</li>
-<li><a href="https://github.com/github/gollum">gollum</a> 和jekyll差不多，是产生wiki的引擎</li>
-<li><a href="https://github.com/redis/redis-rb">redis-rb</a> redis的客户端</li>
-<li>[unicorn] 16 workers</li>
-</ul>
-
-
-<p>Rack:</p>
-
-<ul>
-<li>Rack::Bug<br/>
-Coderack</li>
-<li>nerdEd/rack-validate</li>
-<li>webficient/rack-tidy</li>
-<li>talison/rack-mobile-detect</li>
-</ul>
-
-
-<p>Nginx当然不让 :<br/>
-* Limit Zone<br/>
-* Limit Request: Anti-DDOS
-* memcached support<br/>
-* Push Module: comet!</p>
-
-<p>Git:
-* <a href="https://github.com/mojombo/grit">grit</a> 通过ruby直接对git库使用read/write，是一个Ruby对Git的实现</p>
-
-<h3>chimney(smoke)</h3>
-
-<p>这应该是指一种通信方式，smoke意味硝烟、烽火<br/>
-Smoke calls</p>
-
-<ul>
-<li>BERT-RPC
-另有<a href="https://github.com/blog/531-introducing-bert-and-bert-rpc">Introducing BERT and BERT-RPC</a>，主要优势似乎是利用erlang，对大二进制处理的更好  <br/>
-<a href="http://blog.xdite.net/posts/2011/12/10/github-flavored-ruby/">xdite的笔记</a></li>
-<li><a href="https://github.com/mojombo/bertrpc">mojombo/bertrpc</a></li>
-<li>[chimney]
-proprietary 的库，怀疑是erlang写的<br/>
-让RPC clients知道如何找到server，路由内容存放在Redis中</li>
-<li>proxymachine
-有点类似nodeload替换的功能，不过这个也用于git clone<br/>
-能用来作为所有tcp链接的代理</li>
-<li>JSON-RPC</li>
-<li>node.js<br/>
-downloads<br/>
-event streams</li>
-<li>hubot</li>
-</ul>
-
-
-<h3>resque</h3>
-
-<ul>
-<li><p><a href="https://github.com/defunkt/resque">resque</a><br/>
-Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later</p></li>
-<li><p>优先等级</p>
-
-<ul>
-<li>严重</li>
-<li>高</li>
-<li>低</li>
-</ul>
-</li>
-<li><p>队列任务</p>
-
-<ul>
-<li>page 产生页面</li>
-<li>archive 打包tar</li>
-<li>search
-
-<ul>
-<li>使用<a href="https://github.com/apache/solr">solr</a> 基于Lucene的HTTP接口，所以使用简单</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据库是MySql 5</p></li>
-</ul>
-
-
-<h3>utils</h3>
-
-<ul>
-<li>comet loading</li>
-<li>nagios 负责监控</li>
-<li>resque 的web</li>
-<li>collectd 用于手机负载、RAM等的信息</li>
-<li>pingdom 短信系统</li>
-<li>tender 一个客服系统</li>
-</ul>
-
-
-<p>测试仅仅是使用 test/unit, machinist当做fixtures的工具，  ci joe做push后的自动测试工具</p>
-
-<p>而他的CTO Tom 则给了[这些[(https://speakerdeck.com/u/mojombo/p/github-flavored-ruby)</p>
-
-<p>里面提到了<strong>RDD</strong>的概念:<br/>
-readme driven development
-先把README叫做SPEC，完成一点，就把内容移到README中。</p>
-
-<p>先写TomDOC再写代码则是在code层面这种编码思想的体现。这是写给未来的自己看的。不然很多东西就会归时间的魔鬼所有。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -1901,6 +1776,10 @@ readme driven development
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/">从并发到Kotlin和模式的学习</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2022/04/23/wfh-yi-ge-ban-yue/">WFH一个半月</a>
       </li>
     
@@ -1916,15 +1795,11 @@ readme driven development
         <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/08/19/apollo-config/">Apollo Config</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (95)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (35)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (96)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/kotlin'>Kotlin (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
@@ -1932,7 +1807,7 @@ readme driven development
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2023 - Hegel 2011 -
+  Copyright &copy; 2025 - Hegel 2011 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   <a title="Web Statistics" href="http://getclicky.com/66623321"><img alt="Web Statistics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
   <script src="//static.getclicky.com/js" type="text/javascript"></script>
