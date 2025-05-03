@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 读书笔记 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书笔记/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/读书笔记/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
+    <link href="https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
     <updated>2021-02-16T21:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
+    <id>https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
     <content type="html"><![CDATA[<p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
 一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
 首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
@@ -30,9 +30,9 @@
   
   <entry>
     <title type="html"><![CDATA[Manage It]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it/"/>
+    <link href="https://swachian.github.io//blog/2019/12/01/manage-it/"/>
     <updated>2019-12-01T10:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/01/manage-it</id>
+    <id>https://swachian.github.io//blog/2019/12/01/manage-it</id>
     <content type="html"><![CDATA[<p>项目的驱动因素、约束以及活动余地。少问“为什么”，少问“怎么做”</p>
 
 <p>镀金类需求和核心需求。</p>
@@ -93,9 +93,9 @@
   
   <entry>
     <title type="html"><![CDATA[凤凰项目读后记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/"/>
+    <link href="https://swachian.github.io//blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji/"/>
     <updated>2019-11-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji</id>
+    <id>https://swachian.github.io//blog/2019/11/05/feng-huang-xiang-mu-du-hou-ji</id>
     <content type="html"><![CDATA[<p>在人邮图灵1024半价优惠日买的一本书，主要以小说的形式，描述了一个资深运维经理比尔接手内部的凤凰项目部署，并在世外高人埃瑞克的指导下，如何通过看板、精益、敏捷能方法打通任督二脉，满足业务部门的<strong>真实</strong>需求，从而使整个系统（集团公司）业绩达标的故事。形式相当引人入胜，也很有收获，关键是提供了和人沟通的场景和范本。</p>
 
 <p>上手，讲述了主角被选中的原因：他过去几年组建的大型机团队，是最有组织、最值得信赖的团队，比尔本人也是一个可靠、务实，而且愿意表达真实想法的人。不过，作为运维主管，比尔对开发的印象不是很好，比如开发人员经常粗心大意弄坏东西，然后就丢给运维了；而开发人员和信息安全部门的人联手，更容易给运维添乱。而主人公的冷静坦率的做法，甚至让他在第一部分丢了工作。</p>
@@ -146,9 +146,9 @@
   
   <entry>
     <title type="html"><![CDATA[Spring In Action 4]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4/"/>
+    <link href="https://swachian.github.io//blog/2015/06/01/spring-in-action-4/"/>
     <updated>2015-06-01T10:31:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/01/spring-in-action-4</id>
+    <id>https://swachian.github.io//blog/2015/06/01/spring-in-action-4</id>
     <content type="html"><![CDATA[<p>大约两年前，又读了In action的第三版，感觉离实际的开发已经有点远了，里面讲的内容反应不了当时Spring主要的用法。于是换了
 《Spring In Practice》学习，比当时的in action贴近实际反应现状多了。<br/>
 好在，In action在14年年末又出了新的版本。
@@ -216,9 +216,9 @@ spring.profiles.default
   
   <entry>
     <title type="html"><![CDATA[何伟的甲骨文]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen/"/>
+    <link href="https://swachian.github.io//blog/2014/09/14/he-wei-de-jia-gu-wen/"/>
     <updated>2014-09-14T11:49:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/14/he-wei-de-jia-gu-wen</id>
+    <id>https://swachian.github.io//blog/2014/09/14/he-wei-de-jia-gu-wen</id>
     <content type="html"><![CDATA[<p>书接上回，之前说寻路中国应该叫寻路中国乡村，因为欠缺的城市的内容。但实际上关于城市中国的何伟的书出版的更早，
 就是这本《Oracle》，而且由于某些原因无法在大陆出版。因为一旦
 牵涉到城市，难免会有更敏感的话题出现。

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 技术 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/技术/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/技术/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[从并发到Kotlin和模式的学习]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
+    <link href="https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
     <updated>2025-04-30T23:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
+    <id>https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
     <content type="html"><![CDATA[<p>在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点，相对于Java本身的优势和劣势做一些评价，也会对Kotlin高度配套的Arrow、Ktor、Vert.x写一些体会，同时，因为Kotlin明显受到了Scala的启发，所以也会谈一点关于scala的内容。</p>
 
 <p>前4章讲了Kotlin的基础以及Gof的3类合计23个经典设计模式。Kotlin的语言风格和Java以及JS类似，实质上更像JS，因为她把函数作为一等公民，但很多语法又更像Java。</p>
@@ -200,14 +200,17 @@ fun main() {
 <li>Sidekick，小外挂，把一部分工作包出去，目前AI计算和NVIDIA的关系就是N卡其实就是Sidekick</li>
 </ul>
 
+
+<p>至此，本书最精华的部分就讲解完毕了。后面又讲了3个常见的库和框架的使用，但更流于框架的使用说明，有些例子也举的不太好。
+总体而言，本书的视角比较独特，用kotlin介绍的设计模式有令人耳目一新的地方。当然作者部分地方也显得功力不够，讲的不够清楚到位，有些例子也举的不是很好。</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[The Kubernetes Book]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book/"/>
+    <link href="https://swachian.github.io//blog/2021/10/26/the-kubernetes-book/"/>
     <updated>2021-10-26T09:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book</id>
+    <id>https://swachian.github.io//blog/2021/10/26/the-kubernetes-book</id>
     <content type="html"><![CDATA[<p>The Kubernetes book, 购于Leanpub</p>
 
 <h1>1&amp;2 Kubernetes 基础和操作</h1>
@@ -585,9 +588,9 @@ env var； cmd； vol</p>
   
   <entry>
     <title type="html"><![CDATA[Java 8 9 10 in action]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action/"/>
+    <link href="https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action/"/>
     <updated>2021-10-04T21:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action</id>
+    <id>https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action</id>
     <content type="html"><![CDATA[<h1>第一章</h1>
 
 <p>第一作者写作时是剑桥的在读博士，同时第三作者是他的博士生导师。第二作者是Redhat的Java 8普及牛人。</p>
@@ -910,9 +913,9 @@ Curring：可以分批应用参数的函数，其实就是把值先保存在函�
   
   <entry>
     <title type="html"><![CDATA[Apollo Config]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/08/19/apollo-config/"/>
+    <link href="https://swachian.github.io//blog/2021/08/19/apollo-config/"/>
     <updated>2021-08-19T17:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/08/19/apollo-config</id>
+    <id>https://swachian.github.io//blog/2021/08/19/apollo-config</id>
     <content type="html"><![CDATA[<p>配置项的管理始终是一个很头疼的问题。虽然磕磕绊绊总能凑合着过，但确实一直不太优雅，甚至容易出错。
 人多的情况下，优雅是很难的，还是考虑怎么能减少损耗吧。所以抽空看了看Apollo的东西。</p>
 
@@ -1060,9 +1063,9 @@ kube-system   kube-scheduler-office-wallet-dev-17                        1/1    
   
   <entry>
     <title type="html"><![CDATA[mysql的库表容量查询]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/"/>
+    <link href="https://swachian.github.io//blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/"/>
     <updated>2021-08-09T17:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun</id>
+    <id>https://swachian.github.io//blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun</id>
     <content type="html"><![CDATA[<pre><code>select  
 table_schema as '数据库',  
 table_name as '表名',  

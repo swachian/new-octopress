@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 键盘 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/键盘/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/键盘/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[青轴的蓝牙键盘]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/"/>
+    <link href="https://swachian.github.io//blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan/"/>
     <updated>2018-04-28T21:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan</id>
+    <id>https://swachian.github.io//blog/2018/04/28/qing-zhou-de-lan-ya-jian-pan</id>
     <content type="html"><![CDATA[<p>去年听同事介绍买了一个Filco的红轴蓝牙键盘。一千多的东西虽然用着也不错，但始终谈不上喜欢。
 而且在用了一年之后，其键帽毕竟是ABS材质，打油、磨损等接踵而至。加上2月底摸了下老同事的Filco青轴键盘，
 于是对青轴开始长草。</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 区块链 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/区块链/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/区块链/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Truffle And Solidity]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity/"/>
+    <link href="https://swachian.github.io//blog/2017/05/01/truffle-and-solidity/"/>
     <updated>2017-05-01T10:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/05/01/truffle-and-solidity</id>
+    <id>https://swachian.github.io//blog/2017/05/01/truffle-and-solidity</id>
     <content type="html"><![CDATA[<p>区块链应用的开发，主要指用<code>Solidity</code>编写合约(Contract)，然后部署到区块链上去。
 注意，此处的区块链特指<code>以太坊</code>，而比特币的区块链是没有Solidity这种东西的。</p>
 

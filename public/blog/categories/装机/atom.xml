@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 装机 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/装机/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/装机/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[装机 i3-10100]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/12/18/zhuang-ji-i3-10100/"/>
+    <link href="https://swachian.github.io//blog/2020/12/18/zhuang-ji-i3-10100/"/>
     <updated>2020-12-18T23:17:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/12/18/zhuang-ji-i3-10100</id>
+    <id>https://swachian.github.io//blog/2020/12/18/zhuang-ji-i3-10100</id>
     <content type="html"><![CDATA[<p>一台10年安装的机器不太好了，其实应该只是后面加装的SSD硬盘坏了，但年份确实有点久了，就决定重新配一台。配置如下，东西全部来自于京东：</p>
 
 <ul>
@@ -90,9 +90,9 @@ Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
   
   <entry>
     <title type="html"><![CDATA[装机i5-6500]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500/"/>
+    <link href="https://swachian.github.io//blog/2016/09/19/zhuang-ji-i5-6500/"/>
     <updated>2016-09-19T22:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/09/19/zhuang-ji-i5-6500</id>
+    <id>https://swachian.github.io//blog/2016/09/19/zhuang-ji-i5-6500</id>
     <content type="html"><![CDATA[<p>许久没有装机了，入了如下的配置:</p>
 
 <ul>
@@ -165,9 +165,9 @@ Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
   
   <entry>
     <title type="html"><![CDATA[笔记本加了SSD]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/01/15/bi-ji-ben-jia-liao-ssd/"/>
+    <link href="https://swachian.github.io//blog/2015/01/15/bi-ji-ben-jia-liao-ssd/"/>
     <updated>2015-01-15T23:05:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/01/15/bi-ji-ben-jia-liao-ssd</id>
+    <id>https://swachian.github.io//blog/2015/01/15/bi-ji-ben-jia-liao-ssd</id>
     <content type="html"><![CDATA[<p>在13年8月拿到工作用的Dell E6430时，就有自己加一块SSD硬盘的想法。只是当时拿到之后发现原装的win7-64bit pro
 也不错，使用了几个礼拜后也就不想再重装折腾了。另一个原因则是当时SSD的价格还略高，彼时我一心想的还是256GB的SSD。</p>
 
@@ -212,9 +212,9 @@ Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
   
   <entry>
     <title type="html"><![CDATA[中级品牌机和组装机比较]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/"/>
+    <link href="https://swachian.github.io//blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao/"/>
     <updated>2014-06-22T22:12:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao</id>
+    <id>https://swachian.github.io//blog/2014/06/22/zhong-ji-pin-pai-ji-tai-shi-ji-bi-jiao</id>
     <content type="html"><![CDATA[<p>近日帮一个打算用品牌机的亲戚换机器，因为他之前用的品牌机感觉还不错。并且提出最好要联想的机器。
 原因么依然是目前的一台机器就是联想，但又不想更换显示器，同时希望主机在两三千搞定。
 不换显示器，对于自己组装机器来讲，

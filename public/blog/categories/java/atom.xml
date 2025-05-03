@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: java | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/java/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/java/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[从并发到Kotlin和模式的学习]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
+    <link href="https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
     <updated>2025-04-30T23:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
+    <id>https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
     <content type="html"><![CDATA[<p>在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点，相对于Java本身的优势和劣势做一些评价，也会对Kotlin高度配套的Arrow、Ktor、Vert.x写一些体会，同时，因为Kotlin明显受到了Scala的启发，所以也会谈一点关于scala的内容。</p>
 
 <p>前4章讲了Kotlin的基础以及Gof的3类合计23个经典设计模式。Kotlin的语言风格和Java以及JS类似，实质上更像JS，因为她把函数作为一等公民，但很多语法又更像Java。</p>
@@ -200,14 +200,17 @@ fun main() {
 <li>Sidekick，小外挂，把一部分工作包出去，目前AI计算和NVIDIA的关系就是N卡其实就是Sidekick</li>
 </ul>
 
+
+<p>至此，本书最精华的部分就讲解完毕了。后面又讲了3个常见的库和框架的使用，但更流于框架的使用说明，有些例子也举的不太好。
+总体而言，本书的视角比较独特，用kotlin介绍的设计模式有令人耳目一新的地方。当然作者部分地方也显得功力不够，讲的不够清楚到位，有些例子也举的不是很好。</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java 8 9 10 in action]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action/"/>
+    <link href="https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action/"/>
     <updated>2021-10-04T21:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action</id>
+    <id>https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action</id>
     <content type="html"><![CDATA[<h1>第一章</h1>
 
 <p>第一作者写作时是剑桥的在读博士，同时第三作者是他的博士生导师。第二作者是Redhat的Java 8普及牛人。</p>
@@ -530,9 +533,9 @@ Curring：可以分批应用参数的函数，其实就是把值先保存在函�
   
   <entry>
     <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
+    <link href="https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
     <updated>2021-02-16T21:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
+    <id>https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
     <content type="html"><![CDATA[<p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
 一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
 首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
@@ -545,9 +548,9 @@ Curring：可以分批应用参数的函数，其实就是把值先保存在函�
   
   <entry>
     <title type="html"><![CDATA[Mybatis-plus的字段为复杂对象的读取和装载]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/"/>
+    <link href="https://swachian.github.io//blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/"/>
     <updated>2021-01-14T21:19:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai</id>
+    <id>https://swachian.github.io//blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai</id>
     <content type="html"><![CDATA[<p>如果核心代码写的非常OO，那么Entity中自然会出现很多Value Object。一旦这些VO需要存入数据库，则会牵涉到一个数据库字段转换到Java类型的ORM问题。<br/>
 比如有下面的代码：</p>
 
@@ -618,9 +621,9 @@ public class CommissionTypeHandler implements TypeHandler&lt;Commission&gt; {
   
   <entry>
     <title type="html"><![CDATA[Clean Architecture]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture/"/>
+    <link href="https://swachian.github.io//blog/2020/10/06/clean-architecture/"/>
     <updated>2020-10-06T22:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture</id>
+    <id>https://swachian.github.io//blog/2020/10/06/clean-architecture</id>
     <content type="html"><![CDATA[<p>Rober C. Martin的另一部Clean系列，总体来讲不如Clean Code，但书还值得一读。Bob大叔开发经验丰富，但仔细分析的话，他的主要经验还是基于C的通信软件的开发，之前有过很多的汇编经历。Java看起来真正做过的大的项目似乎并不多。因为按他90年代以前的经历，基本没有使用Java开发过什么，而之后，则转去了做咨询和主编，写的项目按常理应该不多。</p>
 
 <p>书中首先使用龟兔赛跑的隐喻，讽刺了程序员们的迷之自信，总以为自己是聪明的兔子能够有朝一日把一团乱的东西Clean干净，但实际上从来没有发生。以此告诫读者必须脚踏实地做好整洁架构和整洁代码：The only way to go fast is to go well. 随后，提出Software的精髓在于<strong>soft</strong>，也就是easy to change，这是软件设计和开发的根本。并且应用类软件的开发，一般是由urgent behavior驱动的，但维护好clean Architecture则是开发人员的责任。</p>

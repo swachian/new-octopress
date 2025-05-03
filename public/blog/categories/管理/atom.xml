@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 管理 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/管理/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/管理/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Peopleware读书笔记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/02/16/peoplewaredu-shu-bi-ji/"/>
+    <link href="https://swachian.github.io//blog/2018/02/16/peoplewaredu-shu-bi-ji/"/>
     <updated>2018-02-16T14:20:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/02/16/peoplewaredu-shu-bi-ji</id>
+    <id>https://swachian.github.io//blog/2018/02/16/peoplewaredu-shu-bi-ji</id>
     <content type="html"><![CDATA[<p>读完软件随想录，自然而然被吸引去了另一本这个领域的名著《人件》</p>
 
 <h3>质量</h3>
@@ -39,9 +39,9 @@
   
   <entry>
     <title type="html"><![CDATA[Joel 谈软件- 软件随想录]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/"/>
+    <link href="https://swachian.github.io//blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu/"/>
     <updated>2018-01-31T14:12:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu</id>
+    <id>https://swachian.github.io//blog/2018/01/31/joel-tan-ruan-jian-ruan-jian-sui-xiang-lu</id>
     <content type="html"><![CDATA[<p>《Joel谈软件》，我一直是这么称呼《软件随想录》的。
 倒是才注意到，原来黑客与画家、软件随想录都是阮一峰老师翻译的，而且翻译的真不错。与此同时，阮老师也很好地推销了一下自己。本书与《我编程我快乐》不同，是很有深度的书，所以决定边读边记笔记。尤其要说一句，阮老师的注解是很显功力的。</p>
 
@@ -280,9 +280,9 @@
   
   <entry>
     <title type="html"><![CDATA[我编程我快乐]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le/"/>
+    <link href="https://swachian.github.io//blog/2018/01/31/wo-bian-cheng-wo-kuai-le/"/>
     <updated>2018-01-31T13:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/01/31/wo-bian-cheng-wo-kuai-le</id>
+    <id>https://swachian.github.io//blog/2018/01/31/wo-bian-cheng-wo-kuai-le</id>
     <content type="html"><![CDATA[<p>在图灵买了本《我编程我快乐》的电子书。其实原版名字就是著名的《My job went to India》的第二版，
 原书名的意思也是如何成为一个卓越的程序员。</p>
 
@@ -338,9 +338,9 @@
   
   <entry>
     <title type="html"><![CDATA[新的挑战]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2017/07/31/xin-de-tiao-zhan/"/>
+    <link href="https://swachian.github.io//blog/2017/07/31/xin-de-tiao-zhan/"/>
     <updated>2017-07-31T00:21:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2017/07/31/xin-de-tiao-zhan</id>
+    <id>https://swachian.github.io//blog/2017/07/31/xin-de-tiao-zhan</id>
     <content type="html"><![CDATA[<p>去新公司已经快半年了，大约一个半月前副总找谈话，打算提拔我当部门经理，负责起部门的管理工作。
 并且，跟我讲了他的经历。他原本也一直不想做管理，主要顾忌有两点：<br/>
 1. 怕自己干不好；

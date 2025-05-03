@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: rails | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/rails/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[关于handling rails view的神作]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/"/>
+    <link href="https://swachian.github.io//blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo/"/>
     <updated>2015-08-01T22:25:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo</id>
+    <id>https://swachian.github.io//blog/2015/08/01/guan-yu-handling-rails-viewde-shen-zuo</id>
     <content type="html"><![CDATA[<p>http://tutor.lugolabs.com/articles/18-handling-csv-views-in-ruby-on-rails</p>
 
 <p>确实扩展的够方便，实施的够优雅。</p>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[自己生产sdoc]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc/"/>
+    <link href="https://swachian.github.io//blog/2015/04/09/zi-ji-sheng-chan-sdoc/"/>
     <updated>2015-04-09T12:26:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/04/09/zi-ji-sheng-chan-sdoc</id>
+    <id>https://swachian.github.io//blog/2015/04/09/zi-ji-sheng-chan-sdoc</id>
     <content type="html"><![CDATA[<p>很长时间以来，使用ruby rails查api时都喜欢用Searchable API，又称sdoc。
 原先都是直接去sdoc维护的站点下载的，只是这个站点的更新频率越来越低，所提供的ruby和rails的版本也略老，于是决定自己使用sdoc的gem来生成一下。</p>
 
@@ -52,9 +52,9 @@
   
   <entry>
     <title type="html"><![CDATA[2014 Rails Hosting 调查]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/08/16/2014-rails-hosting-diao-cha/"/>
+    <link href="https://swachian.github.io//blog/2014/08/16/2014-rails-hosting-diao-cha/"/>
     <updated>2014-08-16T16:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/08/16/2014-rails-hosting-diao-cha</id>
+    <id>https://swachian.github.io//blog/2014/08/16/2014-rails-hosting-diao-cha</id>
     <content type="html"><![CDATA[<p>2014年是DHH公开Rails的10周年，整个社区范围又进行了一次关于
 Rails部署主机的<a href="http://rails-hosting.com/Results/2014/index.html">调查</a>.
 参加的人数并不算多，1000+。</p>
@@ -153,9 +153,9 @@ HBase CouchDB和Rails社区还是不搭。</p>
   
   <entry>
     <title type="html"><![CDATA[Rails2.3老版本的迁移安装手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/"/>
+    <link href="https://swachian.github.io//blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji/"/>
     <updated>2014-05-08T22:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji</id>
+    <id>https://swachian.github.io//blog/2014/05/08/rails2-dot-3lao-ban-ben-de-qian-yi-an-zhuang-shou-ji</id>
     <content type="html"><![CDATA[<p>一个五六年前开发的Rails应用更换主机需要重新部署。这个Rails的版本还是2.3.5，Ruby版本只是1.8.7. 因为是内部的一个小应用，所以一直也没翻新升级。彼时还没有bundle，而现在对版本依赖的管理已经离不开bundle了。
 下面就是记录一下如何用bundle来安装Rails 2.3的应用。</p>
 
@@ -240,9 +240,9 @@ gem  'rest-client',  '1.6.7'
   
   <entry>
     <title type="html"><![CDATA[IT系统架构的模式]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/"/>
+    <link href="https://swachian.github.io//blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi/"/>
     <updated>2014-04-12T16:18:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi</id>
+    <id>https://swachian.github.io//blog/2014/04/12/itxi-tong-jia-gou-de-mo-shi</id>
     <content type="html"><![CDATA[<p>近日终于得以拜读了Martin Fowler的大作《The Patterns of Enterprise Application Architecture》。</p>
 
 <p>最早了解这本书是从robbin那里，在距今很多年前的一个Java书单里。彼时他对这本书的评价大意是适合要自己动手开发框架的人看，对应用开发没什么直接的帮助。同时，他认为读下来并没有太多感觉。而回过头来看，读过这本书的中国程序员应该是不少的，但真的从中汲取营养做出东西来的人几乎没有。从这也可以看出中国工程师在动手和创新方面确实有些先天不足。</p>

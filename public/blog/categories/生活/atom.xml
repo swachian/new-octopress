@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 生活 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/生活/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/生活/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[WFH一个半月]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue/"/>
+    <link href="https://swachian.github.io//blog/2022/04/23/wfh-yi-ge-ban-yue/"/>
     <updated>2022-04-23T15:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue</id>
+    <id>https://swachian.github.io//blog/2022/04/23/wfh-yi-ge-ban-yue</id>
     <content type="html"><![CDATA[<p>二月初六龙抬头那天正好是周五，那天就WFH。不曾想，自从那天开始WFH，后面疫情日益严重。起初一个礼拜还只是我一人居家办公，
 一周后中小学集体回家上网课，就变成我白天边上班边带娃。又过了一周，老婆单位也开始不能去办公大楼了。最后到了3月底，全上海都进入静态管理，也就是说大部分人是不能去写字楼上班了。
 截止到现在，已经超过了一个半月，也不知道后续还会持续多久。</p>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
+    <link href="https://swachian.github.io//blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
     <updated>2021-12-30T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
+    <id>https://swachian.github.io//blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
     <content type="html"><![CDATA[<p>具体比较：</p>
 
 <table>
@@ -93,9 +93,9 @@
   
   <entry>
     <title type="html"><![CDATA[2020 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/"/>
+    <link href="https://swachian.github.io//blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/"/>
     <updated>2020-12-30T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong</id>
+    <id>https://swachian.github.io//blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong</id>
     <content type="html"><![CDATA[<p>具体比较：</p>
 
 <table>
@@ -165,9 +165,9 @@
   
   <entry>
     <title type="html"><![CDATA[入手本精装书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
+    <link href="https://swachian.github.io//blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
     <updated>2020-04-13T11:20:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
+    <id>https://swachian.github.io//blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
     <content type="html"><![CDATA[<p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
 另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
 
@@ -243,9 +243,9 @@
   
   <entry>
     <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019/"/>
+    <link href="https://swachian.github.io//blog/2019/12/29/crv-2019/"/>
     <updated>2019-12-29T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019</id>
+    <id>https://swachian.github.io//blog/2019/12/29/crv-2019</id>
     <content type="html"><![CDATA[<!-- 2018年的养车成本和2017年的竟然差不多。 -->
 
 

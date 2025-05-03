@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: nodejs | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nodejs/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/nodejs/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Java 和 Javascript的RSA]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/09/19/java-he-javascriptde-rsa/"/>
+    <link href="https://swachian.github.io//blog/2014/09/19/java-he-javascriptde-rsa/"/>
     <updated>2014-09-19T13:57:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/09/19/java-he-javascriptde-rsa</id>
+    <id>https://swachian.github.io//blog/2014/09/19/java-he-javascriptde-rsa</id>
     <content type="html"><![CDATA[<p>近来安全问题日益被重视，通过HTTP传输的部分数据也有了加密的需求。虽然最到位的办法肯定是HTTPS，但证书的申请是比较麻烦的。所以，还是决定
 通过diy的方式，将浏览器中的部分敏感数据加密后再传给服务器。</p>
 
@@ -210,9 +210,9 @@ js相同内容的输出为：
   
   <entry>
     <title type="html"><![CDATA[被低估的JS： 「Pro JavaScript Techniques」读后感]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/07/23/pro-javascript-techniques/"/>
+    <link href="https://swachian.github.io//blog/2014/07/23/pro-javascript-techniques/"/>
     <updated>2014-07-23T16:13:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/07/23/pro-javascript-techniques</id>
+    <id>https://swachian.github.io//blog/2014/07/23/pro-javascript-techniques</id>
     <content type="html"><![CDATA[<p>作为一个Web开发者，无法绕开的一个点就是JavaScript。而对于经过C/Java训练出来的计算机专业人员而言，是很容易轻视JS，从而使得在这方面往往要经过很长的时间和经历，才能体会到
 JS的与众不同及其能力。C或者Java同JS的不同已经不用多言，而同为脚本语言的Ruby Php Perl Python 同 JS的差别也是巨大的。有一定编程基础的人，学习其他大众性的语言，比如最常用的10种语言，
 一般都是比较快的。但是，JS是如此的和其他语言不一样，以至于学习起来真的费一番功夫。</p>
@@ -728,9 +728,9 @@ windowHeight(获知视口有多高)</p>
   
   <entry>
     <title type="html"><![CDATA[hubot and socket.io]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io/"/>
+    <link href="https://swachian.github.io//blog/2012/06/26/hubot-and-socket-dot-io/"/>
     <updated>2012-06-26T22:05:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/26/hubot-and-socket-dot-io</id>
+    <id>https://swachian.github.io//blog/2012/06/26/hubot-and-socket-dot-io</id>
     <content type="html"><![CDATA[<p>这几天搭了hubot, 跑起了gtalk,也选了一些script的.这玩意确实挺有趣.本质上是一种命令行,但又增加了新的特色.
 最大的突破在于实现了通过IM工具来提交交互命令.与此同时,IM上的命令行不在只有一个人可见,想想console,而是变得一群人可以一起参与,很多乐趣
 也就来自其中.而命令行的好处大家都知道,就是快.而结合在im里的命令行比普通的更快,因为不需要登录,不需要启动命令.试想下面的步骤哪个响应更快:</p>
@@ -755,9 +755,9 @@ Socket.io确实让人找回了socket编程的感觉, 而且应该说这玩意是
   
   <entry>
     <title type="html"><![CDATA[JavaScript: The Good Parts]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts/"/>
+    <link href="https://swachian.github.io//blog/2012/06/23/javascript-the-good-parts/"/>
     <updated>2012-06-23T00:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/23/javascript-the-good-parts</id>
+    <id>https://swachian.github.io//blog/2012/06/23/javascript-the-good-parts</id>
     <content type="html"><![CDATA[<p>大约去年的这个时候,在复旦图书馆看见了&lt;JavaScript精粹>的中文版,就借来看了一下.会看这本书应该是我读了墨菲博客的推荐.
 中文版花了不长的时间就看完了,因为这本书确实短小精悍,或者说相当的<strong>concise</strong> . 读完之后很是喜欢, 于是买了英文版.
 再后来, 也就淡淡忘了. 尽管读过一遍, 内容却忘的差不多了, 当时只是明白了不少js的强大的能力, 解除了我对这门语言的一点迷思.
@@ -782,9 +782,9 @@ Closure(outer inner函数之间的scope关系). 我甚至还第一次明白了�
   
   <entry>
     <title type="html"><![CDATA[NodeJS]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs/"/>
+    <link href="https://swachian.github.io//blog/2012/06/04/nodejs/"/>
     <updated>2012-06-04T17:12:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/04/nodejs</id>
+    <id>https://swachian.github.io//blog/2012/06/04/nodejs</id>
     <content type="html"><![CDATA[<p>最近迷上了NodeJS和CoffeeScript.毫不夸张的说,这是我比较了解的语言中,C/CPP/Java/Ruby(可能还有Python),到目前为止最吸引我的.
 特别是搭配CS的语法后, 相当的让人感觉良好.</p>
 

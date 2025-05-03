@@ -8,7 +8,7 @@ categories:
 - ruby
 ---
 
-又是一年圣诞了，继去年[Mac上折腾Ruby](http://octopresszhangyu.herokuapp.com/blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/)之后，这次继续折腾。只是版本换成了~~2.2.4~~ 2.3 以及
+又是一年圣诞了，继去年[Mac上折腾Ruby](./blog/2014/12/31/mac-shang-zhe-teng-ruby-2-dot-2/)之后，这次继续折腾。只是版本换成了~~2.2.4~~ 2.3 以及
 是为了解决readline的问题。
 
 按 https://github.com/guard/guard/wiki/Add-Readline-support-to-Ruby-on-Mac-OS-X  

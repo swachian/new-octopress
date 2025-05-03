@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 读书列表 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/读书列表/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/读书列表/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[读书列表2015]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list/"/>
+    <link href="https://swachian.github.io//blog/2015/02/20/to-read-list/"/>
     <updated>2015-02-20T15:40:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/02/20/to-read-list</id>
+    <id>https://swachian.github.io//blog/2015/02/20/to-read-list</id>
     <content type="html"><![CDATA[<h3>技术类</h3>
 
 <ol>
@@ -67,9 +67,9 @@
   
   <entry>
     <title type="html"><![CDATA[读书列表2014]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list/"/>
+    <link href="https://swachian.github.io//blog/2014/03/02/to-read-list/"/>
     <updated>2014-03-02T09:39:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/03/02/to-read-list</id>
+    <id>https://swachian.github.io//blog/2014/03/02/to-read-list</id>
     <content type="html"><![CDATA[<h3>技术类</h3>
 
 <ol>
@@ -125,9 +125,9 @@
   
   <entry>
     <title type="html"><![CDATA[读书列表2013]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list/"/>
+    <link href="https://swachian.github.io//blog/2013/01/11/to-read-list/"/>
     <updated>2013-01-11T12:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/11/to-read-list</id>
+    <id>https://swachian.github.io//blog/2013/01/11/to-read-list</id>
     <content type="html"><![CDATA[<p>过去2年看了不少书，经管的、技术的、政治文化的，总缺乏一个列表可供集中检查。今年想试试能不能根据计划来读。这样集中的列表也就唾手可得了。</p>
 
 <h2>技术类</h2>

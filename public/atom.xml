@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[从并发到Kotlin和模式的学习]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
+    <link href="https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/"/>
     <updated>2025-04-30T23:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
+    <id>https://swachian.github.io//blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi</id>
     <content type="html"><![CDATA[<p>在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点，相对于Java本身的优势和劣势做一些评价，也会对Kotlin高度配套的Arrow、Ktor、Vert.x写一些体会，同时，因为Kotlin明显受到了Scala的启发，所以也会谈一点关于scala的内容。</p>
 
 <p>前4章讲了Kotlin的基础以及Gof的3类合计23个经典设计模式。Kotlin的语言风格和Java以及JS类似，实质上更像JS，因为她把函数作为一等公民，但很多语法又更像Java。</p>
@@ -241,14 +241,17 @@
 <li>Sidekick，小外挂，把一部分工作包出去，目前AI计算和NVIDIA的关系就是N卡其实就是Sidekick</li>
 </ul>
 
+
+<p>至此，本书最精华的部分就讲解完毕了。后面又讲了3个常见的库和框架的使用，但更流于框架的使用说明，有些例子也举的不太好。
+总体而言，本书的视角比较独特，用kotlin介绍的设计模式有令人耳目一新的地方。当然作者部分地方也显得功力不够，讲的不够清楚到位，有些例子也举的不是很好。</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[WFH一个半月]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue/"/>
+    <link href="https://swachian.github.io//blog/2022/04/23/wfh-yi-ge-ban-yue/"/>
     <updated>2022-04-23T15:11:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2022/04/23/wfh-yi-ge-ban-yue</id>
+    <id>https://swachian.github.io//blog/2022/04/23/wfh-yi-ge-ban-yue</id>
     <content type="html"><![CDATA[<p>二月初六龙抬头那天正好是周五，那天就WFH。不曾想，自从那天开始WFH，后面疫情日益严重。起初一个礼拜还只是我一人居家办公，
 一周后中小学集体回家上网课，就变成我白天边上班边带娃。又过了一周，老婆单位也开始不能去办公大楼了。最后到了3月底，全上海都进入静态管理，也就是说大部分人是不能去写字楼上班了。
 截止到现在，已经超过了一个半月，也不知道后续还会持续多久。</p>
@@ -257,9 +260,9 @@
   
   <entry>
     <title type="html"><![CDATA[2021 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
+    <link href="https://swachian.github.io//blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong/"/>
     <updated>2021-12-30T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
+    <id>https://swachian.github.io//blog/2021/12/30/2021-crvyang-che-cheng-ben-hui-zong</id>
     <content type="html"><![CDATA[<p>具体比较：</p>
 
 <table>
@@ -324,9 +327,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Kubernetes Book]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book/"/>
+    <link href="https://swachian.github.io//blog/2021/10/26/the-kubernetes-book/"/>
     <updated>2021-10-26T09:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book</id>
+    <id>https://swachian.github.io//blog/2021/10/26/the-kubernetes-book</id>
     <content type="html"><![CDATA[<p>The Kubernetes book, 购于Leanpub</p>
 
 <h1>1&amp;2 Kubernetes 基础和操作</h1>
@@ -771,9 +774,9 @@ env var； cmd； vol</p>
   
   <entry>
     <title type="html"><![CDATA[Java 8 9 10 in action]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action/"/>
+    <link href="https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action/"/>
     <updated>2021-10-04T21:22:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/04/java-8-9-10-in-action</id>
+    <id>https://swachian.github.io//blog/2021/10/04/java-8-9-10-in-action</id>
     <content type="html"><![CDATA[<h1>第一章</h1>
 
 <p>第一作者写作时是剑桥的在读博士，同时第三作者是他的博士生导师。第二作者是Redhat的Java 8普及牛人。</p>
@@ -1137,9 +1140,9 @@ Curring：可以分批应用参数的函数，其实就是把值先保存在函�
   
   <entry>
     <title type="html"><![CDATA[Apollo Config]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/08/19/apollo-config/"/>
+    <link href="https://swachian.github.io//blog/2021/08/19/apollo-config/"/>
     <updated>2021-08-19T17:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/08/19/apollo-config</id>
+    <id>https://swachian.github.io//blog/2021/08/19/apollo-config</id>
     <content type="html"><![CDATA[<p>配置项的管理始终是一个很头疼的问题。虽然磕磕绊绊总能凑合着过，但确实一直不太优雅，甚至容易出错。
 人多的情况下，优雅是很难的，还是考虑怎么能减少损耗吧。所以抽空看了看Apollo的东西。</p>
 
@@ -1329,9 +1332,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[mysql的库表容量查询]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/"/>
+    <link href="https://swachian.github.io//blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun/"/>
     <updated>2021-08-09T17:52:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun</id>
+    <id>https://swachian.github.io//blog/2021/08/09/mysqlde-ku-biao-rong-liang-cha-xun</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1356,9 +1359,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[CORS问题]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti/"/>
+    <link href="https://swachian.github.io//blog/2021/03/18/corswen-ti/"/>
     <updated>2021-03-18T13:40:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/03/18/corswen-ti</id>
+    <id>https://swachian.github.io//blog/2021/03/18/corswen-ti</id>
     <content type="html"><![CDATA[<p>动手搞了一下Nginx和Chrome的CORS问题，顺手记录一下一些基本概念。</p>
 
 <p>CORS的本意是限制Http请求中Origin的来源，主要是用于保护浏览器客户端的，可以一定程度上防止浏览器访问页面A时，莫名其妙连去B站资源的情况发生。</p>
@@ -1433,9 +1436,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[某IT作家的两本小说]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/"/>
+    <link href="https://swachian.github.io//blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo/"/>
     <updated>2021-02-26T13:31:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo</id>
+    <id>https://swachian.github.io//blog/2021/02/26/xiong-jie-de-liang-ben-xiao-shuo</id>
     <content type="html"><![CDATA[<p>图书馆可以采购新书，就买了熊节的『敏捷中国史话』来看了一下。看的过程中，发现作者七年前还写过一本自传类的书籍，也就是「不敢止步」，而史话中比较有意思的内容大都来自不敢止步，于是又去找来不敢止步看。也大致对作者的生平有了更多的了解。</p>
 
 <p>从那本自传小说里，作者说他做性格测验和360调查时，结果都是认为他很有勇气，然而作者并没有意识到自己很有勇气。但从他的所做所为来看，他是很有勇气的。表现在下面几件事情上：</p>
@@ -1489,9 +1492,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[DDD的蓝书和红书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
+    <link href="https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu/"/>
     <updated>2021-02-16T21:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
+    <id>https://swachian.github.io//blog/2021/02/16/dddde-lan-shu-he-hong-shu</id>
     <content type="html"><![CDATA[<p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
 一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
 首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
@@ -1504,9 +1507,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[Mybatis-plus的字段为复杂对象的读取和装载]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/"/>
+    <link href="https://swachian.github.io//blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai/"/>
     <updated>2021-01-14T21:19:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai</id>
+    <id>https://swachian.github.io//blog/2021/01/14/mybatis-plusde-zi-duan-wei-fu-za-dui-xiang-de-du-qu-he-zhuang-zai</id>
     <content type="html"><![CDATA[<p>如果核心代码写的非常OO，那么Entity中自然会出现很多Value Object。一旦这些VO需要存入数据库，则会牵涉到一个数据库字段转换到Java类型的ORM问题。<br/>
 比如有下面的代码：</p>
 
@@ -1630,9 +1633,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[2020 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/"/>
+    <link href="https://swachian.github.io//blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong/"/>
     <updated>2020-12-30T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong</id>
+    <id>https://swachian.github.io//blog/2020/12/30/2020-crvyang-che-cheng-ben-hui-zong</id>
     <content type="html"><![CDATA[<p>具体比较：</p>
 
 <table>
@@ -1702,9 +1705,9 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
   
   <entry>
     <title type="html"><![CDATA[装机 i3-10100]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/12/18/zhuang-ji-i3-10100/"/>
+    <link href="https://swachian.github.io//blog/2020/12/18/zhuang-ji-i3-10100/"/>
     <updated>2020-12-18T23:17:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/12/18/zhuang-ji-i3-10100</id>
+    <id>https://swachian.github.io//blog/2020/12/18/zhuang-ji-i3-10100</id>
     <content type="html"><![CDATA[<p>一台10年安装的机器不太好了，其实应该只是后面加装的SSD硬盘坏了，但年份确实有点久了，就决定重新配一台。配置如下，东西全部来自于京东：</p>
 
 <ul>
@@ -1777,9 +1780,9 @@ Samsung 三星 2494LW 23.6英寸宽屏液晶显示器 1285元，<br/>
   
   <entry>
     <title type="html"><![CDATA[Clean Architecture]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture/"/>
+    <link href="https://swachian.github.io//blog/2020/10/06/clean-architecture/"/>
     <updated>2020-10-06T22:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/10/06/clean-architecture</id>
+    <id>https://swachian.github.io//blog/2020/10/06/clean-architecture</id>
     <content type="html"><![CDATA[<p>Rober C. Martin的另一部Clean系列，总体来讲不如Clean Code，但书还值得一读。Bob大叔开发经验丰富，但仔细分析的话，他的主要经验还是基于C的通信软件的开发，之前有过很多的汇编经历。Java看起来真正做过的大的项目似乎并不多。因为按他90年代以前的经历，基本没有使用Java开发过什么，而之后，则转去了做咨询和主编，写的项目按常理应该不多。</p>
 
 <p>书中首先使用龟兔赛跑的隐喻，讽刺了程序员们的迷之自信，总以为自己是聪明的兔子能够有朝一日把一团乱的东西Clean干净，但实际上从来没有发生。以此告诫读者必须脚踏实地做好整洁架构和整洁代码：The only way to go fast is to go well. 随后，提出Software的精髓在于<strong>soft</strong>，也就是easy to change，这是软件设计和开发的根本。并且应用类软件的开发，一般是由urgent behavior驱动的，但维护好clean Architecture则是开发人员的责任。</p>
@@ -1812,9 +1815,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[凌度充气宝-A3更换空调滤芯-CRV的轮胎漏气]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi/"/>
+    <link href="https://swachian.github.io//blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi/"/>
     <updated>2020-09-13T23:33:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi</id>
+    <id>https://swachian.github.io//blog/2020/09/13/ling-du-chong-qi-bao-a3geng-huan-kong-diao-lu-xin-crvde-lun-tai-lou-qi</id>
     <content type="html"><![CDATA[<h2>凌度充气宝</h2>
 
 <p>因CRV有一个轮胎总是漏气，之前的小米充气宝放在家里给皮球打气比较方便，那么车上最好再配一个充气宝，于是决定买一个新的充气宝放在车上。但不想再买相同的型号了，于是看了一下有没有其他选择。最终选择了凌度的一款充气宝CQB-100。</p>
@@ -1856,9 +1859,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[git 删除已提交的文件]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
+    <link href="https://swachian.github.io//blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
     <updated>2020-09-10T17:41:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
+    <id>https://swachian.github.io//blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
     <content type="html"><![CDATA[<p>按台湾人的说法，git属于一旦有东西加入，就像把方丈请到了庙里，是很难再请出去的。
 不过也不是完全不可能，但确实比较辛苦会。核心思想是通过<code>filter-branch</code>
 来强制删除有关的文件，过程中类似<code>rebase</code>。在全部的分支、tag、heads、replace的
@@ -1902,9 +1905,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[查看java的线程cpu使用情况]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/"/>
+    <link href="https://swachian.github.io//blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang/"/>
     <updated>2020-06-24T22:36:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang</id>
+    <id>https://swachian.github.io//blog/2020/06/24/cha-kan-javade-xian-cheng-cpushi-yong-qing-kuang</id>
     <content type="html"><![CDATA[<p>说来惭愧，那么些年写java，至今也没碰到需要对jvm内部线程cpu使用情况的研究。
 今天碰到一例，因为用了flink，出现了一个处理瓶颈，不得不深入一探究竟。</p>
 
@@ -2067,9 +2070,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[入手本精装书]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
+    <link href="https://swachian.github.io//blog/2020/04/13/ru-shou-ben-jing-zhuang-shu/"/>
     <updated>2020-04-13T11:20:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
+    <id>https://swachian.github.io//blog/2020/04/13/ru-shou-ben-jing-zhuang-shu</id>
     <content type="html"><![CDATA[<p>最近博客发的有点少，主要是切换回纸质书+纸质笔记本了。
 另外，机缘巧合，买了本《Design Patterns》的原版精装，价钱只要200出头，相当的划算。必须承认原版精装书的阅读体验确实很棒。</p>
 
@@ -2145,9 +2148,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[俞军的产品经理方法论]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun/"/>
+    <link href="https://swachian.github.io//blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun/"/>
     <updated>2019-12-29T20:05:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun</id>
+    <id>https://swachian.github.io//blog/2019/12/29/yu-jun-de-chan-pin-jing-li-fang-fa-lun</id>
     <content type="html"><![CDATA[<p>先是在caoz的微信上拜读了俞军产品方法论中关于产品经理的选拔方式，同样是从事脑力劳动，依赖主观能动性，发现招聘一个好的产品和一个好的程序员，很大程度上是相通的或者类似的。于是在书籍上市后就火速订购了一本。花了四五天时间看完，对产品和俞军的产品观都有了新的认识。</p>
 
 <p>俞军的经历主要是00年-09年在百度，以及16年被滴滴请出山（加拿大）之后到19年离开滴滴。而滴滴的架构下，俞军是向他们的CTO汇报的。这个以他的段位而言，似乎有点委屈。</p>
@@ -2170,9 +2173,9 @@ SRP，OCP，LSP，ISP，DIP。一个Module应该只对一个Actor负责。Actor�
   
   <entry>
     <title type="html"><![CDATA[2019 CRV养车成本汇总]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019/"/>
+    <link href="https://swachian.github.io//blog/2019/12/29/crv-2019/"/>
     <updated>2019-12-29T10:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2019/12/29/crv-2019</id>
+    <id>https://swachian.github.io//blog/2019/12/29/crv-2019</id>
     <content type="html"><![CDATA[<!-- 2018年的养车成本和2017年的竟然差不多。 -->
 
 

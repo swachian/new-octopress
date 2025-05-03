@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://octopresszhangyu.herokuapp.com/sitemap.xml 
+Sitemap: https://swachian.github.io//sitemap.xml 

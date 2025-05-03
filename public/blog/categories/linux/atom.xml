@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: linux | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/linux/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Kubernetes Book]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book/"/>
+    <link href="https://swachian.github.io//blog/2021/10/26/the-kubernetes-book/"/>
     <updated>2021-10-26T09:47:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2021/10/26/the-kubernetes-book</id>
+    <id>https://swachian.github.io//blog/2021/10/26/the-kubernetes-book</id>
     <content type="html"><![CDATA[<p>The Kubernetes book, 购于Leanpub</p>
 
 <h1>1&amp;2 Kubernetes 基础和操作</h1>
@@ -395,9 +395,9 @@ env var； cmd； vol</p>
   
   <entry>
     <title type="html"><![CDATA[iptables 的一些解释]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi/"/>
+    <link href="https://swachian.github.io//blog/2016/04/29/iptables-de-yi-xie-jie-shi/"/>
     <updated>2016-04-29T09:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2016/04/29/iptables-de-yi-xie-jie-shi</id>
+    <id>https://swachian.github.io//blog/2016/04/29/iptables-de-yi-xie-jie-shi</id>
     <content type="html"><![CDATA[<p>在<strong>物理机</strong>部署的年代里，组网通常是分层而建。例如所有的服务器都接到二层交换机组成<strong>内网</strong>，随后交换机上联三层交换机及防火墙。彼时，防火墙通常由专用
 的设备承担。所有的路由规则、端口开放等也均在网络设备上进行配置。对于服务器而言，通常最简单的做法就是关闭iptables，在内部实现完全互通，而把防护任务交给专用设备。</p>
 
@@ -448,9 +448,9 @@ env var； cmd； vol</p>
   
   <entry>
     <title type="html"><![CDATA[nscd]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd/"/>
+    <link href="https://swachian.github.io//blog/2015/06/19/nscd/"/>
     <updated>2015-06-19T13:56:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/19/nscd</id>
+    <id>https://swachian.github.io//blog/2015/06/19/nscd</id>
     <content type="html"><![CDATA[<p>NSCD是name service cache daemon的缩写，主要用于在linux下对dns查询的结果进行缓存。
 默认情况下，linux是不对dns进行缓存的，因此可能会对应用的性能产生影响。只有开启了nscd服务，才会拥有缓存。</p>
 
@@ -513,9 +513,9 @@ service nscd start
   
   <entry>
     <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <link href="https://swachian.github.io//blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
     <updated>2013-08-17T20:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <id>https://swachian.github.io//blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
     <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
 公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
@@ -539,9 +539,9 @@ service nscd start
   
   <entry>
     <title type="html"><![CDATA[CentOS5 Ruby2.0 and Rails4.0]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/"/>
+    <link href="https://swachian.github.io//blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0/"/>
     <updated>2013-07-12T12:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0</id>
+    <id>https://swachian.github.io//blog/2013/07/12/centos5-ruby2-dot-0-and-rails4-dot-0</id>
     <content type="html"><![CDATA[<p>升级了一个很小的rails应用到4.0，原先使用的版本ree1.8.7 + rails3.1 。因为应用很小，也没使用很多插件，所以git checkout一个branch之后，用rails new生成新的目录完全替换掉老的文件。然后用<code>git diff</code>对一个一个目录或者文件进行比对与合并。整个过程下来，发现rails默认生成的文件，3.1和4.0的区别并非很大。</p>
 
 <p>这个过程也就是只有几个小时，半天不到的时间就让应用可以跑起来了。本地测试了一下，写入数据库、查询、写入文件等都没什么问题。随后自然就是部署。</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 期刊 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/期刊/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/期刊/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[期刊读后感]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application/"/>
+    <link href="https://swachian.github.io//blog/2013/02/09/journal-of-computer-application/"/>
     <updated>2013-02-09T16:45:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/02/09/journal-of-computer-application</id>
+    <id>https://swachian.github.io//blog/2013/02/09/journal-of-computer-application</id>
     <content type="html"><![CDATA[<p>读了去年年底订阅的《计算机应用》，发现还是有一些文章是值得一读的。
 订阅这个杂志是因为觉得发文速度还算快，期刊和文章的档次也还不错。看了2013年第2期，里面还是有六七篇很有收获的文章的。
 必须承认的是，期刊文章的质量普遍比网上的资料要高。</p>
@@ -56,9 +56,9 @@
   
   <entry>
     <title type="html"><![CDATA[核心期刊]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/09/06/article-issues/"/>
+    <link href="https://swachian.github.io//blog/2012/09/06/article-issues/"/>
     <updated>2012-09-06T16:35:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/09/06/article-issues</id>
+    <id>https://swachian.github.io//blog/2012/09/06/article-issues</id>
     <content type="html"><![CDATA[<p>忙了一阵子的投稿，也积累了一些经验。随手记录一下。</p>
 
 <p>投了《计算机系统应用》和《计算机应用与软件》，两篇稿子处理的都还挺快，基本一个月的样子，也都修录了。

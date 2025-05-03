@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 云计算 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/云计算/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/云计算/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linux下的虚拟化技术]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
+    <link href="https://swachian.github.io//blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu/"/>
     <updated>2013-08-17T20:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
+    <id>https://swachian.github.io//blog/2013/08/17/linuxxia-de-xu-ni-hua-ji-zhu</id>
     <content type="html"><![CDATA[<p>因为要在一台Linux系统中虚拟化一个系统，于是这周接触了一下Linux下虚拟机的内容。<br/>
 公司以前一直用的redhat的linux，我所知的虚拟技术仅限于xen和kvm，而且根据一些反馈用的并不是很好。主要体现在资源占用过大，硬盘和内存的消耗都很大，当然公司的服务器硬件配置也有点不够平衡。</p>
 
@@ -41,9 +41,9 @@
   
   <entry>
     <title type="html"><![CDATA[大话存储]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu/"/>
+    <link href="https://swachian.github.io//blog/2013/01/08/da-hua-cun-chu/"/>
     <updated>2013-01-08T17:01:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/08/da-hua-cun-chu</id>
+    <id>https://swachian.github.io//blog/2013/01/08/da-hua-cun-chu</id>
     <content type="html"><![CDATA[<p>张冬的《大话存储》确实一本好书，读了之后顿感以前的计算机组成算是白学了。</p>
 
 <p>书到IP SAN之前都是很棒的。讲的很仔细，简直可以替换计算机组成的有关内容了。作者的实战经验很丰富，专业的知识面很广，如PCB盘片为什么要分层，对磁盘的解析，磁盘与CPU、OS的交互都很细致和形象，串行并行的优劣势，对几种Raid之间的区别于联系、发展脉络讲解的十分到位，柜和阵的区别，FC究竟意味着什么。可以看出作者是一个勤于思考勤于提炼的人。</p>
@@ -274,9 +274,9 @@ Windows使用CIFS协议，Linux使用NFS协议。</p>
   
   <entry>
     <title type="html"><![CDATA[hadoop集群安装手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
+    <link href="https://swachian.github.io//blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji/"/>
     <updated>2012-08-06T16:43:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
+    <id>https://swachian.github.io//blog/2012/08/06/hadoopji-qun-an-zhuang-shou-ji</id>
     <content type="html"><![CDATA[<p>ssh的使用公钥登录配置</p>
 
 <pre><code class="bash">ssh-keygen
@@ -303,9 +303,9 @@ map/reduce之间传输的内容就是map的输出，一般也是一个key value�
   
   <entry>
     <title type="html"><![CDATA[Replace log Files with Streams]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams/"/>
+    <link href="https://swachian.github.io//blog/2012/06/05/replace-log-files-with-streams/"/>
     <updated>2012-06-05T12:16:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/05/replace-log-files-with-streams</id>
+    <id>https://swachian.github.io//blog/2012/06/05/replace-log-files-with-streams</id>
     <content type="html"><![CDATA[<p>早前读过adam的<a href="http://adam.heroku.com/past/2011/4/1/logs_are_streams_not_files/">Logs Are Stream, Not Files</a>, 但当时是阅读
 整个博客，所以对细节不甚了了。今天为了写另一片关于计算模型的文章，顺便又看了一下此文，有新的收获。</p>
 
@@ -349,9 +349,9 @@ tee是让流再复制一份，logger则是linux自带的网syslog发消息的程
   
   <entry>
     <title type="html"><![CDATA[The difference between MapReduce and Hadoop]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/27/the-difference-between-mapreduce-and-hadoop/"/>
+    <link href="https://swachian.github.io//blog/2012/03/27/the-difference-between-mapreduce-and-hadoop/"/>
     <updated>2012-03-27T12:42:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/27/the-difference-between-mapreduce-and-hadoop</id>
+    <id>https://swachian.github.io//blog/2012/03/27/the-difference-between-mapreduce-and-hadoop</id>
     <content type="html"><![CDATA[<p>简单地说，MapReduce是一种计算模型，也就是一种设计；而Hadoop则是这种模式的Java实现，由Apache发行。
 2004年的时候，google发布了MapReduce的论文，并给出了一个C++的实现。此后，很多种语言都实现了MapReduce模式，比较有名的有，
 Hadoop(java), Skynet(ruby)等。<br/>

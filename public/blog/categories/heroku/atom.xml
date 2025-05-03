@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: heroku | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/heroku/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/heroku/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[折腾记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji/"/>
+    <link href="https://swachian.github.io//blog/2013/05/25/zhe-teng-ji/"/>
     <updated>2013-05-25T14:35:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/05/25/zhe-teng-ji</id>
+    <id>https://swachian.github.io//blog/2013/05/25/zhe-teng-ji</id>
     <content type="html"><![CDATA[<p>人总是免不了折腾。用什么虚拟机工具可以折腾，用什么linux发行版本也可以折腾。这些都搞定了，发行墙又来和我们折腾。
 Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方案，但发现还真是折腾。</p>
 ]]></content>
@@ -25,9 +25,9 @@ Heroku能访问80端口，22端口莫名其妙被封。好歹找了个解决方�
   
   <entry>
     <title type="html"><![CDATA[Deploy a Rails 4 app to Heroku]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
+    <link href="https://swachian.github.io//blog/2013/03/04/deploy-a-rails-4-app-to-heroku/"/>
     <updated>2013-03-04T20:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
+    <id>https://swachian.github.io//blog/2013/03/04/deploy-a-rails-4-app-to-heroku</id>
     <content type="html"><![CDATA[<p>近期从<code>rvm</code>切换到了<code>rbenv</code>, ruby也全面升级到了2.0.0版本， Rails也装了4.0.0.beta，似乎一切欣欣向荣的样子。<br/>
 为了方便测试获取一些设备的浏览器信息，写了一个自动获取并分析<code>User-Agent</code>的应用，并确定发布到heroku上。
 在发布的过程中，发现还是有一些陷阱，也差不多被折腾了一个来小时,所以决定记录一下。</p>
@@ -84,9 +84,9 @@ config.serve_static_assets = true
   
   <entry>
     <title type="html"><![CDATA[Heroku's Buildpacks and Redeploy for jekyll and octopress]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
+    <link href="https://swachian.github.io//blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress/"/>
     <updated>2012-07-21T09:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
+    <id>https://swachian.github.io//blog/2012/07/21/herokus-buildpacks-and-redeploy-for-jekyll-and-octopress</id>
     <content type="html"><![CDATA[<p>Heroku是永远能给人带来惊喜的厂商，<a href="http://blog.heroku.com/archives/2012/7/17/buildpacks/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+heroku+%28Heroku+News%29">Builpacks</a>
 只得好好研究一下。从模式上来说，其实就是利用了adapter+template的方式，把变化的部分提取出来变成<strong>buildpack</strong>。
 难能可贵的是，heroku是允许定制化对这部分内容进行操作和配置的。</p>
@@ -107,9 +107,9 @@ config.serve_static_assets = true
   
   <entry>
     <title type="html"><![CDATA[Heroku的新服务]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs/"/>
+    <link href="https://swachian.github.io//blog/2011/07/07/new-service-offered-by-heroku-nodejs/"/>
     <updated>2011-07-07T18:48:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2011/07/07/new-service-offered-by-heroku-nodejs</id>
+    <id>https://swachian.github.io//blog/2011/07/07/new-service-offered-by-heroku-nodejs</id>
     <content type="html"><![CDATA[<p>Heroku发表了一系列介绍自己内部升级的文章。最重要的变化是开始支持除ruby/rack以外的语言和框架。起先加入了node.js，然后又加入了Clojure. Clojure是跑在jvm上面的一种语言，对这块没研究。</p>
 
 <p>在heroku看来，ruby的高动态性和强调美感使她天生适合面向用户的web应用。Node.js的基于事件的搞并发使得它适合实时web。 Clojure使得需要correctness,performance,composability, optionally的组件成为可能，并且触及java的生态圈。</p>

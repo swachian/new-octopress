@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: nosql数据库 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/nosql数据库/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/nosql数据库/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (3) 部署和管理]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod/"/>
+    <link href="https://swachian.github.io//blog/2012/04/17/deployment-and-administration-for-mongod/"/>
     <updated>2012-04-17T11:07:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/17/deployment-and-administration-for-mongod</id>
+    <id>https://swachian.github.io//blog/2012/04/17/deployment-and-administration-for-mongod</id>
     <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
@@ -194,9 +194,9 @@ mongodb hard nofile 10240
   
   <entry>
     <title type="html"><![CDATA[What is Numa and the effect of it]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
+    <link href="https://swachian.github.io//blog/2012/04/08/what-is-numa-and-the-effect-of-it/"/>
     <updated>2012-04-08T22:38:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
+    <id>https://swachian.github.io//blog/2012/04/08/what-is-numa-and-the-effect-of-it</id>
     <content type="html"><![CDATA[<p>研究mongod的时候，知道了一个关于cpu的概念--numa，但又不知道干嘛的。只知道需要在前面加上numactl来执行:</p>
 
 <p><code>numactl --interleave=all mongod --dbpath /data/db --fork  --logpath /data/db.log</code></p>
@@ -215,9 +215,9 @@ mongodb hard nofile 10240
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (2)]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2/"/>
+    <link href="https://swachian.github.io//blog/2012/03/30/learning-mongodb-2/"/>
     <updated>2012-03-30T17:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/30/learning-mongodb-2</id>
+    <id>https://swachian.github.io//blog/2012/03/30/learning-mongodb-2</id>
     <content type="html"><![CDATA[<p>系列链接：</p>
 
 <ol>
@@ -396,9 +396,9 @@ mongos> db.chunks.find()
   
   <entry>
     <title type="html"><![CDATA[Learning Mongodb (1)]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1/"/>
+    <link href="https://swachian.github.io//blog/2012/03/29/learning-mongodb-1/"/>
     <updated>2012-03-29T15:59:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/29/learning-mongodb-1</id>
+    <id>https://swachian.github.io//blog/2012/03/29/learning-mongodb-1</id>
     <content type="html"><![CDATA[<p>一个不错的mongodb<a href="http://tutorial.mongly.com/tutorial/index">入门游戏</a>. 一共二十课，介绍了基本的内容。通常20-60分钟可以通关。<br/>
 下面是同一个作者给mongodb写的<a href="https://github.com/karlseguin/the-little-mongodb-book">小书</a>.<br/>
 需要执行的脚本可以这样输入 <code>./mongo server:27017/dbname --quiet my_commands.js</code></p>
@@ -557,9 +557,9 @@ Sharding可以和<strong>Replication</strong>合在一起做，比如每个shard
   
   <entry>
     <title type="html"><![CDATA[NoSql databases notes]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/03/20/no-sql-databases-notes/"/>
+    <link href="https://swachian.github.io//blog/2012/03/20/no-sql-databases-notes/"/>
     <updated>2012-03-20T21:35:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/03/20/no-sql-databases-notes</id>
+    <id>https://swachian.github.io//blog/2012/03/20/no-sql-databases-notes</id>
     <content type="html"><![CDATA[<p>部门决定在一个日志数据分析系统中不使用oracle或者mysql，于是开始寻找非关系型数据库的替代品。核心需求有以下几个：</p>
 
 <ul>

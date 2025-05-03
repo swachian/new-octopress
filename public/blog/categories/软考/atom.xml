@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 软考 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/软考/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/软考/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[证券从业资格考试]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/06/27/sac/"/>
+    <link href="https://swachian.github.io//blog/2014/06/27/sac/"/>
     <updated>2014-06-27T21:39:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/06/27/sac</id>
+    <id>https://swachian.github.io//blog/2014/06/27/sac</id>
     <content type="html"><![CDATA[<p>本月抽空去考了证券从业资格考试的两门，证券基础知识和证券交易。
 今天可以查成绩了，最终都是70+，通过考试并圆满达到了复习的目标。</p>
 
@@ -59,9 +59,9 @@
   
   <entry>
     <title type="html"><![CDATA[软考的名次]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/04/08/ruankao-qian-jiming/"/>
+    <link href="https://swachian.github.io//blog/2013/04/08/ruankao-qian-jiming/"/>
     <updated>2013-04-08T20:36:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/04/08/ruankao-qian-jiming</id>
+    <id>https://swachian.github.io//blog/2013/04/08/ruankao-qian-jiming</id>
     <content type="html"><![CDATA[<p>不知为何, 这次软考名次出来的特别晚. 往年2月底3月中旬就都出来了, 这次却直到今天, <a href="http://www.rkb.gov.cn/jsj/cms/s_contents/download/s_dt2013040802.html">4月8日才将将公布</a>. 可能是好事多磨吧.</p>
 
 <p>尽管知道自己的成绩有望排进前50, 甚至前十前五都很正常, 不过最后的名次还是让我激动了一小把.</p>
@@ -76,9 +76,9 @@
   
   <entry>
     <title type="html"><![CDATA[裸考在软考中意味着什么]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/16/whats-luokao-for-ruankao/"/>
+    <link href="https://swachian.github.io//blog/2013/01/16/whats-luokao-for-ruankao/"/>
     <updated>2013-01-16T10:30:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/16/whats-luokao-for-ruankao</id>
+    <id>https://swachian.github.io//blog/2013/01/16/whats-luokao-for-ruankao</id>
     <content type="html"><![CDATA[<p>软考通过率大致在20-30%，你以为没过的70%-80%里面大部分是认真复习的么？
 软考里面裸考的比例肯定很高，出考率比四六级、考研都低，个别省份甚至设立了“参加全部考试的保证金”以此鼓励考生尽可能地参加完考试。
 仅从出考率就可以看出参加考试的人里面裸考的大有人在。有如此大的基数，那么没过的很多，有人过了也很正常。</p>
@@ -95,9 +95,9 @@
   
   <entry>
     <title type="html"><![CDATA[通过系统架构师后想说的话]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2013/01/12/pass-the-ruan-kao-exam/"/>
+    <link href="https://swachian.github.io//blog/2013/01/12/pass-the-ruan-kao-exam/"/>
     <updated>2013-01-12T20:08:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2013/01/12/pass-the-ruan-kao-exam</id>
+    <id>https://swachian.github.io//blog/2013/01/12/pass-the-ruan-kao-exam</id>
     <content type="html"><![CDATA[<p>最早听说软考是在大学里了，90年代，当时只是了解这是系统分析员考试。因为不太看得起国家组织的这种考试，于是从来没有留意过。
 班上有人参加过，而且是计算机专业方面的牛人。但我依然对此无动于衷。回过头来看，可能我们这批大学生彼时还未扩招，还是所谓的天之骄子，大学期间
 干些什么对以后的就业并无本质影响，我们的注意力也更多地放在其他地方。</p>
@@ -156,9 +156,9 @@ SQL的特性及优势。9月份刚完成了一片投稿的论文，对此我研�
   
   <entry>
     <title type="html"><![CDATA[软考之系统架构设计师]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/"/>
+    <link href="https://swachian.github.io//blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi/"/>
     <updated>2012-11-04T15:04:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi</id>
+    <id>https://swachian.github.io//blog/2012/11/04/ruankao-xi-tong-jia-gou-she-ji-shi</id>
     <content type="html"><![CDATA[<p>距上次考<a href="/blog/2012/05/27/take-the-exam/">软考的中级项目经理</a>已经有将近半年的时间。看了软考证书的性质一直想再去考一个高级的证书出来。
 毕竟这个证书既然上海居转户认可，那么就有其权威的性质。起初想报考网络规划师，主要是想在考试的同时可以把网络知识学的全面一些。但随着下半年
 论文等事宜，准备一门新的考试的时间并非很充足，所以最后换成了软件架构设计师。实际上下半年只有项目管理、网络规划、系统架构3门高级，项目管理

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 神器 | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/神器/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/神器/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[云梯越来越烂了]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/"/>
+    <link href="https://swachian.github.io//blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao/"/>
     <updated>2015-06-16T21:46:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao</id>
+    <id>https://swachian.github.io//blog/2015/06/16/yun-ti-yue-lai-yue-lan-liao</id>
     <content type="html"><![CDATA[<p>唉，云梯是越来越不给力了。之前的新加坡1站点还能用用，最近这个月来基本是没法用了。
 绝对令人失望。</p>
 
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[云梯]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/28/yun-ti/"/>
+    <link href="https://swachian.github.io//blog/2015/03/28/yun-ti/"/>
     <updated>2015-03-28T23:03:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/28/yun-ti</id>
+    <id>https://swachian.github.io//blog/2015/03/28/yun-ti</id>
     <content type="html"><![CDATA[<p>众所周知，在我国想要自由地访问互联网是有很大阻碍的。目前来讲，突破这个阻碍的方式就是vpn。
 自己买vps后装vpn是最独立的方式，但成本较高，毕竟vps也不便宜。
 如果购买服务的话，云梯在这方面做的还是相当出色的。</p>
@@ -42,9 +42,9 @@
   
   <entry>
     <title type="html"><![CDATA[SQLMAP手记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji/"/>
+    <link href="https://swachian.github.io//blog/2015/03/06/sqlmapshou-ji/"/>
     <updated>2015-03-06T16:37:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/03/06/sqlmapshou-ji</id>
+    <id>https://swachian.github.io//blog/2015/03/06/sqlmapshou-ji</id>
     <content type="html"><![CDATA[<p><a href="http://sqlmap.org/">SQLMAP</a>确实是一个神器，而<a href="http://www.binarytides.com/sqlmap-hacking-tutorial/">这篇文章</a>则从判断是什么库开始，
 历经获取dbs，获取单个db中的tables，获取单个table里面的字段，直至获取每个记录每个字段的数据，做了一步一步细致的讲解。</p>
 
@@ -55,9 +55,9 @@
   
   <entry>
     <title type="html"><![CDATA[nano小卡和iphone6 plus]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2015/02/18/nanoxiao-qia/"/>
+    <link href="https://swachian.github.io//blog/2015/02/18/nanoxiao-qia/"/>
     <updated>2015-02-18T16:36:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2015/02/18/nanoxiao-qia</id>
+    <id>https://swachian.github.io//blog/2015/02/18/nanoxiao-qia</id>
     <content type="html"><![CDATA[<p>差不多一年前，因为用了<a href="/blog/2014/03/10/nubia-z5s/">nubia z5s 把sim卡剪成了micro-sim卡</a>。
 而在昨天，因为几个巧合，最后我开始使用iphone6p，但这个手机又是只能用nano的，于是再次剪卡。</p>
 
@@ -80,9 +80,9 @@
   
   <entry>
     <title type="html"><![CDATA[Atom和Node-Webkit]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit/"/>
+    <link href="https://swachian.github.io//blog/2014/05/07/atomhe-node-webkit/"/>
     <updated>2014-05-07T16:21:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2014/05/07/atomhe-node-webkit</id>
+    <id>https://swachian.github.io//blog/2014/05/07/atomhe-node-webkit</id>
     <content type="html"><![CDATA[<p><a href="http://atom.io">Atom</a>是Github投入开发的一个<strong>新编辑器</strong>。 目前只有Mac版，我在mbp上使用之后感觉还可以。基本可以认为是一个结合了Textmate和Vi插件的产物。
 比如，看界面很像Textmate，但又有Textmat始终也没有支持的Ctrl-P插件。初步使用下来唯一不满的就是软件包太大，170MB对于一个文本编辑器而言是很大了。毕竟Eclipse这样的IDE也只在200MB的规模。</p>
 

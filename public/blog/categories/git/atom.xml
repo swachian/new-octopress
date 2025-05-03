@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: git | Hegel2011的博客]]></title>
-  <link href="http://octopresszhangyu.herokuapp.com/blog/categories/git/atom.xml" rel="self"/>
-  <link href="http://octopresszhangyu.herokuapp.com/"/>
-  <updated>2025-05-02T17:47:49+08:00</updated>
-  <id>http://octopresszhangyu.herokuapp.com/</id>
+  <link href="https://swachian.github.io//blog/categories/git/atom.xml" rel="self"/>
+  <link href="https://swachian.github.io//"/>
+  <updated>2025-05-03T21:32:56+08:00</updated>
+  <id>https://swachian.github.io//</id>
   <author>
     <name><![CDATA[Hegel 2011]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[git 删除已提交的文件]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
+    <link href="https://swachian.github.io//blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian/"/>
     <updated>2020-09-10T17:41:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
+    <id>https://swachian.github.io//blog/2020/09/10/git-shan-chu-yi-ti-jiao-de-wen-jian</id>
     <content type="html"><![CDATA[<p>按台湾人的说法，git属于一旦有东西加入，就像把方丈请到了庙里，是很难再请出去的。
 不过也不是完全不可能，但确实比较辛苦会。核心思想是通过<code>filter-branch</code>
 来强制删除有关的文件，过程中类似<code>rebase</code>。在全部的分支、tag、heads、replace的
@@ -48,9 +48,9 @@ git push origin --force 'refs/replace/*'
   
   <entry>
     <title type="html"><![CDATA[为你自己学Git笔记]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/"/>
+    <link href="https://swachian.github.io//blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping/"/>
     <updated>2018-03-04T14:55:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping</id>
+    <id>https://swachian.github.io//blog/2018/03/04/wei-ni-zi-ji-xue-gitshu-ping</id>
     <content type="html"><![CDATA[<p>从Rails把代码库迁至GitHub起，接触Git已经很长时间了。但限于svn的惯性思维，其实我始终没有真的理解Git。
 毕竟，上班一直是用的svn，去年12月后才开始迁移到git，而之前一个人用用GitHub的话，也确实是当一个svn在使用，主要就是实现通过中心节点实现多个终端的内容和代码共享。</p>
 
@@ -206,9 +206,9 @@ commit信息里面，<code>Parents</code>字段中被合并的分支名位于后
   
   <entry>
     <title type="html"><![CDATA[git init[zz]]]></title>
-    <link href="http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init/"/>
+    <link href="https://swachian.github.io//blog/2012/06/27/git-init/"/>
     <updated>2012-06-27T16:38:00+08:00</updated>
-    <id>http://octopresszhangyu.herokuapp.com/blog/2012/06/27/git-init</id>
+    <id>https://swachian.github.io//blog/2012/06/27/git-init</id>
     <content type="html"><![CDATA[<pre><code>$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
 
 $ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
