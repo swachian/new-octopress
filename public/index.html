@@ -9,7 +9,9 @@
   <meta name="author" content="Hegel 2011">
 
   
-  <meta name="description" content="在深入学习JVM并发艺术的过程中，了解到Kotlin的协程拥有比JAVA 21的协程更加的性能，从而对了解Kotlin实际情况产生了兴趣。同时，又找到了一本基于Kotlin的，讲解Gof模式实践和并发模式实践的书籍，于是跟着整本书，把Kotlin也学习了一遍。本文会就Kotlin的特点， &hellip;">
+  <meta name="description" content="JS的7个基本类型：undefined, null, boolean, number, symbol, string, bigInt
+array, object, function都是可变的，也就是reference类型的
+string的提取有slice, substring. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,513 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2025/06/15/javascript-to-typescript/">JavaScript to TypeScript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2025-06-15T17:33:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2025</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JS的7个基本类型：undefined, null, boolean, number, symbol, string, bigInt<br/>
+array, object, function都是可变的，也就是reference类型的<br/>
+string的提取有slice, substring. slice和substring的功能基本一样，但slice支持复数，含义为从右边开始数<br/>
+array也有slice，含义和string一样。array还有splice，这个可以用于删除数组中的元素, 且第二个参数表示删除的个数，而slice和substring输入的参数表示index</p>
+
+<p>基本的运算符、大小关系比较符等<br/>
+if, swich, while, do while, for 语句，这些和c一样，for &#8230; in 语句是js也支持的</p>
+
+<p>函数是顶级的，可以作为引用传来传去，而且在里面实现了<strong>闭包(closure)</strong>,由此实现了状态的记忆和curry（函数生成函数，high order)<br/>
+js的函数是没有重载，call和apply可以对某个函数对象进行调用。第一个参数都是传入的this，也就是要执行的对象；优先使用call，尤其搭配新的<code>...</code>扩展符，<code>greet.call(person, ...args)</code>, apply是传入一个数组，也是在各类语言中常见的一个名字</p>
+
+<p>Array 可以用字面量<code>[]</code>直接定义，也用<code>[i]</code>作为index来访问。知名方法有<code>join, split, slice, push/unshift, pop/shift, sort, reverse, splice</code>. <code>splice(0, 2)</code>表示删除0开始的2项，<code>splice(2, 1, "a", "b")</code>删除位置2的1项并插入<code>"a", "b"</code></p>
+
+<p><code>this</code>指向调用的对象，如为空则在非严格模式下指向全局。lambda的写法（arrow function）没有默认的this。</p>
+
+<p>传统上，js用Function的construct和prototype来模拟class和继承<br/>
+ES6中引入了<code>...</code>spread, Destruction <code>{a, b, c} = obj // the obj has a b and c properties</code>, 提供了let和const<br/>
+还有class extends， 引入symbol解决命名冲突最大使用场景是iterator。<br/>
+Promise搭配then使用完成异步，await/async更加先进，但await只能用在async的函数中。Promise本质上是给出resolve和err两个方法体，await和async则需要自己写catch error。<br/>
+Map，Set两个基础数据结构，还有不影响gc的WeakMap和WeakSet。<br/>
+Proxy Handler实现了给对象及其方法加上proxy的设计模式，便于修改原先的方法而返回handler给客户使用<br/>
+<code>export {}</code>, <code>import {x} from . //导入一个或多个变量</code>, <code>import x from . // 导入Default</code>， <code>import * as matchers from // 在ts中用的较多</code></p>
+
+<h2>React</h2>
+
+<p>新型的React在return时用()包裹的目的就是避免后面换行对内容的干扰，本质上就是返回一个字符串可以被react进一步解析里面的<code>{}</code>变量<br/>
+返回的内容通常就是html，也包含了需要动态替换的内容和监听的事件处理函数</p>
+
+<p>RFR(React Fast Fresh), HMF(Hot Module Replacement)实现了react开发中的热更新<br/>
+JSX是一种流行的返回格式，在多种Framework中流行<br/>
+eslint在8.3之后，配置文件位于eslint.config.js中</p>
+
+<p>组件的Function是用Pascal风格书写（首字母大写的驼峰拼写），然后就能在html和其他组件中按<code>&lt;FunctionName&gt;</code>来引用了<br/>
+要监听的事件，可以放在组件的Function里。如果加入单元测试的话，小的组件可能也要考虑export。<br/>
+函数理论上传入的对象是<code>props</code>, 例如<code>const Search =&gt; (props) =&gt; {}</code>, 但实际上为了简化利用ES6的destruction特点，可以写作<code>const Search =&gt; ({currentValue, setCurrentValue, children}) =&gt; {}</code><br/>
+<code>children</code>是一个内部的prop，可以起到类似vue中slot和{} 传给fun的作用。</p>
+
+<p><code>useState</code>是React的use系列methods之一，本质是同时返回一个类似proxy的handler，这样当使用这个handler修改参数时，可以引起涉及该变量的JSX的修改，从而引发render  <br/>
+并且这个handler可以作为属性传给其他组件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="p">[</span><span class="nx">currentValue</span><span class="p">,</span> <span class="nx">setCurrentValue</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">Search</span> <span class="nx">currentValue</span><span class="o">=</span><span class="p">{</span><span class="nx">currentValue</span><span class="p">}</span> <span class="nx">setCurrentValue</span><span class="o">=</span><span class="p">{</span><span class="nx">setCurrentValue</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="nx">Search</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">nbsp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">nbsp</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/Search&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>传入时，也就是<code>{...item}</code>用在右边的时候，会自动展开传给函数，甚至可以自动转成nested的。<br/>
+定义时，也就是<code>({ojbectId, ...item})</code>用在左边时，就把传入对象objectId之外的部分写入item，这个称之为rest。</p>
+
+<p><code>useEffect</code>可以监测state的变化，并执行里面顶一顶操作。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">count</span> <span class="err">变化为</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="err">`</span><span class="p">);</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="err">`当前计数</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="err">`</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 清理函数（如取消未完成的请求）</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;清理上一次的 effect&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="p">},</span> <span class="p">[</span><span class="nx">count</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+如果不传入第二个参数，那么就是起到只执行一次的作用。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">},</span> <span class="p">[]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>customer hooks指利用现有的两个use可以封装自己的customer hook库。<br/>
+1. useFetch - 封装数据请求逻辑<br/>
+2. useDarkMode - 管理暗黑模式状态<br/>
+3. useDebounce - 实现防抖功能<br/>
+4. useWindowSize - 监听窗口尺寸变化</p>
+
+<p>Reducer就是函数式编程里面的reducer，<code>(state, newValue(or action)) : new_state =&gt; {}</code><br/>
+然后把它和初始state传给useReducer，就像useState一样可以得到一个初始状态的变量和handler，随后每次给这个handler传入一个新的value（或者理解成action）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">stateReducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="s1">&#39;read&#39;</span><span class="o">:</span>
+</span><span class='line'>            <span class="p">...</span>
+</span><span class='line'>            <span class="k">break</span>
+</span><span class='line'>        <span class="k">case</span> <span class="s1">&#39;refresh&#39;</span><span class="o">:</span>
+</span><span class='line'>            <span class="p">...</span>
+</span><span class='line'>            <span class="k">break</span>
+</span><span class='line'>        <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">error</span><span class="p">(</span><span class="err">`</span><span class="nx">Unsupported</span> <span class="nx">action</span> <span class="nx">type</span> <span class="s1">&#39;${action.type}&#39;</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setState</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">stateReducer</span><span class="p">,</span> <span class="p">[])</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">setState</span><span class="p">({</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;read&#39;</span><span class="p">,</span> <span class="nx">payload</span><span class="o">:</span> <span class="p">{}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里面的state也可以是一个含有多个参数的对象，从而可以把整个组件的操作封装起来。</p>
+
+<p>现代浏览器自带了<code>fetch</code>的异步调用函数，实际上用ajax库更多一些，fetch先返回response，然后再异步读取json</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">API_ENDPOINT</span><span class="p">}</span><span class="nx">$</span><span class="p">{</span><span class="nx">param</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>useCallback把对函数的依赖转换成了对传入的第二个变量的依赖。因为在渲染组件时，Function会重新生成，所以导致引用handleClick的组件都会被重新渲染。使用useCallbak后，就把依赖转化为了传入的数组<code>[]</code>，就不会触发渲染了。搭配memo使用，效果更佳，但这会增加代码的复杂度。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="kr">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">setCount</span><span class="p">(</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="nx">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">},</span> <span class="p">[])</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Count</span><span class="o">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setOther</span><span class="p">(</span><span class="nx">o</span> <span class="o">=&gt;</span> <span class="nx">o</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Trigger</span> <span class="nx">Re</span><span class="o">-</span><span class="nx">render</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>import第三方内容，比如<code>import axios from 'axios'</code></p>
+
+<p>async / await 在React中的用法没有太大不同，在useEffect里面使用时，需要注意要么把useEffect的lambda变成async，要么在这个lambda里面构造async的Function后，调用await才能生效。</p>
+
+<p>css in React</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/* App.module.css */</span>
+</span><span class='line'><span class="nc">.container</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">background-color</span><span class="o">:</span> <span class="m">#f0f0f0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">padding</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nc">.title</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用时</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// App.tsx</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">styles</span> <span class="nx">from</span> <span class="s1">&#39;./App.module.css&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">container</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">CSS</span> <span class="nx">Modules</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vite-plugin-svgr的变化,诀窍在于问号后面跟react，表明这是一个可以用于react的svg图片的组件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">Check</span> <span class="nx">from</span> <span class="s2">&quot;./assets/check.svg?react&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">Check</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;18px&quot;</span> <span class="nx">width</span><span class="o">=</span><span class="s2">&quot;18px&quot;</span> <span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>React.memo与React.useMemo<br/>
+useMemo和use系列一样，用第二个参数来控制要不要重新计算，主要针对组件中的method。<br/>
+memo主要根据组件的入参来判断要不要重新渲染，主要用于父组件更新而子组件不需要更新的情况。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">compute</span><span class="p">},</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">Search</span> <span class="o">=</span> <span class="nx">memo</span><span class="p">(({</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>        <span class="s2">&quot;&lt;div&gt;content&lt;/div&gt;&quot;</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Learn TypeScript</p>
+
+<p>Learn TypeScript - Full Course for Beginners，done 6小时，基本学会了TypeScript，然后发现她也是C#的设计师设计的, 所以c#的语法很多。
+应该TS优先。最早学习js就感觉没有一个架子（blue print)很麻烦，最近终于适应了js的灵活，却发现业界又把TS捧为最佳实践。尽管一开始就应该这样，但世界是个草台班子，实际的发展路线就是这样曲折。<br/>
+运行ts或者tsx的可以是<code>ts-node -emx ...ts</code><br/>
+ts要给每个参数都定义好type，用的语法比较简单，比如我有一个入参</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Redux&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;https://redux.js.org/&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">author</span><span class="o">:</span> <span class="s1">&#39;Dan Abramov, Andrew Clark&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">num_comments</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">points</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">objectID</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'><span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 我需要定义下面的type</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">type</span> <span class="nx">Story</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">title</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">url</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">author</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">num_comments</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">points</span><span class="o">:</span> <span class="nx">number</span>
+</span><span class='line'>    <span class="nx">objectID</span><span class="o">:</span> <span class="nx">number</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 使用时</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">(</span><span class="nx">stories</span> <span class="o">:</span> <span class="nx">Story</span><span class="p">[])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 传入的对象中有Function时，比如List也要传一个function，那么先定义ListProps</span>
+</span><span class='line'><span class="nx">type</span> <span class="nx">ListProps</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">stories</span><span class="o">:</span> <span class="nx">Story</span><span class="p">[],</span>
+</span><span class='line'>    <span class="nx">removeFunc</span><span class="o">:</span> <span class="p">(</span><span class="nx">item</span><span class="o">:</span> <span class="nx">Story</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 前面reducer的例子可以传入一个action, 但每个type的payload属性不同，此时c#的pattern matching 登场了,在这里叫做Union Type</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">type</span> <span class="nx">Action</span> <span class="o">=</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;read&#39;</span><span class="p">;</span> <span class="nx">payload</span><span class="o">:</span> <span class="nx">Story</span><span class="p">[]}</span>
+</span><span class='line'><span class="o">|</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;refresh&#39;</span><span class="p">,</span> <span class="nx">payload</span><span class="o">:</span> <span class="nb">String</span><span class="p">}</span>
+</span><span class='line'><span class="c1">// 注意，{}内部的分隔逗号和分号均可以</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//调用useState时，也能给入参</span>
+</span><span class='line'><span class="kr">const</span> <span class="p">[</span><span class="nx">currentValue</span><span class="p">,</span> <span class="nx">setCurrentValue</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// reducer可以这样写</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">storiesReducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">stories</span><span class="o">:</span> <span class="nx">Story</span><span class="p">[]</span> <span class="p">,</span> <span class="nx">action</span><span class="o">:</span> <span class="nx">Action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">case</span> <span class="s1">&#39;SET_STORIES&#39;</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span>
+</span><span class='line'>      <span class="k">case</span> <span class="s1">&#39;DELETE_STORY&#39;</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">stories</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nx">s</span> <span class="o">!=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">case</span> <span class="s1">&#39;FILTER_STORY&#39;</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">stories</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="err">`</span><span class="nx">Invalid</span> <span class="nx">action</span> <span class="nx">$</span><span class="p">{</span><span class="nx">action</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 传入一个复杂的react函数的type</span>
+</span><span class='line'><span class="nx">type</span> <span class="nx">SearchProps</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">currentValue</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">setCurrentValue</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Dispatch</span><span class="o">&lt;</span><span class="nx">React</span><span class="p">.</span><span class="nx">SetStateAction</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">children</span><span class="o">:</span> <span class="nx">ReactNode</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 可以为空以及状态枚举的写法</span>
+</span><span class='line'><span class="nx">type</span> <span class="nx">Order</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span>
+</span><span class='line'>    <span class="nx">pizza</span><span class="o">:</span> <span class="nx">Pizza</span>
+</span><span class='line'>    <span class="nx">sender</span><span class="o">?:</span> <span class="nx">string</span>
+</span><span class='line'>    <span class="nx">status</span><span class="o">:</span> <span class="s2">&quot;ordered&quot;</span> <span class="o">|</span> <span class="s2">&quot;completed&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 定义泛型的写法，&lt;T&gt;是必须的，是通过这个来表示定义了一个泛型</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addToArray</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">array</span><span class="o">:</span> <span class="nx">T</span><span class="p">[],</span> <span class="nx">item</span><span class="o">:</span> <span class="nx">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">array</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">getLastItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">array</span><span class="o">:</span> <span class="nx">T</span><span class="p">[])</span><span class="o">:</span> <span class="nx">T</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">array</span><span class="p">[</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Partial和Omit，以及可能返回为undefined，Omit表示传入了的类型不包含的属性，提醒后面需要增加，</span>
+</span><span class='line'><span class="c1">// 和c#不同，ts这里的关键字也都是Pascal式的写法，而c#是全小写</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addNewPizza</span><span class="p">(</span><span class="nx">pizza</span><span class="o">:</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">Pizza</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="o">&gt;</span><span class="p">)</span><span class="o">:</span> <span class="nx">Pizza</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">{</span>
+</span><span class='line'>    <span class="nx">menu</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">id</span><span class="o">:</span> <span class="nx">nextPizzaId</span><span class="o">++</span><span class="p">,</span>
+</span><span class='line'>        <span class="p">...</span><span class="nx">pizza</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">menu</span><span class="p">[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Partial把所有属性变为可选</span>
+</span><span class='line'><span class="nx">type</span> <span class="nx">PartialUser</span> <span class="o">=</span> <span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="cm">/* 等价于：</span>
+</span><span class='line'><span class="cm">type PartialUser = {</span>
+</span><span class='line'><span class="cm">  id?: number;</span>
+</span><span class='line'><span class="cm">  name?: string;</span>
+</span><span class='line'><span class="cm">  age?: number;</span>
+</span><span class='line'><span class="cm">  email?: string;</span>
+</span><span class='line'><span class="cm">};</span>
+</span><span class='line'><span class="cm">*/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1788,48 +2297,6 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2021/02/16/dddde-lan-shu-he-hong-shu/">DDD的蓝书和红书</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2021-02-16T21:37:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2021</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>跟着Vlad的「Unit Testing Principles, Practices, and Patterns」 学习单元测试的原理实践和模式之后，
-一路追踪，自然会发现要写好测试自然会要用到Domain-Driven Design的分析和设计方式。因为要写出容易测试代码，
-首先需要写出业务上的好代码，而要做到这一点，目前已知的解法殊途同归，就是要运用DDD的方式，解除业务代码对框架和技术细节的依赖，而专注于业务（领域）本身。加上多年以前DHH推荐的5本他膺服的编程书籍中，就有Eric Evans的「Domain-Driven Design」，也就是蓝皮书。</p>
-
-<p>但这本书确实很不好读。中文版的购于去年3月份，反反复复并看不下去，7月份开始看英文版，废了半年的时间，才断断续续终于看完了。蓝皮书确实写的是不容易褪色和随着时间流逝而跌价的书籍，内里的原则和一些很细节的建议应该只要OO继续是编程的主要范式，那么蓝皮书的价值和地位就会持续存在。比如他评价OO把一切都看成对象，就是等于建筑师把一切都看成房间。过于抽象，其实反而失去了运用时的指导意义。为此，开发出了七种武器来分别描述不同的用于处理业务的OO。</p>
-
-<p>而统一语言，则是强调分析人员、设计人员和最终使用人员使用同一种语言来进行沟通，就像厨房、卫生间、客厅等并非只是建筑师的用语。这样可以用一套原则来进行指导和沟通。DDD本身强调独立性的目的，是通过解除对外部的依赖从而达到可以把核心问题暴露出来并予以解决。从而可以让运维逻辑丰富且清晰，将Domain作为软件的核心，而把APP层做薄。沿着这条路前进了多年之后，随着TDD等实践的进一步发展，获得了易测试等突破性的好处。因此，在国外甚至国内部分项目中，都取得了广泛的应用。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1843,6 +2310,10 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2025/06/15/javascript-to-typescript/">JavaScript To TypeScript</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2025/04/30/cong-bing-fa-dao-kotlinhe-mo-shi-de-xue-xi/">从并发到Kotlin和模式的学习</a>
@@ -1860,15 +2331,11 @@ meta就是config server的地址。app.id表示了应用的身份，需要和apo
         <a href="/blog/2021/10/26/the-kubernetes-book/">The Kubernetes Book</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2021/10/04/java-8-9-10-in-action/">Java 8 9 10 in action</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (96)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/kotlin'>Kotlin (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/技术'>技术 (97)</a></li><li><a href='/blog/categories/生活'>生活 (54)</a></li><li><a href='/blog/categories/车车'>车车 (40)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/读书笔记'>读书笔记 (26)</a></li><li><a href='/blog/categories/时评'>时评 (24)</a></li><li><a href='/blog/categories/神器'>神器 (23)</a></li><li><a href='/blog/categories/笔记'>笔记 (21)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/spring'>Spring (15)</a></li><li><a href='/blog/categories/项目管理'>项目管理 (14)</a></li><li><a href='/blog/categories/rails'>Rails (13)</a></li><li><a href='/blog/categories/linux'>Linux (12)</a></li><li><a href='/blog/categories/软考'>软考 (8)</a></li><li><a href='/blog/categories/云计算'>云计算 (6)</a></li><li><a href='/blog/categories/crv'>Crv (6)</a></li><li><a href='/blog/categories/nodejs'>Nodejs (6)</a></li><li><a href='/blog/categories/nosql数据库'>Nosql数据库 (5)</a></li><li><a href='/blog/categories/旅游'>旅游 (4)</a></li><li><a href='/blog/categories/管理'>管理 (4)</a></li><li><a href='/blog/categories/装机'>装机 (4)</a></li><li><a href='/blog/categories/heroku'>Heroku (4)</a></li><li><a href='/blog/categories/读书列表'>读书列表 (3)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/script'>Script (3)</a></li><li><a href='/blog/categories/mac'>Mac (2)</a></li><li><a href='/blog/categories/期刊'>期刊 (2)</a></li><li><a href='/blog/categories/外刊'>外刊 (2)</a></li><li><a href='/blog/categories/java'>Java (36)</a></li><li><a href='/blog/categories/键盘'>键盘 (1)</a></li><li><a href='/blog/categories/测试'>测试 (1)</a></li><li><a href='/blog/categories/安卓'>安卓 (1)</a></li><li><a href='/blog/categories/kotlin'>Kotlin (1)</a></li><li><a href='/blog/categories/区块链'>区块链 (1)</a></li><li><a href='/blog/categories/读书'>读书 (1)</a></li></ul>
 </section>
   
 </aside>
