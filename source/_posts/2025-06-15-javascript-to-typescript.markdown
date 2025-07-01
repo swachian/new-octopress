@@ -177,7 +177,7 @@ const Search = memo(({a, b, c}) => {
 })
 ```
 
-Learn TypeScript
+## Learn TypeScript
 
 Learn TypeScript - Full Course for Beginners，done 6小时，基本学会了TypeScript，然后发现她也是C#的设计师设计的, 所以c#的语法很多。
 应该TS优先。最早学习js就感觉没有一个架子（blue print)很麻烦，最近终于适应了js的灵活，却发现业界又把TS捧为最佳实践。尽管一开始就应该这样，但世界是个草台班子，实际的发展路线就是这样曲折。  
