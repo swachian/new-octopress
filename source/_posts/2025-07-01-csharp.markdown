@@ -1,0 +1,247 @@
+---
+layout: post
+title: "C# and .Net Notes"
+date: 2025-07-01 17:08
+comments: true
+categories: 
+- 技术
+---
+
+括号的单词：  
+parentheses (), round brackets  
+braces {}, curl ~  
+brackets [], square brackets  
+angle brackets <>  
+villainous org 反派组织
+
+<ItemGroup> 和global using可以关联  
+
+`@"c:\t"` 加入`@`可以防止转义，从而达到verbatim（一字不差）  
+`$"{value}"` 外面一个`$`表示里面一层`{}`用于计算，如果两个`$$`，则里面要两层`{{}}`才运算，这叫Raw interpolated string  
+Raw string literals, C#引入了三个引号`"""` ，其实引号可以更多，如果你被引的文字里需要直接写更多的引号  
+`default(string) ?? "<NULL>"` 中间的两个`??`表示if null then right  
+`WriteLine(format: "{0,-10} {1,6:N0}",arg0: applesText, arg1: applesCount);`, 里面的0和1是表示参数的index，逗号后面是表示alignment对齐的位数，colon后面是表示按数字还currency来处理  
+
+Null-coalescing operations 
+`string? author`  
+`author?.Length ?? 30;`  
+`author ??: "unknown"`  
+
+Pattern Matching  
+
+当o为int时，直接赋值给i，后面即可把i作为int类型直接操作  
+```c#
+if (o is int i)
+{
+  WriteLine($"{i} x {j} = {i * j}");
+}
+```
+
+c#7之后，patten也能用于switch  
+```c#
+switch (animal)
+  {
+    case Cat fourLeggedCat when fourLeggedCat.Legs == 4:
+      message = $"The cat named {fourLeggedCat.Name} has four legs.";
+      break;
+    case Cat wildCat when wildCat.IsDomestic == false:
+      message = $"The non-domestic cat is named {wildCat.Name}.";
+      break;
+    case Cat cat:
+      message = $"The cat is named {cat.Name}.";
+      break;
+    default: // default is always evaluated last.
+      message = $"{animal.Name} is a {animal.GetType().Name}.";
+      break;
+    case Spider spider when spider.IsPoisonous:
+      message = $"The {spider.Name} spider is poisonous. Run!";
+      break;
+    case null:
+      message = "The animal is null.";
+      break;
+  }
+```
+
+如果引入lambda， switch后的case也能当成expression  
+```c#
+ message = animal switch
+  {
+    Cat fourLeggedCat when fourLeggedCat.Legs == 4
+      => $"The cat named {fourLeggedCat.Name} has four legs.",
+    Cat wildCat when wildCat.IsDomestic == false
+      => $"The non-domestic cat is named {wildCat.Name}.",
+    Cat cat
+      => $"The cat is named {cat.Name}.",
+    Spider spider when spider.IsPoisonous
+      => $"The {spider.Name} spider is poisonous. Run!",
+    null
+      => "The animal is null.",
+    _
+      => $"{animal.Name} is a {animal.GetType().Name}."
+  };
+```
+
+`int.TryParse()`, `int.Parse()`可以用于转换string到int
+
+partial class可以实现对已有的class的开闭拓展
+
+支持hash式入参，`TimesTable(number: 7, size: 10)`
+
+cardinal 基数，红衣主教  
+ordinal序列的  
+
+value switch  
+```c#
+   string suffix = lastDigit switch
+        {
+          1 => "st",
+          2 => "nd",
+          3 => "rd",
+          _ => "th"
+        };
+```
+
+contingent 代表团，exclusive to VS 专属于VS  
+
+csproj文件中可以引入另一个csproj，采用ProjectReference标签，更要一级的是sln（solution容器）
+
+```
+  <ItemGroup>
+    <ProjectReference Include="..\CalculatorLib\CalculatorLib.csproj" />
+  </ItemGroup>
+```
+
+\ forward slash  
+/ backward slash
+
+c# 支持out出的入参  
+```c#
+if (int.TryParse(input, out int count))
+{
+  WriteLine($"There are {count} eggs.");
+}
+```
+
+## 进入OO  
+
+alias： `using ENV = System.Environment`
+
+object initializer syntax, 很多样化的syntax
+
+```c#
+Book book = new(isbn: "978-1803237800",
+  title: "C# 12 and .NET 8 - Modern Cross-Platform Development Fundamentals")
+{
+  Author = "Mark J. Price",
+  PageCount = 821
+};
+
+```
+
+`[Flags]`类似java的annotation，是一种decorating 
+
+使用`readonly`优先于`const`，c#中的const只能用于原始类型，且在编译时就已经确定了值。
+
+大写的是Property，小写的是field，field是不对外暴露的  
+
+optional parameters，naming parameters必须出现在required params后面  
+
+in, out, ref, 
+`public void PassingParameters(int w, in int x, ref int y, out int z)`
+ref和out的区别在于，out的参数由method实现初始化 
+
+tuple的返回以及naming  
+```c#
+ // Method that returns a tuple: (string, int).
+  public (string, int) GetFruit()
+  {
+    return ("Apples", 5);
+  }
+  (string, int) fruit = bob.GetFruit();
+  (string fruitName, int fruitNumber) = bob.GetFruit();
+
+```
+
+local function，支持function内再建function  
+```c#
+// Method with a local function.
+  public static int Factorial(int number)
+  {
+    if (number < 0)
+    {
+      throw new ArgumentException(
+        $"{nameof(number)} cannot be less than zero.");
+    }
+    return localFactorial(number);
+
+    int localFactorial(int localNumber) // Local function.
+    {
+      if (localNumber == 0) return 1;
+      return localNumber * localFactorial(localNumber - 1);
+    }
+  }
+```
+
+partial除了修饰method，还能修饰method，便于与自动生成的代码共存  
+```c#
+// Auto-generated designer file
+partial class FormDesigner
+{
+    partial void OnInitialized();
+    
+    public FormDesigner()
+    {
+        InitializeComponent();
+        OnInitialized(); // Optional hook
+    }
+}
+
+// Your custom code
+partial class FormDesigner
+{
+    partial void OnInitialized()
+    {
+        // Add custom initialization code
+    }
+}
+```
+
+indexer其实就是按数组方式去访问  
+```c#
+  #region Indexers: Properties that use array syntax to access them.
+
+  public Person this[int index]
+  {
+    get
+    {
+      return Children[index]; // pass on to the List<T> indexer
+    }
+    set
+    {
+      Children[index] = value;
+    }
+  }
+```
+
+Pattern matching: 1. 类型模式 2. 关系模式( > < =>) 3. 属性模式  
+```c#
+var employee = new Employee { Name = "Charlie", IsManager = true };
+
+string role = employee switch
+{
+    { IsManager: true, Name: var name } when name.StartsWith("C") 
+        => "Manager with a C-name",
+    { IsManager: true } => "Just a manager",
+    _ => "Regular employee"
+};
+```
+
+属性的get，set以及init，init表示必须在构造函数函数中被初始化，注意属性名称使用的是大写  
+```c#
+public class Book 
+{
+  public string Title { get; set; }
+  public string? Author { get; set; }
+}
+```
+
