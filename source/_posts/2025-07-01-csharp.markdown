@@ -244,4 +244,222 @@ public class Book
   public string? Author { get; set; }
 }
 ```
+record的==比较是按value进行的，而其他reference按value实现比较的只有string  
+```c#
+AnimalRecord ar1 = new() { Name = "Rex" };
 
+// 定义primary constructor，Kotlin也是类似的做法
+public Headset() : this("Microsoft", "HoloLens") { }
+```
+
+操作相同类的method： 即this是自己，而传入的参数比如this.method1(that)的that也是本class，最好同时提供静态方法和实例方法。  
+定义operator的重载，指`+-*/`的重载。
+
+```c#
+// Define the + operator to "marry".
+  public static bool operator +(Person p1, Person p2)
+  {
+    Marry(p1, p2);
+
+    // Confirm they are both now married.
+    return p1.Married && p2.Married;
+  }
+```
+
+Generic 例子  
+```c#
+Dictionary<int, string> lookupIntString = new();
+lookupIntString.Add(key: 1, value: "Alpha");
+```
+
+delegate and EventHandler  
+```c#
+  public event EventHandler? Shout; // null initially.
+
+#region Defining and handling delegates
+
+// Assign the method(s) to the Shout event delegate.
+harry.Shout += Harry_Shout;
+harry.Shout += Harry_Shout_2;
+
+// 触发时，就会把所有注册给Shout的handler都调用一遍
+    if (Shout is not null)
+    {
+      // ...then call the delegate to "raise" the event.
+      Shout(this, EventArgs.Empty);
+    }
+```
+
+IComparable 和 IComparer  
+```c#
+public class Person : IComparable<Person>
+{
+  public int CompareTo(Person? other)
+  {
+    int position;
+    return position;
+  }
+}
+
+Array.Sort(people);
+
+
+public class PersonComparer : IComparer<Person?>
+{
+  public int Compare(Person? x, Person? y)
+  {
+    return 0;
+  }
+}
+
+Array.Sort(people, new PersonComparer());
+```
+多个接口定义的方法名相同时，可以使用显示实现的版本。在调用时必须指明接口    
+```c#
+interface IWriter { void Write(); }
+interface IEncoder { void Write(); }
+
+class Processor : IWriter, IEncoder 
+{
+    void IWriter.Write() => Console.WriteLine("Writing to file.");
+    void IEncoder.Write() => Console.WriteLine("Encoding data.");
+}
+// 调用
+var processor = new Processor();
+((IWriter)processor).Write(); // 输出: Writing to file.
+((IEncoder)processor).Write(); // 输出: Encoding data.
+// processor.Write(); // ❌ 编译错误：不能直接通过类实例调用
+```
+
+int? a 表明可能可能为空，还有GetValueOrDefault()可以返回默认值，int的默认值是0  
+
+inherit，用一个colon表示  
+`public class Employee: Person {}`
+
+只有标明多态的方法，才能在method前面用override，否则只能用new来hide父类的方法，且不会有多态的效果。指明多态，需要在父类层级中的某个地方定义该method为`virtual`.
+
+`this`和`base`是区分子类和父类的关键字  
+
+obj转类型时可以用if语句检查后避免使用cast  
+
+constructors不会被继承，除非使用base()调用  
+```c#
+public class PersonException : Exception
+{
+  public PersonException() : base() { }
+
+  public PersonException(string message) : base(message) { }
+
+  public PersonException(string message, Exception innerException)
+    : base(message, innerException) { }
+}
+```
+
+extension methods:  
+利用static class和static method，加上(this string input) 就可以给string加上实例方法。实际上只是一个语法糖，这个东西也很自然地被kt抄了过去  
+```c#
+public static class StringExtensions
+{
+  public static bool IsValidEmail(this string input)
+  {
+    // Use a simple regular expression to check
+    // that the input string is a valid email.
+
+    return Regex.IsMatch(input,
+      @"[a-zA-Z0-9\.-_]+@[a-zA-Z0-9\.-_]+");
+  }
+}
+
+```
+
+自定义的class，初始化特性，继承性，==的计算，都是按内存来进行比对和操作的  
+struct分配的变量存储在stack里，默认没有==方法，但record struct是有的。  
+
+.net 虚拟机的一些概念  
+IL - Intermediate Language  
+CLR - Common Language Runtime  
+BCL - Base Class Libraries  
+Assembly -> NuGet package(dlls)  
+namespace - type的地址  
+RootNamespace在assembly的cproj文件里定义了全局的地址  
+PropertyGroup中定义控制build的属性  
+ItemGroup中定义需要包含的东西  
+一个dll(assembly)可以包含多个namespaces  
+Package是用于管理依赖的，通常和dll一一对应  
+nuget.config定义project，solution的配置，一层一个文件，overriding式的  
+string和int这样小写的关键字，最后会关联到System里面的String和Int32这样的类  
+可以在nuget.org上发布自己的dll，类似nexus  
+
+`{Math.BigMul(number1, number2):N0}` 用于两个大数相乘  
+Random.Shared 可以构造随机数字  
+
+List(Add, Insert, Remove, RemoveAt)  
+Dictionary(Add, Remove)  
+HashSet(Add, Remove)  
+Queue(Enqueue, Dequeue)  
+Stack(Push, Pop)  
+Sorted Collections(SortedDictionary, SortedList, SortedSet)  
+BitArray, LinkedList<T>  
+
+Readonly是只读的list，而ImmutableDictionary可以有Add操作，但结果是返回一个全新的dictionary.  
+```c#
+// Call the Add method with a return value.
+ImmutableDictionary<string, string> newDictionary = 
+  immutableKeywords.Add(
+    key: Guid.NewGuid().ToString(),
+    value: Guid.NewGuid().ToString());
+```
+还有concurrent的版本，有的搭配await/async使用  
+FrozenSet和FrozenDictionary则则没有Add和Remove方法  
+EnsureCapacity(10_000)可以给定size  
+
+Index：  
+s[^5]获取倒数第5个元素  
+```c#
+Range r1 = new(start: 3, end: 7);
+r3 = 3..7;
+r7 = ..3; //从0到3
+```
+
+c#的两个点`..`也是一种spread的操作法，这一点不同于JS的三个点  
+使用range可以返回某个连续集合的span，span默认情况下引用的是原collection内的元素地址，从而可以提高性能  
+
+使用`Path.DirectorySeparatorChar`来构造文件路径，` Path.Combine(current, "images") `组合路径  
+stream helper是一种decorator，如果gzip，CryptoStream等等  
+streamReader， StreamWriter，
+
+EF建设在ADO.NET上，后者是类似JDBC的一套东西。  
+Fluent API  
+扩展自DbContext， OnConfiguring定义数据源等信息  
+OnModelCreating中定义关联关系  
+例子的代码给了用scaffold从表格中生成partial class的例子，但我聚的这种大量attributes（annotation）的写法入侵性太重，手法并不好。  
+configureConventions配置惯例，例如所有的string类型默认50的长度  
+IQueryable<Product>?.ToQueryString()  
+optionsBuilder.LogTo().EnableSensitiveDataLogging可以配置EF的日志，用于调试SQL  
+查询的时候能由tagwith输出日志。
+
+Principal Entity -- contains primary key  
+Dependent Entity -- contains foreign keys  
+Required relationship -- contains foreign key and is non-nullable  
+Optional relationship -- contains foreign key and is nullable  
+HasOne/HasMany, WithOne/WithMany  
+HasForeignKey<Ticket>表示ticket里面会有这个对象的外键  
+HasPrincipalKey可以指定关联的主键  
+abstraction -- focus on a single concern  
+Lower and Higher order abstractions  
+encapsulation -- 封装的是状态  
+ORM eliminate the need for repositories  
+Avoid shallow abstractions  
+Cartesian explosion, 多个一对多的情况下返回数据过多  
+Navigation and AutoInclude() 主动加载  
+_context.Entry()分别载入  
+.AsSplitQuery()没有涉及LazyLoading  
+Add, Update, Attach， 倾向于使用显示的repository  
+_context的FromSqlInterpolated($@"{}")  
+dbContext已经使用了unit of work这种模式   
+
+IQueryable<Student> vs IEnumerable<Student>  
+Run on DB               Run in Memory  
+use internally          queryable.As Enumerable()  
+Return the most specific type  
+更推荐IReadOnlyList返回，这个会直接执行。  
